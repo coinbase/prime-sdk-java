@@ -133,31 +133,12 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositIn
 mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id WIRE"
 ```
 
-## Model Generation
+## OpenAPI spec
 
-The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.
-
-The OpenAPI spec is fetched automatically from the live API (`https://api.prime.coinbase.com/v1/openapi.yaml`) during model generation and is not committed to source control.
-
-### Generate Models from Root Directory
-
-To generate new models from the OpenAPI spec:
+The SDK tracks the published Prime OpenAPI definition in **apiSpec/prime-public-spec.yaml** (source of truth for endpoints and schemas). Refresh the committed file from the live spec:
 
 ```bash
-mvn -Pgenerate-models
+make fetch-spec
 ```
 
-This command:
-- Runs in **incremental mode** (safe - only creates new models that don't exist)
-- Generates domain models in `src/main/java/com/coinbase/prime/model/`
-- Generates enums in `src/main/java/com/coinbase/prime/model/enums/`
-- Automatically applies SDK conventions (Builder patterns, license headers, etc.)
-
-### Advanced Model Generation
-
-For more control over model generation, see the detailed documentation in [`tools/model-generator/README.md`](tools/model-generator/README.md), which covers:
-
-- Force regenerating all models (dangerous - use with caution)
-- Regenerating specific models
-- Understanding the generation pipeline
-- Troubleshooting generation issues
+Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` are maintained separately.
