@@ -33,7 +33,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/entities/%s/futures/auto_sweep", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/auto_sweep", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<SetAutoSweepResponse>() {});
@@ -43,7 +43,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/balance_summary", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetEntityFcmBalanceResponse>() {});
@@ -53,7 +53,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/margin_call_details", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetFcmMarginCallDetailsResponse>() {});
@@ -63,7 +63,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/positions", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetPositionsResponse>() {});
@@ -73,7 +73,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/risk_limits", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetFcmRiskLimitsResponse>() {});
@@ -83,7 +83,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/settings", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/settings", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetFcmSettingsResponse>() {});
@@ -93,7 +93,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/entities/%s/futures/settings", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/settings", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<SetFcmSettingsResponse>() {});
@@ -103,7 +103,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListEntityFuturesSweepsResponse>() {});
@@ -113,7 +113,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ScheduleEntityFuturesSweepResponse>() {});
@@ -123,7 +123,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.DELETE,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<CancelEntityFuturesSweepResponse>() {});
@@ -133,7 +133,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     public GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/futures/equity", request.getEntityId()),
+                String.format("/v1/entities/%s/futures/equity", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetFcmEquityResponse>() {});

@@ -33,7 +33,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
+                String.format("/v1/entities/%s/aggregate_positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListAggregatePositionsResponse>() {});
@@ -43,7 +43,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
+                String.format("/v1/entities/%s/aggregate_positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListAggregateEntityPositionsResponse>() {});
@@ -53,7 +53,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getEntityId()),
+                String.format("/v1/entities/%s/positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListEntityPositionsResponse>() {});
@@ -63,7 +63,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getEntityId()),
+                String.format("/v1/entities/%s/positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPositionsResponse>() {});

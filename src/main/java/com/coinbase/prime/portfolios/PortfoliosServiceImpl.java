@@ -33,7 +33,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     public ListPortfoliosResponse listPortfolios() throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                "/portfolios",
+                "/v1/portfolios",
                 null,
                 List.of(200),
                 new TypeReference<ListPortfoliosResponse>() {});
@@ -43,7 +43,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<GetPortfolioResponse>() {});
@@ -53,7 +53,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/counterparty", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
