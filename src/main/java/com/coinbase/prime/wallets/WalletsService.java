@@ -20,6 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface WalletsService {
+    // Wallets - OpenAPI spec compliance
     ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetWalletResponse getWallet(GetWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;

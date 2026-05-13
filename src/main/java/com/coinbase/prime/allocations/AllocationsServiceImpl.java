@@ -25,6 +25,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 
 public class AllocationsServiceImpl extends CoinbaseServiceImpl implements AllocationsService {
+
     public AllocationsServiceImpl(CoinbasePrimeClient client) {
         super(client);
     }
@@ -60,16 +61,6 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
     }
 
     @Override
-    public ListAllocationsByNettingIdResponse listAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAllocationsByNettingIdResponse>() {});
-    }
-
-    @Override
     public GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -79,4 +70,13 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
                 new TypeReference<GetAllocationResponse>() {});
     }
 
+    @Override
+    public ListAllocationsByNettingIdResponse listAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),
+                request,
+                List.of(200),
+                new TypeReference<ListAllocationsByNettingIdResponse>() {});
+    }
 }

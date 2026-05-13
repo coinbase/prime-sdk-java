@@ -30,16 +30,6 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
     }
 
     @Override
-    public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/products", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioProductsResponse>() {});
-    }
-
-    @Override
     public GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -49,4 +39,13 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
                 new TypeReference<GetCandlesResponse>() {});
     }
 
+    @Override
+    public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/products", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioProductsResponse>() {});
+    }
 }

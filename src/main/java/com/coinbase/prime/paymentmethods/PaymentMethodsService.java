@@ -20,6 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PaymentMethodsService {
+    // Payment Methods
     ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }
