@@ -1,12 +1,56 @@
 # Changelog
 
-## [Unreleased]
+## [1.8.0] - 2026-MAY-13
 
-### Changed
+### Added
 
-- **HTTP versioning**: `Constants.CB_PRIME_BASE_URL` remains `https://api.prime.coinbase.com/v1`; service paths stay versionless. `GetCrossMarginPrimeOverview` targets API version `v2` using `CoinbasePrimeClient.withBaseUrl(Constants.versionedBaseUrl(Constants.CB_PRIME_BASE_URL, "v2"))` for that call only (aligned with prime-sdk-go).
-- Restored `ListPortfoliosRequest` / `listPortfolios(ListPortfoliosRequest)` for API compatibility.
-- Removed `tools/model-generator`; models, enums, requests, responses, services, and `PrimeServiceFactory` are hand-maintained against `apiSpec/prime-public-spec.yaml`. Refresh the spec with `make fetch-spec`.
+#### New API Endpoints
+
+**Financing Service**
+
+- **`getCrossMarginPrimeOverview()`**: Cross-margin Prime overview; issues the request against API **v2** via `CoinbasePrimeClient.withBaseUrl(Constants.versionedBaseUrl(Constants.CB_PRIME_BASE_URL, "v2"))` for this call only (`GET /v2/entities/{entity_id}/cross_margin/prime`)
+- **`getCrossMarginRiskParameters()`**: Cross-margin risk parameters (`GET /entities/{entity_id}/cross_margin/risk_parameters`)
+- **`updateFundingSettings()`**: Update entity funding settings (`POST /entities/{entity_id}/funding_settings`)
+- **`getMarketData()`**: Entity market data (`GET /entities/{entity_id}/market_data`)
+
+**Advanced Transfer Service**
+
+- **`listAdvancedTransferTransactions()`**: List transactions for an advanced transfer (`GET /portfolios/{portfolio_id}/advanced_transfers/{advanced_transfer_id}/transactions`)
+- **`getPortfolioCounterpartyId()`**: Portfolio counterparty id (`GET /portfolios/{portfolio_id}/counterparty`)
+
+**Positions Service**
+
+- **`listAggregateEntityPositions()`**: Aggregate entity positions (`GET /entities/{entity_id}/aggregate_positions`)
+- **`listEntityPositions()`**: Entity positions (`GET /entities/{entity_id}/positions`)
+
+**Products Service**
+
+- **`getCandles()`**: Public product candles (`GET /portfolios/{portfolio_id}/candles`)
+
+#### New & Updated Models
+
+- **`CrossMarginPrimeMarginSummary`**: Margin summary on the cross-margin Prime overview
+- **`CrossMarginRiskParameters`**: Cross-margin risk parameters payload
+- **`MarketData`**: Entity market data
+- **`TierPairRateEntry`**: Trade-finance tier pair rate entry
+- **`CoinbasePrimeClient`**: `withBaseUrl()` for per-call base URL overrides (e.g. v2-only routes)
+- **`Constants`**: `versionedBaseUrl()` helper to swap the trailing `/vN` API segment
+- **`CreateOrderRequest`**: `pegOffsetType` uses `PegOffsetType`; build validation aligned with spec (no auto-generated `client_order_id`)
+
+#### New Enums
+
+- **`PrimeXMControlStatus`**
+- **`PrimeXMMarginLevel`**
+
+### Removed
+
+- **`tools/model-generator`**: removed; maintain models, requests, responses, and services against `apiSpec/prime-public-spec.yaml`
+- **`com.coinbase.prime.advancedtransfers`** package and **`AdvancedTransfersService`**: renamed to **`com.coinbase.prime.advancedtransfer`** and **`AdvancedTransferService`**; **`PrimeServiceFactory.createAdvancedTransfersService()`** replaced by **`createAdvancedTransferService()`**
+- **`TransactionsService.listAdvancedTransferTransactions()`**: use **`AdvancedTransferService.listAdvancedTransferTransactions()`**
+- **`AllocationsService.getPortfolioAllocations()`**: renamed to **`listPortfolioAllocations()`**
+- **`FinancingService.listTfObligations()`** with **`ListTfObligationsRequest`** / **`ListTfObligationsResponse`**: replaced by **`listTradeFinanceObligations()`** with **`ListTradeFinanceObligationsRequest`** / **`ListTradeFinanceObligationsResponse`**
+- **`FinancingService.listFinancingEligibleAssets(ListFinancingEligibleAssetsRequest)`**: replaced by no-argument **`listFinancingEligibleAssets()`**
+- **`ProductsService.listCandles()`** with **`ListCandlesRequest`** / **`ListCandlesResponse`**: replace with **`getCandles()`**, **`GetCandlesRequest`**, and **`GetCandlesResponse`**
 
 ## [1.7.1] - 2026-04-21
 

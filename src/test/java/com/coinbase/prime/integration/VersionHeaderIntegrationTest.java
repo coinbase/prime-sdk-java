@@ -50,8 +50,8 @@ public class VersionHeaderIntegrationTest {
         String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
         
         assertNotNull(userAgent, "User-Agent header should be present");
-        assertEquals("prime-sdk-java/1.4.0", userAgent, 
-            "User-Agent should contain 'prime-sdk-java/1.4.0' to match pom.xml version");
+        assertEquals("prime-sdk-java/1.8.0", userAgent, 
+            "User-Agent should contain 'prime-sdk-java/1.8.0' to match pom.xml version");
         
         // Additional verification: Ensure the SDK_VERSION constant is used correctly
         String expectedUserAgent = String.format("prime-sdk-java/%s", Constants.SDK_VERSION);
@@ -62,8 +62,8 @@ public class VersionHeaderIntegrationTest {
     @Test
     public void testSdkVersionConstantMatches() {
         // Verify that the SDK_VERSION constant has been updated correctly
-        assertEquals("1.4.0", Constants.SDK_VERSION, 
-            "SDK_VERSION constant should be '1.4.0' to match pom.xml version");
+        assertEquals("1.8.0", Constants.SDK_VERSION, 
+            "SDK_VERSION constant should be '1.8.0' to match pom.xml version");
     }
 
     @Test
@@ -88,7 +88,7 @@ public class VersionHeaderIntegrationTest {
             Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
             
             String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
-            assertEquals("prime-sdk-java/1.4.0", userAgent, 
+            assertEquals("prime-sdk-java/1.8.0", userAgent, 
                 "All API calls should include the correct version header, failed for path: " + path);
         }
     }
