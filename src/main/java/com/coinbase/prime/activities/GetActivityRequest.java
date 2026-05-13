@@ -33,6 +33,10 @@ public class GetActivityRequest {
     public GetActivityRequest() {
     }
 
+    public GetActivityRequest(String activityId) {
+        this.activityId = activityId;
+    }
+
     public GetActivityRequest(Builder builder) {
         this.activityId = builder.activityId;
     }

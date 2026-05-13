@@ -33,7 +33,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/v1/portfolios/%s/transactions", request.getPortfolioId()),
+                String.format("/portfolios/%s/transactions", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioTransactionsResponse>() {});
@@ -43,7 +43,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/v1/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
+                String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
                 request,
                 List.of(200),
                 new TypeReference<GetTransactionResponse>() {});
@@ -53,7 +53,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(201, 200),
                 new TypeReference<CreateConversionResponse>() {});
@@ -63,7 +63,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(201, 200),
                 new TypeReference<CreateOnchainTransactionResponse>() {});
@@ -73,7 +73,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/v1/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<ListWalletTransactionsResponse>() {});
@@ -83,7 +83,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateWalletTransferResponse>() {});
@@ -93,7 +93,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateWalletWithdrawalResponse>() {});
@@ -103,17 +103,22 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/v1/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(), request.getTransactionId()),
+                String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(), request.getTransactionId()),
                 request,
                 List.of(200),
                 new TypeReference<GetTransactionTravelRuleDataResponse>() {});
     }
 
+    /**
+     * Submit travel rule data for an existing deposit transaction.
+     * <p>
+     * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
+     */
     @Override
     public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(), request.getTransactionId()),
+                String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(), request.getTransactionId()),
                 request,
                 List.of(201, 200),
                 new TypeReference<SubmitDepositTravelRuleDataResponse>() {});

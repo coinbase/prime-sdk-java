@@ -105,7 +105,8 @@ public class ActivitiesServiceSerializationTest {
 
     @Test
     public void testListPortfolioActivitiesRequestConstruction() throws CoinbaseClientException {
-        ListPortfolioActivitiesRequest request = new ListPortfolioActivitiesRequest.Builder("portfolio-123")
+        ListPortfolioActivitiesRequest request = new ListPortfolioActivitiesRequest.Builder()
+                .portfolioId("portfolio-123")
                 .symbols(new String[]{"BTC", "ETH"})
                 .startTime("2025-01-01T00:00:00Z")
                 .endTime("2025-12-31T23:59:59Z")
@@ -117,7 +118,7 @@ public class ActivitiesServiceSerializationTest {
     @Test
     public void testListPortfolioActivitiesRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListPortfolioActivitiesRequest.Builder(null).build());
+                new ListPortfolioActivitiesRequest.Builder().portfolioId(null).build());
     }
 
     @Test

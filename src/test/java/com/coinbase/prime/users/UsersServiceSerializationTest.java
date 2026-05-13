@@ -38,7 +38,7 @@ public class UsersServiceSerializationTest {
 
     @Test
     public void testListEntityUsersRequestConstruction() throws CoinbaseClientException {
-        ListEntityUsersRequest request = new ListEntityUsersRequest.Builder("entity-123").build();
+        ListEntityUsersRequest request = new ListEntityUsersRequest.Builder().entityId("entity-123").build();
         assertNotNull(request);
         assertEquals("entity-123", request.getEntityId());
     }
@@ -46,7 +46,7 @@ public class UsersServiceSerializationTest {
     @Test
     public void testListEntityUsersRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListEntityUsersRequest.Builder(null).build());
+                new ListEntityUsersRequest.Builder().entityId(null).build());
     }
 
     @Test

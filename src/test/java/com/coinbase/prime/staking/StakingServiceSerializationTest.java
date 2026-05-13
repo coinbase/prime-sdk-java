@@ -244,7 +244,7 @@ public class StakingServiceSerializationTest {
         assertEquals("wallet-456", response.getWalletId());
         assertEquals("0xabc123", response.getWalletAddress());
         assertNotNull(response.getValidators());
-        assertEquals(1, response.getValidators().size());
+        assertEquals(1, response.getValidators().length);
     }
 
     // ==================== GetUnstakingStatus Tests ====================
@@ -277,7 +277,7 @@ public class StakingServiceSerializationTest {
         assertEquals("portfolio-123", response.getPortfolioId());
         assertEquals("wallet-456", response.getWalletId());
         assertNotNull(response.getValidators());
-        assertEquals(1, response.getValidators().size());
+        assertEquals(1, response.getValidators().length);
     }
 
     // ==================== ListTransactionValidators Tests ====================
@@ -286,7 +286,7 @@ public class StakingServiceSerializationTest {
     public void testListTransactionValidatorsRequestSerialization() throws JsonProcessingException {
         ListTransactionValidatorsRequest request = new ListTransactionValidatorsRequest.Builder()
                 .portfolioId("portfolio-123")
-                .transactionIds(java.util.Arrays.asList("txn-1", "txn-2"))
+                .transactionIds(new String[]{"txn-1", "txn-2"})
                 .build();
 
         String json = objectMapper.writeValueAsString(request);
@@ -308,6 +308,6 @@ public class StakingServiceSerializationTest {
         ListTransactionValidatorsResponse response = objectMapper.readValue(json, ListTransactionValidatorsResponse.class);
         assertNotNull(response);
         assertNotNull(response.getTransactionValidators());
-        assertEquals(2, response.getTransactionValidators().size());
+        assertEquals(2, response.getTransactionValidators().length);
     }
 }

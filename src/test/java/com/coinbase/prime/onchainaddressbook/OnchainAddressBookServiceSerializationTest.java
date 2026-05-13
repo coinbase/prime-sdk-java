@@ -117,7 +117,7 @@ public class OnchainAddressBookServiceSerializationTest {
         ListOnchainAddressGroupsResponse response = objectMapper.readValue(json, ListOnchainAddressGroupsResponse.class);
         assertNotNull(response);
         assertNotNull(response.getAddressGroups());
-        assertEquals(2, response.getAddressGroups().size());
+        assertEquals(2, response.getAddressGroups().length);
     }
 
     // ==================== UpdateOnchainAddressBookEntry Tests ====================

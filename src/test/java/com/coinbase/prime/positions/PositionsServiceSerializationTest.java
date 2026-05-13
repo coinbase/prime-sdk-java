@@ -42,7 +42,7 @@ public class PositionsServiceSerializationTest {
                 .entityId("entity-123")
                 .build();
         assertNotNull(request);
-        assertEquals("entity-123", request.getId());
+        assertEquals("entity-123", request.getEntityId());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class PositionsServiceSerializationTest {
                 .entityId("entity-123")
                 .build();
         assertNotNull(request);
-        assertEquals("entity-123", request.getId());
+        assertEquals("entity-123", request.getEntityId());
     }
 
     @Test

@@ -36,7 +36,7 @@ public class AssetsServiceSerializationTest {
 
     @Test
     public void testListAssetsRequestConstruction() throws CoinbaseClientException {
-        ListAssetsRequest request = new ListAssetsRequest.Builder("entity-123").build();
+        ListAssetsRequest request = new ListAssetsRequest.Builder().entityId("entity-123").build();
         assertNotNull(request);
         assertEquals("entity-123", request.getEntityId());
     }
@@ -44,9 +44,9 @@ public class AssetsServiceSerializationTest {
     @Test
     public void testListAssetsRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListAssetsRequest.Builder(null).build());
+                new ListAssetsRequest.Builder().entityId(null).build());
         assertThrows(CoinbaseClientException.class, () ->
-                new ListAssetsRequest.Builder("").build());
+                new ListAssetsRequest.Builder().entityId("").build());
     }
 
     @Test

@@ -291,12 +291,6 @@ public class FinancingServiceSerializationTest {
     // ==================== ListFinancingEligibleAssets Tests ====================
 
     @Test
-    public void testListFinancingEligibleAssetsRequestConstruction() {
-        ListFinancingEligibleAssetsRequest request = new ListFinancingEligibleAssetsRequest.Builder().build();
-        assertNotNull(request);
-    }
-
-    @Test
     public void testListFinancingEligibleAssetsResponseDeserialization() throws JsonProcessingException {
         String json = "{"
                 + "\"assets\":["
@@ -308,7 +302,7 @@ public class FinancingServiceSerializationTest {
         ListFinancingEligibleAssetsResponse response = objectMapper.readValue(json, ListFinancingEligibleAssetsResponse.class);
         assertNotNull(response);
         assertNotNull(response.getAssets());
-        assertEquals(2, response.getAssets().size());
+        assertEquals(2, response.getAssets().length);
     }
 
     // ==================== ListInterestAccruals Tests ====================

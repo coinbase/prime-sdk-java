@@ -24,6 +24,8 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
  * Get Prime Cross Margin Overview (Beta) — uses /v2 path.
+ * Requires a CoinbasePrimeClient initialized with base URL
+ * "https://api.prime.coinbase.com" (without the /v1 suffix).
  */
 public class GetCrossMarginPrimeOverviewRequest {
     @JsonProperty(required = true, value = "entity_id")

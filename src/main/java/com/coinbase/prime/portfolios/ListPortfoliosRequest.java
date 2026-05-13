@@ -14,28 +14,23 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.activities;
-
-import com.coinbase.prime.model.Activity;
+package com.coinbase.prime.portfolios;
 
 /**
- * Response object for retrieving an activity by its activity ID.
- *
- * <p>This endpoint can retrieve both portfolio and entity activities when passed the appropriate API key.
+ * List all portfolios associated with a given entity.
  */
-public class GetActivityResponse {
-    /** The activity details */
-    private Activity activity;
+public class ListPortfoliosRequest {
 
-    public GetActivityResponse() {
+    public ListPortfoliosRequest() {
     }
 
-    public Activity getActivity() {
-        return activity;
-    }
+    public static class Builder {
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
+        public Builder() {
+        }
 
+        public ListPortfoliosRequest build() {
+            return new ListPortfoliosRequest();
+        }
+    }
 }

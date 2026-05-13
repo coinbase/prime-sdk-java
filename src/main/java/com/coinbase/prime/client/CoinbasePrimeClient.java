@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.client;
 
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.client.CoinbaseNetHttpClient;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
@@ -43,6 +44,18 @@ public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
 
     public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, HttpClient client) {
         super(credentials, Constants.CB_PRIME_BASE_URL, client);
+    }
+
+    /**
+     * Returns a new client with the given base URL; credentials and behavior are otherwise unchanged.
+     * Prefer this for single-call version overrides (e.g. {@code v2}) without mutating the shared client.
+     */
+    public CoinbasePrimeClient withBaseUrl(String baseUrl) {
+        CoinbaseCredentials credentials = getCredentials();
+        if (!(credentials instanceof CoinbasePrimeCredentials)) {
+            throw new IllegalStateException("Credentials must be CoinbasePrimeCredentials");
+        }
+        return new CoinbasePrimeClient((CoinbasePrimeCredentials) credentials, baseUrl);
     }
 
     @Override

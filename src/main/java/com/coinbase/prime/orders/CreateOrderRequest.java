@@ -74,7 +74,7 @@ public class CreateOrderRequest {
     private String displayBaseSize;
 
     @JsonProperty("is_raise_exact")
-    private Boolean isRaiseExact;
+    private boolean isRaiseExact;
 
     @JsonProperty("historical_pov")
     private String historicalPov;
@@ -237,11 +237,11 @@ public class CreateOrderRequest {
         this.displayBaseSize = displayBaseSize;
     }
 
-    public Boolean getIsRaiseExact() {
+    public boolean isRaiseExact() {
         return isRaiseExact;
     }
 
-    public void setIsRaiseExact(Boolean isRaiseExact) {
+    public void setRaiseExact(boolean isRaiseExact) {
         this.isRaiseExact = isRaiseExact;
     }
 
@@ -316,7 +316,7 @@ public class CreateOrderRequest {
         private String stpId;
         private String displayQuoteSize;
         private String displayBaseSize;
-        private Boolean isRaiseExact;
+        private boolean isRaiseExact;
         private String historicalPov;
         private String stopPrice;
         private String settlCurrency;
@@ -398,7 +398,7 @@ public class CreateOrderRequest {
             return this;
         }
 
-        public Builder isRaiseExact(Boolean isRaiseExact) {
+        public Builder isRaiseExact(boolean isRaiseExact) {
             this.isRaiseExact = isRaiseExact;
             return this;
         }

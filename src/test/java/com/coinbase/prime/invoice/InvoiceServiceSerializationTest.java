@@ -37,7 +37,8 @@ public class InvoiceServiceSerializationTest {
 
     @Test
     public void testListInvoicesRequestSerialization() throws CoinbaseClientException, JsonProcessingException {
-        ListInvoicesRequest request = new ListInvoicesRequest.Builder("entity-123")
+        ListInvoicesRequest request = new ListInvoicesRequest.Builder()
+                .entityId("entity-123")
                 .states(new InvoiceState[]{InvoiceState.INVOICE_STATE_BILLED, InvoiceState.INVOICE_STATE_PAID})
                 .billingMonth(1)
                 .billingYear(2025)
@@ -54,7 +55,7 @@ public class InvoiceServiceSerializationTest {
     @Test
     public void testListInvoicesRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListInvoicesRequest.Builder(null).build());
+                new ListInvoicesRequest.Builder().entityId(null).build());
     }
 
     @Test

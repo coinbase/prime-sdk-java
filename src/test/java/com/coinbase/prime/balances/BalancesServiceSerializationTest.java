@@ -40,12 +40,13 @@ public class BalancesServiceSerializationTest {
     public void testListEntityBalancesRequestSerialization() throws JsonProcessingException {
         ListEntityBalancesRequest request = new ListEntityBalancesRequest.Builder()
                 .entityId("entity-123")
-                .symbols("BTC,ETH")
+                .symbols(new String[]{"BTC", "ETH"})
                 .build();
 
         String json = objectMapper.writeValueAsString(request);
         assertNotNull(json);
-        assertTrue(json.contains("\"symbols\":\"BTC,ETH\""));
+        assertTrue(json.contains("\"BTC\""));
+        assertTrue(json.contains("\"ETH\""));
         assertFalse(json.contains("\"entity_id\""));
     }
 

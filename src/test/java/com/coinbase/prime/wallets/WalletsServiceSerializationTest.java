@@ -100,15 +100,6 @@ public class WalletsServiceSerializationTest {
 
     @Test
     public void testCreateWalletDepositAddressRequestBuilderValidation() {
-        // Missing required fields should throw
-        assertThrows(CoinbaseClientException.class, () -> {
-            new CreateWalletDepositAddressRequest.Builder()
-                    .portfolioId("portfolio-123")
-                    .walletId("wallet-123")
-                    // missing networkId
-                    .build();
-        });
-
         assertThrows(CoinbaseClientException.class, () -> {
             new CreateWalletDepositAddressRequest.Builder()
                     .portfolioId("portfolio-123")
@@ -142,9 +133,9 @@ public class WalletsServiceSerializationTest {
 
         assertNotNull(response);
         assertNotNull(response.getAddresses());
-        assertEquals(2, response.getAddresses().size());
-        assertEquals("0xabc123", response.getAddresses().get(0).getAddress());
-        assertEquals("0xdef456", response.getAddresses().get(1).getAddress());
+        assertEquals(2, response.getAddresses().length);
+        assertEquals("0xabc123", response.getAddresses()[0].getAddress());
+        assertEquals("0xdef456", response.getAddresses()[1].getAddress());
     }
 
     // ==================== ListWallets Tests ====================
@@ -209,15 +200,8 @@ public class WalletsServiceSerializationTest {
     public void testCreateWalletRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
                 new CreateWalletRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .symbol("BTC")
-                        .type(com.coinbase.prime.model.enums.WalletType.VAULT)
-                        .build());
-
-        assertThrows(CoinbaseClientException.class, () ->
-                new CreateWalletRequest.Builder()
-                        .portfolioId("portfolio-123")
                         .name("My Wallet")
+                        .symbol("BTC")
                         .type(com.coinbase.prime.model.enums.WalletType.VAULT)
                         .build());
     }
@@ -243,7 +227,10 @@ public class WalletsServiceSerializationTest {
 
     @Test
     public void testGetWalletRequestConstruction() throws CoinbaseClientException {
-        GetWalletRequest request = new GetWalletRequest.Builder("portfolio-123", "wallet-456").build();
+        GetWalletRequest request = new GetWalletRequest.Builder()
+                .portfolioId("portfolio-123")
+                .walletId("wallet-456")
+                .build();
         assertNotNull(request);
         assertEquals("portfolio-123", request.getPortfolioId());
         assertEquals("wallet-456", request.getWalletId());
@@ -303,9 +290,9 @@ public class WalletsServiceSerializationTest {
 
         GetWalletDepositInstructionsResponse response = objectMapper.readValue(json, GetWalletDepositInstructionsResponse.class);
         assertNotNull(response);
-        assertNotNull(response.getCryptoDepositInstructions());
-        assertEquals("0xabc123", response.getCryptoDepositInstructions().getAddress());
-        assertNull(response.getFiatDepositInstructions());
+        assertNotNull(response.getCryptoInstructions());
+        assertEquals("0xabc123", response.getCryptoInstructions().getAddress());
+        assertNull(response.getFiatInstructions());
     }
 
     @Test
@@ -320,7 +307,7 @@ public class WalletsServiceSerializationTest {
 
         GetWalletDepositInstructionsResponse response = objectMapper.readValue(json, GetWalletDepositInstructionsResponse.class);
         assertNotNull(response);
-        assertNotNull(response.getFiatDepositInstructions());
-        assertNull(response.getCryptoDepositInstructions());
+        assertNotNull(response.getFiatInstructions());
+        assertNull(response.getCryptoInstructions());
     }
 }

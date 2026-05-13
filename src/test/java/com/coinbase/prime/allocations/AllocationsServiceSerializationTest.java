@@ -56,27 +56,33 @@ public class AllocationsServiceSerializationTest {
     @Test
     public void testCreateAllocationResponseDeserialization() throws JsonProcessingException {
         String json = "{"
+                + "\"body\":{"
                 + "\"success\":true,"
                 + "\"allocation_id\":\"alloc-123\""
+                + "}"
                 + "}";
 
         CreateAllocationResponse response = objectMapper.readValue(json, CreateAllocationResponse.class);
         assertNotNull(response);
-        assertTrue(response.isSuccess());
-        assertEquals("alloc-123", response.getAllocationId());
+        assertNotNull(response.getBody());
+        assertTrue(response.getBody().getSuccess());
+        assertEquals("alloc-123", response.getBody().getAllocationId());
     }
 
     @Test
     public void testCreateAllocationResponseFailureDeserialization() throws JsonProcessingException {
         String json = "{"
+                + "\"body\":{"
                 + "\"success\":false,"
                 + "\"failure_reason\":\"Insufficient orders\""
+                + "}"
                 + "}";
 
         CreateAllocationResponse response = objectMapper.readValue(json, CreateAllocationResponse.class);
         assertNotNull(response);
-        assertFalse(response.isSuccess());
-        assertEquals("Insufficient orders", response.getFailureReason());
+        assertNotNull(response.getBody());
+        assertFalse(response.getBody().getSuccess());
+        assertEquals("Insufficient orders", response.getBody().getFailureReason());
     }
 
     // ==================== CreateNetAllocation Tests ====================
@@ -99,25 +105,30 @@ public class AllocationsServiceSerializationTest {
     @Test
     public void testCreateNetAllocationResponseDeserialization() throws JsonProcessingException {
         String json = "{"
+                + "\"body\":{"
                 + "\"success\":true,"
                 + "\"netting_id\":\"netting-456\","
                 + "\"buy_allocation_id\":\"buy-alloc-1\","
                 + "\"sell_allocation_id\":\"sell-alloc-2\""
+                + "}"
                 + "}";
 
         CreateNetAllocationResponse response = objectMapper.readValue(json, CreateNetAllocationResponse.class);
         assertNotNull(response);
-        assertTrue(response.isSuccess());
-        assertEquals("netting-456", response.getNettingId());
-        assertEquals("buy-alloc-1", response.getBuyAllocationId());
-        assertEquals("sell-alloc-2", response.getSellAllocationId());
+        assertNotNull(response.getBody());
+        assertTrue(response.getBody().getSuccess());
+        assertEquals("netting-456", response.getBody().getNettingId());
+        assertEquals("buy-alloc-1", response.getBody().getBuyAllocationId());
+        assertEquals("sell-alloc-2", response.getBody().getSellAllocationId());
     }
 
     // ==================== GetAllocation Tests ====================
 
     @Test
     public void testGetAllocationRequestConstruction() throws CoinbaseClientException {
-        GetAllocationRequest request = new GetAllocationRequest.Builder("portfolio-123", "alloc-456")
+        GetAllocationRequest request = new GetAllocationRequest.Builder()
+                .portfolioId("portfolio-123")
+                .allocationId("alloc-456")
                 .build();
         assertNotNull(request);
         assertEquals("portfolio-123", request.getPortfolioId());
@@ -142,7 +153,9 @@ public class AllocationsServiceSerializationTest {
 
     @Test
     public void testListAllocationsByNettingIdRequestConstruction() throws CoinbaseClientException {
-        ListAllocationsByNettingIdRequest request = new ListAllocationsByNettingIdRequest.Builder("portfolio-123", "netting-789")
+        ListAllocationsByNettingIdRequest request = new ListAllocationsByNettingIdRequest.Builder()
+                .portfolioId("portfolio-123")
+                .nettingId("netting-789")
                 .build();
         assertNotNull(request);
         assertEquals("portfolio-123", request.getPortfolioId());
@@ -168,7 +181,8 @@ public class AllocationsServiceSerializationTest {
 
     @Test
     public void testListPortfolioAllocationsRequestConstruction() throws CoinbaseClientException {
-        ListPortfolioAllocationsRequest request = new ListPortfolioAllocationsRequest.Builder("portfolio-123")
+        ListPortfolioAllocationsRequest request = new ListPortfolioAllocationsRequest.Builder()
+                .portfolioId("portfolio-123")
                 .productIds(new String[]{"BTC-USD", "ETH-USD"})
                 .build();
         assertNotNull(request);

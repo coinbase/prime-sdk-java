@@ -74,7 +74,10 @@ public class TransactionsServiceSerializationTest {
 
     @Test
     public void testGetTransactionRequestConstruction() throws CoinbaseClientException {
-        GetTransactionRequest request = new GetTransactionRequest.Builder("portfolio-123", "txn-456").build();
+        GetTransactionRequest request = new GetTransactionRequest.Builder()
+                .portfolioId("portfolio-123")
+                .transactionId("txn-456")
+                .build();
         assertNotNull(request);
         assertEquals("portfolio-123", request.getPortfolioId());
         assertEquals("txn-456", request.getTransactionId());

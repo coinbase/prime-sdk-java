@@ -38,7 +38,8 @@ public class AddressBookServiceSerializationTest {
 
     @Test
     public void testListAddressBookRequestSerialization() throws CoinbaseClientException, JsonProcessingException {
-        ListAddressBookRequest request = new ListAddressBookRequest.Builder("portfolio-123")
+        ListAddressBookRequest request = new ListAddressBookRequest.Builder()
+                .portfolioId("portfolio-123")
                 .currencySymbol("BTC")
                 .search("my-address")
                 .build();
@@ -53,7 +54,7 @@ public class AddressBookServiceSerializationTest {
     @Test
     public void testListAddressBookRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListAddressBookRequest.Builder(null).build());
+                new ListAddressBookRequest.Builder().portfolioId(null).build());
     }
 
     @Test
@@ -77,7 +78,8 @@ public class AddressBookServiceSerializationTest {
 
     @Test
     public void testCreateAddressBookEntryRequestSerialization() throws CoinbaseClientException, JsonProcessingException {
-        CreateAddressBookEntryRequest request = new CreateAddressBookEntryRequest.Builder("portfolio-123")
+        CreateAddressBookEntryRequest request = new CreateAddressBookEntryRequest.Builder()
+                .portfolioId("portfolio-123")
                 .address("bc1qxy2kgdygjrsqtzq2n0yrf2")
                 .currencySymbol("BTC")
                 .name("My Bitcoin Address")
@@ -96,13 +98,8 @@ public class AddressBookServiceSerializationTest {
     @Test
     public void testCreateAddressBookEntryRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new CreateAddressBookEntryRequest.Builder("portfolio-123")
+                new CreateAddressBookEntryRequest.Builder()
                         .address("bc1q")
-                        .currencySymbol("BTC")
-                        .build());
-
-        assertThrows(CoinbaseClientException.class, () ->
-                new CreateAddressBookEntryRequest.Builder("portfolio-123")
                         .currencySymbol("BTC")
                         .name("name")
                         .build());

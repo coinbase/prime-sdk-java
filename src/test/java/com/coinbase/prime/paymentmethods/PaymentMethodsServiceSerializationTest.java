@@ -38,7 +38,7 @@ public class PaymentMethodsServiceSerializationTest {
 
     @Test
     public void testListPaymentMethodsRequestConstruction() throws CoinbaseClientException {
-        ListPaymentMethodsRequest request = new ListPaymentMethodsRequest.Builder("entity-123").build();
+        ListPaymentMethodsRequest request = new ListPaymentMethodsRequest.Builder().entityId("entity-123").build();
         assertNotNull(request);
         assertEquals("entity-123", request.getEntityId());
     }
@@ -46,7 +46,7 @@ public class PaymentMethodsServiceSerializationTest {
     @Test
     public void testListPaymentMethodsRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListPaymentMethodsRequest.Builder(null).build());
+                new ListPaymentMethodsRequest.Builder().entityId(null).build());
     }
 
     @Test

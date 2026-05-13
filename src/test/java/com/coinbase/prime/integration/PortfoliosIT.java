@@ -19,6 +19,7 @@ package com.coinbase.prime.integration;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.portfolios.GetPortfolioRequest;
 import com.coinbase.prime.portfolios.GetPortfolioResponse;
+import com.coinbase.prime.portfolios.ListPortfoliosRequest;
 import com.coinbase.prime.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class PortfoliosIT extends BaseIntegrationTest {
     @Test
     public void testListPortfolios() throws Exception {
         PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-        ListPortfoliosResponse response = service.listPortfolios();
+        ListPortfoliosResponse response = service.listPortfolios(new ListPortfoliosRequest.Builder().build());
         assertNotNull(response);
     }
 

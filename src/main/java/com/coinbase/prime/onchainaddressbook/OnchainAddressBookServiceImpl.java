@@ -33,7 +33,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.PUT,
-                String.format("/v1/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<UpdateOnchainAddressBookEntryResponse>() {});
@@ -43,7 +43,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/v1/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
                 List.of(201, 200),
                 new TypeReference<CreateOnchainAddressBookEntryResponse>() {});
@@ -53,7 +53,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.DELETE,
-                String.format("/v1/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
+                String.format("/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
                 request,
                 List.of(200),
                 new TypeReference<DeleteOnchainAddressGroupResponse>() {});
@@ -63,7 +63,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/v1/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
+                String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListOnchainAddressGroupsResponse>() {});

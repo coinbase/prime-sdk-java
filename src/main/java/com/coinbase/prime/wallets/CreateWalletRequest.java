@@ -40,7 +40,7 @@ public class CreateWalletRequest {
     private String symbol;
 
     @JsonProperty("wallet_type")
-    private WalletType walletType;
+    private WalletType type;
 
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
@@ -58,7 +58,7 @@ public class CreateWalletRequest {
         this.portfolioId = builder.portfolioId;
         this.name = builder.name;
         this.symbol = builder.symbol;
-        this.walletType = builder.walletType;
+        this.type = builder.type;
         this.idempotencyKey = builder.idempotencyKey;
         this.networkFamily = builder.networkFamily;
         this.network = builder.network;
@@ -88,12 +88,12 @@ public class CreateWalletRequest {
         this.symbol = symbol;
     }
 
-    public WalletType getWalletType() {
-        return walletType;
+    public WalletType getType() {
+        return type;
     }
 
-    public void setWalletType(WalletType walletType) {
-        this.walletType = walletType;
+    public void setType(WalletType type) {
+        this.type = type;
     }
 
     public String getIdempotencyKey() {
@@ -124,7 +124,7 @@ public class CreateWalletRequest {
         private String portfolioId;
         private String name;
         private String symbol;
-        private WalletType walletType;
+        private WalletType type;
         private String idempotencyKey;
         private NetworkFamily networkFamily;
         private Network network;
@@ -147,8 +147,8 @@ public class CreateWalletRequest {
             return this;
         }
 
-        public Builder walletType(WalletType walletType) {
-            this.walletType = walletType;
+        public Builder type(WalletType type) {
+            this.type = type;
             return this;
         }
 

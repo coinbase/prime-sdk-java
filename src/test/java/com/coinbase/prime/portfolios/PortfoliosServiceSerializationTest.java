@@ -62,7 +62,7 @@ public class PortfoliosServiceSerializationTest {
 
     @Test
     public void testGetPortfolioRequestConstruction() throws CoinbaseClientException {
-        GetPortfolioRequest request = new GetPortfolioRequest.Builder("portfolio-123").build();
+        GetPortfolioRequest request = new GetPortfolioRequest.Builder().portfolioId("portfolio-123").build();
         assertNotNull(request);
         assertEquals("portfolio-123", request.getPortfolioId());
     }
@@ -70,7 +70,7 @@ public class PortfoliosServiceSerializationTest {
     @Test
     public void testGetPortfolioRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new GetPortfolioRequest.Builder(null).build());
+                new GetPortfolioRequest.Builder().portfolioId(null).build());
     }
 
     @Test

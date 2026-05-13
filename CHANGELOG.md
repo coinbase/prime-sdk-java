@@ -1,9 +1,11 @@
 # Changelog
 
-## [2026-05-12]
+## [Unreleased]
 
 ### Changed
 
+- **HTTP versioning**: `Constants.CB_PRIME_BASE_URL` remains `https://api.prime.coinbase.com/v1`; service paths stay versionless. `GetCrossMarginPrimeOverview` targets API version `v2` using `CoinbasePrimeClient.withBaseUrl(Constants.versionedBaseUrl(Constants.CB_PRIME_BASE_URL, "v2"))` for that call only (aligned with prime-sdk-go).
+- Restored `ListPortfoliosRequest` / `listPortfolios(ListPortfoliosRequest)` for API compatibility.
 - Removed `tools/model-generator`; models, enums, requests, responses, services, and `PrimeServiceFactory` are hand-maintained against `apiSpec/prime-public-spec.yaml`. Refresh the spec with `make fetch-spec`.
 
 ## [1.7.1] - 2026-04-21
