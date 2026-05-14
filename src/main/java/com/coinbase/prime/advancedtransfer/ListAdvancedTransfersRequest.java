@@ -35,10 +35,8 @@ public class ListAdvancedTransfersRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("state")
     private AdvancedTransferState state;
 
-    @JsonProperty("type")
     private AdvancedTransferType type;
 
     @JsonProperty("start_time")

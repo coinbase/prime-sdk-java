@@ -23,32 +23,26 @@ import com.coinbase.prime.model.enums.AssetChangeType;
 import com.coinbase.prime.model.NftCollection;
 import com.coinbase.prime.model.NftItem;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class AssetChange {
-    @JsonProperty("type")
     private AssetChangeType type;
 
     /**
      * The currency symbol associated with the balance operation
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The amount in whole units being transferred or approved
      */
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("collection")
     private NftCollection collection;
 
-    @JsonProperty("item")
     private NftItem item;
 
     public AssetChange() {

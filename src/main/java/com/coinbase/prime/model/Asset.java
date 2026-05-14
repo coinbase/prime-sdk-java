@@ -33,13 +33,11 @@ public class Asset {
     /**
      * The name of the asset
      */
-    @JsonProperty("name")
     private String name;
 
     /**
      * The mutable series of letters used to identify the asset
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -63,7 +61,6 @@ public class Asset {
     /**
      * List of networks supported by this asset
      */
-    @JsonProperty("networks")
     private List<NetworkDetails> networks;
 
     public Asset() {

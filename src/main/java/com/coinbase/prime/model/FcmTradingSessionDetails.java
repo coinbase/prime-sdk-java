@@ -61,7 +61,6 @@ public class FcmTradingSessionDetails {
     @JsonProperty("closed_reason")
     private FcmTradingSessionClosedReason closedReason;
 
-    @JsonProperty("maintenance")
     private FcmScheduledMaintenance maintenance;
 
     /**

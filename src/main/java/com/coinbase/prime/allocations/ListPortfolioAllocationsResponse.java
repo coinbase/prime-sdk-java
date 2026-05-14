@@ -18,16 +18,13 @@ package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
 import com.coinbase.prime.common.Pagination;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Portfolio Allocations
  */
 public class ListPortfolioAllocationsResponse {
-    @JsonProperty("allocations")
     private Allocation[] allocations;
 
-    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioAllocationsResponse() {

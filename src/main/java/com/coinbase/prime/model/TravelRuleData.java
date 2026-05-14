@@ -28,10 +28,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleData {
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
     @JsonProperty("is_self")

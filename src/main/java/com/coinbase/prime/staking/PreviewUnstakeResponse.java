@@ -35,7 +35,6 @@ public class PreviewUnstakeResponse {
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
-    @JsonProperty("validators")
     private ValidatorUnstakePreview[] validators;
 
     public PreviewUnstakeResponse() {

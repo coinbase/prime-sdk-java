@@ -32,22 +32,18 @@ public class WalletCryptoDepositInstructions {
     /**
      * The ID of the wallet
      */
-    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the wallet
      */
-    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("type")
     private WalletDepositInstructionType type;
 
     /**
      * The address of the wallet
      */
-    @JsonProperty("address")
     private String address;
 
     /**
@@ -62,7 +58,6 @@ public class WalletCryptoDepositInstructions {
     @JsonProperty("account_identifier_name")
     private String accountIdentifierName;
 
-    @JsonProperty("network")
     private Network network;
 
     public WalletCryptoDepositInstructions() {

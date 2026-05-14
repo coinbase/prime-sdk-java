@@ -64,7 +64,6 @@ public class FutureProductDetails {
     /**
      * The venue this product trades on
      */
-    @JsonProperty("venue")
     private String venue;
 
     /**

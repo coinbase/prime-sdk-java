@@ -31,7 +31,6 @@ public class Position {
     /**
      * Asset symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**

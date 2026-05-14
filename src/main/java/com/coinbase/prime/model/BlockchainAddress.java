@@ -31,7 +31,6 @@ public class BlockchainAddress {
     /**
      * The address on the network
      */
-    @JsonProperty("address")
     private String address;
 
     /**
@@ -40,7 +39,6 @@ public class BlockchainAddress {
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
-    @JsonProperty("network")
     private Network network;
 
     public BlockchainAddress() {

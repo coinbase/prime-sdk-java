@@ -37,10 +37,8 @@ public class GetOrderPreviewRequest {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
-    @JsonProperty("type")
     private OrderType type;
 
     @JsonProperty("base_quantity")
@@ -73,7 +71,6 @@ public class GetOrderPreviewRequest {
     @JsonProperty("settl_currency")
     private String settlCurrency;
 
-    @JsonProperty("postOnly")
     private Boolean postOnly;
 
     @JsonProperty("display_quote_size")
@@ -85,7 +82,6 @@ public class GetOrderPreviewRequest {
     @JsonProperty("peg_offset_type")
     private PegOffsetType pegOffsetType;
 
-    @JsonProperty("offset")
     private String offset;
 
     @JsonProperty("wig_level")

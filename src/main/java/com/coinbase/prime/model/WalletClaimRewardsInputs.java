@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,7 +29,6 @@ public class WalletClaimRewardsInputs {
     /**
      * Optional amount to claim rewards (ETH only). If omitted, the wallet will claim the maximum amount available
      */
-    @JsonProperty("amount")
     private String amount;
 
     public WalletClaimRewardsInputs() {

@@ -34,7 +34,6 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("balance_type")

@@ -35,7 +35,6 @@ public class GetStakingStatusResponse {
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
-    @JsonProperty("validators")
     private ValidatorStakingInfo[] validators;
 
     public GetStakingStatusResponse() {

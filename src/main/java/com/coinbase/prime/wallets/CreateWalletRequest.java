@@ -33,10 +33,8 @@ public class CreateWalletRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("wallet_type")
@@ -48,7 +46,6 @@ public class CreateWalletRequest {
     @JsonProperty("network_family")
     private NetworkFamily networkFamily;
 
-    @JsonProperty("network")
     private Network network;
 
     public CreateWalletRequest() {

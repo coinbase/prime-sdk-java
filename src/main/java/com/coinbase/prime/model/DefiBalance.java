@@ -27,10 +27,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DefiBalance {
-    @JsonProperty("network")
     private String network;
 
-    @JsonProperty("protocol")
     private String protocol;
 
     @JsonProperty("net_usd_value")

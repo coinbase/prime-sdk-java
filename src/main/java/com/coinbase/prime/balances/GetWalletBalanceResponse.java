@@ -17,13 +17,11 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Wallet Balance
  */
 public class GetWalletBalanceResponse {
-    @JsonProperty("balance")
     private Balance balance;
 
     public GetWalletBalanceResponse() {

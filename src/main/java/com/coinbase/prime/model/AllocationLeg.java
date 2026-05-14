@@ -42,7 +42,6 @@ public class AllocationLeg {
     /**
      * The amount size for the allocation leg
      */
-    @JsonProperty("amount")
     private String amount;
 
     public AllocationLeg() {

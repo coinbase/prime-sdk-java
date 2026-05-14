@@ -40,7 +40,6 @@ public class GetCandlesRequest {
     @JsonProperty("end_time")
     private String endTime;
 
-    @JsonProperty("granularity")
     private CandlesGranularity granularity;
 
     public GetCandlesRequest() {

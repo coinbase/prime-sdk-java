@@ -28,10 +28,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
     @JsonProperty("is_self")

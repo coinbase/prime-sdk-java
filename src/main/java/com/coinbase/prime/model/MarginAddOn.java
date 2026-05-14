@@ -31,7 +31,6 @@ public class MarginAddOn {
     /**
      * margin add on amount
      */
-    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("add_on_type")

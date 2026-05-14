@@ -36,10 +36,8 @@ public class DetailedAddress {
     @JsonProperty("address_3")
     private String address3;
 
-    @JsonProperty("city")
     private String city;
 
-    @JsonProperty("state")
     private String state;
 
     @JsonProperty("country_code")

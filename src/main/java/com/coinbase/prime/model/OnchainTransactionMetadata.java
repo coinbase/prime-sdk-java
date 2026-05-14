@@ -33,7 +33,6 @@ public class OnchainTransactionMetadata {
     /**
      * The transaction type label of the confirmed transaction post settlement
      */
-    @JsonProperty("label")
     private String label;
 
     /**

@@ -30,10 +30,8 @@ public class ScheduleEntityFuturesSweepRequest {
     @JsonIgnore
     private String entityId;
 
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("currency")
     private String currency;
 
     public ScheduleEntityFuturesSweepRequest() {

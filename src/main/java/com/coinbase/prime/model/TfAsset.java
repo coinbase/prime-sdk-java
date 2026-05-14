@@ -30,7 +30,6 @@ public class TfAsset {
     /**
      * The asset symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**

@@ -37,13 +37,11 @@ public class CreateOrderRequest {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
-    @JsonProperty("type")
     private OrderType type;
 
     @JsonProperty("base_quantity")
@@ -91,7 +89,6 @@ public class CreateOrderRequest {
     @JsonProperty("peg_offset_type")
     private PegOffsetType pegOffsetType;
 
-    @JsonProperty("offset")
     private String offset;
 
     @JsonProperty("wig_level")

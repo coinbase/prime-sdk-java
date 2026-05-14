@@ -36,7 +36,6 @@ public class ListAddressBookRequest extends PrimeListRequest {
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
-    @JsonProperty("search")
     private String search;
 
     public ListAddressBookRequest() {

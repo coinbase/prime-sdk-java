@@ -48,7 +48,6 @@ public class ExistingLocate {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -66,7 +65,6 @@ public class ExistingLocate {
     /**
      * The locate status
      */
-    @JsonProperty("status")
     private String status;
 
     /**

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MarketData {
-    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("vol_5d")

@@ -35,10 +35,8 @@ public class SubmitDepositTravelRuleDataRequest {
     @JsonIgnore
     private String transactionId;
 
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
     @JsonProperty("is_self")

@@ -30,7 +30,6 @@ public class CreateAllocationResponseBody {
     /**
      * The success boolean for the post allocation
      */
-    @JsonProperty("success")
     private boolean success;
 
     /**

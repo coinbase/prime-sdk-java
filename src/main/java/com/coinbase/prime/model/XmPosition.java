@@ -30,7 +30,6 @@ public class XmPosition {
     /**
      * Position currency
      */
-    @JsonProperty("currency")
     private String currency;
 
     /**

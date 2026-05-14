@@ -17,12 +17,10 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.TfObligation;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class ListTfObligationsResponse {
-    @JsonProperty("obligations")
     private List<TfObligation> obligations;
 
     public ListTfObligationsResponse() {

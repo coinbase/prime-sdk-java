@@ -34,10 +34,8 @@ public class CreateTransferRequest {
     @JsonIgnore
     private String walletId;
 
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("destination")
     private String destination;
 
     @JsonProperty("idempotency_key")

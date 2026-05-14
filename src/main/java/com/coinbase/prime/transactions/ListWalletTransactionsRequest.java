@@ -38,7 +38,6 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     @JsonIgnore
     private String walletId;
 
-    @JsonProperty("types")
     private TransactionType[] types;
 
     @JsonProperty("start_time")

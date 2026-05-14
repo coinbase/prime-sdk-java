@@ -30,13 +30,10 @@ public class CreateWalletWithdrawalResponse {
     @JsonProperty("approval_url")
     private String approvalUrl;
 
-    @JsonProperty("symbol")
     private String symbol;
 
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("fee")
     private String fee;
 
     @JsonProperty("destination_type")

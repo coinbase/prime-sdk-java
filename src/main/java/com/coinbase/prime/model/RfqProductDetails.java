@@ -30,7 +30,6 @@ public class RfqProductDetails {
     /**
      * Whether the product is tradable via RFQ
      */
-    @JsonProperty("tradable")
     private boolean tradable;
 
     /**

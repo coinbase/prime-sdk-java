@@ -30,10 +30,8 @@ public class CreateNewLocatesRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("symbol")
     private String symbol;
 
-    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("conversion_date")

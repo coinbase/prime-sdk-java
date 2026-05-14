@@ -30,7 +30,6 @@ public class WalletStakeInputs {
     /**
      * Optional amount to stake (ETH only). If omitted, the wallet will stake the maximum amount available
      */
-    @JsonProperty("amount")
     private String amount;
 
     /**

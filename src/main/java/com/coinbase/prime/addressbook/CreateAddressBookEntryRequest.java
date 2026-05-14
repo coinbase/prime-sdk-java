@@ -30,13 +30,11 @@ public class CreateAddressBookEntryRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("address")
     private String address;
 
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
-    @JsonProperty("name")
     private String name;
 
     @JsonProperty("account_identifier")

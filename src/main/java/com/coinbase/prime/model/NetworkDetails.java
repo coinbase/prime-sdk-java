@@ -28,13 +28,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class NetworkDetails {
-    @JsonProperty("network")
     private Network network;
 
     /**
      * The name of the network
      */
-    @JsonProperty("name")
     private String name;
 
     /**

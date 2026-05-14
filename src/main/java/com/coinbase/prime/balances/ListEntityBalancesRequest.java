@@ -34,7 +34,6 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     @JsonIgnore
     private String entityId;
 
-    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("aggregation_type")

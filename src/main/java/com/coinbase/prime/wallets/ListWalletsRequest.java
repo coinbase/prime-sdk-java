@@ -34,10 +34,8 @@ public class ListWalletsRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("type")
     private WalletType type;
 
-    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("get_network_unified_wallets")

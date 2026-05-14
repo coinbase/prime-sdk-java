@@ -18,16 +18,13 @@ package com.coinbase.prime.addressbook;
 
 import com.coinbase.prime.model.AddressBookEntry;
 import com.coinbase.prime.common.Pagination;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Address Book
  */
 public class ListAddressBookEntriesResponse {
-    @JsonProperty("addresses")
     private AddressBookEntry[] addresses;
 
-    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListAddressBookEntriesResponse() {

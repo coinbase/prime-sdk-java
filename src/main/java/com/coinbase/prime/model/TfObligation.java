@@ -36,7 +36,6 @@ public class TfObligation {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**

@@ -37,7 +37,6 @@ public class Product {
     /**
      * The product ID, written as &#x60;BASE-QUOTE&#x60;
      */
-    @JsonProperty("id")
     private String id;
 
     /**
@@ -79,7 +78,6 @@ public class Product {
     /**
      * Permissions given to the user for a product
      */
-    @JsonProperty("permissions")
     private List<ProductPermissions> permissions;
 
     /**

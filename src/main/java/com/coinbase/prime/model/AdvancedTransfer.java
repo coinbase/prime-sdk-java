@@ -33,13 +33,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdvancedTransfer {
-    @JsonProperty("id")
     private String id;
 
-    @JsonProperty("type")
     private AdvancedTransferType type;
 
-    @JsonProperty("state")
     private AdvancedTransferState state;
 
     @JsonProperty("fund_movements")

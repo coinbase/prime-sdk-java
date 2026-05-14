@@ -36,7 +36,6 @@ public class RpcConfig {
     /**
      * Custom blockchain node RPC URL. (EVM-only)
      */
-    @JsonProperty("url")
     private String url;
 
     public RpcConfig() {

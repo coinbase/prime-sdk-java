@@ -34,7 +34,6 @@ public class ListInvoicesRequest extends PrimeListRequest {
     @JsonIgnore
     private String entityId;
 
-    @JsonProperty("states")
     private InvoiceState[] states;
 
     @JsonProperty("billing_year")

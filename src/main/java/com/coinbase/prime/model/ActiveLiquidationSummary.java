@@ -34,7 +34,6 @@ public class ActiveLiquidationSummary {
     @JsonProperty("liquidation_id")
     private String liquidationId;
 
-    @JsonProperty("status")
     private XmLiquidationStatus status;
 
     /**

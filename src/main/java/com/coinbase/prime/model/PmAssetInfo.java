@@ -30,19 +30,16 @@ public class PmAssetInfo {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Nominal amount of the currency
      */
-    @JsonProperty("amount")
     private String amount;
 
     /**
      * Spot price for the currency
      */
-    @JsonProperty("price")
     private String price;
 
     /**

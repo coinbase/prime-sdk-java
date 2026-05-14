@@ -37,10 +37,8 @@ public class PortfolioStakingInitiateRequest {
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("metadata")
     private PortfolioStakingMetadata metadata;
 
     public PortfolioStakingInitiateRequest() {

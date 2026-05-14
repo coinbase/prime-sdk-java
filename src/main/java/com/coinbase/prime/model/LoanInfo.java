@@ -36,13 +36,11 @@ public class LoanInfo {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Balance amount
      */
-    @JsonProperty("amount")
     private String amount;
 
     /**

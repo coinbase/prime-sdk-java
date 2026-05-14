@@ -17,13 +17,11 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.CrossMarginOverview;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Cross Margin Overview
  */
 public class GetCrossMarginOverviewResponse {
-    @JsonProperty("overview")
     private CrossMarginOverview overview;
 
     public GetCrossMarginOverviewResponse() {

@@ -34,19 +34,16 @@ public class PortfolioUser {
     /**
      * The unique ID of the user.
      */
-    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the user.
      */
-    @JsonProperty("name")
     private String name;
 
     /**
      * The email of the user.
      */
-    @JsonProperty("email")
     private String email;
 
     /**
@@ -61,13 +58,11 @@ public class PortfolioUser {
     @JsonProperty("entity_id")
     private String entityId;
 
-    @JsonProperty("role")
     private UserRole role;
 
     /**
      * All primary roles assigned to the user.
      */
-    @JsonProperty("roles")
     private List<UserRole> roles;
 
     /**

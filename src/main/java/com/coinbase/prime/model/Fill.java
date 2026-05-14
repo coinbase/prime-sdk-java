@@ -34,7 +34,6 @@ public class Fill {
     /**
      * The unique ID of the fill
      */
-    @JsonProperty("id")
     private String id;
 
     /**
@@ -55,7 +54,6 @@ public class Fill {
     @JsonProperty("client_product_id")
     private String clientProductId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
     /**
@@ -73,25 +71,21 @@ public class Fill {
     /**
      * The price of the fill
      */
-    @JsonProperty("price")
     private String price;
 
     /**
      * The date and time of the fill
      */
-    @JsonProperty("time")
     private OffsetDateTime time;
 
     /**
      * The commission incurred for the fill
      */
-    @JsonProperty("commission")
     private String commission;
 
     /**
      * The name of the venue
      */
-    @JsonProperty("venue")
     private String venue;
 
     /**

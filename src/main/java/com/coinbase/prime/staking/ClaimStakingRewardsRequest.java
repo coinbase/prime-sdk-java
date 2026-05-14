@@ -38,7 +38,6 @@ public class ClaimStakingRewardsRequest {
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
-    @JsonProperty("inputs")
     private WalletClaimRewardsInputs inputs;
 
     public ClaimStakingRewardsRequest() {

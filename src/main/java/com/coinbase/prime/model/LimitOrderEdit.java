@@ -28,10 +28,8 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class LimitOrderEdit {
-    @JsonProperty("price")
     private String price;
 
-    @JsonProperty("size")
     private String size;
 
     @JsonProperty("display_size")

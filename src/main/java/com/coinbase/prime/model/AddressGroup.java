@@ -32,16 +32,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AddressGroup {
-    @JsonProperty("id")
     private String id;
 
-    @JsonProperty("name")
     private String name;
 
     @JsonProperty("network_type")
     private NetworkType networkType;
 
-    @JsonProperty("addresses")
     private List<AddressEntry> addresses;
 
     @JsonProperty("added_at")

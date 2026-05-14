@@ -28,10 +28,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class PaymentMethodSummary {
-    @JsonProperty("id")
     private String id;
 
-    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("payment_method_type")

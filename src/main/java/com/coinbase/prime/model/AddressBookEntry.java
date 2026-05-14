@@ -33,7 +33,6 @@ public class AddressBookEntry {
     /**
      * UUID identifying this address book entry
      */
-    @JsonProperty("id")
     private String id;
 
     /**
@@ -45,13 +44,11 @@ public class AddressBookEntry {
     /**
      * Name for this address book entry
      */
-    @JsonProperty("name")
     private String name;
 
     /**
      * Cryptocurrency address
      */
-    @JsonProperty("address")
     private String address;
 
     /**
@@ -69,7 +66,6 @@ public class AddressBookEntry {
     /**
      * State of this address book entry
      */
-    @JsonProperty("state")
     private String state;
 
     /**
@@ -93,7 +89,6 @@ public class AddressBookEntry {
     @JsonProperty("added_by")
     private DisplayUser addedBy;
 
-    @JsonProperty("type")
     private AddressBookType type;
 
     /**

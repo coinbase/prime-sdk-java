@@ -25,10 +25,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Onchain Wallet Balances
  */
 public class ListOnchainWalletBalancesResponse {
-    @JsonProperty("balances")
     private OnchainBalance[] balances;
 
-    @JsonProperty("pagination")
     private Pagination pagination;
 
     @JsonProperty("defi_balances")

@@ -16,13 +16,11 @@
 
 package com.coinbase.prime.futures;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Set FCM Settings
  */
 public class SetFcmSettingsResponse {
-    @JsonProperty("success")
     private Boolean success;
 
     public SetFcmSettingsResponse() {

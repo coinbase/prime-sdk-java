@@ -39,31 +39,26 @@ public class PostTradeCreditInformation {
     /**
      * The currency symbol credit is denoted in
      */
-    @JsonProperty("currency")
     private String currency;
 
     /**
      * The maximum credit limit
      */
-    @JsonProperty("limit")
     private String limit;
 
     /**
      * The amount of credit used
      */
-    @JsonProperty("utilized")
     private String utilized;
 
     /**
      * The amount of credit available
      */
-    @JsonProperty("available")
     private String available;
 
     /**
      * Whether or not a portfolio is frozen due to balance outstanding or other reason
      */
-    @JsonProperty("frozen")
     private boolean frozen;
 
     /**
@@ -78,7 +73,6 @@ public class PostTradeCreditInformation {
     /**
      * Whether the portfolio has credit enabled
      */
-    @JsonProperty("enabled")
     private boolean enabled;
 
     /**

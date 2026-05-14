@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainAsset {
-    @JsonProperty("network")
     private String network;
 
     /**
@@ -39,7 +38,6 @@ public class OnchainAsset {
     /**
      * Symbol of this asset.
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -51,7 +49,6 @@ public class OnchainAsset {
     /**
      * Name of this asset, either the name of the crypto token or the NFT collection name.
      */
-    @JsonProperty("name")
     private String name;
 
     public OnchainAsset() {

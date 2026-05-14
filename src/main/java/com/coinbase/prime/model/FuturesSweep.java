@@ -33,7 +33,6 @@ public class FuturesSweep {
     /**
      * Sweep ID
      */
-    @JsonProperty("id")
     private String id;
 
     @JsonProperty("requested_amount")
@@ -45,7 +44,6 @@ public class FuturesSweep {
     @JsonProperty("should_sweep_all")
     private boolean shouldSweepAll;
 
-    @JsonProperty("status")
     private FuturesSweepStatus status;
 
     /**

@@ -34,7 +34,6 @@ public class PreviewUnstakeRequest {
     @JsonIgnore
     private String walletId;
 
-    @JsonProperty("amount")
     private String amount;
 
     public PreviewUnstakeRequest() {

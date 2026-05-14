@@ -17,11 +17,9 @@
 package com.coinbase.prime.portfolios;
 
 import com.coinbase.prime.model.Counterparty;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetPortfolioCounterpartyIdResponse {
     /** The counterparty information for the portfolio */
-    @JsonProperty("counterparty")
     private Counterparty counterparty;
 
     public GetPortfolioCounterpartyIdResponse() {

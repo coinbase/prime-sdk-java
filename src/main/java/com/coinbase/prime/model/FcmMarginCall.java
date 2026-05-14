@@ -30,10 +30,8 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class FcmMarginCall {
-    @JsonProperty("type")
     private FcmMarginCallType type;
 
-    @JsonProperty("state")
     private FcmMarginCallState state;
 
     /**

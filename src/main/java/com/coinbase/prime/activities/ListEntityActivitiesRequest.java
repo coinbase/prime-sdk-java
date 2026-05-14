@@ -39,13 +39,10 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonProperty("activity_level")
     private ActivityLevel activityLevel;
 
-    @JsonProperty("symbols")
     private String[] symbols;
 
-    @JsonProperty("categories")
     private ActivityCategory[] categories;
 
-    @JsonProperty("statuses")
     private ActivityStatus[] statuses;
 
     @JsonProperty("start_time")

@@ -26,7 +26,6 @@ public class GetMarketDataResponse {
     @JsonProperty("market_data")
     private List<MarketData> marketData;
 
-    @JsonProperty("pagination")
     private Pagination pagination;
 
     public GetMarketDataResponse() {

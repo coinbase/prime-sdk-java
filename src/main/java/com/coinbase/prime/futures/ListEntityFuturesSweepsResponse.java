@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Entity Futures Sweeps
  */
 public class ListEntityFuturesSweepsResponse {
-    @JsonProperty("sweeps")
     private FuturesSweep[] sweeps;
 
     @JsonProperty("auto_sweep")

@@ -39,7 +39,6 @@ public class Accrual {
     /**
      * The date of accrual in UTC
      */
-    @JsonProperty("date")
     private String date;
 
     /**
@@ -51,7 +50,6 @@ public class Accrual {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("loan_type")
@@ -87,7 +85,6 @@ public class Accrual {
     @JsonProperty("loan_amount")
     private String loanAmount;
 
-    @JsonProperty("benchmark")
     private Benchmark benchmark;
 
     /**
@@ -99,7 +96,6 @@ public class Accrual {
     /**
      * Daily spread offset from the benchmark rate
      */
-    @JsonProperty("spread")
     private String spread;
 
     @JsonProperty("rate_type")

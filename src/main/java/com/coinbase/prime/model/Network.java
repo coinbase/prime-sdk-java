@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,13 +29,11 @@ public class Network {
     /**
      * The network id: base, bitcoin, ethereum, solana etc
      */
-    @JsonProperty("id")
     private String id;
 
     /**
      * The network type: mainnet, testnet, etc
      */
-    @JsonProperty("type")
     private String type;
 
     public Network() {

@@ -42,7 +42,6 @@ public class Transaction {
     /**
      * The ID of the transaction
      */
-    @JsonProperty("id")
     private String id;
 
     /**
@@ -57,16 +56,13 @@ public class Transaction {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
-    @JsonProperty("type")
     private TransactionType type;
 
-    @JsonProperty("status")
     private TransactionStatus status;
 
     /**
      * The asset symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -84,7 +80,6 @@ public class Transaction {
     /**
      * The transaction amount in whole units
      */
-    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("transfer_from")
@@ -102,7 +97,6 @@ public class Transaction {
     /**
      * The fees that the customer paid for the transaction (in whole units)
      */
-    @JsonProperty("fees")
     private String fees;
 
     /**
@@ -135,7 +129,6 @@ public class Transaction {
     /**
      * The network name specific to onchain/onchain wallet transactions
      */
-    @JsonProperty("network")
     private String network;
 
     /**
@@ -144,7 +137,6 @@ public class Transaction {
     @JsonProperty("estimated_asset_changes")
     private List<AssetChange> estimatedAssetChanges;
 
-    @JsonProperty("metadata")
     private TransactionMetadata metadata;
 
     /**

@@ -27,7 +27,6 @@ public class TierPairRateEntry {
     @JsonProperty("tier_b")
     private String tierB;
 
-    @JsonProperty("rate")
     private String rate;
 
     public String getTierA() { return tierA; }

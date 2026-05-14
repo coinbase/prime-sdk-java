@@ -17,13 +17,11 @@
 package com.coinbase.prime.portfolios;
 
 import com.coinbase.prime.model.Portfolio;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Portfolios
  */
 public class ListPortfoliosResponse {
-    @JsonProperty("portfolios")
     private Portfolio[] portfolios;
 
     public ListPortfoliosResponse() {

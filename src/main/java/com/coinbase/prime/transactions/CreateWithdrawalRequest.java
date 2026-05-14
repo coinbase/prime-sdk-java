@@ -39,7 +39,6 @@ public class CreateWithdrawalRequest {
     @JsonIgnore
     private String walletId;
 
-    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("destination_type")
@@ -57,7 +56,6 @@ public class CreateWithdrawalRequest {
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
-    @JsonProperty("counterparty")
     private CounterpartyDestination counterparty;
 
     @JsonProperty("travel_rule_data")

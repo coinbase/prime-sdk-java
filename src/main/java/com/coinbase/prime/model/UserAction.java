@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class UserAction {
-    @JsonProperty("action")
     private Action action;
 
     /**
@@ -40,7 +39,6 @@ public class UserAction {
     /**
      * Time the action was taken
      */
-    @JsonProperty("timestamp")
     private String timestamp;
 
     public UserAction() {

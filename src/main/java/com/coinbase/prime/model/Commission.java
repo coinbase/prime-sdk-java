@@ -30,13 +30,11 @@ public class Commission {
     /**
      * Fee model (all_in or cost_plus)
      */
-    @JsonProperty("type")
     private String type;
 
     /**
      * Commission rate (in whole percentage. Commission of 15bps is \&quot;0.0015\&quot;)
      */
-    @JsonProperty("rate")
     private String rate;
 
     /**

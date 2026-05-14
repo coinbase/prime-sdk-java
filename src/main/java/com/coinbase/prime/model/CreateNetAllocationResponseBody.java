@@ -30,7 +30,6 @@ public class CreateNetAllocationResponseBody {
     /**
      * The success boolean for the post net allocation
      */
-    @JsonProperty("success")
     private boolean success;
 
     /**

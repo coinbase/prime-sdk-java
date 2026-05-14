@@ -17,13 +17,11 @@
 package com.coinbase.prime.products;
 
 import com.coinbase.prime.model.Candle;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Public Product Candles (Beta)
  */
 public class GetCandlesResponse {
-    @JsonProperty("candles")
     private Candle[] candles;
 
     public GetCandlesResponse() {

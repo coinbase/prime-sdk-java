@@ -38,7 +38,6 @@ public class CreateUnstakeRequest {
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
-    @JsonProperty("inputs")
     private WalletUnstakeInputs inputs;
 
     public CreateUnstakeRequest() {

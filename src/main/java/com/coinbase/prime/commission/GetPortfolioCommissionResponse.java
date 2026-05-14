@@ -17,13 +17,11 @@
 package com.coinbase.prime.commission;
 
 import com.coinbase.prime.model.Commission;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Portfolio Commission
  */
 public class GetPortfolioCommissionResponse {
-    @JsonProperty("commission")
     private Commission commission;
 
     public GetPortfolioCommissionResponse() {

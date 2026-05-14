@@ -30,19 +30,16 @@ public class Balance {
     /**
      * The display symbol for the asset
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The total amount in whole units with full precision. Includes the &#x60;holds&#x60; amount.
      */
-    @JsonProperty("amount")
     private String amount;
 
     /**
      * Amount that is currently held in obligation to an open order&#39;s position or a pending withdrawal
      */
-    @JsonProperty("holds")
     private String holds;
 
     /**

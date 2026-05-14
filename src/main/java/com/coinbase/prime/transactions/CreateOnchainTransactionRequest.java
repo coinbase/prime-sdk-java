@@ -39,7 +39,6 @@ public class CreateOnchainTransactionRequest {
     @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
 
-    @JsonProperty("rpc")
     private RpcConfig rpc;
 
     @JsonProperty("evm_params")

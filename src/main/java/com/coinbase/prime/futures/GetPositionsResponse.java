@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get Entity Positions
  */
 public class GetPositionsResponse {
-    @JsonProperty("positions")
     private FcmPosition[] positions;
 
     @JsonProperty("clearing_account_id")

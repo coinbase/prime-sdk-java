@@ -103,7 +103,6 @@ public class MarginSummary {
     /**
      * Whether or not a entity is frozen due to balance outstanding or other reason
      */
-    @JsonProperty("frozen")
     private boolean frozen;
 
     /**

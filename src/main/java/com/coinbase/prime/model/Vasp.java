@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Vasp {
-    @JsonProperty("id")
     private String id;
 
     @JsonProperty("country_code")

@@ -18,16 +18,13 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.common.Pagination;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Wallet Addresses
  */
 public class ListWalletAddressesResponse {
-    @JsonProperty("addresses")
     private BlockchainAddress[] addresses;
 
-    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListWalletAddressesResponse() {

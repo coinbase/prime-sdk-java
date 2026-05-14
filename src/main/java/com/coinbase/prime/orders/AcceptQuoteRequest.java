@@ -34,7 +34,6 @@ public class AcceptQuoteRequest {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
     @JsonProperty("client_order_id")

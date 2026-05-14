@@ -28,19 +28,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TransferLocation {
-    @JsonProperty("type")
     private TransferLocationType type;
 
     /**
      * The value of the transfer location: payment method ID, wallet ID or crypto address
      */
-    @JsonProperty("value")
     private String value;
 
     /**
      * The crypto address of the transfer location
      */
-    @JsonProperty("address")
     private String address;
 
     /**

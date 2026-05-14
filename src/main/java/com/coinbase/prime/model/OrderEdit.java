@@ -28,7 +28,6 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class OrderEdit {
-    @JsonProperty("price")
     private String price;
 
     @JsonProperty("base_quantity")

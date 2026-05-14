@@ -23,19 +23,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get Transaction Travel Rule Data
  */
 public class GetTransactionTravelRuleDataResponse {
-    @JsonProperty("fulfilled")
     private Boolean fulfilled;
 
     @JsonProperty("is_self")
     private Boolean isSelf;
 
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
-    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("amount_currency")

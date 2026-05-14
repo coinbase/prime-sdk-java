@@ -17,14 +17,12 @@
 package com.coinbase.prime.products;
 
 import com.coinbase.prime.model.Candle;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * Response object for listing public product candles.
  */
 public class ListCandlesResponse {
-    @JsonProperty("candles")
     private List<Candle> candles;
 
     public ListCandlesResponse() {

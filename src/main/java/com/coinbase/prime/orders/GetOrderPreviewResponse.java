@@ -31,10 +31,8 @@ public class GetOrderPreviewResponse {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
-    @JsonProperty("type")
     private OrderType type;
 
     @JsonProperty("base_quantity")
@@ -55,10 +53,8 @@ public class GetOrderPreviewResponse {
     @JsonProperty("time_in_force")
     private TimeInForceType timeInForce;
 
-    @JsonProperty("commission")
     private String commission;
 
-    @JsonProperty("slippage")
     private String slippage;
 
     @JsonProperty("best_bid")

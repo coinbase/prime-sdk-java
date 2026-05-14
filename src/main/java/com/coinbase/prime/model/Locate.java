@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -30,19 +29,16 @@ public class Locate {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The available quantity located
      */
-    @JsonProperty("quantity")
     private String quantity;
 
     /**
      * The interest rate for located symbol
      */
-    @JsonProperty("rate")
     private String rate;
 
     public Locate() {

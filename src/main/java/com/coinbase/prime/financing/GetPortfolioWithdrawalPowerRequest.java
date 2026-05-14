@@ -30,7 +30,6 @@ public class GetPortfolioWithdrawalPowerRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("symbol")
     private String symbol;
 
     public GetPortfolioWithdrawalPowerRequest() {

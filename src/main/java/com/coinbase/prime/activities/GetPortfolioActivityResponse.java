@@ -17,13 +17,11 @@
 package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Portfolio Activity by Activity ID
  */
 public class GetPortfolioActivityResponse {
-    @JsonProperty("activity")
     private Activity activity;
 
     public GetPortfolioActivityResponse() {

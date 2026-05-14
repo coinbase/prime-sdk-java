@@ -63,7 +63,6 @@ public class Allocation {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private OrderSide side;
 
     /**
@@ -90,13 +89,11 @@ public class Allocation {
     @JsonProperty("fees_allocated")
     private String feesAllocated;
 
-    @JsonProperty("status")
     private AllocationStatus status;
 
     /**
      * Portfolio ID of the source portfolio.
      */
-    @JsonProperty("source")
     private String source;
 
     /**
@@ -108,7 +105,6 @@ public class Allocation {
     /**
      * Array of objects, each containing the leg ID, destination portfolio ID and amount in chosen units allocated to each portfolio: [{leg_id, portfolio_id, allocation_base, allocation_quote}, {leg_id, portfolio_id, allocation_base, allocation_quote}...]
      */
-    @JsonProperty("destinations")
     private List<DestinationAlloc> destinations;
 
     /**

@@ -30,7 +30,6 @@ public class ConversionDetail {
     /**
      * The currency symbol
      */
-    @JsonProperty("symbol")
     private String symbol;
 
     /**

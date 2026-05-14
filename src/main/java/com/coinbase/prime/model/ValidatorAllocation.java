@@ -36,7 +36,6 @@ public class ValidatorAllocation {
     /**
      * Amount for performing staking operations with this validator
      */
-    @JsonProperty("amount")
     private String amount;
 
     public ValidatorAllocation() {

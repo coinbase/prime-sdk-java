@@ -40,7 +40,6 @@ public class Activity {
     /**
      * A unique id for the account activity
      */
-    @JsonProperty("id")
     private String id;
 
     /**
@@ -49,16 +48,13 @@ public class Activity {
     @JsonProperty("reference_id")
     private String referenceId;
 
-    @JsonProperty("category")
     private ActivityCategory category;
 
-    @JsonProperty("type")
     private PrimeActivityType type;
 
     @JsonProperty("secondary_type")
     private ActivitySecondaryType secondaryType;
 
-    @JsonProperty("status")
     private ActivityStatus status;
 
     /**
@@ -70,13 +66,11 @@ public class Activity {
     /**
      * Title of the activity
      */
-    @JsonProperty("title")
     private String title;
 
     /**
      * Description detail of the activity
      */
-    @JsonProperty("description")
     private String description;
 
     /**
@@ -97,7 +91,6 @@ public class Activity {
     /**
      * List of currencies included in an activity
      */
-    @JsonProperty("symbols")
     private List<String> symbols;
 
     /**

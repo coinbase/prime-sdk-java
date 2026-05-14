@@ -30,13 +30,11 @@ public class Portfolio {
     /**
      * The unique ID of the portfolio
      */
-    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the portfolio
      */
-    @JsonProperty("name")
     private String name;
 
     /**

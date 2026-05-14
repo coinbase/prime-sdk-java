@@ -17,13 +17,11 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.ExistingLocate;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Existing Locates
  */
 public class ListExistingLocatesResponse {
-    @JsonProperty("locates")
     private ExistingLocate[] locates;
 
     public ListExistingLocatesResponse() {

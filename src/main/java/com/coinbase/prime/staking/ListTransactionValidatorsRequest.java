@@ -34,10 +34,8 @@ public class ListTransactionValidatorsRequest {
     @JsonProperty("transaction_ids")
     private String[] transactionIds;
 
-    @JsonProperty("cursor")
     private String cursor;
 
-    @JsonProperty("limit")
     private Integer limit;
 
     @JsonProperty("sort_direction")

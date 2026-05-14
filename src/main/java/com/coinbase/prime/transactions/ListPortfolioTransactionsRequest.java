@@ -35,10 +35,8 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty("symbols")
     private String[] symbols;
 
-    @JsonProperty("types")
     private TransactionType[] types;
 
     @JsonProperty("start_time")

@@ -41,7 +41,6 @@ public class XmMarginCall {
     /**
      * Margin call currency
      */
-    @JsonProperty("currency")
     private String currency;
 
     /**

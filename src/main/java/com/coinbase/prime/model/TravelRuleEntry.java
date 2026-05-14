@@ -31,19 +31,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleEntry {
-    @JsonProperty("id")
     private String id;
 
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
-    @JsonProperty("vasp")
     private Vasp vasp;
 
     @JsonProperty("wallet_details")

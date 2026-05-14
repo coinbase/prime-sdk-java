@@ -17,13 +17,11 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Allocation by ID
  */
 public class GetAllocationResponse {
-    @JsonProperty("allocation")
     private Allocation allocation;
 
     public GetAllocationResponse() {
