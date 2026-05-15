@@ -41,11 +41,11 @@ public class FundMovement {
     }
 
     public FundMovement(Builder builder) {
-        this.id = builder.id;
-        this.source = builder.source;
-        this.target = builder.target;
-        this.currency = builder.currency;
-        this.amount = builder.amount;
+        id = builder.id;
+        source = builder.source;
+        target = builder.target;
+        currency = builder.currency;
+        amount = builder.amount;
     }
     public String getId() {
         return id;

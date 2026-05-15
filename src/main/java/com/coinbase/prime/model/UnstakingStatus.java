@@ -69,13 +69,13 @@ public class UnstakingStatus {
     }
 
     public UnstakingStatus(Builder builder) {
-        this.amount = builder.amount;
-        this.unstakeType = builder.unstakeType;
-        this.finishingAt = builder.finishingAt;
-        this.remainingHours = builder.remainingHours;
-        this.requestedAt = builder.requestedAt;
-        this.estimateType = builder.estimateType;
-        this.estimateDescription = builder.estimateDescription;
+        amount = builder.amount;
+        unstakeType = builder.unstakeType;
+        finishingAt = builder.finishingAt;
+        remainingHours = builder.remainingHours;
+        requestedAt = builder.requestedAt;
+        estimateType = builder.estimateType;
+        estimateDescription = builder.estimateDescription;
     }
     public String getAmount() {
         return amount;

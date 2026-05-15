@@ -49,12 +49,12 @@ public class AcceptQuoteRequest {
     }
 
     public AcceptQuoteRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.clientOrderId = builder.clientOrderId;
-        this.quoteId = builder.quoteId;
-        this.settlCurrency = builder.settlCurrency;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
+        side = builder.side;
+        clientOrderId = builder.clientOrderId;
+        quoteId = builder.quoteId;
+        settlCurrency = builder.settlCurrency;
     }
 
     public String getPortfolioId() {
@@ -152,7 +152,7 @@ public class AcceptQuoteRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

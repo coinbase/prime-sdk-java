@@ -43,8 +43,8 @@ public class MatchMetadata {
     }
 
     public MatchMetadata(Builder builder) {
-        this.referenceId = builder.referenceId;
-        this.settlementDate = builder.settlementDate;
+        referenceId = builder.referenceId;
+        settlementDate = builder.settlementDate;
     }
     public String getReferenceId() {
         return referenceId;

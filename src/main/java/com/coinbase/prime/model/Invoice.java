@@ -60,15 +60,15 @@ public class Invoice {
     }
 
     public Invoice(Builder builder) {
-        this.id = builder.id;
-        this.billingMonth = builder.billingMonth;
-        this.billingYear = builder.billingYear;
-        this.dueDate = builder.dueDate;
-        this.invoiceNumber = builder.invoiceNumber;
-        this.state = builder.state;
-        this.usdAmountPaid = builder.usdAmountPaid;
-        this.usdAmountOwed = builder.usdAmountOwed;
-        this.invoiceItems = builder.invoiceItems;
+        id = builder.id;
+        billingMonth = builder.billingMonth;
+        billingYear = builder.billingYear;
+        dueDate = builder.dueDate;
+        invoiceNumber = builder.invoiceNumber;
+        state = builder.state;
+        usdAmountPaid = builder.usdAmountPaid;
+        usdAmountOwed = builder.usdAmountOwed;
+        invoiceItems = builder.invoiceItems;
     }
     public String getId() {
         return id;

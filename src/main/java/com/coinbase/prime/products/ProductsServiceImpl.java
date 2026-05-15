@@ -31,7 +31,7 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
 
     @Override
     public GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/candles", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
 
     @Override
     public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/products", request.getPortfolioId()),
                 request,

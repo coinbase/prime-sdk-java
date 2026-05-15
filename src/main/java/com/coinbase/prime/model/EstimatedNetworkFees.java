@@ -43,8 +43,8 @@ public class EstimatedNetworkFees {
     }
 
     public EstimatedNetworkFees(Builder builder) {
-        this.lowerBound = builder.lowerBound;
-        this.upperBound = builder.upperBound;
+        lowerBound = builder.lowerBound;
+        upperBound = builder.upperBound;
     }
     public String getLowerBound() {
         return lowerBound;

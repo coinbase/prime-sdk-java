@@ -34,8 +34,8 @@ public class AggregatedFiatBalance {
     }
 
     public AggregatedFiatBalance(Builder builder) {
-        this.total = builder.total;
-        this.holds = builder.holds;
+        total = builder.total;
+        holds = builder.holds;
     }
     public String getTotal() {
         return total;

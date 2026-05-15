@@ -45,9 +45,9 @@ public class UserAction {
     }
 
     public UserAction(Builder builder) {
-        this.action = builder.action;
-        this.userId = builder.userId;
-        this.timestamp = builder.timestamp;
+        action = builder.action;
+        userId = builder.userId;
+        timestamp = builder.timestamp;
     }
     public Action getAction() {
         return action;

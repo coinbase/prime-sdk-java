@@ -48,10 +48,10 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             CoinbasePrimeCredentials credentials = mapper.readValue(credentialsJson, CoinbasePrimeCredentials.class);
-            this.accessKey = credentials.getAccessKey();
-            this.passphrase = credentials.getPassphrase();
-            this.signingKey = credentials.getSigningKey();
-            this.svcAccountId = credentials.getSvcAccountId();
+            accessKey = credentials.getAccessKey();
+            passphrase = credentials.getPassphrase();
+            signingKey = credentials.getSigningKey();
+            svcAccountId = credentials.getSvcAccountId();
         } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to parse credentials", e);
         }
@@ -106,10 +106,10 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     public CoinbasePrimeCredentials() {}
 
     public CoinbasePrimeCredentials(Builder builder) {
-        this.accessKey = builder.accessKey;
-        this.passphrase = builder.passphrase;
-        this.signingKey = builder.signingKey;
-        this.svcAccountId = builder.svcAccountId;
+        accessKey = builder.accessKey;
+        passphrase = builder.passphrase;
+        signingKey = builder.signingKey;
+        svcAccountId = builder.svcAccountId;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         try {
             String message = String.format("%s%s%s%s", timestamp, method, path, body);
 
-            byte[] hmacKey = this.signingKey.getBytes(StandardCharsets.UTF_8);
+            byte[] hmacKey = signingKey.getBytes(StandardCharsets.UTF_8);
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(new SecretKeySpec(hmacKey, "HmacSHA256"));
 
@@ -203,18 +203,18 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         }
 
         public CoinbaseCredentials build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new CoinbasePrimeCredentials(this);
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.accessKey)) {
+            if (isNullOrEmpty(accessKey)) {
                 throw new CoinbaseClientException("Access key is required");
             }
-            if (isNullOrEmpty(this.passphrase)) {
+            if (isNullOrEmpty(passphrase)) {
                 throw new CoinbaseClientException("Passphrase is required");
             }
-            if (isNullOrEmpty(this.signingKey)) {
+            if (isNullOrEmpty(signingKey)) {
                 throw new CoinbaseClientException("Signing key is required");
             }
         }

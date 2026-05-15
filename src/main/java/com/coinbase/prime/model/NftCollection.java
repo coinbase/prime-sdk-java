@@ -35,7 +35,7 @@ public class NftCollection {
     }
 
     public NftCollection(Builder builder) {
-        this.name = builder.name;
+        name = builder.name;
     }
     public String getName() {
         return name;

@@ -31,7 +31,7 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
 
     @Override
     public ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/entities/%s/payment-methods", request.getEntityId()),
                 request,
@@ -41,7 +41,7 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
 
     @Override
     public GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
                 request,

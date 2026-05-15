@@ -60,11 +60,11 @@ public class TfObligation {
     }
 
     public TfObligation(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.amountDue = builder.amountDue;
-        this.notionalAmount = builder.notionalAmount;
-        this.dueDate = builder.dueDate;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        amountDue = builder.amountDue;
+        notionalAmount = builder.notionalAmount;
+        dueDate = builder.dueDate;
     }
     public String getPortfolioId() {
         return portfolioId;

@@ -56,11 +56,11 @@ public class FuturesSweep {
     }
 
     public FuturesSweep(Builder builder) {
-        this.id = builder.id;
-        this.requestedAmount = builder.requestedAmount;
-        this.shouldSweepAll = builder.shouldSweepAll;
-        this.status = builder.status;
-        this.scheduledTime = builder.scheduledTime;
+        id = builder.id;
+        requestedAmount = builder.requestedAmount;
+        shouldSweepAll = builder.shouldSweepAll;
+        status = builder.status;
+        scheduledTime = builder.scheduledTime;
     }
     public String getId() {
         return id;

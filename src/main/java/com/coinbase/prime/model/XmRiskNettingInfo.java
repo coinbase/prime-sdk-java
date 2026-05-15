@@ -116,20 +116,20 @@ public class XmRiskNettingInfo {
     }
 
     public XmRiskNettingInfo(Builder builder) {
-        this.nodalMarginRequirement = builder.nodalMarginRequirement;
-        this.portfolioMarginRequirement = builder.portfolioMarginRequirement;
-        this.integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
-        this.ineligibleFuturesMarginRequirement = builder.ineligibleFuturesMarginRequirement;
-        this.positionMarginRequirement = builder.positionMarginRequirement;
-        this.portfolioMarginAddon = builder.portfolioMarginAddon;
-        this.integratedPositionMarginRequirement = builder.integratedPositionMarginRequirement;
-        this.integratedPortfolioMarginAddon = builder.integratedPortfolioMarginAddon;
-        this.nettedFuturesNotional = builder.nettedFuturesNotional;
-        this.totalGmvBasis = builder.totalGmvBasis;
-        this.ipmCashBalance = builder.ipmCashBalance;
-        this.integratedScenarioAddon = builder.integratedScenarioAddon;
-        this.allIntegratedScenarioAddons = builder.allIntegratedScenarioAddons;
-        this.xmPositions = builder.xmPositions;
+        nodalMarginRequirement = builder.nodalMarginRequirement;
+        portfolioMarginRequirement = builder.portfolioMarginRequirement;
+        integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
+        ineligibleFuturesMarginRequirement = builder.ineligibleFuturesMarginRequirement;
+        positionMarginRequirement = builder.positionMarginRequirement;
+        portfolioMarginAddon = builder.portfolioMarginAddon;
+        integratedPositionMarginRequirement = builder.integratedPositionMarginRequirement;
+        integratedPortfolioMarginAddon = builder.integratedPortfolioMarginAddon;
+        nettedFuturesNotional = builder.nettedFuturesNotional;
+        totalGmvBasis = builder.totalGmvBasis;
+        ipmCashBalance = builder.ipmCashBalance;
+        integratedScenarioAddon = builder.integratedScenarioAddon;
+        allIntegratedScenarioAddons = builder.allIntegratedScenarioAddons;
+        xmPositions = builder.xmPositions;
     }
     public String getNodalMarginRequirement() {
         return nodalMarginRequirement;

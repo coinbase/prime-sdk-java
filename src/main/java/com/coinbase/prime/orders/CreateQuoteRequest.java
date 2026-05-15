@@ -55,14 +55,14 @@ public class CreateQuoteRequest {
     }
 
     public CreateQuoteRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.clientQuoteId = builder.clientQuoteId;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.limitPrice = builder.limitPrice;
-        this.settlCurrency = builder.settlCurrency;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
+        side = builder.side;
+        clientQuoteId = builder.clientQuoteId;
+        baseQuantity = builder.baseQuantity;
+        quoteValue = builder.quoteValue;
+        limitPrice = builder.limitPrice;
+        settlCurrency = builder.settlCurrency;
     }
 
     public String getPortfolioId() {
@@ -188,7 +188,7 @@ public class CreateQuoteRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

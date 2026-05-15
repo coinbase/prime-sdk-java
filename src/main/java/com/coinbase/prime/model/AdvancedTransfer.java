@@ -49,11 +49,11 @@ public class AdvancedTransfer {
     }
 
     public AdvancedTransfer(Builder builder) {
-        this.id = builder.id;
-        this.type = builder.type;
-        this.state = builder.state;
-        this.fundMovements = builder.fundMovements;
-        this.blindMatchMetadata = builder.blindMatchMetadata;
+        id = builder.id;
+        type = builder.type;
+        state = builder.state;
+        fundMovements = builder.fundMovements;
+        blindMatchMetadata = builder.blindMatchMetadata;
     }
     public String getId() {
         return id;

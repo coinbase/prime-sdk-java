@@ -158,31 +158,31 @@ public class Transaction {
     }
 
     public Transaction(Builder builder) {
-        this.id = builder.id;
-        this.walletId = builder.walletId;
-        this.portfolioId = builder.portfolioId;
-        this.type = builder.type;
-        this.status = builder.status;
-        this.symbol = builder.symbol;
-        this.createdAt = builder.createdAt;
-        this.completedAt = builder.completedAt;
-        this.amount = builder.amount;
-        this.transferFrom = builder.transferFrom;
-        this.transferTo = builder.transferTo;
-        this.networkFees = builder.networkFees;
-        this.fees = builder.fees;
-        this.feeSymbol = builder.feeSymbol;
-        this.blockchainIds = builder.blockchainIds;
-        this.transactionId = builder.transactionId;
-        this.destinationSymbol = builder.destinationSymbol;
-        this.estimatedNetworkFees = builder.estimatedNetworkFees;
-        this.network = builder.network;
-        this.estimatedAssetChanges = builder.estimatedAssetChanges;
-        this.metadata = builder.metadata;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.onchainDetails = builder.onchainDetails;
-        this.networkInfo = builder.networkInfo;
-        this.processRequirements = builder.processRequirements;
+        id = builder.id;
+        walletId = builder.walletId;
+        portfolioId = builder.portfolioId;
+        type = builder.type;
+        status = builder.status;
+        symbol = builder.symbol;
+        createdAt = builder.createdAt;
+        completedAt = builder.completedAt;
+        amount = builder.amount;
+        transferFrom = builder.transferFrom;
+        transferTo = builder.transferTo;
+        networkFees = builder.networkFees;
+        fees = builder.fees;
+        feeSymbol = builder.feeSymbol;
+        blockchainIds = builder.blockchainIds;
+        transactionId = builder.transactionId;
+        destinationSymbol = builder.destinationSymbol;
+        estimatedNetworkFees = builder.estimatedNetworkFees;
+        network = builder.network;
+        estimatedAssetChanges = builder.estimatedAssetChanges;
+        metadata = builder.metadata;
+        idempotencyKey = builder.idempotencyKey;
+        onchainDetails = builder.onchainDetails;
+        networkInfo = builder.networkInfo;
+        processRequirements = builder.processRequirements;
     }
     public String getId() {
         return id;

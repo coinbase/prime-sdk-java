@@ -49,12 +49,12 @@ public class SubmitDepositTravelRuleDataRequest {
     }
 
     public SubmitDepositTravelRuleDataRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.transactionId = builder.transactionId;
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.isSelf = builder.isSelf;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+        portfolioId = builder.portfolioId;
+        transactionId = builder.transactionId;
+        originator = builder.originator;
+        beneficiary = builder.beneficiary;
+        isSelf = builder.isSelf;
+        optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
     }
 
     public String getPortfolioId() {
@@ -152,10 +152,10 @@ public class SubmitDepositTravelRuleDataRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.transactionId)) {
+            if (isNullOrEmpty(transactionId)) {
                 throw new CoinbaseClientException("TransactionId is required");
             }
         }

@@ -32,7 +32,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     @Override
     public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities", request.getPortfolioId()),
                 request,
@@ -42,7 +42,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
 
     @Override
     public GetActivityResponse getActivity(GetActivityRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/activities/%s", request.getActivityId()),
                 request,
@@ -53,7 +53,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     @Override
     public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/entities/%s/activities", request.getEntityId()),
                 request,
@@ -64,7 +64,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     @Override
     public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
                 request,

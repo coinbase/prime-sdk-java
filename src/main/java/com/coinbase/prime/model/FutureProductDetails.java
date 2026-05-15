@@ -91,17 +91,17 @@ public class FutureProductDetails {
     }
 
     public FutureProductDetails(Builder builder) {
-        this.contractCode = builder.contractCode;
-        this.contractSize = builder.contractSize;
-        this.contractExpiry = builder.contractExpiry;
-        this.contractRootUnit = builder.contractRootUnit;
-        this.contractExpiryType = builder.contractExpiryType;
-        this.riskManagedBy = builder.riskManagedBy;
-        this.venue = builder.venue;
-        this.groupDescription = builder.groupDescription;
-        this.contractExpiryTimezone = builder.contractExpiryTimezone;
-        this.groupShortDescription = builder.groupShortDescription;
-        this.perpetualDetails = builder.perpetualDetails;
+        contractCode = builder.contractCode;
+        contractSize = builder.contractSize;
+        contractExpiry = builder.contractExpiry;
+        contractRootUnit = builder.contractRootUnit;
+        contractExpiryType = builder.contractExpiryType;
+        riskManagedBy = builder.riskManagedBy;
+        venue = builder.venue;
+        groupDescription = builder.groupDescription;
+        contractExpiryTimezone = builder.contractExpiryTimezone;
+        groupShortDescription = builder.groupShortDescription;
+        perpetualDetails = builder.perpetualDetails;
     }
     public String getContractCode() {
         return contractCode;

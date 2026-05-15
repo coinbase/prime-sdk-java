@@ -47,10 +47,10 @@ public class ListInvoicesRequest extends PrimeListRequest {
 
     public ListInvoicesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.entityId = builder.entityId;
-        this.states = builder.states;
-        this.billingYear = builder.billingYear;
-        this.billingMonth = builder.billingMonth;
+        entityId = builder.entityId;
+        states = builder.states;
+        billingYear = builder.billingYear;
+        billingMonth = builder.billingMonth;
     }
 
     public String getEntityId() {
@@ -123,8 +123,8 @@ public class ListInvoicesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -134,7 +134,7 @@ public class ListInvoicesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
+            if (isNullOrEmpty(entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

@@ -45,8 +45,8 @@ public class WalletUnstakeInputs {
     }
 
     public WalletUnstakeInputs(Builder builder) {
-        this.amount = builder.amount;
-        this.validatorAllocations = builder.validatorAllocations;
+        amount = builder.amount;
+        validatorAllocations = builder.validatorAllocations;
     }
     public String getAmount() {
         return amount;

@@ -59,11 +59,11 @@ public class Portfolio {
     }
 
     public Portfolio(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.entityId = builder.entityId;
-        this.organizationId = builder.organizationId;
-        this.entityName = builder.entityName;
+        id = builder.id;
+        name = builder.name;
+        entityId = builder.entityId;
+        organizationId = builder.organizationId;
+        entityName = builder.entityName;
     }
     public String getId() {
         return id;

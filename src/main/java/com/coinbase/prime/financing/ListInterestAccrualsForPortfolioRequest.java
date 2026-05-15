@@ -40,9 +40,9 @@ public class ListInterestAccrualsForPortfolioRequest {
     }
 
     public ListInterestAccrualsForPortfolioRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+        portfolioId = builder.portfolioId;
+        startDate = builder.startDate;
+        endDate = builder.endDate;
     }
 
     public String getPortfolioId() {
@@ -98,7 +98,7 @@ public class ListInterestAccrualsForPortfolioRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

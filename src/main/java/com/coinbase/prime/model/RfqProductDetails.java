@@ -72,13 +72,13 @@ public class RfqProductDetails {
     }
 
     public RfqProductDetails(Builder builder) {
-        this.tradable = builder.tradable;
-        this.minNotionalSize = builder.minNotionalSize;
-        this.maxNotionalSize = builder.maxNotionalSize;
-        this.minBaseSize = builder.minBaseSize;
-        this.maxBaseSize = builder.maxBaseSize;
-        this.minQuoteSize = builder.minQuoteSize;
-        this.maxQuoteSize = builder.maxQuoteSize;
+        tradable = builder.tradable;
+        minNotionalSize = builder.minNotionalSize;
+        maxNotionalSize = builder.maxNotionalSize;
+        minBaseSize = builder.minBaseSize;
+        maxBaseSize = builder.maxBaseSize;
+        minQuoteSize = builder.minQuoteSize;
+        maxQuoteSize = builder.maxQuoteSize;
     }
     public boolean getTradable() {
         return tradable;

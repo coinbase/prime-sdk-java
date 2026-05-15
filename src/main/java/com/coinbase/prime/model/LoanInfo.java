@@ -59,11 +59,11 @@ public class LoanInfo {
     }
 
     public LoanInfo(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.notionalAmount = builder.notionalAmount;
-        this.dueDate = builder.dueDate;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        notionalAmount = builder.notionalAmount;
+        dueDate = builder.dueDate;
     }
     public String getPortfolioId() {
         return portfolioId;

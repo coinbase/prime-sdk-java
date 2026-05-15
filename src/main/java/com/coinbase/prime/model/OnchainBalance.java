@@ -43,9 +43,9 @@ public class OnchainBalance {
     }
 
     public OnchainBalance(Builder builder) {
-        this.asset = builder.asset;
-        this.amount = builder.amount;
-        this.visibilityStatus = builder.visibilityStatus;
+        asset = builder.asset;
+        amount = builder.amount;
+        visibilityStatus = builder.visibilityStatus;
     }
     public OnchainAsset getAsset() {
         return asset;

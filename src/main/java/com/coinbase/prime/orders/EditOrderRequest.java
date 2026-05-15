@@ -68,18 +68,18 @@ public class EditOrderRequest {
     }
 
     public EditOrderRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.orderId = builder.orderId;
-        this.productId = builder.productId;
-        this.origClientOrderId = builder.origClientOrderId;
-        this.clientOrderId = builder.clientOrderId;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.limitPrice = builder.limitPrice;
-        this.expiryTime = builder.expiryTime;
-        this.displayQuoteSize = builder.displayQuoteSize;
-        this.displayBaseSize = builder.displayBaseSize;
-        this.stopPrice = builder.stopPrice;
+        portfolioId = builder.portfolioId;
+        orderId = builder.orderId;
+        productId = builder.productId;
+        origClientOrderId = builder.origClientOrderId;
+        clientOrderId = builder.clientOrderId;
+        baseQuantity = builder.baseQuantity;
+        quoteValue = builder.quoteValue;
+        limitPrice = builder.limitPrice;
+        expiryTime = builder.expiryTime;
+        displayQuoteSize = builder.displayQuoteSize;
+        displayBaseSize = builder.displayBaseSize;
+        stopPrice = builder.stopPrice;
     }
 
     public String getPortfolioId() {
@@ -261,10 +261,10 @@ public class EditOrderRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.orderId)) {
+            if (isNullOrEmpty(orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }
         }

@@ -55,10 +55,10 @@ public class ValidatorUnstakePreview {
     }
 
     public ValidatorUnstakePreview(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
-        this.unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
-        this.estimatedUnstakeDate = builder.estimatedUnstakeDate;
+        validatorAddress = builder.validatorAddress;
+        estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
+        unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
+        estimatedUnstakeDate = builder.estimatedUnstakeDate;
     }
     public String getValidatorAddress() {
         return validatorAddress;

@@ -48,7 +48,7 @@ public abstract class PrimeListRequest {
     }
 
     public void setSortDirection(SortDirection direction) {
-        this.sortDirection = direction;
+        sortDirection = direction;
     }
 
     public Integer getLimit() {

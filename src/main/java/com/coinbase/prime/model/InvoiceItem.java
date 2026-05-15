@@ -51,14 +51,14 @@ public class InvoiceItem {
     }
 
     public InvoiceItem(Builder builder) {
-        this.description = builder.description;
-        this.currencySymbol = builder.currencySymbol;
-        this.invoiceType = builder.invoiceType;
-        this.rate = builder.rate;
-        this.quantity = builder.quantity;
-        this.price = builder.price;
-        this.averageAuc = builder.averageAuc;
-        this.total = builder.total;
+        description = builder.description;
+        currencySymbol = builder.currencySymbol;
+        invoiceType = builder.invoiceType;
+        rate = builder.rate;
+        quantity = builder.quantity;
+        price = builder.price;
+        averageAuc = builder.averageAuc;
+        total = builder.total;
     }
     public String getDescription() {
         return description;

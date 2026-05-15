@@ -31,7 +31,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
 
     @Override
     public ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
 
     @Override
     public CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
 
     @Override
     public GetWalletResponse getWallet(GetWalletRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -62,7 +62,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
     @Override
     public ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -73,7 +73,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
     @Override
     public CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -84,7 +84,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
     @Override
     public GetWalletDepositInstructionsResponse getWalletDepositInstructions(
             GetWalletDepositInstructionsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(),
                         request.getWalletId()),

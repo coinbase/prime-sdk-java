@@ -44,9 +44,9 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
 
     public ListPortfolioFillsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+        portfolioId = builder.portfolioId;
+        startDate = builder.startDate;
+        endDate = builder.endDate;
     }
 
     public String getPortfolioId() {
@@ -105,8 +105,8 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -116,7 +116,7 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

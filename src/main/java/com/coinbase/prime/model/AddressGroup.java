@@ -48,11 +48,11 @@ public class AddressGroup {
     }
 
     public AddressGroup(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.networkType = builder.networkType;
-        this.addresses = builder.addresses;
-        this.addedAt = builder.addedAt;
+        id = builder.id;
+        name = builder.name;
+        networkType = builder.networkType;
+        addresses = builder.addresses;
+        addedAt = builder.addedAt;
     }
     public String getId() {
         return id;

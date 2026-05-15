@@ -45,9 +45,9 @@ public class BlockchainAddress {
     }
 
     public BlockchainAddress(Builder builder) {
-        this.address = builder.address;
-        this.accountIdentifier = builder.accountIdentifier;
-        this.network = builder.network;
+        address = builder.address;
+        accountIdentifier = builder.accountIdentifier;
+        network = builder.network;
     }
     public String getAddress() {
         return address;

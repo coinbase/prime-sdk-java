@@ -40,9 +40,9 @@ public class GetPortfolioBuyingPowerRequest {
     }
 
     public GetPortfolioBuyingPowerRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.baseCurrency = builder.baseCurrency;
-        this.quoteCurrency = builder.quoteCurrency;
+        portfolioId = builder.portfolioId;
+        baseCurrency = builder.baseCurrency;
+        quoteCurrency = builder.quoteCurrency;
     }
 
     public String getPortfolioId() {
@@ -98,7 +98,7 @@ public class GetPortfolioBuyingPowerRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

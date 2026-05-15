@@ -38,9 +38,9 @@ public class DefiBalance {
     }
 
     public DefiBalance(Builder builder) {
-        this.network = builder.network;
-        this.protocol = builder.protocol;
-        this.netUsdValue = builder.netUsdValue;
+        network = builder.network;
+        protocol = builder.protocol;
+        netUsdValue = builder.netUsdValue;
     }
     public String getNetwork() {
         return network;

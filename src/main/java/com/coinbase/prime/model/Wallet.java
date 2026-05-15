@@ -52,14 +52,14 @@ public class Wallet {
     }
 
     public Wallet(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.symbol = builder.symbol;
-        this.type = builder.type;
-        this.createdAt = builder.createdAt;
-        this.address = builder.address;
-        this.visibility = builder.visibility;
-        this.network = builder.network;
+        id = builder.id;
+        name = builder.name;
+        symbol = builder.symbol;
+        type = builder.type;
+        createdAt = builder.createdAt;
+        address = builder.address;
+        visibility = builder.visibility;
+        network = builder.network;
     }
     public String getId() {
         return id;

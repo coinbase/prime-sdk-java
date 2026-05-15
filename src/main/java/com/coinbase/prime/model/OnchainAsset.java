@@ -55,11 +55,11 @@ public class OnchainAsset {
     }
 
     public OnchainAsset(Builder builder) {
-        this.network = builder.network;
-        this.contractAddress = builder.contractAddress;
-        this.symbol = builder.symbol;
-        this.tokenId = builder.tokenId;
-        this.name = builder.name;
+        network = builder.network;
+        contractAddress = builder.contractAddress;
+        symbol = builder.symbol;
+        tokenId = builder.tokenId;
+        name = builder.name;
     }
     public String getNetwork() {
         return network;

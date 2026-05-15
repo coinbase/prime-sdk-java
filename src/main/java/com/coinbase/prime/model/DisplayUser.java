@@ -47,9 +47,9 @@ public class DisplayUser {
     }
 
     public DisplayUser(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.avatarUrl = builder.avatarUrl;
+        id = builder.id;
+        name = builder.name;
+        avatarUrl = builder.avatarUrl;
     }
     public String getId() {
         return id;

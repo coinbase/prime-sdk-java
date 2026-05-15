@@ -59,11 +59,11 @@ public class StakingStatus {
     }
 
     public StakingStatus(Builder builder) {
-        this.amount = builder.amount;
-        this.stakeType = builder.stakeType;
-        this.estimatedStakeDate = builder.estimatedStakeDate;
-        this.estimatedHoursToStake = builder.estimatedHoursToStake;
-        this.requestedAt = builder.requestedAt;
+        amount = builder.amount;
+        stakeType = builder.stakeType;
+        estimatedStakeDate = builder.estimatedStakeDate;
+        estimatedHoursToStake = builder.estimatedHoursToStake;
+        requestedAt = builder.requestedAt;
     }
     public String getAmount() {
         return amount;

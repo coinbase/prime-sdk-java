@@ -61,11 +61,11 @@ public class DestinationAlloc {
     }
 
     public DestinationAlloc(Builder builder) {
-        this.legId = builder.legId;
-        this.portfolioId = builder.portfolioId;
-        this.allocationBase = builder.allocationBase;
-        this.allocationQuote = builder.allocationQuote;
-        this.feesAllocatedLeg = builder.feesAllocatedLeg;
+        legId = builder.legId;
+        portfolioId = builder.portfolioId;
+        allocationBase = builder.allocationBase;
+        allocationQuote = builder.allocationQuote;
+        feesAllocatedLeg = builder.feesAllocatedLeg;
     }
     public String getLegId() {
         return legId;

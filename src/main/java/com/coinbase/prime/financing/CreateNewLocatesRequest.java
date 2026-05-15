@@ -44,11 +44,11 @@ public class CreateNewLocatesRequest {
     }
 
     public CreateNewLocatesRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.conversionDate = builder.conversionDate;
-        this.locateDate = builder.locateDate;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        conversionDate = builder.conversionDate;
+        locateDate = builder.locateDate;
     }
 
     public String getPortfolioId() {
@@ -132,7 +132,7 @@ public class CreateNewLocatesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

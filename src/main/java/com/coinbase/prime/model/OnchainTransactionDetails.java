@@ -80,15 +80,15 @@ public class OnchainTransactionDetails {
     }
 
     public OnchainTransactionDetails(Builder builder) {
-        this.signedTransaction = builder.signedTransaction;
-        this.riskAssessment = builder.riskAssessment;
-        this.chainId = builder.chainId;
-        this.nonce = builder.nonce;
-        this.replacedTransactionId = builder.replacedTransactionId;
-        this.destinationAddress = builder.destinationAddress;
-        this.skipBroadcast = builder.skipBroadcast;
-        this.failureReason = builder.failureReason;
-        this.signingStatus = builder.signingStatus;
+        signedTransaction = builder.signedTransaction;
+        riskAssessment = builder.riskAssessment;
+        chainId = builder.chainId;
+        nonce = builder.nonce;
+        replacedTransactionId = builder.replacedTransactionId;
+        destinationAddress = builder.destinationAddress;
+        skipBroadcast = builder.skipBroadcast;
+        failureReason = builder.failureReason;
+        signingStatus = builder.signingStatus;
     }
     public String getSignedTransaction() {
         return signedTransaction;

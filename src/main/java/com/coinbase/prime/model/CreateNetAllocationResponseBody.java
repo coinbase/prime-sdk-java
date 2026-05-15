@@ -60,11 +60,11 @@ public class CreateNetAllocationResponseBody {
     }
 
     public CreateNetAllocationResponseBody(Builder builder) {
-        this.success = builder.success;
-        this.nettingId = builder.nettingId;
-        this.buyAllocationId = builder.buyAllocationId;
-        this.sellAllocationId = builder.sellAllocationId;
-        this.failureReason = builder.failureReason;
+        success = builder.success;
+        nettingId = builder.nettingId;
+        buyAllocationId = builder.buyAllocationId;
+        sellAllocationId = builder.sellAllocationId;
+        failureReason = builder.failureReason;
     }
     public boolean getSuccess() {
         return success;

@@ -72,16 +72,16 @@ public class TravelRuleParty {
     }
 
     public TravelRuleParty(Builder builder) {
-        this.name = builder.name;
-        this.naturalPersonName = builder.naturalPersonName;
-        this.address = builder.address;
-        this.walletType = builder.walletType;
-        this.vaspId = builder.vaspId;
-        this.vaspName = builder.vaspName;
-        this.personalId = builder.personalId;
-        this.dateOfBirth = builder.dateOfBirth;
-        this.telephoneNumber = builder.telephoneNumber;
-        this.accountId = builder.accountId;
+        name = builder.name;
+        naturalPersonName = builder.naturalPersonName;
+        address = builder.address;
+        walletType = builder.walletType;
+        vaspId = builder.vaspId;
+        vaspName = builder.vaspName;
+        personalId = builder.personalId;
+        dateOfBirth = builder.dateOfBirth;
+        telephoneNumber = builder.telephoneNumber;
+        accountId = builder.accountId;
     }
     public String getName() {
         return name;

@@ -53,12 +53,12 @@ public class ListAdvancedTransfersRequest extends PrimeListRequest {
 
     public ListAdvancedTransfersRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.state = builder.state;
-        this.type = builder.type;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.referenceId = builder.referenceId;
+        portfolioId = builder.portfolioId;
+        state = builder.state;
+        type = builder.type;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        referenceId = builder.referenceId;
     }
 
     public String getPortfolioId() {
@@ -159,8 +159,8 @@ public class ListAdvancedTransfersRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -170,7 +170,7 @@ public class ListAdvancedTransfersRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

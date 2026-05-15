@@ -51,13 +51,13 @@ public class CreateConversionRequest {
     }
 
     public CreateConversionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.amount = builder.amount;
-        this.destination = builder.destination;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.sourceSymbol = builder.sourceSymbol;
-        this.destinationSymbol = builder.destinationSymbol;
+        portfolioId = builder.portfolioId;
+        walletId = builder.walletId;
+        amount = builder.amount;
+        destination = builder.destination;
+        idempotencyKey = builder.idempotencyKey;
+        sourceSymbol = builder.sourceSymbol;
+        destinationSymbol = builder.destinationSymbol;
     }
 
     public String getPortfolioId() {
@@ -169,10 +169,10 @@ public class CreateConversionRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.walletId)) {
+            if (isNullOrEmpty(walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

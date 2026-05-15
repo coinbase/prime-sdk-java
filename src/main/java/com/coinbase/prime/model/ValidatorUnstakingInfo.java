@@ -45,8 +45,8 @@ public class ValidatorUnstakingInfo {
     }
 
     public ValidatorUnstakingInfo(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.statuses = builder.statuses;
+        validatorAddress = builder.validatorAddress;
+        statuses = builder.statuses;
     }
     public String getValidatorAddress() {
         return validatorAddress;

@@ -31,7 +31,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/open_orders", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/order", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/order_preview", request.getPortfolioId()),
                 request,
@@ -62,7 +62,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     @Override
     public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders", request.getPortfolioId()),
                 request,
@@ -72,7 +72,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId()),
                 request,
@@ -82,7 +82,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId()),
                 request,
@@ -92,7 +92,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId()),
                 request,
@@ -103,7 +103,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     @Override
     public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/fills", request.getPortfolioId()),
                 request,
@@ -113,7 +113,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/rfq", request.getPortfolioId()),
                 request,
@@ -123,7 +123,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/accept_quote", request.getPortfolioId()),
                 request,
@@ -134,7 +134,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     @Override
     public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request)
             throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
                 request,
@@ -144,7 +144,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public EditOrderResponse editOrder(EditOrderRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.PUT,
                 String.format("/portfolios/%s/orders/%s/edit", request.getPortfolioId(), request.getOrderId()),
                 request,

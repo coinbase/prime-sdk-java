@@ -56,13 +56,13 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
 
     public ListPortfolioTransactionsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.symbols = builder.symbols;
-        this.types = builder.types;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
-        this.travelRuleStatus = builder.travelRuleStatus;
+        portfolioId = builder.portfolioId;
+        symbols = builder.symbols;
+        types = builder.types;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
+        travelRuleStatus = builder.travelRuleStatus;
     }
 
     public String getPortfolioId() {
@@ -177,8 +177,8 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -188,7 +188,7 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

@@ -72,13 +72,13 @@ public class ConversionDetail {
     }
 
     public ConversionDetail(Builder builder) {
-        this.symbol = builder.symbol;
-        this.tfBalance = builder.tfBalance;
-        this.notionalTfBalance = builder.notionalTfBalance;
-        this.convertedBalance = builder.convertedBalance;
-        this.notionalConvertedBalance = builder.notionalConvertedBalance;
-        this.interestRate = builder.interestRate;
-        this.conversionRate = builder.conversionRate;
+        symbol = builder.symbol;
+        tfBalance = builder.tfBalance;
+        notionalTfBalance = builder.notionalTfBalance;
+        convertedBalance = builder.convertedBalance;
+        notionalConvertedBalance = builder.notionalConvertedBalance;
+        interestRate = builder.interestRate;
+        conversionRate = builder.conversionRate;
     }
     public String getSymbol() {
         return symbol;

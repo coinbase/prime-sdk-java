@@ -47,9 +47,9 @@ public class Commission {
     }
 
     public Commission(Builder builder) {
-        this.type = builder.type;
-        this.rate = builder.rate;
-        this.tradingVolume = builder.tradingVolume;
+        type = builder.type;
+        rate = builder.rate;
+        tradingVolume = builder.tradingVolume;
     }
     public String getType() {
         return type;

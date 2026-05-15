@@ -61,16 +61,16 @@ public class TravelRuleEntry {
     }
 
     public TravelRuleEntry(Builder builder) {
-        this.id = builder.id;
-        this.blockchainAddress = builder.blockchainAddress;
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.vasp = builder.vasp;
-        this.walletDetails = builder.walletDetails;
-        this.transferPurpose = builder.transferPurpose;
-        this.isSelfCertified = builder.isSelfCertified;
-        this.isIntermediary = builder.isIntermediary;
-        this.isSelf = builder.isSelf;
+        id = builder.id;
+        blockchainAddress = builder.blockchainAddress;
+        originator = builder.originator;
+        beneficiary = builder.beneficiary;
+        vasp = builder.vasp;
+        walletDetails = builder.walletDetails;
+        transferPurpose = builder.transferPurpose;
+        isSelfCertified = builder.isSelfCertified;
+        isIntermediary = builder.isIntermediary;
+        isSelf = builder.isSelf;
     }
     public String getId() {
         return id;

@@ -52,10 +52,10 @@ public class Position {
     }
 
     public Position(Builder builder) {
-        this.symbol = builder.symbol;
-        this._long = builder._long;
-        this._short = builder._short;
-        this.positionReference = builder.positionReference;
+        symbol = builder.symbol;
+        _long = builder._long;
+        _short = builder._short;
+        positionReference = builder.positionReference;
     }
     public String getSymbol() {
         return symbol;

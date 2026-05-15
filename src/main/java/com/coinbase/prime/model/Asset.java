@@ -67,12 +67,12 @@ public class Asset {
     }
 
     public Asset(Builder builder) {
-        this.name = builder.name;
-        this.symbol = builder.symbol;
-        this.decimalPrecision = builder.decimalPrecision;
-        this.tradingSupported = builder.tradingSupported;
-        this.explorerUrl = builder.explorerUrl;
-        this.networks = builder.networks;
+        name = builder.name;
+        symbol = builder.symbol;
+        decimalPrecision = builder.decimalPrecision;
+        tradingSupported = builder.tradingSupported;
+        explorerUrl = builder.explorerUrl;
+        networks = builder.networks;
     }
     public String getName() {
         return name;

@@ -98,28 +98,28 @@ public class CreateOrderRequest {
     }
 
     public CreateOrderRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.clientOrderId = builder.clientOrderId;
-        this.type = builder.type;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.limitPrice = builder.limitPrice;
-        this.startTime = builder.startTime;
-        this.expiryTime = builder.expiryTime;
-        this.timeInForce = builder.timeInForce;
-        this.stpId = builder.stpId;
-        this.displayQuoteSize = builder.displayQuoteSize;
-        this.displayBaseSize = builder.displayBaseSize;
-        this.isRaiseExact = builder.isRaiseExact;
-        this.historicalPov = builder.historicalPov;
-        this.stopPrice = builder.stopPrice;
-        this.settlCurrency = builder.settlCurrency;
-        this.postOnly = builder.postOnly;
-        this.pegOffsetType = builder.pegOffsetType;
-        this.offset = builder.offset;
-        this.wigLevel = builder.wigLevel;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
+        side = builder.side;
+        clientOrderId = builder.clientOrderId;
+        type = builder.type;
+        baseQuantity = builder.baseQuantity;
+        quoteValue = builder.quoteValue;
+        limitPrice = builder.limitPrice;
+        startTime = builder.startTime;
+        expiryTime = builder.expiryTime;
+        timeInForce = builder.timeInForce;
+        stpId = builder.stpId;
+        displayQuoteSize = builder.displayQuoteSize;
+        displayBaseSize = builder.displayBaseSize;
+        isRaiseExact = builder.isRaiseExact;
+        historicalPov = builder.historicalPov;
+        stopPrice = builder.stopPrice;
+        settlCurrency = builder.settlCurrency;
+        postOnly = builder.postOnly;
+        pegOffsetType = builder.pegOffsetType;
+        offset = builder.offset;
+        wigLevel = builder.wigLevel;
     }
 
     public String getPortfolioId() {
@@ -441,7 +441,7 @@ public class CreateOrderRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

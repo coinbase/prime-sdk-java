@@ -60,11 +60,11 @@ public class EntityBalance {
     }
 
     public EntityBalance(Builder builder) {
-        this.symbol = builder.symbol;
-        this.longAmount = builder.longAmount;
-        this.longNotional = builder.longNotional;
-        this.shortAmount = builder.shortAmount;
-        this.shortNotional = builder.shortNotional;
+        symbol = builder.symbol;
+        longAmount = builder.longAmount;
+        longNotional = builder.longNotional;
+        shortAmount = builder.shortAmount;
+        shortNotional = builder.shortNotional;
     }
     public String getSymbol() {
         return symbol;

@@ -53,13 +53,13 @@ public class CreateNetAllocationRequest {
     }
 
     public CreateNetAllocationRequest(Builder builder) {
-        this.sourcePortfolioId = builder.sourcePortfolioId;
-        this.productId = builder.productId;
-        this.orderIds = builder.orderIds;
-        this.allocationLegs = builder.allocationLegs;
-        this.sizeType = builder.sizeType;
-        this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
-        this.nettingId = builder.nettingId;
+        sourcePortfolioId = builder.sourcePortfolioId;
+        productId = builder.productId;
+        orderIds = builder.orderIds;
+        allocationLegs = builder.allocationLegs;
+        sizeType = builder.sizeType;
+        remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
+        nettingId = builder.nettingId;
     }
 
     public String getSourcePortfolioId() {

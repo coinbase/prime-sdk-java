@@ -38,9 +38,9 @@ public class ScheduleEntityFuturesSweepRequest {
     }
 
     public ScheduleEntityFuturesSweepRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.amount = builder.amount;
-        this.currency = builder.currency;
+        entityId = builder.entityId;
+        amount = builder.amount;
+        currency = builder.currency;
     }
 
     public String getEntityId() {
@@ -96,7 +96,7 @@ public class ScheduleEntityFuturesSweepRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
+            if (isNullOrEmpty(entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

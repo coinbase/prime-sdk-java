@@ -43,9 +43,9 @@ public class ListAddressBookRequest extends PrimeListRequest {
 
     public ListAddressBookRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.currencySymbol = builder.currencySymbol;
-        this.search = builder.search;
+        portfolioId = builder.portfolioId;
+        currencySymbol = builder.currencySymbol;
+        search = builder.search;
     }
 
     public String getPortfolioId() {
@@ -104,8 +104,8 @@ public class ListAddressBookRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -115,7 +115,7 @@ public class ListAddressBookRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

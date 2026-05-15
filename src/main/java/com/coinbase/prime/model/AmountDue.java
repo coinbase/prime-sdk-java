@@ -48,9 +48,9 @@ public class AmountDue {
     }
 
     public AmountDue(Builder builder) {
-        this.currency = builder.currency;
-        this.amount = builder.amount;
-        this.dueDate = builder.dueDate;
+        currency = builder.currency;
+        amount = builder.amount;
+        dueDate = builder.dueDate;
     }
     public String getCurrency() {
         return currency;

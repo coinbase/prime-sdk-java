@@ -55,10 +55,10 @@ public class ShortCollateral {
     }
 
     public ShortCollateral(Builder builder) {
-        this.oldBalance = builder.oldBalance;
-        this.newBalance = builder.newBalance;
-        this.loanInterestRate = builder.loanInterestRate;
-        this.collateralInterestRate = builder.collateralInterestRate;
+        oldBalance = builder.oldBalance;
+        newBalance = builder.newBalance;
+        loanInterestRate = builder.loanInterestRate;
+        collateralInterestRate = builder.collateralInterestRate;
     }
     public String getOldBalance() {
         return oldBalance;

@@ -39,9 +39,9 @@ public class Vasp {
     }
 
     public Vasp(Builder builder) {
-        this.id = builder.id;
-        this.countryCode = builder.countryCode;
-        this.leiNumber = builder.leiNumber;
+        id = builder.id;
+        countryCode = builder.countryCode;
+        leiNumber = builder.leiNumber;
     }
     public String getId() {
         return id;

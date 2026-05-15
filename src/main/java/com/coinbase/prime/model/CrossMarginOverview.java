@@ -67,13 +67,13 @@ public class CrossMarginOverview {
     }
 
     public CrossMarginOverview(Builder builder) {
-        this.controlStatus = builder.controlStatus;
-        this.callStatus = builder.callStatus;
-        this.marginLevel = builder.marginLevel;
-        this.marginSummary = builder.marginSummary;
-        this.activeMarginCalls = builder.activeMarginCalls;
-        this.activeLoans = builder.activeLoans;
-        this.activeLiquidation = builder.activeLiquidation;
+        controlStatus = builder.controlStatus;
+        callStatus = builder.callStatus;
+        marginLevel = builder.marginLevel;
+        marginSummary = builder.marginSummary;
+        activeMarginCalls = builder.activeMarginCalls;
+        activeLoans = builder.activeLoans;
+        activeLiquidation = builder.activeLiquidation;
     }
     public XmControlStatus getControlStatus() {
         return controlStatus;

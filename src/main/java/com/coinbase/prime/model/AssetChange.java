@@ -49,11 +49,11 @@ public class AssetChange {
     }
 
     public AssetChange(Builder builder) {
-        this.type = builder.type;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.collection = builder.collection;
-        this.item = builder.item;
+        type = builder.type;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        collection = builder.collection;
+        item = builder.item;
     }
     public AssetChangeType getType() {
         return type;

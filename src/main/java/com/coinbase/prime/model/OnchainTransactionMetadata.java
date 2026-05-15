@@ -45,8 +45,8 @@ public class OnchainTransactionMetadata {
     }
 
     public OnchainTransactionMetadata(Builder builder) {
-        this.label = builder.label;
-        this.confirmedAssetChanges = builder.confirmedAssetChanges;
+        label = builder.label;
+        confirmedAssetChanges = builder.confirmedAssetChanges;
     }
     public String getLabel() {
         return label;

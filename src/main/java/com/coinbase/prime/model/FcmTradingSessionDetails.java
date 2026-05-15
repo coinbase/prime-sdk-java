@@ -79,15 +79,15 @@ public class FcmTradingSessionDetails {
     }
 
     public FcmTradingSessionDetails(Builder builder) {
-        this.sessionOpen = builder.sessionOpen;
-        this.openTime = builder.openTime;
-        this.closeTime = builder.closeTime;
-        this.sessionState = builder.sessionState;
-        this.afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
-        this.closedReason = builder.closedReason;
-        this.maintenance = builder.maintenance;
-        this.settlementTimestamp = builder.settlementTimestamp;
-        this.settlementPrice = builder.settlementPrice;
+        sessionOpen = builder.sessionOpen;
+        openTime = builder.openTime;
+        closeTime = builder.closeTime;
+        sessionState = builder.sessionState;
+        afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
+        closedReason = builder.closedReason;
+        maintenance = builder.maintenance;
+        settlementTimestamp = builder.settlementTimestamp;
+        settlementPrice = builder.settlementPrice;
     }
     public boolean getSessionOpen() {
         return sessionOpen;

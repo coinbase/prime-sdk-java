@@ -47,12 +47,12 @@ public class WalletFiatDepositInstructions {
     }
 
     public WalletFiatDepositInstructions(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.type = builder.type;
-        this.accountNumber = builder.accountNumber;
-        this.routingNumber = builder.routingNumber;
-        this.referenceCode = builder.referenceCode;
+        id = builder.id;
+        name = builder.name;
+        type = builder.type;
+        accountNumber = builder.accountNumber;
+        routingNumber = builder.routingNumber;
+        referenceCode = builder.referenceCode;
     }
     public String getId() {
         return id;

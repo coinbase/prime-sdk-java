@@ -42,8 +42,8 @@ public class ValidatorAllocation {
     }
 
     public ValidatorAllocation(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.amount = builder.amount;
+        validatorAddress = builder.validatorAddress;
+        amount = builder.amount;
     }
     public String getValidatorAddress() {
         return validatorAddress;

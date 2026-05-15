@@ -40,8 +40,8 @@ public class MarketRate {
     }
 
     public MarketRate(Builder builder) {
-        this.symbol = builder.symbol;
-        this.rate = builder.rate;
+        symbol = builder.symbol;
+        rate = builder.rate;
     }
     public String getSymbol() {
         return symbol;

@@ -62,11 +62,11 @@ public class PerpetualProductDetails {
     }
 
     public PerpetualProductDetails(Builder builder) {
-        this.openInterest = builder.openInterest;
-        this.fundingRate = builder.fundingRate;
-        this.fundingTime = builder.fundingTime;
-        this.maxLeverage = builder.maxLeverage;
-        this.underlyingType = builder.underlyingType;
+        openInterest = builder.openInterest;
+        fundingRate = builder.fundingRate;
+        fundingTime = builder.fundingTime;
+        maxLeverage = builder.maxLeverage;
+        underlyingType = builder.underlyingType;
     }
     public String getOpenInterest() {
         return openInterest;

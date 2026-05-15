@@ -38,7 +38,7 @@ public class GetActivityRequest {
     }
 
     public GetActivityRequest(Builder builder) {
-        this.activityId = builder.activityId;
+        activityId = builder.activityId;
     }
 
     public String getActivityId() {
@@ -66,7 +66,7 @@ public class GetActivityRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.activityId)) {
+            if (isNullOrEmpty(activityId)) {
                 throw new CoinbaseClientException("ActivityId is required");
             }
         }

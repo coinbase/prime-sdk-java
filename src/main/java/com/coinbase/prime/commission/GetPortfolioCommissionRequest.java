@@ -37,8 +37,8 @@ public class GetPortfolioCommissionRequest {
     }
 
     public GetPortfolioCommissionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
     }
 
     public String getPortfolioId() {
@@ -80,7 +80,7 @@ public class GetPortfolioCommissionRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

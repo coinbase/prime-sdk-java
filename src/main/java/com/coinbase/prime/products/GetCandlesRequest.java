@@ -46,11 +46,11 @@ public class GetCandlesRequest {
     }
 
     public GetCandlesRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.granularity = builder.granularity;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        granularity = builder.granularity;
     }
 
     public String getPortfolioId() {
@@ -134,7 +134,7 @@ public class GetCandlesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

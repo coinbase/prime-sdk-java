@@ -33,7 +33,7 @@ public class ActivityMetadataTransactions {
     }
 
     public ActivityMetadataTransactions(Builder builder) {
-        this.consensus = builder.consensus;
+        consensus = builder.consensus;
     }
     public ActivityMetadataConsensus getConsensus() {
         return consensus;

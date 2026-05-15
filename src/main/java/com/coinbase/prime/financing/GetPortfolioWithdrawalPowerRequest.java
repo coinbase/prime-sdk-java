@@ -36,8 +36,8 @@ public class GetPortfolioWithdrawalPowerRequest {
     }
 
     public GetPortfolioWithdrawalPowerRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
     }
 
     public String getPortfolioId() {
@@ -79,7 +79,7 @@ public class GetPortfolioWithdrawalPowerRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

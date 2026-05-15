@@ -56,10 +56,10 @@ public class Conversion {
     }
 
     public Conversion(Builder builder) {
-        this.conversionDetails = builder.conversionDetails;
-        this.shortCollateral = builder.shortCollateral;
-        this.conversionDatetime = builder.conversionDatetime;
-        this.portfolioId = builder.portfolioId;
+        conversionDetails = builder.conversionDetails;
+        shortCollateral = builder.shortCollateral;
+        conversionDatetime = builder.conversionDatetime;
+        portfolioId = builder.portfolioId;
     }
     public List<ConversionDetail> getConversionDetails() {
         return conversionDetails;

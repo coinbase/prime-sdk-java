@@ -102,19 +102,19 @@ public class Product {
     }
 
     public Product(Builder builder) {
-        this.id = builder.id;
-        this.baseIncrement = builder.baseIncrement;
-        this.quoteIncrement = builder.quoteIncrement;
-        this.baseMinSize = builder.baseMinSize;
-        this.quoteMinSize = builder.quoteMinSize;
-        this.baseMaxSize = builder.baseMaxSize;
-        this.quoteMaxSize = builder.quoteMaxSize;
-        this.permissions = builder.permissions;
-        this.priceIncrement = builder.priceIncrement;
-        this.rfqProductDetails = builder.rfqProductDetails;
-        this.productType = builder.productType;
-        this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
-        this.futureProductDetails = builder.futureProductDetails;
+        id = builder.id;
+        baseIncrement = builder.baseIncrement;
+        quoteIncrement = builder.quoteIncrement;
+        baseMinSize = builder.baseMinSize;
+        quoteMinSize = builder.quoteMinSize;
+        baseMaxSize = builder.baseMaxSize;
+        quoteMaxSize = builder.quoteMaxSize;
+        permissions = builder.permissions;
+        priceIncrement = builder.priceIncrement;
+        rfqProductDetails = builder.rfqProductDetails;
+        productType = builder.productType;
+        fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
+        futureProductDetails = builder.futureProductDetails;
     }
     public String getId() {
         return id;

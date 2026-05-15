@@ -64,13 +64,13 @@ public class CommissionDetailTotal {
     }
 
     public CommissionDetailTotal(Builder builder) {
-        this.totalCommission = builder.totalCommission;
-        this.clientCommission = builder.clientCommission;
-        this.venueCommission = builder.venueCommission;
-        this.cesCommission = builder.cesCommission;
-        this.financingCommission = builder.financingCommission;
-        this.regulatoryCommission = builder.regulatoryCommission;
-        this.clearingCommission = builder.clearingCommission;
+        totalCommission = builder.totalCommission;
+        clientCommission = builder.clientCommission;
+        venueCommission = builder.venueCommission;
+        cesCommission = builder.cesCommission;
+        financingCommission = builder.financingCommission;
+        regulatoryCommission = builder.regulatoryCommission;
+        clearingCommission = builder.clearingCommission;
     }
     public String getTotalCommission() {
         return totalCommission;

@@ -58,12 +58,12 @@ public class Candle {
     }
 
     public Candle(Builder builder) {
-        this.timestamp = builder.timestamp;
-        this.open = builder.open;
-        this.high = builder.high;
-        this.low = builder.low;
-        this.close = builder.close;
-        this.volume = builder.volume;
+        timestamp = builder.timestamp;
+        open = builder.open;
+        high = builder.high;
+        low = builder.low;
+        close = builder.close;
+        volume = builder.volume;
     }
     public OffsetDateTime getTimestamp() {
         return timestamp;

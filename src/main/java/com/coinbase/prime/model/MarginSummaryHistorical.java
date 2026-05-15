@@ -47,9 +47,9 @@ public class MarginSummaryHistorical {
     }
 
     public MarginSummaryHistorical(Builder builder) {
-        this.conversionDatetime = builder.conversionDatetime;
-        this.conversionDate = builder.conversionDate;
-        this.marginSummary = builder.marginSummary;
+        conversionDatetime = builder.conversionDatetime;
+        conversionDate = builder.conversionDate;
+        marginSummary = builder.marginSummary;
     }
     public String getConversionDatetime() {
         return conversionDatetime;

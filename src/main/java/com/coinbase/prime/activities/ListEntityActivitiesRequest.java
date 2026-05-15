@@ -59,14 +59,14 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
     public ListEntityActivitiesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.entityId = builder.entityId;
-        this.activityLevel = builder.activityLevel;
-        this.symbols = builder.symbols;
-        this.categories = builder.categories;
-        this.statuses = builder.statuses;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+        entityId = builder.entityId;
+        activityLevel = builder.activityLevel;
+        symbols = builder.symbols;
+        categories = builder.categories;
+        statuses = builder.statuses;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getEntityId() {
@@ -195,8 +195,8 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -206,7 +206,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
+            if (isNullOrEmpty(entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

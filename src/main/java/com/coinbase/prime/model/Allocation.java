@@ -117,21 +117,21 @@ public class Allocation {
     }
 
     public Allocation(Builder builder) {
-        this.rootId = builder.rootId;
-        this.reversalId = builder.reversalId;
-        this.allocationCompletedAt = builder.allocationCompletedAt;
-        this.userId = builder.userId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.avgPrice = builder.avgPrice;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.feesAllocated = builder.feesAllocated;
-        this.status = builder.status;
-        this.source = builder.source;
-        this.orderIds = builder.orderIds;
-        this.destinations = builder.destinations;
-        this.nettingId = builder.nettingId;
+        rootId = builder.rootId;
+        reversalId = builder.reversalId;
+        allocationCompletedAt = builder.allocationCompletedAt;
+        userId = builder.userId;
+        productId = builder.productId;
+        side = builder.side;
+        avgPrice = builder.avgPrice;
+        baseQuantity = builder.baseQuantity;
+        quoteValue = builder.quoteValue;
+        feesAllocated = builder.feesAllocated;
+        status = builder.status;
+        source = builder.source;
+        orderIds = builder.orderIds;
+        destinations = builder.destinations;
+        nettingId = builder.nettingId;
     }
     public String getRootId() {
         return rootId;

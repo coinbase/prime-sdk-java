@@ -50,13 +50,13 @@ public class DetailedAddress {
     }
 
     public DetailedAddress(Builder builder) {
-        this.address1 = builder.address1;
-        this.address2 = builder.address2;
-        this.address3 = builder.address3;
-        this.city = builder.city;
-        this.state = builder.state;
-        this.countryCode = builder.countryCode;
-        this.postalCode = builder.postalCode;
+        address1 = builder.address1;
+        address2 = builder.address2;
+        address3 = builder.address3;
+        city = builder.city;
+        state = builder.state;
+        countryCode = builder.countryCode;
+        postalCode = builder.postalCode;
     }
     public String getAddress1() {
         return address1;

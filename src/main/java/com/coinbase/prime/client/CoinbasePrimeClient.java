@@ -65,7 +65,7 @@ public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
             TypeReference<T> responseClass) throws CoinbasePrimeException {
         if (!expectedStatusCodes.contains(response.statusCode())) {
             try {
-                CoinbasePrimeErrorMessage errorMessage = this.mapper.readValue(response.body(), CoinbasePrimeErrorMessage.class);
+                CoinbasePrimeErrorMessage errorMessage = mapper.readValue(response.body(), CoinbasePrimeErrorMessage.class);
                 errorMessage.setStatusCode(response.statusCode());
                 throw errorMessage.createCoinbaseException();
             } catch (Exception e) {
@@ -74,7 +74,7 @@ public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
         }
 
         try {
-            return this.mapper.readValue(response.body(), responseClass);
+            return mapper.readValue(response.body(), responseClass);
         } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to deserialize class", e);
         }

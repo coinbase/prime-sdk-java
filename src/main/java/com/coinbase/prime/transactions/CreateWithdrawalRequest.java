@@ -65,16 +65,16 @@ public class CreateWithdrawalRequest {
     }
 
     public CreateWithdrawalRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.amount = builder.amount;
-        this.destinationType = builder.destinationType;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.currencySymbol = builder.currencySymbol;
-        this.paymentMethod = builder.paymentMethod;
-        this.blockchainAddress = builder.blockchainAddress;
-        this.counterparty = builder.counterparty;
-        this.travelRuleData = builder.travelRuleData;
+        portfolioId = builder.portfolioId;
+        walletId = builder.walletId;
+        amount = builder.amount;
+        destinationType = builder.destinationType;
+        idempotencyKey = builder.idempotencyKey;
+        currencySymbol = builder.currencySymbol;
+        paymentMethod = builder.paymentMethod;
+        blockchainAddress = builder.blockchainAddress;
+        counterparty = builder.counterparty;
+        travelRuleData = builder.travelRuleData;
     }
 
     public String getPortfolioId() {
@@ -228,10 +228,10 @@ public class CreateWithdrawalRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.walletId)) {
+            if (isNullOrEmpty(walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

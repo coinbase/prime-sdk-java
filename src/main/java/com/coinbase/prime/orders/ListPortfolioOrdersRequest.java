@@ -59,13 +59,13 @@ public class ListPortfolioOrdersRequest extends PrimeListRequest {
 
     public ListPortfolioOrdersRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.orderStatuses = builder.orderStatuses;
-        this.productIds = builder.productIds;
-        this.orderType = builder.orderType;
-        this.orderSide = builder.orderSide;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+        portfolioId = builder.portfolioId;
+        orderStatuses = builder.orderStatuses;
+        productIds = builder.productIds;
+        orderType = builder.orderType;
+        orderSide = builder.orderSide;
+        startDate = builder.startDate;
+        endDate = builder.endDate;
     }
 
     public String getPortfolioId() {
@@ -180,8 +180,8 @@ public class ListPortfolioOrdersRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -191,7 +191,7 @@ public class ListPortfolioOrdersRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

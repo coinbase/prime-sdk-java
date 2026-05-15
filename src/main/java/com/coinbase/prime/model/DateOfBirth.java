@@ -36,9 +36,9 @@ public class DateOfBirth {
     }
 
     public DateOfBirth(Builder builder) {
-        this.year = builder.year;
-        this.month = builder.month;
-        this.day = builder.day;
+        year = builder.year;
+        month = builder.month;
+        day = builder.day;
     }
     public Long getYear() {
         return year;

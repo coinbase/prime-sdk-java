@@ -38,8 +38,8 @@ public class GetTransactionTravelRuleDataRequest {
     }
 
     public GetTransactionTravelRuleDataRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.transactionId = builder.transactionId;
+        portfolioId = builder.portfolioId;
+        transactionId = builder.transactionId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class GetTransactionTravelRuleDataRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.transactionId)) {
+            if (isNullOrEmpty(transactionId)) {
                 throw new CoinbaseClientException("TransactionId is required");
             }
         }

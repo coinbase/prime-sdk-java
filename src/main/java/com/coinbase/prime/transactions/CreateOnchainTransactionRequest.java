@@ -48,11 +48,11 @@ public class CreateOnchainTransactionRequest {
     }
 
     public CreateOnchainTransactionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.rawUnsignedTxn = builder.rawUnsignedTxn;
-        this.rpc = builder.rpc;
-        this.evmParams = builder.evmParams;
+        portfolioId = builder.portfolioId;
+        walletId = builder.walletId;
+        rawUnsignedTxn = builder.rawUnsignedTxn;
+        rpc = builder.rpc;
+        evmParams = builder.evmParams;
     }
 
     public String getPortfolioId() {
@@ -136,10 +136,10 @@ public class CreateOnchainTransactionRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.walletId)) {
+            if (isNullOrEmpty(walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

@@ -54,12 +54,12 @@ public class TravelRuleData {
     }
 
     public TravelRuleData(Builder builder) {
-        this.beneficiary = builder.beneficiary;
-        this.originator = builder.originator;
-        this.isSelf = builder.isSelf;
-        this.isIntermediary = builder.isIntermediary;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
-        this.attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
+        beneficiary = builder.beneficiary;
+        originator = builder.originator;
+        isSelf = builder.isSelf;
+        isIntermediary = builder.isIntermediary;
+        optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+        attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
     }
     public TravelRuleParty getBeneficiary() {
         return beneficiary;

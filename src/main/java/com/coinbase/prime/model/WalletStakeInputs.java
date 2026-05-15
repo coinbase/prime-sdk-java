@@ -42,8 +42,8 @@ public class WalletStakeInputs {
     }
 
     public WalletStakeInputs(Builder builder) {
-        this.amount = builder.amount;
-        this.validatorAddress = builder.validatorAddress;
+        amount = builder.amount;
+        validatorAddress = builder.validatorAddress;
     }
     public String getAmount() {
         return amount;

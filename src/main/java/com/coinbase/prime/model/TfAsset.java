@@ -48,9 +48,9 @@ public class TfAsset {
     }
 
     public TfAsset(Builder builder) {
-        this.symbol = builder.symbol;
-        this.assetAdjustment = builder.assetAdjustment;
-        this.liabilityAdjustment = builder.liabilityAdjustment;
+        symbol = builder.symbol;
+        assetAdjustment = builder.assetAdjustment;
+        liabilityAdjustment = builder.liabilityAdjustment;
     }
     public String getSymbol() {
         return symbol;

@@ -31,7 +31,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
 
     @Override
     public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.PUT,
                 String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
 
     @Override
     public CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
 
     @Override
     public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.DELETE,
                 String.format("/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
                 request,
@@ -61,7 +61,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
 
     @Override
     public ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
                 request,

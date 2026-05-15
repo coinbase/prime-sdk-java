@@ -37,7 +37,7 @@ public class PortfolioStakingMetadata {
     }
 
     public PortfolioStakingMetadata(Builder builder) {
-        this.externalId = builder.externalId;
+        externalId = builder.externalId;
     }
     public String getExternalId() {
         return externalId;

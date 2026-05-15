@@ -50,10 +50,10 @@ public class TransferLocation {
     }
 
     public TransferLocation(Builder builder) {
-        this.type = builder.type;
-        this.value = builder.value;
-        this.address = builder.address;
-        this.accountIdentifier = builder.accountIdentifier;
+        type = builder.type;
+        value = builder.value;
+        address = builder.address;
+        accountIdentifier = builder.accountIdentifier;
     }
     public TransferLocationType getType() {
         return type;

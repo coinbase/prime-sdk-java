@@ -47,9 +47,9 @@ public class TransactionValidator {
     }
 
     public TransactionValidator(Builder builder) {
-        this.transactionId = builder.transactionId;
-        this.validatorAddress = builder.validatorAddress;
-        this.validatorStatus = builder.validatorStatus;
+        transactionId = builder.transactionId;
+        validatorAddress = builder.validatorAddress;
+        validatorStatus = builder.validatorStatus;
     }
     public String getTransactionId() {
         return transactionId;

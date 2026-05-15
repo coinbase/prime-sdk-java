@@ -43,9 +43,9 @@ public class TransactionMetadata {
     }
 
     public TransactionMetadata(Builder builder) {
-        this.matchMetadata = builder.matchMetadata;
-        this.onchainTransactionMetadata = builder.onchainTransactionMetadata;
-        this.rewardMetadata = builder.rewardMetadata;
+        matchMetadata = builder.matchMetadata;
+        onchainTransactionMetadata = builder.onchainTransactionMetadata;
+        rewardMetadata = builder.rewardMetadata;
     }
     public MatchMetadata getMatchMetadata() {
         return matchMetadata;

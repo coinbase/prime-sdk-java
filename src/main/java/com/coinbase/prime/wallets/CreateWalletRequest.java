@@ -52,13 +52,13 @@ public class CreateWalletRequest {
     }
 
     public CreateWalletRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.name = builder.name;
-        this.symbol = builder.symbol;
-        this.type = builder.type;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.networkFamily = builder.networkFamily;
-        this.network = builder.network;
+        portfolioId = builder.portfolioId;
+        name = builder.name;
+        symbol = builder.symbol;
+        type = builder.type;
+        idempotencyKey = builder.idempotencyKey;
+        networkFamily = builder.networkFamily;
+        network = builder.network;
     }
 
     public String getPortfolioId() {
@@ -170,7 +170,7 @@ public class CreateWalletRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

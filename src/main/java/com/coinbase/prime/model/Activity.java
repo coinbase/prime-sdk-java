@@ -112,23 +112,23 @@ public class Activity {
     }
 
     public Activity(Builder builder) {
-        this.id = builder.id;
-        this.referenceId = builder.referenceId;
-        this.category = builder.category;
-        this.type = builder.type;
-        this.secondaryType = builder.secondaryType;
-        this.status = builder.status;
-        this.createdBy = builder.createdBy;
-        this.title = builder.title;
-        this.description = builder.description;
-        this.userActions = builder.userActions;
-        this.transactionsMetadata = builder.transactionsMetadata;
-        this.accountMetadata = builder.accountMetadata;
-        this.ordersMetadata = builder.ordersMetadata;
-        this.symbols = builder.symbols;
-        this.createdAt = builder.createdAt;
-        this.updatedAt = builder.updatedAt;
-        this.hierarchyType = builder.hierarchyType;
+        id = builder.id;
+        referenceId = builder.referenceId;
+        category = builder.category;
+        type = builder.type;
+        secondaryType = builder.secondaryType;
+        status = builder.status;
+        createdBy = builder.createdBy;
+        title = builder.title;
+        description = builder.description;
+        userActions = builder.userActions;
+        transactionsMetadata = builder.transactionsMetadata;
+        accountMetadata = builder.accountMetadata;
+        ordersMetadata = builder.ordersMetadata;
+        symbols = builder.symbols;
+        createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
+        hierarchyType = builder.hierarchyType;
     }
     public String getId() {
         return id;

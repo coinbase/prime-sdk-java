@@ -123,23 +123,23 @@ public class Accrual {
     }
 
     public Accrual(Builder builder) {
-        this.accrualId = builder.accrualId;
-        this.date = builder.date;
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.loanType = builder.loanType;
-        this.interestRate = builder.interestRate;
-        this.nominalAccrual = builder.nominalAccrual;
-        this.notionalAccrual = builder.notionalAccrual;
-        this.conversionRate = builder.conversionRate;
-        this.loanAmount = builder.loanAmount;
-        this.benchmark = builder.benchmark;
-        this.benchmarkRate = builder.benchmarkRate;
-        this.spread = builder.spread;
-        this.rateType = builder.rateType;
-        this.loanAmountNotional = builder.loanAmountNotional;
-        this.nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
-        this.notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
+        accrualId = builder.accrualId;
+        date = builder.date;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        loanType = builder.loanType;
+        interestRate = builder.interestRate;
+        nominalAccrual = builder.nominalAccrual;
+        notionalAccrual = builder.notionalAccrual;
+        conversionRate = builder.conversionRate;
+        loanAmount = builder.loanAmount;
+        benchmark = builder.benchmark;
+        benchmarkRate = builder.benchmarkRate;
+        spread = builder.spread;
+        rateType = builder.rateType;
+        loanAmountNotional = builder.loanAmountNotional;
+        nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
+        notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
     }
     public String getAccrualId() {
         return accrualId;

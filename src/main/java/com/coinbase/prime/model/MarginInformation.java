@@ -44,8 +44,8 @@ public class MarginInformation {
     }
 
     public MarginInformation(Builder builder) {
-        this.marginCallRecords = builder.marginCallRecords;
-        this.marginSummary = builder.marginSummary;
+        marginCallRecords = builder.marginCallRecords;
+        marginSummary = builder.marginSummary;
     }
     public List<MarginCallRecord> getMarginCallRecords() {
         return marginCallRecords;

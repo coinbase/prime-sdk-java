@@ -105,19 +105,19 @@ public class NetworkDetails {
     }
 
     public NetworkDetails(Builder builder) {
-        this.network = builder.network;
-        this.name = builder.name;
-        this.maxDecimals = builder.maxDecimals;
-        this._default = builder._default;
-        this.tradingSupported = builder.tradingSupported;
-        this.vaultSupported = builder.vaultSupported;
-        this.primeCustodySupported = builder.primeCustodySupported;
-        this.destinationTagRequired = builder.destinationTagRequired;
-        this.networkLink = builder.networkLink;
-        this.networkScopedSymbol = builder.networkScopedSymbol;
-        this.minWithdrawalAmount = builder.minWithdrawalAmount;
-        this.maxWithdrawalAmount = builder.maxWithdrawalAmount;
-        this.minDepositAmount = builder.minDepositAmount;
+        network = builder.network;
+        name = builder.name;
+        maxDecimals = builder.maxDecimals;
+        _default = builder._default;
+        tradingSupported = builder.tradingSupported;
+        vaultSupported = builder.vaultSupported;
+        primeCustodySupported = builder.primeCustodySupported;
+        destinationTagRequired = builder.destinationTagRequired;
+        networkLink = builder.networkLink;
+        networkScopedSymbol = builder.networkScopedSymbol;
+        minWithdrawalAmount = builder.minWithdrawalAmount;
+        maxWithdrawalAmount = builder.maxWithdrawalAmount;
+        minDepositAmount = builder.minDepositAmount;
     }
     public Network getNetwork() {
         return network;

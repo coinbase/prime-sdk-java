@@ -31,7 +31,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
                 request,
@@ -51,7 +51,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -61,7 +61,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -71,7 +71,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -81,7 +81,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -91,7 +91,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -106,7 +106,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
      */
     @Override
     public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(), request.getTransactionId()),
                 request,
@@ -116,7 +116,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(), request.getTransactionId()),
                 request,

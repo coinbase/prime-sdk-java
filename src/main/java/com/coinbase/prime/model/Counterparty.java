@@ -37,7 +37,7 @@ public class Counterparty {
     }
 
     public Counterparty(Builder builder) {
-        this.counterpartyId = builder.counterpartyId;
+        counterpartyId = builder.counterpartyId;
     }
     public String getCounterpartyId() {
         return counterpartyId;

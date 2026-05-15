@@ -46,11 +46,11 @@ public class ListCandlesRequest {
     }
 
     public ListCandlesRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.granularity = builder.granularity;
+        portfolioId = builder.portfolioId;
+        productId = builder.productId;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        granularity = builder.granularity;
     }
 
     public String getPortfolioId() {
@@ -129,24 +129,24 @@ public class ListCandlesRequest {
         }
 
         public ListCandlesRequest build() {
-            this.validate();
+            validate();
             return new ListCandlesRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId cannot be null");
             }
-            if (isNullOrEmpty(this.productId)) {
+            if (isNullOrEmpty(productId)) {
                 throw new CoinbaseClientException("ProductId cannot be null");
             }
-            if (isNullOrEmpty(this.startTime)) {
+            if (isNullOrEmpty(startTime)) {
                 throw new CoinbaseClientException("StartTime cannot be null");
             }
-            if (isNullOrEmpty(this.endTime)) {
+            if (isNullOrEmpty(endTime)) {
                 throw new CoinbaseClientException("EndTime cannot be null");
             }
-            if (this.granularity == null) {
+            if (granularity == null) {
                 throw new CoinbaseClientException("Granularity cannot be null");
             }
         }

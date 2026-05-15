@@ -31,7 +31,7 @@ public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsServ
 
     @Override
     public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/entities/%s/assets", request.getEntityId()),
                 request,

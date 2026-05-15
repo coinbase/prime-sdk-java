@@ -45,9 +45,9 @@ public class Locate {
     }
 
     public Locate(Builder builder) {
-        this.symbol = builder.symbol;
-        this.quantity = builder.quantity;
-        this.rate = builder.rate;
+        symbol = builder.symbol;
+        quantity = builder.quantity;
+        rate = builder.rate;
     }
     public String getSymbol() {
         return symbol;

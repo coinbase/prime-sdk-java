@@ -48,9 +48,9 @@ public class AllocationLeg {
     }
 
     public AllocationLeg(Builder builder) {
-        this.allocationLegId = builder.allocationLegId;
-        this.destinationPortfolioId = builder.destinationPortfolioId;
-        this.amount = builder.amount;
+        allocationLegId = builder.allocationLegId;
+        destinationPortfolioId = builder.destinationPortfolioId;
+        amount = builder.amount;
     }
     public String getAllocationLegId() {
         return allocationLegId;

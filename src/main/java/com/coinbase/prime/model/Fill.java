@@ -110,21 +110,21 @@ public class Fill {
     }
 
     public Fill(Builder builder) {
-        this.id = builder.id;
-        this.orderId = builder.orderId;
-        this.productId = builder.productId;
-        this.clientProductId = builder.clientProductId;
-        this.side = builder.side;
-        this.filledQuantity = builder.filledQuantity;
-        this.filledValue = builder.filledValue;
-        this.price = builder.price;
-        this.time = builder.time;
-        this.commission = builder.commission;
-        this.venue = builder.venue;
-        this.venueFees = builder.venueFees;
-        this.cesCommission = builder.cesCommission;
-        this.productType = builder.productType;
-        this.commissionDetailTotal = builder.commissionDetailTotal;
+        id = builder.id;
+        orderId = builder.orderId;
+        productId = builder.productId;
+        clientProductId = builder.clientProductId;
+        side = builder.side;
+        filledQuantity = builder.filledQuantity;
+        filledValue = builder.filledValue;
+        price = builder.price;
+        time = builder.time;
+        commission = builder.commission;
+        venue = builder.venue;
+        venueFees = builder.venueFees;
+        cesCommission = builder.cesCommission;
+        productType = builder.productType;
+        commissionDetailTotal = builder.commissionDetailTotal;
     }
     public String getId() {
         return id;

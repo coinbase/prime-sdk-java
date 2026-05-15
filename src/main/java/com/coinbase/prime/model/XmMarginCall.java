@@ -89,17 +89,17 @@ public class XmMarginCall {
     }
 
     public XmMarginCall(Builder builder) {
-        this.marginCallId = builder.marginCallId;
-        this.currency = builder.currency;
-        this.initialNotionalAmount = builder.initialNotionalAmount;
-        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
-        this.marginCallType = builder.marginCallType;
-        this.marginCallStatus = builder.marginCallStatus;
-        this.calledWithMarginLevel = builder.calledWithMarginLevel;
-        this.calledWithMarginSummary = builder.calledWithMarginSummary;
-        this.dueAt = builder.dueAt;
-        this.createdAt = builder.createdAt;
-        this.updatedAt = builder.updatedAt;
+        marginCallId = builder.marginCallId;
+        currency = builder.currency;
+        initialNotionalAmount = builder.initialNotionalAmount;
+        outstandingNotionalAmount = builder.outstandingNotionalAmount;
+        marginCallType = builder.marginCallType;
+        marginCallStatus = builder.marginCallStatus;
+        calledWithMarginLevel = builder.calledWithMarginLevel;
+        calledWithMarginSummary = builder.calledWithMarginSummary;
+        dueAt = builder.dueAt;
+        createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
     public String getMarginCallId() {
         return marginCallId;

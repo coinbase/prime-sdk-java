@@ -39,8 +39,8 @@ public class TravelRuleWalletDetails {
     }
 
     public TravelRuleWalletDetails(Builder builder) {
-        this.walletType = builder.walletType;
-        this.walletAddress = builder.walletAddress;
+        walletType = builder.walletType;
+        walletAddress = builder.walletAddress;
     }
     public TravelRuleWalletType getWalletType() {
         return walletType;

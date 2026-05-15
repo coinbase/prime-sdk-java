@@ -31,7 +31,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements 
 
     @Override
     public ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements 
 
     @Override
     public CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements 
 
     @Override
     public CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/advanced_transfers/%s/cancel", request.getPortfolioId(), request.getAdvancedTransferId()),
                 request,
@@ -61,7 +61,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements 
 
     @Override
     public ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(), request.getAdvancedTransferId()),
                 request,
@@ -71,7 +71,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements 
 
     @Override
     public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
-        return this.request(
+        return request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
                 request,

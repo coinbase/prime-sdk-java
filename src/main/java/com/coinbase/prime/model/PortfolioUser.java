@@ -75,14 +75,14 @@ public class PortfolioUser {
     }
 
     public PortfolioUser(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.email = builder.email;
-        this.portfolioId = builder.portfolioId;
-        this.entityId = builder.entityId;
-        this.role = builder.role;
-        this.roles = builder.roles;
-        this.secondaryPermissions = builder.secondaryPermissions;
+        id = builder.id;
+        name = builder.name;
+        email = builder.email;
+        portfolioId = builder.portfolioId;
+        entityId = builder.entityId;
+        role = builder.role;
+        roles = builder.roles;
+        secondaryPermissions = builder.secondaryPermissions;
     }
     public String getId() {
         return id;

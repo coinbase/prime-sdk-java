@@ -40,8 +40,8 @@ public class TieredPricingFee {
     }
 
     public TieredPricingFee(Builder builder) {
-        this.symbol = builder.symbol;
-        this.fee = builder.fee;
+        symbol = builder.symbol;
+        fee = builder.fee;
     }
     public String getSymbol() {
         return symbol;

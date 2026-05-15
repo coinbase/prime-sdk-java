@@ -35,7 +35,7 @@ public class ProcessRequirements {
     }
 
     public ProcessRequirements(Builder builder) {
-        this.travelRuleStatus = builder.travelRuleStatus;
+        travelRuleStatus = builder.travelRuleStatus;
     }
     public TravelRuleStatus getTravelRuleStatus() {
         return travelRuleStatus;

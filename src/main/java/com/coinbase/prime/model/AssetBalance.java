@@ -59,11 +59,11 @@ public class AssetBalance {
     }
 
     public AssetBalance(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.notionalAmount = builder.notionalAmount;
-        this.conversionRate = builder.conversionRate;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        notionalAmount = builder.notionalAmount;
+        conversionRate = builder.conversionRate;
     }
     public String getPortfolioId() {
         return portfolioId;

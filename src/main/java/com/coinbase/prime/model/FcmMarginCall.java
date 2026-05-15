@@ -62,12 +62,12 @@ public class FcmMarginCall {
     }
 
     public FcmMarginCall(Builder builder) {
-        this.type = builder.type;
-        this.state = builder.state;
-        this.initialAmount = builder.initialAmount;
-        this.remainingAmount = builder.remainingAmount;
-        this.businessDate = builder.businessDate;
-        this.cureDeadline = builder.cureDeadline;
+        type = builder.type;
+        state = builder.state;
+        initialAmount = builder.initialAmount;
+        remainingAmount = builder.remainingAmount;
+        businessDate = builder.businessDate;
+        cureDeadline = builder.cureDeadline;
     }
     public FcmMarginCallType getType() {
         return type;

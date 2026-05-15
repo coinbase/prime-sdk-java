@@ -91,17 +91,17 @@ public class PostTradeCreditInformation {
     }
 
     public PostTradeCreditInformation(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.currency = builder.currency;
-        this.limit = builder.limit;
-        this.utilized = builder.utilized;
-        this.available = builder.available;
-        this.frozen = builder.frozen;
-        this.frozenReason = builder.frozenReason;
-        this.amountsDue = builder.amountsDue;
-        this.enabled = builder.enabled;
-        this.adjustedCreditUtilized = builder.adjustedCreditUtilized;
-        this.adjustedPortfolioEquity = builder.adjustedPortfolioEquity;
+        portfolioId = builder.portfolioId;
+        currency = builder.currency;
+        limit = builder.limit;
+        utilized = builder.utilized;
+        available = builder.available;
+        frozen = builder.frozen;
+        frozenReason = builder.frozenReason;
+        amountsDue = builder.amountsDue;
+        enabled = builder.enabled;
+        adjustedCreditUtilized = builder.adjustedCreditUtilized;
+        adjustedPortfolioEquity = builder.adjustedPortfolioEquity;
     }
     public String getPortfolioId() {
         return portfolioId;

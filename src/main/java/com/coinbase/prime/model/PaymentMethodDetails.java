@@ -47,12 +47,12 @@ public class PaymentMethodDetails {
     }
 
     public PaymentMethodDetails(Builder builder) {
-        this.id = builder.id;
-        this.symbol = builder.symbol;
-        this.paymentMethodType = builder.paymentMethodType;
-        this.name = builder.name;
-        this.accountNumber = builder.accountNumber;
-        this.bankCode = builder.bankCode;
+        id = builder.id;
+        symbol = builder.symbol;
+        paymentMethodType = builder.paymentMethodType;
+        name = builder.name;
+        accountNumber = builder.accountNumber;
+        bankCode = builder.bankCode;
     }
     public String getId() {
         return id;

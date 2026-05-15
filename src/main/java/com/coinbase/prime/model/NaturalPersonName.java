@@ -40,9 +40,9 @@ public class NaturalPersonName {
     }
 
     public NaturalPersonName(Builder builder) {
-        this.firstName = builder.firstName;
-        this.middleName = builder.middleName;
-        this.lastName = builder.lastName;
+        firstName = builder.firstName;
+        middleName = builder.middleName;
+        lastName = builder.lastName;
     }
     public String getFirstName() {
         return firstName;

@@ -38,8 +38,8 @@ public class PositionReference {
     }
 
     public PositionReference(Builder builder) {
-        this.id = builder.id;
-        this.type = builder.type;
+        id = builder.id;
+        type = builder.type;
     }
     public String getId() {
         return id;

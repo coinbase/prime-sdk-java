@@ -46,9 +46,9 @@ public class ActiveLiquidationSummary {
     }
 
     public ActiveLiquidationSummary(Builder builder) {
-        this.liquidationId = builder.liquidationId;
-        this.status = builder.status;
-        this.shortfallAmount = builder.shortfallAmount;
+        liquidationId = builder.liquidationId;
+        status = builder.status;
+        shortfallAmount = builder.shortfallAmount;
     }
     public String getLiquidationId() {
         return liquidationId;

@@ -52,10 +52,10 @@ public class BlindMatchMetadata {
     }
 
     public BlindMatchMetadata(Builder builder) {
-        this.referenceId = builder.referenceId;
-        this.settlementDate = builder.settlementDate;
-        this.tradeDate = builder.tradeDate;
-        this.settlementTime = builder.settlementTime;
+        referenceId = builder.referenceId;
+        settlementDate = builder.settlementDate;
+        tradeDate = builder.tradeDate;
+        settlementTime = builder.settlementTime;
     }
     public String getReferenceId() {
         return referenceId;

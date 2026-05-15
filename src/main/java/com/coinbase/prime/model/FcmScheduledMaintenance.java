@@ -44,8 +44,8 @@ public class FcmScheduledMaintenance {
     }
 
     public FcmScheduledMaintenance(Builder builder) {
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
     }
     public OffsetDateTime getStartTime() {
         return startTime;

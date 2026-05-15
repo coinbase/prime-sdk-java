@@ -45,11 +45,11 @@ public class PortfolioStakingUnstakeRequest {
     }
 
     public PortfolioStakingUnstakeRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.currencySymbol = builder.currencySymbol;
-        this.amount = builder.amount;
-        this.metadata = builder.metadata;
+        portfolioId = builder.portfolioId;
+        idempotencyKey = builder.idempotencyKey;
+        currencySymbol = builder.currencySymbol;
+        amount = builder.amount;
+        metadata = builder.metadata;
     }
 
     public String getPortfolioId() {
@@ -133,7 +133,7 @@ public class PortfolioStakingUnstakeRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

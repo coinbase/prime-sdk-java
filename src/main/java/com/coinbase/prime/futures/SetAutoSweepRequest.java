@@ -37,8 +37,8 @@ public class SetAutoSweepRequest {
     }
 
     public SetAutoSweepRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.autoSweep = builder.autoSweep;
+        entityId = builder.entityId;
+        autoSweep = builder.autoSweep;
     }
 
     public String getEntityId() {
@@ -80,7 +80,7 @@ public class SetAutoSweepRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
+            if (isNullOrEmpty(entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

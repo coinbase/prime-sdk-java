@@ -61,11 +61,11 @@ public class MarginCallRecord {
     }
 
     public MarginCallRecord(Builder builder) {
-        this.marginCallId = builder.marginCallId;
-        this.initialNotionalAmount = builder.initialNotionalAmount;
-        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
-        this.createdAt = builder.createdAt;
-        this.dueAt = builder.dueAt;
+        marginCallId = builder.marginCallId;
+        initialNotionalAmount = builder.initialNotionalAmount;
+        outstandingNotionalAmount = builder.outstandingNotionalAmount;
+        createdAt = builder.createdAt;
+        dueAt = builder.dueAt;
     }
     public String getMarginCallId() {
         return marginCallId;

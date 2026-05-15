@@ -77,14 +77,14 @@ public class FcmPosition {
     }
 
     public FcmPosition(Builder builder) {
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.numberOfContracts = builder.numberOfContracts;
-        this.dailyRealizedPnl = builder.dailyRealizedPnl;
-        this.unrealizedPnl = builder.unrealizedPnl;
-        this.currentPrice = builder.currentPrice;
-        this.avgEntryPrice = builder.avgEntryPrice;
-        this.expirationTime = builder.expirationTime;
+        productId = builder.productId;
+        side = builder.side;
+        numberOfContracts = builder.numberOfContracts;
+        dailyRealizedPnl = builder.dailyRealizedPnl;
+        unrealizedPnl = builder.unrealizedPnl;
+        currentPrice = builder.currentPrice;
+        avgEntryPrice = builder.avgEntryPrice;
+        expirationTime = builder.expirationTime;
     }
     public String getProductId() {
         return productId;

@@ -58,15 +58,15 @@ public class OrderEdit {
     }
 
     public OrderEdit(Builder builder) {
-        this.price = builder.price;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.displayBaseSize = builder.displayBaseSize;
-        this.displayQuoteSize = builder.displayQuoteSize;
-        this.stopPrice = builder.stopPrice;
-        this.expiryTime = builder.expiryTime;
-        this.acceptTime = builder.acceptTime;
-        this.clientOrderId = builder.clientOrderId;
+        price = builder.price;
+        baseQuantity = builder.baseQuantity;
+        quoteValue = builder.quoteValue;
+        displayBaseSize = builder.displayBaseSize;
+        displayQuoteSize = builder.displayQuoteSize;
+        stopPrice = builder.stopPrice;
+        expiryTime = builder.expiryTime;
+        acceptTime = builder.acceptTime;
+        clientOrderId = builder.clientOrderId;
     }
     public String getPrice() {
         return price;

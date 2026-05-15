@@ -43,8 +43,8 @@ public class ActivityMetadataConsensus {
     }
 
     public ActivityMetadataConsensus(Builder builder) {
-        this.approvalDeadline = builder.approvalDeadline;
-        this.hasPassedConsensus = builder.hasPassedConsensus;
+        approvalDeadline = builder.approvalDeadline;
+        hasPassedConsensus = builder.hasPassedConsensus;
     }
     public String getApprovalDeadline() {
         return approvalDeadline;

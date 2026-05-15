@@ -53,13 +53,13 @@ public class CreateAllocationRequest {
     }
 
     public CreateAllocationRequest(Builder builder) {
-        this.allocationId = builder.allocationId;
-        this.sourcePortfolioId = builder.sourcePortfolioId;
-        this.productId = builder.productId;
-        this.orderIds = builder.orderIds;
-        this.allocationLegs = builder.allocationLegs;
-        this.sizeType = builder.sizeType;
-        this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
+        allocationId = builder.allocationId;
+        sourcePortfolioId = builder.sourcePortfolioId;
+        productId = builder.productId;
+        orderIds = builder.orderIds;
+        allocationLegs = builder.allocationLegs;
+        sizeType = builder.sizeType;
+        remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
     }
 
     public String getAllocationId() {

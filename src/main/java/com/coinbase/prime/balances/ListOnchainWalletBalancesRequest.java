@@ -46,9 +46,9 @@ public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
 
     public ListOnchainWalletBalancesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.visibilityStatuses = builder.visibilityStatuses;
+        portfolioId = builder.portfolioId;
+        walletId = builder.walletId;
+        visibilityStatuses = builder.visibilityStatuses;
     }
 
     public String getPortfolioId() {
@@ -107,8 +107,8 @@ public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            cursor = pagination.getNextCursor();
+            sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -118,10 +118,10 @@ public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.walletId)) {
+            if (isNullOrEmpty(walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

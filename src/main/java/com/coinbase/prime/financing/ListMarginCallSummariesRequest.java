@@ -40,9 +40,9 @@ public class ListMarginCallSummariesRequest {
     }
 
     public ListMarginCallSummariesRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+        entityId = builder.entityId;
+        startDate = builder.startDate;
+        endDate = builder.endDate;
     }
 
     public String getEntityId() {
@@ -98,7 +98,7 @@ public class ListMarginCallSummariesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
+            if (isNullOrEmpty(entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

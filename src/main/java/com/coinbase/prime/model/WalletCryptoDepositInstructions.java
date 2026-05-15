@@ -64,13 +64,13 @@ public class WalletCryptoDepositInstructions {
     }
 
     public WalletCryptoDepositInstructions(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.type = builder.type;
-        this.address = builder.address;
-        this.accountIdentifier = builder.accountIdentifier;
-        this.accountIdentifierName = builder.accountIdentifierName;
-        this.network = builder.network;
+        id = builder.id;
+        name = builder.name;
+        type = builder.type;
+        address = builder.address;
+        accountIdentifier = builder.accountIdentifier;
+        accountIdentifierName = builder.accountIdentifierName;
+        network = builder.network;
     }
     public String getId() {
         return id;

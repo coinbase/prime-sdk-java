@@ -34,7 +34,7 @@ public class PaymentMethodDestination {
     }
 
     public PaymentMethodDestination(Builder builder) {
-        this.paymentMethodId = builder.paymentMethodId;
+        paymentMethodId = builder.paymentMethodId;
     }
     public String getPaymentMethodId() {
         return paymentMethodId;

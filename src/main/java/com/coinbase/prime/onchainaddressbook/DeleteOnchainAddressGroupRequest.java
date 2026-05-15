@@ -38,8 +38,8 @@ public class DeleteOnchainAddressGroupRequest {
     }
 
     public DeleteOnchainAddressGroupRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.addressGroupId = builder.addressGroupId;
+        portfolioId = builder.portfolioId;
+        addressGroupId = builder.addressGroupId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class DeleteOnchainAddressGroupRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
+            if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.addressGroupId)) {
+            if (isNullOrEmpty(addressGroupId)) {
                 throw new CoinbaseClientException("AddressGroupId is required");
             }
         }

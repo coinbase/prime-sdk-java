@@ -48,12 +48,12 @@ public class PaymentMethodSummary {
     }
 
     public PaymentMethodSummary(Builder builder) {
-        this.id = builder.id;
-        this.symbol = builder.symbol;
-        this.paymentMethodType = builder.paymentMethodType;
-        this.bankName = builder.bankName;
-        this.accountNumber = builder.accountNumber;
-        this.bankName2 = builder.bankName2;
+        id = builder.id;
+        symbol = builder.symbol;
+        paymentMethodType = builder.paymentMethodType;
+        bankName = builder.bankName;
+        accountNumber = builder.accountNumber;
+        bankName2 = builder.bankName2;
     }
     public String getId() {
         return id;

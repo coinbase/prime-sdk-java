@@ -40,8 +40,8 @@ public class SweepAmount {
     }
 
     public SweepAmount(Builder builder) {
-        this.currency = builder.currency;
-        this.amount = builder.amount;
+        currency = builder.currency;
+        amount = builder.amount;
     }
     public String getCurrency() {
         return currency;

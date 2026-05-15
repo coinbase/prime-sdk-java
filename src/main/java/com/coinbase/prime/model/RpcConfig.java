@@ -42,8 +42,8 @@ public class RpcConfig {
     }
 
     public RpcConfig(Builder builder) {
-        this.skipBroadcast = builder.skipBroadcast;
-        this.url = builder.url;
+        skipBroadcast = builder.skipBroadcast;
+        url = builder.url;
     }
     public boolean getSkipBroadcast() {
         return skipBroadcast;

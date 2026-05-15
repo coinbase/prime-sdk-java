@@ -40,9 +40,9 @@ public class AddressEntry {
     }
 
     public AddressEntry(Builder builder) {
-        this.name = builder.name;
-        this.address = builder.address;
-        this.chainIds = builder.chainIds;
+        name = builder.name;
+        address = builder.address;
+        chainIds = builder.chainIds;
     }
     public String getName() {
         return name;

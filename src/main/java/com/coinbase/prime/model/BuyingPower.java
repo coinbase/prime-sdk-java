@@ -61,11 +61,11 @@ public class BuyingPower {
     }
 
     public BuyingPower(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.baseCurrency = builder.baseCurrency;
-        this.quoteCurrency = builder.quoteCurrency;
-        this.baseBuyingPower = builder.baseBuyingPower;
-        this.quoteBuyingPower = builder.quoteBuyingPower;
+        portfolioId = builder.portfolioId;
+        baseCurrency = builder.baseCurrency;
+        quoteCurrency = builder.quoteCurrency;
+        baseBuyingPower = builder.baseBuyingPower;
+        quoteBuyingPower = builder.quoteBuyingPower;
     }
     public String getPortfolioId() {
         return portfolioId;

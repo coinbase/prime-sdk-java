@@ -95,17 +95,17 @@ public class ExistingLocate {
     }
 
     public ExistingLocate(Builder builder) {
-        this.locateId = builder.locateId;
-        this.entityId = builder.entityId;
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.requestedAmount = builder.requestedAmount;
-        this.interestRate = builder.interestRate;
-        this.status = builder.status;
-        this.approvedAmount = builder.approvedAmount;
-        this.conversionDate = builder.conversionDate;
-        this.createdAt = builder.createdAt;
-        this.locateDate = builder.locateDate;
+        locateId = builder.locateId;
+        entityId = builder.entityId;
+        portfolioId = builder.portfolioId;
+        symbol = builder.symbol;
+        requestedAmount = builder.requestedAmount;
+        interestRate = builder.interestRate;
+        status = builder.status;
+        approvedAmount = builder.approvedAmount;
+        conversionDate = builder.conversionDate;
+        createdAt = builder.createdAt;
+        locateDate = builder.locateDate;
     }
     public String getLocateId() {
         return locateId;

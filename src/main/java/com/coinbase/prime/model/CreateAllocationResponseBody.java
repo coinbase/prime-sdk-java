@@ -48,9 +48,9 @@ public class CreateAllocationResponseBody {
     }
 
     public CreateAllocationResponseBody(Builder builder) {
-        this.success = builder.success;
-        this.allocationId = builder.allocationId;
-        this.failureReason = builder.failureReason;
+        success = builder.success;
+        allocationId = builder.allocationId;
+        failureReason = builder.failureReason;
     }
     public boolean getSuccess() {
         return success;

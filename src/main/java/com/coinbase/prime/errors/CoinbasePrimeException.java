@@ -28,7 +28,7 @@ public class CoinbasePrimeException extends CoinbaseException {
 
     public CoinbasePrimeException(String message, Throwable cause) {
         super(message, cause);
-        this.statusCode = 500;
+        statusCode = 500;
     }
 
     public CoinbasePrimeException(int statusCode, String message, Throwable cause) {
@@ -38,7 +38,7 @@ public class CoinbasePrimeException extends CoinbaseException {
 
     public CoinbasePrimeException(Throwable cause) {
         super(cause);
-        this.statusCode = 500;
+        statusCode = 500;
     }
 
     public int getStatusCode() {

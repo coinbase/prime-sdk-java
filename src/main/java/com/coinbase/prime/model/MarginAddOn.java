@@ -40,8 +40,8 @@ public class MarginAddOn {
     }
 
     public MarginAddOn(Builder builder) {
-        this.amount = builder.amount;
-        this.addOnType = builder.addOnType;
+        amount = builder.amount;
+        addOnType = builder.addOnType;
     }
     public String getAmount() {
         return amount;

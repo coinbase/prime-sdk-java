@@ -35,7 +35,7 @@ public class WalletClaimRewardsInputs {
     }
 
     public WalletClaimRewardsInputs(Builder builder) {
-        this.amount = builder.amount;
+        amount = builder.amount;
     }
     public String getAmount() {
         return amount;

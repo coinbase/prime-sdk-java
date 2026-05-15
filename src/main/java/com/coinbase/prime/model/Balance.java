@@ -112,20 +112,20 @@ public class Balance {
     }
 
     public Balance(Builder builder) {
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.holds = builder.holds;
-        this.bondedAmount = builder.bondedAmount;
-        this.reservedAmount = builder.reservedAmount;
-        this.unbondingAmount = builder.unbondingAmount;
-        this.unvestedAmount = builder.unvestedAmount;
-        this.pendingRewardsAmount = builder.pendingRewardsAmount;
-        this.pastRewardsAmount = builder.pastRewardsAmount;
-        this.bondableAmount = builder.bondableAmount;
-        this.withdrawableAmount = builder.withdrawableAmount;
-        this.fiatAmount = builder.fiatAmount;
-        this.unbondableAmount = builder.unbondableAmount;
-        this.claimableRewardsAmount = builder.claimableRewardsAmount;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        holds = builder.holds;
+        bondedAmount = builder.bondedAmount;
+        reservedAmount = builder.reservedAmount;
+        unbondingAmount = builder.unbondingAmount;
+        unvestedAmount = builder.unvestedAmount;
+        pendingRewardsAmount = builder.pendingRewardsAmount;
+        pastRewardsAmount = builder.pastRewardsAmount;
+        bondableAmount = builder.bondableAmount;
+        withdrawableAmount = builder.withdrawableAmount;
+        fiatAmount = builder.fiatAmount;
+        unbondableAmount = builder.unbondableAmount;
+        claimableRewardsAmount = builder.claimableRewardsAmount;
     }
     public String getSymbol() {
         return symbol;

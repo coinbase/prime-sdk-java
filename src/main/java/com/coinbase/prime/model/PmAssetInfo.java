@@ -130,23 +130,23 @@ public class PmAssetInfo {
     }
 
     public PmAssetInfo(Builder builder) {
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.price = builder.price;
-        this.notionalAmount = builder.notionalAmount;
-        this.assetTier = builder.assetTier;
-        this.marginEligible = builder.marginEligible;
-        this.baseMarginRequirement = builder.baseMarginRequirement;
-        this.baseMarginRequirementNotional = builder.baseMarginRequirementNotional;
-        this.adv30d = builder.adv30d;
-        this.hist5dVol = builder.hist5dVol;
-        this.hist30dVol = builder.hist30dVol;
-        this.hist90dVol = builder.hist90dVol;
-        this.volatilityAddon = builder.volatilityAddon;
-        this.liquidityAddon = builder.liquidityAddon;
-        this.totalPositionMargin = builder.totalPositionMargin;
-        this.shortNominal = builder.shortNominal;
-        this.longNominal = builder.longNominal;
+        symbol = builder.symbol;
+        amount = builder.amount;
+        price = builder.price;
+        notionalAmount = builder.notionalAmount;
+        assetTier = builder.assetTier;
+        marginEligible = builder.marginEligible;
+        baseMarginRequirement = builder.baseMarginRequirement;
+        baseMarginRequirementNotional = builder.baseMarginRequirementNotional;
+        adv30d = builder.adv30d;
+        hist5dVol = builder.hist5dVol;
+        hist30dVol = builder.hist30dVol;
+        hist90dVol = builder.hist90dVol;
+        volatilityAddon = builder.volatilityAddon;
+        liquidityAddon = builder.liquidityAddon;
+        totalPositionMargin = builder.totalPositionMargin;
+        shortNominal = builder.shortNominal;
+        longNominal = builder.longNominal;
     }
     public String getSymbol() {
         return symbol;

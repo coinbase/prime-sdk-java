@@ -42,10 +42,10 @@ public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
     }
 
     public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction(Builder builder) {
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.isSelf = builder.isSelf;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+        originator = builder.originator;
+        beneficiary = builder.beneficiary;
+        isSelf = builder.isSelf;
+        optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
     }
     public TravelRuleParty getOriginator() {
         return originator;

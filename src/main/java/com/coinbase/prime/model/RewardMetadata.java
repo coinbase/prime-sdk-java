@@ -33,7 +33,7 @@ public class RewardMetadata {
     }
 
     public RewardMetadata(Builder builder) {
-        this.subtype = builder.subtype;
+        subtype = builder.subtype;
     }
     public RewardSubtype getSubtype() {
         return subtype;

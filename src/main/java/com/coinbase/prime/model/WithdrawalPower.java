@@ -40,8 +40,8 @@ public class WithdrawalPower {
     }
 
     public WithdrawalPower(Builder builder) {
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
+        symbol = builder.symbol;
+        amount = builder.amount;
     }
     public String getSymbol() {
         return symbol;

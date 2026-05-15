@@ -43,8 +43,8 @@ public class RiskAssessment {
     }
 
     public RiskAssessment(Builder builder) {
-        this.complianceRiskDetected = builder.complianceRiskDetected;
-        this.securityRiskDetected = builder.securityRiskDetected;
+        complianceRiskDetected = builder.complianceRiskDetected;
+        securityRiskDetected = builder.securityRiskDetected;
     }
     public boolean getComplianceRiskDetected() {
         return complianceRiskDetected;

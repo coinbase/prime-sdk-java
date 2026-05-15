@@ -54,14 +54,14 @@ public class LimitOrderEdit {
     }
 
     public LimitOrderEdit(Builder builder) {
-        this.price = builder.price;
-        this.size = builder.size;
-        this.displaySize = builder.displaySize;
-        this.stopPrice = builder.stopPrice;
-        this.stopLimitPrice = builder.stopLimitPrice;
-        this.endTime = builder.endTime;
-        this.acceptTime = builder.acceptTime;
-        this.clientOrderId = builder.clientOrderId;
+        price = builder.price;
+        size = builder.size;
+        displaySize = builder.displaySize;
+        stopPrice = builder.stopPrice;
+        stopLimitPrice = builder.stopLimitPrice;
+        endTime = builder.endTime;
+        acceptTime = builder.acceptTime;
+        clientOrderId = builder.clientOrderId;
     }
     public String getPrice() {
         return price;
