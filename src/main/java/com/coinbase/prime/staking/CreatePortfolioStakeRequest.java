@@ -37,19 +37,21 @@ public class CreatePortfolioStakeRequest {
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    @JsonProperty("amount")
     private String amount;
 
+    @JsonProperty("metadata")
     private PortfolioStakingMetadata metadata;
 
     public CreatePortfolioStakeRequest() {
     }
 
     public CreatePortfolioStakeRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        idempotencyKey = builder.idempotencyKey;
-        currencySymbol = builder.currencySymbol;
-        amount = builder.amount;
-        metadata = builder.metadata;
+        this.portfolioId = builder.portfolioId;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.currencySymbol = builder.currencySymbol;
+        this.amount = builder.amount;
+        this.metadata = builder.metadata;
     }
 
     public String getPortfolioId() {
@@ -133,7 +135,7 @@ public class CreatePortfolioStakeRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

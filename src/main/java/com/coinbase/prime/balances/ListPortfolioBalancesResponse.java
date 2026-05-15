@@ -25,8 +25,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Portfolio Balances
  */
 public class ListPortfolioBalancesResponse {
+    @JsonProperty("balances")
     private Balance[] balances;
 
+    @JsonProperty("type")
     private PortfolioBalanceType type;
 
     @JsonProperty("trading_balances")

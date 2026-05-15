@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -54,10 +55,10 @@ public class ShortCollateral {
     }
 
     public ShortCollateral(Builder builder) {
-        oldBalance = builder.oldBalance;
-        newBalance = builder.newBalance;
-        loanInterestRate = builder.loanInterestRate;
-        collateralInterestRate = builder.collateralInterestRate;
+        this.oldBalance = builder.oldBalance;
+        this.newBalance = builder.newBalance;
+        this.loanInterestRate = builder.loanInterestRate;
+        this.collateralInterestRate = builder.collateralInterestRate;
     }
     public String getOldBalance() {
         return oldBalance;

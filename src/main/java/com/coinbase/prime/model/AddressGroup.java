@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.AddressEntry;
 import com.coinbase.prime.model.enums.NetworkType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -31,13 +32,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AddressGroup {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("network_type")
     private NetworkType networkType;
 
+    @JsonProperty("addresses")
     private List<AddressEntry> addresses;
 
     @JsonProperty("added_at")
@@ -47,11 +51,11 @@ public class AddressGroup {
     }
 
     public AddressGroup(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        networkType = builder.networkType;
-        addresses = builder.addresses;
-        addedAt = builder.addedAt;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.networkType = builder.networkType;
+        this.addresses = builder.addresses;
+        this.addedAt = builder.addedAt;
     }
     public String getId() {
         return id;

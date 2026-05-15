@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.PaymentMethodType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,8 +28,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class PaymentMethodSummary {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("payment_method_type")
@@ -47,12 +50,12 @@ public class PaymentMethodSummary {
     }
 
     public PaymentMethodSummary(Builder builder) {
-        id = builder.id;
-        symbol = builder.symbol;
-        paymentMethodType = builder.paymentMethodType;
-        bankName = builder.bankName;
-        accountNumber = builder.accountNumber;
-        bankName2 = builder.bankName2;
+        this.id = builder.id;
+        this.symbol = builder.symbol;
+        this.paymentMethodType = builder.paymentMethodType;
+        this.bankName = builder.bankName;
+        this.accountNumber = builder.accountNumber;
+        this.bankName2 = builder.bankName2;
     }
     public String getId() {
         return id;

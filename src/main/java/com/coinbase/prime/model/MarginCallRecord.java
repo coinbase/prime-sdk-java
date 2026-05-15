@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -60,11 +61,11 @@ public class MarginCallRecord {
     }
 
     public MarginCallRecord(Builder builder) {
-        marginCallId = builder.marginCallId;
-        initialNotionalAmount = builder.initialNotionalAmount;
-        outstandingNotionalAmount = builder.outstandingNotionalAmount;
-        createdAt = builder.createdAt;
-        dueAt = builder.dueAt;
+        this.marginCallId = builder.marginCallId;
+        this.initialNotionalAmount = builder.initialNotionalAmount;
+        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
+        this.createdAt = builder.createdAt;
+        this.dueAt = builder.dueAt;
     }
     public String getMarginCallId() {
         return marginCallId;

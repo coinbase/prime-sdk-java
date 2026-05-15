@@ -19,25 +19,30 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DateOfBirth {
+    @JsonProperty("year")
     private Long year;
 
+    @JsonProperty("month")
     private Long month;
 
+    @JsonProperty("day")
     private Long day;
 
     public DateOfBirth() {
     }
 
     public DateOfBirth(Builder builder) {
-        year = builder.year;
-        month = builder.month;
-        day = builder.day;
+        this.year = builder.year;
+        this.month = builder.month;
+        this.day = builder.day;
     }
     public Long getYear() {
         return year;

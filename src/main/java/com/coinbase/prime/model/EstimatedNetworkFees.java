@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -42,8 +43,8 @@ public class EstimatedNetworkFees {
     }
 
     public EstimatedNetworkFees(Builder builder) {
-        lowerBound = builder.lowerBound;
-        upperBound = builder.upperBound;
+        this.lowerBound = builder.lowerBound;
+        this.upperBound = builder.upperBound;
     }
     public String getLowerBound() {
         return lowerBound;

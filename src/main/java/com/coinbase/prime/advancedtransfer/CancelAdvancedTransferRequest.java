@@ -38,8 +38,8 @@ public class CancelAdvancedTransferRequest {
     }
 
     public CancelAdvancedTransferRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        advancedTransferId = builder.advancedTransferId;
+        this.portfolioId = builder.portfolioId;
+        this.advancedTransferId = builder.advancedTransferId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class CancelAdvancedTransferRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(advancedTransferId)) {
+            if (isNullOrEmpty(this.advancedTransferId)) {
                 throw new CoinbaseClientException("AdvancedTransferId is required");
             }
         }

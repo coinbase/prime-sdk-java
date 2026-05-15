@@ -30,17 +30,19 @@ public class ScheduleEntityFuturesSweepRequest {
     @JsonIgnore
     private String entityId;
 
+    @JsonProperty("amount")
     private String amount;
 
+    @JsonProperty("currency")
     private String currency;
 
     public ScheduleEntityFuturesSweepRequest() {
     }
 
     public ScheduleEntityFuturesSweepRequest(Builder builder) {
-        entityId = builder.entityId;
-        amount = builder.amount;
-        currency = builder.currency;
+        this.entityId = builder.entityId;
+        this.amount = builder.amount;
+        this.currency = builder.currency;
     }
 
     public String getEntityId() {
@@ -96,7 +98,7 @@ public class ScheduleEntityFuturesSweepRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

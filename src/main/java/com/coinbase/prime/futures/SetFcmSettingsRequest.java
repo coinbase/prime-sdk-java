@@ -37,8 +37,8 @@ public class SetFcmSettingsRequest {
     }
 
     public SetFcmSettingsRequest(Builder builder) {
-        entityId = builder.entityId;
-        targetDerivativesExcess = builder.targetDerivativesExcess;
+        this.entityId = builder.entityId;
+        this.targetDerivativesExcess = builder.targetDerivativesExcess;
     }
 
     public String getEntityId() {
@@ -80,7 +80,7 @@ public class SetFcmSettingsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

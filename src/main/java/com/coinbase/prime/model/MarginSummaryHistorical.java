@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.MarginSummary;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -46,9 +47,9 @@ public class MarginSummaryHistorical {
     }
 
     public MarginSummaryHistorical(Builder builder) {
-        conversionDatetime = builder.conversionDatetime;
-        conversionDate = builder.conversionDate;
-        marginSummary = builder.marginSummary;
+        this.conversionDatetime = builder.conversionDatetime;
+        this.conversionDate = builder.conversionDate;
+        this.marginSummary = builder.marginSummary;
     }
     public String getConversionDatetime() {
         return conversionDatetime;

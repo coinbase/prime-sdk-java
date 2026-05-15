@@ -23,6 +23,7 @@ import com.coinbase.prime.model.enums.XmCallStatus;
 import com.coinbase.prime.model.enums.XmCallType;
 import com.coinbase.prime.model.enums.XmMarginLevel;
 import com.coinbase.prime.model.XmSummary;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -40,6 +41,7 @@ public class XmMarginCall {
     /**
      * Margin call currency
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
@@ -88,17 +90,17 @@ public class XmMarginCall {
     }
 
     public XmMarginCall(Builder builder) {
-        marginCallId = builder.marginCallId;
-        currency = builder.currency;
-        initialNotionalAmount = builder.initialNotionalAmount;
-        outstandingNotionalAmount = builder.outstandingNotionalAmount;
-        marginCallType = builder.marginCallType;
-        marginCallStatus = builder.marginCallStatus;
-        calledWithMarginLevel = builder.calledWithMarginLevel;
-        calledWithMarginSummary = builder.calledWithMarginSummary;
-        dueAt = builder.dueAt;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        this.marginCallId = builder.marginCallId;
+        this.currency = builder.currency;
+        this.initialNotionalAmount = builder.initialNotionalAmount;
+        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
+        this.marginCallType = builder.marginCallType;
+        this.marginCallStatus = builder.marginCallStatus;
+        this.calledWithMarginLevel = builder.calledWithMarginLevel;
+        this.calledWithMarginSummary = builder.calledWithMarginSummary;
+        this.dueAt = builder.dueAt;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
     }
     public String getMarginCallId() {
         return marginCallId;

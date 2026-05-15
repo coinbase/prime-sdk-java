@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,11 +31,13 @@ public class AmountDue {
     /**
      * The currency this loan is due in
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * The amount due
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
@@ -47,9 +50,9 @@ public class AmountDue {
     }
 
     public AmountDue(Builder builder) {
-        currency = builder.currency;
-        amount = builder.amount;
-        dueDate = builder.dueDate;
+        this.currency = builder.currency;
+        this.amount = builder.amount;
+        this.dueDate = builder.dueDate;
     }
     public String getCurrency() {
         return currency;

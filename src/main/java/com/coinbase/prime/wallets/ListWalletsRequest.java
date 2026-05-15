@@ -34,8 +34,10 @@ public class ListWalletsRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("type")
     private WalletType type;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("get_network_unified_wallets")
@@ -46,10 +48,10 @@ public class ListWalletsRequest extends PrimeListRequest {
 
     public ListWalletsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        type = builder.type;
-        symbols = builder.symbols;
-        getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
+        this.portfolioId = builder.portfolioId;
+        this.type = builder.type;
+        this.symbols = builder.symbols;
+        this.getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
     }
 
     public String getPortfolioId() {
@@ -122,8 +124,8 @@ public class ListWalletsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -133,7 +135,7 @@ public class ListWalletsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

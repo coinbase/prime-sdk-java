@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.EstimateType;
 import com.coinbase.prime.model.enums.UnstakeType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,6 +33,7 @@ public class UnstakingStatus {
     /**
      * Amount being unstaked (whole amount, e.g., 16 ETH)
      */
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("unstake_type")
@@ -68,13 +70,13 @@ public class UnstakingStatus {
     }
 
     public UnstakingStatus(Builder builder) {
-        amount = builder.amount;
-        unstakeType = builder.unstakeType;
-        finishingAt = builder.finishingAt;
-        remainingHours = builder.remainingHours;
-        requestedAt = builder.requestedAt;
-        estimateType = builder.estimateType;
-        estimateDescription = builder.estimateDescription;
+        this.amount = builder.amount;
+        this.unstakeType = builder.unstakeType;
+        this.finishingAt = builder.finishingAt;
+        this.remainingHours = builder.remainingHours;
+        this.requestedAt = builder.requestedAt;
+        this.estimateType = builder.estimateType;
+        this.estimateDescription = builder.estimateDescription;
     }
     public String getAmount() {
         return amount;

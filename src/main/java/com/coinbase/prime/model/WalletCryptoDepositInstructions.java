@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.Network;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -31,18 +32,22 @@ public class WalletCryptoDepositInstructions {
     /**
      * The ID of the wallet
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the wallet
      */
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("type")
     private WalletDepositInstructionType type;
 
     /**
      * The address of the wallet
      */
+    @JsonProperty("address")
     private String address;
 
     /**
@@ -57,19 +62,20 @@ public class WalletCryptoDepositInstructions {
     @JsonProperty("account_identifier_name")
     private String accountIdentifierName;
 
+    @JsonProperty("network")
     private Network network;
 
     public WalletCryptoDepositInstructions() {
     }
 
     public WalletCryptoDepositInstructions(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        type = builder.type;
-        address = builder.address;
-        accountIdentifier = builder.accountIdentifier;
-        accountIdentifierName = builder.accountIdentifierName;
-        network = builder.network;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.type = builder.type;
+        this.address = builder.address;
+        this.accountIdentifier = builder.accountIdentifier;
+        this.accountIdentifierName = builder.accountIdentifierName;
+        this.network = builder.network;
     }
     public String getId() {
         return id;

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -43,8 +44,8 @@ public class FcmScheduledMaintenance {
     }
 
     public FcmScheduledMaintenance(Builder builder) {
-        startTime = builder.startTime;
-        endTime = builder.endTime;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
     }
     public OffsetDateTime getStartTime() {
         return startTime;

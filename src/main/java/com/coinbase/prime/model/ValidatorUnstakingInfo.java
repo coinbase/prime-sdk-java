@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.UnstakingStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,14 +39,15 @@ public class ValidatorUnstakingInfo {
     /**
      * List of active unstaking requests for this validator
      */
+    @JsonProperty("statuses")
     private List<UnstakingStatus> statuses;
 
     public ValidatorUnstakingInfo() {
     }
 
     public ValidatorUnstakingInfo(Builder builder) {
-        validatorAddress = builder.validatorAddress;
-        statuses = builder.statuses;
+        this.validatorAddress = builder.validatorAddress;
+        this.statuses = builder.statuses;
     }
     public String getValidatorAddress() {
         return validatorAddress;

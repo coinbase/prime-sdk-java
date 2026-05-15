@@ -26,6 +26,7 @@ public class ListInterestAccrualsResponse {
     @JsonProperty("total_notional_accrual")
     private String totalNotionalAccrual;
 
+    @JsonProperty("accruals")
     private Accrual[] accruals;
 
     public ListInterestAccrualsResponse() {

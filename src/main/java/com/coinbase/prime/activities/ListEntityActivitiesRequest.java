@@ -39,10 +39,13 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonProperty("activity_level")
     private ActivityLevel activityLevel;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
+    @JsonProperty("categories")
     private ActivityCategory[] categories;
 
+    @JsonProperty("statuses")
     private ActivityStatus[] statuses;
 
     @JsonProperty("start_time")
@@ -59,14 +62,14 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
     public ListEntityActivitiesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        entityId = builder.entityId;
-        activityLevel = builder.activityLevel;
-        symbols = builder.symbols;
-        categories = builder.categories;
-        statuses = builder.statuses;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
-        getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+        this.entityId = builder.entityId;
+        this.activityLevel = builder.activityLevel;
+        this.symbols = builder.symbols;
+        this.categories = builder.categories;
+        this.statuses = builder.statuses;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getEntityId() {
@@ -195,8 +198,8 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -206,7 +209,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

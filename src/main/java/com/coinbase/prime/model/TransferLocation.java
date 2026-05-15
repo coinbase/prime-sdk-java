@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.TransferLocationType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,16 +28,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TransferLocation {
+    @JsonProperty("type")
     private TransferLocationType type;
 
     /**
      * The value of the transfer location: payment method ID, wallet ID or crypto address
      */
+    @JsonProperty("value")
     private String value;
 
     /**
      * The crypto address of the transfer location
      */
+    @JsonProperty("address")
     private String address;
 
     /**
@@ -49,10 +53,10 @@ public class TransferLocation {
     }
 
     public TransferLocation(Builder builder) {
-        type = builder.type;
-        value = builder.value;
-        address = builder.address;
-        accountIdentifier = builder.accountIdentifier;
+        this.type = builder.type;
+        this.value = builder.value;
+        this.address = builder.address;
+        this.accountIdentifier = builder.accountIdentifier;
     }
     public TransferLocationType getType() {
         return type;

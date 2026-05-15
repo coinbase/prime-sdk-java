@@ -40,9 +40,9 @@ public class ListMarginConversionsRequest {
     }
 
     public ListMarginConversionsRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        startDate = builder.startDate;
-        endDate = builder.endDate;
+        this.portfolioId = builder.portfolioId;
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
     }
 
     public String getPortfolioId() {
@@ -98,7 +98,7 @@ public class ListMarginConversionsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

@@ -34,15 +34,16 @@ public class PreviewUnstakeRequest {
     @JsonIgnore
     private String walletId;
 
+    @JsonProperty("amount")
     private String amount;
 
     public PreviewUnstakeRequest() {
     }
 
     public PreviewUnstakeRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        amount = builder.amount;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.amount = builder.amount;
     }
 
     public String getPortfolioId() {
@@ -98,10 +99,10 @@ public class PreviewUnstakeRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

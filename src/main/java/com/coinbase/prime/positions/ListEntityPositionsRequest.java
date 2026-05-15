@@ -38,7 +38,7 @@ public class ListEntityPositionsRequest extends PrimeListRequest {
 
     public ListEntityPositionsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        entityId = builder.entityId;
+        this.entityId = builder.entityId;
     }
 
     public String getEntityId() {
@@ -69,8 +69,8 @@ public class ListEntityPositionsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -80,7 +80,7 @@ public class ListEntityPositionsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

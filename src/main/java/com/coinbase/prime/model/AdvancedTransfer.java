@@ -23,6 +23,7 @@ import com.coinbase.prime.model.enums.AdvancedTransferState;
 import com.coinbase.prime.model.enums.AdvancedTransferType;
 import com.coinbase.prime.model.BlindMatchMetadata;
 import com.coinbase.prime.model.FundMovement;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,10 +33,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdvancedTransfer {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("type")
     private AdvancedTransferType type;
 
+    @JsonProperty("state")
     private AdvancedTransferState state;
 
     @JsonProperty("fund_movements")
@@ -48,11 +52,11 @@ public class AdvancedTransfer {
     }
 
     public AdvancedTransfer(Builder builder) {
-        id = builder.id;
-        type = builder.type;
-        state = builder.state;
-        fundMovements = builder.fundMovements;
-        blindMatchMetadata = builder.blindMatchMetadata;
+        this.id = builder.id;
+        this.type = builder.type;
+        this.state = builder.state;
+        this.fundMovements = builder.fundMovements;
+        this.blindMatchMetadata = builder.blindMatchMetadata;
     }
     public String getId() {
         return id;

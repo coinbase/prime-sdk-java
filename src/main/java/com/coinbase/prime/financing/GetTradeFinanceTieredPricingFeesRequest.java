@@ -37,8 +37,8 @@ public class GetTradeFinanceTieredPricingFeesRequest {
     }
 
     public GetTradeFinanceTieredPricingFeesRequest(Builder builder) {
-        entityId = builder.entityId;
-        effectiveAt = builder.effectiveAt;
+        this.entityId = builder.entityId;
+        this.effectiveAt = builder.effectiveAt;
     }
 
     public String getEntityId() {
@@ -80,7 +80,7 @@ public class GetTradeFinanceTieredPricingFeesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

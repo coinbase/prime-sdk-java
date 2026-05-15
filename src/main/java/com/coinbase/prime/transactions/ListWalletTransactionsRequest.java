@@ -38,6 +38,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     @JsonIgnore
     private String walletId;
 
+    @JsonProperty("types")
     private TransactionType[] types;
 
     @JsonProperty("start_time")
@@ -51,11 +52,11 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
 
     public ListWalletTransactionsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        types = builder.types;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.types = builder.types;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
     }
 
     public String getPortfolioId() {
@@ -142,8 +143,8 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -153,10 +154,10 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

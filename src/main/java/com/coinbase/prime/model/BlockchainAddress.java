@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.Network;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,6 +31,7 @@ public class BlockchainAddress {
     /**
      * The address on the network
      */
+    @JsonProperty("address")
     private String address;
 
     /**
@@ -38,15 +40,16 @@ public class BlockchainAddress {
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
+    @JsonProperty("network")
     private Network network;
 
     public BlockchainAddress() {
     }
 
     public BlockchainAddress(Builder builder) {
-        address = builder.address;
-        accountIdentifier = builder.accountIdentifier;
-        network = builder.network;
+        this.address = builder.address;
+        this.accountIdentifier = builder.accountIdentifier;
+        this.network = builder.network;
     }
     public String getAddress() {
         return address;

@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.TravelRuleStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -34,7 +35,7 @@ public class ProcessRequirements {
     }
 
     public ProcessRequirements(Builder builder) {
-        travelRuleStatus = builder.travelRuleStatus;
+        this.travelRuleStatus = builder.travelRuleStatus;
     }
     public TravelRuleStatus getTravelRuleStatus() {
         return travelRuleStatus;

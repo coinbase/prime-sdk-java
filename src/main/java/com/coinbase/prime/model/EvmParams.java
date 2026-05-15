@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -60,11 +61,11 @@ public class EvmParams {
     }
 
     public EvmParams(Builder builder) {
-        disableDynamicGas = builder.disableDynamicGas;
-        disableDynamicNonce = builder.disableDynamicNonce;
-        replacedTransactionId = builder.replacedTransactionId;
-        chainId = builder.chainId;
-        networkName = builder.networkName;
+        this.disableDynamicGas = builder.disableDynamicGas;
+        this.disableDynamicNonce = builder.disableDynamicNonce;
+        this.replacedTransactionId = builder.replacedTransactionId;
+        this.chainId = builder.chainId;
+        this.networkName = builder.networkName;
     }
     public boolean getDisableDynamicGas() {
         return disableDynamicGas;

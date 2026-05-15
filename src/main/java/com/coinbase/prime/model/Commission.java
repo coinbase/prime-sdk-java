@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,11 +30,13 @@ public class Commission {
     /**
      * Fee model (all_in or cost_plus)
      */
+    @JsonProperty("type")
     private String type;
 
     /**
      * Commission rate (in whole percentage. Commission of 15bps is \&quot;0.0015\&quot;)
      */
+    @JsonProperty("rate")
     private String rate;
 
     /**
@@ -46,9 +49,9 @@ public class Commission {
     }
 
     public Commission(Builder builder) {
-        type = builder.type;
-        rate = builder.rate;
-        tradingVolume = builder.tradingVolume;
+        this.type = builder.type;
+        this.rate = builder.rate;
+        this.tradingVolume = builder.tradingVolume;
     }
     public String getType() {
         return type;

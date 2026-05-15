@@ -38,16 +38,17 @@ public class ClaimStakingRewardsRequest {
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    @JsonProperty("inputs")
     private WalletClaimRewardsInputs inputs;
 
     public ClaimStakingRewardsRequest() {
     }
 
     public ClaimStakingRewardsRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        idempotencyKey = builder.idempotencyKey;
-        inputs = builder.inputs;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.inputs = builder.inputs;
     }
 
     public String getPortfolioId() {
@@ -117,10 +118,10 @@ public class ClaimStakingRewardsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

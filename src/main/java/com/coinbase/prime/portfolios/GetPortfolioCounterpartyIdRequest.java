@@ -32,7 +32,7 @@ public class GetPortfolioCounterpartyIdRequest {
     }
 
     public GetPortfolioCounterpartyIdRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
+        this.portfolioId = builder.portfolioId;
     }
 
     public String getPortfolioId() {
@@ -51,12 +51,12 @@ public class GetPortfolioCounterpartyIdRequest {
         }
 
         public GetPortfolioCounterpartyIdRequest build() throws CoinbaseClientException {
-            validate();
+            this.validate();
             return new GetPortfolioCounterpartyIdRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

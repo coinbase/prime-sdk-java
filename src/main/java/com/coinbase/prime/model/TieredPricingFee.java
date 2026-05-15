@@ -19,6 +19,8 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -28,19 +30,21 @@ public class TieredPricingFee {
     /**
      * Asset symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The fee in bps
      */
+    @JsonProperty("fee")
     private String fee;
 
     public TieredPricingFee() {
     }
 
     public TieredPricingFee(Builder builder) {
-        symbol = builder.symbol;
-        fee = builder.fee;
+        this.symbol = builder.symbol;
+        this.fee = builder.fee;
     }
     public String getSymbol() {
         return symbol;

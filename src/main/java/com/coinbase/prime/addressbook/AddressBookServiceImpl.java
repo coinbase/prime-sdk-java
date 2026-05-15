@@ -31,7 +31,7 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
 
     @Override
     public ListAddressBookResponse listAddressBook(ListAddressBookRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,
@@ -41,7 +41,7 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
 
     @Override
     public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,

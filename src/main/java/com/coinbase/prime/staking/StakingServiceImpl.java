@@ -31,7 +31,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public CreateStakeResponse createStake(CreateStakeRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/staking/initiate", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -41,7 +41,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public CreateUnstakeResponse createUnstake(CreateUnstakeRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/staking/unstake", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -51,7 +51,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/staking/transaction-validators/query", request.getPortfolioId()),
                 request,
@@ -61,7 +61,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
                 request,
@@ -71,7 +71,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
                 request,
@@ -81,7 +81,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public ClaimRewardsResponse claimRewards(ClaimRewardsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/staking/claim_rewards", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -91,7 +91,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/staking/unstake/preview", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -101,7 +101,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public GetUnstakingStatusResponse getUnstakingStatus(GetUnstakingStatusRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/staking/unstake/status", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -111,7 +111,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
 
     @Override
     public GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/staking/status", request.getPortfolioId(), request.getWalletId()),
                 request,

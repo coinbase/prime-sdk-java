@@ -38,8 +38,8 @@ public class GetAllocationRequest {
     }
 
     public GetAllocationRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        allocationId = builder.allocationId;
+        this.portfolioId = builder.portfolioId;
+        this.allocationId = builder.allocationId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class GetAllocationRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(allocationId)) {
+            if (isNullOrEmpty(this.allocationId)) {
                 throw new CoinbaseClientException("AllocationId is required");
             }
         }

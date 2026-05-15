@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -26,8 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DefiBalance {
+    @JsonProperty("network")
     private String network;
 
+    @JsonProperty("protocol")
     private String protocol;
 
     @JsonProperty("net_usd_value")
@@ -37,9 +40,9 @@ public class DefiBalance {
     }
 
     public DefiBalance(Builder builder) {
-        network = builder.network;
-        protocol = builder.protocol;
-        netUsdValue = builder.netUsdValue;
+        this.network = builder.network;
+        this.protocol = builder.protocol;
+        this.netUsdValue = builder.netUsdValue;
     }
     public String getNetwork() {
         return network;

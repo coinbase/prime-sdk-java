@@ -30,8 +30,10 @@ public class CreateNewLocatesRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("symbol")
     private String symbol;
 
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("conversion_date")
@@ -44,11 +46,11 @@ public class CreateNewLocatesRequest {
     }
 
     public CreateNewLocatesRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        symbol = builder.symbol;
-        amount = builder.amount;
-        conversionDate = builder.conversionDate;
-        locateDate = builder.locateDate;
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.amount = builder.amount;
+        this.conversionDate = builder.conversionDate;
+        this.locateDate = builder.locateDate;
     }
 
     public String getPortfolioId() {
@@ -132,7 +134,7 @@ public class CreateNewLocatesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

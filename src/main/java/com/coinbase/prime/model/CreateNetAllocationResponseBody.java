@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class CreateNetAllocationResponseBody {
     /**
      * The success boolean for the post net allocation
      */
+    @JsonProperty("success")
     private boolean success;
 
     /**
@@ -59,11 +61,11 @@ public class CreateNetAllocationResponseBody {
     }
 
     public CreateNetAllocationResponseBody(Builder builder) {
-        success = builder.success;
-        nettingId = builder.nettingId;
-        buyAllocationId = builder.buyAllocationId;
-        sellAllocationId = builder.sellAllocationId;
-        failureReason = builder.failureReason;
+        this.success = builder.success;
+        this.nettingId = builder.nettingId;
+        this.buyAllocationId = builder.buyAllocationId;
+        this.sellAllocationId = builder.sellAllocationId;
+        this.failureReason = builder.failureReason;
     }
     public boolean getSuccess() {
         return success;

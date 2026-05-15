@@ -38,8 +38,8 @@ public class GetWalletRequest {
     }
 
     public GetWalletRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class GetWalletRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

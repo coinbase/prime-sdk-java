@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.FcmMarginCallState;
 import com.coinbase.prime.model.enums.FcmMarginCallType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,8 +30,10 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class FcmMarginCall {
+    @JsonProperty("type")
     private FcmMarginCallType type;
 
+    @JsonProperty("state")
     private FcmMarginCallState state;
 
     /**
@@ -61,12 +64,12 @@ public class FcmMarginCall {
     }
 
     public FcmMarginCall(Builder builder) {
-        type = builder.type;
-        state = builder.state;
-        initialAmount = builder.initialAmount;
-        remainingAmount = builder.remainingAmount;
-        businessDate = builder.businessDate;
-        cureDeadline = builder.cureDeadline;
+        this.type = builder.type;
+        this.state = builder.state;
+        this.initialAmount = builder.initialAmount;
+        this.remainingAmount = builder.remainingAmount;
+        this.businessDate = builder.businessDate;
+        this.cureDeadline = builder.cureDeadline;
     }
     public FcmMarginCallType getType() {
         return type;

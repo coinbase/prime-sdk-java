@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,10 +28,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class WalletFiatDepositInstructions {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("type")
     private WalletDepositInstructionType type;
 
     @JsonProperty("account_number")
@@ -46,12 +50,12 @@ public class WalletFiatDepositInstructions {
     }
 
     public WalletFiatDepositInstructions(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        type = builder.type;
-        accountNumber = builder.accountNumber;
-        routingNumber = builder.routingNumber;
-        referenceCode = builder.referenceCode;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.type = builder.type;
+        this.accountNumber = builder.accountNumber;
+        this.routingNumber = builder.routingNumber;
+        this.referenceCode = builder.referenceCode;
     }
     public String getId() {
         return id;

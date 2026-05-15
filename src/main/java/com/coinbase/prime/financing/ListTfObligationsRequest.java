@@ -28,7 +28,7 @@ public class ListTfObligationsRequest {
     }
 
     public ListTfObligationsRequest(Builder builder) {
-        entityId = builder.entityId;
+        this.entityId = builder.entityId;
     }
 
     public String getEntityId() {

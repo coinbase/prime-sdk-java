@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -35,14 +36,15 @@ public class ValidatorAllocation {
     /**
      * Amount for performing staking operations with this validator
      */
+    @JsonProperty("amount")
     private String amount;
 
     public ValidatorAllocation() {
     }
 
     public ValidatorAllocation(Builder builder) {
-        validatorAddress = builder.validatorAddress;
-        amount = builder.amount;
+        this.validatorAddress = builder.validatorAddress;
+        this.amount = builder.amount;
     }
     public String getValidatorAddress() {
         return validatorAddress;

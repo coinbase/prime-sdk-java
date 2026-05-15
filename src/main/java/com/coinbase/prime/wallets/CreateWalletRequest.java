@@ -33,8 +33,10 @@ public class CreateWalletRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("wallet_type")
@@ -46,19 +48,20 @@ public class CreateWalletRequest {
     @JsonProperty("network_family")
     private NetworkFamily networkFamily;
 
+    @JsonProperty("network")
     private Network network;
 
     public CreateWalletRequest() {
     }
 
     public CreateWalletRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        name = builder.name;
-        symbol = builder.symbol;
-        type = builder.type;
-        idempotencyKey = builder.idempotencyKey;
-        networkFamily = builder.networkFamily;
-        network = builder.network;
+        this.portfolioId = builder.portfolioId;
+        this.name = builder.name;
+        this.symbol = builder.symbol;
+        this.type = builder.type;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.networkFamily = builder.networkFamily;
+        this.network = builder.network;
     }
 
     public String getPortfolioId() {
@@ -170,7 +173,7 @@ public class CreateWalletRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

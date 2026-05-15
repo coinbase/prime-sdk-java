@@ -48,11 +48,11 @@ public class GetWalletDepositInstructionsRequest {
     }
 
     public GetWalletDepositInstructionsRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        depositType = builder.depositType;
-        networkId = builder.networkId;
-        networkType = builder.networkType;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.depositType = builder.depositType;
+        this.networkId = builder.networkId;
+        this.networkType = builder.networkType;
     }
 
     public String getPortfolioId() {
@@ -136,10 +136,10 @@ public class GetWalletDepositInstructionsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

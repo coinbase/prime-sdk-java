@@ -17,11 +17,13 @@
 package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.model.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Transaction by Transaction ID
  */
 public class GetTransactionResponse {
+    @JsonProperty("transaction")
     private Transaction transaction;
 
     public GetTransactionResponse() {

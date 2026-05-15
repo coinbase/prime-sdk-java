@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.XmParty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -77,14 +78,14 @@ public class XmLoan {
     }
 
     public XmLoan(Builder builder) {
-        loanId = builder.loanId;
-        loanParty = builder.loanParty;
-        principalCurrency = builder.principalCurrency;
-        principalCurrencyMarketPrice = builder.principalCurrencyMarketPrice;
-        initialPrincipalAmount = builder.initialPrincipalAmount;
-        outstandingPrincipalAmount = builder.outstandingPrincipalAmount;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        this.loanId = builder.loanId;
+        this.loanParty = builder.loanParty;
+        this.principalCurrency = builder.principalCurrency;
+        this.principalCurrencyMarketPrice = builder.principalCurrencyMarketPrice;
+        this.initialPrincipalAmount = builder.initialPrincipalAmount;
+        this.outstandingPrincipalAmount = builder.outstandingPrincipalAmount;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
     }
     public String getLoanId() {
         return loanId;

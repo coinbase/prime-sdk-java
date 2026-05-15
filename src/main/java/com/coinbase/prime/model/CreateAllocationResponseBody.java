@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class CreateAllocationResponseBody {
     /**
      * The success boolean for the post allocation
      */
+    @JsonProperty("success")
     private boolean success;
 
     /**
@@ -47,9 +49,9 @@ public class CreateAllocationResponseBody {
     }
 
     public CreateAllocationResponseBody(Builder builder) {
-        success = builder.success;
-        allocationId = builder.allocationId;
-        failureReason = builder.failureReason;
+        this.success = builder.success;
+        this.allocationId = builder.allocationId;
+        this.failureReason = builder.failureReason;
     }
     public boolean getSuccess() {
         return success;

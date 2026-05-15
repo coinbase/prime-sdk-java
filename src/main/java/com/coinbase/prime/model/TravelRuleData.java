@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.TravelRuleParty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,8 +28,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleData {
+    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
+    @JsonProperty("originator")
     private TravelRuleParty originator;
 
     @JsonProperty("is_self")
@@ -53,12 +56,12 @@ public class TravelRuleData {
     }
 
     public TravelRuleData(Builder builder) {
-        beneficiary = builder.beneficiary;
-        originator = builder.originator;
-        isSelf = builder.isSelf;
-        isIntermediary = builder.isIntermediary;
-        optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
-        attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
+        this.beneficiary = builder.beneficiary;
+        this.originator = builder.originator;
+        this.isSelf = builder.isSelf;
+        this.isIntermediary = builder.isIntermediary;
+        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+        this.attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
     }
     public TravelRuleParty getBeneficiary() {
         return beneficiary;

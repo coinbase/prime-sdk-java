@@ -27,7 +27,7 @@ public class CoinbasePrimeErrorMessage implements CoinbaseErrorMessage {
     }
 
     public CoinbasePrimeErrorMessage(Builder builder) {
-        message = builder.message;
+        this.message = builder.message;
     }
 
     public String getMessage() {
@@ -48,7 +48,7 @@ public class CoinbasePrimeErrorMessage implements CoinbaseErrorMessage {
 
     @Override
     public CoinbaseException createCoinbaseException() {
-       return new CoinbasePrimeException(statusCode, message);
+       return new CoinbasePrimeException(this.statusCode, this.message);
     }
 
     public static class Builder {

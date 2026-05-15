@@ -31,10 +31,13 @@ public class CreateConversionResponse {
     @JsonProperty("destination_symbol")
     private String destinationSymbol;
 
+    @JsonProperty("amount")
     private String amount;
 
+    @JsonProperty("destination")
     private String destination;
 
+    @JsonProperty("source")
     private String source;
 
     @JsonProperty("transaction_id")

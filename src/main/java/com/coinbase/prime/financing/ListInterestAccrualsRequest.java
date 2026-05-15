@@ -43,10 +43,10 @@ public class ListInterestAccrualsRequest {
     }
 
     public ListInterestAccrualsRequest(Builder builder) {
-        entityId = builder.entityId;
-        portfolioId = builder.portfolioId;
-        startDate = builder.startDate;
-        endDate = builder.endDate;
+        this.entityId = builder.entityId;
+        this.portfolioId = builder.portfolioId;
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
     }
 
     public String getEntityId() {
@@ -116,7 +116,7 @@ public class ListInterestAccrualsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

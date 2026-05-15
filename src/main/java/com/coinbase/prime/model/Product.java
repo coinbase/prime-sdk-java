@@ -24,6 +24,7 @@ import com.coinbase.prime.model.FutureProductDetails;
 import com.coinbase.prime.model.enums.ProductPermissions;
 import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.RfqProductDetails;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -36,6 +37,7 @@ public class Product {
     /**
      * The product ID, written as &#x60;BASE-QUOTE&#x60;
      */
+    @JsonProperty("id")
     private String id;
 
     /**
@@ -77,6 +79,7 @@ public class Product {
     /**
      * Permissions given to the user for a product
      */
+    @JsonProperty("permissions")
     private List<ProductPermissions> permissions;
 
     /**
@@ -101,19 +104,19 @@ public class Product {
     }
 
     public Product(Builder builder) {
-        id = builder.id;
-        baseIncrement = builder.baseIncrement;
-        quoteIncrement = builder.quoteIncrement;
-        baseMinSize = builder.baseMinSize;
-        quoteMinSize = builder.quoteMinSize;
-        baseMaxSize = builder.baseMaxSize;
-        quoteMaxSize = builder.quoteMaxSize;
-        permissions = builder.permissions;
-        priceIncrement = builder.priceIncrement;
-        rfqProductDetails = builder.rfqProductDetails;
-        productType = builder.productType;
-        fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
-        futureProductDetails = builder.futureProductDetails;
+        this.id = builder.id;
+        this.baseIncrement = builder.baseIncrement;
+        this.quoteIncrement = builder.quoteIncrement;
+        this.baseMinSize = builder.baseMinSize;
+        this.quoteMinSize = builder.quoteMinSize;
+        this.baseMaxSize = builder.baseMaxSize;
+        this.quoteMaxSize = builder.quoteMaxSize;
+        this.permissions = builder.permissions;
+        this.priceIncrement = builder.priceIncrement;
+        this.rfqProductDetails = builder.rfqProductDetails;
+        this.productType = builder.productType;
+        this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
+        this.futureProductDetails = builder.futureProductDetails;
     }
     public String getId() {
         return id;

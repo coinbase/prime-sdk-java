@@ -17,11 +17,13 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.TfObligation;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Trade Finance Obligations
  */
 public class ListTradeFinanceObligationsResponse {
+    @JsonProperty("obligations")
     private TfObligation[] obligations;
 
     public ListTradeFinanceObligationsResponse() {

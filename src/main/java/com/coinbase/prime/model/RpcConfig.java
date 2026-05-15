@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -35,14 +36,15 @@ public class RpcConfig {
     /**
      * Custom blockchain node RPC URL. (EVM-only)
      */
+    @JsonProperty("url")
     private String url;
 
     public RpcConfig() {
     }
 
     public RpcConfig(Builder builder) {
-        skipBroadcast = builder.skipBroadcast;
-        url = builder.url;
+        this.skipBroadcast = builder.skipBroadcast;
+        this.url = builder.url;
     }
     public boolean getSkipBroadcast() {
         return skipBroadcast;

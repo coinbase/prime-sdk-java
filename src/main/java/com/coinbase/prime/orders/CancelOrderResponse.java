@@ -16,11 +16,13 @@
 
 package com.coinbase.prime.orders;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Cancel Order
  */
 public class CancelOrderResponse {
+    @JsonProperty("id")
     private String id;
 
     public CancelOrderResponse() {

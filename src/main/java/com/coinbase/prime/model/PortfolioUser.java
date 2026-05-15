@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.SecondaryPermission;
 import com.coinbase.prime.model.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -33,16 +34,19 @@ public class PortfolioUser {
     /**
      * The unique ID of the user.
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the user.
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * The email of the user.
      */
+    @JsonProperty("email")
     private String email;
 
     /**
@@ -57,11 +61,13 @@ public class PortfolioUser {
     @JsonProperty("entity_id")
     private String entityId;
 
+    @JsonProperty("role")
     private UserRole role;
 
     /**
      * All primary roles assigned to the user.
      */
+    @JsonProperty("roles")
     private List<UserRole> roles;
 
     /**
@@ -74,14 +80,14 @@ public class PortfolioUser {
     }
 
     public PortfolioUser(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        email = builder.email;
-        portfolioId = builder.portfolioId;
-        entityId = builder.entityId;
-        role = builder.role;
-        roles = builder.roles;
-        secondaryPermissions = builder.secondaryPermissions;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.email = builder.email;
+        this.portfolioId = builder.portfolioId;
+        this.entityId = builder.entityId;
+        this.role = builder.role;
+        this.roles = builder.roles;
+        this.secondaryPermissions = builder.secondaryPermissions;
     }
     public String getId() {
         return id;

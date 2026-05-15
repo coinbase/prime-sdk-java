@@ -23,11 +23,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Create Wallet Deposit Address
  */
 public class CreateWalletDepositAddressResponse {
+    @JsonProperty("address")
     private String address;
 
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
+    @JsonProperty("network")
     private Network network;
 
     public CreateWalletDepositAddressResponse() {

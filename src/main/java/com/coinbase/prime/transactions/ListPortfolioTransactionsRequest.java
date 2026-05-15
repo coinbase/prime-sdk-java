@@ -35,8 +35,10 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
+    @JsonProperty("types")
     private TransactionType[] types;
 
     @JsonProperty("start_time")
@@ -56,13 +58,13 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
 
     public ListPortfolioTransactionsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        symbols = builder.symbols;
-        types = builder.types;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
-        getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
-        travelRuleStatus = builder.travelRuleStatus;
+        this.portfolioId = builder.portfolioId;
+        this.symbols = builder.symbols;
+        this.types = builder.types;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
+        this.travelRuleStatus = builder.travelRuleStatus;
     }
 
     public String getPortfolioId() {
@@ -177,8 +179,8 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -188,7 +190,7 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

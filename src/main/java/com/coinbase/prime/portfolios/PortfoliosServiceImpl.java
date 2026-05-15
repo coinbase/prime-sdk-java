@@ -31,7 +31,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
 
     @Override
     public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 "/portfolios",
                 request,
@@ -41,7 +41,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
 
     @Override
     public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
 
     @Override
     public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
                 request,

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -60,11 +61,11 @@ public class DestinationAlloc {
     }
 
     public DestinationAlloc(Builder builder) {
-        legId = builder.legId;
-        portfolioId = builder.portfolioId;
-        allocationBase = builder.allocationBase;
-        allocationQuote = builder.allocationQuote;
-        feesAllocatedLeg = builder.feesAllocatedLeg;
+        this.legId = builder.legId;
+        this.portfolioId = builder.portfolioId;
+        this.allocationBase = builder.allocationBase;
+        this.allocationQuote = builder.allocationQuote;
+        this.feesAllocatedLeg = builder.feesAllocatedLeg;
     }
     public String getLegId() {
         return legId;

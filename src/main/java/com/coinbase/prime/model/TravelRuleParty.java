@@ -23,6 +23,7 @@ import com.coinbase.prime.model.DetailedAddress;
 import com.coinbase.prime.model.NaturalPersonName;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
 import com.coinbase.prime.model.DateOfBirth;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,11 +31,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleParty {
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("natural_person_name")
     private NaturalPersonName naturalPersonName;
 
+    @JsonProperty("address")
     private DetailedAddress address;
 
     @JsonProperty("wallet_type")
@@ -71,16 +74,16 @@ public class TravelRuleParty {
     }
 
     public TravelRuleParty(Builder builder) {
-        name = builder.name;
-        naturalPersonName = builder.naturalPersonName;
-        address = builder.address;
-        walletType = builder.walletType;
-        vaspId = builder.vaspId;
-        vaspName = builder.vaspName;
-        personalId = builder.personalId;
-        dateOfBirth = builder.dateOfBirth;
-        telephoneNumber = builder.telephoneNumber;
-        accountId = builder.accountId;
+        this.name = builder.name;
+        this.naturalPersonName = builder.naturalPersonName;
+        this.address = builder.address;
+        this.walletType = builder.walletType;
+        this.vaspId = builder.vaspId;
+        this.vaspName = builder.vaspName;
+        this.personalId = builder.personalId;
+        this.dateOfBirth = builder.dateOfBirth;
+        this.telephoneNumber = builder.telephoneNumber;
+        this.accountId = builder.accountId;
     }
     public String getName() {
         return name;

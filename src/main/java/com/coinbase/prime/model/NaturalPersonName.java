@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -39,9 +40,9 @@ public class NaturalPersonName {
     }
 
     public NaturalPersonName(Builder builder) {
-        firstName = builder.firstName;
-        middleName = builder.middleName;
-        lastName = builder.lastName;
+        this.firstName = builder.firstName;
+        this.middleName = builder.middleName;
+        this.lastName = builder.lastName;
     }
     public String getFirstName() {
         return firstName;

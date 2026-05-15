@@ -32,9 +32,9 @@ public class Pagination {
     public Pagination() {}
 
     public Pagination(Builder builder) {
-        nextCursor = builder.nextCursor;
-        sortDirection = builder.sortDirection;
-        hasNext = builder.hasNext;
+        this.nextCursor = builder.nextCursor;
+        this.sortDirection = builder.sortDirection;
+        this.hasNext = builder.hasNext;
     }
 
     public String getNextCursor() {

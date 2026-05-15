@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -60,11 +61,11 @@ public class BuyingPower {
     }
 
     public BuyingPower(Builder builder) {
-        portfolioId = builder.portfolioId;
-        baseCurrency = builder.baseCurrency;
-        quoteCurrency = builder.quoteCurrency;
-        baseBuyingPower = builder.baseBuyingPower;
-        quoteBuyingPower = builder.quoteBuyingPower;
+        this.portfolioId = builder.portfolioId;
+        this.baseCurrency = builder.baseCurrency;
+        this.quoteCurrency = builder.quoteCurrency;
+        this.baseBuyingPower = builder.baseBuyingPower;
+        this.quoteBuyingPower = builder.quoteBuyingPower;
     }
     public String getPortfolioId() {
         return portfolioId;

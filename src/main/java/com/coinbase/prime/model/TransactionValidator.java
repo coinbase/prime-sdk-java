@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.ValidatorStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -46,9 +47,9 @@ public class TransactionValidator {
     }
 
     public TransactionValidator(Builder builder) {
-        transactionId = builder.transactionId;
-        validatorAddress = builder.validatorAddress;
-        validatorStatus = builder.validatorStatus;
+        this.transactionId = builder.transactionId;
+        this.validatorAddress = builder.validatorAddress;
+        this.validatorStatus = builder.validatorStatus;
     }
     public String getTransactionId() {
         return transactionId;

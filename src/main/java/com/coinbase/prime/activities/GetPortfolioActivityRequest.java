@@ -38,8 +38,8 @@ public class GetPortfolioActivityRequest {
     }
 
     public GetPortfolioActivityRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        activityId = builder.activityId;
+        this.portfolioId = builder.portfolioId;
+        this.activityId = builder.activityId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class GetPortfolioActivityRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(activityId)) {
+            if (isNullOrEmpty(this.activityId)) {
                 throw new CoinbaseClientException("ActivityId is required");
             }
         }

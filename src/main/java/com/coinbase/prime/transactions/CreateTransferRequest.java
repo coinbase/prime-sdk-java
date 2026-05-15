@@ -34,8 +34,10 @@ public class CreateTransferRequest {
     @JsonIgnore
     private String walletId;
 
+    @JsonProperty("amount")
     private String amount;
 
+    @JsonProperty("destination")
     private String destination;
 
     @JsonProperty("idempotency_key")
@@ -48,12 +50,12 @@ public class CreateTransferRequest {
     }
 
     public CreateTransferRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        amount = builder.amount;
-        destination = builder.destination;
-        idempotencyKey = builder.idempotencyKey;
-        currencySymbol = builder.currencySymbol;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.amount = builder.amount;
+        this.destination = builder.destination;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.currencySymbol = builder.currencySymbol;
     }
 
     public String getPortfolioId() {
@@ -151,10 +153,10 @@ public class CreateTransferRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

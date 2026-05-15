@@ -38,8 +38,8 @@ public class ListAllocationsByClientNettingIdRequest {
     }
 
     public ListAllocationsByClientNettingIdRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        nettingId = builder.nettingId;
+        this.portfolioId = builder.portfolioId;
+        this.nettingId = builder.nettingId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class ListAllocationsByClientNettingIdRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(nettingId)) {
+            if (isNullOrEmpty(this.nettingId)) {
                 throw new CoinbaseClientException("NettingId is required");
             }
         }

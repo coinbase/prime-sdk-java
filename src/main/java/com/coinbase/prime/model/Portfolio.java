@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,11 +30,13 @@ public class Portfolio {
     /**
      * The unique ID of the portfolio
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The name of the portfolio
      */
+    @JsonProperty("name")
     private String name;
 
     /**
@@ -58,11 +61,11 @@ public class Portfolio {
     }
 
     public Portfolio(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        entityId = builder.entityId;
-        organizationId = builder.organizationId;
-        entityName = builder.entityName;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.entityId = builder.entityId;
+        this.organizationId = builder.organizationId;
+        this.entityName = builder.entityName;
     }
     public String getId() {
         return id;

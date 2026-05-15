@@ -30,22 +30,22 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     public FinancingServiceImpl(CoinbasePrimeClient client) {
         super(client);
-        primeClient = client;
+        this.primeClient = client;
     }
 
     @Override
-    public CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/locates", request.getPortfolioId()),
+    public ListInterestAccrualsResponse listInterestAccruals(ListInterestAccrualsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/accruals", request.getEntityId()),
                 request,
-                List.of(201, 200),
-                new TypeReference<CreateNewLocatesResponse>() {});
+                List.of(200),
+                new TypeReference<ListInterestAccrualsResponse>() {});
     }
 
     @Override
     public GetCrossMarginOverviewResponse getCrossMarginOverview(GetCrossMarginOverviewRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/cross_margin", request.getEntityId()),
                 request,
@@ -55,7 +55,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     @Override
     public GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/locates_availability", request.getEntityId()),
                 request,
@@ -65,7 +65,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     @Override
     public GetMarginInformationResponse getMarginInformation(GetMarginInformationRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/margin", request.getEntityId()),
                 request,
@@ -74,8 +74,58 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
+    public ListMarginCallSummariesResponse listMarginCallSummaries(ListMarginCallSummariesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/margin_summaries", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListMarginCallSummariesResponse>() {});
+    }
+
+    @Override
+    public ListTradeFinanceObligationsResponse listTradeFinanceObligations(ListTradeFinanceObligationsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/tf_obligations", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListTradeFinanceObligationsResponse>() {});
+    }
+
+    @Override
+    public GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(GetTradeFinanceTieredPricingFeesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/tf_tiered_fees", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<GetTradeFinanceTieredPricingFeesResponse>() {});
+    }
+
+    @Override
+    public ListFinancingEligibleAssetsResponse listFinancingEligibleAssets() throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                "/financing/eligible-assets",
+                null,
+                List.of(200),
+                new TypeReference<ListFinancingEligibleAssetsResponse>() {});
+    }
+
+    @Override
+    public ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/accruals", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListInterestAccrualsForPortfolioResponse>() {});
+    }
+
+    @Override
     public GetPortfolioBuyingPowerResponse getPortfolioBuyingPower(GetPortfolioBuyingPowerRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/buying_power", request.getPortfolioId()),
                 request,
@@ -85,7 +135,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     @Override
     public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/credit", request.getPortfolioId()),
                 request,
@@ -94,28 +144,8 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
-    public GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/withdrawal_power", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioWithdrawalPowerResponse>() {});
-    }
-
-    @Override
-    public GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(GetTradeFinanceTieredPricingFeesRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                String.format("/entities/%s/tf_tiered_fees", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetTradeFinanceTieredPricingFeesResponse>() {});
-    }
-
-    @Override
     public ListExistingLocatesResponse listExistingLocates(ListExistingLocatesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/locates", request.getPortfolioId()),
                 request,
@@ -124,38 +154,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
-    public ListInterestAccrualsResponse listInterestAccruals(ListInterestAccrualsRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                String.format("/entities/%s/accruals", request.getEntityId()),
+    public CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/locates", request.getPortfolioId()),
                 request,
-                List.of(200),
-                new TypeReference<ListInterestAccrualsResponse>() {});
-    }
-
-    @Override
-    public ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/accruals", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListInterestAccrualsForPortfolioResponse>() {});
-    }
-
-    @Override
-    public ListMarginCallSummariesResponse listMarginCallSummaries(ListMarginCallSummariesRequest request) throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                String.format("/entities/%s/margin_summaries", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListMarginCallSummariesResponse>() {});
+                List.of(201, 200),
+                new TypeReference<CreateNewLocatesResponse>() {});
     }
 
     @Override
     public ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/margin_conversions", request.getPortfolioId()),
                 request,
@@ -164,28 +174,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
-    public ListTradeFinanceObligationsResponse listTradeFinanceObligations(ListTradeFinanceObligationsRequest request) throws CoinbasePrimeException {
-        return request(
+    public GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbasePrimeException {
+        return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/tf_obligations", request.getEntityId()),
+                String.format("/portfolios/%s/withdrawal_power", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<ListTradeFinanceObligationsResponse>() {});
-    }
-
-    @Override
-    public ListFinancingEligibleAssetsResponse listFinancingEligibleAssets() throws CoinbasePrimeException {
-        return request(
-                HttpMethod.GET,
-                "/financing/eligible-assets",
-                null,
-                List.of(200),
-                new TypeReference<ListFinancingEligibleAssetsResponse>() {});
+                new TypeReference<GetPortfolioWithdrawalPowerResponse>() {});
     }
 
     @Override
     public UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/entities/%s/funding_settings", request.getEntityId()),
                 request,
@@ -195,7 +195,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     @Override
     public GetCrossMarginRiskParametersResponse getCrossMarginRiskParameters(GetCrossMarginRiskParametersRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/cross_margin/risk_parameters", request.getEntityId()),
                 request,
@@ -221,11 +221,12 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
 
     @Override
     public GetMarketDataResponse getMarketData(GetMarketDataRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/market_data", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetMarketDataResponse>() {});
     }
+
 }

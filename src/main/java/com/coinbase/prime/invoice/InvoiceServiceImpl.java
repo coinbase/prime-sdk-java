@@ -31,7 +31,7 @@ public class InvoiceServiceImpl extends CoinbaseServiceImpl implements InvoiceSe
 
     @Override
     public ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/invoices", request.getEntityId()),
                 request,

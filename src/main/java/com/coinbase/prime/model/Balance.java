@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,16 +30,19 @@ public class Balance {
     /**
      * The display symbol for the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The total amount in whole units with full precision. Includes the &#x60;holds&#x60; amount.
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
      * Amount that is currently held in obligation to an open order&#39;s position or a pending withdrawal
      */
+    @JsonProperty("holds")
     private String holds;
 
     /**
@@ -111,20 +115,20 @@ public class Balance {
     }
 
     public Balance(Builder builder) {
-        symbol = builder.symbol;
-        amount = builder.amount;
-        holds = builder.holds;
-        bondedAmount = builder.bondedAmount;
-        reservedAmount = builder.reservedAmount;
-        unbondingAmount = builder.unbondingAmount;
-        unvestedAmount = builder.unvestedAmount;
-        pendingRewardsAmount = builder.pendingRewardsAmount;
-        pastRewardsAmount = builder.pastRewardsAmount;
-        bondableAmount = builder.bondableAmount;
-        withdrawableAmount = builder.withdrawableAmount;
-        fiatAmount = builder.fiatAmount;
-        unbondableAmount = builder.unbondableAmount;
-        claimableRewardsAmount = builder.claimableRewardsAmount;
+        this.symbol = builder.symbol;
+        this.amount = builder.amount;
+        this.holds = builder.holds;
+        this.bondedAmount = builder.bondedAmount;
+        this.reservedAmount = builder.reservedAmount;
+        this.unbondingAmount = builder.unbondingAmount;
+        this.unvestedAmount = builder.unvestedAmount;
+        this.pendingRewardsAmount = builder.pendingRewardsAmount;
+        this.pastRewardsAmount = builder.pastRewardsAmount;
+        this.bondableAmount = builder.bondableAmount;
+        this.withdrawableAmount = builder.withdrawableAmount;
+        this.fiatAmount = builder.fiatAmount;
+        this.unbondableAmount = builder.unbondableAmount;
+        this.claimableRewardsAmount = builder.claimableRewardsAmount;
     }
     public String getSymbol() {
         return symbol;

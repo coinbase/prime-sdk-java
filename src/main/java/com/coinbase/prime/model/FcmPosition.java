@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.FcmPositionSide;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -34,6 +35,7 @@ public class FcmPosition {
     @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private FcmPositionSide side;
 
     /**
@@ -76,14 +78,14 @@ public class FcmPosition {
     }
 
     public FcmPosition(Builder builder) {
-        productId = builder.productId;
-        side = builder.side;
-        numberOfContracts = builder.numberOfContracts;
-        dailyRealizedPnl = builder.dailyRealizedPnl;
-        unrealizedPnl = builder.unrealizedPnl;
-        currentPrice = builder.currentPrice;
-        avgEntryPrice = builder.avgEntryPrice;
-        expirationTime = builder.expirationTime;
+        this.productId = builder.productId;
+        this.side = builder.side;
+        this.numberOfContracts = builder.numberOfContracts;
+        this.dailyRealizedPnl = builder.dailyRealizedPnl;
+        this.unrealizedPnl = builder.unrealizedPnl;
+        this.currentPrice = builder.currentPrice;
+        this.avgEntryPrice = builder.avgEntryPrice;
+        this.expirationTime = builder.expirationTime;
     }
     public String getProductId() {
         return productId;

@@ -19,6 +19,8 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -28,13 +30,14 @@ public class NftCollection {
     /**
      * NFT collection name
      */
+    @JsonProperty("name")
     private String name;
 
     public NftCollection() {
     }
 
     public NftCollection(Builder builder) {
-        name = builder.name;
+        this.name = builder.name;
     }
     public String getName() {
         return name;

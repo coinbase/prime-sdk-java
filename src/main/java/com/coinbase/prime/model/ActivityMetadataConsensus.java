@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -42,8 +43,8 @@ public class ActivityMetadataConsensus {
     }
 
     public ActivityMetadataConsensus(Builder builder) {
-        approvalDeadline = builder.approvalDeadline;
-        hasPassedConsensus = builder.hasPassedConsensus;
+        this.approvalDeadline = builder.approvalDeadline;
+        this.hasPassedConsensus = builder.hasPassedConsensus;
     }
     public String getApprovalDeadline() {
         return approvalDeadline;

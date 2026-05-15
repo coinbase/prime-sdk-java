@@ -35,6 +35,7 @@ public class GetUnstakingStatusResponse {
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
+    @JsonProperty("validators")
     private ValidatorUnstakingInfo[] validators;
 
     public GetUnstakingStatusResponse() {

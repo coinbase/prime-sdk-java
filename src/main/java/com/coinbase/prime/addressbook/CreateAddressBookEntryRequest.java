@@ -30,11 +30,13 @@ public class CreateAddressBookEntryRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("address")
     private String address;
 
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("account_identifier")
@@ -47,12 +49,12 @@ public class CreateAddressBookEntryRequest {
     }
 
     public CreateAddressBookEntryRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        address = builder.address;
-        currencySymbol = builder.currencySymbol;
-        name = builder.name;
-        accountIdentifier = builder.accountIdentifier;
-        chainIds = builder.chainIds;
+        this.portfolioId = builder.portfolioId;
+        this.address = builder.address;
+        this.currencySymbol = builder.currencySymbol;
+        this.name = builder.name;
+        this.accountIdentifier = builder.accountIdentifier;
+        this.chainIds = builder.chainIds;
     }
 
     public String getPortfolioId() {
@@ -150,7 +152,7 @@ public class CreateAddressBookEntryRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

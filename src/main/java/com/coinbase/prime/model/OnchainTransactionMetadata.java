@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.AssetChange;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,6 +33,7 @@ public class OnchainTransactionMetadata {
     /**
      * The transaction type label of the confirmed transaction post settlement
      */
+    @JsonProperty("label")
     private String label;
 
     /**
@@ -44,8 +46,8 @@ public class OnchainTransactionMetadata {
     }
 
     public OnchainTransactionMetadata(Builder builder) {
-        label = builder.label;
-        confirmedAssetChanges = builder.confirmedAssetChanges;
+        this.label = builder.label;
+        this.confirmedAssetChanges = builder.confirmedAssetChanges;
     }
     public String getLabel() {
         return label;

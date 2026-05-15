@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class EntityBalance {
     /**
      * The display symbol for the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -59,11 +61,11 @@ public class EntityBalance {
     }
 
     public EntityBalance(Builder builder) {
-        symbol = builder.symbol;
-        longAmount = builder.longAmount;
-        longNotional = builder.longNotional;
-        shortAmount = builder.shortAmount;
-        shortNotional = builder.shortNotional;
+        this.symbol = builder.symbol;
+        this.longAmount = builder.longAmount;
+        this.longNotional = builder.longNotional;
+        this.shortAmount = builder.shortAmount;
+        this.shortNotional = builder.shortNotional;
     }
     public String getSymbol() {
         return symbol;

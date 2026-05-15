@@ -27,6 +27,7 @@ public class ListTransactionValidatorsResponse {
     @JsonProperty("transaction_validators")
     private TransactionValidator[] transactionValidators;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListTransactionValidatorsResponse() {

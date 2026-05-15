@@ -31,7 +31,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
 
     @Override
     public ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/balances", request.getEntityId()),
                 request,
@@ -41,7 +41,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
 
     @Override
     public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/balances", request.getPortfolioId()),
                 request,
@@ -51,7 +51,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
 
     @Override
     public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
                 request,
@@ -61,7 +61,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
 
     @Override
     public ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
                 request,

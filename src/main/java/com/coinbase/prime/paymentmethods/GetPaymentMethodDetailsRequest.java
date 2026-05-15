@@ -38,8 +38,8 @@ public class GetPaymentMethodDetailsRequest {
     }
 
     public GetPaymentMethodDetailsRequest(Builder builder) {
-        entityId = builder.entityId;
-        paymentMethodId = builder.paymentMethodId;
+        this.entityId = builder.entityId;
+        this.paymentMethodId = builder.paymentMethodId;
     }
 
     public String getEntityId() {
@@ -81,10 +81,10 @@ public class GetPaymentMethodDetailsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
-            if (isNullOrEmpty(paymentMethodId)) {
+            if (isNullOrEmpty(this.paymentMethodId)) {
                 throw new CoinbaseClientException("PaymentMethodId is required");
             }
         }

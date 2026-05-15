@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.RiskAssessment;
 import com.coinbase.prime.model.enums.SigningStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -46,6 +47,7 @@ public class OnchainTransactionDetails {
     /**
      * The transaction nonce. Only present for EVM-based blockchain transactions.
      */
+    @JsonProperty("nonce")
     private String nonce;
 
     /**
@@ -79,15 +81,15 @@ public class OnchainTransactionDetails {
     }
 
     public OnchainTransactionDetails(Builder builder) {
-        signedTransaction = builder.signedTransaction;
-        riskAssessment = builder.riskAssessment;
-        chainId = builder.chainId;
-        nonce = builder.nonce;
-        replacedTransactionId = builder.replacedTransactionId;
-        destinationAddress = builder.destinationAddress;
-        skipBroadcast = builder.skipBroadcast;
-        failureReason = builder.failureReason;
-        signingStatus = builder.signingStatus;
+        this.signedTransaction = builder.signedTransaction;
+        this.riskAssessment = builder.riskAssessment;
+        this.chainId = builder.chainId;
+        this.nonce = builder.nonce;
+        this.replacedTransactionId = builder.replacedTransactionId;
+        this.destinationAddress = builder.destinationAddress;
+        this.skipBroadcast = builder.skipBroadcast;
+        this.failureReason = builder.failureReason;
+        this.signingStatus = builder.signingStatus;
     }
     public String getSignedTransaction() {
         return signedTransaction;

@@ -37,8 +37,8 @@ public class GetPositionsRequest {
     }
 
     public GetPositionsRequest(Builder builder) {
-        entityId = builder.entityId;
-        productId = builder.productId;
+        this.entityId = builder.entityId;
+        this.productId = builder.productId;
     }
 
     public String getEntityId() {
@@ -80,7 +80,7 @@ public class GetPositionsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

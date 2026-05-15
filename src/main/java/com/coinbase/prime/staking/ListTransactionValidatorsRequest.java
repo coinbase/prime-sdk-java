@@ -34,8 +34,10 @@ public class ListTransactionValidatorsRequest {
     @JsonProperty("transaction_ids")
     private String[] transactionIds;
 
+    @JsonProperty("cursor")
     private String cursor;
 
+    @JsonProperty("limit")
     private Integer limit;
 
     @JsonProperty("sort_direction")
@@ -45,11 +47,11 @@ public class ListTransactionValidatorsRequest {
     }
 
     public ListTransactionValidatorsRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        transactionIds = builder.transactionIds;
-        cursor = builder.cursor;
-        limit = builder.limit;
-        sortDirection = builder.sortDirection;
+        this.portfolioId = builder.portfolioId;
+        this.transactionIds = builder.transactionIds;
+        this.cursor = builder.cursor;
+        this.limit = builder.limit;
+        this.sortDirection = builder.sortDirection;
     }
 
     public String getPortfolioId() {
@@ -133,7 +135,7 @@ public class ListTransactionValidatorsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

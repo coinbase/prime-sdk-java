@@ -20,6 +20,8 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.PositionReferenceType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -29,16 +31,18 @@ public class PositionReference {
     /**
      * Reference ID
      */
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("type")
     private PositionReferenceType type;
 
     public PositionReference() {
     }
 
     public PositionReference(Builder builder) {
-        id = builder.id;
-        type = builder.type;
+        this.id = builder.id;
+        this.type = builder.type;
     }
     public String getId() {
         return id;

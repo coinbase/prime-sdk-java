@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,8 +39,8 @@ public class TravelRuleWalletDetails {
     }
 
     public TravelRuleWalletDetails(Builder builder) {
-        walletType = builder.walletType;
-        walletAddress = builder.walletAddress;
+        this.walletType = builder.walletType;
+        this.walletAddress = builder.walletAddress;
     }
     public TravelRuleWalletType getWalletType() {
         return walletType;

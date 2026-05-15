@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.InvoiceType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class InvoiceItem {
+    @JsonProperty("description")
     private String description;
 
     @JsonProperty("currency_symbol")
@@ -35,29 +37,33 @@ public class InvoiceItem {
     @JsonProperty("invoice_type")
     private InvoiceType invoiceType;
 
+    @JsonProperty("rate")
     private Double rate;
 
+    @JsonProperty("quantity")
     private Double quantity;
 
+    @JsonProperty("price")
     private Double price;
 
     @JsonProperty("average_auc")
     private Double averageAuc;
 
+    @JsonProperty("total")
     private Double total;
 
     public InvoiceItem() {
     }
 
     public InvoiceItem(Builder builder) {
-        description = builder.description;
-        currencySymbol = builder.currencySymbol;
-        invoiceType = builder.invoiceType;
-        rate = builder.rate;
-        quantity = builder.quantity;
-        price = builder.price;
-        averageAuc = builder.averageAuc;
-        total = builder.total;
+        this.description = builder.description;
+        this.currencySymbol = builder.currencySymbol;
+        this.invoiceType = builder.invoiceType;
+        this.rate = builder.rate;
+        this.quantity = builder.quantity;
+        this.price = builder.price;
+        this.averageAuc = builder.averageAuc;
+        this.total = builder.total;
     }
     public String getDescription() {
         return description;

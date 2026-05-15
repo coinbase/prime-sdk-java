@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -42,8 +43,8 @@ public class MatchMetadata {
     }
 
     public MatchMetadata(Builder builder) {
-        referenceId = builder.referenceId;
-        settlementDate = builder.settlementDate;
+        this.referenceId = builder.referenceId;
+        this.settlementDate = builder.settlementDate;
     }
     public String getReferenceId() {
         return referenceId;

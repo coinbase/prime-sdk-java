@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,11 +30,13 @@ public class DisplayUser {
     /**
      * User UUID
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * User full name
      */
+    @JsonProperty("name")
     private String name;
 
     /**
@@ -46,9 +49,9 @@ public class DisplayUser {
     }
 
     public DisplayUser(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        avatarUrl = builder.avatarUrl;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.avatarUrl = builder.avatarUrl;
     }
     public String getId() {
         return id;

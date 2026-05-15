@@ -34,6 +34,7 @@ public class ListInvoicesRequest extends PrimeListRequest {
     @JsonIgnore
     private String entityId;
 
+    @JsonProperty("states")
     private InvoiceState[] states;
 
     @JsonProperty("billing_year")
@@ -47,10 +48,10 @@ public class ListInvoicesRequest extends PrimeListRequest {
 
     public ListInvoicesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        entityId = builder.entityId;
-        states = builder.states;
-        billingYear = builder.billingYear;
-        billingMonth = builder.billingMonth;
+        this.entityId = builder.entityId;
+        this.states = builder.states;
+        this.billingYear = builder.billingYear;
+        this.billingMonth = builder.billingMonth;
     }
 
     public String getEntityId() {
@@ -123,8 +124,8 @@ public class ListInvoicesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -134,7 +135,7 @@ public class ListInvoicesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

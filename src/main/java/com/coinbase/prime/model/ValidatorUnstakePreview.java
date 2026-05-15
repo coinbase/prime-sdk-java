@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -54,10 +55,10 @@ public class ValidatorUnstakePreview {
     }
 
     public ValidatorUnstakePreview(Builder builder) {
-        validatorAddress = builder.validatorAddress;
-        estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
-        unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
-        estimatedUnstakeDate = builder.estimatedUnstakeDate;
+        this.validatorAddress = builder.validatorAddress;
+        this.estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
+        this.unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
+        this.estimatedUnstakeDate = builder.estimatedUnstakeDate;
     }
     public String getValidatorAddress() {
         return validatorAddress;

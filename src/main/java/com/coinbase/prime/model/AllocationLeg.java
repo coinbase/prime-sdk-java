@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -41,15 +42,16 @@ public class AllocationLeg {
     /**
      * The amount size for the allocation leg
      */
+    @JsonProperty("amount")
     private String amount;
 
     public AllocationLeg() {
     }
 
     public AllocationLeg(Builder builder) {
-        allocationLegId = builder.allocationLegId;
-        destinationPortfolioId = builder.destinationPortfolioId;
-        amount = builder.amount;
+        this.allocationLegId = builder.allocationLegId;
+        this.destinationPortfolioId = builder.destinationPortfolioId;
+        this.amount = builder.amount;
     }
     public String getAllocationLegId() {
         return allocationLegId;

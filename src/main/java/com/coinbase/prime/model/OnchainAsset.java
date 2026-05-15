@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainAsset {
+    @JsonProperty("network")
     private String network;
 
     /**
@@ -37,6 +39,7 @@ public class OnchainAsset {
     /**
      * Symbol of this asset.
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -48,17 +51,18 @@ public class OnchainAsset {
     /**
      * Name of this asset, either the name of the crypto token or the NFT collection name.
      */
+    @JsonProperty("name")
     private String name;
 
     public OnchainAsset() {
     }
 
     public OnchainAsset(Builder builder) {
-        network = builder.network;
-        contractAddress = builder.contractAddress;
-        symbol = builder.symbol;
-        tokenId = builder.tokenId;
-        name = builder.name;
+        this.network = builder.network;
+        this.contractAddress = builder.contractAddress;
+        this.symbol = builder.symbol;
+        this.tokenId = builder.tokenId;
+        this.name = builder.name;
     }
     public String getNetwork() {
         return network;

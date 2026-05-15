@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -63,13 +64,13 @@ public class CommissionDetailTotal {
     }
 
     public CommissionDetailTotal(Builder builder) {
-        totalCommission = builder.totalCommission;
-        clientCommission = builder.clientCommission;
-        venueCommission = builder.venueCommission;
-        cesCommission = builder.cesCommission;
-        financingCommission = builder.financingCommission;
-        regulatoryCommission = builder.regulatoryCommission;
-        clearingCommission = builder.clearingCommission;
+        this.totalCommission = builder.totalCommission;
+        this.clientCommission = builder.clientCommission;
+        this.venueCommission = builder.venueCommission;
+        this.cesCommission = builder.cesCommission;
+        this.financingCommission = builder.financingCommission;
+        this.regulatoryCommission = builder.regulatoryCommission;
+        this.clearingCommission = builder.clearingCommission;
     }
     public String getTotalCommission() {
         return totalCommission;

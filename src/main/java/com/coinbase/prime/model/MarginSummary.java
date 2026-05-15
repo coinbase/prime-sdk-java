@@ -24,6 +24,7 @@ import com.coinbase.prime.model.LoanInfo;
 import com.coinbase.prime.model.MarginAddOn;
 import com.coinbase.prime.model.MarketRate;
 import com.coinbase.prime.model.PmAssetInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -102,6 +103,7 @@ public class MarginSummary {
     /**
      * Whether or not a entity is frozen due to balance outstanding or other reason
      */
+    @JsonProperty("frozen")
     private boolean frozen;
 
     /**
@@ -225,38 +227,38 @@ public class MarginSummary {
     }
 
     public MarginSummary(Builder builder) {
-        entityId = builder.entityId;
-        marginEquity = builder.marginEquity;
-        marginRequirement = builder.marginRequirement;
-        excessDeficit = builder.excessDeficit;
-        pmCreditConsumed = builder.pmCreditConsumed;
-        tfCreditLimit = builder.tfCreditLimit;
-        tfCreditConsumed = builder.tfCreditConsumed;
-        tfAdjustedAssetValue = builder.tfAdjustedAssetValue;
-        tfAdjustedLiabilityValue = builder.tfAdjustedLiabilityValue;
-        tfAdjustedCreditConsumed = builder.tfAdjustedCreditConsumed;
-        tfAdjustedEquity = builder.tfAdjustedEquity;
-        frozen = builder.frozen;
-        frozenReason = builder.frozenReason;
-        tfEnabled = builder.tfEnabled;
-        pmEnabled = builder.pmEnabled;
-        marketRates = builder.marketRates;
-        assetBalances = builder.assetBalances;
-        tfLoans = builder.tfLoans;
-        pmLoans = builder.pmLoans;
-        shortCollateral = builder.shortCollateral;
-        grossMarketValue = builder.grossMarketValue;
-        netMarketValue = builder.netMarketValue;
-        longMarketValue = builder.longMarketValue;
-        nonMarginableLongMarketValue = builder.nonMarginableLongMarketValue;
-        shortMarketValue = builder.shortMarketValue;
-        grossLeverage = builder.grossLeverage;
-        netExposure = builder.netExposure;
-        portfolioStressTriggered = builder.portfolioStressTriggered;
-        pmAssetInfo = builder.pmAssetInfo;
-        pmCreditLimit = builder.pmCreditLimit;
-        pmMarginLimit = builder.pmMarginLimit;
-        pmMarginConsumed = builder.pmMarginConsumed;
+        this.entityId = builder.entityId;
+        this.marginEquity = builder.marginEquity;
+        this.marginRequirement = builder.marginRequirement;
+        this.excessDeficit = builder.excessDeficit;
+        this.pmCreditConsumed = builder.pmCreditConsumed;
+        this.tfCreditLimit = builder.tfCreditLimit;
+        this.tfCreditConsumed = builder.tfCreditConsumed;
+        this.tfAdjustedAssetValue = builder.tfAdjustedAssetValue;
+        this.tfAdjustedLiabilityValue = builder.tfAdjustedLiabilityValue;
+        this.tfAdjustedCreditConsumed = builder.tfAdjustedCreditConsumed;
+        this.tfAdjustedEquity = builder.tfAdjustedEquity;
+        this.frozen = builder.frozen;
+        this.frozenReason = builder.frozenReason;
+        this.tfEnabled = builder.tfEnabled;
+        this.pmEnabled = builder.pmEnabled;
+        this.marketRates = builder.marketRates;
+        this.assetBalances = builder.assetBalances;
+        this.tfLoans = builder.tfLoans;
+        this.pmLoans = builder.pmLoans;
+        this.shortCollateral = builder.shortCollateral;
+        this.grossMarketValue = builder.grossMarketValue;
+        this.netMarketValue = builder.netMarketValue;
+        this.longMarketValue = builder.longMarketValue;
+        this.nonMarginableLongMarketValue = builder.nonMarginableLongMarketValue;
+        this.shortMarketValue = builder.shortMarketValue;
+        this.grossLeverage = builder.grossLeverage;
+        this.netExposure = builder.netExposure;
+        this.portfolioStressTriggered = builder.portfolioStressTriggered;
+        this.pmAssetInfo = builder.pmAssetInfo;
+        this.pmCreditLimit = builder.pmCreditLimit;
+        this.pmMarginLimit = builder.pmMarginLimit;
+        this.pmMarginConsumed = builder.pmMarginConsumed;
     }
     public String getEntityId() {
         return entityId;

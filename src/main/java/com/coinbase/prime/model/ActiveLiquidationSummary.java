@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.XmLiquidationStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -33,6 +34,7 @@ public class ActiveLiquidationSummary {
     @JsonProperty("liquidation_id")
     private String liquidationId;
 
+    @JsonProperty("status")
     private XmLiquidationStatus status;
 
     /**
@@ -45,9 +47,9 @@ public class ActiveLiquidationSummary {
     }
 
     public ActiveLiquidationSummary(Builder builder) {
-        liquidationId = builder.liquidationId;
-        status = builder.status;
-        shortfallAmount = builder.shortfallAmount;
+        this.liquidationId = builder.liquidationId;
+        this.status = builder.status;
+        this.shortfallAmount = builder.shortfallAmount;
     }
     public String getLiquidationId() {
         return liquidationId;

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -61,11 +62,11 @@ public class PerpetualProductDetails {
     }
 
     public PerpetualProductDetails(Builder builder) {
-        openInterest = builder.openInterest;
-        fundingRate = builder.fundingRate;
-        fundingTime = builder.fundingTime;
-        maxLeverage = builder.maxLeverage;
-        underlyingType = builder.underlyingType;
+        this.openInterest = builder.openInterest;
+        this.fundingRate = builder.fundingRate;
+        this.fundingTime = builder.fundingTime;
+        this.maxLeverage = builder.maxLeverage;
+        this.underlyingType = builder.underlyingType;
     }
     public String getOpenInterest() {
         return openInterest;

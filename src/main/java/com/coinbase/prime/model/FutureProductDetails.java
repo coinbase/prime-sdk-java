@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.ContractExpiryType;
 import com.coinbase.prime.model.PerpetualProductDetails;
 import com.coinbase.prime.model.enums.RiskManagementType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -63,6 +64,7 @@ public class FutureProductDetails {
     /**
      * The venue this product trades on
      */
+    @JsonProperty("venue")
     private String venue;
 
     /**
@@ -90,17 +92,17 @@ public class FutureProductDetails {
     }
 
     public FutureProductDetails(Builder builder) {
-        contractCode = builder.contractCode;
-        contractSize = builder.contractSize;
-        contractExpiry = builder.contractExpiry;
-        contractRootUnit = builder.contractRootUnit;
-        contractExpiryType = builder.contractExpiryType;
-        riskManagedBy = builder.riskManagedBy;
-        venue = builder.venue;
-        groupDescription = builder.groupDescription;
-        contractExpiryTimezone = builder.contractExpiryTimezone;
-        groupShortDescription = builder.groupShortDescription;
-        perpetualDetails = builder.perpetualDetails;
+        this.contractCode = builder.contractCode;
+        this.contractSize = builder.contractSize;
+        this.contractExpiry = builder.contractExpiry;
+        this.contractRootUnit = builder.contractRootUnit;
+        this.contractExpiryType = builder.contractExpiryType;
+        this.riskManagedBy = builder.riskManagedBy;
+        this.venue = builder.venue;
+        this.groupDescription = builder.groupDescription;
+        this.contractExpiryTimezone = builder.contractExpiryTimezone;
+        this.groupShortDescription = builder.groupShortDescription;
+        this.perpetualDetails = builder.perpetualDetails;
     }
     public String getContractCode() {
         return contractCode;

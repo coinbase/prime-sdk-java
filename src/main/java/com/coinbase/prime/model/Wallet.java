@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.Network;
 import com.coinbase.prime.model.enums.WalletType;
 import com.coinbase.prime.model.enums.WalletVisibility;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,35 +31,42 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class Wallet {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("symbol")
     private String symbol;
 
+    @JsonProperty("type")
     private WalletType type;
 
     @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
+    @JsonProperty("address")
     private String address;
 
+    @JsonProperty("visibility")
     private WalletVisibility visibility;
 
+    @JsonProperty("network")
     private Network network;
 
     public Wallet() {
     }
 
     public Wallet(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        symbol = builder.symbol;
-        type = builder.type;
-        createdAt = builder.createdAt;
-        address = builder.address;
-        visibility = builder.visibility;
-        network = builder.network;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.symbol = builder.symbol;
+        this.type = builder.type;
+        this.createdAt = builder.createdAt;
+        this.address = builder.address;
+        this.visibility = builder.visibility;
+        this.network = builder.network;
     }
     public String getId() {
         return id;

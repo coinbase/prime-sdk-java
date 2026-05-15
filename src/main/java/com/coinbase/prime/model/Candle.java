@@ -19,6 +19,8 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -26,43 +28,49 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class Candle {
+    @JsonProperty("timestamp")
     private OffsetDateTime timestamp;
 
     /**
      * Opening price for the period
      */
+    @JsonProperty("open")
     private String open;
 
     /**
      * Highest price during the period
      */
+    @JsonProperty("high")
     private String high;
 
     /**
      * Lowest price during the period
      */
+    @JsonProperty("low")
     private String low;
 
     /**
      * Closing price for the period
      */
+    @JsonProperty("close")
     private String close;
 
     /**
      * Volume traded during the period
      */
+    @JsonProperty("volume")
     private String volume;
 
     public Candle() {
     }
 
     public Candle(Builder builder) {
-        timestamp = builder.timestamp;
-        open = builder.open;
-        high = builder.high;
-        low = builder.low;
-        close = builder.close;
-        volume = builder.volume;
+        this.timestamp = builder.timestamp;
+        this.open = builder.open;
+        this.high = builder.high;
+        this.low = builder.low;
+        this.close = builder.close;
+        this.volume = builder.volume;
     }
     public OffsetDateTime getTimestamp() {
         return timestamp;

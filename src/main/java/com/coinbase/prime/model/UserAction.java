@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.Action;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class UserAction {
+    @JsonProperty("action")
     private Action action;
 
     /**
@@ -38,15 +40,16 @@ public class UserAction {
     /**
      * Time the action was taken
      */
+    @JsonProperty("timestamp")
     private String timestamp;
 
     public UserAction() {
     }
 
     public UserAction(Builder builder) {
-        action = builder.action;
-        userId = builder.userId;
-        timestamp = builder.timestamp;
+        this.action = builder.action;
+        this.userId = builder.userId;
+        this.timestamp = builder.timestamp;
     }
     public Action getAction() {
         return action;

@@ -18,13 +18,16 @@ package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Portfolio Transactions
  */
 public class ListPortfolioTransactionsResponse {
+    @JsonProperty("transactions")
     private Transaction[] transactions;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioTransactionsResponse() {

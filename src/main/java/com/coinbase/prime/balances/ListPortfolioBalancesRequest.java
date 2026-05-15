@@ -34,6 +34,7 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("balance_type")
@@ -44,9 +45,9 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
 
     public ListPortfolioBalancesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        symbols = builder.symbols;
-        balanceType = builder.balanceType;
+        this.portfolioId = builder.portfolioId;
+        this.symbols = builder.symbols;
+        this.balanceType = builder.balanceType;
     }
 
     public String getPortfolioId() {
@@ -105,8 +106,8 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -116,7 +117,7 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

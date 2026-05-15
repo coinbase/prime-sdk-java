@@ -27,8 +27,10 @@ public class CreateWalletResponse {
     @JsonProperty("activity_id")
     private String activityId;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("wallet_type")

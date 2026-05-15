@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Vasp {
+    @JsonProperty("id")
     private String id;
 
     @JsonProperty("country_code")
@@ -38,9 +40,9 @@ public class Vasp {
     }
 
     public Vasp(Builder builder) {
-        id = builder.id;
-        countryCode = builder.countryCode;
-        leiNumber = builder.leiNumber;
+        this.id = builder.id;
+        this.countryCode = builder.countryCode;
+        this.leiNumber = builder.leiNumber;
     }
     public String getId() {
         return id;

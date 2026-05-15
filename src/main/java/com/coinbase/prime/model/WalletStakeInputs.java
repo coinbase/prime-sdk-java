@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class WalletStakeInputs {
     /**
      * Optional amount to stake (ETH only). If omitted, the wallet will stake the maximum amount available
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
@@ -41,8 +43,8 @@ public class WalletStakeInputs {
     }
 
     public WalletStakeInputs(Builder builder) {
-        amount = builder.amount;
-        validatorAddress = builder.validatorAddress;
+        this.amount = builder.amount;
+        this.validatorAddress = builder.validatorAddress;
     }
     public String getAmount() {
         return amount;

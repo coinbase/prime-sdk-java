@@ -38,8 +38,8 @@ public class CreateAdvancedTransferRequest {
     }
 
     public CreateAdvancedTransferRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        advancedTransfer = builder.advancedTransfer;
+        this.portfolioId = builder.portfolioId;
+        this.advancedTransfer = builder.advancedTransfer;
     }
 
     public String getPortfolioId() {
@@ -81,7 +81,7 @@ public class CreateAdvancedTransferRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

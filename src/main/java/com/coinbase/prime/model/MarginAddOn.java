@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.MarginAddOnType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,6 +31,7 @@ public class MarginAddOn {
     /**
      * margin add on amount
      */
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("add_on_type")
@@ -39,8 +41,8 @@ public class MarginAddOn {
     }
 
     public MarginAddOn(Builder builder) {
-        amount = builder.amount;
-        addOnType = builder.addOnType;
+        this.amount = builder.amount;
+        this.addOnType = builder.addOnType;
     }
     public String getAmount() {
         return amount;

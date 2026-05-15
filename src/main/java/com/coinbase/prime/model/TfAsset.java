@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class TfAsset {
     /**
      * The asset symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -47,9 +49,9 @@ public class TfAsset {
     }
 
     public TfAsset(Builder builder) {
-        symbol = builder.symbol;
-        assetAdjustment = builder.assetAdjustment;
-        liabilityAdjustment = builder.liabilityAdjustment;
+        this.symbol = builder.symbol;
+        this.assetAdjustment = builder.assetAdjustment;
+        this.liabilityAdjustment = builder.liabilityAdjustment;
     }
     public String getSymbol() {
         return symbol;

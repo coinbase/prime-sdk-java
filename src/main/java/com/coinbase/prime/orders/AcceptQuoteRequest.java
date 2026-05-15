@@ -34,6 +34,7 @@ public class AcceptQuoteRequest {
     @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
     @JsonProperty("client_order_id")
@@ -49,12 +50,12 @@ public class AcceptQuoteRequest {
     }
 
     public AcceptQuoteRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        productId = builder.productId;
-        side = builder.side;
-        clientOrderId = builder.clientOrderId;
-        quoteId = builder.quoteId;
-        settlCurrency = builder.settlCurrency;
+        this.portfolioId = builder.portfolioId;
+        this.productId = builder.productId;
+        this.side = builder.side;
+        this.clientOrderId = builder.clientOrderId;
+        this.quoteId = builder.quoteId;
+        this.settlCurrency = builder.settlCurrency;
     }
 
     public String getPortfolioId() {
@@ -152,7 +153,7 @@ public class AcceptQuoteRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

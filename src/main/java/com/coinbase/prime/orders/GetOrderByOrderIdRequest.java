@@ -38,8 +38,8 @@ public class GetOrderByOrderIdRequest {
     }
 
     public GetOrderByOrderIdRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        orderId = builder.orderId;
+        this.portfolioId = builder.portfolioId;
+        this.orderId = builder.orderId;
     }
 
     public String getPortfolioId() {
@@ -81,10 +81,10 @@ public class GetOrderByOrderIdRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(orderId)) {
+            if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }
         }

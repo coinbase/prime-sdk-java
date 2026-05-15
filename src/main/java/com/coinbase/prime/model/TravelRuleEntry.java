@@ -23,6 +23,7 @@ import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.TravelRuleParty;
 import com.coinbase.prime.model.TravelRuleWalletDetails;
 import com.coinbase.prime.model.Vasp;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,15 +31,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleEntry {
+    @JsonProperty("id")
     private String id;
 
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
+    @JsonProperty("originator")
     private TravelRuleParty originator;
 
+    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
+    @JsonProperty("vasp")
     private Vasp vasp;
 
     @JsonProperty("wallet_details")
@@ -60,16 +65,16 @@ public class TravelRuleEntry {
     }
 
     public TravelRuleEntry(Builder builder) {
-        id = builder.id;
-        blockchainAddress = builder.blockchainAddress;
-        originator = builder.originator;
-        beneficiary = builder.beneficiary;
-        vasp = builder.vasp;
-        walletDetails = builder.walletDetails;
-        transferPurpose = builder.transferPurpose;
-        isSelfCertified = builder.isSelfCertified;
-        isIntermediary = builder.isIntermediary;
-        isSelf = builder.isSelf;
+        this.id = builder.id;
+        this.blockchainAddress = builder.blockchainAddress;
+        this.originator = builder.originator;
+        this.beneficiary = builder.beneficiary;
+        this.vasp = builder.vasp;
+        this.walletDetails = builder.walletDetails;
+        this.transferPurpose = builder.transferPurpose;
+        this.isSelfCertified = builder.isSelfCertified;
+        this.isIntermediary = builder.isIntermediary;
+        this.isSelf = builder.isSelf;
     }
     public String getId() {
         return id;

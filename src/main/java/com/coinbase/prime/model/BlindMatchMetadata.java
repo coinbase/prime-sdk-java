@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -51,10 +52,10 @@ public class BlindMatchMetadata {
     }
 
     public BlindMatchMetadata(Builder builder) {
-        referenceId = builder.referenceId;
-        settlementDate = builder.settlementDate;
-        tradeDate = builder.tradeDate;
-        settlementTime = builder.settlementTime;
+        this.referenceId = builder.referenceId;
+        this.settlementDate = builder.settlementDate;
+        this.tradeDate = builder.tradeDate;
+        this.settlementTime = builder.settlementTime;
     }
     public String getReferenceId() {
         return referenceId;

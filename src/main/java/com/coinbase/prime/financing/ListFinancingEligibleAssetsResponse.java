@@ -17,11 +17,13 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.TfAsset;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Financing Eligible Assets
  */
 public class ListFinancingEligibleAssetsResponse {
+    @JsonProperty("assets")
     private TfAsset[] assets;
 
     public ListFinancingEligibleAssetsResponse() {

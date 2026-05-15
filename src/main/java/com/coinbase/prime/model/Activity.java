@@ -27,6 +27,7 @@ import com.coinbase.prime.model.enums.ActivityStatus;
 import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.coinbase.prime.model.enums.HierarchyType;
 import com.coinbase.prime.model.UserAction;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -39,6 +40,7 @@ public class Activity {
     /**
      * A unique id for the account activity
      */
+    @JsonProperty("id")
     private String id;
 
     /**
@@ -47,13 +49,16 @@ public class Activity {
     @JsonProperty("reference_id")
     private String referenceId;
 
+    @JsonProperty("category")
     private ActivityCategory category;
 
+    @JsonProperty("type")
     private PrimeActivityType type;
 
     @JsonProperty("secondary_type")
     private ActivitySecondaryType secondaryType;
 
+    @JsonProperty("status")
     private ActivityStatus status;
 
     /**
@@ -65,11 +70,13 @@ public class Activity {
     /**
      * Title of the activity
      */
+    @JsonProperty("title")
     private String title;
 
     /**
      * Description detail of the activity
      */
+    @JsonProperty("description")
     private String description;
 
     /**
@@ -90,6 +97,7 @@ public class Activity {
     /**
      * List of currencies included in an activity
      */
+    @JsonProperty("symbols")
     private List<String> symbols;
 
     /**
@@ -111,23 +119,23 @@ public class Activity {
     }
 
     public Activity(Builder builder) {
-        id = builder.id;
-        referenceId = builder.referenceId;
-        category = builder.category;
-        type = builder.type;
-        secondaryType = builder.secondaryType;
-        status = builder.status;
-        createdBy = builder.createdBy;
-        title = builder.title;
-        description = builder.description;
-        userActions = builder.userActions;
-        transactionsMetadata = builder.transactionsMetadata;
-        accountMetadata = builder.accountMetadata;
-        ordersMetadata = builder.ordersMetadata;
-        symbols = builder.symbols;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
-        hierarchyType = builder.hierarchyType;
+        this.id = builder.id;
+        this.referenceId = builder.referenceId;
+        this.category = builder.category;
+        this.type = builder.type;
+        this.secondaryType = builder.secondaryType;
+        this.status = builder.status;
+        this.createdBy = builder.createdBy;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.userActions = builder.userActions;
+        this.transactionsMetadata = builder.transactionsMetadata;
+        this.accountMetadata = builder.accountMetadata;
+        this.ordersMetadata = builder.ordersMetadata;
+        this.symbols = builder.symbols;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
+        this.hierarchyType = builder.hierarchyType;
     }
     public String getId() {
         return id;

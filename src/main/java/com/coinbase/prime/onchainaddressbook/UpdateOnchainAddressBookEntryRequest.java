@@ -38,8 +38,8 @@ public class UpdateOnchainAddressBookEntryRequest {
     }
 
     public UpdateOnchainAddressBookEntryRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        addressGroup = builder.addressGroup;
+        this.portfolioId = builder.portfolioId;
+        this.addressGroup = builder.addressGroup;
     }
 
     public String getPortfolioId() {
@@ -81,7 +81,7 @@ public class UpdateOnchainAddressBookEntryRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

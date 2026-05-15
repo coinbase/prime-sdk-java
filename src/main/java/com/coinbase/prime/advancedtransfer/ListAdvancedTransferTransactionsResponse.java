@@ -17,11 +17,13 @@
 package com.coinbase.prime.advancedtransfer;
 
 import com.coinbase.prime.model.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List transactions associated with an Advanced Transfer
  */
 public class ListAdvancedTransferTransactionsResponse {
+    @JsonProperty("transactions")
     private Transaction[] transactions;
 
     public ListAdvancedTransferTransactionsResponse() {

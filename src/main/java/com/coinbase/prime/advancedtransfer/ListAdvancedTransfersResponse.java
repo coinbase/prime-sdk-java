@@ -27,6 +27,7 @@ public class ListAdvancedTransfersResponse {
     @JsonProperty("advanced_transfers")
     private AdvancedTransfer[] advancedTransfers;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListAdvancedTransfersResponse() {

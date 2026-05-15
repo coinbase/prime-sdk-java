@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.AddressBookType;
 import com.coinbase.prime.model.DisplayUser;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,6 +33,7 @@ public class AddressBookEntry {
     /**
      * UUID identifying this address book entry
      */
+    @JsonProperty("id")
     private String id;
 
     /**
@@ -43,11 +45,13 @@ public class AddressBookEntry {
     /**
      * Name for this address book entry
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * Cryptocurrency address
      */
+    @JsonProperty("address")
     private String address;
 
     /**
@@ -65,6 +69,7 @@ public class AddressBookEntry {
     /**
      * State of this address book entry
      */
+    @JsonProperty("state")
     private String state;
 
     /**
@@ -88,6 +93,7 @@ public class AddressBookEntry {
     @JsonProperty("added_by")
     private DisplayUser addedBy;
 
+    @JsonProperty("type")
     private AddressBookType type;
 
     /**
@@ -100,19 +106,19 @@ public class AddressBookEntry {
     }
 
     public AddressBookEntry(Builder builder) {
-        id = builder.id;
-        currencySymbol = builder.currencySymbol;
-        name = builder.name;
-        address = builder.address;
-        accountIdentifier = builder.accountIdentifier;
-        accountIdentifierName = builder.accountIdentifierName;
-        state = builder.state;
-        explorerLink = builder.explorerLink;
-        lastUsedAt = builder.lastUsedAt;
-        addedAt = builder.addedAt;
-        addedBy = builder.addedBy;
-        type = builder.type;
-        counterpartyId = builder.counterpartyId;
+        this.id = builder.id;
+        this.currencySymbol = builder.currencySymbol;
+        this.name = builder.name;
+        this.address = builder.address;
+        this.accountIdentifier = builder.accountIdentifier;
+        this.accountIdentifierName = builder.accountIdentifierName;
+        this.state = builder.state;
+        this.explorerLink = builder.explorerLink;
+        this.lastUsedAt = builder.lastUsedAt;
+        this.addedAt = builder.addedAt;
+        this.addedBy = builder.addedBy;
+        this.type = builder.type;
+        this.counterpartyId = builder.counterpartyId;
     }
     public String getId() {
         return id;

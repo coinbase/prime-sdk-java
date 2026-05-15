@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.ConversionDetail;
 import com.coinbase.prime.model.ShortCollateral;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -55,10 +56,10 @@ public class Conversion {
     }
 
     public Conversion(Builder builder) {
-        conversionDetails = builder.conversionDetails;
-        shortCollateral = builder.shortCollateral;
-        conversionDatetime = builder.conversionDatetime;
-        portfolioId = builder.portfolioId;
+        this.conversionDetails = builder.conversionDetails;
+        this.shortCollateral = builder.shortCollateral;
+        this.conversionDatetime = builder.conversionDatetime;
+        this.portfolioId = builder.portfolioId;
     }
     public List<ConversionDetail> getConversionDetails() {
         return conversionDetails;

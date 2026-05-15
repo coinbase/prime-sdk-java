@@ -50,10 +50,10 @@ public class ListPortfolioProductsRequest extends PrimeListRequest {
 
     public ListPortfolioProductsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        productType = builder.productType;
-        contractExpiryType = builder.contractExpiryType;
-        expiringContractStatus = builder.expiringContractStatus;
+        this.portfolioId = builder.portfolioId;
+        this.productType = builder.productType;
+        this.contractExpiryType = builder.contractExpiryType;
+        this.expiringContractStatus = builder.expiringContractStatus;
     }
 
     public String getPortfolioId() {
@@ -126,8 +126,8 @@ public class ListPortfolioProductsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -137,7 +137,7 @@ public class ListPortfolioProductsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

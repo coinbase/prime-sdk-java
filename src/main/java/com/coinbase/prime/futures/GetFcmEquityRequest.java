@@ -34,7 +34,7 @@ public class GetFcmEquityRequest {
     }
 
     public GetFcmEquityRequest(Builder builder) {
-        entityId = builder.entityId;
+        this.entityId = builder.entityId;
     }
 
     public String getEntityId() {
@@ -62,7 +62,7 @@ public class GetFcmEquityRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

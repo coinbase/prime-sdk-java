@@ -39,6 +39,7 @@ public class CreateWithdrawalRequest {
     @JsonIgnore
     private String walletId;
 
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("destination_type")
@@ -56,6 +57,7 @@ public class CreateWithdrawalRequest {
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
+    @JsonProperty("counterparty")
     private CounterpartyDestination counterparty;
 
     @JsonProperty("travel_rule_data")
@@ -65,16 +67,16 @@ public class CreateWithdrawalRequest {
     }
 
     public CreateWithdrawalRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        amount = builder.amount;
-        destinationType = builder.destinationType;
-        idempotencyKey = builder.idempotencyKey;
-        currencySymbol = builder.currencySymbol;
-        paymentMethod = builder.paymentMethod;
-        blockchainAddress = builder.blockchainAddress;
-        counterparty = builder.counterparty;
-        travelRuleData = builder.travelRuleData;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.amount = builder.amount;
+        this.destinationType = builder.destinationType;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.currencySymbol = builder.currencySymbol;
+        this.paymentMethod = builder.paymentMethod;
+        this.blockchainAddress = builder.blockchainAddress;
+        this.counterparty = builder.counterparty;
+        this.travelRuleData = builder.travelRuleData;
     }
 
     public String getPortfolioId() {
@@ -228,10 +230,10 @@ public class CreateWithdrawalRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

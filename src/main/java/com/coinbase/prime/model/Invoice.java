@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.InvoiceItem;
 import com.coinbase.prime.model.enums.InvoiceState;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Invoice {
+    @JsonProperty("id")
     private String id;
 
     @JsonProperty("billing_month")
@@ -44,6 +46,7 @@ public class Invoice {
     @JsonProperty("invoice_number")
     private String invoiceNumber;
 
+    @JsonProperty("state")
     private InvoiceState state;
 
     @JsonProperty("usd_amount_paid")
@@ -59,15 +62,15 @@ public class Invoice {
     }
 
     public Invoice(Builder builder) {
-        id = builder.id;
-        billingMonth = builder.billingMonth;
-        billingYear = builder.billingYear;
-        dueDate = builder.dueDate;
-        invoiceNumber = builder.invoiceNumber;
-        state = builder.state;
-        usdAmountPaid = builder.usdAmountPaid;
-        usdAmountOwed = builder.usdAmountOwed;
-        invoiceItems = builder.invoiceItems;
+        this.id = builder.id;
+        this.billingMonth = builder.billingMonth;
+        this.billingYear = builder.billingYear;
+        this.dueDate = builder.dueDate;
+        this.invoiceNumber = builder.invoiceNumber;
+        this.state = builder.state;
+        this.usdAmountPaid = builder.usdAmountPaid;
+        this.usdAmountOwed = builder.usdAmountOwed;
+        this.invoiceItems = builder.invoiceItems;
     }
     public String getId() {
         return id;

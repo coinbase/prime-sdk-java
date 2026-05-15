@@ -19,6 +19,8 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -28,19 +30,21 @@ public class MarketRate {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The current market rate of currency
      */
+    @JsonProperty("rate")
     private String rate;
 
     public MarketRate() {
     }
 
     public MarketRate(Builder builder) {
-        symbol = builder.symbol;
-        rate = builder.rate;
+        this.symbol = builder.symbol;
+        this.rate = builder.rate;
     }
     public String getSymbol() {
         return symbol;

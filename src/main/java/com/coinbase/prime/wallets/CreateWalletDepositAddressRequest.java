@@ -41,9 +41,9 @@ public class CreateWalletDepositAddressRequest {
     }
 
     public CreateWalletDepositAddressRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        walletId = builder.walletId;
-        networkId = builder.networkId;
+        this.portfolioId = builder.portfolioId;
+        this.walletId = builder.walletId;
+        this.networkId = builder.networkId;
     }
 
     public String getPortfolioId() {
@@ -99,10 +99,10 @@ public class CreateWalletDepositAddressRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(walletId)) {
+            if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }
         }

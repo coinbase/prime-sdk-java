@@ -49,12 +49,12 @@ public class UpdateFundingSettingsRequest {
     }
 
     public UpdateFundingSettingsRequest(Builder builder) {
-        entityId = builder.entityId;
-        designatedFundingPortfolioId = builder.designatedFundingPortfolioId;
-        automaticConversionEnabled = builder.automaticConversionEnabled;
-        automaticLoanEnabled = builder.automaticLoanEnabled;
-        automaticExcessReturnEnabled = builder.automaticExcessReturnEnabled;
-        excessFundsTargetAmount = builder.excessFundsTargetAmount;
+        this.entityId = builder.entityId;
+        this.designatedFundingPortfolioId = builder.designatedFundingPortfolioId;
+        this.automaticConversionEnabled = builder.automaticConversionEnabled;
+        this.automaticLoanEnabled = builder.automaticLoanEnabled;
+        this.automaticExcessReturnEnabled = builder.automaticExcessReturnEnabled;
+        this.excessFundsTargetAmount = builder.excessFundsTargetAmount;
     }
 
     public String getEntityId() {
@@ -152,7 +152,7 @@ public class UpdateFundingSettingsRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

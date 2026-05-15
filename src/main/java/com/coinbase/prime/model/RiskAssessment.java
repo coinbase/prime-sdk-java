@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -42,8 +43,8 @@ public class RiskAssessment {
     }
 
     public RiskAssessment(Builder builder) {
-        complianceRiskDetected = builder.complianceRiskDetected;
-        securityRiskDetected = builder.securityRiskDetected;
+        this.complianceRiskDetected = builder.complianceRiskDetected;
+        this.securityRiskDetected = builder.securityRiskDetected;
     }
     public boolean getComplianceRiskDetected() {
         return complianceRiskDetected;

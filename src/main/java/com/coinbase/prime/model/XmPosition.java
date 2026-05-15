@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class XmPosition {
     /**
      * Position currency
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
@@ -179,31 +181,31 @@ public class XmPosition {
     }
 
     public XmPosition(Builder builder) {
-        currency = builder.currency;
-        marketPrice = builder.marketPrice;
-        marginEligible = builder.marginEligible;
-        marketCap = builder.marketCap;
-        adv30Days = builder.adv30Days;
-        hist5dVol = builder.hist5dVol;
-        hist30dVol = builder.hist30dVol;
-        hist90dVol = builder.hist90dVol;
-        marginRequirement = builder.marginRequirement;
-        spotBalance = builder.spotBalance;
-        spotBalanceNotional = builder.spotBalanceNotional;
-        spotTotalPositionMargin = builder.spotTotalPositionMargin;
-        futuresBalance = builder.futuresBalance;
-        futuresBalanceNotional = builder.futuresBalanceNotional;
-        futuresTotalPositionMargin = builder.futuresTotalPositionMargin;
-        gmvBasis = builder.gmvBasis;
-        baseRequirement = builder.baseRequirement;
-        liqShortsAddOn = builder.liqShortsAddOn;
-        liqLongsAddOn = builder.liqLongsAddOn;
-        volShortsAddOn = builder.volShortsAddOn;
-        volLongsAddOn = builder.volLongsAddOn;
-        vol5daysAddOn = builder.vol5daysAddOn;
-        vol30daysAddOn = builder.vol30daysAddOn;
-        vol90daysAddOn = builder.vol90daysAddOn;
-        totalPositionMargin = builder.totalPositionMargin;
+        this.currency = builder.currency;
+        this.marketPrice = builder.marketPrice;
+        this.marginEligible = builder.marginEligible;
+        this.marketCap = builder.marketCap;
+        this.adv30Days = builder.adv30Days;
+        this.hist5dVol = builder.hist5dVol;
+        this.hist30dVol = builder.hist30dVol;
+        this.hist90dVol = builder.hist90dVol;
+        this.marginRequirement = builder.marginRequirement;
+        this.spotBalance = builder.spotBalance;
+        this.spotBalanceNotional = builder.spotBalanceNotional;
+        this.spotTotalPositionMargin = builder.spotTotalPositionMargin;
+        this.futuresBalance = builder.futuresBalance;
+        this.futuresBalanceNotional = builder.futuresBalanceNotional;
+        this.futuresTotalPositionMargin = builder.futuresTotalPositionMargin;
+        this.gmvBasis = builder.gmvBasis;
+        this.baseRequirement = builder.baseRequirement;
+        this.liqShortsAddOn = builder.liqShortsAddOn;
+        this.liqLongsAddOn = builder.liqLongsAddOn;
+        this.volShortsAddOn = builder.volShortsAddOn;
+        this.volLongsAddOn = builder.volLongsAddOn;
+        this.vol5daysAddOn = builder.vol5daysAddOn;
+        this.vol30daysAddOn = builder.vol30daysAddOn;
+        this.vol90daysAddOn = builder.vol90daysAddOn;
+        this.totalPositionMargin = builder.totalPositionMargin;
     }
     public String getCurrency() {
         return currency;

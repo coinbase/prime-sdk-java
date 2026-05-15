@@ -37,7 +37,7 @@ public class GetMarketDataRequest extends PrimeListRequest {
 
     public GetMarketDataRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        entityId = builder.entityId;
+        this.entityId = builder.entityId;
     }
 
     public String getEntityId() {
@@ -83,7 +83,7 @@ public class GetMarketDataRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

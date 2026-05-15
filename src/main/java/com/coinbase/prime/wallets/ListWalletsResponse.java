@@ -18,13 +18,16 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Wallet;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Portfolio Wallets
  */
 public class ListWalletsResponse {
+    @JsonProperty("wallets")
     private Wallet[] wallets;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListWalletsResponse() {

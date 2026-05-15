@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.PositionReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -30,6 +31,7 @@ public class Position {
     /**
      * Asset symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -51,10 +53,10 @@ public class Position {
     }
 
     public Position(Builder builder) {
-        symbol = builder.symbol;
-        _long = builder._long;
-        _short = builder._short;
-        positionReference = builder.positionReference;
+        this.symbol = builder.symbol;
+        this._long = builder._long;
+        this._short = builder._short;
+        this.positionReference = builder.positionReference;
     }
     public String getSymbol() {
         return symbol;

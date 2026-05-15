@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class ConversionDetail {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -71,13 +73,13 @@ public class ConversionDetail {
     }
 
     public ConversionDetail(Builder builder) {
-        symbol = builder.symbol;
-        tfBalance = builder.tfBalance;
-        notionalTfBalance = builder.notionalTfBalance;
-        convertedBalance = builder.convertedBalance;
-        notionalConvertedBalance = builder.notionalConvertedBalance;
-        interestRate = builder.interestRate;
-        conversionRate = builder.conversionRate;
+        this.symbol = builder.symbol;
+        this.tfBalance = builder.tfBalance;
+        this.notionalTfBalance = builder.notionalTfBalance;
+        this.convertedBalance = builder.convertedBalance;
+        this.notionalConvertedBalance = builder.notionalConvertedBalance;
+        this.interestRate = builder.interestRate;
+        this.conversionRate = builder.conversionRate;
     }
     public String getSymbol() {
         return symbol;

@@ -18,13 +18,16 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.EntityBalance;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Entity Balances
  */
 public class ListEntityBalancesResponse {
+    @JsonProperty("balances")
     private EntityBalance[] balances;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListEntityBalancesResponse() {

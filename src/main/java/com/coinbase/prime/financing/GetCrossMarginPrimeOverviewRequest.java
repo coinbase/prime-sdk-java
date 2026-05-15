@@ -36,7 +36,7 @@ public class GetCrossMarginPrimeOverviewRequest {
     }
 
     public GetCrossMarginPrimeOverviewRequest(Builder builder) {
-        entityId = builder.entityId;
+        this.entityId = builder.entityId;
     }
 
     public String getEntityId() {
@@ -64,7 +64,7 @@ public class GetCrossMarginPrimeOverviewRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

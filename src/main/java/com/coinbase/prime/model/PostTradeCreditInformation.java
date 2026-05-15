@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.AmountDue;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,26 +39,31 @@ public class PostTradeCreditInformation {
     /**
      * The currency symbol credit is denoted in
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * The maximum credit limit
      */
+    @JsonProperty("limit")
     private String limit;
 
     /**
      * The amount of credit used
      */
+    @JsonProperty("utilized")
     private String utilized;
 
     /**
      * The amount of credit available
      */
+    @JsonProperty("available")
     private String available;
 
     /**
      * Whether or not a portfolio is frozen due to balance outstanding or other reason
      */
+    @JsonProperty("frozen")
     private boolean frozen;
 
     /**
@@ -72,6 +78,7 @@ public class PostTradeCreditInformation {
     /**
      * Whether the portfolio has credit enabled
      */
+    @JsonProperty("enabled")
     private boolean enabled;
 
     /**
@@ -90,17 +97,17 @@ public class PostTradeCreditInformation {
     }
 
     public PostTradeCreditInformation(Builder builder) {
-        portfolioId = builder.portfolioId;
-        currency = builder.currency;
-        limit = builder.limit;
-        utilized = builder.utilized;
-        available = builder.available;
-        frozen = builder.frozen;
-        frozenReason = builder.frozenReason;
-        amountsDue = builder.amountsDue;
-        enabled = builder.enabled;
-        adjustedCreditUtilized = builder.adjustedCreditUtilized;
-        adjustedPortfolioEquity = builder.adjustedPortfolioEquity;
+        this.portfolioId = builder.portfolioId;
+        this.currency = builder.currency;
+        this.limit = builder.limit;
+        this.utilized = builder.utilized;
+        this.available = builder.available;
+        this.frozen = builder.frozen;
+        this.frozenReason = builder.frozenReason;
+        this.amountsDue = builder.amountsDue;
+        this.enabled = builder.enabled;
+        this.adjustedCreditUtilized = builder.adjustedCreditUtilized;
+        this.adjustedPortfolioEquity = builder.adjustedPortfolioEquity;
     }
     public String getPortfolioId() {
         return portfolioId;

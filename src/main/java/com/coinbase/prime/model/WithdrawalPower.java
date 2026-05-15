@@ -19,6 +19,8 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -28,19 +30,21 @@ public class WithdrawalPower {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Withdrawal power
      */
+    @JsonProperty("amount")
     private String amount;
 
     public WithdrawalPower() {
     }
 
     public WithdrawalPower(Builder builder) {
-        symbol = builder.symbol;
-        amount = builder.amount;
+        this.symbol = builder.symbol;
+        this.amount = builder.amount;
     }
     public String getSymbol() {
         return symbol;

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -27,6 +28,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class OrderEdit {
+    @JsonProperty("price")
     private String price;
 
     @JsonProperty("base_quantity")
@@ -57,15 +59,15 @@ public class OrderEdit {
     }
 
     public OrderEdit(Builder builder) {
-        price = builder.price;
-        baseQuantity = builder.baseQuantity;
-        quoteValue = builder.quoteValue;
-        displayBaseSize = builder.displayBaseSize;
-        displayQuoteSize = builder.displayQuoteSize;
-        stopPrice = builder.stopPrice;
-        expiryTime = builder.expiryTime;
-        acceptTime = builder.acceptTime;
-        clientOrderId = builder.clientOrderId;
+        this.price = builder.price;
+        this.baseQuantity = builder.baseQuantity;
+        this.quoteValue = builder.quoteValue;
+        this.displayBaseSize = builder.displayBaseSize;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.stopPrice = builder.stopPrice;
+        this.expiryTime = builder.expiryTime;
+        this.acceptTime = builder.acceptTime;
+        this.clientOrderId = builder.clientOrderId;
     }
     public String getPrice() {
         return price;

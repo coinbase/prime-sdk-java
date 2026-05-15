@@ -37,8 +37,10 @@ public class GetOrderPreviewRequest {
     @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
+    @JsonProperty("type")
     private OrderType type;
 
     @JsonProperty("base_quantity")
@@ -71,6 +73,7 @@ public class GetOrderPreviewRequest {
     @JsonProperty("settl_currency")
     private String settlCurrency;
 
+    @JsonProperty("postOnly")
     private Boolean postOnly;
 
     @JsonProperty("display_quote_size")
@@ -82,6 +85,7 @@ public class GetOrderPreviewRequest {
     @JsonProperty("peg_offset_type")
     private PegOffsetType pegOffsetType;
 
+    @JsonProperty("offset")
     private String offset;
 
     @JsonProperty("wig_level")
@@ -91,26 +95,26 @@ public class GetOrderPreviewRequest {
     }
 
     public GetOrderPreviewRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        productId = builder.productId;
-        side = builder.side;
-        type = builder.type;
-        baseQuantity = builder.baseQuantity;
-        quoteValue = builder.quoteValue;
-        limitPrice = builder.limitPrice;
-        startTime = builder.startTime;
-        expiryTime = builder.expiryTime;
-        timeInForce = builder.timeInForce;
-        isRaiseExact = builder.isRaiseExact;
-        historicalPov = builder.historicalPov;
-        stopPrice = builder.stopPrice;
-        settlCurrency = builder.settlCurrency;
-        postOnly = builder.postOnly;
-        displayQuoteSize = builder.displayQuoteSize;
-        displayBaseSize = builder.displayBaseSize;
-        pegOffsetType = builder.pegOffsetType;
-        offset = builder.offset;
-        wigLevel = builder.wigLevel;
+        this.portfolioId = builder.portfolioId;
+        this.productId = builder.productId;
+        this.side = builder.side;
+        this.type = builder.type;
+        this.baseQuantity = builder.baseQuantity;
+        this.quoteValue = builder.quoteValue;
+        this.limitPrice = builder.limitPrice;
+        this.startTime = builder.startTime;
+        this.expiryTime = builder.expiryTime;
+        this.timeInForce = builder.timeInForce;
+        this.isRaiseExact = builder.isRaiseExact;
+        this.historicalPov = builder.historicalPov;
+        this.stopPrice = builder.stopPrice;
+        this.settlCurrency = builder.settlCurrency;
+        this.postOnly = builder.postOnly;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.displayBaseSize = builder.displayBaseSize;
+        this.pegOffsetType = builder.pegOffsetType;
+        this.offset = builder.offset;
+        this.wigLevel = builder.wigLevel;
     }
 
     public String getPortfolioId() {
@@ -404,7 +408,7 @@ public class GetOrderPreviewRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

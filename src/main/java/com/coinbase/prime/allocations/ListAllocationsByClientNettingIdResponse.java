@@ -17,11 +17,13 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Net Allocations by Netting ID
  */
 public class ListAllocationsByClientNettingIdResponse {
+    @JsonProperty("allocations")
     private Allocation[] allocations;
 
     public ListAllocationsByClientNettingIdResponse() {

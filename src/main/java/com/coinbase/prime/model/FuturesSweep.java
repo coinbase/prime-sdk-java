@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.SweepAmount;
 import com.coinbase.prime.model.enums.FuturesSweepStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,6 +33,7 @@ public class FuturesSweep {
     /**
      * Sweep ID
      */
+    @JsonProperty("id")
     private String id;
 
     @JsonProperty("requested_amount")
@@ -43,6 +45,7 @@ public class FuturesSweep {
     @JsonProperty("should_sweep_all")
     private boolean shouldSweepAll;
 
+    @JsonProperty("status")
     private FuturesSweepStatus status;
 
     /**
@@ -55,11 +58,11 @@ public class FuturesSweep {
     }
 
     public FuturesSweep(Builder builder) {
-        id = builder.id;
-        requestedAmount = builder.requestedAmount;
-        shouldSweepAll = builder.shouldSweepAll;
-        status = builder.status;
-        scheduledTime = builder.scheduledTime;
+        this.id = builder.id;
+        this.requestedAmount = builder.requestedAmount;
+        this.shouldSweepAll = builder.shouldSweepAll;
+        this.status = builder.status;
+        this.scheduledTime = builder.scheduledTime;
     }
     public String getId() {
         return id;

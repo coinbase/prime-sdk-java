@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.NetworkDetails;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,11 +33,13 @@ public class Asset {
     /**
      * The name of the asset
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * The mutable series of letters used to identify the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -60,18 +63,19 @@ public class Asset {
     /**
      * List of networks supported by this asset
      */
+    @JsonProperty("networks")
     private List<NetworkDetails> networks;
 
     public Asset() {
     }
 
     public Asset(Builder builder) {
-        name = builder.name;
-        symbol = builder.symbol;
-        decimalPrecision = builder.decimalPrecision;
-        tradingSupported = builder.tradingSupported;
-        explorerUrl = builder.explorerUrl;
-        networks = builder.networks;
+        this.name = builder.name;
+        this.symbol = builder.symbol;
+        this.decimalPrecision = builder.decimalPrecision;
+        this.tradingSupported = builder.tradingSupported;
+        this.explorerUrl = builder.explorerUrl;
+        this.networks = builder.networks;
     }
     public String getName() {
         return name;

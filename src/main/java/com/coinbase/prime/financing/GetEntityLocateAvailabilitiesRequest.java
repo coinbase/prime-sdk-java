@@ -40,9 +40,9 @@ public class GetEntityLocateAvailabilitiesRequest {
     }
 
     public GetEntityLocateAvailabilitiesRequest(Builder builder) {
-        entityId = builder.entityId;
-        conversionDate = builder.conversionDate;
-        locateDate = builder.locateDate;
+        this.entityId = builder.entityId;
+        this.conversionDate = builder.conversionDate;
+        this.locateDate = builder.locateDate;
     }
 
     public String getEntityId() {
@@ -98,7 +98,7 @@ public class GetEntityLocateAvailabilitiesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

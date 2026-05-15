@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -35,11 +36,13 @@ public class AssetBalance {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Balance amount
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
@@ -58,11 +61,11 @@ public class AssetBalance {
     }
 
     public AssetBalance(Builder builder) {
-        portfolioId = builder.portfolioId;
-        symbol = builder.symbol;
-        amount = builder.amount;
-        notionalAmount = builder.notionalAmount;
-        conversionRate = builder.conversionRate;
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.amount = builder.amount;
+        this.notionalAmount = builder.notionalAmount;
+        this.conversionRate = builder.conversionRate;
     }
     public String getPortfolioId() {
         return portfolioId;

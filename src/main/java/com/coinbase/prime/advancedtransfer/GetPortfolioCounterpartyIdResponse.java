@@ -17,11 +17,13 @@
 package com.coinbase.prime.advancedtransfer;
 
 import com.coinbase.prime.model.Counterparty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Get Portfolio Counterparty ID
  */
 public class GetPortfolioCounterpartyIdResponse {
+    @JsonProperty("counterparty")
     private Counterparty counterparty;
 
     public GetPortfolioCounterpartyIdResponse() {

@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.AllocationStatus;
 import com.coinbase.prime.model.DestinationAlloc;
 import com.coinbase.prime.model.enums.OrderSide;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -62,6 +63,7 @@ public class Allocation {
     @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
     /**
@@ -88,11 +90,13 @@ public class Allocation {
     @JsonProperty("fees_allocated")
     private String feesAllocated;
 
+    @JsonProperty("status")
     private AllocationStatus status;
 
     /**
      * Portfolio ID of the source portfolio.
      */
+    @JsonProperty("source")
     private String source;
 
     /**
@@ -104,6 +108,7 @@ public class Allocation {
     /**
      * Array of objects, each containing the leg ID, destination portfolio ID and amount in chosen units allocated to each portfolio: [{leg_id, portfolio_id, allocation_base, allocation_quote}, {leg_id, portfolio_id, allocation_base, allocation_quote}...]
      */
+    @JsonProperty("destinations")
     private List<DestinationAlloc> destinations;
 
     /**
@@ -116,21 +121,21 @@ public class Allocation {
     }
 
     public Allocation(Builder builder) {
-        rootId = builder.rootId;
-        reversalId = builder.reversalId;
-        allocationCompletedAt = builder.allocationCompletedAt;
-        userId = builder.userId;
-        productId = builder.productId;
-        side = builder.side;
-        avgPrice = builder.avgPrice;
-        baseQuantity = builder.baseQuantity;
-        quoteValue = builder.quoteValue;
-        feesAllocated = builder.feesAllocated;
-        status = builder.status;
-        source = builder.source;
-        orderIds = builder.orderIds;
-        destinations = builder.destinations;
-        nettingId = builder.nettingId;
+        this.rootId = builder.rootId;
+        this.reversalId = builder.reversalId;
+        this.allocationCompletedAt = builder.allocationCompletedAt;
+        this.userId = builder.userId;
+        this.productId = builder.productId;
+        this.side = builder.side;
+        this.avgPrice = builder.avgPrice;
+        this.baseQuantity = builder.baseQuantity;
+        this.quoteValue = builder.quoteValue;
+        this.feesAllocated = builder.feesAllocated;
+        this.status = builder.status;
+        this.source = builder.source;
+        this.orderIds = builder.orderIds;
+        this.destinations = builder.destinations;
+        this.nettingId = builder.nettingId;
     }
     public String getRootId() {
         return rootId;

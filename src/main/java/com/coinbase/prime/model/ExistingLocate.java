@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -47,6 +48,7 @@ public class ExistingLocate {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -64,6 +66,7 @@ public class ExistingLocate {
     /**
      * The locate status
      */
+    @JsonProperty("status")
     private String status;
 
     /**
@@ -94,17 +97,17 @@ public class ExistingLocate {
     }
 
     public ExistingLocate(Builder builder) {
-        locateId = builder.locateId;
-        entityId = builder.entityId;
-        portfolioId = builder.portfolioId;
-        symbol = builder.symbol;
-        requestedAmount = builder.requestedAmount;
-        interestRate = builder.interestRate;
-        status = builder.status;
-        approvedAmount = builder.approvedAmount;
-        conversionDate = builder.conversionDate;
-        createdAt = builder.createdAt;
-        locateDate = builder.locateDate;
+        this.locateId = builder.locateId;
+        this.entityId = builder.entityId;
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.requestedAmount = builder.requestedAmount;
+        this.interestRate = builder.interestRate;
+        this.status = builder.status;
+        this.approvedAmount = builder.approvedAmount;
+        this.conversionDate = builder.conversionDate;
+        this.createdAt = builder.createdAt;
+        this.locateDate = builder.locateDate;
     }
     public String getLocateId() {
         return locateId;

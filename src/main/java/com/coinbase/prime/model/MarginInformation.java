@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.MarginCallRecord;
 import com.coinbase.prime.model.MarginSummary;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -43,8 +44,8 @@ public class MarginInformation {
     }
 
     public MarginInformation(Builder builder) {
-        marginCallRecords = builder.marginCallRecords;
-        marginSummary = builder.marginSummary;
+        this.marginCallRecords = builder.marginCallRecords;
+        this.marginSummary = builder.marginSummary;
     }
     public List<MarginCallRecord> getMarginCallRecords() {
         return marginCallRecords;

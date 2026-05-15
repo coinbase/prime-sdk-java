@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -35,6 +36,7 @@ public class TfObligation {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
@@ -59,11 +61,11 @@ public class TfObligation {
     }
 
     public TfObligation(Builder builder) {
-        portfolioId = builder.portfolioId;
-        symbol = builder.symbol;
-        amountDue = builder.amountDue;
-        notionalAmount = builder.notionalAmount;
-        dueDate = builder.dueDate;
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.amountDue = builder.amountDue;
+        this.notionalAmount = builder.notionalAmount;
+        this.dueDate = builder.dueDate;
     }
     public String getPortfolioId() {
         return portfolioId;

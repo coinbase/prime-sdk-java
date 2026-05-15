@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.XmRiskNettingInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -82,15 +83,15 @@ public class XmSummary {
     }
 
     public XmSummary(Builder builder) {
-        marginRequirement = builder.marginRequirement;
-        accountEquity = builder.accountEquity;
-        marginExcessShortfall = builder.marginExcessShortfall;
-        consumedCredit = builder.consumedCredit;
-        xmCreditLimit = builder.xmCreditLimit;
-        xmMarginLimit = builder.xmMarginLimit;
-        spotEquity = builder.spotEquity;
-        futuresEquity = builder.futuresEquity;
-        riskNettingInfo = builder.riskNettingInfo;
+        this.marginRequirement = builder.marginRequirement;
+        this.accountEquity = builder.accountEquity;
+        this.marginExcessShortfall = builder.marginExcessShortfall;
+        this.consumedCredit = builder.consumedCredit;
+        this.xmCreditLimit = builder.xmCreditLimit;
+        this.xmMarginLimit = builder.xmMarginLimit;
+        this.spotEquity = builder.spotEquity;
+        this.futuresEquity = builder.futuresEquity;
+        this.riskNettingInfo = builder.riskNettingInfo;
     }
     public String getMarginRequirement() {
         return marginRequirement;

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -29,6 +30,7 @@ public class RfqProductDetails {
     /**
      * Whether the product is tradable via RFQ
      */
+    @JsonProperty("tradable")
     private boolean tradable;
 
     /**
@@ -71,13 +73,13 @@ public class RfqProductDetails {
     }
 
     public RfqProductDetails(Builder builder) {
-        tradable = builder.tradable;
-        minNotionalSize = builder.minNotionalSize;
-        maxNotionalSize = builder.maxNotionalSize;
-        minBaseSize = builder.minBaseSize;
-        maxBaseSize = builder.maxBaseSize;
-        minQuoteSize = builder.minQuoteSize;
-        maxQuoteSize = builder.maxQuoteSize;
+        this.tradable = builder.tradable;
+        this.minNotionalSize = builder.minNotionalSize;
+        this.maxNotionalSize = builder.maxNotionalSize;
+        this.minBaseSize = builder.minBaseSize;
+        this.maxBaseSize = builder.maxBaseSize;
+        this.minQuoteSize = builder.minQuoteSize;
+        this.maxQuoteSize = builder.maxQuoteSize;
     }
     public boolean getTradable() {
         return tradable;

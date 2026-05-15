@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.Benchmark;
 import com.coinbase.prime.model.enums.LoanType;
 import com.coinbase.prime.model.enums.RateType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,6 +39,7 @@ public class Accrual {
     /**
      * The date of accrual in UTC
      */
+    @JsonProperty("date")
     private String date;
 
     /**
@@ -49,6 +51,7 @@ public class Accrual {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("loan_type")
@@ -84,6 +87,7 @@ public class Accrual {
     @JsonProperty("loan_amount")
     private String loanAmount;
 
+    @JsonProperty("benchmark")
     private Benchmark benchmark;
 
     /**
@@ -95,6 +99,7 @@ public class Accrual {
     /**
      * Daily spread offset from the benchmark rate
      */
+    @JsonProperty("spread")
     private String spread;
 
     @JsonProperty("rate_type")
@@ -122,23 +127,23 @@ public class Accrual {
     }
 
     public Accrual(Builder builder) {
-        accrualId = builder.accrualId;
-        date = builder.date;
-        portfolioId = builder.portfolioId;
-        symbol = builder.symbol;
-        loanType = builder.loanType;
-        interestRate = builder.interestRate;
-        nominalAccrual = builder.nominalAccrual;
-        notionalAccrual = builder.notionalAccrual;
-        conversionRate = builder.conversionRate;
-        loanAmount = builder.loanAmount;
-        benchmark = builder.benchmark;
-        benchmarkRate = builder.benchmarkRate;
-        spread = builder.spread;
-        rateType = builder.rateType;
-        loanAmountNotional = builder.loanAmountNotional;
-        nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
-        notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
+        this.accrualId = builder.accrualId;
+        this.date = builder.date;
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.loanType = builder.loanType;
+        this.interestRate = builder.interestRate;
+        this.nominalAccrual = builder.nominalAccrual;
+        this.notionalAccrual = builder.notionalAccrual;
+        this.conversionRate = builder.conversionRate;
+        this.loanAmount = builder.loanAmount;
+        this.benchmark = builder.benchmark;
+        this.benchmarkRate = builder.benchmarkRate;
+        this.spread = builder.spread;
+        this.rateType = builder.rateType;
+        this.loanAmountNotional = builder.loanAmountNotional;
+        this.nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
+        this.notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
     }
     public String getAccrualId() {
         return accrualId;

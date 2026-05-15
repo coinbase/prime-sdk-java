@@ -40,17 +40,18 @@ public class GetCandlesRequest {
     @JsonProperty("end_time")
     private String endTime;
 
+    @JsonProperty("granularity")
     private CandlesGranularity granularity;
 
     public GetCandlesRequest() {
     }
 
     public GetCandlesRequest(Builder builder) {
-        portfolioId = builder.portfolioId;
-        productId = builder.productId;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
-        granularity = builder.granularity;
+        this.portfolioId = builder.portfolioId;
+        this.productId = builder.productId;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.granularity = builder.granularity;
     }
 
     public String getPortfolioId() {
@@ -134,7 +135,7 @@ public class GetCandlesRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

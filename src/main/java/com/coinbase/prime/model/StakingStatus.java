@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.StakeType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -31,6 +32,7 @@ public class StakingStatus {
     /**
      * Amount being staked (whole amount, e.g., 16 ETH)
      */
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("stake_type")
@@ -58,11 +60,11 @@ public class StakingStatus {
     }
 
     public StakingStatus(Builder builder) {
-        amount = builder.amount;
-        stakeType = builder.stakeType;
-        estimatedStakeDate = builder.estimatedStakeDate;
-        estimatedHoursToStake = builder.estimatedHoursToStake;
-        requestedAt = builder.requestedAt;
+        this.amount = builder.amount;
+        this.stakeType = builder.stakeType;
+        this.estimatedStakeDate = builder.estimatedStakeDate;
+        this.estimatedHoursToStake = builder.estimatedHoursToStake;
+        this.requestedAt = builder.requestedAt;
     }
     public String getAmount() {
         return amount;

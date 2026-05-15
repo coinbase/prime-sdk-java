@@ -34,6 +34,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     @JsonIgnore
     private String entityId;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
     @JsonProperty("aggregation_type")
@@ -44,9 +45,9 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
 
     public ListEntityBalancesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        entityId = builder.entityId;
-        symbols = builder.symbols;
-        aggregationType = builder.aggregationType;
+        this.entityId = builder.entityId;
+        this.symbols = builder.symbols;
+        this.aggregationType = builder.aggregationType;
     }
 
     public String getEntityId() {
@@ -105,8 +106,8 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -116,7 +117,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(entityId)) {
+            if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }
         }

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -36,7 +37,7 @@ public class Counterparty {
     }
 
     public Counterparty(Builder builder) {
-        counterpartyId = builder.counterpartyId;
+        this.counterpartyId = builder.counterpartyId;
     }
     public String getCounterpartyId() {
         return counterpartyId;

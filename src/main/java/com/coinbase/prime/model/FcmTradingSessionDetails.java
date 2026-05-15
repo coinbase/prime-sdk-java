@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.FcmScheduledMaintenance;
 import com.coinbase.prime.model.enums.FcmTradingSessionClosedReason;
 import com.coinbase.prime.model.enums.FcmTradingSessionState;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -60,6 +61,7 @@ public class FcmTradingSessionDetails {
     @JsonProperty("closed_reason")
     private FcmTradingSessionClosedReason closedReason;
 
+    @JsonProperty("maintenance")
     private FcmScheduledMaintenance maintenance;
 
     /**
@@ -78,15 +80,15 @@ public class FcmTradingSessionDetails {
     }
 
     public FcmTradingSessionDetails(Builder builder) {
-        sessionOpen = builder.sessionOpen;
-        openTime = builder.openTime;
-        closeTime = builder.closeTime;
-        sessionState = builder.sessionState;
-        afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
-        closedReason = builder.closedReason;
-        maintenance = builder.maintenance;
-        settlementTimestamp = builder.settlementTimestamp;
-        settlementPrice = builder.settlementPrice;
+        this.sessionOpen = builder.sessionOpen;
+        this.openTime = builder.openTime;
+        this.closeTime = builder.closeTime;
+        this.sessionState = builder.sessionState;
+        this.afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
+        this.closedReason = builder.closedReason;
+        this.maintenance = builder.maintenance;
+        this.settlementTimestamp = builder.settlementTimestamp;
+        this.settlementPrice = builder.settlementPrice;
     }
     public boolean getSessionOpen() {
         return sessionOpen;

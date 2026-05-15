@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -33,7 +34,7 @@ public class PaymentMethodDestination {
     }
 
     public PaymentMethodDestination(Builder builder) {
-        paymentMethodId = builder.paymentMethodId;
+        this.paymentMethodId = builder.paymentMethodId;
     }
     public String getPaymentMethodId() {
         return paymentMethodId;

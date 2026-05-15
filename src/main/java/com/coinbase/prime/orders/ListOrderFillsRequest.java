@@ -42,8 +42,8 @@ public class ListOrderFillsRequest extends PrimeListRequest {
 
     public ListOrderFillsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        orderId = builder.orderId;
+        this.portfolioId = builder.portfolioId;
+        this.orderId = builder.orderId;
     }
 
     public String getPortfolioId() {
@@ -88,8 +88,8 @@ public class ListOrderFillsRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -99,10 +99,10 @@ public class ListOrderFillsRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(orderId)) {
+            if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }
         }

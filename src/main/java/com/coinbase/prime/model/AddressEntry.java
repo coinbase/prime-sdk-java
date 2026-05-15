@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -28,8 +29,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AddressEntry {
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("address")
     private String address;
 
     @JsonProperty("chain_ids")
@@ -39,9 +42,9 @@ public class AddressEntry {
     }
 
     public AddressEntry(Builder builder) {
-        name = builder.name;
-        address = builder.address;
-        chainIds = builder.chainIds;
+        this.name = builder.name;
+        this.address = builder.address;
+        this.chainIds = builder.chainIds;
     }
     public String getName() {
         return name;

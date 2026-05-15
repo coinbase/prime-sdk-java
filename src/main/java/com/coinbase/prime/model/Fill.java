@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.CommissionDetailTotal;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.ProductType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -33,6 +34,7 @@ public class Fill {
     /**
      * The unique ID of the fill
      */
+    @JsonProperty("id")
     private String id;
 
     /**
@@ -53,6 +55,7 @@ public class Fill {
     @JsonProperty("client_product_id")
     private String clientProductId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
     /**
@@ -70,21 +73,25 @@ public class Fill {
     /**
      * The price of the fill
      */
+    @JsonProperty("price")
     private String price;
 
     /**
      * The date and time of the fill
      */
+    @JsonProperty("time")
     private OffsetDateTime time;
 
     /**
      * The commission incurred for the fill
      */
+    @JsonProperty("commission")
     private String commission;
 
     /**
      * The name of the venue
      */
+    @JsonProperty("venue")
     private String venue;
 
     /**
@@ -109,21 +116,21 @@ public class Fill {
     }
 
     public Fill(Builder builder) {
-        id = builder.id;
-        orderId = builder.orderId;
-        productId = builder.productId;
-        clientProductId = builder.clientProductId;
-        side = builder.side;
-        filledQuantity = builder.filledQuantity;
-        filledValue = builder.filledValue;
-        price = builder.price;
-        time = builder.time;
-        commission = builder.commission;
-        venue = builder.venue;
-        venueFees = builder.venueFees;
-        cesCommission = builder.cesCommission;
-        productType = builder.productType;
-        commissionDetailTotal = builder.commissionDetailTotal;
+        this.id = builder.id;
+        this.orderId = builder.orderId;
+        this.productId = builder.productId;
+        this.clientProductId = builder.clientProductId;
+        this.side = builder.side;
+        this.filledQuantity = builder.filledQuantity;
+        this.filledValue = builder.filledValue;
+        this.price = builder.price;
+        this.time = builder.time;
+        this.commission = builder.commission;
+        this.venue = builder.venue;
+        this.venueFees = builder.venueFees;
+        this.cesCommission = builder.cesCommission;
+        this.productType = builder.productType;
+        this.commissionDetailTotal = builder.commissionDetailTotal;
     }
     public String getId() {
         return id;

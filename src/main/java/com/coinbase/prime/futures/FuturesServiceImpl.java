@@ -31,7 +31,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/entities/%s/futures/auto_sweep", request.getEntityId()),
                 request,
@@ -41,7 +41,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
                 request,
@@ -51,7 +51,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
                 request,
@@ -61,7 +61,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/positions", request.getEntityId()),
                 request,
@@ -71,7 +71,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
                 request,
@@ -81,7 +81,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/settings", request.getEntityId()),
                 request,
@@ -91,7 +91,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/entities/%s/futures/settings", request.getEntityId()),
                 request,
@@ -101,7 +101,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
@@ -111,7 +111,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.POST,
                 String.format("/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
@@ -121,7 +121,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.DELETE,
                 String.format("/entities/%s/futures/sweeps", request.getEntityId()),
                 request,
@@ -131,7 +131,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
 
     @Override
     public GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbasePrimeException {
-        return request(
+        return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/equity", request.getEntityId()),
                 request,

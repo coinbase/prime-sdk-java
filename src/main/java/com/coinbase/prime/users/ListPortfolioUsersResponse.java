@@ -18,13 +18,16 @@ package com.coinbase.prime.users;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.PortfolioUser;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * List Portfolio Users
  */
 public class ListPortfolioUsersResponse {
+    @JsonProperty("users")
     private PortfolioUser[] users;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioUsersResponse() {

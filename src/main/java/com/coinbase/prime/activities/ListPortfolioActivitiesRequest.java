@@ -35,10 +35,13 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
+    @JsonProperty("categories")
     private ActivityCategory[] categories;
 
+    @JsonProperty("statuses")
     private ActivityStatus[] statuses;
 
     @JsonProperty("start_time")
@@ -55,13 +58,13 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
 
     public ListPortfolioActivitiesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
-        portfolioId = builder.portfolioId;
-        symbols = builder.symbols;
-        categories = builder.categories;
-        statuses = builder.statuses;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
-        getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+        this.portfolioId = builder.portfolioId;
+        this.symbols = builder.symbols;
+        this.categories = builder.categories;
+        this.statuses = builder.statuses;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getPortfolioId() {
@@ -176,8 +179,8 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         }
 
         public Builder pagination(Pagination pagination) {
-            cursor = pagination.getNextCursor();
-            sortDirection = pagination.getSortDirection();
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
@@ -187,7 +190,7 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

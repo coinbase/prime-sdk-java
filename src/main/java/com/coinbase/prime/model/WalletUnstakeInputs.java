@@ -20,6 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.ValidatorAllocation;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,6 +33,7 @@ public class WalletUnstakeInputs {
     /**
      * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
@@ -44,8 +46,8 @@ public class WalletUnstakeInputs {
     }
 
     public WalletUnstakeInputs(Builder builder) {
-        amount = builder.amount;
-        validatorAllocations = builder.validatorAllocations;
+        this.amount = builder.amount;
+        this.validatorAllocations = builder.validatorAllocations;
     }
     public String getAmount() {
         return amount;

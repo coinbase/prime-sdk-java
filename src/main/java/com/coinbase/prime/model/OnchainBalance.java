@@ -21,6 +21,7 @@
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.coinbase.prime.model.OnchainAsset;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -28,11 +29,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainBalance {
+    @JsonProperty("asset")
     private OnchainAsset asset;
 
     /**
      * The total amount in whole units with full precision.
      */
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("visibility_status")
@@ -42,9 +45,9 @@ public class OnchainBalance {
     }
 
     public OnchainBalance(Builder builder) {
-        asset = builder.asset;
-        amount = builder.amount;
-        visibilityStatus = builder.visibilityStatus;
+        this.asset = builder.asset;
+        this.amount = builder.amount;
+        this.visibilityStatus = builder.visibilityStatus;
     }
     public OnchainAsset getAsset() {
         return asset;
