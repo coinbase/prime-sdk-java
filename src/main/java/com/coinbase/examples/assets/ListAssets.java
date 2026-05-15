@@ -32,8 +32,8 @@ public class ListAssets {
       String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
       AssetsService service = PrimeServiceFactory.createAssetsService(client);
-      ListAssetsResponse response = service.listAssets(
-          new ListAssetsRequest.Builder(entityId).build());
+      ListAssetsResponse response =
+          service.listAssets(new ListAssetsRequest.Builder().entityId(entityId).build());
 
       System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

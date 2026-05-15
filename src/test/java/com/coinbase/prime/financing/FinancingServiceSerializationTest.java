@@ -420,11 +420,11 @@ public class FinancingServiceSerializationTest {
         assertEquals(2, response.getConversions().length);
     }
 
-    // ==================== ListTfObligations Tests ====================
+    // ==================== ListTradeFinanceObligations Tests ====================
 
     @Test
-    public void testListTfObligationsRequestConstruction() {
-        ListTfObligationsRequest request = new ListTfObligationsRequest.Builder()
+    public void testListTradeFinanceObligationsRequestConstruction() throws Exception {
+        ListTradeFinanceObligationsRequest request = new ListTradeFinanceObligationsRequest.Builder()
                 .entityId("entity-123")
                 .build();
         assertNotNull(request);
@@ -432,17 +432,18 @@ public class FinancingServiceSerializationTest {
     }
 
     @Test
-    public void testListTfObligationsResponseDeserialization() throws JsonProcessingException {
+    public void testListTradeFinanceObligationsResponseDeserialization() throws JsonProcessingException {
         String json = "{"
                 + "\"obligations\":["
-                + "{\"id\":\"obl-1\",\"symbol\":\"BTC\",\"amount\":\"1.0\"},"
-                + "{\"id\":\"obl-2\",\"symbol\":\"ETH\",\"amount\":\"10.0\"}"
+                + "{\"symbol\":\"BTC\",\"amount_due\":\"1.0\"},"
+                + "{\"symbol\":\"ETH\",\"amount_due\":\"10.0\"}"
                 + "]"
                 + "}";
 
-        ListTfObligationsResponse response = objectMapper.readValue(json, ListTfObligationsResponse.class);
+        ListTradeFinanceObligationsResponse response =
+                objectMapper.readValue(json, ListTradeFinanceObligationsResponse.class);
         assertNotNull(response);
         assertNotNull(response.getObligations());
-        assertEquals(2, response.getObligations().size());
+        assertEquals(2, response.getObligations().length);
     }
 }

@@ -18,6 +18,9 @@ package com.coinbase.prime.integration;
 
 import com.coinbase.prime.advancedtransfer.*;
 import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdRequest;
+import com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdResponse;
+import com.coinbase.prime.portfolios.PortfoliosService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -56,11 +59,9 @@ public class AdvancedTransferIT extends BaseIntegrationTest {
     public void testGetPortfolioCounterpartyId() throws Exception {
         assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
                 "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        AdvancedTransferService service = PrimeServiceFactory.createAdvancedTransferService(client);
+        PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
         GetPortfolioCounterpartyIdResponse response = service.getPortfolioCounterpartyId(
-                new GetPortfolioCounterpartyIdRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
+                new GetPortfolioCounterpartyIdRequest.Builder(portfolioId).build());
         assertNotNull(response);
     }
 

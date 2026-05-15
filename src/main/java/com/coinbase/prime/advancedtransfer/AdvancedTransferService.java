@@ -24,5 +24,11 @@ public interface AdvancedTransferService {
     CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * @deprecated Prefer {@link com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId(com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdRequest)}
+     * — this route is scoped to portfolios in the REST API.
+     */
+    @Deprecated
     GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -29,6 +29,8 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
         super(client);
     }
 
+    /** @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)} */
+    @Deprecated
     @Override
     public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbasePrimeException {
         return this.request(
@@ -59,6 +61,8 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
                 new TypeReference<ListEntityPositionsResponse>() {});
     }
 
+    /** @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)} */
+    @Deprecated
     @Override
     public ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbasePrimeException {
         return this.request(

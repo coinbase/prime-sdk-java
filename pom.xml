@@ -77,21 +77,12 @@
         <configuration>
           <source>11</source>
           <target>11</target>
-          <!-- Sample programs under examples/ are not regenerated with the OpenAPI client; exclude until updated. -->
-          <excludes>
-            <exclude>com/coinbase/examples/**/*.java</exclude>
-          </excludes>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.7.0</version>
-        <configuration>
-          <sourceFileExcludes>
-            <sourceFileExclude>com/coinbase/examples/**/*.java</sourceFileExclude>
-          </sourceFileExcludes>
-        </configuration>
         <executions>
           <execution>
             <id>attach-javadocs</id>

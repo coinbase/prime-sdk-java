@@ -35,7 +35,8 @@ public class GetPortfolio {
             System.out.println("Using Portfolio ID: " + portfolioId);
 
             PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-            GetPortfolioResponse response = service.getPortfolio(new GetPortfolioRequest.Builder(portfolioId).build());
+            GetPortfolioResponse response =
+                    service.getPortfolio(new GetPortfolioRequest.Builder().portfolioId(portfolioId).build());
 
             System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
         } catch (Exception e) {

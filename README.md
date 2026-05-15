@@ -170,7 +170,7 @@ The SDK tracks the published Prime OpenAPI definition in **apiSpec/prime-public-
 make fetch-spec
 ```
 
-Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` are maintained separately.
+Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` ship in the same module and compile with **`mvn compile`**—keep them in sync when the SDK API changes.
 
 ## Changelog
 

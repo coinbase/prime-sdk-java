@@ -35,8 +35,8 @@ public class ListEntityUsers {
             System.out.println("Using Entity ID: " + entityId);
 
             UsersService service = PrimeServiceFactory.createUsersService(client);
-            ListEntityUsersResponse response = service.listEntityUsers(
-                    new ListEntityUsersRequest.Builder(entityId).build());
+            ListEntityUsersResponse response =
+                    service.listEntityUsers(new ListEntityUsersRequest.Builder().entityId(entityId).build());
 
             System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
         } catch (Exception e) {

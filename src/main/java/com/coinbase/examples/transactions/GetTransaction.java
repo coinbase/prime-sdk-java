@@ -35,8 +35,12 @@ public class GetTransaction {
       System.out.println("Getting transaction: Portfolio ID: " + portfolioId + ", Transaction ID: " + transactionId);
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
-      GetTransactionResponse response = service.getTransaction(
-          new GetTransactionRequest.Builder(portfolioId, transactionId).build());
+      GetTransactionResponse response =
+          service.getTransaction(
+              new GetTransactionRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .transactionId(transactionId)
+                  .build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

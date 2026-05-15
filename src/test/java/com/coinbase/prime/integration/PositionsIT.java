@@ -30,8 +30,8 @@ public class PositionsIT extends BaseIntegrationTest {
         assumeTrue(entityId != null && !entityId.isEmpty(),
                 "Skipping: COINBASE_PRIME_ENTITY_ID not set");
         PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListPositionsResponse response = service.listPositions(
-                new ListPositionsRequest.Builder()
+        ListEntityPositionsResponse response = service.listEntityPositions(
+                new ListEntityPositionsRequest.Builder()
                         .entityId(entityId)
                         .build());
         assertNotNull(response);
@@ -42,8 +42,8 @@ public class PositionsIT extends BaseIntegrationTest {
         assumeTrue(entityId != null && !entityId.isEmpty(),
                 "Skipping: COINBASE_PRIME_ENTITY_ID not set");
         PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListPositionsResponse response = service.listPositions(
-                new ListPositionsRequest.Builder()
+        ListEntityPositionsResponse response = service.listEntityPositions(
+                new ListEntityPositionsRequest.Builder()
                         .entityId(entityId)
                         .limit(5)
                         .build());
@@ -55,8 +55,8 @@ public class PositionsIT extends BaseIntegrationTest {
         assumeTrue(entityId != null && !entityId.isEmpty(),
                 "Skipping: COINBASE_PRIME_ENTITY_ID not set");
         PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListAggregatePositionsResponse response = service.listAggregatePositions(
-                new ListAggregatePositionsRequest.Builder()
+        ListAggregateEntityPositionsResponse response = service.listAggregateEntityPositions(
+                new ListAggregateEntityPositionsRequest.Builder()
                         .entityId(entityId)
                         .build());
         assertNotNull(response);
@@ -67,8 +67,8 @@ public class PositionsIT extends BaseIntegrationTest {
         assumeTrue(entityId != null && !entityId.isEmpty(),
                 "Skipping: COINBASE_PRIME_ENTITY_ID not set");
         PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListAggregatePositionsResponse response = service.listAggregatePositions(
-                new ListAggregatePositionsRequest.Builder()
+        ListAggregateEntityPositionsResponse response = service.listAggregateEntityPositions(
+                new ListAggregateEntityPositionsRequest.Builder()
                         .entityId(entityId)
                         .limit(5)
                         .build());

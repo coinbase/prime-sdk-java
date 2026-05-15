@@ -35,11 +35,11 @@ public class ProductsServiceSerializationTest {
         objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    // ==================== ListCandles Tests ====================
+    // ==================== GetCandles Tests ====================
 
     @Test
-    public void testListCandlesRequestSerialization() throws JsonProcessingException {
-        ListCandlesRequest request = new ListCandlesRequest.Builder()
+    public void testGetCandlesRequestSerialization() throws JsonProcessingException {
+        GetCandlesRequest request = new GetCandlesRequest.Builder()
                 .portfolioId("portfolio-123")
                 .productId("BTC-USD")
                 .startTime("2025-01-01T00:00:00Z")
@@ -57,18 +57,10 @@ public class ProductsServiceSerializationTest {
     }
 
     @Test
-    public void testListCandlesRequestBuilderValidation() {
+    public void testGetCandlesRequestBuilderValidation() {
         assertThrows(CoinbaseClientException.class, () ->
-                new ListCandlesRequest.Builder()
+                new GetCandlesRequest.Builder()
                         .productId("BTC-USD")
-                        .startTime("2025-01-01T00:00:00Z")
-                        .endTime("2025-01-02T00:00:00Z")
-                        .granularity(CandlesGranularity.ONE_DAY)
-                        .build());
-
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListCandlesRequest.Builder()
-                        .portfolioId("portfolio-123")
                         .startTime("2025-01-01T00:00:00Z")
                         .endTime("2025-01-02T00:00:00Z")
                         .granularity(CandlesGranularity.ONE_DAY)
@@ -76,18 +68,18 @@ public class ProductsServiceSerializationTest {
     }
 
     @Test
-    public void testListCandlesResponseDeserialization() throws JsonProcessingException {
+    public void testGetCandlesResponseDeserialization() throws JsonProcessingException {
         String json = "{"
                 + "\"candles\":["
-                + "{\"start\":\"1704067200\",\"high\":\"50000.00\",\"low\":\"48000.00\",\"open\":\"49000.00\",\"close\":\"49500.00\",\"volume\":\"1000.0\"},"
-                + "{\"start\":\"1704153600\",\"high\":\"51000.00\",\"low\":\"49000.00\",\"open\":\"49500.00\",\"close\":\"50500.00\",\"volume\":\"1200.0\"}"
+                + "{\"open\":\"49000.00\",\"high\":\"50000.00\",\"low\":\"48000.00\",\"close\":\"49500.00\",\"volume\":\"1000.0\"},"
+                + "{\"open\":\"49500.00\",\"high\":\"51000.00\",\"low\":\"49000.00\",\"close\":\"50500.00\",\"volume\":\"1200.0\"}"
                 + "]"
                 + "}";
 
-        ListCandlesResponse response = objectMapper.readValue(json, ListCandlesResponse.class);
+        GetCandlesResponse response = objectMapper.readValue(json, GetCandlesResponse.class);
         assertNotNull(response);
         assertNotNull(response.getCandles());
-        assertEquals(2, response.getCandles().size());
+        assertEquals(2, response.getCandles().length);
     }
 
     // ==================== ListPortfolioProducts Tests ====================

@@ -32,8 +32,8 @@ public class ListPortfolioAllocationsExample {
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       AllocationsService service = PrimeServiceFactory.createAllocationsService(client);
-      ListPortfolioAllocationsResponse response = service.getPortfolioAllocations(
-          new ListPortfolioAllocationsRequest.Builder(portfolioId).build());
+      ListPortfolioAllocationsResponse response =
+          service.listPortfolioAllocations(new ListPortfolioAllocationsRequest.Builder().portfolioId(portfolioId).build());
 
       System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
