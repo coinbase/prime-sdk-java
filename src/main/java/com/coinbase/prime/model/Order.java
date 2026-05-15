@@ -27,7 +27,6 @@ import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.enums.TimeInForceType;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

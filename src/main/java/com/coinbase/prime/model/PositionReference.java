@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.PositionReferenceType;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;

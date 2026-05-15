@@ -22,7 +22,6 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.FcmScheduledMaintenance;
 import com.coinbase.prime.model.enums.FcmTradingSessionClosedReason;
 import com.coinbase.prime.model.enums.FcmTradingSessionState;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

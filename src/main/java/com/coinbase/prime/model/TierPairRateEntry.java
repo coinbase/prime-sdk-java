@@ -16,10 +16,8 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TierPairRateEntry {
     @JsonProperty("tier_a")
     private String tierA;

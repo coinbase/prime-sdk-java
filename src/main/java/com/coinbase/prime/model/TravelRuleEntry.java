@@ -23,7 +23,6 @@ import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.TravelRuleParty;
 import com.coinbase.prime.model.TravelRuleWalletDetails;
 import com.coinbase.prime.model.Vasp;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

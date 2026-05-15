@@ -27,7 +27,6 @@ import com.coinbase.prime.model.enums.ActivityStatus;
 import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.coinbase.prime.model.enums.HierarchyType;
 import com.coinbase.prime.model.UserAction;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

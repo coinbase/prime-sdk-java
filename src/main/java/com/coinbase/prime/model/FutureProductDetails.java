@@ -22,7 +22,6 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.ContractExpiryType;
 import com.coinbase.prime.model.PerpetualProductDetails;
 import com.coinbase.prime.model.enums.RiskManagementType;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

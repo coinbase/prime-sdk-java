@@ -23,7 +23,6 @@ import com.coinbase.prime.model.DetailedAddress;
 import com.coinbase.prime.model.NaturalPersonName;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
 import com.coinbase.prime.model.DateOfBirth;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

@@ -24,7 +24,6 @@ import com.coinbase.prime.model.FutureProductDetails;
 import com.coinbase.prime.model.enums.ProductPermissions;
 import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.RfqProductDetails;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

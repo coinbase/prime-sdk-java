@@ -22,7 +22,6 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.MatchMetadata;
 import com.coinbase.prime.model.RewardMetadata;
 import com.coinbase.prime.model.OnchainTransactionMetadata;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

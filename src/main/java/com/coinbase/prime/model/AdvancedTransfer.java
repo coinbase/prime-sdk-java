@@ -23,7 +23,6 @@ import com.coinbase.prime.model.enums.AdvancedTransferState;
 import com.coinbase.prime.model.enums.AdvancedTransferType;
 import com.coinbase.prime.model.BlindMatchMetadata;
 import com.coinbase.prime.model.FundMovement;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

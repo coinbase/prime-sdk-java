@@ -28,7 +28,6 @@ import com.coinbase.prime.model.TransactionMetadata;
 import com.coinbase.prime.model.enums.TransactionStatus;
 import com.coinbase.prime.model.enums.TransactionType;
 import com.coinbase.prime.model.TransferLocation;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;

@@ -23,7 +23,6 @@ import com.coinbase.prime.model.enums.XmCallStatus;
 import com.coinbase.prime.model.enums.XmCallType;
 import com.coinbase.prime.model.enums.XmMarginLevel;
 import com.coinbase.prime.model.XmSummary;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
