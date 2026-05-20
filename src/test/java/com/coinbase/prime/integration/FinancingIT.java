@@ -21,19 +21,36 @@ import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.financing.*;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class FinancingIT extends BaseIntegrationTest {
 
+    @Override
+    protected String featureScope() {
+        return "FINANCING";
+    }
+
+    private static String dateDaysAgo(int days) {
+        return LocalDate.now().minusDays(days).toString();
+    }
+
+    private static String today() {
+        return LocalDate.now().toString();
+    }
+
     @Test
     public void testListInterestAccruals() throws Exception {
         assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+                "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
         FinancingService service = PrimeServiceFactory.createFinancingService(client);
         ListInterestAccrualsResponse response = service.listInterestAccruals(
                 new ListInterestAccrualsRequest.Builder()
                         .entityId(entityId)
+                        .startDate(dateDaysAgo(30))
+                        .endDate(today())
                         .build());
         assertNotNull(response);
     }
@@ -41,13 +58,13 @@ public class FinancingIT extends BaseIntegrationTest {
     @Test
     public void testListInterestAccrualsWithDateRange() throws Exception {
         assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+                "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
         FinancingService service = PrimeServiceFactory.createFinancingService(client);
         ListInterestAccrualsResponse response = service.listInterestAccruals(
                 new ListInterestAccrualsRequest.Builder()
                         .entityId(entityId)
-                        .startDate("2025-01-01")
-                        .endDate("2025-12-31")
+                        .startDate(dateDaysAgo(90))
+                        .endDate(today())
                         .build());
         assertNotNull(response);
     }
@@ -72,6 +89,7 @@ public class FinancingIT extends BaseIntegrationTest {
         GetEntityLocateAvailabilitiesResponse response = service.getEntityLocateAvailabilities(
                 new GetEntityLocateAvailabilitiesRequest.Builder()
                         .entityId(entityId)
+                        .locateDate(today())
                         .build());
         assertNotNull(response);
     }
@@ -96,6 +114,8 @@ public class FinancingIT extends BaseIntegrationTest {
         ListMarginCallSummariesResponse response = service.listMarginCallSummaries(
                 new ListMarginCallSummariesRequest.Builder()
                         .entityId(entityId)
+                        .startDate(dateDaysAgo(7))
+                        .endDate(today())
                         .build());
         assertNotNull(response);
     }
@@ -108,8 +128,8 @@ public class FinancingIT extends BaseIntegrationTest {
         ListMarginCallSummariesResponse response = service.listMarginCallSummaries(
                 new ListMarginCallSummariesRequest.Builder()
                         .entityId(entityId)
-                        .startDate("2025-01-01")
-                        .endDate("2025-12-31")
+                        .startDate(dateDaysAgo(30))
+                        .endDate(today())
                         .build());
         assertNotNull(response);
     }
@@ -154,8 +174,8 @@ public class FinancingIT extends BaseIntegrationTest {
             ListInterestAccrualsForPortfolioResponse response = service.listInterestAccrualsForPortfolio(
                     new ListInterestAccrualsForPortfolioRequest.Builder()
                             .portfolioId(portfolioId)
-                            .startDate("2025-01-01")
-                            .endDate("2025-12-31")
+                            .startDate(dateDaysAgo(90))
+                            .endDate(today())
                             .build());
             assertNotNull(response);
         } catch (CoinbaseClientException e) {
@@ -176,8 +196,8 @@ public class FinancingIT extends BaseIntegrationTest {
             ListInterestAccrualsForPortfolioResponse response = service.listInterestAccrualsForPortfolio(
                     new ListInterestAccrualsForPortfolioRequest.Builder()
                             .portfolioId(portfolioId)
-                            .startDate("2025-01-01")
-                            .endDate("2025-06-30")
+                            .startDate(dateDaysAgo(30))
+                            .endDate(today())
                             .build());
             assertNotNull(response);
         } catch (CoinbaseClientException e) {
@@ -224,7 +244,7 @@ public class FinancingIT extends BaseIntegrationTest {
             ListExistingLocatesResponse response = service.listExistingLocates(
                     new ListExistingLocatesRequest.Builder()
                             .portfolioId(portfolioId)
-                            .locateDate("2025-01-01")
+                            .locateDate(today())
                             .build());
             assertNotNull(response);
         } catch (CoinbaseClientException e) {
@@ -245,8 +265,8 @@ public class FinancingIT extends BaseIntegrationTest {
             ListMarginConversionsResponse response = service.listMarginConversions(
                     new ListMarginConversionsRequest.Builder()
                             .portfolioId(portfolioId)
-                            .startDate("2025-01-01")
-                            .endDate("2025-12-31")
+                            .startDate(dateDaysAgo(90))
+                            .endDate(today())
                             .build());
             assertNotNull(response);
         } catch (CoinbaseClientException e) {
@@ -267,8 +287,8 @@ public class FinancingIT extends BaseIntegrationTest {
             ListMarginConversionsResponse response = service.listMarginConversions(
                     new ListMarginConversionsRequest.Builder()
                             .portfolioId(portfolioId)
-                            .startDate("2025-01-01")
-                            .endDate("2025-06-30")
+                            .startDate(dateDaysAgo(30))
+                            .endDate(today())
                             .build());
             assertNotNull(response);
         } catch (CoinbaseClientException e) {

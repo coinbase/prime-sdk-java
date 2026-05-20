@@ -26,10 +26,19 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  * Base class for live integration tests. Tests are skipped automatically when
  * COINBASE_PRIME_CREDENTIALS is not set in the environment.
  *
- * Required env vars:
- *   COINBASE_PRIME_CREDENTIALS - JSON with accessKey, passphrase, signingKey
- *   COINBASE_PRIME_PORTFOLIO_ID - portfolio UUID used in portfolio-scoped calls
- *   COINBASE_PRIME_ENTITY_ID    - entity UUID used in entity-scoped calls
+ * <p>Required env vars:
+ * <ul>
+ *   <li>COINBASE_PRIME_CREDENTIALS - JSON with accessKey, passphrase, signingKey</li>
+ *   <li>COINBASE_PRIME_PORTFOLIO_ID - portfolio UUID used in portfolio-scoped calls</li>
+ *   <li>COINBASE_PRIME_ENTITY_ID - entity UUID used in entity-scoped calls</li>
+ * </ul>
+ *
+ * <p>Optional per-feature overrides (used when a subclass declares {@link #featureScope()}):
+ * <ul>
+ *   <li>COINBASE_PRIME_FUTURES_CREDENTIALS / _PORTFOLIO_ID / _ENTITY_ID</li>
+ *   <li>COINBASE_PRIME_FINANCING_CREDENTIALS / _PORTFOLIO_ID / _ENTITY_ID</li>
+ * </ul>
+ * Any field not set falls back to the default COINBASE_PRIME_* variable.
  */
 public abstract class BaseIntegrationTest {
 
@@ -37,16 +46,38 @@ public abstract class BaseIntegrationTest {
     protected String portfolioId;
     protected String entityId;
 
+    /**
+     * When non-null, integration config is resolved from COINBASE_PRIME_{scope}_* env vars
+     * with fallback to the default COINBASE_PRIME_* vars.
+     */
+    protected String featureScope() {
+        return null;
+    }
+
     @BeforeEach
     public void setUpBase() throws Exception {
-        String credentialsJson = System.getenv("COINBASE_PRIME_CREDENTIALS");
-        assumeTrue(credentialsJson != null && !credentialsJson.isEmpty(),
-                "Skipping integration test: COINBASE_PRIME_CREDENTIALS not set");
+        String scope = featureScope();
+        String credentialsJson = resolve(scope, "CREDENTIALS");
+        portfolioId = resolve(scope, "PORTFOLIO_ID");
+        entityId = resolve(scope, "ENTITY_ID");
 
-        portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-        entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+        assumeTrue(credentialsJson != null && !credentialsJson.isEmpty(),
+                scope != null
+                        ? "Skipping integration test: COINBASE_PRIME_" + scope
+                                + "_CREDENTIALS (or fallback COINBASE_PRIME_CREDENTIALS) not set"
+                        : "Skipping integration test: COINBASE_PRIME_CREDENTIALS not set");
 
         CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(credentialsJson);
         client = new CoinbasePrimeClient(credentials);
+    }
+
+    private static String resolve(String scope, String suffix) {
+        if (scope != null) {
+            String scoped = System.getenv("COINBASE_PRIME_" + scope + "_" + suffix);
+            if (scoped != null && !scoped.isEmpty()) {
+                return scoped;
+            }
+        }
+        return System.getenv("COINBASE_PRIME_" + suffix);
     }
 }

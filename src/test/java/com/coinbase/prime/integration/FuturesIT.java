@@ -25,6 +25,11 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class FuturesIT extends BaseIntegrationTest {
 
+    @Override
+    protected String featureScope() {
+        return "FUTURES";
+    }
+
     @Test
     public void testGetEntityFcmBalance() throws Exception {
         assumeTrue(entityId != null && !entityId.isEmpty(),
