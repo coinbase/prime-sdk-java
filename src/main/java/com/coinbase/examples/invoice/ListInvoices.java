@@ -35,8 +35,8 @@ public class ListInvoices {
             System.out.println("Using Entity ID: " + entityId);
 
             InvoiceService service = PrimeServiceFactory.createInvoiceService(client);
-            ListInvoicesResponse response = service.listInvoices(
-                    new ListInvoicesRequest.Builder(entityId).build());
+            ListInvoicesResponse response =
+                    service.listInvoices(new ListInvoicesRequest.Builder().entityId(entityId).build());
 
             System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
         } catch (Exception e) {

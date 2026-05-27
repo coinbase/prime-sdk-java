@@ -36,7 +36,7 @@ public class ListPaymentMethods {
 
             PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
             ListPaymentMethodsResponse response = service.listPaymentMethods(
-                    new ListPaymentMethodsRequest.Builder(entityId).build());
+                    new ListPaymentMethodsRequest.Builder().entityId(entityId).build());
 
             System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
         } catch (Exception e) {

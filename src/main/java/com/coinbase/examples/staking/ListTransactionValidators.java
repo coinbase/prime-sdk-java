@@ -24,8 +24,6 @@ import com.coinbase.prime.staking.ListTransactionValidatorsResponse;
 import com.coinbase.prime.staking.StakingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.List;
-
 public class ListTransactionValidators {
     public static void main(String[] args) {
         try {
@@ -35,10 +33,11 @@ public class ListTransactionValidators {
             String transactionId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_TRANSACTION_ID");
 
             StakingService service = PrimeServiceFactory.createStakingService(client);
-            ListTransactionValidatorsResponse response = service.listTransactionValidators(
+            ListTransactionValidatorsResponse response =
+                    service.listTransactionValidators(
                     new ListTransactionValidatorsRequest.Builder()
                             .portfolioId(portfolioId)
-                            .transactionIds(List.of(transactionId))
+                            .transactionIds(new String[]{transactionId})
                             .build());
 
             System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));

@@ -20,8 +20,8 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.financing.FinancingService;
-import com.coinbase.prime.financing.ListTfObligationsRequest;
-import com.coinbase.prime.financing.ListTfObligationsResponse;
+import com.coinbase.prime.financing.ListTradeFinanceObligationsRequest;
+import com.coinbase.prime.financing.ListTradeFinanceObligationsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListTfObligations {
@@ -32,8 +32,8 @@ public class ListTfObligations {
             String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
             FinancingService service = PrimeServiceFactory.createFinancingService(client);
-            ListTfObligationsResponse response = service.listTfObligations(
-                    new ListTfObligationsRequest.Builder()
+            ListTradeFinanceObligationsResponse response = service.listTradeFinanceObligations(
+                    new ListTradeFinanceObligationsRequest.Builder()
                             .entityId(entityId)
                             .build());
 

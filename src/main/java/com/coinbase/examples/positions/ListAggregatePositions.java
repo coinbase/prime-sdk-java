@@ -19,8 +19,8 @@ package com.coinbase.examples.positions;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.positions.ListAggregatePositionsRequest;
-import com.coinbase.prime.positions.ListAggregatePositionsResponse;
+import com.coinbase.prime.positions.ListAggregateEntityPositionsRequest;
+import com.coinbase.prime.positions.ListAggregateEntityPositionsResponse;
 import com.coinbase.prime.positions.PositionsService;
 import com.coinbase.prime.utils.Utils;
 
@@ -35,8 +35,9 @@ public class ListAggregatePositions {
             System.out.println("Using Entity ID: " + entityId);
 
             PositionsService service = PrimeServiceFactory.createPositionsService(client);
-            ListAggregatePositionsResponse response = service.listAggregatePositions(
-                    new ListAggregatePositionsRequest.Builder()
+            ListAggregateEntityPositionsResponse response =
+                    service.listAggregateEntityPositions(
+                    new ListAggregateEntityPositionsRequest.Builder()
                             .entityId(entityId)
                             .build());
 

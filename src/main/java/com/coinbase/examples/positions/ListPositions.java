@@ -19,8 +19,8 @@ package com.coinbase.examples.positions;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.positions.ListPositionsRequest;
-import com.coinbase.prime.positions.ListPositionsResponse;
+import com.coinbase.prime.positions.ListEntityPositionsRequest;
+import com.coinbase.prime.positions.ListEntityPositionsResponse;
 import com.coinbase.prime.positions.PositionsService;
 import com.coinbase.prime.utils.Utils;
 
@@ -35,8 +35,9 @@ public class ListPositions {
             System.out.println("Using Entity ID: " + entityId);
 
             PositionsService service = PrimeServiceFactory.createPositionsService(client);
-            ListPositionsResponse response = service.listPositions(
-                    new ListPositionsRequest.Builder()
+            ListEntityPositionsResponse response =
+                    service.listEntityPositions(
+                    new ListEntityPositionsRequest.Builder()
                             .entityId(entityId)
                             .build());
 

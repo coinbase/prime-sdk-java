@@ -36,7 +36,8 @@ public class ListPortfolioActivities {
 
       // Parse symbols from CSV if provided as first argument
       // Parse categories from CSV if provided as second argument
-      ListPortfolioActivitiesRequest.Builder builder = new ListPortfolioActivitiesRequest.Builder(portfolioId);
+      ListPortfolioActivitiesRequest.Builder builder =
+          new ListPortfolioActivitiesRequest.Builder().portfolioId(portfolioId);
       
       if (args.length > 0 && !args[0].isEmpty()) {
         String[] symbols = args[0].split(",");

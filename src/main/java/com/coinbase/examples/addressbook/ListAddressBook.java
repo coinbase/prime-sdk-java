@@ -34,9 +34,8 @@ public class ListAddressBook {
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
 
       AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
-      ListAddressBookResponse response = service.listAddressBook(
-          new ListAddressBookRequest.Builder(portfolioId)
-              .build());
+      ListAddressBookResponse response =
+          service.listAddressBook(new ListAddressBookRequest.Builder().portfolioId(portfolioId).build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

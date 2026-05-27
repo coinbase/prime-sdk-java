@@ -42,14 +42,13 @@ public class CoinbasePrimeCredentialsTest {
 
     @Test
     public void testUserAgentHeaderContainsCorrectVersion() throws CoinbaseClientException {
-        // RED PHASE: This test should FAIL initially because the User-Agent
-        // will contain "prime-sdk-java/1.0.0" but we expect "prime-sdk-java/1.4.0"
+        // User-Agent must match Constants.SDK_VERSION (kept in sync with pom.xml).
         URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
         Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
         
         String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
         assertNotNull(userAgent, "User-Agent header should be present");
-        assertEquals("prime-sdk-java/1.4.0", userAgent, 
+        assertEquals("prime-sdk-java/" + Constants.SDK_VERSION, userAgent,
             "User-Agent header should contain correct SDK version");
     }
 

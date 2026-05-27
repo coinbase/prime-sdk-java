@@ -34,8 +34,8 @@ public class ListEntityActivities {
       System.out.println("Using Entity ID: " + entityId);
 
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
-      ListEntityActivitiesResponse response = service.listEntityActivities(
-          new ListEntityActivitiesRequest.Builder(entityId).build());
+      ListEntityActivitiesResponse response =
+          service.listEntityActivities(new ListEntityActivitiesRequest.Builder().entityId(entityId).build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

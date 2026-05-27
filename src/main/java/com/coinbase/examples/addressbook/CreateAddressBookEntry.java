@@ -45,7 +45,9 @@ public class CreateAddressBookEntry {
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Creating entry: " + name + " (" + currencySymbol + ") " + address);
 
-      CreateAddressBookEntryRequest.Builder builder = new CreateAddressBookEntryRequest.Builder(portfolioId)
+      CreateAddressBookEntryRequest.Builder builder =
+          new CreateAddressBookEntryRequest.Builder()
+          .portfolioId(portfolioId)
           .address(address)
           .currencySymbol(currencySymbol)
           .name(name);

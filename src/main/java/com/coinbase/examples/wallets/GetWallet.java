@@ -35,8 +35,9 @@ public class GetWallet {
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
       WalletsService service = PrimeServiceFactory.createWalletsService(client);
-      GetWalletResponse response = service.getWallet(
-          new GetWalletRequest.Builder(portfolioId, walletId).build());
+      GetWalletResponse response =
+          service.getWallet(
+              new GetWalletRequest.Builder().portfolioId(portfolioId).walletId(walletId).build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

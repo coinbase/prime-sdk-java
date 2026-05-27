@@ -1,5 +1,60 @@
 # Changelog
 
+## [1.8.0] - 2026-MAY-13
+
+### Added
+
+#### New API Endpoints
+
+**Financing Service**
+
+- **`getCrossMarginPrimeOverview()`**: Cross-margin Prime overview; issues the request against API **v2** via `CoinbasePrimeClient.withBaseUrl(Constants.versionedBaseUrl(Constants.CB_PRIME_BASE_URL, "v2"))` for this call only (`GET /v2/entities/{entity_id}/cross_margin/prime`)
+- **`getCrossMarginRiskParameters()`**: Cross-margin risk parameters (`GET /entities/{entity_id}/cross_margin/risk_parameters`)
+- **`updateFundingSettings()`**: Update entity funding settings (`POST /entities/{entity_id}/funding_settings`)
+- **`getMarketData()`**: Entity market data (`GET /entities/{entity_id}/market_data`)
+
+**Advanced Transfer Service**
+
+- **`listAdvancedTransferTransactions()`**: List transactions for an advanced transfer (`GET /portfolios/{portfolio_id}/advanced_transfers/{advanced_transfer_id}/transactions`)
+
+**Note:** `GET /portfolios/{portfolio_id}/counterparty` is surfaced as **`PortfoliosService.getPortfolioCounterpartyId()`** (canonical). The same helper on **`AdvancedTransferService`** remains for compatibility but is **deprecated** in favor of the portfolios API.
+
+**Positions Service**
+
+- **`listAggregateEntityPositions()`**: Aggregate entity positions (`GET /entities/{entity_id}/aggregate_positions`)
+- **`listEntityPositions()`**: Entity positions (`GET /entities/{entity_id}/positions`)
+
+**Products Service**
+
+- **`getCandles()`**: Public product candles (`GET /portfolios/{portfolio_id}/candles`)
+
+#### New & Updated Models
+
+- **`CrossMarginPrimeMarginSummary`**: Margin summary on the cross-margin Prime overview
+- **`CrossMarginRiskParameters`**: Cross-margin risk parameters payload
+- **`MarketData`**: Entity market data
+- **`TierPairRateEntry`**: Trade-finance tier pair rate entry
+- **`CoinbasePrimeClient`**: `withBaseUrl()` for per-call base URL overrides (e.g. v2-only routes)
+- **`Constants`**: `versionedBaseUrl()` helper to swap the trailing `/vN` API segment
+- **`CreateOrderRequest`**: `pegOffsetType` uses `PegOffsetType`; build validation aligned with spec (no auto-generated `client_order_id`)
+
+### Deprecated
+
+- **`PositionsService.listAggregatePositions()`** / **`listPositions()`**: same routes as **`listAggregateEntityPositions()`** / **`listEntityPositions()`**; prefer the spec-aligned entity-named methods.
+- **`AdvancedTransferService.getPortfolioCounterpartyId()`**: prefer **`PortfoliosService.getPortfolioCounterpartyId()`** (same HTTP route).
+
+
+
+- **`tools/model-generator`**: removed; maintain models, requests, responses, and services against `apiSpec/prime-public-spec.yaml`
+- **`com.coinbase.prime.advancedtransfers`** package and **`AdvancedTransfersService`**: renamed to **`com.coinbase.prime.advancedtransfer`** and **`AdvancedTransferService`**; **`PrimeServiceFactory.createAdvancedTransfersService()`** replaced by **`createAdvancedTransferService()`**
+- **`TransactionsService.listAdvancedTransferTransactions()`**: use **`AdvancedTransferService.listAdvancedTransferTransactions()`**
+- **`AllocationsService.getPortfolioAllocations()`**: renamed to **`listPortfolioAllocations()`**
+- **`FinancingService.listTfObligations()`** with **`ListTfObligationsRequest`** / **`ListTfObligationsResponse`**: replaced by **`listTradeFinanceObligations()`** with **`ListTradeFinanceObligationsRequest`** / **`ListTradeFinanceObligationsResponse`**
+- **`FinancingService.listFinancingEligibleAssets(ListFinancingEligibleAssetsRequest)`**: replaced by no-argument **`listFinancingEligibleAssets()`**
+- **`ProductsService.listCandles()`** with **`ListCandlesRequest`** / **`ListCandlesResponse`**: replaced by **`getCandles()`**, **`GetCandlesRequest`**, and **`GetCandlesResponse`** (standalone **`ListCandles*`** Java types removed)
+- Unused legacy types (**`ListAddressBookEntriesRequest`/`Response`**, **`ListAllocationsByClientNettingIdRequest`/`Response`**) superseded by the wired request/response classes on **`AddressBookService`** and **`AllocationsService`**
+
+
 ## [1.7.1] - 2026-04-21
 
 ### Added
@@ -19,7 +74,7 @@
 - `GetStakingStatus` - Wallet staking status
 
 ### Changed
-- Regenerated `com.coinbase.prime.model` and `model.enums` from latest Prime OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`)
+- Model and types refresh from the Prime OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`). The experimental **`tools/model-generator`** workflow described here was **removed in [1.8.0](#180---2026-may-13)**; newer releases maintain the SDK manually against **`apiSpec/prime-public-spec.yaml`**.- Regenerated `com.coinbase.prime.model` and `model.enums` from latest Prime OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`)
 - **Model generator** (`PostProcessor`): map `GoogleTypeDate` to `DateOfBirth` so `TravelRuleParty.date_of_birth` compiles when `Google*` types are excluded
 - `ActivityMetadataConsensus`, `Asset`, `CreateAllocationResponseBody`, `CreateNetAllocationResponseBody`, `CrossMarginOverview`, `EvmParams`, `FcmTradingSessionDetails`, `FuturesSweep`, `MarginSummary`, `NetworkDetails`, `OnchainTransactionDetails`, `Order`, `PmAssetInfo`, `PostTradeCreditInformation`, `RequestToSubmitTravelRuleDataForAnExistingDepositTransaction`, `RfqProductDetails`, `RiskAssessment`, `RpcConfig`, `TravelRuleData`, `TravelRuleParty`, `XmPosition`, `XmRiskNettingInfo`, `UserRole` - field updates per spec
 

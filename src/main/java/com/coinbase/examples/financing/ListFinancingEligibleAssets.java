@@ -20,7 +20,6 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.financing.FinancingService;
-import com.coinbase.prime.financing.ListFinancingEligibleAssetsRequest;
 import com.coinbase.prime.financing.ListFinancingEligibleAssetsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,9 +30,7 @@ public class ListFinancingEligibleAssets {
             CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
             FinancingService service = PrimeServiceFactory.createFinancingService(client);
-            ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets(
-                    new ListFinancingEligibleAssetsRequest.Builder()
-                            .build());
+            ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets();
 
             System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
         } catch (Exception e) {

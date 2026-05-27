@@ -20,8 +20,6 @@ package com.coinbase.prime.portfolios;
  * List all portfolios associated with a given entity.
  */
 public class ListPortfoliosRequest {
-    // No parameters required for listing all portfolios
-    // This is a simple GET request to /v1/portfolios with no path or query parameters
 
     public ListPortfoliosRequest() {
     }

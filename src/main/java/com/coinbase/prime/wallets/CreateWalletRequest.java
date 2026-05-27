@@ -17,23 +17,39 @@
 package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.Network;
+import com.coinbase.prime.model.enums.NetworkFamily;
 import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Create Wallet
+ */
 public class CreateWalletRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("symbol")
     private String symbol;
 
     @JsonProperty("wallet_type")
     private WalletType type;
+
+    @JsonProperty("idempotency_key")
+    private String idempotencyKey;
+
+    @JsonProperty("network_family")
+    private NetworkFamily networkFamily;
+
+    @JsonProperty("network")
+    private Network network;
 
     public CreateWalletRequest() {
     }
@@ -43,6 +59,9 @@ public class CreateWalletRequest {
         this.name = builder.name;
         this.symbol = builder.symbol;
         this.type = builder.type;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.networkFamily = builder.networkFamily;
+        this.network = builder.network;
     }
 
     public String getPortfolioId() {
@@ -77,11 +96,38 @@ public class CreateWalletRequest {
         this.type = type;
     }
 
+    public String getIdempotencyKey() {
+        return idempotencyKey;
+    }
+
+    public void setIdempotencyKey(String idempotencyKey) {
+        this.idempotencyKey = idempotencyKey;
+    }
+
+    public NetworkFamily getNetworkFamily() {
+        return networkFamily;
+    }
+
+    public void setNetworkFamily(NetworkFamily networkFamily) {
+        this.networkFamily = networkFamily;
+    }
+
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String name;
         private String symbol;
         private WalletType type;
+        private String idempotencyKey;
+        private NetworkFamily networkFamily;
+        private Network network;
 
         public Builder() {
         }
@@ -106,23 +152,29 @@ public class CreateWalletRequest {
             return this;
         }
 
+        public Builder idempotencyKey(String idempotencyKey) {
+            this.idempotencyKey = idempotencyKey;
+            return this;
+        }
+
+        public Builder networkFamily(NetworkFamily networkFamily) {
+            this.networkFamily = networkFamily;
+            return this;
+        }
+
+        public Builder network(Network network) {
+            this.network = network;
+            return this;
+        }
+
         public CreateWalletRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new CreateWalletRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("Portfolio ID is required");
-            }
-            if (isNullOrEmpty(this.name)) {
-                throw new CoinbaseClientException("Name is required");
-            }
-            if (isNullOrEmpty(this.symbol)) {
-                throw new CoinbaseClientException("Symbol is required");
-            }
-            if (this.type == null) {
-                throw new CoinbaseClientException("Type is required");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
         }
     }

@@ -45,7 +45,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 HttpMethod.POST,
                 String.format("/portfolios/%s/order", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateOrderResponse>() {});
     }
 
@@ -117,7 +117,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 HttpMethod.POST,
                 String.format("/portfolios/%s/rfq", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateQuoteResponse>() {});
     }
 

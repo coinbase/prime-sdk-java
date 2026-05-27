@@ -55,7 +55,9 @@ public class ListEntityBalances {
           .entityId(entityId);
 
       if (symbols != null) {
-        builder.symbols(symbols);
+        String[] symbolArray =
+            java.util.Arrays.stream(symbols.split(",")).map(String::trim).filter(s -> !s.isEmpty()).toArray(String[]::new);
+        builder.symbols(symbolArray);
       }
       if (aggregationType != null) {
         builder.aggregationType(aggregationType);

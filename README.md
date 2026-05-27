@@ -1,9 +1,11 @@
 # Coinbase Prime Java SDK
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.coinbase.prime/coinbase-prime-sdk-java.svg)](https://central.sonatype.com/artifact/com.coinbase.prime/coinbase-prime-sdk-java)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ## Overview
 
-The *Coinbase Prime Java SDK* is a sample library that demonstrates the structure of a [Coinbase Prime](https://prime.coinbase.com/) driver for
-the [REST APIs](https://docs.cdp.coinbase.com/prime/reference).
+The *Coinbase Prime Java SDK* is a sample library that demonstrates the usage of the [Coinbase Prime](https://prime.coinbase.com/) API via its [REST APIs](https://docs.cdp.coinbase.com/prime/reference).
 
 ## License
 
@@ -13,8 +15,8 @@ The application and code are only available for demonstration purposes.
 
 ## Usage
 
-To use the *Coinbase Prime Java SDK*, initialize the Credentials class and create a new client. The Credentials struct is JSON
-enabled. Ensure that Prime API credentials are stored in a secure manner. This client can then be used to instantiate 
+To use the *Coinbase Prime Java SDK*, initialize the Credentials class and create a new client. The Credentials class is JSON
+enabled. Ensure that Prime API credentials are stored in a secure manner. This client can then be used to instantiate
 Coinbase Prime Services. An example using the PortfoliosService is shown below:
 
 ```java
@@ -57,6 +59,33 @@ For a full example on using the SDK, see the [`Main`](src/main/java/com/coinbase
 
 **Warning**: this does place a market order for a very small amount of ADA. Please ensure that you have the necessary funds in your account before running this code.
 
+## Available Services
+
+The SDK is organized into service interfaces under `com.coinbase.prime.*`, each wrapping a domain of the Prime REST API. Use [`PrimeServiceFactory`](src/main/java/com/coinbase/prime/factory/PrimeServiceFactory.java) to construct service instances from a [`CoinbasePrimeClient`](src/main/java/com/coinbase/prime/client/CoinbasePrimeClient.java).
+
+| Service | Package |
+| --- | --- |
+| `ActivitiesService` | `com.coinbase.prime.activities` |
+| `AddressBookService` | `com.coinbase.prime.addressbook` |
+| `AdvancedTransferService` | `com.coinbase.prime.advancedtransfer` |
+| `AllocationsService` | `com.coinbase.prime.allocations` |
+| `AssetsService` | `com.coinbase.prime.assets` |
+| `BalancesService` | `com.coinbase.prime.balances` |
+| `CommissionService` | `com.coinbase.prime.commission` |
+| `FinancingService` | `com.coinbase.prime.financing` |
+| `FuturesService` | `com.coinbase.prime.futures` |
+| `InvoiceService` | `com.coinbase.prime.invoice` |
+| `OnchainAddressBookService` | `com.coinbase.prime.onchainaddressbook` |
+| `OrdersService` | `com.coinbase.prime.orders` |
+| `PaymentMethodsService` | `com.coinbase.prime.paymentmethods` |
+| `PortfoliosService` | `com.coinbase.prime.portfolios` |
+| `PositionsService` | `com.coinbase.prime.positions` |
+| `ProductsService` | `com.coinbase.prime.products` |
+| `StakingService` | `com.coinbase.prime.staking` |
+| `TransactionsService` | `com.coinbase.prime.transactions` |
+| `UsersService` | `com.coinbase.prime.users` |
+| `WalletsService` | `com.coinbase.prime.wallets` |
+
 ## Binaries
 
 Binaries and dependency information for Maven, Gradle, Ivy and others can be found at the [Maven Central Repository](https://central.sonatype.com/search?q=g%3Acom.coinbase.prime+a%3Acoinbase-prime-sdk-java&smo=true)
@@ -81,7 +110,7 @@ mvn clean install
 
 ## Running Examples
 
-The SDK includes several example classes demonstrating how to use various endpoints. 
+The SDK includes several example classes demonstrating how to use various endpoints.
 
 ### Setup Environment Variables
 
@@ -133,31 +162,22 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositIn
 mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id WIRE"
 ```
 
-## Model Generation
+## OpenAPI spec
 
-The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.
-
-The OpenAPI spec is fetched automatically from the live API (`https://api.prime.coinbase.com/v1/openapi.yaml`) during model generation and is not committed to source control.
-
-### Generate Models from Root Directory
-
-To generate new models from the OpenAPI spec:
+The SDK tracks the published Prime OpenAPI definition in **apiSpec/prime-public-spec.yaml** (source of truth for endpoints and schemas). Refresh the committed file from the live spec:
 
 ```bash
-mvn -Pgenerate-models
+make fetch-spec
 ```
 
-This command:
-- Runs in **incremental mode** (safe - only creates new models that don't exist)
-- Generates domain models in `src/main/java/com/coinbase/prime/model/`
-- Generates enums in `src/main/java/com/coinbase/prime/model/enums/`
-- Automatically applies SDK conventions (Builder patterns, license headers, etc.)
+Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` ship in the same module and compile with **`mvn compile`**—keep them in sync when the SDK API changes.
 
-### Advanced Model Generation
+## Changelog
 
-For more control over model generation, see the detailed documentation in [`tools/model-generator/README.md`](tools/model-generator/README.md), which covers:
+Release history and API changes are documented in [CHANGELOG.md](CHANGELOG.md).
 
-- Force regenerating all models (dangerous - use with caution)
-- Regenerating specific models
-- Understanding the generation pipeline
-- Troubleshooting generation issues
+## Security and bug reports
+
+If you discover a security vulnerability within this SDK, please see our [Security Policy](SECURITY.md) for disclosure information.
+
+For non-security bugs and feature requests, use [GitHub Issues](https://github.com/coinbase-samples/prime-sdk-java/issues).

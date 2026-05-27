@@ -54,7 +54,9 @@ public class CreateWalletWithdrawal {
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
       CreateWalletWithdrawalResponse response = service.createWalletWithdrawal(
-          new CreateWalletWithdrawalRequest.Builder(portfolioId, walletId)
+          new CreateWalletWithdrawalRequest.Builder()
+              .portfolioId(portfolioId)
+              .walletId(walletId)
               .amount(amount)
               .currencySymbol(currencySymbol)
               .destinationType(DestinationType.DESTINATION_BLOCKCHAIN)

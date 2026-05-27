@@ -48,7 +48,9 @@ public class CreateWalletTransfer {
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
       CreateWalletTransferResponse response = service.createWalletTransfer(
-          new CreateWalletTransferRequest.Builder(portfolioId, sourceWalletId)
+          new CreateWalletTransferRequest.Builder()
+              .portfolioId(portfolioId)
+              .walletId(sourceWalletId)
               .amount(amount)
               .currencySymbol(currencySymbol)
               .destination(destinationWalletId)

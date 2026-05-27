@@ -20,8 +20,8 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.CandlesGranularity;
-import com.coinbase.prime.products.ListCandlesRequest;
-import com.coinbase.prime.products.ListCandlesResponse;
+import com.coinbase.prime.products.GetCandlesRequest;
+import com.coinbase.prime.products.GetCandlesResponse;
 import com.coinbase.prime.products.ProductsService;
 import com.coinbase.prime.utils.Utils;
 
@@ -45,8 +45,8 @@ public class ListCandles {
           + ", End: " + endTime);
 
       ProductsService service = PrimeServiceFactory.createProductsService(client);
-      ListCandlesResponse response = service.listCandles(
-          new ListCandlesRequest.Builder()
+      GetCandlesResponse response = service.getCandles(
+          new GetCandlesRequest.Builder()
               .portfolioId(portfolioId)
               .productId(productId)
               .startTime(startTime)
