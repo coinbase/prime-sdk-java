@@ -34,19 +34,19 @@ import java.util.Arrays;
      * FcmTradingSessionDetails contains trading session details for FCM products
      */
 public class FcmTradingSessionDetails {
-        /**
+    /**
      * Whether the trading session is currently open
      */
     @JsonProperty("session_open")
     private boolean sessionOpen;
 
-        /**
+    /**
      * Trading session open time
      */
     @JsonProperty("open_time")
     private OffsetDateTime openTime;
 
-        /**
+    /**
      * Trading session close time
      */
     @JsonProperty("close_time")
@@ -58,7 +58,7 @@ public class FcmTradingSessionDetails {
     @JsonProperty("session_state")
     private FcmTradingSessionState sessionState;
 
-        /**
+    /**
      * Whether after-hours order entry is disabled
      */
     @JsonProperty("after_hours_order_entry_disabled")
@@ -76,13 +76,13 @@ public class FcmTradingSessionDetails {
     @JsonProperty("maintenance")
     private FcmScheduledMaintenance maintenance;
 
-        /**
+    /**
      * Settlement timestamp from previous trading day
      */
     @JsonProperty("settlement_timestamp")
     private OffsetDateTime settlementTimestamp;
 
-        /**
+    /**
      * Settlement price from previous trading day
      */
     @JsonProperty("settlement_price")

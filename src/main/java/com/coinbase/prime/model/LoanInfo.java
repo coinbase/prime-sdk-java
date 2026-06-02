@@ -27,31 +27,31 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class LoanInfo {
-        /**
+    /**
      * The unique ID of the portfolio
      */
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
-        /**
+    /**
      * The currency symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-        /**
+    /**
      * Balance amount
      */
     @JsonProperty("amount")
     private String amount;
 
-        /**
+    /**
      * Notional balance amount
      */
     @JsonProperty("notional_amount")
     private String notionalAmount;
 
-        /**
+    /**
      * Settlement due date
      */
     @JsonProperty("due_date")

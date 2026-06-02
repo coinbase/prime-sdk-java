@@ -60,13 +60,13 @@ public class CrossMarginOverview {
     @JsonProperty("margin_summary")
     private XmSummary marginSummary;
 
-        /**
+    /**
      * List of active XM margin calls
      */
     @JsonProperty("active_margin_calls")
     private List<XmMarginCall> activeMarginCalls;
 
-        /**
+    /**
      * List of active XM loans
      */
     @JsonProperty("active_loans")

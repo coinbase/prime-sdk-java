@@ -31,73 +31,73 @@ public class NetworkDetails {
     @JsonProperty("network")
     private Network network;
 
-        /**
+    /**
      * The name of the network
      */
     @JsonProperty("name")
     private String name;
 
-        /**
+    /**
      * The maximum number of decimals supported for this network
      */
     @JsonProperty("max_decimals")
     private String maxDecimals;
 
-        /**
+    /**
      * Indicates whether this network is the default network for the asset
      */
     @JsonProperty("default")
     private boolean _default;
 
-        /**
+    /**
      * Indicates whether this network supports trading
      */
     @JsonProperty("trading_supported")
     private boolean tradingSupported;
 
-        /**
+    /**
      * Indicates whether this network supports vault
      */
     @JsonProperty("vault_supported")
     private boolean vaultSupported;
 
-        /**
+    /**
      * Indicates whether this network supports prime custody
      */
     @JsonProperty("prime_custody_supported")
     private boolean primeCustodySupported;
 
-        /**
+    /**
      * Indicates whether this network requires a destination tag
      */
     @JsonProperty("destination_tag_required")
     private boolean destinationTagRequired;
 
-        /**
+    /**
      * Base URL to our recommended block explorer (crypto only)
      */
     @JsonProperty("network_link")
     private String networkLink;
 
-        /**
+    /**
      * Indicates the symbol that can be used to query other endpoints, related to transactions, wallets, and activities, to get information particularly for this asset on the network
      */
     @JsonProperty("network_scoped_symbol")
     private String networkScopedSymbol;
 
-        /**
+    /**
      * The minimum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets.
      */
     @JsonProperty("min_withdrawal_amount")
     private String minWithdrawalAmount;
 
-        /**
+    /**
      * The platform maximum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets. Note that Prime Transfer policies may override this value.
      */
     @JsonProperty("max_withdrawal_amount")
     private String maxWithdrawalAmount;
 
-        /**
+    /**
      * The minimum deposit amount for this network. Applies to trading, prime custody, and vault wallets.
      */
     @JsonProperty("min_deposit_amount")

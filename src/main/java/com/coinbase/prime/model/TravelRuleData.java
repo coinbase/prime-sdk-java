@@ -49,7 +49,7 @@ public class TravelRuleData {
     @JsonProperty("is_self")
     private boolean isSelf;
 
-        /**
+    /**
      * True if Coinbase is being used as an intermediary for a customer transfer.
      */
     @JsonProperty("is_intermediary")
@@ -61,7 +61,7 @@ public class TravelRuleData {
     @JsonProperty("opt_out_of_ownership_verification")
     private boolean optOutOfOwnershipVerification;
 
-        /**
+    /**
      * Whether the originating VASP attests to verified wallet ownership. When true with is_intermediary, enables automatic VASP data enrichment from the legal entity.
      */
     @JsonProperty("attest_verified_wallet_ownership")

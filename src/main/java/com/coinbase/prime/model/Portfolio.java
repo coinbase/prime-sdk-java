@@ -27,31 +27,31 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Portfolio {
-        /**
+    /**
      * The unique ID of the portfolio
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * The name of the portfolio
      */
     @JsonProperty("name")
     private String name;
 
-        /**
+    /**
      * The ID of the entity to which the portfolio is associated
      */
     @JsonProperty("entity_id")
     private String entityId;
 
-        /**
+    /**
      * The ID of the organization to which the portfolio is associated
      */
     @JsonProperty("organization_id")
     private String organizationId;
 
-        /**
+    /**
      * The name of the entity to which the portfolio is associated
      */
     @JsonProperty("entity_name")

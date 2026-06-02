@@ -31,25 +31,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EntityUser {
-        /**
+    /**
      * The unique ID of the user
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * The name of the user
      */
     @JsonProperty("name")
     private String name;
 
-        /**
+    /**
      * The email of the user
      */
     @JsonProperty("email")
     private String email;
 
-        /**
+    /**
      * The entity to which this user and associated permissions are identified
      */
     @JsonProperty("entity_id")
@@ -61,13 +61,13 @@ public class EntityUser {
     @JsonProperty("role")
     private UserRole role;
 
-        /**
+    /**
      * All primary roles assigned to the user.
      */
     @JsonProperty("roles")
     private List<UserRole> roles;
 
-        /**
+    /**
      * All secondary permissions assigned to the user.
      */
     @JsonProperty("secondary_permissions")

@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Counterparty {
-        /**
+    /**
      * The unique counterparty ID for the portfolio
      */
     @JsonProperty("counterparty_id")

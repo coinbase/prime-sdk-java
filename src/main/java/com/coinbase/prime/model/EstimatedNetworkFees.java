@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class EstimatedNetworkFees {
-        /**
+    /**
      * Estimated lower bound for networks fees (in whole units)
      */
     @JsonProperty("lower_bound")
     private String lowerBound;
 
-        /**
+    /**
      * Estimated upper bound for network fees (in whole units)
      */
     @JsonProperty("upper_bound")

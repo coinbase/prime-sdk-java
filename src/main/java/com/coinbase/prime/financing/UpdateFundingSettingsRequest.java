@@ -26,38 +26,38 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Update Funding Settings
  */
 public class UpdateFundingSettingsRequest {
-        /**
+    /**
      * Prime Entity ID
      */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
-        /**
+    /**
      * Set the Derivatives Funding Portfolio that will be used to fund FCM margin calls and receive excess margin sweeps. Only one portfolio per entity.
      */
     @JsonProperty("designated_funding_portfolio_id")
     private String designatedFundingPortfolioId;
 
-        /**
+    /**
      * When true, USDC in your Derivatives Funding Portfolio will be converted to USD to meet FCM margin calls (Auto-Convert USDC).
      */
     @JsonProperty("automatic_conversion_enabled")
     private Boolean automaticConversionEnabled;
 
-        /**
+    /**
      * When true, Coinbase affiliates may initiate loans on your behalf to meet FCM margin calls, per your Lending agreement. Available to Portfolio Margin or Cross Margin clients only. (Auto-Initiate Loans)
      */
     @JsonProperty("automatic_loan_enabled")
     private Boolean automaticLoanEnabled;
 
-        /**
+    /**
      * When true, any FCM account balance above your margin requirements will be automatically swept back to your Derivatives funding portfolio. (Auto-Return Excess Margin)
      */
     @JsonProperty("automatic_excess_return_enabled")
     private Boolean automaticExcessReturnEnabled;
 
-        /**
+    /**
      * Weekend Buying Power: Setting a target amount to maintain in your Futures account above margin requirements. You can only withdraw funds in excess of this amount.
      */
     @JsonProperty("excess_funds_target_amount")

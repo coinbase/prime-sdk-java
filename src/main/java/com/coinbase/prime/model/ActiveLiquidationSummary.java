@@ -31,7 +31,7 @@ import java.util.Arrays;
      * ActiveLiquidationSummary provides a summary of the active or most recent XM liquidation
      */
 public class ActiveLiquidationSummary {
-        /**
+    /**
      * Financing liquidation UUID
      */
     @JsonProperty("liquidation_id")
@@ -43,7 +43,7 @@ public class ActiveLiquidationSummary {
     @JsonProperty("status")
     private XmLiquidationStatus status;
 
-        /**
+    /**
      * USD notional shortfall amount that triggered the liquidation
      */
     @JsonProperty("shortfall_amount")

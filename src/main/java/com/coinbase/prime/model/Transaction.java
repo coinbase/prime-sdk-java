@@ -39,19 +39,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Transaction {
-        /**
+    /**
      * The ID of the transaction
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * The wallet ID of the transaction
      */
     @JsonProperty("wallet_id")
     private String walletId;
 
-        /**
+    /**
      * The portfolio ID of the transaction
      */
     @JsonProperty("portfolio_id")
@@ -69,25 +69,25 @@ public class Transaction {
     @JsonProperty("status")
     private TransactionStatus status;
 
-        /**
+    /**
      * The asset symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-        /**
+    /**
      * The transaction creation time (as a UTC timestamp)
      */
     @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
-        /**
+    /**
      * The transaction completion time (as a UTC timestamp)
      */
     @JsonProperty("completed_at")
     private OffsetDateTime completedAt;
 
-        /**
+    /**
      * The transaction amount in whole units
      */
     @JsonProperty("amount")
@@ -99,37 +99,37 @@ public class Transaction {
     @JsonProperty("transfer_to")
     private TransferLocation transferTo;
 
-        /**
+    /**
      * The blockchain network fees (in whole units) required in order to broadcast the transaction
      */
     @JsonProperty("network_fees")
     private String networkFees;
 
-        /**
+    /**
      * The fees that the customer paid for the transaction (in whole units)
      */
     @JsonProperty("fees")
     private String fees;
 
-        /**
+    /**
      * The asset in which fees will be paid
      */
     @JsonProperty("fee_symbol")
     private String feeSymbol;
 
-        /**
+    /**
      * The cryptocurrency network transaction hashes/IDs generated upon broadcast
      */
     @JsonProperty("blockchain_ids")
     private List<String> blockchainIds;
 
-        /**
+    /**
      * The 8 character alphanumeric short form id for the transaction
      */
     @JsonProperty("transaction_id")
     private String transactionId;
 
-        /**
+    /**
      * The destination asset symbol
      */
     @JsonProperty("destination_symbol")
@@ -138,13 +138,13 @@ public class Transaction {
     @JsonProperty("estimated_network_fees")
     private EstimatedNetworkFees estimatedNetworkFees;
 
-        /**
+    /**
      * The network name specific to web3/onchain wallet transactions
      */
     @JsonProperty("network")
     private String network;
 
-        /**
+    /**
      * The estimated asset changes (web3)
      */
     @JsonProperty("estimated_asset_changes")
@@ -153,7 +153,7 @@ public class Transaction {
     @JsonProperty("metadata")
     private TransactionMetadata metadata;
 
-        /**
+    /**
      * The idempotency key associated with the transaction creation request
      */
     @JsonProperty("idempotency_key")

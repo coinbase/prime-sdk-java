@@ -27,19 +27,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Commission {
-        /**
+    /**
      * Fee model (all_in or cost_plus)
      */
     @JsonProperty("type")
     private String type;
 
-        /**
+    /**
      * Commission rate (in whole percentage. Commission of 15bps is "0.0015")
      */
     @JsonProperty("rate")
     private String rate;
 
-        /**
+    /**
      * Average 30 days over past 3 months (e.g. 90 days divided by 3)
      */
     @JsonProperty("trading_volume")

@@ -28,13 +28,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TransactionValidator {
-        /**
+    /**
      * The ID of the transaction which staked to this validator
      */
     @JsonProperty("transaction_id")
     private String transactionId;
 
-        /**
+    /**
      * The address (public key) of the validator
      */
     @JsonProperty("validator_address")

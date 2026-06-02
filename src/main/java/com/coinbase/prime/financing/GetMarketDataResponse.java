@@ -26,7 +26,7 @@ import java.util.List;
  * Get Market Data (Beta)
  */
 public class GetMarketDataResponse {
-        /**
+    /**
      * List of market data entries
      */
     @JsonProperty("market_data")

@@ -34,13 +34,13 @@ public class UserAction {
     @JsonProperty("action")
     private Action action;
 
-        /**
+    /**
      * Id of the user who executed the action
      */
     @JsonProperty("user_id")
     private String userId;
 
-        /**
+    /**
      * Time the action was taken
      */
     @JsonProperty("timestamp")

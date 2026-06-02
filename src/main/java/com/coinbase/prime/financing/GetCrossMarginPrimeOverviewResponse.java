@@ -37,7 +37,7 @@ public class GetCrossMarginPrimeOverviewResponse {
     @JsonProperty("margin_level")
     private PrimeXMMarginLevel marginLevel;
 
-        /**
+    /**
      * When margin metrics were evaluated.
      */
     @JsonProperty("evaluated_at")

@@ -70,7 +70,7 @@ public class TravelRuleParty {
     @JsonProperty("vasp_name")
     private String vaspName;
 
-        /**
+    /**
      * Personal identifier for travel rule compliance. For individuals: passport number, national ID, driver's license. For institutions: LEI (Legal Entity Identifier).
      */
     @JsonProperty("personal_id")
@@ -79,13 +79,13 @@ public class TravelRuleParty {
     @JsonProperty("date_of_birth")
     private DateOfBirth dateOfBirth;
 
-        /**
+    /**
      * Telephone number for contact purposes.
      */
     @JsonProperty("telephone_number")
     private String telephoneNumber;
 
-        /**
+    /**
      * Account identifier for travel rule compliance. If not provided, defaults to portfolio ID.
      */
     @JsonProperty("account_id")

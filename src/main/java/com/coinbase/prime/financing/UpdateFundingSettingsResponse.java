@@ -22,19 +22,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Update Funding Settings
  */
 public class UpdateFundingSettingsResponse {
-        /**
+    /**
      * Identifier for the created activity / proposal
      */
     @JsonProperty("activity_id")
     private String activityId;
 
-        /**
+    /**
      * Type of the activity (e.g. PCS proposal type)
      */
     @JsonProperty("activity_type")
     private String activityType;
 
-        /**
+    /**
      * Number of approvals still required before the change applies
      */
     @JsonProperty("num_approvals_remaining")

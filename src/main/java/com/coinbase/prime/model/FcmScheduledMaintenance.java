@@ -31,13 +31,13 @@ import java.util.Arrays;
      * FcmScheduledMaintenance contains scheduled maintenance window information
      */
 public class FcmScheduledMaintenance {
-        /**
+    /**
      * Maintenance window start time
      */
     @JsonProperty("start_time")
     private OffsetDateTime startTime;
 
-        /**
+    /**
      * Maintenance window end time
      */
     @JsonProperty("end_time")

@@ -33,13 +33,13 @@ public class CommissionDetailTotal {
     @JsonProperty("total_commission")
     private String totalCommission;
 
-        /**
+    /**
      * CB fee
      */
     @JsonProperty("client_commission")
     private String clientCommission;
 
-        /**
+    /**
      * Exchange fees
      */
     @JsonProperty("venue_commission")
@@ -57,13 +57,13 @@ public class CommissionDetailTotal {
     @JsonProperty("financing_commission")
     private String financingCommission;
 
-        /**
+    /**
      * NFA fees
      */
     @JsonProperty("regulatory_commission")
     private String regulatoryCommission;
 
-        /**
+    /**
      * Clearing fees
      */
     @JsonProperty("clearing_commission")

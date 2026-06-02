@@ -37,13 +37,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Activity {
-        /**
+    /**
      * A unique id for the account activity
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * A reference for orders and transactions, n/a for other category types
      */
     @JsonProperty("reference_id")
@@ -64,25 +64,25 @@ public class Activity {
     @JsonProperty("status")
     private ActivityStatus status;
 
-        /**
+    /**
      * Id of user who created the activity
      */
     @JsonProperty("created_by")
     private String createdBy;
 
-        /**
+    /**
      * Title of the activity
      */
     @JsonProperty("title")
     private String title;
 
-        /**
+    /**
      * Description detail of the activity
      */
     @JsonProperty("description")
     private String description;
 
-        /**
+    /**
      * Actions related to the Activity
      */
     @JsonProperty("user_actions")
@@ -97,19 +97,19 @@ public class Activity {
     @JsonProperty("orders_metadata")
     private Object ordersMetadata;
 
-        /**
+    /**
      * List of currencies included in an activity
      */
     @JsonProperty("symbols")
     private List<String> symbols;
 
-        /**
+    /**
      * Time activity was created at
      */
     @JsonProperty("created_at")
     private String createdAt;
 
-        /**
+    /**
      * Time for latest status update of account activity
      */
     @JsonProperty("updated_at")

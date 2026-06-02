@@ -33,13 +33,13 @@ import java.util.List;
      * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet. Requirements and supported fields vary by asset type.
      */
 public class WalletUnstakeInputs {
-        /**
+    /**
      * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available
      */
     @JsonProperty("amount")
     private String amount;
 
-        /**
+    /**
      * (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which validators to unstake from and how much. This feature is in alpha. Please reach out to your Coinbase Prime account manager for more information
      */
     @JsonProperty("validator_allocations")

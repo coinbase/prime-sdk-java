@@ -26,7 +26,7 @@ import java.util.List;
  * Get Cross Margin Risk Parameters (Beta)
  */
 public class GetCrossMarginRiskParametersResponse {
-        /**
+    /**
      * Current XM tier risk parameters for the entity's client tier.
      */
     /**
@@ -35,7 +35,7 @@ public class GetCrossMarginRiskParametersResponse {
     @JsonProperty("risk_parameters")
     private List<CrossMarginRiskParameters> riskParameters;
 
-        /**
+    /**
      * Offset credit rate matrix for long/short tier pairs.
      */
     /**
@@ -44,7 +44,7 @@ public class GetCrossMarginRiskParametersResponse {
     @JsonProperty("offset_credit_matrix_long_short")
     private List<TierPairRateEntry> offsetCreditMatrixLongShort;
 
-        /**
+    /**
      * Offset credit rate matrix for long/long tier pairs.
      */
     /**
@@ -53,7 +53,7 @@ public class GetCrossMarginRiskParametersResponse {
     @JsonProperty("offset_credit_matrix_long_long")
     private List<TierPairRateEntry> offsetCreditMatrixLongLong;
 
-        /**
+    /**
      * Offset credit rate matrix for short/short tier pairs.
      */
     /**
@@ -62,7 +62,7 @@ public class GetCrossMarginRiskParametersResponse {
     @JsonProperty("offset_credit_matrix_short_short")
     private List<TierPairRateEntry> offsetCreditMatrixShortShort;
 
-        /**
+    /**
      * Margin period of risk (number of days).
      */
     /**

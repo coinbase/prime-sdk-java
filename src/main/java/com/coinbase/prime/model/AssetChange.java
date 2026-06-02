@@ -36,13 +36,13 @@ public class AssetChange {
     @JsonProperty("type")
     private AssetChangeType type;
 
-        /**
+    /**
      * The currency symbol associated with the balance operation
      */
     @JsonProperty("symbol")
     private String symbol;
 
-        /**
+    /**
      * The amount in whole units being transferred or approved
      */
     @JsonProperty("amount")

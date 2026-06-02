@@ -28,13 +28,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class MarginSummaryHistorical {
-        /**
+    /**
      * The UTC date time used for conversion
      */
     @JsonProperty("conversion_datetime")
     private String conversionDatetime;
 
-        /**
+    /**
      * The date used for conversion
      */
     @JsonProperty("conversion_date")

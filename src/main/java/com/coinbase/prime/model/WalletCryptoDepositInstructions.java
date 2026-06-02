@@ -29,13 +29,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class WalletCryptoDepositInstructions {
-        /**
+    /**
      * The ID of the wallet
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * The name of the wallet
      */
     @JsonProperty("name")
@@ -47,19 +47,19 @@ public class WalletCryptoDepositInstructions {
     @JsonProperty("type")
     private WalletDepositInstructionType type;
 
-        /**
+    /**
      * The address of the wallet
      */
     @JsonProperty("address")
     private String address;
 
-        /**
+    /**
      * The tag/memo of the address, if applicable -- required for certain assets (e.g. XRP, XLM, etc.)
      */
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
-        /**
+    /**
      * The blockchain network's terminology for the unique identifier used to identify the receiver of the transaction (different blockchain networks use different names, such as &#x60;destination_tag&#x60; or &#x60;memo&#x60;)
      */
     @JsonProperty("account_identifier_name")

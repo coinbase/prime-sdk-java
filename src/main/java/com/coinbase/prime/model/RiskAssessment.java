@@ -30,13 +30,13 @@ import java.util.Arrays;
      * New message for risk assessment details
      */
 public class RiskAssessment {
-        /**
+    /**
      * Indicates if the transaction has been flagged for compliance concerns
      */
     @JsonProperty("compliance_risk_detected")
     private boolean complianceRiskDetected;
 
-        /**
+    /**
      * Indicates if the transaction has been flagged for security concerns
      */
     @JsonProperty("security_risk_detected")

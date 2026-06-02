@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MarginInformation {
-        /**
+    /**
      * The current margin call records
      */
     @JsonProperty("margin_call_records")

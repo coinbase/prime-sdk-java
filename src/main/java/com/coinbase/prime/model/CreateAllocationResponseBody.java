@@ -27,19 +27,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class CreateAllocationResponseBody {
-        /**
+    /**
      * The success boolean for the post allocation
      */
     @JsonProperty("success")
     private boolean success;
 
-        /**
+    /**
      * The allocation id for the post allocation
      */
     @JsonProperty("allocation_id")
     private String allocationId;
 
-        /**
+    /**
      * The failure reason for the post allocation
      */
     @JsonProperty("failure_reason")

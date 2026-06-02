@@ -27,19 +27,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DisplayUser {
-        /**
+    /**
      * User UUID
      */
     @JsonProperty("id")
     private String id;
 
-        /**
+    /**
      * User full name
      */
     @JsonProperty("name")
     private String name;
 
-        /**
+    /**
      * User avatar URL
      */
     @JsonProperty("avatar_url")
