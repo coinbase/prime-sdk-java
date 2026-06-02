@@ -20,7 +20,7 @@ import com.coinbase.prime.model.CrossMarginOverview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Get Cross Margin Overview
+ * Get Exchange Cross Margin Overview
  */
 public class GetCrossMarginOverviewResponse {
     @JsonProperty("overview")

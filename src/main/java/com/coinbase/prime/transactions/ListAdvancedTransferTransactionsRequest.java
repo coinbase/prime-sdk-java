@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
     /**
-     * List transactions associated with an Advanced Transfer
-     */
+ * List transactions associated with an Advanced Transfer
+ */
 public class ListAdvancedTransferTransactionsRequest {
     /**
      * The portfolio ID

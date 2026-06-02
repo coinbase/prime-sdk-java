@@ -20,7 +20,7 @@ import com.coinbase.prime.model.TravelRuleParty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Get Transaction Travel Rule Data
+ * Response containing fulfilled travel rule data for a transaction
  */
 public class GetTransactionTravelRuleDataResponse {
     /**

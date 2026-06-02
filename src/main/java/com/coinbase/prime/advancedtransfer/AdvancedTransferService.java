@@ -23,22 +23,19 @@ public interface AdvancedTransferService {
     /**
      * List Advanced Transfers
      */
-ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Create Advanced Transfer
      */
-CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Cancel Advanced Transfer
      */
-CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * List transactions associated with an Advanced Transfer
      */
-ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     /**
      * @deprecated Prefer {@link com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId(com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdRequest)}

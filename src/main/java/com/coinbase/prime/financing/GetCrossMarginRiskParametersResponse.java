@@ -23,11 +23,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
     /**
-     * Get Cross Margin Risk Parameters
-     */
+ * Get Cross Margin Risk Parameters (Beta)
+ */
 public class GetCrossMarginRiskParametersResponse {
         /**
      * Current XM tier risk parameters for the entity's client tier.
+     */
+    /**
+     * Current XM tier risk parameters for the entity's client tier
      */
     @JsonProperty("risk_parameters")
     private List<CrossMarginRiskParameters> riskParameters;
@@ -35,11 +38,17 @@ public class GetCrossMarginRiskParametersResponse {
         /**
      * Offset credit rate matrix for long/short tier pairs.
      */
+    /**
+     * Offset credit rate matrix for long/short tier pairs
+     */
     @JsonProperty("offset_credit_matrix_long_short")
     private List<TierPairRateEntry> offsetCreditMatrixLongShort;
 
         /**
      * Offset credit rate matrix for long/long tier pairs.
+     */
+    /**
+     * Offset credit rate matrix for long/long tier pairs
      */
     @JsonProperty("offset_credit_matrix_long_long")
     private List<TierPairRateEntry> offsetCreditMatrixLongLong;
@@ -47,11 +56,17 @@ public class GetCrossMarginRiskParametersResponse {
         /**
      * Offset credit rate matrix for short/short tier pairs.
      */
+    /**
+     * Offset credit rate matrix for short/short tier pairs
+     */
     @JsonProperty("offset_credit_matrix_short_short")
     private List<TierPairRateEntry> offsetCreditMatrixShortShort;
 
         /**
      * Margin period of risk (number of days).
+     */
+    /**
+     * Margin period of risk (number of days)
      */
     @JsonProperty("margin_period_of_risk")
     private Double marginPeriodOfRisk;

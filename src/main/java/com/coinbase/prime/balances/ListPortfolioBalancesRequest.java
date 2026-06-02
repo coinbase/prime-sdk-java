@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * List Portfolio Balances
+ * List Entity Balances
  */
 public class ListPortfolioBalancesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")

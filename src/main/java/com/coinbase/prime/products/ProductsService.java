@@ -24,6 +24,5 @@ public interface ProductsService {
     /**
      * Get Public Product Candles (Beta)
      */
-GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

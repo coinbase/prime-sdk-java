@@ -22,8 +22,8 @@ import com.coinbase.prime.model.enums.PrimeXMMarginLevel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
     /**
-     * Get Exchange Cross Margin Overview
-     */
+ * Get Exchange Cross Margin Overview
+ */
 public class GetCrossMarginPrimeOverviewResponse {
     /**
      * - TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled. - TRADES_ONLY: Allowed to trade but not withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled. - SESSION_LOCKED: Not allowed to trade or withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.

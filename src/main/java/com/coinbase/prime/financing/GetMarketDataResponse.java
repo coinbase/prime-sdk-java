@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
     /**
-     * Get Market Data
-     */
+ * Get Market Data (Beta)
+ */
 public class GetMarketDataResponse {
         /**
      * List of market data entries

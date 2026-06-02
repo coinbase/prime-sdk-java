@@ -20,7 +20,7 @@ import com.coinbase.prime.model.Transaction;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * List transactions associated with an Advanced Transfer
+ * ListAdvancedTransferTransactionsResponse contains the transactions associated with an advanced transfer.
  */
 public class ListAdvancedTransferTransactionsResponse {
     /**

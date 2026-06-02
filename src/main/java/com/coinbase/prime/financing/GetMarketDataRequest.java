@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Get Market Data
+ * Get Market Data (Beta)
  */
 public class GetMarketDataRequest extends PrimeListRequest {
         /**

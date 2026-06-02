@@ -19,7 +19,7 @@ package com.coinbase.prime.transactions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Submit Deposit Travel Rule Data
+ * Response after submitting travel rule data for a deposit
  */
 public class SubmitDepositTravelRuleDataResponse {
     /**

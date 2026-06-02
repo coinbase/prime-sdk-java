@@ -23,6 +23,5 @@ public interface CommissionService {
     /**
      * Get Portfolio Commission
      */
-GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Get Cross Margin Overview
+ * Get Exchange Cross Margin Overview
  */
 public class GetCrossMarginOverviewRequest {
     /**

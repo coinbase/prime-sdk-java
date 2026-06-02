@@ -19,8 +19,8 @@ package com.coinbase.prime.transactions;
 import com.coinbase.prime.model.Transaction;
 
     /**
-     * ListAdvancedTransferTransactionsResponse contains the transactions associated with an advanced transfer.
-     */
+ * ListAdvancedTransferTransactionsResponse contains the transactions associated with an advanced transfer.
+ */
 public class ListAdvancedTransferTransactionsResponse {
     private Transaction[] transactions;
 

@@ -20,7 +20,7 @@ import com.coinbase.prime.model.TfAsset;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * List Financing Eligible Assets
+ * ListFinancingEligibleAssetsResponse contains the list of financing eligible assets with their details
  */
 public class ListFinancingEligibleAssetsResponse {
     /**

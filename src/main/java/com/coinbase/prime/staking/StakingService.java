@@ -26,31 +26,25 @@ public interface StakingService {
     /**
      * List Transaction Validators
      */
-ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Request to stake currency in a portfolio
      */
-PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Request to unstake currency across a portfolio
      */
-PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Get Staking Status
      */
-GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Get Unstaking Status
      */
-GetUnstakingStatusResponse getUnstakingStatus(GetUnstakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    GetUnstakingStatusResponse getUnstakingStatus(GetUnstakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
      * Preview Unstake
      */
-PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+    PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

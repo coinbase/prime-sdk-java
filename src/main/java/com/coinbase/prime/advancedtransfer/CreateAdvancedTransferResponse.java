@@ -20,7 +20,7 @@ import com.coinbase.prime.model.AdvancedTransfer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Create Advanced Transfer
+ * CreateAdvancedTransferResponse is the response after creating an advanced transfer.
  */
 public class CreateAdvancedTransferResponse {
     /**

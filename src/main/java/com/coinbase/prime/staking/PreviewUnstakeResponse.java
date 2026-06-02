@@ -20,7 +20,7 @@ import com.coinbase.prime.model.ValidatorUnstakePreview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Preview Unstake
+ * PreviewUnstakeResponse contains the response data from previewing an unstaking operation.
  */
 public class PreviewUnstakeResponse {
     /**

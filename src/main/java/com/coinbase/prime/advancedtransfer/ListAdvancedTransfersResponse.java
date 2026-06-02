@@ -21,7 +21,7 @@ import com.coinbase.prime.common.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * List Advanced Transfers
+ * ListAdvancedTransfersResponse contains the list of advanced transfers and pagination info.
  */
 public class ListAdvancedTransfersResponse {
     @JsonProperty("advanced_transfers")
