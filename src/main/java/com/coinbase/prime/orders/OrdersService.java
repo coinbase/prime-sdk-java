@@ -20,15 +20,31 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface OrdersService {
-    AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Accept Quote
+     */
+AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Create Order
+     */
+CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    EditOrderResponse editOrder(EditOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Cancel Order
+     */
+CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Edit Order (Beta)
+     */
+EditOrderResponse editOrder(EditOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;

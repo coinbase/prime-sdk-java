@@ -30,43 +30,82 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Order
  */
 public class CreateOrderRequest {
+    /**
+     * The ID of the portfolio that owns the order
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the product being traded for the order (e.g. &#x60;BTC-USD&#x60;)
+     */
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
+     */
     @JsonProperty("side")
     private OrderSide side;
 
+    /**
+     * A client-generated order ID used for reference purposes
+     */
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
+    /**
+     * - UNKNOWN_ORDER_TYPE: nil value - MARKET: A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order) - LIMIT: A [limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order) - TWAP: A [time-weighted average price order](https://en.wikipedia.org/wiki/Time-weighted_average_price) - BLOCK: A [block trade](https://en.wikipedia.org/wiki/Block_trade) - VWAP: A [volume-weighted average price order](https://en.wikipedia.org/wiki/Volume-weighted_average_price) - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order) - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote) - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+     */
     @JsonProperty("type")
     private OrderType type;
 
+    /**
+     * Order size in base asset units (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required)
+     */
     @JsonProperty("base_quantity")
     private String baseQuantity;
 
+    /**
+     * Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or receive (when selling); the quantity in base units will be determined based on the market liquidity and indicated &#x60;quote_value&#x60; (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required)
+     */
     @JsonProperty("quote_value")
     private String quoteValue;
 
+    /**
+     * The limit price (required for TWAP, VWAP, LIMIT, and STOP_LIMIT orders)
+     */
     @JsonProperty("limit_price")
     private String limitPrice;
 
+    /**
+     * The start time of the order in UTC (TWAP only)
+     */
     @JsonProperty("start_time")
     private String startTime;
 
+    /**
+     * The expiry time of the order in UTC (TWAP, VWAP, LIMIT, and STOP_LIMIT GTD only)
+     */
     @JsonProperty("expiry_time")
     private String expiryTime;
 
+    /**
+     * - UNKNOWN_TIME_IN_FORCE: nil value - GOOD_UNTIL_DATE_TIME: Expires at a certain date/time - GOOD_UNTIL_CANCELLED: Order stays on the books until cancelled - IMMEDIATE_OR_CANCEL: Order is executed immediately at submission or is cancelled - FILL_OR_KILL: Order is executed immediately and fully at submission or is cancelled
+     */
     @JsonProperty("time_in_force")
     private TimeInForceType timeInForce;
 
+    /**
+     * An optional self trade prevention id (in the form of a UUID). The value is only honored for certain clients who are permitted to specify a custom self trade prevention id
+     */
     @JsonProperty("stp_id")
     private String stpId;
 
+    /**
+     * Optionally specify a display size. This is the maximum order size that will show up on venue order books. Specifying a value here effectively makes a LIMIT order into an "iceberg" style order. This property only applies to LIMIT orders and will be ignored for other order types.
+     */
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
 
@@ -76,24 +115,45 @@ public class CreateOrderRequest {
     @JsonProperty("is_raise_exact")
     private boolean isRaiseExact;
 
+    /**
+     * Historical percentage of volume
+     */
     @JsonProperty("historical_pov")
     private String historicalPov;
 
+    /**
+     * Specifies the stop price at which the order activates. The order is activated if the last trade price on Coinbase Exchange crosses the stop price specified on the order
+     */
     @JsonProperty("stop_price")
     private String stopPrice;
 
+    /**
+     * The currency in which the settlement will be made
+     */
     @JsonProperty("settl_currency")
     private String settlCurrency;
 
+    /**
+     * Post-only flag - when true, the order will only be posted to the order book and not immediately matched. Only applicable to LIMIT orders with GTC or GTD time in force.
+     */
     @JsonProperty("post_only")
     private Boolean postOnly;
 
+    /**
+     * - UNKNOWN_PEG_OFFSET_TYPE: nil value - PEG_OFFSET_TYPE_PRICE: Offset specified in price units - PEG_OFFSET_TYPE_BPS: Offset specified in basis points (BPS) - PEG_OFFSET_TYPE_DEPTH: Offset specified in depth
+     */
     @JsonProperty("peg_offset_type")
     private PegOffsetType pegOffsetType;
 
+    /**
+     * Offset value for PEG orders. 0 means peg to BBO. Only non-negative values are allowed (PEG orders only)
+     */
     @JsonProperty("offset")
     private String offset;
 
+    /**
+     * next: 23
+     */
     @JsonProperty("wig_level")
     private String wigLevel;
 

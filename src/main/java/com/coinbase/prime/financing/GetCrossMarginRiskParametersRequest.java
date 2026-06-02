@@ -26,8 +26,8 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Cross Margin Risk Parameters
  */
 public class GetCrossMarginRiskParametersRequest {
-    /**
-     * XM customer Prime Entity ID
+        /**
+     * XM customer Prime Entity ID.
      */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore

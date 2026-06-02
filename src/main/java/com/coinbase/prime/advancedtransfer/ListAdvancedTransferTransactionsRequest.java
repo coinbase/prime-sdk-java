@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List transactions associated with an Advanced Transfer
  */
 public class ListAdvancedTransferTransactionsRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the Advanced Transfer
+     */
     @JsonProperty(required = true, value = "advanced_transfer_id")
     @JsonIgnore
     private String advancedTransferId;

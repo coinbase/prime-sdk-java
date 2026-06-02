@@ -27,6 +27,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Invoice item
+     */
 public class InvoiceItem {
     @JsonProperty("description")
     private String description;
@@ -34,6 +37,9 @@ public class InvoiceItem {
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    /**
+     * Types
+     */
     @JsonProperty("invoice_type")
     private InvoiceType invoiceType;
 

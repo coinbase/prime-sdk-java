@@ -22,24 +22,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Create Conversion
  */
 public class CreateConversionResponse {
+    /**
+     * The activity ID for the conversion
+     */
     @JsonProperty("activity_id")
     private String activityId;
 
+    /**
+     * The currency symbol to convert from
+     */
     @JsonProperty("source_symbol")
     private String sourceSymbol;
 
+    /**
+     * The currency symbol to convert to
+     */
     @JsonProperty("destination_symbol")
     private String destinationSymbol;
 
+    /**
+     * The amount in whole units to convert
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * The UUID of the destination wallet
+     */
     @JsonProperty("destination")
     private String destination;
 
+    /**
+     * The UUID of the source wallet
+     */
     @JsonProperty("source")
     private String source;
 
+    /**
+     * The UUID of the conversion transaction
+     */
     @JsonProperty("transaction_id")
     private String transactionId;
 

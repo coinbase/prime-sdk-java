@@ -26,6 +26,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Cancel Entity Futures Sweep
  */
 public class CancelEntityFuturesSweepRequest {
+    /**
+     * Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

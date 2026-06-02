@@ -27,28 +27,55 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
+    /**
+     * LimitOrderEdit represents an order edit that is accepted
+     */
 public class LimitOrderEdit {
+    /**
+     * New price for the edited order
+     */
     @JsonProperty("price")
     private String price;
 
+    /**
+     * New size for the edited order
+     */
     @JsonProperty("size")
     private String size;
 
+    /**
+     * New display size for the edited order
+     */
     @JsonProperty("display_size")
     private String displaySize;
 
+    /**
+     * New stop price for the edited order
+     */
     @JsonProperty("stop_price")
     private String stopPrice;
 
+    /**
+     * New stop limit price for the edited order
+     */
     @JsonProperty("stop_limit_price")
     private String stopLimitPrice;
 
+    /**
+     * New end time for the edited order
+     */
     @JsonProperty("end_time")
     private OffsetDateTime endTime;
 
+    /**
+     * Time when the edit was accepted
+     */
     @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
+    /**
+     * Client order id of the order being replaced
+     */
     @JsonProperty("client_order_id")
     private String clientOrderId;
 

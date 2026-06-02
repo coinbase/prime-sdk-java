@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class PositionReference {
-    /**
+        /**
      * Reference ID
      */
     @JsonProperty("id")

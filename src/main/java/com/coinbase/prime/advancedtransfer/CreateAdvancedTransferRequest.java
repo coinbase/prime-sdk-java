@@ -27,10 +27,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Advanced Transfer
  */
 public class CreateAdvancedTransferRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * AdvancedTransfer represents a complex transfer operation such as a blind match settlement.
+     */
     @JsonProperty("advanced_transfer")
     private AdvancedTransfer advancedTransfer;
 

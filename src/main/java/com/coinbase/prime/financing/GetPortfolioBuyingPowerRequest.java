@@ -26,13 +26,22 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Portfolio Buying Power
  */
 public class GetPortfolioBuyingPowerRequest {
+    /**
+     * The unique ID of the portfolio
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The symbol for the base currency
+     */
     @JsonProperty("base_currency")
     private String baseCurrency;
 
+    /**
+     * The symbol for the quote currency
+     */
     @JsonProperty("quote_currency")
     private String quoteCurrency;
 

@@ -26,6 +26,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Cross Margin Overview
  */
 public class GetCrossMarginOverviewRequest {
+    /**
+     * XM customer Prime Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

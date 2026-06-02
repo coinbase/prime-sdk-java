@@ -20,9 +20,21 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AllocationsService {
-    CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Create Portfolio Allocations
+     */
+CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Create Portfolio Net Allocations
+     */
+CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListAllocationsByNettingIdResponse listAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Get Allocation by ID
+     */
+GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

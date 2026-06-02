@@ -27,32 +27,35 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class PerpetualProductDetails {
     /**
+     * PerpetualProductDetails contains details specific to perpetual futures products
+     */
+public class PerpetualProductDetails {
+        /**
      * Open interest
      */
     @JsonProperty("open_interest")
     private String openInterest;
 
-    /**
+        /**
      * Current funding rate
      */
     @JsonProperty("funding_rate")
     private String fundingRate;
 
-    /**
+        /**
      * Next funding time
      */
     @JsonProperty("funding_time")
     private OffsetDateTime fundingTime;
 
-    /**
+        /**
      * Maximum leverage allowed
      */
     @JsonProperty("max_leverage")
     private String maxLeverage;
 
-    /**
+        /**
      * The type of underlying for the perpetual product
      */
     @JsonProperty("underlying_type")

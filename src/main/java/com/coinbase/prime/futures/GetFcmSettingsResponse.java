@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get FCM Settings
  */
 public class GetFcmSettingsResponse {
+    /**
+     * Target derivatives excess in the FCM
+     */
     @JsonProperty("target_derivatives_excess")
     private String targetDerivativesExcess;
 

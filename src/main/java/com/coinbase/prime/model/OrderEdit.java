@@ -28,30 +28,57 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class OrderEdit {
+    /**
+     * New price for the edited order
+     */
     @JsonProperty("price")
     private String price;
 
+    /**
+     * New base quantity for the edited order, populated if order is in base size
+     */
     @JsonProperty("base_quantity")
     private String baseQuantity;
 
+    /**
+     * New quote value for the edited order, populated if order is in quote size
+     */
     @JsonProperty("quote_value")
     private String quoteValue;
 
+    /**
+     * Display base size for the edited order, populated if order is in base size
+     */
     @JsonProperty("display_base_size")
     private String displayBaseSize;
 
+    /**
+     * Display quote size for the edited order, populated if order is in quote size
+     */
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
 
+    /**
+     * New stop price for the edited order
+     */
     @JsonProperty("stop_price")
     private String stopPrice;
 
+    /**
+     * New expiry/end time for the edited order
+     */
     @JsonProperty("expiry_time")
     private OffsetDateTime expiryTime;
 
+    /**
+     * Time when the edit was accepted
+     */
     @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
+    /**
+     * The new client order identifier that the order adopted after the replacement was successfully accepted
+     */
     @JsonProperty("client_order_id")
     private String clientOrderId;
 

@@ -26,13 +26,22 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Schedule Entity Futures Sweep
  */
 public class ScheduleEntityFuturesSweepRequest {
+    /**
+     * Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    /**
+     * Amount. Default to sweep all if not provided
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * Currency. Required
+     */
     @JsonProperty("currency")
     private String currency;
 

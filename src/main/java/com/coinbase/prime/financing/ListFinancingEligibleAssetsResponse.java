@@ -23,6 +23,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Financing Eligible Assets
  */
 public class ListFinancingEligibleAssetsResponse {
+    /**
+     * List of assets eligible for Trade Finance
+     */
     @JsonProperty("assets")
     private TfAsset[] assets;
 

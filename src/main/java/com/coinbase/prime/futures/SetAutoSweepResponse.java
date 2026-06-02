@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Set Auto Sweep
  */
 public class SetAutoSweepResponse {
+    /**
+     * Success
+     */
     @JsonProperty("success")
     private Boolean success;
 

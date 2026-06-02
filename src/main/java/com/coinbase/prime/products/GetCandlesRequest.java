@@ -27,19 +27,34 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Public Product Candles (Beta)
  */
 public class GetCandlesRequest {
+    /**
+     * The portfolio id requesting market data.
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The trading pair.
+     */
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * Timestamp for starting range of aggregations
+     */
     @JsonProperty("start_time")
     private String startTime;
 
+    /**
+     * Timestamp for ending range of aggregations
+     */
     @JsonProperty("end_time")
     private String endTime;
 
+    /**
+     * The timeframe each candle represents.
+     */
     @JsonProperty("granularity")
     private CandlesGranularity granularity;
 

@@ -26,6 +26,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Margin Information
  */
 public class GetMarginInformationRequest {
+    /**
+     * The unique ID of the entity
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

@@ -27,16 +27,28 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Request to unstake currency across a portfolio
  */
 public class PortfolioStakingUnstakeRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The client generated idempotency key (uuid required) for requested execution. Subsequent requests using the same key will not create new transactions.
+     */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    /**
+     * The currency symbol to unstake
+     */
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    /**
+     * The quantity of the chosen currency to unstake
+     */
     @JsonProperty("amount")
     private String amount;
 

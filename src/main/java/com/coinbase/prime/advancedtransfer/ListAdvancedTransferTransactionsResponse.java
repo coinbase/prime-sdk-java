@@ -23,6 +23,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List transactions associated with an Advanced Transfer
  */
 public class ListAdvancedTransferTransactionsResponse {
+    /**
+     * The transactions associated with an Advanced Transfer
+     */
     @JsonProperty("transactions")
     private Transaction[] transactions;
 

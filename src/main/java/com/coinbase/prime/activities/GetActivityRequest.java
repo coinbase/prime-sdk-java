@@ -26,6 +26,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Activity by Activity ID
  */
 public class GetActivityRequest {
+    /**
+     * Id of the activity to retrieve
+     */
     @JsonProperty(required = true, value = "activity_id")
     @JsonIgnore
     private String activityId;

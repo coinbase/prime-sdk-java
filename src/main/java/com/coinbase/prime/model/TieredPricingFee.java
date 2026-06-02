@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TieredPricingFee {
-    /**
+        /**
      * Asset symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
+        /**
      * The fee in bps
      */
     @JsonProperty("fee")

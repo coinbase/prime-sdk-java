@@ -31,46 +31,49 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PortfolioUser {
-    /**
+        /**
      * The unique ID of the user.
      */
     @JsonProperty("id")
     private String id;
 
-    /**
+        /**
      * The name of the user.
      */
     @JsonProperty("name")
     private String name;
 
-    /**
+        /**
      * The email of the user.
      */
     @JsonProperty("email")
     private String email;
 
-    /**
+        /**
      * The portfolio to which this user and associated permissions are identified.
      */
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
-    /**
+        /**
      * The entity to which this user and associated permissions are identified.
      */
     @JsonProperty("entity_id")
     private String entityId;
 
+    /**
+     * - USER_ROLE_UNKNOWN: nil value - AUDITOR: An auditor - SIGNATORY: A signatory - ADMIN: An admin - INITIATOR: An initiator - REVIEWER: A reviewer - TRADER: A trader - FULL_TRADER: A trader with full permissions - TEAM_MANAGER: A team manager - APPROVER: An approver - TAX_MANAGER: A tax manager - BUSINESS_MANAGER: A business manager
+     */
     @JsonProperty("role")
     private UserRole role;
 
-    /**
+        /**
      * All primary roles assigned to the user.
      */
     @JsonProperty("roles")
     private List<UserRole> roles;
 
-    /**
+        /**
      * All secondary permissions assigned to the user.
      */
     @JsonProperty("secondary_permissions")

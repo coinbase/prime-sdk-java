@@ -26,27 +26,30 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class ValidatorUnstakePreview {
     /**
+     * ValidatorUnstakePreview contains the per-validator breakdown for an unstake preview.
+     */
+public class ValidatorUnstakePreview {
+        /**
      * Public address of the validator being unstaked from
      */
     @JsonProperty("validator_address")
     private String validatorAddress;
 
-    /**
+        /**
      * Estimated amount that would be unstaked from this validator (in ETH)
      */
     @JsonProperty("estimated_unstaking_amount")
     private String estimatedUnstakingAmount;
 
-    /**
-     * Estimated time until this validator&#39;s unstake completes, in hours
+        /**
+     * Estimated time until this validator's unstake completes, in hours
      */
     @JsonProperty("unstake_time_estimate_in_hours")
     private Double unstakeTimeEstimateInHours;
 
-    /**
-     * Estimated date when this validator&#39;s unstake will complete (ISO 8601)
+        /**
+     * Estimated date when this validator's unstake will complete (ISO 8601)
      */
     @JsonProperty("estimated_unstake_date")
     private String estimatedUnstakeDate;

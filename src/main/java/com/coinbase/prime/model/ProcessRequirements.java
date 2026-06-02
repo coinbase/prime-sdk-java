@@ -27,7 +27,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Represents the status of various process requirements for a transaction
+     */
 public class ProcessRequirements {
+    /**
+     * Travel rule compliance status for a transaction
+     */
     @JsonProperty("travel_rule_status")
     private TravelRuleStatus travelRuleStatus;
 

@@ -29,51 +29,57 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainTransactionDetails {
-    /**
+        /**
      * The signed transaction data
      */
     @JsonProperty("signed_transaction")
     private String signedTransaction;
 
+    /**
+     * New message for risk assessment details
+     */
     @JsonProperty("risk_assessment")
     private RiskAssessment riskAssessment;
 
-    /**
+        /**
      * The blockchain network chain ID. Will be empty for Solana transactions.
      */
     @JsonProperty("chain_id")
     private String chainId;
 
-    /**
+        /**
      * The transaction nonce. Only present for EVM-based blockchain transactions.
      */
     @JsonProperty("nonce")
     private String nonce;
 
-    /**
+        /**
      * The ID of the transaction that this transaction replaced
      */
     @JsonProperty("replaced_transaction_id")
     private String replacedTransactionId;
 
-    /**
+        /**
      * The destination address for the transaction
      */
     @JsonProperty("destination_address")
     private String destinationAddress;
 
-    /**
+        /**
      * If set to true, the transaction will not be broadcast to the network. You can still retrieve the signed transaction from the GetTransaction endpoint by transaction ID once the transaction is created.
      */
     @JsonProperty("skip_broadcast")
     private boolean skipBroadcast;
 
-    /**
+        /**
      * Reason for transaction failure if applicable
      */
     @JsonProperty("failure_reason")
     private String failureReason;
 
+    /**
+     * - SIGNING_STATUS_UNKNOWN: Unknown signing status - SIGNED: Transaction has been signed - UNSIGNED: Transaction is unsigned
+     */
     @JsonProperty("signing_status")
     private SigningStatus signingStatus;
 

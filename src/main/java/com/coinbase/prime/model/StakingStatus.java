@@ -29,7 +29,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class StakingStatus {
-    /**
+        /**
      * Amount being staked (whole amount, e.g., 16 ETH)
      */
     @JsonProperty("amount")
@@ -38,19 +38,19 @@ public class StakingStatus {
     @JsonProperty("stake_type")
     private StakeType stakeType;
 
-    /**
+        /**
      * Estimated date when staking will complete (ISO 8601 format)
      */
     @JsonProperty("estimated_stake_date")
     private OffsetDateTime estimatedStakeDate;
 
-    /**
+        /**
      * Estimated hours until this staking request completes
      */
     @JsonProperty("estimated_hours_to_stake")
     private Long estimatedHoursToStake;
 
-    /**
+        /**
      * Timestamp when the stake request was originally created
      */
     @JsonProperty("requested_at")

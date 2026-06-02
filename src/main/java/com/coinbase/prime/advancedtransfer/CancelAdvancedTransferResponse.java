@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Cancel Advanced Transfer
  */
 public class CancelAdvancedTransferResponse {
+    /**
+     * The ID of the canceled Advanced Transfer
+     */
     @JsonProperty("advanced_transfer_id")
     private String advancedTransferId;
 

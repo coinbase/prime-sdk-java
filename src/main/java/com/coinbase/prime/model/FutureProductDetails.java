@@ -30,61 +30,73 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class FutureProductDetails {
     /**
+     * FutureProductDetails contains details specific to futures products
+     */
+public class FutureProductDetails {
+        /**
      * Contract code identifier
      */
     @JsonProperty("contract_code")
     private String contractCode;
 
-    /**
+        /**
      * Contract size
      */
     @JsonProperty("contract_size")
     private String contractSize;
 
-    /**
+        /**
      * Contract expiry timestamp
      */
     @JsonProperty("contract_expiry")
     private OffsetDateTime contractExpiry;
 
-    /**
+        /**
      * Contract root unit (underlying asset)
      */
     @JsonProperty("contract_root_unit")
     private String contractRootUnit;
 
+    /**
+     * - CONTRACT_EXPIRY_TYPE_UNSPECIFIED: Unspecified contract expiry type - CONTRACT_EXPIRY_TYPE_EXPIRING: Expiring futures contract - CONTRACT_EXPIRY_TYPE_PERPETUAL: Perpetual futures contract (no expiry)
+     */
     @JsonProperty("contract_expiry_type")
     private ContractExpiryType contractExpiryType;
 
+    /**
+     * - RISK_MANAGEMENT_TYPE_UNSPECIFIED: Unspecified risk management type - RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM: Risk is managed by FCM (Futures Commission Merchant) - RISK_MANAGEMENT_TYPE_MANAGED_BY_VENUE: Risk is managed by the venue
+     */
     @JsonProperty("risk_managed_by")
     private RiskManagementType riskManagedBy;
 
-    /**
+        /**
      * The venue this product trades on
      */
     @JsonProperty("venue")
     private String venue;
 
-    /**
+        /**
      * Descriptive name for the product group
      */
     @JsonProperty("group_description")
     private String groupDescription;
 
-    /**
+        /**
      * IANA time zone for contract expiration
      */
     @JsonProperty("contract_expiry_timezone")
     private String contractExpiryTimezone;
 
-    /**
+        /**
      * Short version of the group description
      */
     @JsonProperty("group_short_description")
     private String groupShortDescription;
 
+    /**
+     * PerpetualProductDetails contains details specific to perpetual futures products
+     */
     @JsonProperty("perpetual_details")
     private PerpetualProductDetails perpetualDetails;
 

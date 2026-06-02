@@ -20,9 +20,21 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - SECONDARY_PERMISSION_UNKNOWN: nil value - VIDEO_APPROVER: A video approver - TEAM_APPROVER: A team approver - WEB3_SIGNER: A web3 signer
+     */
 public enum SecondaryPermission {
+  /**
+   * A video approver
+   */
   VIDEO_APPROVER,
+  /**
+   * A team approver
+   */
   TEAM_APPROVER,
+  /**
+   * A web3 signer
+   */
   WEB3_SIGNER
 }
 

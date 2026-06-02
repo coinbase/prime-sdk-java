@@ -28,14 +28,23 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Onchain Transaction
  */
 public class CreateOnchainTransactionRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * Raw unsigned transaction in Hex format (Supports EVM and Solana)
+     */
     @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
 

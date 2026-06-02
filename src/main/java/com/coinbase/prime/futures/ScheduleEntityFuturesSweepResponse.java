@@ -22,9 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Schedule Entity Futures Sweep
  */
 public class ScheduleEntityFuturesSweepResponse {
+    /**
+     * Success
+     */
     @JsonProperty("success")
     private Boolean success;
 
+    /**
+     * Request ID
+     */
     @JsonProperty("request_id")
     private String requestId;
 

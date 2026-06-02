@@ -26,7 +26,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Represents a destination for a counterparty payment
+     */
 public class CounterpartyDestination {
+    /**
+     * The counterparty ID to pay out
+     */
     @JsonProperty("counterparty_id")
     private String counterpartyId;
 

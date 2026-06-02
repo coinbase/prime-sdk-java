@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Cancel Order
  */
 public class CancelOrderResponse {
+    /**
+     * The unique UUID for the order
+     */
     @JsonProperty("id")
     private String id;
 

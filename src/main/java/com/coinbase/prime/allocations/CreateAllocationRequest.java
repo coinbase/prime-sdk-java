@@ -28,24 +28,42 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Portfolio Allocations
  */
 public class CreateAllocationRequest {
+    /**
+     * The ID of the allocation
+     */
     @JsonProperty("allocation_id")
     private String allocationId;
 
+    /**
+     * The source portfolio id for the allocation
+     */
     @JsonProperty("source_portfolio_id")
     private String sourcePortfolioId;
 
+    /**
+     * The product for the allocation
+     */
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * The list of order ids in the allocation
+     */
     @JsonProperty("order_ids")
     private String[] orderIds;
 
+    /**
+     * The list of allocation_legs for the allocation
+     */
     @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
 
     @JsonProperty("size_type")
     private AllocationSizeType sizeType;
 
+    /**
+     * The portfolio where to allocate the remainder of the size
+     */
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
 

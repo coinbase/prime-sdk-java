@@ -20,6 +20,9 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * AdvancedTransferState represents the lifecycle state of an advanced transfer.
+     */
 public enum AdvancedTransferState {
   ADVANCED_TRANSFER_STATE_CREATED,
   ADVANCED_TRANSFER_STATE_PROCESSING,

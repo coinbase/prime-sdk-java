@@ -28,20 +28,20 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Position {
-    /**
+        /**
      * Asset symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
-     * The long position based on &#39;reference&#39; value
+        /**
+     * The long position based on 'reference' value
      */
     @JsonProperty("long")
     private String _long;
 
-    /**
-     * The short position based on &#39;reference&#39; value
+        /**
+     * The short position based on 'reference' value
      */
     @JsonProperty("short")
     private String _short;

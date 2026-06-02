@@ -34,55 +34,55 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Product {
-    /**
+        /**
      * The product ID, written as &#x60;BASE-QUOTE&#x60;
      */
     @JsonProperty("id")
     private String id;
 
-    /**
+        /**
      * The smallest permitted unit of denomination for the base asset (varies by product)
      */
     @JsonProperty("base_increment")
     private String baseIncrement;
 
-    /**
+        /**
      * The smallest permitted unit of denomination for the quote asset (varies by product)
      */
     @JsonProperty("quote_increment")
     private String quoteIncrement;
 
-    /**
+        /**
      * The minimum size (in base asset units) for which an order can be placed
      */
     @JsonProperty("base_min_size")
     private String baseMinSize;
 
-    /**
+        /**
      * The minimum size (in quote asset units) for which an order can be placed
      */
     @JsonProperty("quote_min_size")
     private String quoteMinSize;
 
-    /**
+        /**
      * The maximum size (in base asset units) for which an order can be placed
      */
     @JsonProperty("base_max_size")
     private String baseMaxSize;
 
-    /**
+        /**
      * The maximum size (in quote asset units) for which an order can be placed
      */
     @JsonProperty("quote_max_size")
     private String quoteMaxSize;
 
-    /**
+        /**
      * Permissions given to the user for a product
      */
     @JsonProperty("permissions")
     private List<ProductPermissions> permissions;
 
-    /**
+        /**
      * The smallest permitted price increment for the product
      */
     @JsonProperty("price_increment")
@@ -91,12 +91,21 @@ public class Product {
     @JsonProperty("rfq_product_details")
     private RfqProductDetails rfqProductDetails;
 
+    /**
+     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
+     */
     @JsonProperty("product_type")
     private ProductType productType;
 
+    /**
+     * FcmTradingSessionDetails contains trading session details for FCM products
+     */
     @JsonProperty("fcm_trading_session_details")
     private FcmTradingSessionDetails fcmTradingSessionDetails;
 
+    /**
+     * FutureProductDetails contains details specific to futures products
+     */
     @JsonProperty("future_product_details")
     private FutureProductDetails futureProductDetails;
 

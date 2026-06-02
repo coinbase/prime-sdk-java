@@ -30,13 +30,22 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Entity Balances
  */
 public class ListEntityBalancesRequest extends PrimeListRequest {
+    /**
+     * The entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    /**
+     * A list of symbols by which to filter the response
+     */
     @JsonProperty("symbols")
     private String[] symbols;
 
+    /**
+     * A type by which to filter aggregated balances, defaults to "TOTAL" - UNKNOWN_BALANCE_TYPE: nil - TRADING_BALANCES: Trading balances - VAULT_BALANCES: Vault balances - TOTAL_BALANCES: Total balances (The sum of vault and trading + prime custody) - PRIME_CUSTODY_BALANCES: Prime custody balances - UNIFIED_TOTAL_BALANCES: Unified total balance across networks and wallet types (vault + trading + prime custody)
+     */
     @JsonProperty("aggregation_type")
     private PortfolioBalanceType aggregationType;
 

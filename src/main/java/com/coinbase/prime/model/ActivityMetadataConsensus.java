@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class ActivityMetadataConsensus {
-    /**
+        /**
      * Deadline for approval of an activity
      */
     @JsonProperty("approval_deadline")
     private String approvalDeadline;
 
-    /**
+        /**
      * If activity has passed consensus threshold
      */
     @JsonProperty("has_passed_consensus")

@@ -27,17 +27,23 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class ActiveLiquidationSummary {
     /**
+     * ActiveLiquidationSummary provides a summary of the active or most recent XM liquidation
+     */
+public class ActiveLiquidationSummary {
+        /**
      * Financing liquidation UUID
      */
     @JsonProperty("liquidation_id")
     private String liquidationId;
 
+    /**
+     * - XM_LIQUIDATION_STATUS_PRE_LIQUIDATION: Liquidation is in the pre-liquidation phase - XM_LIQUIDATION_STATUS_LIQUIDATING: Liquidation is actively in progress - XM_LIQUIDATION_STATUS_LIQUIDATED: Liquidation has completed successfully - XM_LIQUIDATION_STATUS_CANCELED: Liquidation was canceled - XM_LIQUIDATION_STATUS_FAILED: Liquidation failed
+     */
     @JsonProperty("status")
     private XmLiquidationStatus status;
 
-    /**
+        /**
      * USD notional shortfall amount that triggered the liquidation
      */
     @JsonProperty("shortfall_amount")

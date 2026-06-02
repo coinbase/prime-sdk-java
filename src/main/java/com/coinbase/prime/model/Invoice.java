@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+    /**
+     * Invoice
+     */
 public class Invoice {
     @JsonProperty("id")
     private String id;
@@ -46,6 +49,9 @@ public class Invoice {
     @JsonProperty("invoice_number")
     private String invoiceNumber;
 
+    /**
+     * States
+     */
     @JsonProperty("state")
     private InvoiceState state;
 

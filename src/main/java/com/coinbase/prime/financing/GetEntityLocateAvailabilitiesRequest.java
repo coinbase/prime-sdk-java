@@ -26,13 +26,22 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Entity Locate Availabilities
  */
 public class GetEntityLocateAvailabilitiesRequest {
+    /**
+     * The unique ID of the entity
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    /**
+     * Deprecated: Use locate_date instead
+     */
     @JsonProperty("conversion_date")
     private String conversionDate;
 
+    /**
+     * The date of the locate availability in YYYY-MM-DD format
+     */
     @JsonProperty("locate_date")
     private String locateDate;
 

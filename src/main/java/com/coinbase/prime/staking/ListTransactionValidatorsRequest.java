@@ -27,16 +27,28 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Transaction Validators
  */
 public class ListTransactionValidatorsRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * List of transaction IDs to filter validators by. Maximum of 100 transaction IDs allowed per request.
+     */
     @JsonProperty("transaction_ids")
     private String[] transactionIds;
 
+    /**
+     * Cursor for pagination
+     */
     @JsonProperty("cursor")
     private String cursor;
 
+    /**
+     * Maximum number of transaction-validator associations to return per page. Default is 100, maximum is 1000.
+     */
     @JsonProperty("limit")
     private Integer limit;
 

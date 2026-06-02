@@ -21,19 +21,31 @@ import com.coinbase.prime.model.enums.PrimeXMControlStatus;
 import com.coinbase.prime.model.enums.PrimeXMMarginLevel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+    /**
+     * Get Exchange Cross Margin Overview
+     */
 public class GetCrossMarginPrimeOverviewResponse {
+    /**
+     * - TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled. - TRADES_ONLY: Allowed to trade but not withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled. - SESSION_LOCKED: Not allowed to trade or withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+     */
     @JsonProperty("control_status")
     private PrimeXMControlStatus controlStatus;
 
+    /**
+     * - HEALTHY_THRESHOLD: Margin level is healthy - DEFICIT_THRESHOLD: Margin level is breaching the deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the margin methodology) - WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined in the margin methodology). WT is differentiated from DT in that it means margin health is approaching the UMCT - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger an urgent margin call - LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
+     */
     @JsonProperty("margin_level")
     private PrimeXMMarginLevel marginLevel;
 
-    /**
+        /**
      * When margin metrics were evaluated.
      */
     @JsonProperty("evaluated_at")
     private String evaluatedAt;
 
+    /**
+     * Cross-margin account summary and nested breakdowns.
+     */
     @JsonProperty("margin_summary")
     private CrossMarginPrimeMarginSummary marginSummary;
 

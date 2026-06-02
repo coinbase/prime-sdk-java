@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Network {
-    /**
+        /**
      * The network id: base, bitcoin, ethereum, solana etc
      */
     @JsonProperty("id")
     private String id;
 
-    /**
+        /**
      * The network type: mainnet, testnet, etc
      */
     @JsonProperty("type")

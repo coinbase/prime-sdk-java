@@ -23,18 +23,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get Staking Status
  */
 public class GetStakingStatusResponse {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty("wallet_id")
     private String walletId;
 
+    /**
+     * The wallet address
+     */
     @JsonProperty("wallet_address")
     private String walletAddress;
 
+    /**
+     * Current timestamp at time of API call
+     */
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
+    /**
+     * List of validators with staking information for this wallet
+     */
     @JsonProperty("validators")
     private ValidatorStakingInfo[] validators;
 

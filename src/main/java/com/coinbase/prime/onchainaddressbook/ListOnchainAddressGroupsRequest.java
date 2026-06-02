@@ -26,6 +26,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Onchain Address Groups
  */
 public class ListOnchainAddressGroupsRequest {
+    /**
+     * Portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;

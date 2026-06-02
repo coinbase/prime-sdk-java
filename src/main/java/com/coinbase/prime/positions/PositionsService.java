@@ -24,15 +24,28 @@ public interface PositionsService {
      * @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)} — same REST route as the current spec.
      */
     @Deprecated
-    ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Aggregate Entity Positions
+     */
+ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
-    ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Aggregate Entity Positions
+     */
+ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
-    ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Entity Positions
+     */
+ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     /**
      * @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)} — same REST route as the current spec.
      */
     @Deprecated
-    ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Entity Positions
+     */
+ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

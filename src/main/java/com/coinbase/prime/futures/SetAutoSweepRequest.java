@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Set Auto Sweep
  */
 public class SetAutoSweepRequest {
+    /**
+     * Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    /**
+     * Auto sweep status, default to false
+     */
     @JsonProperty("auto_sweep")
     private Boolean autoSweep;
 

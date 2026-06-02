@@ -27,19 +27,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class Locate {
-    /**
+        /**
      * The currency symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
+        /**
      * The available quantity located
      */
     @JsonProperty("quantity")
     private String quantity;
 
-    /**
+        /**
      * The interest rate for located symbol
      */
     @JsonProperty("rate")

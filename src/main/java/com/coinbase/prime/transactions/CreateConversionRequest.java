@@ -26,26 +26,47 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Conversion
  */
 public class CreateConversionRequest {
+    /**
+     * The ID of the portfolio
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID that the conversion will originate from
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * The amount in whole units to convert
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * The UUID of the destination wallet
+     */
     @JsonProperty("destination")
     private String destination;
 
+    /**
+     * The idempotency key associated with this conversion
+     */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    /**
+     * The currency symbol to convert from
+     */
     @JsonProperty("source_symbol")
     private String sourceSymbol;
 
+    /**
+     * The currency symbol to convert to
+     */
     @JsonProperty("destination_symbol")
     private String destinationSymbol;
 

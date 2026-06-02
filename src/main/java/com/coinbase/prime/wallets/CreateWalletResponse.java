@@ -24,15 +24,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Create Wallet
  */
 public class CreateWalletResponse {
+    /**
+     * The id of activity
+     */
     @JsonProperty("activity_id")
     private String activityId;
 
+    /**
+     * The name of the wallet
+     */
     @JsonProperty("name")
     private String name;
 
+    /**
+     * The asset stored in the wallet
+     */
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
+     */
     @JsonProperty("wallet_type")
     private WalletType walletType;
 

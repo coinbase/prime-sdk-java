@@ -21,9 +21,25 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface WalletsService {
     ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetWalletResponse getWallet(GetWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Create Wallet
+     */
+CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Wallet by Wallet ID
+     */
+GetWalletResponse getWallet(GetWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * List Wallet Addresses
+     */
+ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Get Wallet Deposit Instructions
+     */
+GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

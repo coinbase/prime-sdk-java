@@ -22,15 +22,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get FCM Equity
  */
 public class GetFcmEquityResponse {
+    /**
+     * Prior EOD account equity (ending balance + realized P&amp;L + commissions/fees)
+     */
     @JsonProperty("eod_account_equity")
     private String eodAccountEquity;
 
+    /**
+     * Prior EOD unrealized P&amp;L on open futures positions
+     */
     @JsonProperty("eod_unrealized_pnl")
     private String eodUnrealizedPnl;
 
+    /**
+     * Current Derivatives Account Balance minus prior EOD margin requirement. (Positive = excess; negative = deficit)
+     */
     @JsonProperty("current_excess_deficit")
     private String currentExcessDeficit;
 
+    /**
+     * Excess funds in the Derivatives account available to transfer ("sweep") to the designated funding portfolio
+     */
     @JsonProperty("available_to_sweep")
     private String availableToSweep;
 

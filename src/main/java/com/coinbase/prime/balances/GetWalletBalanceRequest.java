@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Wallet Balance
  */
 public class GetWalletBalanceRequest {
+    /**
+     * Portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;

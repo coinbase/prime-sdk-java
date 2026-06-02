@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class MarketRate {
-    /**
+        /**
      * The currency symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
+        /**
      * The current market rate of currency
      */
     @JsonProperty("rate")

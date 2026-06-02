@@ -28,8 +28,8 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * {@code https://api.prime.coinbase.com} (without the /v1 suffix).
  */
 public class GetCrossMarginPrimeOverviewRequest {
-    /**
-     * Prime entity ID for the XM (cross-margin) customer.
+        /**
+     * XM customer Prime Entity ID
      */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore

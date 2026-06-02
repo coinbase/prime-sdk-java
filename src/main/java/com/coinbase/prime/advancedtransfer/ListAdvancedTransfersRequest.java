@@ -31,22 +31,40 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Advanced Transfers
  */
 public class ListAdvancedTransfersRequest extends PrimeListRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The state of the Advanced Transfer to filter by
+     */
     @JsonProperty("state")
     private AdvancedTransferState state;
 
+    /**
+     * The type of the Advanced Transfer to filter by
+     */
     @JsonProperty("type")
     private AdvancedTransferType type;
 
+    /**
+     * UTC timestamp of creation from which to filter the response (inclusive, ISO-8601 format)
+     */
     @JsonProperty("start_time")
     private String startTime;
 
+    /**
+     * UTC timestamp of creation until which to filter the response (exclusive, ISO-8601 format)
+     */
     @JsonProperty("end_time")
     private String endTime;
 
+    /**
+     * The reference ID of the Advanced Transfer to filter by
+     */
     @JsonProperty("reference_id")
     private String referenceId;
 

@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Conversion {
-    /**
+        /**
      * Conversion details
      */
     @JsonProperty("conversion_details")
@@ -40,13 +40,13 @@ public class Conversion {
     @JsonProperty("short_collateral")
     private ShortCollateral shortCollateral;
 
-    /**
+        /**
      * The UTC date time used for conversion
      */
     @JsonProperty("conversion_datetime")
     private String conversionDatetime;
 
-    /**
+        /**
      * Portfolio Id
      */
     @JsonProperty("portfolio_id")

@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class WithdrawalPower {
-    /**
+        /**
      * The currency symbol
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
+        /**
      * Withdrawal power
      */
     @JsonProperty("amount")

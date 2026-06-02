@@ -30,6 +30,9 @@ public class GetPortfolioActivityRequest {
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Id of the activity to retrieve
+     */
     @JsonProperty(required = true, value = "activity_id")
     @JsonIgnore
     private String activityId;

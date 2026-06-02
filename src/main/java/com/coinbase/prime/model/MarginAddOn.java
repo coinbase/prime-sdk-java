@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class MarginAddOn {
-    /**
+        /**
      * margin add on amount
      */
     @JsonProperty("amount")

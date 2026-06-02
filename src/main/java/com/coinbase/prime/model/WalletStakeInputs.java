@@ -26,14 +26,17 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class WalletStakeInputs {
     /**
+     * WalletStakeInputs contains the custom inputs for staking operations on a wallet. Requirements and supported fields vary by asset type.
+     */
+public class WalletStakeInputs {
+        /**
      * Optional amount to stake (ETH only). If omitted, the wallet will stake the maximum amount available
      */
     @JsonProperty("amount")
     private String amount;
 
-    /**
+        /**
      * Optional validator address, defaults to Coinbase validator. For SOL, must be the vote account address. Ignored for ETH.
      */
     @JsonProperty("validator_address")

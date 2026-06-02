@@ -22,33 +22,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get Entity FCM Balance
  */
 public class GetEntityFcmBalanceResponse {
+    /**
+     * Portfolio ID
+     */
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
+    /**
+     * CFM USD balance
+     */
     @JsonProperty("cfm_usd_balance")
     private String cfmUsdBalance;
 
+    /**
+     * Unrealized PNL
+     */
     @JsonProperty("unrealized_pnl")
     private String unrealizedPnl;
 
+    /**
+     * Daily realized PNL
+     */
     @JsonProperty("daily_realized_pnl")
     private String dailyRealizedPnl;
 
+    /**
+     * Excess liquidity
+     */
     @JsonProperty("excess_liquidity")
     private String excessLiquidity;
 
+    /**
+     * Futures buying power
+     */
     @JsonProperty("futures_buying_power")
     private String futuresBuyingPower;
 
+    /**
+     * Initial margin
+     */
     @JsonProperty("initial_margin")
     private String initialMargin;
 
+    /**
+     * Maintenance margin
+     */
     @JsonProperty("maintenance_margin")
     private String maintenanceMargin;
 
+    /**
+     * Clearing account ID
+     */
     @JsonProperty("clearing_account_id")
     private String clearingAccountId;
 
+    /**
+     * Unsettled accrued funding PNL from the last settlement
+     */
     @JsonProperty("cfm_unsettled_accrued_funding_pnl")
     private String cfmUnsettledAccruedFundingPnl;
 

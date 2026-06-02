@@ -34,6 +34,9 @@ public class ListPortfolioBalancesRequest extends PrimeListRequest {
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * A list of symbols by which to filter the response
+     */
     @JsonProperty("symbols")
     private String[] symbols;
 

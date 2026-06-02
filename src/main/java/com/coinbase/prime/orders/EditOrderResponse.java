@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Edit Order (Beta)
  */
 public class EditOrderResponse {
+    /**
+     * The ID of the order being edited
+     */
     @JsonProperty("order_id")
     private String orderId;
 

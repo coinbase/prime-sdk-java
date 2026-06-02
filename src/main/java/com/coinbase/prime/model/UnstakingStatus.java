@@ -30,7 +30,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class UnstakingStatus {
-    /**
+        /**
      * Amount being unstaked (whole amount, e.g., 16 ETH)
      */
     @JsonProperty("amount")
@@ -39,19 +39,19 @@ public class UnstakingStatus {
     @JsonProperty("unstake_type")
     private UnstakeType unstakeType;
 
-    /**
+        /**
      * Estimated date when unstaking will complete (ISO 8601 format)
      */
     @JsonProperty("finishing_at")
     private OffsetDateTime finishingAt;
 
-    /**
+        /**
      * Estimated hours until this unstaking request completes
      */
     @JsonProperty("remaining_hours")
     private Long remainingHours;
 
-    /**
+        /**
      * Timestamp when the unstake request was originally created
      */
     @JsonProperty("requested_at")
@@ -60,7 +60,7 @@ public class UnstakingStatus {
     @JsonProperty("estimate_type")
     private EstimateType estimateType;
 
-    /**
+        /**
      * Detailed explanation of the estimate status for display to users.
      */
     @JsonProperty("estimate_description")

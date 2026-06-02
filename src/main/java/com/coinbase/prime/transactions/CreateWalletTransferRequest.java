@@ -26,23 +26,41 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Transfer
  */
 public class CreateWalletTransferRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID that the transfer will originate from
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * The amount in whole units to send
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * The UUID of the destination wallet
+     */
     @JsonProperty("destination")
     private String destination;
 
+    /**
+     * The idempotency key associated with this transfer
+     */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    /**
+     * The currency symbol to transfer
+     */
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 

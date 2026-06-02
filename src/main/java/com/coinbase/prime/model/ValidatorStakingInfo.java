@@ -30,13 +30,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ValidatorStakingInfo {
-    /**
+        /**
      * The validator address (public key)
      */
     @JsonProperty("validator_address")
     private String validatorAddress;
 
-    /**
+        /**
      * List of active staking requests for this validator
      */
     @JsonProperty("statuses")

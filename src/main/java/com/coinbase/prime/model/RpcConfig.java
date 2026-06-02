@@ -27,13 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class RpcConfig {
-    /**
+        /**
      * If true, transaction will not be broadcast to the network
      */
     @JsonProperty("skip_broadcast")
     private boolean skipBroadcast;
 
-    /**
+        /**
      * Custom blockchain node RPC URL. (EVM-only)
      */
     @JsonProperty("url")

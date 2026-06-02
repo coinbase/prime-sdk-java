@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Cancel Advanced Transfer
  */
 public class CancelAdvancedTransferRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the canceled Advanced Transfer
+     */
     @JsonProperty(required = true, value = "advanced_transfer_id")
     @JsonIgnore
     private String advancedTransferId;

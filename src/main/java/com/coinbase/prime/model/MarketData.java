@@ -21,37 +21,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MarketData {
-    /**
+        /**
      * Base asset symbol (e.g., BTC, ETH, SOL)
      */
     @JsonProperty("symbol")
     private String symbol;
 
-    /**
+        /**
      * Daily historical volatility over trailing 5 days (decimal, e.g., 0.65 = 65%)
      */
     @JsonProperty("vol_5d")
     private String vol5d;
 
-    /**
+        /**
      * Daily historical volatility over trailing 30 days (decimal, e.g., 0.65 = 65%)
      */
     @JsonProperty("vol_30d")
     private String vol30d;
 
-    /**
+        /**
      * Daily historical volatility over trailing 90 days (decimal, e.g., 0.65 = 65%)
      */
     @JsonProperty("vol_90d")
     private String vol90d;
 
-    /**
+        /**
      * Average daily trading volume over trailing 30 days (USD)
      */
     @JsonProperty("adv_30d")
     private String adv30d;
 
-    /**
+        /**
      * Weighted blend of the most recent vol_5d and the max vol_5d over last 30 days into a single volatility measure (decimal).
      */
     @JsonProperty("weighted_vol")

@@ -26,6 +26,9 @@ public class GetPositionsResponse {
     @JsonProperty("positions")
     private FcmPosition[] positions;
 
+    /**
+     * Clearing account ID
+     */
     @JsonProperty("clearing_account_id")
     private String clearingAccountId;
 

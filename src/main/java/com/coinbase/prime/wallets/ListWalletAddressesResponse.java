@@ -24,6 +24,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Wallet Addresses
  */
 public class ListWalletAddressesResponse {
+    /**
+     * Addresses
+     */
     @JsonProperty("addresses")
     private BlockchainAddress[] addresses;
 

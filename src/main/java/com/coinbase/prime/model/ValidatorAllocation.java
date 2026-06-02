@@ -26,14 +26,17 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class ValidatorAllocation {
     /**
+     * ValidatorAllocation specifies the validator and amount for staking or unstaking. Used for granular ETH V2 validator-level staking or unstaking operations.
+     */
+public class ValidatorAllocation {
+        /**
      * The validator address for performing staking operations
      */
     @JsonProperty("validator_address")
     private String validatorAddress;
 
-    /**
+        /**
      * Amount for performing staking operations with this validator
      */
     @JsonProperty("amount")

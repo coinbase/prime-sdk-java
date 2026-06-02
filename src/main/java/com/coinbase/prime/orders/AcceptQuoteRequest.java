@@ -27,22 +27,40 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Accept Quote
  */
 public class AcceptQuoteRequest {
+    /**
+     * The ID of the portfolio that owns the order
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the product being traded for the order (e.g. &#x60;BTC-USD&#x60;)
+     */
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
+     */
     @JsonProperty("side")
     private OrderSide side;
 
+    /**
+     * A client-generated ID used for reference purposes (note: order will be rejected if this ID is not unique among all currently active orders)
+     */
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
+    /**
+     * A quote id that was returned from the quote request
+     */
     @JsonProperty("quote_id")
     private String quoteId;
 
+    /**
+     * next: 7
+     */
     @JsonProperty("settl_currency")
     private String settlCurrency;
 

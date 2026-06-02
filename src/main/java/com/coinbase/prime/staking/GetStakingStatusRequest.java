@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Staking Status
  */
 public class GetStakingStatusRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;

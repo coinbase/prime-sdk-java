@@ -22,8 +22,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class GetMarketDataResponse {
     /**
+     * Get Market Data
+     */
+public class GetMarketDataResponse {
+        /**
      * List of market data entries
      */
     @JsonProperty("market_data")
