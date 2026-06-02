@@ -35,8 +35,23 @@ public interface FinancingService {
     CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Sets FCM funding configuration for the entity and submits the desired configuration to Prime API for approval.
+     */
     UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Gets the current Cross Margin (XM) risk parameters for an entity.
+     */
     GetCrossMarginRiskParametersResponse getCrossMarginRiskParameters(GetCrossMarginRiskParametersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Returns real time risk data from the cross margin model.
+     */
     GetCrossMarginPrimeOverviewResponse getCrossMarginPrimeOverview(GetCrossMarginPrimeOverviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Retrieves market data including volatility and average daily volume for an entity.
+     */
     GetMarketDataResponse getMarketData(GetMarketDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -23,9 +23,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Get Cross Margin Risk Parameters (Beta)
+ * Get Cross Margin Risk Parameters
  */
 public class GetCrossMarginRiskParametersRequest {
+    /**
+     * XM customer Prime Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

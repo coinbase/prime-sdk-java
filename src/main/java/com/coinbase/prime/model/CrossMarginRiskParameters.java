@@ -19,41 +19,80 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * XM 2.0 risk parameters for an asset tier.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CrossMarginRiskParameters {
+    /**
+     * Asset tier identifier.
+     */
     @JsonProperty("asset_tier")
     private String assetTier;
 
+    /**
+     * Base ratio for long positions.
+     */
     @JsonProperty("base_ratio_long")
     private String baseRatioLong;
 
+    /**
+     * Base ratio for short positions.
+     */
     @JsonProperty("base_ratio_short")
     private String baseRatioShort;
 
+    /**
+     * Volatility rate for long positions.
+     */
     @JsonProperty("volatility_rate_long")
     private String volatilityRateLong;
 
+    /**
+     * Volatility rate for short positions.
+     */
     @JsonProperty("volatility_rate_short")
     private String volatilityRateShort;
 
+    /**
+     * Volatility low threshold.
+     */
     @JsonProperty("volatility_low_threshold")
     private String volatilityLowThreshold;
 
+    /**
+     * Volatility high threshold.
+     */
     @JsonProperty("volatility_high_threshold")
     private String volatilityHighThreshold;
 
+    /**
+     * Liquidity A for long positions.
+     */
     @JsonProperty("liquidity_a_long")
     private String liquidityALong;
 
+    /**
+     * Liquidity A for short positions.
+     */
     @JsonProperty("liquidity_a_short")
     private String liquidityAShort;
 
+    /**
+     * Liquidity B for short positions.
+     */
     @JsonProperty("liquidity_b_short")
     private String liquidityBShort;
 
+    /**
+     * Liquidity threshold.
+     */
     @JsonProperty("liquidity_threshold")
     private String liquidityThreshold;
 
+    /**
+     * Basis offset credit rate.
+     */
     @JsonProperty("basis_offset_credit_rate")
     private String basisOffsetCreditRate;
 
