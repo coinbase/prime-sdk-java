@@ -20,10 +20,28 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PortfoliosService {
-    ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     /**
-     * Get Portfolio by Portfolio ID
+     * List all portfolios associated with a given entity.
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
+    ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Portfolio by Portfolio ID.
+     * <p>
+     * Retrieve a given portfolio by its portfolio ID
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
      */
     GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
     GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }
