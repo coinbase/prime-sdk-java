@@ -19,81 +19,67 @@ package com.coinbase.prime.staking;
 import com.coinbase.prime.model.ValidatorUnstakePreview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * PreviewUnstakeResponse contains the response data from previewing an unstaking operation.
- */
+/** PreviewUnstakeResponse contains the response data from previewing an unstaking operation. */
 public class PreviewUnstakeResponse {
-    /**
-     * Estimated amount that would be unstaked
-     */
-    @JsonProperty("estimated_amount")
-    private String estimatedAmount;
+  /** Estimated amount that would be unstaked */
+  @JsonProperty("estimated_amount")
+  private String estimatedAmount;
 
-    /**
-     * The wallet ID
-     */
-    @JsonProperty("wallet_id")
-    private String walletId;
+  /** The wallet ID */
+  @JsonProperty("wallet_id")
+  private String walletId;
 
-    /**
-     * The blockchain address of the wallet
-     */
-    @JsonProperty("wallet_address")
-    private String walletAddress;
+  /** The blockchain address of the wallet */
+  @JsonProperty("wallet_address")
+  private String walletAddress;
 
-    /**
-     * Timestamp at which this preview was generated (ISO 8601)
-     */
-    @JsonProperty("current_timestamp")
-    private String currentTimestamp;
+  /** Timestamp at which this preview was generated (ISO 8601) */
+  @JsonProperty("current_timestamp")
+  private String currentTimestamp;
 
-    /**
-     * Per-validator breakdown of the unstake simulation
-     */
-    @JsonProperty("validators")
-    private ValidatorUnstakePreview[] validators;
+  /** Per-validator breakdown of the unstake simulation */
+  @JsonProperty("validators")
+  private ValidatorUnstakePreview[] validators;
 
-    public PreviewUnstakeResponse() {
-    }
+  public PreviewUnstakeResponse() {}
 
-    public String getEstimatedAmount() {
-        return estimatedAmount;
-    }
+  public String getEstimatedAmount() {
+    return estimatedAmount;
+  }
 
-    public void setEstimatedAmount(String estimatedAmount) {
-        this.estimatedAmount = estimatedAmount;
-    }
+  public void setEstimatedAmount(String estimatedAmount) {
+    this.estimatedAmount = estimatedAmount;
+  }
 
-    public String getWalletId() {
-        return walletId;
-    }
+  public String getWalletId() {
+    return walletId;
+  }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
 
-    public String getWalletAddress() {
-        return walletAddress;
-    }
+  public String getWalletAddress() {
+    return walletAddress;
+  }
 
-    public void setWalletAddress(String walletAddress) {
-        this.walletAddress = walletAddress;
-    }
+  public void setWalletAddress(String walletAddress) {
+    this.walletAddress = walletAddress;
+  }
 
-    public String getCurrentTimestamp() {
-        return currentTimestamp;
-    }
+  public String getCurrentTimestamp() {
+    return currentTimestamp;
+  }
 
-    public void setCurrentTimestamp(String currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
-    }
+  public void setCurrentTimestamp(String currentTimestamp) {
+    this.currentTimestamp = currentTimestamp;
+  }
 
-    public ValidatorUnstakePreview[] getValidators() {
-        return validators;
-    }
+  public ValidatorUnstakePreview[] getValidators() {
+    return validators;
+  }
 
-    public void setValidators(ValidatorUnstakePreview[] validators) {
-        this.validators = validators;
-    }
-
+  public void setValidators(ValidatorUnstakePreview[] validators) {
+    this.validators = validators;
+  }
 }

@@ -19,207 +19,208 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.BlockchainAddress;
-import com.coinbase.prime.model.TravelRuleParty;
-import com.coinbase.prime.model.TravelRuleWalletDetails;
-import com.coinbase.prime.model.Vasp;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class TravelRuleEntry {
-    @JsonProperty("id")
+  @JsonProperty("id")
+  private String id;
+
+  @JsonProperty("blockchain_address")
+  private BlockchainAddress blockchainAddress;
+
+  @JsonProperty("originator")
+  private TravelRuleParty originator;
+
+  @JsonProperty("beneficiary")
+  private TravelRuleParty beneficiary;
+
+  @JsonProperty("vasp")
+  private Vasp vasp;
+
+  @JsonProperty("wallet_details")
+  private TravelRuleWalletDetails walletDetails;
+
+  @JsonProperty("transfer_purpose")
+  private String transferPurpose;
+
+  @JsonProperty("is_self_certified")
+  private Boolean isSelfCertified;
+
+  @JsonProperty("is_intermediary")
+  private Boolean isIntermediary;
+
+  @JsonProperty("is_self")
+  private Boolean isSelf;
+
+  public TravelRuleEntry() {}
+
+  public TravelRuleEntry(Builder builder) {
+    this.id = builder.id;
+    this.blockchainAddress = builder.blockchainAddress;
+    this.originator = builder.originator;
+    this.beneficiary = builder.beneficiary;
+    this.vasp = builder.vasp;
+    this.walletDetails = builder.walletDetails;
+    this.transferPurpose = builder.transferPurpose;
+    this.isSelfCertified = builder.isSelfCertified;
+    this.isIntermediary = builder.isIntermediary;
+    this.isSelf = builder.isSelf;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public BlockchainAddress getBlockchainAddress() {
+    return blockchainAddress;
+  }
+
+  public void setBlockchainAddress(BlockchainAddress blockchainAddress) {
+    this.blockchainAddress = blockchainAddress;
+  }
+
+  public TravelRuleParty getOriginator() {
+    return originator;
+  }
+
+  public void setOriginator(TravelRuleParty originator) {
+    this.originator = originator;
+  }
+
+  public TravelRuleParty getBeneficiary() {
+    return beneficiary;
+  }
+
+  public void setBeneficiary(TravelRuleParty beneficiary) {
+    this.beneficiary = beneficiary;
+  }
+
+  public Vasp getVasp() {
+    return vasp;
+  }
+
+  public void setVasp(Vasp vasp) {
+    this.vasp = vasp;
+  }
+
+  public TravelRuleWalletDetails getWalletDetails() {
+    return walletDetails;
+  }
+
+  public void setWalletDetails(TravelRuleWalletDetails walletDetails) {
+    this.walletDetails = walletDetails;
+  }
+
+  public String getTransferPurpose() {
+    return transferPurpose;
+  }
+
+  public void setTransferPurpose(String transferPurpose) {
+    this.transferPurpose = transferPurpose;
+  }
+
+  public Boolean getIsSelfCertified() {
+    return isSelfCertified;
+  }
+
+  public void setIsSelfCertified(Boolean isSelfCertified) {
+    this.isSelfCertified = isSelfCertified;
+  }
+
+  public Boolean getIsIntermediary() {
+    return isIntermediary;
+  }
+
+  public void setIsIntermediary(Boolean isIntermediary) {
+    this.isIntermediary = isIntermediary;
+  }
+
+  public Boolean getIsSelf() {
+    return isSelf;
+  }
+
+  public void setIsSelf(Boolean isSelf) {
+    this.isSelf = isSelf;
+  }
+
+  public static class Builder {
     private String id;
 
-    @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
-    @JsonProperty("vasp")
     private Vasp vasp;
 
-    @JsonProperty("wallet_details")
     private TravelRuleWalletDetails walletDetails;
 
-    @JsonProperty("transfer_purpose")
     private String transferPurpose;
 
-    @JsonProperty("is_self_certified")
     private Boolean isSelfCertified;
 
-    @JsonProperty("is_intermediary")
     private Boolean isIntermediary;
 
-    @JsonProperty("is_self")
     private Boolean isSelf;
 
-    public TravelRuleEntry() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public TravelRuleEntry(Builder builder) {
-        this.id = builder.id;
-        this.blockchainAddress = builder.blockchainAddress;
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.vasp = builder.vasp;
-        this.walletDetails = builder.walletDetails;
-        this.transferPurpose = builder.transferPurpose;
-        this.isSelfCertified = builder.isSelfCertified;
-        this.isIntermediary = builder.isIntermediary;
-        this.isSelf = builder.isSelf;
-    }
-    public String getId() {
-        return id;
+    public Builder blockchainAddress(BlockchainAddress blockchainAddress) {
+      this.blockchainAddress = blockchainAddress;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public BlockchainAddress getBlockchainAddress() {
-        return blockchainAddress;
+    public Builder originator(TravelRuleParty originator) {
+      this.originator = originator;
+      return this;
     }
 
-    public void setBlockchainAddress(BlockchainAddress blockchainAddress) {
-        this.blockchainAddress = blockchainAddress;
-    }
-    public TravelRuleParty getOriginator() {
-        return originator;
+    public Builder beneficiary(TravelRuleParty beneficiary) {
+      this.beneficiary = beneficiary;
+      return this;
     }
 
-    public void setOriginator(TravelRuleParty originator) {
-        this.originator = originator;
-    }
-    public TravelRuleParty getBeneficiary() {
-        return beneficiary;
+    public Builder vasp(Vasp vasp) {
+      this.vasp = vasp;
+      return this;
     }
 
-    public void setBeneficiary(TravelRuleParty beneficiary) {
-        this.beneficiary = beneficiary;
-    }
-    public Vasp getVasp() {
-        return vasp;
+    public Builder walletDetails(TravelRuleWalletDetails walletDetails) {
+      this.walletDetails = walletDetails;
+      return this;
     }
 
-    public void setVasp(Vasp vasp) {
-        this.vasp = vasp;
-    }
-    public TravelRuleWalletDetails getWalletDetails() {
-        return walletDetails;
+    public Builder transferPurpose(String transferPurpose) {
+      this.transferPurpose = transferPurpose;
+      return this;
     }
 
-    public void setWalletDetails(TravelRuleWalletDetails walletDetails) {
-        this.walletDetails = walletDetails;
-    }
-    public String getTransferPurpose() {
-        return transferPurpose;
+    public Builder isSelfCertified(Boolean isSelfCertified) {
+      this.isSelfCertified = isSelfCertified;
+      return this;
     }
 
-    public void setTransferPurpose(String transferPurpose) {
-        this.transferPurpose = transferPurpose;
-    }
-    public Boolean getIsSelfCertified() {
-        return isSelfCertified;
+    public Builder isIntermediary(Boolean isIntermediary) {
+      this.isIntermediary = isIntermediary;
+      return this;
     }
 
-    public void setIsSelfCertified(Boolean isSelfCertified) {
-        this.isSelfCertified = isSelfCertified;
-    }
-    public Boolean getIsIntermediary() {
-        return isIntermediary;
+    public Builder isSelf(Boolean isSelf) {
+      this.isSelf = isSelf;
+      return this;
     }
 
-    public void setIsIntermediary(Boolean isIntermediary) {
-        this.isIntermediary = isIntermediary;
+    public TravelRuleEntry build() {
+      return new TravelRuleEntry(this);
     }
-    public Boolean getIsSelf() {
-        return isSelf;
-    }
-
-    public void setIsSelf(Boolean isSelf) {
-        this.isSelf = isSelf;
-    }
-    public static class Builder {
-        private String id;
-
-        private BlockchainAddress blockchainAddress;
-
-        private TravelRuleParty originator;
-
-        private TravelRuleParty beneficiary;
-
-        private Vasp vasp;
-
-        private TravelRuleWalletDetails walletDetails;
-
-        private String transferPurpose;
-
-        private Boolean isSelfCertified;
-
-        private Boolean isIntermediary;
-
-        private Boolean isSelf;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder blockchainAddress(BlockchainAddress blockchainAddress) {
-            this.blockchainAddress = blockchainAddress;
-            return this;
-        }
-
-        public Builder originator(TravelRuleParty originator) {
-            this.originator = originator;
-            return this;
-        }
-
-        public Builder beneficiary(TravelRuleParty beneficiary) {
-            this.beneficiary = beneficiary;
-            return this;
-        }
-
-        public Builder vasp(Vasp vasp) {
-            this.vasp = vasp;
-            return this;
-        }
-
-        public Builder walletDetails(TravelRuleWalletDetails walletDetails) {
-            this.walletDetails = walletDetails;
-            return this;
-        }
-
-        public Builder transferPurpose(String transferPurpose) {
-            this.transferPurpose = transferPurpose;
-            return this;
-        }
-
-        public Builder isSelfCertified(Boolean isSelfCertified) {
-            this.isSelfCertified = isSelfCertified;
-            return this;
-        }
-
-        public Builder isIntermediary(Boolean isIntermediary) {
-            this.isIntermediary = isIntermediary;
-            return this;
-        }
-
-        public Builder isSelf(Boolean isSelf) {
-            this.isSelf = isSelf;
-            return this;
-        }
-
-        public TravelRuleEntry build() {
-            return new TravelRuleEntry(this);
-        }
-    }
+  }
 }
-

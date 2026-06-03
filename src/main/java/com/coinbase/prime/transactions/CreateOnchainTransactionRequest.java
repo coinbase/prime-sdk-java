@@ -16,142 +16,132 @@
 
 package com.coinbase.prime.transactions;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.EvmParams;
 import com.coinbase.prime.model.RpcConfig;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Onchain Transaction
- */
+/** Create Onchain Transaction */
 public class CreateOnchainTransactionRequest {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The wallet ID */
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  /** Raw unsigned transaction in Hex format (Supports EVM and Solana) */
+  @JsonProperty("raw_unsigned_txn")
+  private String rawUnsignedTxn;
+
+  @JsonProperty("rpc")
+  private RpcConfig rpc;
+
+  @JsonProperty("evm_params")
+  private EvmParams evmParams;
+
+  public CreateOnchainTransactionRequest() {}
+
+  public CreateOnchainTransactionRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+    this.rawUnsignedTxn = builder.rawUnsignedTxn;
+    this.rpc = builder.rpc;
+    this.evmParams = builder.evmParams;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public String getRawUnsignedTxn() {
+    return rawUnsignedTxn;
+  }
+
+  public void setRawUnsignedTxn(String rawUnsignedTxn) {
+    this.rawUnsignedTxn = rawUnsignedTxn;
+  }
+
+  public RpcConfig getRpc() {
+    return rpc;
+  }
+
+  public void setRpc(RpcConfig rpc) {
+    this.rpc = rpc;
+  }
+
+  public EvmParams getEvmParams() {
+    return evmParams;
+  }
+
+  public void setEvmParams(EvmParams evmParams) {
+    this.evmParams = evmParams;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The wallet ID
-     */
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
     private String walletId;
-
-    /**
-     * Raw unsigned transaction in Hex format (Supports EVM and Solana)
-     */
-    @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
-
-    @JsonProperty("rpc")
     private RpcConfig rpc;
-
-    @JsonProperty("evm_params")
     private EvmParams evmParams;
 
-    public CreateOnchainTransactionRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public CreateOnchainTransactionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.rawUnsignedTxn = builder.rawUnsignedTxn;
-        this.rpc = builder.rpc;
-        this.evmParams = builder.evmParams;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder rawUnsignedTxn(String rawUnsignedTxn) {
+      this.rawUnsignedTxn = rawUnsignedTxn;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder rpc(RpcConfig rpc) {
+      this.rpc = rpc;
+      return this;
     }
 
-    public String getWalletId() {
-        return walletId;
+    public Builder evmParams(EvmParams evmParams) {
+      this.evmParams = evmParams;
+      return this;
     }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
+    public CreateOnchainTransactionRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateOnchainTransactionRequest(this);
     }
 
-    public String getRawUnsignedTxn() {
-        return rawUnsignedTxn;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public void setRawUnsignedTxn(String rawUnsignedTxn) {
-        this.rawUnsignedTxn = rawUnsignedTxn;
-    }
-
-    public RpcConfig getRpc() {
-        return rpc;
-    }
-
-    public void setRpc(RpcConfig rpc) {
-        this.rpc = rpc;
-    }
-
-    public EvmParams getEvmParams() {
-        return evmParams;
-    }
-
-    public void setEvmParams(EvmParams evmParams) {
-        this.evmParams = evmParams;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-        private String rawUnsignedTxn;
-        private RpcConfig rpc;
-        private EvmParams evmParams;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder rawUnsignedTxn(String rawUnsignedTxn) {
-            this.rawUnsignedTxn = rawUnsignedTxn;
-            return this;
-        }
-
-        public Builder rpc(RpcConfig rpc) {
-            this.rpc = rpc;
-            return this;
-        }
-
-        public Builder evmParams(EvmParams evmParams) {
-            this.evmParams = evmParams;
-            return this;
-        }
-
-        public CreateOnchainTransactionRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateOnchainTransactionRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

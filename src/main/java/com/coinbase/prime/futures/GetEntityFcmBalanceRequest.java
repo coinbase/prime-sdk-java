@@ -16,58 +16,52 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Entity FCM Balance
- */
+/** Get Entity FCM Balance */
 public class GetEntityFcmBalanceRequest {
-    /**
-     * Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  public GetEntityFcmBalanceRequest() {}
+
+  public GetEntityFcmBalanceRequest(Builder builder) {
+    this.entityId = builder.entityId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public static class Builder {
     private String entityId;
 
-    public GetEntityFcmBalanceRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetEntityFcmBalanceRequest(Builder builder) {
-        this.entityId = builder.entityId;
+    public GetEntityFcmBalanceRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetEntityFcmBalanceRequest(this);
     }
 
-    public String getEntityId() {
-        return entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public static class Builder {
-        private String entityId;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public GetEntityFcmBalanceRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetEntityFcmBalanceRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

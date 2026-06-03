@@ -21,76 +21,78 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsService {
-    public WalletsServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public WalletsServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListWalletsResponse>() {});
-    }
+  @Override
+  public ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/wallets", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListWalletsResponse>() {});
+  }
 
-    @Override
-    public CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/wallets", request.getPortfolioId()),
-                request,
-                List.of(201, 200),
-                new TypeReference<CreateWalletResponse>() {});
-    }
+  @Override
+  public CreateWalletResponse createWallet(CreateWalletRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/wallets", request.getPortfolioId()),
+        request,
+        List.of(201, 200),
+        new TypeReference<CreateWalletResponse>() {});
+  }
 
-    @Override
-    public GetWalletResponse getWallet(GetWalletRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<GetWalletResponse>() {});
-    }
+  @Override
+  public GetWalletResponse getWallet(GetWalletRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<GetWalletResponse>() {});
+  }
 
-    @Override
-    public ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<ListWalletAddressesResponse>() {});
-    }
+  @Override
+  public ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<ListWalletAddressesResponse>() {});
+  }
 
-    @Override
-    public CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                request,
-                List.of(201, 200),
-                new TypeReference<CreateWalletDepositAddressResponse>() {});
-    }
+  @Override
+  public CreateWalletDepositAddressResponse createWalletDepositAddress(
+      CreateWalletDepositAddressRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(201, 200),
+        new TypeReference<CreateWalletDepositAddressResponse>() {});
+  }
 
-    @Override
-    public GetWalletDepositInstructionsResponse getWalletDepositInstructions(
-            GetWalletDepositInstructionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(),
-                        request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<GetWalletDepositInstructionsResponse>() {});
-    }
-
+  @Override
+  public GetWalletDepositInstructionsResponse getWalletDepositInstructions(
+      GetWalletDepositInstructionsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/wallets/%s/deposit_instructions",
+            request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<GetWalletDepositInstructionsResponse>() {});
+  }
 }

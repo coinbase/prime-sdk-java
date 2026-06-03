@@ -21,56 +21,62 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class PositionsServiceImpl extends CoinbaseServiceImpl implements PositionsService {
-    public PositionsServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public PositionsServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    /** @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)} */
-    @Deprecated
-    @Override
-    public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAggregatePositionsResponse>() {});
-    }
+  /**
+   * @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)}
+   */
+  @Deprecated
+  @Override
+  public ListAggregatePositionsResponse listAggregatePositions(
+      ListAggregatePositionsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/aggregate_positions", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAggregatePositionsResponse>() {});
+  }
 
-    @Override
-    public ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAggregateEntityPositionsResponse>() {});
-    }
+  @Override
+  public ListAggregateEntityPositionsResponse listAggregateEntityPositions(
+      ListAggregateEntityPositionsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/aggregate_positions", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAggregateEntityPositionsResponse>() {});
+  }
 
-    @Override
-    public ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityPositionsResponse>() {});
-    }
+  @Override
+  public ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/positions", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityPositionsResponse>() {});
+  }
 
-    /** @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)} */
-    @Deprecated
-    @Override
-    public ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPositionsResponse>() {});
-    }
-
+  /**
+   * @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)}
+   */
+  @Deprecated
+  @Override
+  public ListPositionsResponse listPositions(ListPositionsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/positions", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPositionsResponse>() {});
+  }
 }

@@ -26,20 +26,22 @@ import com.coinbase.prime.orders.CreateQuoteRequest;
 import com.coinbase.prime.orders.CreateQuoteResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class CreateAndAcceptQuote {
   public static void main(String[] args) {
     try {
       if (args.length < 5) {
-        System.err.println("Usage: CreateAndAcceptQuote <product_id> <side> <basequantity|quotevalue> <amount> <limit_price>");
+        System.err.println(
+            "Usage: CreateAndAcceptQuote <product_id> <side> <basequantity|quotevalue> <amount> <limit_price>");
         System.err.println("Example: CreateAndAcceptQuote ETH-USD BUY basequantity 0.007 3500.00");
-        System.err.println("Example: CreateAndAcceptQuote BTC-USD SELL quotevalue 1000.00 95000.00");
+        System.err.println(
+            "Example: CreateAndAcceptQuote BTC-USD SELL quotevalue 1000.00 95000.00");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -50,18 +52,29 @@ public class CreateAndAcceptQuote {
       String limitPrice = args[4];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
-      System.out.println("Quote parameters: " + productId + " " + side + " " + quantityType + "=" + amount + " limit_price=" + limitPrice);
+      System.out.println(
+          "Quote parameters: "
+              + productId
+              + " "
+              + side
+              + " "
+              + quantityType
+              + "="
+              + amount
+              + " limit_price="
+              + limitPrice);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
 
       // Step 1: Create Quote
       System.out.println("\n=== Creating Quote ===");
-      CreateQuoteRequest.Builder quoteBuilder = new CreateQuoteRequest.Builder()
-          .portfolioId(portfolioId)
-          .productId(productId)
-          .side(side)
-          .limitPrice(limitPrice)
-          .clientQuoteId(UUID.randomUUID().toString());
+      CreateQuoteRequest.Builder quoteBuilder =
+          new CreateQuoteRequest.Builder()
+              .portfolioId(portfolioId)
+              .productId(productId)
+              .side(side)
+              .limitPrice(limitPrice)
+              .clientQuoteId(UUID.randomUUID().toString());
 
       if (quantityType.equals("basequantity")) {
         quoteBuilder.baseQuantity(amount);
@@ -74,21 +87,28 @@ public class CreateAndAcceptQuote {
 
       CreateQuoteResponse quoteResponse = service.createQuote(quoteBuilder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(quoteResponse));
+      System.out.println(
+          Utils.getObjectMapper()
+              .writerWithDefaultPrettyPrinter()
+              .writeValueAsString(quoteResponse));
       System.out.println("\nQuote ID: " + quoteResponse.getQuoteId());
 
       // Step 2: Immediately Accept Quote
       System.out.println("\n=== Accepting Quote ===");
-      AcceptQuoteResponse acceptResponse = service.acceptQuote(
-          new AcceptQuoteRequest.Builder()
-              .portfolioId(portfolioId)
-              .quoteId(quoteResponse.getQuoteId())
-              .productId(productId)
-              .side(side)
-              .clientOrderId(UUID.randomUUID().toString())
-              .build());
+      AcceptQuoteResponse acceptResponse =
+          service.acceptQuote(
+              new AcceptQuoteRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .quoteId(quoteResponse.getQuoteId())
+                  .productId(productId)
+                  .side(side)
+                  .clientOrderId(UUID.randomUUID().toString())
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(acceptResponse));
+      System.out.println(
+          Utils.getObjectMapper()
+              .writerWithDefaultPrettyPrinter()
+              .writeValueAsString(acceptResponse));
     } catch (Exception e) {
       e.printStackTrace();
     }

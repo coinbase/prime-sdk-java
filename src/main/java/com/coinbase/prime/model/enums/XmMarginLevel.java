@@ -28,4 +28,3 @@ public enum XmMarginLevel {
   URGENT_MARGIN_CALL_THRESHOLD,
   LIQUIDATION_THRESHOLD
 }
-

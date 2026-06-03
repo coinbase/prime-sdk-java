@@ -19,71 +19,70 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.ValidatorAllocation;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-    /**
-     * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet. Requirements and supported fields vary by asset type.
-     */
+/**
+ * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet. Requirements
+ * and supported fields vary by asset type.
+ */
 public class WalletUnstakeInputs {
-    /**
-     * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available
-     */
-    @JsonProperty("amount")
+  /**
+   * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount
+   * available
+   */
+  @JsonProperty("amount")
+  private String amount;
+
+  /**
+   * (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which
+   * validators to unstake from and how much. This feature is in alpha. Please reach out to your
+   * Coinbase Prime account manager for more information
+   */
+  @JsonProperty("validator_allocations")
+  private List<ValidatorAllocation> validatorAllocations;
+
+  public WalletUnstakeInputs() {}
+
+  public WalletUnstakeInputs(Builder builder) {
+    this.amount = builder.amount;
+    this.validatorAllocations = builder.validatorAllocations;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public List<ValidatorAllocation> getValidatorAllocations() {
+    return validatorAllocations;
+  }
+
+  public void setValidatorAllocations(List<ValidatorAllocation> validatorAllocations) {
+    this.validatorAllocations = validatorAllocations;
+  }
+
+  public static class Builder {
     private String amount;
 
-    /**
-     * (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which validators to unstake from and how much. This feature is in alpha. Please reach out to your Coinbase Prime account manager for more information
-     */
-    @JsonProperty("validator_allocations")
     private List<ValidatorAllocation> validatorAllocations;
 
-    public WalletUnstakeInputs() {
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public WalletUnstakeInputs(Builder builder) {
-        this.amount = builder.amount;
-        this.validatorAllocations = builder.validatorAllocations;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder validatorAllocations(List<ValidatorAllocation> validatorAllocations) {
+      this.validatorAllocations = validatorAllocations;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public WalletUnstakeInputs build() {
+      return new WalletUnstakeInputs(this);
     }
-    public List<ValidatorAllocation> getValidatorAllocations() {
-        return validatorAllocations;
-    }
-
-    public void setValidatorAllocations(List<ValidatorAllocation> validatorAllocations) {
-        this.validatorAllocations = validatorAllocations;
-    }
-    public static class Builder {
-        private String amount;
-
-        private List<ValidatorAllocation> validatorAllocations;
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder validatorAllocations(List<ValidatorAllocation> validatorAllocations) {
-            this.validatorAllocations = validatorAllocations;
-            return this;
-        }
-
-        public WalletUnstakeInputs build() {
-            return new WalletUnstakeInputs(this);
-        }
-    }
+  }
 }
-

@@ -19,65 +19,58 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class SweepAmount {
-    /**
-     * Currency
-     */
-    @JsonProperty("currency")
+  /** Currency */
+  @JsonProperty("currency")
+  private String currency;
+
+  /** Amount */
+  @JsonProperty("amount")
+  private String amount;
+
+  public SweepAmount() {}
+
+  public SweepAmount(Builder builder) {
+    this.currency = builder.currency;
+    this.amount = builder.amount;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public static class Builder {
     private String currency;
 
-    /**
-     * Amount
-     */
-    @JsonProperty("amount")
     private String amount;
 
-    public SweepAmount() {
+    public Builder currency(String currency) {
+      this.currency = currency;
+      return this;
     }
 
-    public SweepAmount(Builder builder) {
-        this.currency = builder.currency;
-        this.amount = builder.amount;
-    }
-    public String getCurrency() {
-        return currency;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public SweepAmount build() {
+      return new SweepAmount(this);
     }
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public static class Builder {
-        private String currency;
-
-        private String amount;
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public SweepAmount build() {
-            return new SweepAmount(this);
-        }
-    }
+  }
 }
-

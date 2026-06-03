@@ -27,15 +27,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ListPortfolioAllocationsExample {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       AllocationsService service = PrimeServiceFactory.createAllocationsService(client);
       ListPortfolioAllocationsResponse response =
-          service.listPortfolioAllocations(new ListPortfolioAllocationsRequest.Builder().portfolioId(portfolioId).build());
+          service.listPortfolioAllocations(
+              new ListPortfolioAllocationsRequest.Builder().portfolioId(portfolioId).build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

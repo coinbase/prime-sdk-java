@@ -20,9 +20,12 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - UNKNOWN_BALANCE_TYPE: nil - TRADING_BALANCES: Trading balances - VAULT_BALANCES: Vault balances - TOTAL_BALANCES: Total balances (The sum of vault and trading + prime custody) - PRIME_CUSTODY_BALANCES: Prime custody balances - UNIFIED_TOTAL_BALANCES: Unified total balance across networks and wallet types (vault + trading + prime custody)
-     */
+/**
+ * - UNKNOWN_BALANCE_TYPE: nil - TRADING_BALANCES: Trading balances - VAULT_BALANCES: Vault balances
+ * - TOTAL_BALANCES: Total balances (The sum of vault and trading + prime custody) -
+ * PRIME_CUSTODY_BALANCES: Prime custody balances - UNIFIED_TOTAL_BALANCES: Unified total balance
+ * across networks and wallet types (vault + trading + prime custody)
+ */
 public enum PortfolioBalanceType {
   TRADING_BALANCES,
   VAULT_BALANCES,
@@ -30,4 +33,3 @@ public enum PortfolioBalanceType {
   PRIME_CUSTODY_BALANCES,
   UNIFIED_TOTAL_BALANCES
 }
-

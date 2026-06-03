@@ -19,22 +19,18 @@ package com.coinbase.prime.allocations;
 import com.coinbase.prime.model.Allocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Allocation by ID
- */
+/** Get Allocation by ID */
 public class GetAllocationResponse {
-    @JsonProperty("allocation")
-    private Allocation allocation;
+  @JsonProperty("allocation")
+  private Allocation allocation;
 
-    public GetAllocationResponse() {
-    }
+  public GetAllocationResponse() {}
 
-    public Allocation getAllocation() {
-        return allocation;
-    }
+  public Allocation getAllocation() {
+    return allocation;
+  }
 
-    public void setAllocation(Allocation allocation) {
-        this.allocation = allocation;
-    }
-
+  public void setAllocation(Allocation allocation) {
+    this.allocation = allocation;
+  }
 }

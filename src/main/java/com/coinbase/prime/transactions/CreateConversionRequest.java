@@ -16,188 +16,170 @@
 
 package com.coinbase.prime.transactions;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Conversion
- */
+/** Create Conversion */
 public class CreateConversionRequest {
-    /**
-     * The ID of the portfolio
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The ID of the portfolio */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The wallet ID that the conversion will originate from */
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  /** The amount in whole units to convert */
+  @JsonProperty("amount")
+  private String amount;
+
+  /** The UUID of the destination wallet */
+  @JsonProperty("destination")
+  private String destination;
+
+  /** The idempotency key associated with this conversion */
+  @JsonProperty("idempotency_key")
+  private String idempotencyKey;
+
+  /** The currency symbol to convert from */
+  @JsonProperty("source_symbol")
+  private String sourceSymbol;
+
+  /** The currency symbol to convert to */
+  @JsonProperty("destination_symbol")
+  private String destinationSymbol;
+
+  public CreateConversionRequest() {}
+
+  public CreateConversionRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+    this.amount = builder.amount;
+    this.destination = builder.destination;
+    this.idempotencyKey = builder.idempotencyKey;
+    this.sourceSymbol = builder.sourceSymbol;
+    this.destinationSymbol = builder.destinationSymbol;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public String getDestination() {
+    return destination;
+  }
+
+  public void setDestination(String destination) {
+    this.destination = destination;
+  }
+
+  public String getIdempotencyKey() {
+    return idempotencyKey;
+  }
+
+  public void setIdempotencyKey(String idempotencyKey) {
+    this.idempotencyKey = idempotencyKey;
+  }
+
+  public String getSourceSymbol() {
+    return sourceSymbol;
+  }
+
+  public void setSourceSymbol(String sourceSymbol) {
+    this.sourceSymbol = sourceSymbol;
+  }
+
+  public String getDestinationSymbol() {
+    return destinationSymbol;
+  }
+
+  public void setDestinationSymbol(String destinationSymbol) {
+    this.destinationSymbol = destinationSymbol;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The wallet ID that the conversion will originate from
-     */
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
     private String walletId;
-
-    /**
-     * The amount in whole units to convert
-     */
-    @JsonProperty("amount")
     private String amount;
-
-    /**
-     * The UUID of the destination wallet
-     */
-    @JsonProperty("destination")
     private String destination;
-
-    /**
-     * The idempotency key associated with this conversion
-     */
-    @JsonProperty("idempotency_key")
     private String idempotencyKey;
-
-    /**
-     * The currency symbol to convert from
-     */
-    @JsonProperty("source_symbol")
     private String sourceSymbol;
-
-    /**
-     * The currency symbol to convert to
-     */
-    @JsonProperty("destination_symbol")
     private String destinationSymbol;
 
-    public CreateConversionRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public CreateConversionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.amount = builder.amount;
-        this.destination = builder.destination;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.sourceSymbol = builder.sourceSymbol;
-        this.destinationSymbol = builder.destinationSymbol;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder destination(String destination) {
+      this.destination = destination;
+      return this;
     }
 
-    public String getWalletId() {
-        return walletId;
+    public Builder idempotencyKey(String idempotencyKey) {
+      this.idempotencyKey = idempotencyKey;
+      return this;
     }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
+    public Builder sourceSymbol(String sourceSymbol) {
+      this.sourceSymbol = sourceSymbol;
+      return this;
     }
 
-    public String getAmount() {
-        return amount;
+    public Builder destinationSymbol(String destinationSymbol) {
+      this.destinationSymbol = destinationSymbol;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public CreateConversionRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateConversionRequest(this);
     }
 
-    public String getDestination() {
-        return destination;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getIdempotencyKey() {
-        return idempotencyKey;
-    }
-
-    public void setIdempotencyKey(String idempotencyKey) {
-        this.idempotencyKey = idempotencyKey;
-    }
-
-    public String getSourceSymbol() {
-        return sourceSymbol;
-    }
-
-    public void setSourceSymbol(String sourceSymbol) {
-        this.sourceSymbol = sourceSymbol;
-    }
-
-    public String getDestinationSymbol() {
-        return destinationSymbol;
-    }
-
-    public void setDestinationSymbol(String destinationSymbol) {
-        this.destinationSymbol = destinationSymbol;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-        private String amount;
-        private String destination;
-        private String idempotencyKey;
-        private String sourceSymbol;
-        private String destinationSymbol;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder destination(String destination) {
-            this.destination = destination;
-            return this;
-        }
-
-        public Builder idempotencyKey(String idempotencyKey) {
-            this.idempotencyKey = idempotencyKey;
-            return this;
-        }
-
-        public Builder sourceSymbol(String sourceSymbol) {
-            this.sourceSymbol = sourceSymbol;
-            return this;
-        }
-
-        public Builder destinationSymbol(String destinationSymbol) {
-            this.destinationSymbol = destinationSymbol;
-            return this;
-        }
-
-        public CreateConversionRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateConversionRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

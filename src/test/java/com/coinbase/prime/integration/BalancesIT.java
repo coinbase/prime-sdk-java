@@ -16,6 +16,9 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.balances.*;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.WalletType;
@@ -24,83 +27,86 @@ import com.coinbase.prime.wallets.ListWalletsResponse;
 import com.coinbase.prime.wallets.WalletsService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class BalancesIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListEntityBalances() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        BalancesService service = PrimeServiceFactory.createBalancesService(client);
-        ListEntityBalancesResponse response = service.listEntityBalances(
-                new ListEntityBalancesRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListEntityBalances() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    BalancesService service = PrimeServiceFactory.createBalancesService(client);
+    ListEntityBalancesResponse response =
+        service.listEntityBalances(
+            new ListEntityBalancesRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListEntityBalancesWithSymbols() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        BalancesService service = PrimeServiceFactory.createBalancesService(client);
-        ListEntityBalancesResponse response = service.listEntityBalances(
-                new ListEntityBalancesRequest.Builder()
-                        .entityId(entityId)
-                        .symbols(new String[]{"BTC", "ETH", "USDC"})
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListEntityBalancesWithSymbols() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    BalancesService service = PrimeServiceFactory.createBalancesService(client);
+    ListEntityBalancesResponse response =
+        service.listEntityBalances(
+            new ListEntityBalancesRequest.Builder()
+                .entityId(entityId)
+                .symbols(new String[] {"BTC", "ETH", "USDC"})
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPortfolioBalances() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        BalancesService service = PrimeServiceFactory.createBalancesService(client);
-        ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-                new ListPortfolioBalancesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioBalances() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    BalancesService service = PrimeServiceFactory.createBalancesService(client);
+    ListPortfolioBalancesResponse response =
+        service.listPortfolioBalances(
+            new ListPortfolioBalancesRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPortfolioBalancesWithSymbols() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        BalancesService service = PrimeServiceFactory.createBalancesService(client);
-        ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-                new ListPortfolioBalancesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .symbols(new String[]{"BTC", "ETH"})
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioBalancesWithSymbols() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    BalancesService service = PrimeServiceFactory.createBalancesService(client);
+    ListPortfolioBalancesResponse response =
+        service.listPortfolioBalances(
+            new ListPortfolioBalancesRequest.Builder()
+                .portfolioId(portfolioId)
+                .symbols(new String[] {"BTC", "ETH"})
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListOnchainWalletBalances() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+  @Test
+  public void testListOnchainWalletBalances() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
 
-        WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
-        ListWalletsResponse wallets = walletsService.listWallets(
-                new ListWalletsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .type(WalletType.ONCHAIN)
-                        .build());
-        assumeTrue(wallets != null && wallets.getWallets() != null && wallets.getWallets().length > 0,
-                "Skipping: no ONCHAIN wallets found for portfolio");
+    WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
+    ListWalletsResponse wallets =
+        walletsService.listWallets(
+            new ListWalletsRequest.Builder()
+                .portfolioId(portfolioId)
+                .type(WalletType.ONCHAIN)
+                .build());
+    assumeTrue(
+        wallets != null && wallets.getWallets() != null && wallets.getWallets().length > 0,
+        "Skipping: no ONCHAIN wallets found for portfolio");
 
-        String walletId = wallets.getWallets()[0].getId();
+    String walletId = wallets.getWallets()[0].getId();
 
-        BalancesService service = PrimeServiceFactory.createBalancesService(client);
-        ListOnchainWalletBalancesResponse response = service.listOnchainWalletBalances(
-                new ListOnchainWalletBalancesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .walletId(walletId)
-                        .build());
-        assertNotNull(response);
-    }
+    BalancesService service = PrimeServiceFactory.createBalancesService(client);
+    ListOnchainWalletBalancesResponse response =
+        service.listOnchainWalletBalances(
+            new ListOnchainWalletBalancesRequest.Builder()
+                .portfolioId(portfolioId)
+                .walletId(walletId)
+                .build());
+    assertNotNull(response);
+  }
 }

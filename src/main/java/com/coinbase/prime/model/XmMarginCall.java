@@ -19,247 +19,238 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.XmCallStatus;
 import com.coinbase.prime.model.enums.XmCallType;
 import com.coinbase.prime.model.enums.XmMarginLevel;
-import com.coinbase.prime.model.XmSummary;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 
 public class XmMarginCall {
-    /**
-     * Financing margin call UUID
-     */
-    @JsonProperty("margin_call_id")
+  /** Financing margin call UUID */
+  @JsonProperty("margin_call_id")
+  private String marginCallId;
+
+  /** Margin call currency */
+  @JsonProperty("currency")
+  private String currency;
+
+  /** Call amount (notional) as of the margin call creation */
+  @JsonProperty("initial_notional_amount")
+  private String initialNotionalAmount;
+
+  /** Current outstanding call amount (notional) */
+  @JsonProperty("outstanding_notional_amount")
+  private String outstandingNotionalAmount;
+
+  @JsonProperty("margin_call_type")
+  private XmCallType marginCallType;
+
+  @JsonProperty("margin_call_status")
+  private XmCallStatus marginCallStatus;
+
+  @JsonProperty("called_with_margin_level")
+  private XmMarginLevel calledWithMarginLevel;
+
+  @JsonProperty("called_with_margin_summary")
+  private XmSummary calledWithMarginSummary;
+
+  /** Timestamp when the margin call settlement is due */
+  @JsonProperty("due_at")
+  private OffsetDateTime dueAt;
+
+  /** Timestamp when the margin call was created */
+  @JsonProperty("created_at")
+  private OffsetDateTime createdAt;
+
+  /** Timestamp when the margin call was last updated */
+  @JsonProperty("updated_at")
+  private OffsetDateTime updatedAt;
+
+  public XmMarginCall() {}
+
+  public XmMarginCall(Builder builder) {
+    this.marginCallId = builder.marginCallId;
+    this.currency = builder.currency;
+    this.initialNotionalAmount = builder.initialNotionalAmount;
+    this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
+    this.marginCallType = builder.marginCallType;
+    this.marginCallStatus = builder.marginCallStatus;
+    this.calledWithMarginLevel = builder.calledWithMarginLevel;
+    this.calledWithMarginSummary = builder.calledWithMarginSummary;
+    this.dueAt = builder.dueAt;
+    this.createdAt = builder.createdAt;
+    this.updatedAt = builder.updatedAt;
+  }
+
+  public String getMarginCallId() {
+    return marginCallId;
+  }
+
+  public void setMarginCallId(String marginCallId) {
+    this.marginCallId = marginCallId;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+  public String getInitialNotionalAmount() {
+    return initialNotionalAmount;
+  }
+
+  public void setInitialNotionalAmount(String initialNotionalAmount) {
+    this.initialNotionalAmount = initialNotionalAmount;
+  }
+
+  public String getOutstandingNotionalAmount() {
+    return outstandingNotionalAmount;
+  }
+
+  public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
+    this.outstandingNotionalAmount = outstandingNotionalAmount;
+  }
+
+  public XmCallType getMarginCallType() {
+    return marginCallType;
+  }
+
+  public void setMarginCallType(XmCallType marginCallType) {
+    this.marginCallType = marginCallType;
+  }
+
+  public XmCallStatus getMarginCallStatus() {
+    return marginCallStatus;
+  }
+
+  public void setMarginCallStatus(XmCallStatus marginCallStatus) {
+    this.marginCallStatus = marginCallStatus;
+  }
+
+  public XmMarginLevel getCalledWithMarginLevel() {
+    return calledWithMarginLevel;
+  }
+
+  public void setCalledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
+    this.calledWithMarginLevel = calledWithMarginLevel;
+  }
+
+  public XmSummary getCalledWithMarginSummary() {
+    return calledWithMarginSummary;
+  }
+
+  public void setCalledWithMarginSummary(XmSummary calledWithMarginSummary) {
+    this.calledWithMarginSummary = calledWithMarginSummary;
+  }
+
+  public OffsetDateTime getDueAt() {
+    return dueAt;
+  }
+
+  public void setDueAt(OffsetDateTime dueAt) {
+    this.dueAt = dueAt;
+  }
+
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public static class Builder {
     private String marginCallId;
 
-    /**
-     * Margin call currency
-     */
-    @JsonProperty("currency")
     private String currency;
 
-    /**
-     * Call amount (notional) as of the margin call creation
-     */
-    @JsonProperty("initial_notional_amount")
     private String initialNotionalAmount;
 
-    /**
-     * Current outstanding call amount (notional)
-     */
-    @JsonProperty("outstanding_notional_amount")
     private String outstandingNotionalAmount;
 
-    @JsonProperty("margin_call_type")
     private XmCallType marginCallType;
 
-    @JsonProperty("margin_call_status")
     private XmCallStatus marginCallStatus;
 
-    @JsonProperty("called_with_margin_level")
     private XmMarginLevel calledWithMarginLevel;
 
-    @JsonProperty("called_with_margin_summary")
     private XmSummary calledWithMarginSummary;
 
-    /**
-     * Timestamp when the margin call settlement is due
-     */
-    @JsonProperty("due_at")
     private OffsetDateTime dueAt;
 
-    /**
-     * Timestamp when the margin call was created
-     */
-    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
-    /**
-     * Timestamp when the margin call was last updated
-     */
-    @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
-    public XmMarginCall() {
+    public Builder marginCallId(String marginCallId) {
+      this.marginCallId = marginCallId;
+      return this;
     }
 
-    public XmMarginCall(Builder builder) {
-        this.marginCallId = builder.marginCallId;
-        this.currency = builder.currency;
-        this.initialNotionalAmount = builder.initialNotionalAmount;
-        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
-        this.marginCallType = builder.marginCallType;
-        this.marginCallStatus = builder.marginCallStatus;
-        this.calledWithMarginLevel = builder.calledWithMarginLevel;
-        this.calledWithMarginSummary = builder.calledWithMarginSummary;
-        this.dueAt = builder.dueAt;
-        this.createdAt = builder.createdAt;
-        this.updatedAt = builder.updatedAt;
-    }
-    public String getMarginCallId() {
-        return marginCallId;
+    public Builder currency(String currency) {
+      this.currency = currency;
+      return this;
     }
 
-    public void setMarginCallId(String marginCallId) {
-        this.marginCallId = marginCallId;
-    }
-    public String getCurrency() {
-        return currency;
+    public Builder initialNotionalAmount(String initialNotionalAmount) {
+      this.initialNotionalAmount = initialNotionalAmount;
+      return this;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-    public String getInitialNotionalAmount() {
-        return initialNotionalAmount;
+    public Builder outstandingNotionalAmount(String outstandingNotionalAmount) {
+      this.outstandingNotionalAmount = outstandingNotionalAmount;
+      return this;
     }
 
-    public void setInitialNotionalAmount(String initialNotionalAmount) {
-        this.initialNotionalAmount = initialNotionalAmount;
-    }
-    public String getOutstandingNotionalAmount() {
-        return outstandingNotionalAmount;
+    public Builder marginCallType(XmCallType marginCallType) {
+      this.marginCallType = marginCallType;
+      return this;
     }
 
-    public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
-        this.outstandingNotionalAmount = outstandingNotionalAmount;
-    }
-    public XmCallType getMarginCallType() {
-        return marginCallType;
+    public Builder marginCallStatus(XmCallStatus marginCallStatus) {
+      this.marginCallStatus = marginCallStatus;
+      return this;
     }
 
-    public void setMarginCallType(XmCallType marginCallType) {
-        this.marginCallType = marginCallType;
-    }
-    public XmCallStatus getMarginCallStatus() {
-        return marginCallStatus;
+    public Builder calledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
+      this.calledWithMarginLevel = calledWithMarginLevel;
+      return this;
     }
 
-    public void setMarginCallStatus(XmCallStatus marginCallStatus) {
-        this.marginCallStatus = marginCallStatus;
-    }
-    public XmMarginLevel getCalledWithMarginLevel() {
-        return calledWithMarginLevel;
+    public Builder calledWithMarginSummary(XmSummary calledWithMarginSummary) {
+      this.calledWithMarginSummary = calledWithMarginSummary;
+      return this;
     }
 
-    public void setCalledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
-        this.calledWithMarginLevel = calledWithMarginLevel;
-    }
-    public XmSummary getCalledWithMarginSummary() {
-        return calledWithMarginSummary;
+    public Builder dueAt(OffsetDateTime dueAt) {
+      this.dueAt = dueAt;
+      return this;
     }
 
-    public void setCalledWithMarginSummary(XmSummary calledWithMarginSummary) {
-        this.calledWithMarginSummary = calledWithMarginSummary;
-    }
-    public OffsetDateTime getDueAt() {
-        return dueAt;
+    public Builder createdAt(OffsetDateTime createdAt) {
+      this.createdAt = createdAt;
+      return this;
     }
 
-    public void setDueAt(OffsetDateTime dueAt) {
-        this.dueAt = dueAt;
-    }
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
+    public Builder updatedAt(OffsetDateTime updatedAt) {
+      this.updatedAt = updatedAt;
+      return this;
     }
 
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
+    public XmMarginCall build() {
+      return new XmMarginCall(this);
     }
-    public OffsetDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    public static class Builder {
-        private String marginCallId;
-
-        private String currency;
-
-        private String initialNotionalAmount;
-
-        private String outstandingNotionalAmount;
-
-        private XmCallType marginCallType;
-
-        private XmCallStatus marginCallStatus;
-
-        private XmMarginLevel calledWithMarginLevel;
-
-        private XmSummary calledWithMarginSummary;
-
-        private OffsetDateTime dueAt;
-
-        private OffsetDateTime createdAt;
-
-        private OffsetDateTime updatedAt;
-
-        public Builder marginCallId(String marginCallId) {
-            this.marginCallId = marginCallId;
-            return this;
-        }
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public Builder initialNotionalAmount(String initialNotionalAmount) {
-            this.initialNotionalAmount = initialNotionalAmount;
-            return this;
-        }
-
-        public Builder outstandingNotionalAmount(String outstandingNotionalAmount) {
-            this.outstandingNotionalAmount = outstandingNotionalAmount;
-            return this;
-        }
-
-        public Builder marginCallType(XmCallType marginCallType) {
-            this.marginCallType = marginCallType;
-            return this;
-        }
-
-        public Builder marginCallStatus(XmCallStatus marginCallStatus) {
-            this.marginCallStatus = marginCallStatus;
-            return this;
-        }
-
-        public Builder calledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
-            this.calledWithMarginLevel = calledWithMarginLevel;
-            return this;
-        }
-
-        public Builder calledWithMarginSummary(XmSummary calledWithMarginSummary) {
-            this.calledWithMarginSummary = calledWithMarginSummary;
-            return this;
-        }
-
-        public Builder dueAt(OffsetDateTime dueAt) {
-            this.dueAt = dueAt;
-            return this;
-        }
-
-        public Builder createdAt(OffsetDateTime createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        public Builder updatedAt(OffsetDateTime updatedAt) {
-            this.updatedAt = updatedAt;
-            return this;
-        }
-
-        public XmMarginCall build() {
-            return new XmMarginCall(this);
-        }
-    }
+  }
 }
-

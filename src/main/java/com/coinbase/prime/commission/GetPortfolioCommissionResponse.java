@@ -19,22 +19,18 @@ package com.coinbase.prime.commission;
 import com.coinbase.prime.model.Commission;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Portfolio Commission
- */
+/** Get Portfolio Commission */
 public class GetPortfolioCommissionResponse {
-    @JsonProperty("commission")
-    private Commission commission;
+  @JsonProperty("commission")
+  private Commission commission;
 
-    public GetPortfolioCommissionResponse() {
-    }
+  public GetPortfolioCommissionResponse() {}
 
-    public Commission getCommission() {
-        return commission;
-    }
+  public Commission getCommission() {
+    return commission;
+  }
 
-    public void setCommission(Commission commission) {
-        this.commission = commission;
-    }
-
+  public void setCommission(Commission commission) {
+    this.commission = commission;
+  }
 }

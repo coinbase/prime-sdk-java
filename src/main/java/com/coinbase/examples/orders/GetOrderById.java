@@ -30,18 +30,21 @@ import com.coinbase.prime.utils.Utils;
 public class GetOrderById {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String orderId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_ORDER_ID");
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
       if (orderId == null || orderId.isEmpty()) {
-        ListPortfolioOrdersResponse listed = service.listPortfolioOrders(
-            new ListPortfolioOrdersRequest.Builder().portfolioId(portfolioId).limit(1).build());
+        ListPortfolioOrdersResponse listed =
+            service.listPortfolioOrders(
+                new ListPortfolioOrdersRequest.Builder().portfolioId(portfolioId).limit(1).build());
         Order[] orders = listed.getOrders();
         if (orders == null || orders.length == 0) {
-          System.err.println("No orders found; pass order_id, set COINBASE_PRIME_ORDER_ID, or ensure portfolio has orders.");
+          System.err.println(
+              "No orders found; pass order_id, set COINBASE_PRIME_ORDER_ID, or ensure portfolio has orders.");
           return;
         }
         orderId = orders[0].getId();
@@ -49,13 +52,15 @@ public class GetOrderById {
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
 
-      GetOrderByOrderIdResponse response = service.getOrderByOrderId(
-          new GetOrderByOrderIdRequest.Builder()
-              .portfolioId(portfolioId)
-              .orderId(orderId)
-              .build());
+      GetOrderByOrderIdResponse response =
+          service.getOrderByOrderId(
+              new GetOrderByOrderIdRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .orderId(orderId)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

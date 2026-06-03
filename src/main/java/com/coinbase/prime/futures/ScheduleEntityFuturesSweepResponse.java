@@ -18,39 +18,31 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Schedule Entity Futures Sweep
- */
+/** Schedule Entity Futures Sweep */
 public class ScheduleEntityFuturesSweepResponse {
-    /**
-     * Success
-     */
-    @JsonProperty("success")
-    private Boolean success;
+  /** Success */
+  @JsonProperty("success")
+  private Boolean success;
 
-    /**
-     * Request ID
-     */
-    @JsonProperty("request_id")
-    private String requestId;
+  /** Request ID */
+  @JsonProperty("request_id")
+  private String requestId;
 
-    public ScheduleEntityFuturesSweepResponse() {
-    }
+  public ScheduleEntityFuturesSweepResponse() {}
 
-    public Boolean getSuccess() {
-        return success;
-    }
+  public Boolean getSuccess() {
+    return success;
+  }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+  public void setSuccess(Boolean success) {
+    this.success = success;
+  }
 
-    public String getRequestId() {
-        return requestId;
-    }
+  public String getRequestId() {
+    return requestId;
+  }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
-
+  public void setRequestId(String requestId) {
+    this.requestId = requestId;
+  }
 }

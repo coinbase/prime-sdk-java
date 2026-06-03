@@ -21,66 +21,62 @@ import com.coinbase.prime.model.Balance;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Entity Balances
- */
+/** List Entity Balances */
 public class ListPortfolioBalancesResponse {
-    @JsonProperty("balances")
-    private Balance[] balances;
+  @JsonProperty("balances")
+  private Balance[] balances;
 
-    @JsonProperty("type")
-    private PortfolioBalanceType type;
+  @JsonProperty("type")
+  private PortfolioBalanceType type;
 
-    @JsonProperty("trading_balances")
-    private AggregatedFiatBalance tradingBalances;
+  @JsonProperty("trading_balances")
+  private AggregatedFiatBalance tradingBalances;
 
-    @JsonProperty("vault_balances")
-    private AggregatedFiatBalance vaultBalances;
+  @JsonProperty("vault_balances")
+  private AggregatedFiatBalance vaultBalances;
 
-    @JsonProperty("prime_custody_balances")
-    private AggregatedFiatBalance primeCustodyBalances;
+  @JsonProperty("prime_custody_balances")
+  private AggregatedFiatBalance primeCustodyBalances;
 
-    public ListPortfolioBalancesResponse() {
-    }
+  public ListPortfolioBalancesResponse() {}
 
-    public Balance[] getBalances() {
-        return balances;
-    }
+  public Balance[] getBalances() {
+    return balances;
+  }
 
-    public void setBalances(Balance[] balances) {
-        this.balances = balances;
-    }
+  public void setBalances(Balance[] balances) {
+    this.balances = balances;
+  }
 
-    public PortfolioBalanceType getType() {
-        return type;
-    }
+  public PortfolioBalanceType getType() {
+    return type;
+  }
 
-    public void setType(PortfolioBalanceType type) {
-        this.type = type;
-    }
+  public void setType(PortfolioBalanceType type) {
+    this.type = type;
+  }
 
-    public AggregatedFiatBalance getTradingBalances() {
-        return tradingBalances;
-    }
+  public AggregatedFiatBalance getTradingBalances() {
+    return tradingBalances;
+  }
 
-    public void setTradingBalances(AggregatedFiatBalance tradingBalances) {
-        this.tradingBalances = tradingBalances;
-    }
+  public void setTradingBalances(AggregatedFiatBalance tradingBalances) {
+    this.tradingBalances = tradingBalances;
+  }
 
-    public AggregatedFiatBalance getVaultBalances() {
-        return vaultBalances;
-    }
+  public AggregatedFiatBalance getVaultBalances() {
+    return vaultBalances;
+  }
 
-    public void setVaultBalances(AggregatedFiatBalance vaultBalances) {
-        this.vaultBalances = vaultBalances;
-    }
+  public void setVaultBalances(AggregatedFiatBalance vaultBalances) {
+    this.vaultBalances = vaultBalances;
+  }
 
-    public AggregatedFiatBalance getPrimeCustodyBalances() {
-        return primeCustodyBalances;
-    }
+  public AggregatedFiatBalance getPrimeCustodyBalances() {
+    return primeCustodyBalances;
+  }
 
-    public void setPrimeCustodyBalances(AggregatedFiatBalance primeCustodyBalances) {
-        this.primeCustodyBalances = primeCustodyBalances;
-    }
-
+  public void setPrimeCustodyBalances(AggregatedFiatBalance primeCustodyBalances) {
+    this.primeCustodyBalances = primeCustodyBalances;
+  }
 }

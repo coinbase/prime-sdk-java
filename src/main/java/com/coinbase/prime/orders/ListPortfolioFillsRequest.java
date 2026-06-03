@@ -16,109 +16,105 @@
 
 package com.coinbase.prime.orders;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Portfolio Fills
- */
+/** List Portfolio Fills */
 public class ListPortfolioFillsRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty("start_date")
+  private String startDate;
+
+  @JsonProperty("end_date")
+  private String endDate;
+
+  public ListPortfolioFillsRequest() {}
+
+  public ListPortfolioFillsRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.startDate = builder.startDate;
+    this.endDate = builder.endDate;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty("start_date")
     private String startDate;
-
-    @JsonProperty("end_date")
     private String endDate;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListPortfolioFillsRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListPortfolioFillsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+    public Builder startDate(String startDate) {
+      this.startDate = startDate;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder endDate(String endDate) {
+      this.endDate = endDate;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public ListPortfolioFillsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListPortfolioFillsRequest(this);
     }
 
-    public String getEndDate() {
-        return endDate;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String startDate;
-        private String endDate;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder startDate(String startDate) {
-            this.startDate = startDate;
-            return this;
-        }
-
-        public Builder endDate(String endDate) {
-            this.endDate = endDate;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListPortfolioFillsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListPortfolioFillsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

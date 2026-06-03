@@ -21,64 +21,75 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
-public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl implements AdvancedTransferService {
-    public AdvancedTransferServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl
+    implements AdvancedTransferService {
+  public AdvancedTransferServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAdvancedTransfersResponse>() {});
-    }
+  @Override
+  public ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAdvancedTransfersResponse>() {});
+  }
 
-    @Override
-    public CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
-                request,
-                List.of(201, 200),
-                new TypeReference<CreateAdvancedTransferResponse>() {});
-    }
+  @Override
+  public CreateAdvancedTransferResponse createAdvancedTransfer(
+      CreateAdvancedTransferRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
+        request,
+        List.of(201, 200),
+        new TypeReference<CreateAdvancedTransferResponse>() {});
+  }
 
-    @Override
-    public CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/advanced_transfers/%s/cancel", request.getPortfolioId(), request.getAdvancedTransferId()),
-                request,
-                List.of(200),
-                new TypeReference<CancelAdvancedTransferResponse>() {});
-    }
+  @Override
+  public CancelAdvancedTransferResponse cancelAdvancedTransfer(
+      CancelAdvancedTransferRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/advanced_transfers/%s/cancel",
+            request.getPortfolioId(), request.getAdvancedTransferId()),
+        request,
+        List.of(200),
+        new TypeReference<CancelAdvancedTransferResponse>() {});
+  }
 
-    @Override
-    public ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(), request.getAdvancedTransferId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
-    }
+  @Override
+  public ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(
+      ListAdvancedTransferTransactionsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/advanced_transfers/%s/transactions",
+            request.getPortfolioId(), request.getAdvancedTransferId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
+  }
 
-    /** @deprecated Prefer {@link com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId} */
-    @Deprecated
-    @Override
-    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
-    }
-
+  /**
+   * @deprecated Prefer {@link
+   *     com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId}
+   */
+  @Deprecated
+  @Override
+  public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
+      GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
+  }
 }

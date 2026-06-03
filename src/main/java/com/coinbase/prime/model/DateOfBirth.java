@@ -19,77 +19,75 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class DateOfBirth {
-    @JsonProperty("year")
+  @JsonProperty("year")
+  private Long year;
+
+  @JsonProperty("month")
+  private Long month;
+
+  @JsonProperty("day")
+  private Long day;
+
+  public DateOfBirth() {}
+
+  public DateOfBirth(Builder builder) {
+    this.year = builder.year;
+    this.month = builder.month;
+    this.day = builder.day;
+  }
+
+  public Long getYear() {
+    return year;
+  }
+
+  public void setYear(Long year) {
+    this.year = year;
+  }
+
+  public Long getMonth() {
+    return month;
+  }
+
+  public void setMonth(Long month) {
+    this.month = month;
+  }
+
+  public Long getDay() {
+    return day;
+  }
+
+  public void setDay(Long day) {
+    this.day = day;
+  }
+
+  public static class Builder {
     private Long year;
 
-    @JsonProperty("month")
     private Long month;
 
-    @JsonProperty("day")
     private Long day;
 
-    public DateOfBirth() {
+    public Builder year(Long year) {
+      this.year = year;
+      return this;
     }
 
-    public DateOfBirth(Builder builder) {
-        this.year = builder.year;
-        this.month = builder.month;
-        this.day = builder.day;
-    }
-    public Long getYear() {
-        return year;
+    public Builder month(Long month) {
+      this.month = month;
+      return this;
     }
 
-    public void setYear(Long year) {
-        this.year = year;
-    }
-    public Long getMonth() {
-        return month;
+    public Builder day(Long day) {
+      this.day = day;
+      return this;
     }
 
-    public void setMonth(Long month) {
-        this.month = month;
+    public DateOfBirth build() {
+      return new DateOfBirth(this);
     }
-    public Long getDay() {
-        return day;
-    }
-
-    public void setDay(Long day) {
-        this.day = day;
-    }
-    public static class Builder {
-        private Long year;
-
-        private Long month;
-
-        private Long day;
-
-        public Builder year(Long year) {
-            this.year = year;
-            return this;
-        }
-
-        public Builder month(Long month) {
-            this.month = month;
-            return this;
-        }
-
-        public Builder day(Long day) {
-            this.day = day;
-            return this;
-        }
-
-        public DateOfBirth build() {
-            return new DateOfBirth(this);
-        }
-    }
+  }
 }
-

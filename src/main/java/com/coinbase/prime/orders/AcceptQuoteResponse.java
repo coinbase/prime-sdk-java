@@ -18,22 +18,18 @@ package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Accept Quote
- */
+/** Accept Quote */
 public class AcceptQuoteResponse {
-    @JsonProperty("order_id")
-    private String orderId;
+  @JsonProperty("order_id")
+  private String orderId;
 
-    public AcceptQuoteResponse() {
-    }
+  public AcceptQuoteResponse() {}
 
-    public String getOrderId() {
-        return orderId;
-    }
+  public String getOrderId() {
+    return orderId;
+  }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
 }

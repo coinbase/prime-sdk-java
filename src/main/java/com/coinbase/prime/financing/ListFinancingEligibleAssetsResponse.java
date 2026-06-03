@@ -20,24 +20,21 @@ import com.coinbase.prime.model.TfAsset;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ListFinancingEligibleAssetsResponse contains the list of financing eligible assets with their details
+ * ListFinancingEligibleAssetsResponse contains the list of financing eligible assets with their
+ * details
  */
 public class ListFinancingEligibleAssetsResponse {
-    /**
-     * List of assets eligible for Trade Finance
-     */
-    @JsonProperty("assets")
-    private TfAsset[] assets;
+  /** List of assets eligible for Trade Finance */
+  @JsonProperty("assets")
+  private TfAsset[] assets;
 
-    public ListFinancingEligibleAssetsResponse() {
-    }
+  public ListFinancingEligibleAssetsResponse() {}
 
-    public TfAsset[] getAssets() {
-        return assets;
-    }
+  public TfAsset[] getAssets() {
+    return assets;
+  }
 
-    public void setAssets(TfAsset[] assets) {
-        this.assets = assets;
-    }
-
+  public void setAssets(TfAsset[] assets) {
+    this.assets = assets;
+  }
 }

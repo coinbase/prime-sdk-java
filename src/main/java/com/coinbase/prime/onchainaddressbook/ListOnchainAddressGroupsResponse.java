@@ -19,22 +19,18 @@ package com.coinbase.prime.onchainaddressbook;
 import com.coinbase.prime.model.AddressGroup;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Onchain Address Groups
- */
+/** List Onchain Address Groups */
 public class ListOnchainAddressGroupsResponse {
-    @JsonProperty("address_groups")
-    private AddressGroup[] addressGroups;
+  @JsonProperty("address_groups")
+  private AddressGroup[] addressGroups;
 
-    public ListOnchainAddressGroupsResponse() {
-    }
+  public ListOnchainAddressGroupsResponse() {}
 
-    public AddressGroup[] getAddressGroups() {
-        return addressGroups;
-    }
+  public AddressGroup[] getAddressGroups() {
+    return addressGroups;
+  }
 
-    public void setAddressGroups(AddressGroup[] addressGroups) {
-        this.addressGroups = addressGroups;
-    }
-
+  public void setAddressGroups(AddressGroup[] addressGroups) {
+    this.addressGroups = addressGroups;
+  }
 }

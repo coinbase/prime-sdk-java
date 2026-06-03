@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.serialization;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.prime.activities.GetActivityRequest;
 import com.coinbase.prime.activities.ListPortfolioActivitiesRequest;
 import com.coinbase.prime.allocations.GetAllocationRequest;
@@ -38,210 +40,199 @@ import com.coinbase.prime.wallets.GetWalletRequest;
 import com.coinbase.prime.wallets.ListWalletsRequest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Tests verifying request construction with minimal required parameters
- * Validates that requests can be built with only required fields (no nulls passed)
- * Core-java handles null-free serialization automatically
+ * Tests verifying request construction with minimal required parameters Validates that requests can
+ * be built with only required fields (no nulls passed) Core-java handles null-free serialization
+ * automatically
  */
 public class RequestSerializationTest {
 
-    @Test
-    public void testListPortfolioActivitiesRequestConstruction() {
-        ListPortfolioActivitiesRequest request =
-                new ListPortfolioActivitiesRequest.Builder().portfolioId("portfolio-123").build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioActivitiesRequestConstruction() {
+    ListPortfolioActivitiesRequest request =
+        new ListPortfolioActivitiesRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetActivityRequestConstruction() throws Exception {
-        GetActivityRequest request =
-                new GetActivityRequest.Builder().activityId("activity-456").build();
-        assertNotNull(request);
-        assertEquals("activity-456", request.getActivityId());
-    }
+  @Test
+  public void testGetActivityRequestConstruction() throws Exception {
+    GetActivityRequest request =
+        new GetActivityRequest.Builder().activityId("activity-456").build();
+    assertNotNull(request);
+    assertEquals("activity-456", request.getActivityId());
+  }
 
-    @Test
-    public void testListPortfolioAllocationsRequestConstruction() throws Exception {
-        ListPortfolioAllocationsRequest request =
-                new ListPortfolioAllocationsRequest.Builder().portfolioId("portfolio-789").build();
-        assertNotNull(request);
-        assertEquals("portfolio-789", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioAllocationsRequestConstruction() throws Exception {
+    ListPortfolioAllocationsRequest request =
+        new ListPortfolioAllocationsRequest.Builder().portfolioId("portfolio-789").build();
+    assertNotNull(request);
+    assertEquals("portfolio-789", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetAllocationRequestConstruction() throws Exception {
-        GetAllocationRequest request =
-                new GetAllocationRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .allocationId("allocation-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("allocation-456", request.getAllocationId());
-    }
+  @Test
+  public void testGetAllocationRequestConstruction() throws Exception {
+    GetAllocationRequest request =
+        new GetAllocationRequest.Builder()
+            .portfolioId("portfolio-123")
+            .allocationId("allocation-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("allocation-456", request.getAllocationId());
+  }
 
-    @Test
-    public void testListAssetsRequestConstruction() throws Exception {
-        ListAssetsRequest request = new ListAssetsRequest.Builder().entityId("entity-123").build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testListAssetsRequestConstruction() throws Exception {
+    ListAssetsRequest request = new ListAssetsRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListPortfolioBalancesRequestConstruction() throws Exception {
-        ListPortfolioBalancesRequest request =
-                new ListPortfolioBalancesRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioBalancesRequestConstruction() throws Exception {
+    ListPortfolioBalancesRequest request =
+        new ListPortfolioBalancesRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetWalletBalanceRequestConstruction() throws Exception {
-        GetWalletBalanceRequest request =
-                new GetWalletBalanceRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .walletId("wallet-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("wallet-456", request.getWalletId());
-    }
+  @Test
+  public void testGetWalletBalanceRequestConstruction() throws Exception {
+    GetWalletBalanceRequest request =
+        new GetWalletBalanceRequest.Builder()
+            .portfolioId("portfolio-123")
+            .walletId("wallet-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("wallet-456", request.getWalletId());
+  }
 
-    @Test
-    public void testGetPortfolioCommissionRequestConstruction() throws Exception {
-        GetPortfolioCommissionRequest request =
-                new GetPortfolioCommissionRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testGetPortfolioCommissionRequestConstruction() throws Exception {
+    GetPortfolioCommissionRequest request =
+        new GetPortfolioCommissionRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetMarginInformationRequestConstruction() throws Exception {
-        GetMarginInformationRequest request =
-                new GetMarginInformationRequest.Builder().entityId("entity-123").build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testGetMarginInformationRequestConstruction() throws Exception {
+    GetMarginInformationRequest request =
+        new GetMarginInformationRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListExistingLocatesRequestConstruction() throws Exception {
-        ListExistingLocatesRequest request =
-                new ListExistingLocatesRequest.Builder().portfolioId("portfolio-123").build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListExistingLocatesRequestConstruction() throws Exception {
+    ListExistingLocatesRequest request =
+        new ListExistingLocatesRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetEntityFcmBalanceRequestConstruction() throws Exception {
-        GetEntityFcmBalanceRequest request =
-                new GetEntityFcmBalanceRequest.Builder().entityId("entity-123").build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testGetEntityFcmBalanceRequestConstruction() throws Exception {
+    GetEntityFcmBalanceRequest request =
+        new GetEntityFcmBalanceRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListOpenOrdersRequestConstruction() throws Exception {
-        ListOpenOrdersRequest request =
-                new ListOpenOrdersRequest.Builder().portfolioId("portfolio-123").build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListOpenOrdersRequestConstruction() throws Exception {
+    ListOpenOrdersRequest request =
+        new ListOpenOrdersRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetOrderByOrderIdRequestConstruction() throws Exception {
-        GetOrderByOrderIdRequest request =
-                new GetOrderByOrderIdRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .orderId("order-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("order-456", request.getOrderId());
-    }
+  @Test
+  public void testGetOrderByOrderIdRequestConstruction() throws Exception {
+    GetOrderByOrderIdRequest request =
+        new GetOrderByOrderIdRequest.Builder()
+            .portfolioId("portfolio-123")
+            .orderId("order-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("order-456", request.getOrderId());
+  }
 
-    @Test
-    public void testListPaymentMethodsRequestConstruction() throws Exception {
-        ListPaymentMethodsRequest request =
-                new ListPaymentMethodsRequest.Builder().entityId("entity-123").build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testListPaymentMethodsRequestConstruction() throws Exception {
+    ListPaymentMethodsRequest request =
+        new ListPaymentMethodsRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testGetPaymentMethodDetailsRequestConstruction() throws Exception {
-        GetPaymentMethodDetailsRequest request =
-                new GetPaymentMethodDetailsRequest.Builder()
-                        .entityId("entity-123")
-                        .paymentMethodId("payment-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-        assertEquals("payment-456", request.getPaymentMethodId());
-    }
+  @Test
+  public void testGetPaymentMethodDetailsRequestConstruction() throws Exception {
+    GetPaymentMethodDetailsRequest request =
+        new GetPaymentMethodDetailsRequest.Builder()
+            .entityId("entity-123")
+            .paymentMethodId("payment-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+    assertEquals("payment-456", request.getPaymentMethodId());
+  }
 
-    @Test
-    public void testGetPortfolioRequestConstruction() throws Exception {
-        GetPortfolioRequest request =
-                new GetPortfolioRequest.Builder().portfolioId("portfolio-123").build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testGetPortfolioRequestConstruction() throws Exception {
+    GetPortfolioRequest request =
+        new GetPortfolioRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetTransactionRequestConstruction() throws Exception {
-        GetTransactionRequest request =
-                new GetTransactionRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .transactionId("txn-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("txn-456", request.getTransactionId());
-    }
+  @Test
+  public void testGetTransactionRequestConstruction() throws Exception {
+    GetTransactionRequest request =
+        new GetTransactionRequest.Builder()
+            .portfolioId("portfolio-123")
+            .transactionId("txn-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("txn-456", request.getTransactionId());
+  }
 
-    @Test
-    public void testListPortfolioTransactionsRequestConstruction() throws Exception {
-        ListPortfolioTransactionsRequest request =
-                new ListPortfolioTransactionsRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioTransactionsRequestConstruction() throws Exception {
+    ListPortfolioTransactionsRequest request =
+        new ListPortfolioTransactionsRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testListWalletsRequestConstruction() throws Exception {
-        ListWalletsRequest request =
-                new ListWalletsRequest.Builder().portfolioId("portfolio-123").build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListWalletsRequestConstruction() throws Exception {
+    ListWalletsRequest request =
+        new ListWalletsRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testGetWalletRequestConstruction() throws Exception {
-        GetWalletRequest request =
-                new GetWalletRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .walletId("wallet-456")
-                        .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("wallet-456", request.getWalletId());
-    }
+  @Test
+  public void testGetWalletRequestConstruction() throws Exception {
+    GetWalletRequest request =
+        new GetWalletRequest.Builder().portfolioId("portfolio-123").walletId("wallet-456").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("wallet-456", request.getWalletId());
+  }
 
-    @Test
-    public void testRequestWithOptionalFieldsBuildsSuccessfully() throws Exception {
-        ListPortfolioActivitiesRequest request =
-                new ListPortfolioActivitiesRequest.Builder().portfolioId("portfolio-123").build();
+  @Test
+  public void testRequestWithOptionalFieldsBuildsSuccessfully() throws Exception {
+    ListPortfolioActivitiesRequest request =
+        new ListPortfolioActivitiesRequest.Builder().portfolioId("portfolio-123").build();
 
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 }

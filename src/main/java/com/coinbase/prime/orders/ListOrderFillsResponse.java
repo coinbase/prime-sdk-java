@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.orders;
 
-import com.coinbase.prime.model.Fill;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.Fill;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Order Fills
- */
+/** List Order Fills */
 public class ListOrderFillsResponse {
-    @JsonProperty("fills")
-    private Fill[] fills;
+  @JsonProperty("fills")
+  private Fill[] fills;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListOrderFillsResponse() {
-    }
+  public ListOrderFillsResponse() {}
 
-    public Fill[] getFills() {
-        return fills;
-    }
+  public Fill[] getFills() {
+    return fills;
+  }
 
-    public void setFills(Fill[] fills) {
-        this.fills = fills;
-    }
+  public void setFills(Fill[] fills) {
+    this.fills = fills;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

@@ -16,114 +16,110 @@
 
 package com.coinbase.prime.balances;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Onchain Wallet Balances
- */
+/** List Onchain Wallet Balances */
 public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  @JsonProperty("visibility_statuses")
+  private VisibilityStatus[] visibilityStatuses;
+
+  public ListOnchainWalletBalancesRequest() {}
+
+  public ListOnchainWalletBalancesRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+    this.visibilityStatuses = builder.visibilityStatuses;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public VisibilityStatus[] getVisibilityStatuses() {
+    return visibilityStatuses;
+  }
+
+  public void setVisibilityStatuses(VisibilityStatus[] visibilityStatuses) {
+    this.visibilityStatuses = visibilityStatuses;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
     private String walletId;
-
-    @JsonProperty("visibility_statuses")
     private VisibilityStatus[] visibilityStatuses;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListOnchainWalletBalancesRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListOnchainWalletBalancesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.visibilityStatuses = builder.visibilityStatuses;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder visibilityStatuses(VisibilityStatus[] visibilityStatuses) {
+      this.visibilityStatuses = visibilityStatuses;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public String getWalletId() {
-        return walletId;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
+    public ListOnchainWalletBalancesRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListOnchainWalletBalancesRequest(this);
     }
 
-    public VisibilityStatus[] getVisibilityStatuses() {
-        return visibilityStatuses;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public void setVisibilityStatuses(VisibilityStatus[] visibilityStatuses) {
-        this.visibilityStatuses = visibilityStatuses;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-        private VisibilityStatus[] visibilityStatuses;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder visibilityStatuses(VisibilityStatus[] visibilityStatuses) {
-            this.visibilityStatuses = visibilityStatuses;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListOnchainWalletBalancesRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListOnchainWalletBalancesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

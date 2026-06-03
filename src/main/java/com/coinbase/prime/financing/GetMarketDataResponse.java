@@ -19,38 +19,32 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.MarketData;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
-    /**
- * Get Market Data (Beta)
- */
+/** Get Market Data (Beta) */
 public class GetMarketDataResponse {
-    /**
-     * List of market data entries
-     */
-    @JsonProperty("market_data")
-    private List<MarketData> marketData;
+  /** List of market data entries */
+  @JsonProperty("market_data")
+  private List<MarketData> marketData;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public GetMarketDataResponse() {
-    }
+  public GetMarketDataResponse() {}
 
-    public List<MarketData> getMarketData() {
-        return marketData;
-    }
+  public List<MarketData> getMarketData() {
+    return marketData;
+  }
 
-    public void setMarketData(List<MarketData> marketData) {
-        this.marketData = marketData;
-    }
+  public void setMarketData(List<MarketData> marketData) {
+    this.marketData = marketData;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

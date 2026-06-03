@@ -23,14 +23,14 @@ import com.coinbase.prime.orders.ListPortfolioFillsRequest;
 import com.coinbase.prime.orders.ListPortfolioFillsResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 public class ListPortfolioFills {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -44,14 +44,16 @@ public class ListPortfolioFills {
       System.out.println("Date range: " + startDate + " to " + endDate);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      ListPortfolioFillsResponse response = service.listPortfolioFills(
-          new ListPortfolioFillsRequest.Builder()
-              .portfolioId(portfolioId)
-              .startDate(startDate)
-              .endDate(endDate)
-              .build());
+      ListPortfolioFillsResponse response =
+          service.listPortfolioFills(
+              new ListPortfolioFillsRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .startDate(startDate)
+                  .endDate(endDate)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

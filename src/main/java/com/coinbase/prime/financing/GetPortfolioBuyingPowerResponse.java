@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.BuyingPower;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Portfolio Buying Power
- */
+/** Get Portfolio Buying Power */
 public class GetPortfolioBuyingPowerResponse {
-    @JsonProperty("buying_power")
-    private BuyingPower buyingPower;
+  @JsonProperty("buying_power")
+  private BuyingPower buyingPower;
 
-    public GetPortfolioBuyingPowerResponse() {
-    }
+  public GetPortfolioBuyingPowerResponse() {}
 
-    public BuyingPower getBuyingPower() {
-        return buyingPower;
-    }
+  public BuyingPower getBuyingPower() {
+    return buyingPower;
+  }
 
-    public void setBuyingPower(BuyingPower buyingPower) {
-        this.buyingPower = buyingPower;
-    }
-
+  public void setBuyingPower(BuyingPower buyingPower) {
+    this.buyingPower = buyingPower;
+  }
 }

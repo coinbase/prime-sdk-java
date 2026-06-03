@@ -19,22 +19,18 @@ package com.coinbase.prime.allocations;
 import com.coinbase.prime.model.Allocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Net Allocations by Netting ID
- */
+/** Get Net Allocations by Netting ID */
 public class ListAllocationsByNettingIdResponse {
-    @JsonProperty("allocations")
-    private Allocation[] allocations;
+  @JsonProperty("allocations")
+  private Allocation[] allocations;
 
-    public ListAllocationsByNettingIdResponse() {
-    }
+  public ListAllocationsByNettingIdResponse() {}
 
-    public Allocation[] getAllocations() {
-        return allocations;
-    }
+  public Allocation[] getAllocations() {
+    return allocations;
+  }
 
-    public void setAllocations(Allocation[] allocations) {
-        this.allocations = allocations;
-    }
-
+  public void setAllocations(Allocation[] allocations) {
+    this.allocations = allocations;
+  }
 }

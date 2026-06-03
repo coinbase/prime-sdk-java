@@ -16,74 +16,70 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AddressGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Onchain Address Book Entry
- */
+/** Create Onchain Address Book Entry */
 public class CreateOnchainAddressBookEntryRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    @JsonProperty("address_group")
+  @JsonProperty("address_group")
+  private AddressGroup addressGroup;
+
+  public CreateOnchainAddressBookEntryRequest() {}
+
+  public CreateOnchainAddressBookEntryRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.addressGroup = builder.addressGroup;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public AddressGroup getAddressGroup() {
+    return addressGroup;
+  }
+
+  public void setAddressGroup(AddressGroup addressGroup) {
+    this.addressGroup = addressGroup;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private AddressGroup addressGroup;
 
-    public CreateOnchainAddressBookEntryRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public CreateOnchainAddressBookEntryRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.addressGroup = builder.addressGroup;
+    public Builder addressGroup(AddressGroup addressGroup) {
+      this.addressGroup = addressGroup;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public CreateOnchainAddressBookEntryRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateOnchainAddressBookEntryRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public AddressGroup getAddressGroup() {
-        return addressGroup;
-    }
-
-    public void setAddressGroup(AddressGroup addressGroup) {
-        this.addressGroup = addressGroup;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private AddressGroup addressGroup;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder addressGroup(AddressGroup addressGroup) {
-            this.addressGroup = addressGroup;
-            return this;
-        }
-
-        public CreateOnchainAddressBookEntryRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateOnchainAddressBookEntryRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

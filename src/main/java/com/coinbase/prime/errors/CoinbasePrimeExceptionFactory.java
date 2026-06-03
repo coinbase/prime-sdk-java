@@ -15,46 +15,50 @@
  */
 package com.coinbase.prime.errors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CoinbasePrimeExceptionFactory {
 
-    public static CoinbasePrimeException create(int statusCode, String responseBody) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  public static CoinbasePrimeException create(int statusCode, String responseBody) {
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
-            return new CoinbasePrimeException(statusCode, errorMessage.getMessage());
-        } catch (Throwable e) {
-            return new CoinbasePrimeException(statusCode, responseBody);
-        }
+      CoinbasePrimeErrorMessage errorMessage =
+          mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
+      return new CoinbasePrimeException(statusCode, errorMessage.getMessage());
+    } catch (Throwable e) {
+      return new CoinbasePrimeException(statusCode, responseBody);
     }
+  }
 
-    public static CoinbasePrimeException create(String responseBody, Throwable cause) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  public static CoinbasePrimeException create(String responseBody, Throwable cause) {
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
-            return new CoinbasePrimeException(errorMessage.getMessage(), cause);
-        } catch (Throwable e) {
-            return new CoinbasePrimeException(responseBody, cause);
-        }
+      CoinbasePrimeErrorMessage errorMessage =
+          mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
+      return new CoinbasePrimeException(errorMessage.getMessage(), cause);
+    } catch (Throwable e) {
+      return new CoinbasePrimeException(responseBody, cause);
     }
+  }
 
-    public static CoinbasePrimeException create(int statusCode, String responseBody, Throwable cause) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
-            return new CoinbasePrimeException(statusCode, errorMessage.getMessage(), cause);
-        } catch (Throwable e) {
-            return new CoinbasePrimeException(statusCode, responseBody, cause);
-        }
+  public static CoinbasePrimeException create(
+      int statusCode, String responseBody, Throwable cause) {
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      CoinbasePrimeErrorMessage errorMessage =
+          mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
+      return new CoinbasePrimeException(statusCode, errorMessage.getMessage(), cause);
+    } catch (Throwable e) {
+      return new CoinbasePrimeException(statusCode, responseBody, cause);
     }
+  }
 
-    public static CoinbasePrimeException create(Throwable cause) {
-        return new CoinbasePrimeException(cause);
-    }
+  public static CoinbasePrimeException create(Throwable cause) {
+    return new CoinbasePrimeException(cause);
+  }
 }

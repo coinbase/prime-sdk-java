@@ -16,100 +16,90 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Schedule Entity Futures Sweep
- */
+/** Schedule Entity Futures Sweep */
 public class ScheduleEntityFuturesSweepRequest {
-    /**
-     * Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  /** Amount. Default to sweep all if not provided */
+  @JsonProperty("amount")
+  private String amount;
+
+  /** Currency. Required */
+  @JsonProperty("currency")
+  private String currency;
+
+  public ScheduleEntityFuturesSweepRequest() {}
+
+  public ScheduleEntityFuturesSweepRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.amount = builder.amount;
+    this.currency = builder.currency;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+  public static class Builder {
     private String entityId;
-
-    /**
-     * Amount. Default to sweep all if not provided
-     */
-    @JsonProperty("amount")
     private String amount;
-
-    /**
-     * Currency. Required
-     */
-    @JsonProperty("currency")
     private String currency;
 
-    public ScheduleEntityFuturesSweepRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ScheduleEntityFuturesSweepRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.amount = builder.amount;
-        this.currency = builder.currency;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder currency(String currency) {
+      this.currency = currency;
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
+      validate();
+      return new ScheduleEntityFuturesSweepRequest(this);
     }
 
-    public String getAmount() {
-        return amount;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String amount;
-        private String currency;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
-            validate();
-            return new ScheduleEntityFuturesSweepRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

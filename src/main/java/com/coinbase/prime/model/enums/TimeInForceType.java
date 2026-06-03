@@ -20,25 +20,19 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - UNKNOWN_TIME_IN_FORCE: nil value - GOOD_UNTIL_DATE_TIME: Expires at a certain date/time - GOOD_UNTIL_CANCELLED: Order stays on the books until cancelled - IMMEDIATE_OR_CANCEL: Order is executed immediately at submission or is cancelled - FILL_OR_KILL: Order is executed immediately and fully at submission or is cancelled
-     */
+/**
+ * - UNKNOWN_TIME_IN_FORCE: nil value - GOOD_UNTIL_DATE_TIME: Expires at a certain date/time -
+ * GOOD_UNTIL_CANCELLED: Order stays on the books until cancelled - IMMEDIATE_OR_CANCEL: Order is
+ * executed immediately at submission or is cancelled - FILL_OR_KILL: Order is executed immediately
+ * and fully at submission or is cancelled
+ */
 public enum TimeInForceType {
-  /**
-   * Expires at a certain date/time
-   */
+  /** Expires at a certain date/time */
   GOOD_UNTIL_DATE_TIME,
-  /**
-   * Order stays on the books until cancelled
-   */
+  /** Order stays on the books until cancelled */
   GOOD_UNTIL_CANCELLED,
-  /**
-   * Order is executed immediately at submission or is cancelled
-   */
+  /** Order is executed immediately at submission or is cancelled */
   IMMEDIATE_OR_CANCEL,
-  /**
-   * Order is executed immediately and fully at submission or is cancelled
-   */
+  /** Order is executed immediately and fully at submission or is cancelled */
   FILL_OR_KILL
 }
-

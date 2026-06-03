@@ -33,7 +33,8 @@ public class CancelOrder {
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String orderId = args[0];
@@ -41,13 +42,12 @@ public class CancelOrder {
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      CancelOrderResponse response = service.cancelOrder(
-          new CancelOrderRequest.Builder()
-              .portfolioId(portfolioId)
-              .orderId(orderId)
-              .build());
+      CancelOrderResponse response =
+          service.cancelOrder(
+              new CancelOrderRequest.Builder().portfolioId(portfolioId).orderId(orderId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

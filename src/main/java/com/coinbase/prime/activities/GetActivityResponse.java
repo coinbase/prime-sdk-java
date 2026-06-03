@@ -18,22 +18,18 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
 
-/**
- * Get Activity by Activity ID
- */
+/** Get Activity by Activity ID */
 public class GetActivityResponse {
-    /** The activity details */
-    private Activity activity;
+  /** The activity details */
+  private Activity activity;
 
-    public GetActivityResponse() {
-    }
+  public GetActivityResponse() {}
 
-    public Activity getActivity() {
-        return activity;
-    }
+  public Activity getActivity() {
+    return activity;
+  }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
+  public void setActivity(Activity activity) {
+    this.activity = activity;
+  }
 }

@@ -16,164 +16,151 @@
 
 package com.coinbase.prime.orders;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Accept Quote
- */
+/** Accept Quote */
 public class AcceptQuoteRequest {
-    /**
-     * The ID of the portfolio that owns the order
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The ID of the portfolio that owns the order */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The ID of the product being traded for the order (e.g. &#x60;BTC-USD&#x60;) */
+  @JsonProperty("product_id")
+  private String productId;
+
+  /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+  @JsonProperty("side")
+  private OrderSide side;
+
+  /**
+   * A client-generated ID used for reference purposes (note: order will be rejected if this ID is
+   * not unique among all currently active orders)
+   */
+  @JsonProperty("client_order_id")
+  private String clientOrderId;
+
+  /** A quote id that was returned from the quote request */
+  @JsonProperty("quote_id")
+  private String quoteId;
+
+  /** next: 7 */
+  @JsonProperty("settl_currency")
+  private String settlCurrency;
+
+  public AcceptQuoteRequest() {}
+
+  public AcceptQuoteRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.productId = builder.productId;
+    this.side = builder.side;
+    this.clientOrderId = builder.clientOrderId;
+    this.quoteId = builder.quoteId;
+    this.settlCurrency = builder.settlCurrency;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public OrderSide getSide() {
+    return side;
+  }
+
+  public void setSide(OrderSide side) {
+    this.side = side;
+  }
+
+  public String getClientOrderId() {
+    return clientOrderId;
+  }
+
+  public void setClientOrderId(String clientOrderId) {
+    this.clientOrderId = clientOrderId;
+  }
+
+  public String getQuoteId() {
+    return quoteId;
+  }
+
+  public void setQuoteId(String quoteId) {
+    this.quoteId = quoteId;
+  }
+
+  public String getSettlCurrency() {
+    return settlCurrency;
+  }
+
+  public void setSettlCurrency(String settlCurrency) {
+    this.settlCurrency = settlCurrency;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The ID of the product being traded for the order (e.g. &#x60;BTC-USD&#x60;)
-     */
-    @JsonProperty("product_id")
     private String productId;
-
-    /**
-     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
-     */
-    @JsonProperty("side")
     private OrderSide side;
-
-    /**
-     * A client-generated ID used for reference purposes (note: order will be rejected if this ID is not unique among all currently active orders)
-     */
-    @JsonProperty("client_order_id")
     private String clientOrderId;
-
-    /**
-     * A quote id that was returned from the quote request
-     */
-    @JsonProperty("quote_id")
     private String quoteId;
-
-    /**
-     * next: 7
-     */
-    @JsonProperty("settl_currency")
     private String settlCurrency;
 
-    public AcceptQuoteRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public AcceptQuoteRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.clientOrderId = builder.clientOrderId;
-        this.quoteId = builder.quoteId;
-        this.settlCurrency = builder.settlCurrency;
+    public Builder productId(String productId) {
+      this.productId = productId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder side(OrderSide side) {
+      this.side = side;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder clientOrderId(String clientOrderId) {
+      this.clientOrderId = clientOrderId;
+      return this;
     }
 
-    public String getProductId() {
-        return productId;
+    public Builder quoteId(String quoteId) {
+      this.quoteId = quoteId;
+      return this;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public Builder settlCurrency(String settlCurrency) {
+      this.settlCurrency = settlCurrency;
+      return this;
     }
 
-    public OrderSide getSide() {
-        return side;
+    public AcceptQuoteRequest build() throws CoinbaseClientException {
+      validate();
+      return new AcceptQuoteRequest(this);
     }
 
-    public void setSide(OrderSide side) {
-        this.side = side;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
-
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
-
-    public String getQuoteId() {
-        return quoteId;
-    }
-
-    public void setQuoteId(String quoteId) {
-        this.quoteId = quoteId;
-    }
-
-    public String getSettlCurrency() {
-        return settlCurrency;
-    }
-
-    public void setSettlCurrency(String settlCurrency) {
-        this.settlCurrency = settlCurrency;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String productId;
-        private OrderSide side;
-        private String clientOrderId;
-        private String quoteId;
-        private String settlCurrency;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public Builder side(OrderSide side) {
-            this.side = side;
-            return this;
-        }
-
-        public Builder clientOrderId(String clientOrderId) {
-            this.clientOrderId = clientOrderId;
-            return this;
-        }
-
-        public Builder quoteId(String quoteId) {
-            this.quoteId = quoteId;
-            return this;
-        }
-
-        public Builder settlCurrency(String settlCurrency) {
-            this.settlCurrency = settlCurrency;
-            return this;
-        }
-
-        public AcceptQuoteRequest build() throws CoinbaseClientException {
-            validate();
-            return new AcceptQuoteRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

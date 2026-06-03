@@ -16,100 +16,90 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Portfolio Buying Power
- */
+/** Get Portfolio Buying Power */
 public class GetPortfolioBuyingPowerRequest {
-    /**
-     * The unique ID of the portfolio
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The unique ID of the portfolio */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The symbol for the base currency */
+  @JsonProperty("base_currency")
+  private String baseCurrency;
+
+  /** The symbol for the quote currency */
+  @JsonProperty("quote_currency")
+  private String quoteCurrency;
+
+  public GetPortfolioBuyingPowerRequest() {}
+
+  public GetPortfolioBuyingPowerRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.baseCurrency = builder.baseCurrency;
+    this.quoteCurrency = builder.quoteCurrency;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getBaseCurrency() {
+    return baseCurrency;
+  }
+
+  public void setBaseCurrency(String baseCurrency) {
+    this.baseCurrency = baseCurrency;
+  }
+
+  public String getQuoteCurrency() {
+    return quoteCurrency;
+  }
+
+  public void setQuoteCurrency(String quoteCurrency) {
+    this.quoteCurrency = quoteCurrency;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The symbol for the base currency
-     */
-    @JsonProperty("base_currency")
     private String baseCurrency;
-
-    /**
-     * The symbol for the quote currency
-     */
-    @JsonProperty("quote_currency")
     private String quoteCurrency;
 
-    public GetPortfolioBuyingPowerRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetPortfolioBuyingPowerRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.baseCurrency = builder.baseCurrency;
-        this.quoteCurrency = builder.quoteCurrency;
+    public Builder baseCurrency(String baseCurrency) {
+      this.baseCurrency = baseCurrency;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder quoteCurrency(String quoteCurrency) {
+      this.quoteCurrency = quoteCurrency;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public GetPortfolioBuyingPowerRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPortfolioBuyingPowerRequest(this);
     }
 
-    public String getBaseCurrency() {
-        return baseCurrency;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setBaseCurrency(String baseCurrency) {
-        this.baseCurrency = baseCurrency;
-    }
-
-    public String getQuoteCurrency() {
-        return quoteCurrency;
-    }
-
-    public void setQuoteCurrency(String quoteCurrency) {
-        this.quoteCurrency = quoteCurrency;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String baseCurrency;
-        private String quoteCurrency;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder baseCurrency(String baseCurrency) {
-            this.baseCurrency = baseCurrency;
-            return this;
-        }
-
-        public Builder quoteCurrency(String quoteCurrency) {
-            this.quoteCurrency = quoteCurrency;
-            return this;
-        }
-
-        public GetPortfolioBuyingPowerRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPortfolioBuyingPowerRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

@@ -25,22 +25,24 @@ import com.coinbase.prime.portfolios.PortfoliosService;
 import com.coinbase.prime.utils.Utils;
 
 public class GetPortfolioCounterpartyId {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            System.out.println("Using Portfolio ID: " + portfolioId);
+      System.out.println("Using Portfolio ID: " + portfolioId);
 
-            PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-            GetPortfolioCounterpartyIdResponse response = service.getPortfolioCounterpartyId(
-                    new GetPortfolioCounterpartyIdRequest.Builder(portfolioId).build());
+      PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
+      GetPortfolioCounterpartyIdResponse response =
+          service.getPortfolioCounterpartyId(
+              new GetPortfolioCounterpartyIdRequest.Builder(portfolioId).build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

@@ -19,22 +19,18 @@ package com.coinbase.prime.transactions;
 import com.coinbase.prime.model.Transaction;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Transaction by Transaction ID
- */
+/** Get Transaction by Transaction ID */
 public class GetTransactionResponse {
-    @JsonProperty("transaction")
-    private Transaction transaction;
+  @JsonProperty("transaction")
+  private Transaction transaction;
 
-    public GetTransactionResponse() {
-    }
+  public GetTransactionResponse() {}
 
-    public Transaction getTransaction() {
-        return transaction;
-    }
+  public Transaction getTransaction() {
+    return transaction;
+  }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
-
+  public void setTransaction(Transaction transaction) {
+    this.transaction = transaction;
+  }
 }

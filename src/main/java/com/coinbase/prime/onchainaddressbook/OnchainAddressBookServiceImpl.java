@@ -21,52 +21,57 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
-public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implements OnchainAddressBookService {
-    public OnchainAddressBookServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl
+    implements OnchainAddressBookService {
+  public OnchainAddressBookServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.PUT,
-                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<UpdateOnchainAddressBookEntryResponse>() {});
-    }
+  @Override
+  public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(
+      UpdateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.PUT,
+        String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<UpdateOnchainAddressBookEntryResponse>() {});
+  }
 
-    @Override
-    public CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
-                request,
-                List.of(201, 200),
-                new TypeReference<CreateOnchainAddressBookEntryResponse>() {});
-    }
+  @Override
+  public CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(
+      CreateOnchainAddressBookEntryRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+        request,
+        List.of(201, 200),
+        new TypeReference<CreateOnchainAddressBookEntryResponse>() {});
+  }
 
-    @Override
-    public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.DELETE,
-                String.format("/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
-                request,
-                List.of(200),
-                new TypeReference<DeleteOnchainAddressGroupResponse>() {});
-    }
+  @Override
+  public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(
+      DeleteOnchainAddressGroupRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.DELETE,
+        String.format(
+            "/portfolios/%s/onchain_address_group/%s",
+            request.getPortfolioId(), request.getAddressGroupId()),
+        request,
+        List.of(200),
+        new TypeReference<DeleteOnchainAddressGroupResponse>() {});
+  }
 
-    @Override
-    public ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListOnchainAddressGroupsResponse>() {});
-    }
-
+  @Override
+  public ListOnchainAddressGroupsResponse listOnchainAddressGroups(
+      ListOnchainAddressGroupsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListOnchainAddressGroupsResponse>() {});
+  }
 }

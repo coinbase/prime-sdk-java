@@ -21,52 +21,57 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class BalancesServiceImpl extends CoinbaseServiceImpl implements BalancesService {
-    public BalancesServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public BalancesServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/balances", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityBalancesResponse>() {});
-    }
+  @Override
+  public ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/balances", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityBalancesResponse>() {});
+  }
 
-    @Override
-    public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/balances", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioBalancesResponse>() {});
-    }
+  @Override
+  public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/balances", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPortfolioBalancesResponse>() {});
+  }
 
-    @Override
-    public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<GetWalletBalanceResponse>() {});
-    }
+  @Override
+  public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<GetWalletBalanceResponse>() {});
+  }
 
-    @Override
-    public ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<ListOnchainWalletBalancesResponse>() {});
-    }
-
+  @Override
+  public ListOnchainWalletBalancesResponse listOnchainWalletBalances(
+      ListOnchainWalletBalancesRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/wallets/%s/web3_balances",
+            request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<ListOnchainWalletBalancesResponse>() {});
+  }
 }

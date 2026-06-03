@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.orders;
 
-import com.coinbase.prime.model.Order;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.Order;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Open Orders
- */
+/** List Open Orders */
 public class ListOpenOrdersResponse {
-    @JsonProperty("orders")
-    private Order[] orders;
+  @JsonProperty("orders")
+  private Order[] orders;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListOpenOrdersResponse() {
-    }
+  public ListOpenOrdersResponse() {}
 
-    public Order[] getOrders() {
-        return orders;
-    }
+  public Order[] getOrders() {
+    return orders;
+  }
 
-    public void setOrders(Order[] orders) {
-        this.orders = orders;
-    }
+  public void setOrders(Order[] orders) {
+    this.orders = orders;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

@@ -19,128 +19,118 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class TfObligation {
-    /**
-     * The unique ID of the portfolio
-     */
-    @JsonProperty("portfolio_id")
+  /** The unique ID of the portfolio */
+  @JsonProperty("portfolio_id")
+  private String portfolioId;
+
+  /** The currency symbol */
+  @JsonProperty("symbol")
+  private String symbol;
+
+  /** Current amount due */
+  @JsonProperty("amount_due")
+  private String amountDue;
+
+  /** Loan notional amount */
+  @JsonProperty("notional_amount")
+  private String notionalAmount;
+
+  /** Settlement due date */
+  @JsonProperty("due_date")
+  private String dueDate;
+
+  public TfObligation() {}
+
+  public TfObligation(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.symbol = builder.symbol;
+    this.amountDue = builder.amountDue;
+    this.notionalAmount = builder.notionalAmount;
+    this.dueDate = builder.dueDate;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public String getAmountDue() {
+    return amountDue;
+  }
+
+  public void setAmountDue(String amountDue) {
+    this.amountDue = amountDue;
+  }
+
+  public String getNotionalAmount() {
+    return notionalAmount;
+  }
+
+  public void setNotionalAmount(String notionalAmount) {
+    this.notionalAmount = notionalAmount;
+  }
+
+  public String getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(String dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  public static class Builder {
     private String portfolioId;
 
-    /**
-     * The currency symbol
-     */
-    @JsonProperty("symbol")
     private String symbol;
 
-    /**
-     * Current amount due
-     */
-    @JsonProperty("amount_due")
     private String amountDue;
 
-    /**
-     * Loan notional amount
-     */
-    @JsonProperty("notional_amount")
     private String notionalAmount;
 
-    /**
-     * Settlement due date
-     */
-    @JsonProperty("due_date")
     private String dueDate;
 
-    public TfObligation() {
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public TfObligation(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.amountDue = builder.amountDue;
-        this.notionalAmount = builder.notionalAmount;
-        this.dueDate = builder.dueDate;
-    }
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-    public String getSymbol() {
-        return symbol;
+    public Builder amountDue(String amountDue) {
+      this.amountDue = amountDue;
+      return this;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-    public String getAmountDue() {
-        return amountDue;
+    public Builder notionalAmount(String notionalAmount) {
+      this.notionalAmount = notionalAmount;
+      return this;
     }
 
-    public void setAmountDue(String amountDue) {
-        this.amountDue = amountDue;
-    }
-    public String getNotionalAmount() {
-        return notionalAmount;
+    public Builder dueDate(String dueDate) {
+      this.dueDate = dueDate;
+      return this;
     }
 
-    public void setNotionalAmount(String notionalAmount) {
-        this.notionalAmount = notionalAmount;
+    public TfObligation build() {
+      return new TfObligation(this);
     }
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-    public static class Builder {
-        private String portfolioId;
-
-        private String symbol;
-
-        private String amountDue;
-
-        private String notionalAmount;
-
-        private String dueDate;
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder amountDue(String amountDue) {
-            this.amountDue = amountDue;
-            return this;
-        }
-
-        public Builder notionalAmount(String notionalAmount) {
-            this.notionalAmount = notionalAmount;
-            return this;
-        }
-
-        public Builder dueDate(String dueDate) {
-            this.dueDate = dueDate;
-            return this;
-        }
-
-        public TfObligation build() {
-            return new TfObligation(this);
-        }
-    }
+  }
 }
-

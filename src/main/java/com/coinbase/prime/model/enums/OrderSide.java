@@ -20,17 +20,10 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
-     */
+/** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
 public enum OrderSide {
-  /**
-   * Buy order
-   */
+  /** Buy order */
   BUY,
-  /**
-   * Sell order
-   */
+  /** Sell order */
   SELL
 }
-

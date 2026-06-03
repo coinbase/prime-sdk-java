@@ -19,61 +19,57 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.BlockchainAddress;
+
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class TravelRuleWalletDetails {
-    @JsonProperty("wallet_type")
+  @JsonProperty("wallet_type")
+  private TravelRuleWalletType walletType;
+
+  @JsonProperty("wallet_address")
+  private BlockchainAddress walletAddress;
+
+  public TravelRuleWalletDetails() {}
+
+  public TravelRuleWalletDetails(Builder builder) {
+    this.walletType = builder.walletType;
+    this.walletAddress = builder.walletAddress;
+  }
+
+  public TravelRuleWalletType getWalletType() {
+    return walletType;
+  }
+
+  public void setWalletType(TravelRuleWalletType walletType) {
+    this.walletType = walletType;
+  }
+
+  public BlockchainAddress getWalletAddress() {
+    return walletAddress;
+  }
+
+  public void setWalletAddress(BlockchainAddress walletAddress) {
+    this.walletAddress = walletAddress;
+  }
+
+  public static class Builder {
     private TravelRuleWalletType walletType;
 
-    @JsonProperty("wallet_address")
     private BlockchainAddress walletAddress;
 
-    public TravelRuleWalletDetails() {
+    public Builder walletType(TravelRuleWalletType walletType) {
+      this.walletType = walletType;
+      return this;
     }
 
-    public TravelRuleWalletDetails(Builder builder) {
-        this.walletType = builder.walletType;
-        this.walletAddress = builder.walletAddress;
-    }
-    public TravelRuleWalletType getWalletType() {
-        return walletType;
+    public Builder walletAddress(BlockchainAddress walletAddress) {
+      this.walletAddress = walletAddress;
+      return this;
     }
 
-    public void setWalletType(TravelRuleWalletType walletType) {
-        this.walletType = walletType;
+    public TravelRuleWalletDetails build() {
+      return new TravelRuleWalletDetails(this);
     }
-    public BlockchainAddress getWalletAddress() {
-        return walletAddress;
-    }
-
-    public void setWalletAddress(BlockchainAddress walletAddress) {
-        this.walletAddress = walletAddress;
-    }
-    public static class Builder {
-        private TravelRuleWalletType walletType;
-
-        private BlockchainAddress walletAddress;
-
-        public Builder walletType(TravelRuleWalletType walletType) {
-            this.walletType = walletType;
-            return this;
-        }
-
-        public Builder walletAddress(BlockchainAddress walletAddress) {
-            this.walletAddress = walletAddress;
-            return this;
-        }
-
-        public TravelRuleWalletDetails build() {
-            return new TravelRuleWalletDetails(this);
-        }
-    }
+  }
 }
-

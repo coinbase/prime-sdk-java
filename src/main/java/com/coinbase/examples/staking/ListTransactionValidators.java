@@ -25,24 +25,27 @@ import com.coinbase.prime.staking.StakingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListTransactionValidators {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-            String transactionId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_TRANSACTION_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String transactionId =
+          args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_TRANSACTION_ID");
 
-            StakingService service = PrimeServiceFactory.createStakingService(client);
-            ListTransactionValidatorsResponse response =
-                    service.listTransactionValidators(
-                    new ListTransactionValidatorsRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .transactionIds(new String[]{transactionId})
-                            .build());
+      StakingService service = PrimeServiceFactory.createStakingService(client);
+      ListTransactionValidatorsResponse response =
+          service.listTransactionValidators(
+              new ListTransactionValidatorsRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .transactionIds(new String[] {transactionId})
+                  .build());
 
-            System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

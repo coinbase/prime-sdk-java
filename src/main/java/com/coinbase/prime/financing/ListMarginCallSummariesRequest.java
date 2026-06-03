@@ -16,91 +16,87 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Margin Call Summaries
- */
+/** List Margin Call Summaries */
 public class ListMarginCallSummariesRequest {
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  @JsonProperty("start_date")
+  private String startDate;
+
+  @JsonProperty("end_date")
+  private String endDate;
+
+  public ListMarginCallSummariesRequest() {}
+
+  public ListMarginCallSummariesRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.startDate = builder.startDate;
+    this.endDate = builder.endDate;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
+  public static class Builder {
     private String entityId;
-
-    @JsonProperty("start_date")
     private String startDate;
-
-    @JsonProperty("end_date")
     private String endDate;
 
-    public ListMarginCallSummariesRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ListMarginCallSummariesRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.startDate = builder.startDate;
-        this.endDate = builder.endDate;
+    public Builder startDate(String startDate) {
+      this.startDate = startDate;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder endDate(String endDate) {
+      this.endDate = endDate;
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public ListMarginCallSummariesRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListMarginCallSummariesRequest(this);
     }
 
-    public String getStartDate() {
-        return startDate;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String startDate;
-        private String endDate;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder startDate(String startDate) {
-            this.startDate = startDate;
-            return this;
-        }
-
-        public Builder endDate(String endDate) {
-            this.endDate = endDate;
-            return this;
-        }
-
-        public ListMarginCallSummariesRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListMarginCallSummariesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

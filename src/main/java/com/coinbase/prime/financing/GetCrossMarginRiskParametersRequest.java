@@ -16,61 +16,53 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Cross Margin Risk Parameters (Beta)
- */
+/** Get Cross Margin Risk Parameters (Beta) */
 public class GetCrossMarginRiskParametersRequest {
-    /**
-     * XM customer Prime Entity ID.
-     */
-    /**
-     * XM customer Prime Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** XM customer Prime Entity ID. */
+  /** XM customer Prime Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  public GetCrossMarginRiskParametersRequest() {}
+
+  public GetCrossMarginRiskParametersRequest(Builder builder) {
+    this.entityId = builder.entityId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public static class Builder {
     private String entityId;
 
-    public GetCrossMarginRiskParametersRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetCrossMarginRiskParametersRequest(Builder builder) {
-        this.entityId = builder.entityId;
+    public GetCrossMarginRiskParametersRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetCrossMarginRiskParametersRequest(this);
     }
 
-    public String getEntityId() {
-        return entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public static class Builder {
-        private String entityId;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public GetCrossMarginRiskParametersRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetCrossMarginRiskParametersRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

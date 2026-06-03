@@ -19,22 +19,18 @@ package com.coinbase.prime.allocations;
 import com.coinbase.prime.model.CreateAllocationResponseBody;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Portfolio Allocations
- */
+/** Create Portfolio Allocations */
 public class CreateAllocationResponse {
-    @JsonProperty("body")
-    private CreateAllocationResponseBody body;
+  @JsonProperty("body")
+  private CreateAllocationResponseBody body;
 
-    public CreateAllocationResponse() {
-    }
+  public CreateAllocationResponse() {}
 
-    public CreateAllocationResponseBody getBody() {
-        return body;
-    }
+  public CreateAllocationResponseBody getBody() {
+    return body;
+  }
 
-    public void setBody(CreateAllocationResponseBody body) {
-        this.body = body;
-    }
-
+  public void setBody(CreateAllocationResponseBody body) {
+    this.body = body;
+  }
 }

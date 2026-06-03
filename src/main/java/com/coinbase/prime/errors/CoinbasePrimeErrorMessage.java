@@ -20,50 +20,48 @@ import com.coinbase.core.errors.CoinbaseErrorMessage;
 import com.coinbase.core.errors.CoinbaseException;
 
 public class CoinbasePrimeErrorMessage implements CoinbaseErrorMessage {
+  private String message;
+  private int statusCode;
+
+  public CoinbasePrimeErrorMessage() {}
+
+  public CoinbasePrimeErrorMessage(Builder builder) {
+    this.message = builder.message;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public int getStatusCode() {
+    return statusCode;
+  }
+
+  public void setStatusCode(int statusCode) {
+    this.statusCode = statusCode;
+  }
+
+  @Override
+  public CoinbaseException createCoinbaseException() {
+    return new CoinbasePrimeException(this.statusCode, this.message);
+  }
+
+  public static class Builder {
     private String message;
-    private int statusCode;
 
-    public CoinbasePrimeErrorMessage() {
+    public Builder() {}
+
+    public Builder message(String message) {
+      this.message = message;
+      return this;
     }
 
-    public CoinbasePrimeErrorMessage(Builder builder) {
-        this.message = builder.message;
+    public CoinbasePrimeErrorMessage build() {
+      return new CoinbasePrimeErrorMessage(this);
     }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    @Override
-    public CoinbaseException createCoinbaseException() {
-       return new CoinbasePrimeException(this.statusCode, this.message);
-    }
-
-    public static class Builder {
-        private String message;
-
-        public Builder() {
-        }
-
-        public Builder message(String message) {
-            this.message = message;
-            return this;
-        }
-
-        public CoinbasePrimeErrorMessage build() {
-            return new CoinbasePrimeErrorMessage(this);
-        }
-    }
+  }
 }

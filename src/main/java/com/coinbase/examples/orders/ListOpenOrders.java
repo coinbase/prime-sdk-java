@@ -27,19 +27,20 @@ import com.coinbase.prime.utils.Utils;
 public class ListOpenOrders {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      ListOpenOrdersResponse response = service.listOpenOrders(
-          new ListOpenOrdersRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      ListOpenOrdersResponse response =
+          service.listOpenOrders(
+              new ListOpenOrdersRequest.Builder().portfolioId(portfolioId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

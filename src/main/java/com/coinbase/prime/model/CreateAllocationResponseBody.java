@@ -19,86 +19,78 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class CreateAllocationResponseBody {
-    /**
-     * The success boolean for the post allocation
-     */
-    @JsonProperty("success")
+  /** The success boolean for the post allocation */
+  @JsonProperty("success")
+  private boolean success;
+
+  /** The allocation id for the post allocation */
+  @JsonProperty("allocation_id")
+  private String allocationId;
+
+  /** The failure reason for the post allocation */
+  @JsonProperty("failure_reason")
+  private String failureReason;
+
+  public CreateAllocationResponseBody() {}
+
+  public CreateAllocationResponseBody(Builder builder) {
+    this.success = builder.success;
+    this.allocationId = builder.allocationId;
+    this.failureReason = builder.failureReason;
+  }
+
+  public boolean getSuccess() {
+    return success;
+  }
+
+  public void setSuccess(boolean success) {
+    this.success = success;
+  }
+
+  public String getAllocationId() {
+    return allocationId;
+  }
+
+  public void setAllocationId(String allocationId) {
+    this.allocationId = allocationId;
+  }
+
+  public String getFailureReason() {
+    return failureReason;
+  }
+
+  public void setFailureReason(String failureReason) {
+    this.failureReason = failureReason;
+  }
+
+  public static class Builder {
     private boolean success;
 
-    /**
-     * The allocation id for the post allocation
-     */
-    @JsonProperty("allocation_id")
     private String allocationId;
 
-    /**
-     * The failure reason for the post allocation
-     */
-    @JsonProperty("failure_reason")
     private String failureReason;
 
-    public CreateAllocationResponseBody() {
+    public Builder success(boolean success) {
+      this.success = success;
+      return this;
     }
 
-    public CreateAllocationResponseBody(Builder builder) {
-        this.success = builder.success;
-        this.allocationId = builder.allocationId;
-        this.failureReason = builder.failureReason;
-    }
-    public boolean getSuccess() {
-        return success;
+    public Builder allocationId(String allocationId) {
+      this.allocationId = allocationId;
+      return this;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-    public String getAllocationId() {
-        return allocationId;
+    public Builder failureReason(String failureReason) {
+      this.failureReason = failureReason;
+      return this;
     }
 
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
+    public CreateAllocationResponseBody build() {
+      return new CreateAllocationResponseBody(this);
     }
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
-    }
-    public static class Builder {
-        private boolean success;
-
-        private String allocationId;
-
-        private String failureReason;
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
-        }
-
-        public Builder failureReason(String failureReason) {
-            this.failureReason = failureReason;
-            return this;
-        }
-
-        public CreateAllocationResponseBody build() {
-            return new CreateAllocationResponseBody(this);
-        }
-    }
+  }
 }
-

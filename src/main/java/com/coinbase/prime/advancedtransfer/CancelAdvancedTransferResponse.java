@@ -18,25 +18,19 @@ package com.coinbase.prime.advancedtransfer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * CancelAdvancedTransferResponse is the response after canceling an advanced transfer.
- */
+/** CancelAdvancedTransferResponse is the response after canceling an advanced transfer. */
 public class CancelAdvancedTransferResponse {
-    /**
-     * The ID of the canceled Advanced Transfer
-     */
-    @JsonProperty("advanced_transfer_id")
-    private String advancedTransferId;
+  /** The ID of the canceled Advanced Transfer */
+  @JsonProperty("advanced_transfer_id")
+  private String advancedTransferId;
 
-    public CancelAdvancedTransferResponse() {
-    }
+  public CancelAdvancedTransferResponse() {}
 
-    public String getAdvancedTransferId() {
-        return advancedTransferId;
-    }
+  public String getAdvancedTransferId() {
+    return advancedTransferId;
+  }
 
-    public void setAdvancedTransferId(String advancedTransferId) {
-        this.advancedTransferId = advancedTransferId;
-    }
-
+  public void setAdvancedTransferId(String advancedTransferId) {
+    this.advancedTransferId = advancedTransferId;
+  }
 }

@@ -27,7 +27,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GetActivity {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String activityId = args.length > 0 ? args[0] : "ACTIVITY_ID_HERE";
 
@@ -36,7 +37,8 @@ public class GetActivity {
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
       GetActivityResponse response = service.getActivity(new GetActivityRequest(activityId));
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

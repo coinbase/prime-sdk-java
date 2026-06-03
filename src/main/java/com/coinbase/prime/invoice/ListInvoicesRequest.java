@@ -16,128 +16,124 @@
 
 package com.coinbase.prime.invoice;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.InvoiceState;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Invoices
- */
+/** List Invoices */
 public class ListInvoicesRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  @JsonProperty("states")
+  private InvoiceState[] states;
+
+  @JsonProperty("billing_year")
+  private Integer billingYear;
+
+  @JsonProperty("billing_month")
+  private Integer billingMonth;
+
+  public ListInvoicesRequest() {}
+
+  public ListInvoicesRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.entityId = builder.entityId;
+    this.states = builder.states;
+    this.billingYear = builder.billingYear;
+    this.billingMonth = builder.billingMonth;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public InvoiceState[] getStates() {
+    return states;
+  }
+
+  public void setStates(InvoiceState[] states) {
+    this.states = states;
+  }
+
+  public Integer getBillingYear() {
+    return billingYear;
+  }
+
+  public void setBillingYear(Integer billingYear) {
+    this.billingYear = billingYear;
+  }
+
+  public Integer getBillingMonth() {
+    return billingMonth;
+  }
+
+  public void setBillingMonth(Integer billingMonth) {
+    this.billingMonth = billingMonth;
+  }
+
+  public static class Builder {
     private String entityId;
-
-    @JsonProperty("states")
     private InvoiceState[] states;
-
-    @JsonProperty("billing_year")
     private Integer billingYear;
-
-    @JsonProperty("billing_month")
     private Integer billingMonth;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListInvoicesRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ListInvoicesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.entityId = builder.entityId;
-        this.states = builder.states;
-        this.billingYear = builder.billingYear;
-        this.billingMonth = builder.billingMonth;
+    public Builder states(InvoiceState[] states) {
+      this.states = states;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder billingYear(Integer billingYear) {
+      this.billingYear = billingYear;
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public Builder billingMonth(Integer billingMonth) {
+      this.billingMonth = billingMonth;
+      return this;
     }
 
-    public InvoiceState[] getStates() {
-        return states;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setStates(InvoiceState[] states) {
-        this.states = states;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public Integer getBillingYear() {
-        return billingYear;
+    public ListInvoicesRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListInvoicesRequest(this);
     }
 
-    public void setBillingYear(Integer billingYear) {
-        this.billingYear = billingYear;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public Integer getBillingMonth() {
-        return billingMonth;
-    }
-
-    public void setBillingMonth(Integer billingMonth) {
-        this.billingMonth = billingMonth;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private InvoiceState[] states;
-        private Integer billingYear;
-        private Integer billingMonth;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder states(InvoiceState[] states) {
-            this.states = states;
-            return this;
-        }
-
-        public Builder billingYear(Integer billingYear) {
-            this.billingYear = billingYear;
-            return this;
-        }
-
-        public Builder billingMonth(Integer billingMonth) {
-            this.billingMonth = billingMonth;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListInvoicesRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListInvoicesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

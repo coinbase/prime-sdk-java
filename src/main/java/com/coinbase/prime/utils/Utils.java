@@ -19,26 +19,22 @@ package com.coinbase.prime.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class Utils {
-    private static final ObjectMapper OBJECT_MAPPER = configureObjectMapper();
+  private static final ObjectMapper OBJECT_MAPPER = configureObjectMapper();
 
-    private static ObjectMapper configureObjectMapper() {
-        ObjectMapper mapper = com.coinbase.core.utils.Utils.configureObjectMapper();
-        // add modules here if needed in the future
-        return mapper;
-    }
+  private static ObjectMapper configureObjectMapper() {
+    ObjectMapper mapper = com.coinbase.core.utils.Utils.configureObjectMapper();
+    // add modules here if needed in the future
+    return mapper;
+  }
 
-    /**
-     * Returns a configured ObjectMapper instance matching the configuration used by
-     * coinbase-core-java.
-     * This mapper is configured with:
-     * - NON_NULL serialization
-     * - Ignore unknown properties
-     * - Read unknown enum values as null
-     * - JSR310 JavaTimeModule for date/time support
-     *
-     * @return Configured ObjectMapper instance
-     */
-    public static ObjectMapper getObjectMapper() {
-        return OBJECT_MAPPER;
-    }
+  /**
+   * Returns a configured ObjectMapper instance matching the configuration used by
+   * coinbase-core-java. This mapper is configured with: - NON_NULL serialization - Ignore unknown
+   * properties - Read unknown enum values as null - JSR310 JavaTimeModule for date/time support
+   *
+   * @return Configured ObjectMapper instance
+   */
+  public static ObjectMapper getObjectMapper() {
+    return OBJECT_MAPPER;
+  }
 }

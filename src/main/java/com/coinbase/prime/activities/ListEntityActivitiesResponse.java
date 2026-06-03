@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.activities;
 
-import com.coinbase.prime.model.Activity;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.Activity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Entity Activities
- */
+/** List Entity Activities */
 public class ListEntityActivitiesResponse {
-    @JsonProperty("activities")
-    private Activity[] activities;
+  @JsonProperty("activities")
+  private Activity[] activities;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListEntityActivitiesResponse() {
-    }
+  public ListEntityActivitiesResponse() {}
 
-    public Activity[] getActivities() {
-        return activities;
-    }
+  public Activity[] getActivities() {
+    return activities;
+  }
 
-    public void setActivities(Activity[] activities) {
-        this.activities = activities;
-    }
+  public void setActivities(Activity[] activities) {
+    this.activities = activities;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

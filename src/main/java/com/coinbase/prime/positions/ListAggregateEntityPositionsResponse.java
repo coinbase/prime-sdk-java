@@ -20,33 +20,29 @@ import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Position;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Aggregate Entity Positions
- */
+/** List Aggregate Entity Positions */
 public class ListAggregateEntityPositionsResponse {
-    @JsonProperty("positions")
-    private Position[] positions;
+  @JsonProperty("positions")
+  private Position[] positions;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListAggregateEntityPositionsResponse() {
-    }
+  public ListAggregateEntityPositionsResponse() {}
 
-    public Position[] getPositions() {
-        return positions;
-    }
+  public Position[] getPositions() {
+    return positions;
+  }
 
-    public void setPositions(Position[] positions) {
-        this.positions = positions;
-    }
+  public void setPositions(Position[] positions) {
+    this.positions = positions;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

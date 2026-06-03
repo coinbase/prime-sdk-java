@@ -18,44 +18,40 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Claim Wallet Staking Rewards (Alpha)
- */
+/** Claim Wallet Staking Rewards (Alpha) */
 public class ClaimStakingRewardsResponse {
-    @JsonProperty("wallet_id")
-    private String walletId;
+  @JsonProperty("wallet_id")
+  private String walletId;
 
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    @JsonProperty("activity_id")
-    private String activityId;
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    public ClaimStakingRewardsResponse() {
-    }
+  public ClaimStakingRewardsResponse() {}
 
-    public String getWalletId() {
-        return walletId;
-    }
+  public String getWalletId() {
+    return walletId;
+  }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 }

@@ -24,7 +24,6 @@ import com.coinbase.prime.orders.AcceptQuoteRequest;
 import com.coinbase.prime.orders.AcceptQuoteResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class AcceptQuote {
@@ -36,7 +35,8 @@ public class AcceptQuote {
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String quoteId = args[0];
@@ -44,16 +44,18 @@ public class AcceptQuote {
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Quote ID: " + quoteId);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      AcceptQuoteResponse response = service.acceptQuote(
-          new AcceptQuoteRequest.Builder()
-              .portfolioId(portfolioId)
-              .quoteId(quoteId)
-              .productId("ETH-USD")
-              .side(OrderSide.BUY)
-              .clientOrderId(UUID.randomUUID().toString())
-              .build());
+      AcceptQuoteResponse response =
+          service.acceptQuote(
+              new AcceptQuoteRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .quoteId(quoteId)
+                  .productId("ETH-USD")
+                  .side(OrderSide.BUY)
+                  .clientOrderId(UUID.randomUUID().toString())
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -21,52 +21,54 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements ActivitiesService {
-    public ActivitiesServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public ActivitiesServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/activities", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioActivitiesResponse>() {});
-    }
+  @Override
+  public ListPortfolioActivitiesResponse listPortfolioActivities(
+      ListPortfolioActivitiesRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/activities", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPortfolioActivitiesResponse>() {});
+  }
 
-    @Override
-    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/activities", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityActivitiesResponse>() {});
-    }
+  @Override
+  public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/activities", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityActivitiesResponse>() {});
+  }
 
-    @Override
-    public GetActivityResponse getActivity(GetActivityRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/activities/%s", request.getActivityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetActivityResponse>() {});
-    }
+  @Override
+  public GetActivityResponse getActivity(GetActivityRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/activities/%s", request.getActivityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetActivityResponse>() {});
+  }
 
-    @Override
-    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioActivityResponse>() {});
-    }
-
+  @Override
+  public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioActivityResponse>() {});
+  }
 }

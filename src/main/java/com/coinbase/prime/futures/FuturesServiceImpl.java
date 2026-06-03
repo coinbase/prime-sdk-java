@@ -21,122 +21,131 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesService {
-    public FuturesServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public FuturesServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/entities/%s/futures/auto_sweep", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<SetAutoSweepResponse>() {});
-    }
+  @Override
+  public SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/entities/%s/futures/auto_sweep", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<SetAutoSweepResponse>() {});
+  }
 
-    @Override
-    public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetEntityFcmBalanceResponse>() {});
-    }
+  @Override
+  public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetEntityFcmBalanceResponse>() {});
+  }
 
-    @Override
-    public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetFcmMarginCallDetailsResponse>() {});
-    }
+  @Override
+  public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(
+      GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetFcmMarginCallDetailsResponse>() {});
+  }
 
-    @Override
-    public GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/positions", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPositionsResponse>() {});
-    }
+  @Override
+  public GetPositionsResponse getPositions(GetPositionsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/positions", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPositionsResponse>() {});
+  }
 
-    @Override
-    public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetFcmRiskLimitsResponse>() {});
-    }
+  @Override
+  public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetFcmRiskLimitsResponse>() {});
+  }
 
-    @Override
-    public GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/settings", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetFcmSettingsResponse>() {});
-    }
+  @Override
+  public GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/settings", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetFcmSettingsResponse>() {});
+  }
 
-    @Override
-    public SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/entities/%s/futures/settings", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<SetFcmSettingsResponse>() {});
-    }
+  @Override
+  public SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/entities/%s/futures/settings", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<SetFcmSettingsResponse>() {});
+  }
 
-    @Override
-    public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityFuturesSweepsResponse>() {});
-    }
+  @Override
+  public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(
+      ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityFuturesSweepsResponse>() {});
+  }
 
-    @Override
-    public ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ScheduleEntityFuturesSweepResponse>() {});
-    }
+  @Override
+  public ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(
+      ScheduleEntityFuturesSweepRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ScheduleEntityFuturesSweepResponse>() {});
+  }
 
-    @Override
-    public CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.DELETE,
-                String.format("/entities/%s/futures/sweeps", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<CancelEntityFuturesSweepResponse>() {});
-    }
+  @Override
+  public CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(
+      CancelEntityFuturesSweepRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.DELETE,
+        String.format("/entities/%s/futures/sweeps", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<CancelEntityFuturesSweepResponse>() {});
+  }
 
-    @Override
-    public GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/equity", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<GetFcmEquityResponse>() {});
-    }
-
+  @Override
+  public GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/futures/equity", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetFcmEquityResponse>() {});
+  }
 }

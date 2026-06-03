@@ -19,77 +19,75 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class Vasp {
-    @JsonProperty("id")
+  @JsonProperty("id")
+  private String id;
+
+  @JsonProperty("country_code")
+  private String countryCode;
+
+  @JsonProperty("lei_number")
+  private String leiNumber;
+
+  public Vasp() {}
+
+  public Vasp(Builder builder) {
+    this.id = builder.id;
+    this.countryCode = builder.countryCode;
+    this.leiNumber = builder.leiNumber;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getCountryCode() {
+    return countryCode;
+  }
+
+  public void setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
+  }
+
+  public String getLeiNumber() {
+    return leiNumber;
+  }
+
+  public void setLeiNumber(String leiNumber) {
+    this.leiNumber = leiNumber;
+  }
+
+  public static class Builder {
     private String id;
 
-    @JsonProperty("country_code")
     private String countryCode;
 
-    @JsonProperty("lei_number")
     private String leiNumber;
 
-    public Vasp() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public Vasp(Builder builder) {
-        this.id = builder.id;
-        this.countryCode = builder.countryCode;
-        this.leiNumber = builder.leiNumber;
-    }
-    public String getId() {
-        return id;
+    public Builder countryCode(String countryCode) {
+      this.countryCode = countryCode;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getCountryCode() {
-        return countryCode;
+    public Builder leiNumber(String leiNumber) {
+      this.leiNumber = leiNumber;
+      return this;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public Vasp build() {
+      return new Vasp(this);
     }
-    public String getLeiNumber() {
-        return leiNumber;
-    }
-
-    public void setLeiNumber(String leiNumber) {
-        this.leiNumber = leiNumber;
-    }
-    public static class Builder {
-        private String id;
-
-        private String countryCode;
-
-        private String leiNumber;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder countryCode(String countryCode) {
-            this.countryCode = countryCode;
-            return this;
-        }
-
-        public Builder leiNumber(String leiNumber) {
-            this.leiNumber = leiNumber;
-            return this;
-        }
-
-        public Vasp build() {
-            return new Vasp(this);
-        }
-    }
+  }
 }
-

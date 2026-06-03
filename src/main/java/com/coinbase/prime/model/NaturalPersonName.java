@@ -19,89 +19,79 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
-    /**
-     * Natural person name components
-     */
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/** Natural person name components */
 public class NaturalPersonName {
-    /**
-     * Given/first name
-     */
-    @JsonProperty("first_name")
+  /** Given/first name */
+  @JsonProperty("first_name")
+  private String firstName;
+
+  /** optional middle name (currently unused) */
+  @JsonProperty("middle_name")
+  private String middleName;
+
+  /** Family/last name */
+  @JsonProperty("last_name")
+  private String lastName;
+
+  public NaturalPersonName() {}
+
+  public NaturalPersonName(Builder builder) {
+    this.firstName = builder.firstName;
+    this.middleName = builder.middleName;
+    this.lastName = builder.lastName;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getMiddleName() {
+    return middleName;
+  }
+
+  public void setMiddleName(String middleName) {
+    this.middleName = middleName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public static class Builder {
     private String firstName;
 
-    /**
-     * optional middle name (currently unused)
-     */
-    @JsonProperty("middle_name")
     private String middleName;
 
-    /**
-     * Family/last name
-     */
-    @JsonProperty("last_name")
     private String lastName;
 
-    public NaturalPersonName() {
+    public Builder firstName(String firstName) {
+      this.firstName = firstName;
+      return this;
     }
 
-    public NaturalPersonName(Builder builder) {
-        this.firstName = builder.firstName;
-        this.middleName = builder.middleName;
-        this.lastName = builder.lastName;
-    }
-    public String getFirstName() {
-        return firstName;
+    public Builder middleName(String middleName) {
+      this.middleName = middleName;
+      return this;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getMiddleName() {
-        return middleName;
+    public Builder lastName(String lastName) {
+      this.lastName = lastName;
+      return this;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public NaturalPersonName build() {
+      return new NaturalPersonName(this);
     }
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public static class Builder {
-        private String firstName;
-
-        private String middleName;
-
-        private String lastName;
-
-        public Builder firstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public Builder middleName(String middleName) {
-            this.middleName = middleName;
-            return this;
-        }
-
-        public Builder lastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public NaturalPersonName build() {
-            return new NaturalPersonName(this);
-        }
-    }
+  }
 }
-

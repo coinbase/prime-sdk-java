@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.PostTradeCreditInformation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Portfolio Credit Information
- */
+/** Get Portfolio Credit Information */
 public class GetPortfolioCreditInformationResponse {
-    @JsonProperty("post_trade_credit")
-    private PostTradeCreditInformation postTradeCredit;
+  @JsonProperty("post_trade_credit")
+  private PostTradeCreditInformation postTradeCredit;
 
-    public GetPortfolioCreditInformationResponse() {
-    }
+  public GetPortfolioCreditInformationResponse() {}
 
-    public PostTradeCreditInformation getPostTradeCredit() {
-        return postTradeCredit;
-    }
+  public PostTradeCreditInformation getPostTradeCredit() {
+    return postTradeCredit;
+  }
 
-    public void setPostTradeCredit(PostTradeCreditInformation postTradeCredit) {
-        this.postTradeCredit = postTradeCredit;
-    }
-
+  public void setPostTradeCredit(PostTradeCreditInformation postTradeCredit) {
+    this.postTradeCredit = postTradeCredit;
+  }
 }

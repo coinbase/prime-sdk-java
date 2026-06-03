@@ -28,7 +28,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListEntityBalances {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
@@ -51,12 +52,15 @@ public class ListEntityBalances {
         System.out.println("Aggregation type: " + aggregationType);
       }
 
-      ListEntityBalancesRequest.Builder builder = new ListEntityBalancesRequest.Builder()
-          .entityId(entityId);
+      ListEntityBalancesRequest.Builder builder =
+          new ListEntityBalancesRequest.Builder().entityId(entityId);
 
       if (symbols != null) {
         String[] symbolArray =
-            java.util.Arrays.stream(symbols.split(",")).map(String::trim).filter(s -> !s.isEmpty()).toArray(String[]::new);
+            java.util.Arrays.stream(symbols.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
         builder.symbols(symbolArray);
       }
       if (aggregationType != null) {
@@ -66,7 +70,8 @@ public class ListEntityBalances {
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
       ListEntityBalancesResponse response = service.listEntityBalances(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

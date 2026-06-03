@@ -20,33 +20,29 @@ import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Wallet;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Portfolio Wallets
- */
+/** List Portfolio Wallets */
 public class ListWalletsResponse {
-    @JsonProperty("wallets")
-    private Wallet[] wallets;
+  @JsonProperty("wallets")
+  private Wallet[] wallets;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListWalletsResponse() {
-    }
+  public ListWalletsResponse() {}
 
-    public Wallet[] getWallets() {
-        return wallets;
-    }
+  public Wallet[] getWallets() {
+    return wallets;
+  }
 
-    public void setWallets(Wallet[] wallets) {
-        this.wallets = wallets;
-    }
+  public void setWallets(Wallet[] wallets) {
+    this.wallets = wallets;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

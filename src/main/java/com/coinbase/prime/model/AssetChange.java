@@ -19,125 +19,117 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.AssetChangeType;
-import com.coinbase.prime.model.NftCollection;
-import com.coinbase.prime.model.NftItem;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class AssetChange {
-    /**
-     * AssetChangeType identifies the type of asset change
-     */
-    @JsonProperty("type")
+  /** AssetChangeType identifies the type of asset change */
+  @JsonProperty("type")
+  private AssetChangeType type;
+
+  /** The currency symbol associated with the balance operation */
+  @JsonProperty("symbol")
+  private String symbol;
+
+  /** The amount in whole units being transferred or approved */
+  @JsonProperty("amount")
+  private String amount;
+
+  @JsonProperty("collection")
+  private NftCollection collection;
+
+  @JsonProperty("item")
+  private NftItem item;
+
+  public AssetChange() {}
+
+  public AssetChange(Builder builder) {
+    this.type = builder.type;
+    this.symbol = builder.symbol;
+    this.amount = builder.amount;
+    this.collection = builder.collection;
+    this.item = builder.item;
+  }
+
+  public AssetChangeType getType() {
+    return type;
+  }
+
+  public void setType(AssetChangeType type) {
+    this.type = type;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public NftCollection getCollection() {
+    return collection;
+  }
+
+  public void setCollection(NftCollection collection) {
+    this.collection = collection;
+  }
+
+  public NftItem getItem() {
+    return item;
+  }
+
+  public void setItem(NftItem item) {
+    this.item = item;
+  }
+
+  public static class Builder {
     private AssetChangeType type;
 
-    /**
-     * The currency symbol associated with the balance operation
-     */
-    @JsonProperty("symbol")
     private String symbol;
 
-    /**
-     * The amount in whole units being transferred or approved
-     */
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty("collection")
     private NftCollection collection;
 
-    @JsonProperty("item")
     private NftItem item;
 
-    public AssetChange() {
+    public Builder type(AssetChangeType type) {
+      this.type = type;
+      return this;
     }
 
-    public AssetChange(Builder builder) {
-        this.type = builder.type;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.collection = builder.collection;
-        this.item = builder.item;
-    }
-    public AssetChangeType getType() {
-        return type;
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public void setType(AssetChangeType type) {
-        this.type = type;
-    }
-    public String getSymbol() {
-        return symbol;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder collection(NftCollection collection) {
+      this.collection = collection;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public NftCollection getCollection() {
-        return collection;
+    public Builder item(NftItem item) {
+      this.item = item;
+      return this;
     }
 
-    public void setCollection(NftCollection collection) {
-        this.collection = collection;
+    public AssetChange build() {
+      return new AssetChange(this);
     }
-    public NftItem getItem() {
-        return item;
-    }
-
-    public void setItem(NftItem item) {
-        this.item = item;
-    }
-    public static class Builder {
-        private AssetChangeType type;
-
-        private String symbol;
-
-        private String amount;
-
-        private NftCollection collection;
-
-        private NftItem item;
-
-        public Builder type(AssetChangeType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder collection(NftCollection collection) {
-            this.collection = collection;
-            return this;
-        }
-
-        public Builder item(NftItem item) {
-            this.item = item;
-            return this;
-        }
-
-        public AssetChange build() {
-            return new AssetChange(this);
-        }
-    }
+  }
 }
-

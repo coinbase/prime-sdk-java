@@ -16,83 +16,75 @@
 
 package com.coinbase.prime.balances;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Wallet Balance
- */
+/** Get Wallet Balance */
 public class GetWalletBalanceRequest {
-    /**
-     * Portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  /** Portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * Wallet ID
-     */
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
+  /** Wallet ID */
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  public GetWalletBalanceRequest() {}
+
+  public GetWalletBalanceRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String walletId;
 
-    public GetWalletBalanceRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetWalletBalanceRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetWalletBalanceRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetWalletBalanceRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public String getWalletId() {
-        return walletId;
-    }
-
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public GetWalletBalanceRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetWalletBalanceRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

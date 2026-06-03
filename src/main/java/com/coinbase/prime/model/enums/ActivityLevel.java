@@ -25,4 +25,3 @@ public enum ActivityLevel {
   ACTIVITY_LEVEL_PORTFOLIO,
   ACTIVITY_LEVEL_ENTITY
 }
-

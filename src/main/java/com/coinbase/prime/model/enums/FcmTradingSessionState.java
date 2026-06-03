@@ -20,33 +20,24 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - FCM_TRADING_SESSION_STATE_UNDEFINED: Undefined session state - FCM_TRADING_SESSION_STATE_PRE_OPEN: Pre-open state, orders can be placed and cancelled - FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL: Pre-open state, orders cannot be cancelled - FCM_TRADING_SESSION_STATE_OPEN: Trading session is open - FCM_TRADING_SESSION_STATE_CLOSE: Trading session is closed - FCM_TRADING_SESSION_STATE_HALTED: Trading session is halted
-     */
+/**
+ * - FCM_TRADING_SESSION_STATE_UNDEFINED: Undefined session state -
+ * FCM_TRADING_SESSION_STATE_PRE_OPEN: Pre-open state, orders can be placed and cancelled -
+ * FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL: Pre-open state, orders cannot be cancelled -
+ * FCM_TRADING_SESSION_STATE_OPEN: Trading session is open - FCM_TRADING_SESSION_STATE_CLOSE:
+ * Trading session is closed - FCM_TRADING_SESSION_STATE_HALTED: Trading session is halted
+ */
 public enum FcmTradingSessionState {
-  /**
-   * Undefined session state
-   */
+  /** Undefined session state */
   FCM_TRADING_SESSION_STATE_UNDEFINED,
-  /**
-   * Pre-open state, orders can be placed and cancelled
-   */
+  /** Pre-open state, orders can be placed and cancelled */
   FCM_TRADING_SESSION_STATE_PRE_OPEN,
-  /**
-   * Pre-open state, orders cannot be cancelled
-   */
+  /** Pre-open state, orders cannot be cancelled */
   FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL,
-  /**
-   * Trading session is open
-   */
+  /** Trading session is open */
   FCM_TRADING_SESSION_STATE_OPEN,
-  /**
-   * Trading session is closed
-   */
+  /** Trading session is closed */
   FCM_TRADING_SESSION_STATE_CLOSE,
-  /**
-   * Trading session is halted
-   */
+  /** Trading session is halted */
   FCM_TRADING_SESSION_STATE_HALTED
 }
-

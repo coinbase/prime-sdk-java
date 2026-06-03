@@ -24,20 +24,21 @@ import com.coinbase.prime.orders.CreateQuoteRequest;
 import com.coinbase.prime.orders.CreateQuoteResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class CreateQuote {
   public static void main(String[] args) {
     try {
       if (args.length < 5) {
-        System.err.println("Usage: CreateQuote <product_id> <side> <basequantity|quotevalue> <amount> <limit_price>");
+        System.err.println(
+            "Usage: CreateQuote <product_id> <side> <basequantity|quotevalue> <amount> <limit_price>");
         System.err.println("Example: CreateQuote ETH-USD BUY basequantity 0.007 3500.00");
         System.err.println("Example: CreateQuote BTC-USD SELL quotevalue 1000.00 95000.00");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -48,14 +49,25 @@ public class CreateQuote {
       String limitPrice = args[4];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
-      System.out.println("Quote parameters: " + productId + " " + side + " " + quantityType + "=" + amount + " limit_price=" + limitPrice);
+      System.out.println(
+          "Quote parameters: "
+              + productId
+              + " "
+              + side
+              + " "
+              + quantityType
+              + "="
+              + amount
+              + " limit_price="
+              + limitPrice);
 
-      CreateQuoteRequest.Builder builder = new CreateQuoteRequest.Builder()
-          .portfolioId(portfolioId)
-          .productId(productId)
-          .side(side)
-          .limitPrice(limitPrice)
-          .clientQuoteId(UUID.randomUUID().toString());
+      CreateQuoteRequest.Builder builder =
+          new CreateQuoteRequest.Builder()
+              .portfolioId(portfolioId)
+              .productId(productId)
+              .side(side)
+              .limitPrice(limitPrice)
+              .clientQuoteId(UUID.randomUUID().toString());
 
       if (quantityType.equals("basequantity")) {
         builder.baseQuantity(amount);
@@ -69,7 +81,8 @@ public class CreateQuote {
       OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
       CreateQuoteResponse response = ordersService.createQuote(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -16,40 +16,34 @@
 
 package com.coinbase.prime.wallets;
 
-import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.BlockchainAddress;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Wallet Addresses
- */
+/** List Wallet Addresses */
 public class ListWalletAddressesResponse {
-    /**
-     * Addresses
-     */
-    @JsonProperty("addresses")
-    private BlockchainAddress[] addresses;
+  /** Addresses */
+  @JsonProperty("addresses")
+  private BlockchainAddress[] addresses;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListWalletAddressesResponse() {
-    }
+  public ListWalletAddressesResponse() {}
 
-    public BlockchainAddress[] getAddresses() {
-        return addresses;
-    }
+  public BlockchainAddress[] getAddresses() {
+    return addresses;
+  }
 
-    public void setAddresses(BlockchainAddress[] addresses) {
-        this.addresses = addresses;
-    }
+  public void setAddresses(BlockchainAddress[] addresses) {
+    this.addresses = addresses;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

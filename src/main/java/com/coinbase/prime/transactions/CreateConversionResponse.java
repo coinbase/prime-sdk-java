@@ -18,109 +18,91 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Conversion
- */
+/** Create Conversion */
 public class CreateConversionResponse {
-    /**
-     * The activity ID for the conversion
-     */
-    @JsonProperty("activity_id")
-    private String activityId;
+  /** The activity ID for the conversion */
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    /**
-     * The currency symbol to convert from
-     */
-    @JsonProperty("source_symbol")
-    private String sourceSymbol;
+  /** The currency symbol to convert from */
+  @JsonProperty("source_symbol")
+  private String sourceSymbol;
 
-    /**
-     * The currency symbol to convert to
-     */
-    @JsonProperty("destination_symbol")
-    private String destinationSymbol;
+  /** The currency symbol to convert to */
+  @JsonProperty("destination_symbol")
+  private String destinationSymbol;
 
-    /**
-     * The amount in whole units to convert
-     */
-    @JsonProperty("amount")
-    private String amount;
+  /** The amount in whole units to convert */
+  @JsonProperty("amount")
+  private String amount;
 
-    /**
-     * The UUID of the destination wallet
-     */
-    @JsonProperty("destination")
-    private String destination;
+  /** The UUID of the destination wallet */
+  @JsonProperty("destination")
+  private String destination;
 
-    /**
-     * The UUID of the source wallet
-     */
-    @JsonProperty("source")
-    private String source;
+  /** The UUID of the source wallet */
+  @JsonProperty("source")
+  private String source;
 
-    /**
-     * The UUID of the conversion transaction
-     */
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  /** The UUID of the conversion transaction */
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    public CreateConversionResponse() {
-    }
+  public CreateConversionResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getSourceSymbol() {
-        return sourceSymbol;
-    }
+  public String getSourceSymbol() {
+    return sourceSymbol;
+  }
 
-    public void setSourceSymbol(String sourceSymbol) {
-        this.sourceSymbol = sourceSymbol;
-    }
+  public void setSourceSymbol(String sourceSymbol) {
+    this.sourceSymbol = sourceSymbol;
+  }
 
-    public String getDestinationSymbol() {
-        return destinationSymbol;
-    }
+  public String getDestinationSymbol() {
+    return destinationSymbol;
+  }
 
-    public void setDestinationSymbol(String destinationSymbol) {
-        this.destinationSymbol = destinationSymbol;
-    }
+  public void setDestinationSymbol(String destinationSymbol) {
+    this.destinationSymbol = destinationSymbol;
+  }
 
-    public String getAmount() {
-        return amount;
-    }
+  public String getAmount() {
+    return amount;
+  }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
 
-    public String getDestination() {
-        return destination;
-    }
+  public String getDestination() {
+    return destination;
+  }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+  public void setDestination(String destination) {
+    this.destination = destination;
+  }
 
-    public String getSource() {
-        return source;
-    }
+  public String getSource() {
+    return source;
+  }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
+  public void setSource(String source) {
+    this.source = source;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 }

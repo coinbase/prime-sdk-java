@@ -18,25 +18,19 @@ package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Cancel Order
- */
+/** Cancel Order */
 public class CancelOrderResponse {
-    /**
-     * The unique UUID for the order
-     */
-    @JsonProperty("id")
-    private String id;
+  /** The unique UUID for the order */
+  @JsonProperty("id")
+  private String id;
 
-    public CancelOrderResponse() {
-    }
+  public CancelOrderResponse() {}
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
+  public void setId(String id) {
+    this.id = id;
+  }
 }

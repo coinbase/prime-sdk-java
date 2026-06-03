@@ -19,65 +19,58 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class RpcConfig {
-    /**
-     * If true, transaction will not be broadcast to the network
-     */
-    @JsonProperty("skip_broadcast")
+  /** If true, transaction will not be broadcast to the network */
+  @JsonProperty("skip_broadcast")
+  private boolean skipBroadcast;
+
+  /** Custom blockchain node RPC URL. (EVM-only) */
+  @JsonProperty("url")
+  private String url;
+
+  public RpcConfig() {}
+
+  public RpcConfig(Builder builder) {
+    this.skipBroadcast = builder.skipBroadcast;
+    this.url = builder.url;
+  }
+
+  public boolean getSkipBroadcast() {
+    return skipBroadcast;
+  }
+
+  public void setSkipBroadcast(boolean skipBroadcast) {
+    this.skipBroadcast = skipBroadcast;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public static class Builder {
     private boolean skipBroadcast;
 
-    /**
-     * Custom blockchain node RPC URL. (EVM-only)
-     */
-    @JsonProperty("url")
     private String url;
 
-    public RpcConfig() {
+    public Builder skipBroadcast(boolean skipBroadcast) {
+      this.skipBroadcast = skipBroadcast;
+      return this;
     }
 
-    public RpcConfig(Builder builder) {
-        this.skipBroadcast = builder.skipBroadcast;
-        this.url = builder.url;
-    }
-    public boolean getSkipBroadcast() {
-        return skipBroadcast;
+    public Builder url(String url) {
+      this.url = url;
+      return this;
     }
 
-    public void setSkipBroadcast(boolean skipBroadcast) {
-        this.skipBroadcast = skipBroadcast;
+    public RpcConfig build() {
+      return new RpcConfig(this);
     }
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-    public static class Builder {
-        private boolean skipBroadcast;
-
-        private String url;
-
-        public Builder skipBroadcast(boolean skipBroadcast) {
-            this.skipBroadcast = skipBroadcast;
-            return this;
-        }
-
-        public Builder url(String url) {
-            this.url = url;
-            return this;
-        }
-
-        public RpcConfig build() {
-            return new RpcConfig(this);
-        }
-    }
+  }
 }
-

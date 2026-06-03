@@ -25,25 +25,32 @@ import com.coinbase.prime.transactions.TransactionsService;
 import com.coinbase.prime.utils.Utils;
 
 public class GetTransactionTravelRuleData {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-            String transactionId = args.length > 0 ? args[0] : "TRANSACTION_ID_HERE";
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String transactionId = args.length > 0 ? args[0] : "TRANSACTION_ID_HERE";
 
-            System.out.println("Getting travel rule data: Portfolio ID: " + portfolioId + ", Transaction ID: " + transactionId);
+      System.out.println(
+          "Getting travel rule data: Portfolio ID: "
+              + portfolioId
+              + ", Transaction ID: "
+              + transactionId);
 
-            TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
-            GetTransactionTravelRuleDataResponse response = service.getTransactionTravelRuleData(
-                    new GetTransactionTravelRuleDataRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .transactionId(transactionId)
-                            .build());
+      TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
+      GetTransactionTravelRuleDataResponse response =
+          service.getTransactionTravelRuleData(
+              new GetTransactionTravelRuleDataRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .transactionId(transactionId)
+                  .build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

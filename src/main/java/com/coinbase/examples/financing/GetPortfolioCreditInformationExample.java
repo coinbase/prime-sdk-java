@@ -25,21 +25,22 @@ import com.coinbase.prime.financing.GetPortfolioCreditInformationResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GetPortfolioCreditInformationExample {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials =
-                    new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            FinancingService service = PrimeServiceFactory.createFinancingService(client);
-            GetPortfolioCreditInformationResponse response = service.getPortfolioCreditInformation(
-                    new GetPortfolioCreditInformationRequest.Builder().portfolioId(portfolioId).build());
+      FinancingService service = PrimeServiceFactory.createFinancingService(client);
+      GetPortfolioCreditInformationResponse response =
+          service.getPortfolioCreditInformation(
+              new GetPortfolioCreditInformationRequest.Builder().portfolioId(portfolioId).build());
 
-            System.out.println(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

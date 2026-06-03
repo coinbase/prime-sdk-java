@@ -16,313 +16,342 @@
 
 package com.coinbase.prime.integration;
 
-import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.financing.*;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.financing.*;
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
+
 public class FinancingIT extends BaseIntegrationTest {
 
-    @Override
-    protected String featureScope() {
-        return "FINANCING";
-    }
+  @Override
+  protected String featureScope() {
+    return "FINANCING";
+  }
 
-    private static String dateDaysAgo(int days) {
-        return LocalDate.now().minusDays(days).toString();
-    }
+  private static String dateDaysAgo(int days) {
+    return LocalDate.now().minusDays(days).toString();
+  }
 
-    private static String today() {
-        return LocalDate.now().toString();
-    }
+  private static String today() {
+    return LocalDate.now().toString();
+  }
 
-    @Test
-    public void testListInterestAccruals() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListInterestAccrualsResponse response = service.listInterestAccruals(
-                new ListInterestAccrualsRequest.Builder()
-                        .entityId(entityId)
-                        .startDate(dateDaysAgo(30))
-                        .endDate(today())
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListInterestAccruals() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(),
+        "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListInterestAccrualsResponse response =
+        service.listInterestAccruals(
+            new ListInterestAccrualsRequest.Builder()
+                .entityId(entityId)
+                .startDate(dateDaysAgo(30))
+                .endDate(today())
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListInterestAccrualsWithDateRange() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListInterestAccrualsResponse response = service.listInterestAccruals(
-                new ListInterestAccrualsRequest.Builder()
-                        .entityId(entityId)
-                        .startDate(dateDaysAgo(90))
-                        .endDate(today())
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListInterestAccrualsWithDateRange() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(),
+        "Skipping: COINBASE_PRIME_FINANCING_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListInterestAccrualsResponse response =
+        service.listInterestAccruals(
+            new ListInterestAccrualsRequest.Builder()
+                .entityId(entityId)
+                .startDate(dateDaysAgo(90))
+                .endDate(today())
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetCrossMarginOverview() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetCrossMarginOverviewResponse response = service.getCrossMarginOverview(
-                new GetCrossMarginOverviewRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetCrossMarginOverview() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetCrossMarginOverviewResponse response =
+        service.getCrossMarginOverview(
+            new GetCrossMarginOverviewRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetEntityLocateAvailabilities() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetEntityLocateAvailabilitiesResponse response = service.getEntityLocateAvailabilities(
-                new GetEntityLocateAvailabilitiesRequest.Builder()
-                        .entityId(entityId)
-                        .locateDate(today())
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetEntityLocateAvailabilities() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetEntityLocateAvailabilitiesResponse response =
+        service.getEntityLocateAvailabilities(
+            new GetEntityLocateAvailabilitiesRequest.Builder()
+                .entityId(entityId)
+                .locateDate(today())
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetMarginInformation() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetMarginInformationResponse response = service.getMarginInformation(
-                new GetMarginInformationRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetMarginInformation() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetMarginInformationResponse response =
+        service.getMarginInformation(
+            new GetMarginInformationRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListMarginCallSummaries() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListMarginCallSummariesResponse response = service.listMarginCallSummaries(
-                new ListMarginCallSummariesRequest.Builder()
-                        .entityId(entityId)
-                        .startDate(dateDaysAgo(7))
-                        .endDate(today())
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListMarginCallSummaries() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListMarginCallSummariesResponse response =
+        service.listMarginCallSummaries(
+            new ListMarginCallSummariesRequest.Builder()
+                .entityId(entityId)
+                .startDate(dateDaysAgo(7))
+                .endDate(today())
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListMarginCallSummariesWithDateRange() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListMarginCallSummariesResponse response = service.listMarginCallSummaries(
-                new ListMarginCallSummariesRequest.Builder()
-                        .entityId(entityId)
-                        .startDate(dateDaysAgo(30))
-                        .endDate(today())
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListMarginCallSummariesWithDateRange() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListMarginCallSummariesResponse response =
+        service.listMarginCallSummaries(
+            new ListMarginCallSummariesRequest.Builder()
+                .entityId(entityId)
+                .startDate(dateDaysAgo(30))
+                .endDate(today())
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListTradeFinanceObligations() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListTradeFinanceObligationsResponse response = service.listTradeFinanceObligations(
-                new ListTradeFinanceObligationsRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListTradeFinanceObligations() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListTradeFinanceObligationsResponse response =
+        service.listTradeFinanceObligations(
+            new ListTradeFinanceObligationsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetTradeFinanceTieredPricingFees() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetTradeFinanceTieredPricingFeesResponse response = service.getTradeFinanceTieredPricingFees(
-                new GetTradeFinanceTieredPricingFeesRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetTradeFinanceTieredPricingFees() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetTradeFinanceTieredPricingFeesResponse response =
+        service.getTradeFinanceTieredPricingFees(
+            new GetTradeFinanceTieredPricingFeesRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListFinancingEligibleAssets() throws Exception {
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets();
-        assertNotNull(response);
-    }
+  @Test
+  public void testListFinancingEligibleAssets() throws Exception {
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets();
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListInterestAccrualsForPortfolio() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        try {
-            ListInterestAccrualsForPortfolioResponse response = service.listInterestAccrualsForPortfolio(
-                    new ListInterestAccrualsForPortfolioRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .startDate(dateDaysAgo(90))
-                            .endDate(today())
-                            .build());
-            assertNotNull(response);
-        } catch (CoinbaseClientException e) {
-            String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
-            assumeTrue(!causeMsg.contains("InvalidArgument") && !causeMsg.contains("not enabled")
-                            && !causeMsg.contains("precondition"),
-                    "Skipping: portfolio does not have access to interest accruals or date format unsupported");
-            throw e;
-        }
+  @Test
+  public void testListInterestAccrualsForPortfolio() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    try {
+      ListInterestAccrualsForPortfolioResponse response =
+          service.listInterestAccrualsForPortfolio(
+              new ListInterestAccrualsForPortfolioRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .startDate(dateDaysAgo(90))
+                  .endDate(today())
+                  .build());
+      assertNotNull(response);
+    } catch (CoinbaseClientException e) {
+      String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
+      assumeTrue(
+          !causeMsg.contains("InvalidArgument")
+              && !causeMsg.contains("not enabled")
+              && !causeMsg.contains("precondition"),
+          "Skipping: portfolio does not have access to interest accruals or date format unsupported");
+      throw e;
     }
+  }
 
-    @Test
-    public void testListInterestAccrualsForPortfolioWithDateRange() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        try {
-            ListInterestAccrualsForPortfolioResponse response = service.listInterestAccrualsForPortfolio(
-                    new ListInterestAccrualsForPortfolioRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .startDate(dateDaysAgo(30))
-                            .endDate(today())
-                            .build());
-            assertNotNull(response);
-        } catch (CoinbaseClientException e) {
-            String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
-            assumeTrue(!causeMsg.contains("InvalidArgument") && !causeMsg.contains("not enabled")
-                            && !causeMsg.contains("precondition"),
-                    "Skipping: portfolio does not have access to interest accruals or date format unsupported");
-            throw e;
-        }
+  @Test
+  public void testListInterestAccrualsForPortfolioWithDateRange() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    try {
+      ListInterestAccrualsForPortfolioResponse response =
+          service.listInterestAccrualsForPortfolio(
+              new ListInterestAccrualsForPortfolioRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .startDate(dateDaysAgo(30))
+                  .endDate(today())
+                  .build());
+      assertNotNull(response);
+    } catch (CoinbaseClientException e) {
+      String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
+      assumeTrue(
+          !causeMsg.contains("InvalidArgument")
+              && !causeMsg.contains("not enabled")
+              && !causeMsg.contains("precondition"),
+          "Skipping: portfolio does not have access to interest accruals or date format unsupported");
+      throw e;
     }
+  }
 
-    @Test
-    public void testGetPortfolioBuyingPower() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetPortfolioBuyingPowerResponse response = service.getPortfolioBuyingPower(
-                new GetPortfolioBuyingPowerRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .baseCurrency("BTC")
-                        .quoteCurrency("USD")
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioBuyingPower() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioBuyingPowerResponse response =
+        service.getPortfolioBuyingPower(
+            new GetPortfolioBuyingPowerRequest.Builder()
+                .portfolioId(portfolioId)
+                .baseCurrency("BTC")
+                .quoteCurrency("USD")
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetPortfolioCreditInformation() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetPortfolioCreditInformationResponse response = service.getPortfolioCreditInformation(
-                new GetPortfolioCreditInformationRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioCreditInformation() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioCreditInformationResponse response =
+        service.getPortfolioCreditInformation(
+            new GetPortfolioCreditInformationRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListExistingLocates() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        try {
-            ListExistingLocatesResponse response = service.listExistingLocates(
-                    new ListExistingLocatesRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .locateDate(today())
-                            .build());
-            assertNotNull(response);
-        } catch (CoinbaseClientException e) {
-            String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
-            assumeTrue(!causeMsg.contains("precondition") && !causeMsg.contains("not enabled")
-                            && !causeMsg.contains("missing") && !causeMsg.contains("Invalid"),
-                    "Skipping: portfolio does not have access to locates");
-            throw e;
-        }
+  @Test
+  public void testListExistingLocates() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    try {
+      ListExistingLocatesResponse response =
+          service.listExistingLocates(
+              new ListExistingLocatesRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .locateDate(today())
+                  .build());
+      assertNotNull(response);
+    } catch (CoinbaseClientException e) {
+      String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
+      assumeTrue(
+          !causeMsg.contains("precondition")
+              && !causeMsg.contains("not enabled")
+              && !causeMsg.contains("missing")
+              && !causeMsg.contains("Invalid"),
+          "Skipping: portfolio does not have access to locates");
+      throw e;
     }
+  }
 
-    @Test
-    public void testListMarginConversions() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        try {
-            ListMarginConversionsResponse response = service.listMarginConversions(
-                    new ListMarginConversionsRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .startDate(dateDaysAgo(90))
-                            .endDate(today())
-                            .build());
-            assertNotNull(response);
-        } catch (CoinbaseClientException e) {
-            String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
-            assumeTrue(!causeMsg.contains("InvalidArgument") && !causeMsg.contains("not enabled")
-                            && !causeMsg.contains("precondition"),
-                    "Skipping: portfolio does not have access to margin conversions or date format unsupported");
-            throw e;
-        }
+  @Test
+  public void testListMarginConversions() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    try {
+      ListMarginConversionsResponse response =
+          service.listMarginConversions(
+              new ListMarginConversionsRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .startDate(dateDaysAgo(90))
+                  .endDate(today())
+                  .build());
+      assertNotNull(response);
+    } catch (CoinbaseClientException e) {
+      String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
+      assumeTrue(
+          !causeMsg.contains("InvalidArgument")
+              && !causeMsg.contains("not enabled")
+              && !causeMsg.contains("precondition"),
+          "Skipping: portfolio does not have access to margin conversions or date format unsupported");
+      throw e;
     }
+  }
 
-    @Test
-    public void testListMarginConversionsWithDateRange() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        try {
-            ListMarginConversionsResponse response = service.listMarginConversions(
-                    new ListMarginConversionsRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .startDate(dateDaysAgo(30))
-                            .endDate(today())
-                            .build());
-            assertNotNull(response);
-        } catch (CoinbaseClientException e) {
-            String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
-            assumeTrue(!causeMsg.contains("InvalidArgument") && !causeMsg.contains("not enabled")
-                            && !causeMsg.contains("precondition"),
-                    "Skipping: portfolio does not have access to margin conversions or date format unsupported");
-            throw e;
-        }
+  @Test
+  public void testListMarginConversionsWithDateRange() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    try {
+      ListMarginConversionsResponse response =
+          service.listMarginConversions(
+              new ListMarginConversionsRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .startDate(dateDaysAgo(30))
+                  .endDate(today())
+                  .build());
+      assertNotNull(response);
+    } catch (CoinbaseClientException e) {
+      String causeMsg = e.getCause() != null ? e.getCause().getMessage() : "";
+      assumeTrue(
+          !causeMsg.contains("InvalidArgument")
+              && !causeMsg.contains("not enabled")
+              && !causeMsg.contains("precondition"),
+          "Skipping: portfolio does not have access to margin conversions or date format unsupported");
+      throw e;
     }
+  }
 
-    @Test
-    public void testGetPortfolioWithdrawalPower() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetPortfolioWithdrawalPowerResponse response = service.getPortfolioWithdrawalPower(
-                new GetPortfolioWithdrawalPowerRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .symbol("BTC")
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioWithdrawalPower() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioWithdrawalPowerResponse response =
+        service.getPortfolioWithdrawalPower(
+            new GetPortfolioWithdrawalPowerRequest.Builder()
+                .portfolioId(portfolioId)
+                .symbol("BTC")
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetPortfolioWithdrawalPowerWithSymbol() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        FinancingService service = PrimeServiceFactory.createFinancingService(client);
-        GetPortfolioWithdrawalPowerResponse response = service.getPortfolioWithdrawalPower(
-                new GetPortfolioWithdrawalPowerRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .symbol("BTC")
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioWithdrawalPowerWithSymbol() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioWithdrawalPowerResponse response =
+        service.getPortfolioWithdrawalPower(
+            new GetPortfolioWithdrawalPowerRequest.Builder()
+                .portfolioId(portfolioId)
+                .symbol("BTC")
+                .build());
+    assertNotNull(response);
+  }
 }

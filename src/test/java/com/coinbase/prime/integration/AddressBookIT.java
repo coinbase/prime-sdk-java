@@ -16,41 +16,43 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.addressbook.AddressBookService;
 import com.coinbase.prime.addressbook.ListAddressBookRequest;
 import com.coinbase.prime.addressbook.ListAddressBookResponse;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class AddressBookIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListAddressBook() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
-        ListAddressBookResponse response = service.listAddressBook(
-                new ListAddressBookRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListAddressBook() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
+    ListAddressBookResponse response =
+        service.listAddressBook(
+            new ListAddressBookRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListAddressBookWithSearch() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
-        ListAddressBookResponse response = service.listAddressBook(
-                new ListAddressBookRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .currencySymbol("BTC")
-                        .search("")
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListAddressBookWithSearch() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
+    ListAddressBookResponse response =
+        service.listAddressBook(
+            new ListAddressBookRequest.Builder()
+                .portfolioId(portfolioId)
+                .currencySymbol("BTC")
+                .search("")
+                .limit(5)
+                .build());
+    assertNotNull(response);
+  }
 }

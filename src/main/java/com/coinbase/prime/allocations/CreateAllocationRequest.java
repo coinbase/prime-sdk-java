@@ -19,176 +19,156 @@ package com.coinbase.prime.allocations;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AllocationLeg;
 import com.coinbase.prime.model.enums.AllocationSizeType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Portfolio Allocations
- */
+/** Create Portfolio Allocations */
 public class CreateAllocationRequest {
-    /**
-     * The ID of the allocation
-     */
-    @JsonProperty("allocation_id")
+  /** The ID of the allocation */
+  @JsonProperty("allocation_id")
+  private String allocationId;
+
+  /** The source portfolio id for the allocation */
+  @JsonProperty("source_portfolio_id")
+  private String sourcePortfolioId;
+
+  /** The product for the allocation */
+  @JsonProperty("product_id")
+  private String productId;
+
+  /** The list of order ids in the allocation */
+  @JsonProperty("order_ids")
+  private String[] orderIds;
+
+  /** The list of allocation_legs for the allocation */
+  @JsonProperty("allocation_legs")
+  private AllocationLeg[] allocationLegs;
+
+  @JsonProperty("size_type")
+  private AllocationSizeType sizeType;
+
+  /** The portfolio where to allocate the remainder of the size */
+  @JsonProperty("remainder_destination_portfolio")
+  private String remainderDestinationPortfolio;
+
+  public CreateAllocationRequest() {}
+
+  public CreateAllocationRequest(Builder builder) {
+    this.allocationId = builder.allocationId;
+    this.sourcePortfolioId = builder.sourcePortfolioId;
+    this.productId = builder.productId;
+    this.orderIds = builder.orderIds;
+    this.allocationLegs = builder.allocationLegs;
+    this.sizeType = builder.sizeType;
+    this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
+  }
+
+  public String getAllocationId() {
+    return allocationId;
+  }
+
+  public void setAllocationId(String allocationId) {
+    this.allocationId = allocationId;
+  }
+
+  public String getSourcePortfolioId() {
+    return sourcePortfolioId;
+  }
+
+  public void setSourcePortfolioId(String sourcePortfolioId) {
+    this.sourcePortfolioId = sourcePortfolioId;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public String[] getOrderIds() {
+    return orderIds;
+  }
+
+  public void setOrderIds(String[] orderIds) {
+    this.orderIds = orderIds;
+  }
+
+  public AllocationLeg[] getAllocationLegs() {
+    return allocationLegs;
+  }
+
+  public void setAllocationLegs(AllocationLeg[] allocationLegs) {
+    this.allocationLegs = allocationLegs;
+  }
+
+  public AllocationSizeType getSizeType() {
+    return sizeType;
+  }
+
+  public void setSizeType(AllocationSizeType sizeType) {
+    this.sizeType = sizeType;
+  }
+
+  public String getRemainderDestinationPortfolio() {
+    return remainderDestinationPortfolio;
+  }
+
+  public void setRemainderDestinationPortfolio(String remainderDestinationPortfolio) {
+    this.remainderDestinationPortfolio = remainderDestinationPortfolio;
+  }
+
+  public static class Builder {
     private String allocationId;
-
-    /**
-     * The source portfolio id for the allocation
-     */
-    @JsonProperty("source_portfolio_id")
     private String sourcePortfolioId;
-
-    /**
-     * The product for the allocation
-     */
-    @JsonProperty("product_id")
     private String productId;
-
-    /**
-     * The list of order ids in the allocation
-     */
-    @JsonProperty("order_ids")
     private String[] orderIds;
-
-    /**
-     * The list of allocation_legs for the allocation
-     */
-    @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
-
-    @JsonProperty("size_type")
     private AllocationSizeType sizeType;
-
-    /**
-     * The portfolio where to allocate the remainder of the size
-     */
-    @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
 
-    public CreateAllocationRequest() {
+    public Builder() {}
+
+    public Builder allocationId(String allocationId) {
+      this.allocationId = allocationId;
+      return this;
     }
 
-    public CreateAllocationRequest(Builder builder) {
-        this.allocationId = builder.allocationId;
-        this.sourcePortfolioId = builder.sourcePortfolioId;
-        this.productId = builder.productId;
-        this.orderIds = builder.orderIds;
-        this.allocationLegs = builder.allocationLegs;
-        this.sizeType = builder.sizeType;
-        this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
+    public Builder sourcePortfolioId(String sourcePortfolioId) {
+      this.sourcePortfolioId = sourcePortfolioId;
+      return this;
     }
 
-    public String getAllocationId() {
-        return allocationId;
+    public Builder productId(String productId) {
+      this.productId = productId;
+      return this;
     }
 
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
+    public Builder orderIds(String[] orderIds) {
+      this.orderIds = orderIds;
+      return this;
     }
 
-    public String getSourcePortfolioId() {
-        return sourcePortfolioId;
+    public Builder allocationLegs(AllocationLeg[] allocationLegs) {
+      this.allocationLegs = allocationLegs;
+      return this;
     }
 
-    public void setSourcePortfolioId(String sourcePortfolioId) {
-        this.sourcePortfolioId = sourcePortfolioId;
+    public Builder sizeType(AllocationSizeType sizeType) {
+      this.sizeType = sizeType;
+      return this;
     }
 
-    public String getProductId() {
-        return productId;
+    public Builder remainderDestinationPortfolio(String remainderDestinationPortfolio) {
+      this.remainderDestinationPortfolio = remainderDestinationPortfolio;
+      return this;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public CreateAllocationRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateAllocationRequest(this);
     }
 
-    public String[] getOrderIds() {
-        return orderIds;
-    }
-
-    public void setOrderIds(String[] orderIds) {
-        this.orderIds = orderIds;
-    }
-
-    public AllocationLeg[] getAllocationLegs() {
-        return allocationLegs;
-    }
-
-    public void setAllocationLegs(AllocationLeg[] allocationLegs) {
-        this.allocationLegs = allocationLegs;
-    }
-
-    public AllocationSizeType getSizeType() {
-        return sizeType;
-    }
-
-    public void setSizeType(AllocationSizeType sizeType) {
-        this.sizeType = sizeType;
-    }
-
-    public String getRemainderDestinationPortfolio() {
-        return remainderDestinationPortfolio;
-    }
-
-    public void setRemainderDestinationPortfolio(String remainderDestinationPortfolio) {
-        this.remainderDestinationPortfolio = remainderDestinationPortfolio;
-    }
-
-    public static class Builder {
-        private String allocationId;
-        private String sourcePortfolioId;
-        private String productId;
-        private String[] orderIds;
-        private AllocationLeg[] allocationLegs;
-        private AllocationSizeType sizeType;
-        private String remainderDestinationPortfolio;
-
-        public Builder() {
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
-        }
-
-        public Builder sourcePortfolioId(String sourcePortfolioId) {
-            this.sourcePortfolioId = sourcePortfolioId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public Builder orderIds(String[] orderIds) {
-            this.orderIds = orderIds;
-            return this;
-        }
-
-        public Builder allocationLegs(AllocationLeg[] allocationLegs) {
-            this.allocationLegs = allocationLegs;
-            return this;
-        }
-
-        public Builder sizeType(AllocationSizeType sizeType) {
-            this.sizeType = sizeType;
-            return this;
-        }
-
-        public Builder remainderDestinationPortfolio(String remainderDestinationPortfolio) {
-            this.remainderDestinationPortfolio = remainderDestinationPortfolio;
-            return this;
-        }
-
-        public CreateAllocationRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateAllocationRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-        }
-    }
+    private void validate() throws CoinbaseClientException {}
+  }
 }

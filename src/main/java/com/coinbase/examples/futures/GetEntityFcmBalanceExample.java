@@ -27,17 +27,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GetEntityFcmBalanceExample {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
       FuturesService service = PrimeServiceFactory.createFuturesService(client);
-      GetEntityFcmBalanceResponse response = service.getEntityFcmBalance(
-          new GetEntityFcmBalanceRequest.Builder()
-              .entityId(entityId)
-              .build());
+      GetEntityFcmBalanceResponse response =
+          service.getEntityFcmBalance(
+              new GetEntityFcmBalanceRequest.Builder().entityId(entityId).build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

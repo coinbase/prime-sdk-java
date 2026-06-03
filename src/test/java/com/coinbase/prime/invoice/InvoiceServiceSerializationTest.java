@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.invoice;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.InvoiceState;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,53 +26,59 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class InvoiceServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    @Test
-    public void testListInvoicesRequestSerialization() throws CoinbaseClientException, JsonProcessingException {
-        ListInvoicesRequest request = new ListInvoicesRequest.Builder()
-                .entityId("entity-123")
-                .states(new InvoiceState[]{InvoiceState.INVOICE_STATE_BILLED, InvoiceState.INVOICE_STATE_PAID})
-                .billingMonth(1)
-                .billingYear(2025)
-                .build();
+  @Test
+  public void testListInvoicesRequestSerialization()
+      throws CoinbaseClientException, JsonProcessingException {
+    ListInvoicesRequest request =
+        new ListInvoicesRequest.Builder()
+            .entityId("entity-123")
+            .states(
+                new InvoiceState[] {
+                  InvoiceState.INVOICE_STATE_BILLED, InvoiceState.INVOICE_STATE_PAID
+                })
+            .billingMonth(1)
+            .billingYear(2025)
+            .build();
 
-        String json = objectMapper.writeValueAsString(request);
-        assertNotNull(json);
-        assertTrue(json.contains("\"states\""));
-        assertTrue(json.contains("\"billing_month\":1"));
-        assertTrue(json.contains("\"billing_year\":2025"));
-        assertFalse(json.contains("entity_id"));
-    }
+    String json = objectMapper.writeValueAsString(request);
+    assertNotNull(json);
+    assertTrue(json.contains("\"states\""));
+    assertTrue(json.contains("\"billing_month\":1"));
+    assertTrue(json.contains("\"billing_year\":2025"));
+    assertFalse(json.contains("entity_id"));
+  }
 
-    @Test
-    public void testListInvoicesRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListInvoicesRequest.Builder().entityId(null).build());
-    }
+  @Test
+  public void testListInvoicesRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new ListInvoicesRequest.Builder().entityId(null).build());
+  }
 
-    @Test
-    public void testListInvoicesResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"invoices\":["
-                + "{\"id\":\"inv-1\",\"state\":\"INVOICE_STATE_BILLED\",\"billing_month\":1,\"billing_year\":2025},"
-                + "{\"id\":\"inv-2\",\"state\":\"INVOICE_STATE_PAID\",\"billing_month\":12,\"billing_year\":2024}"
-                + "]"
-                + "}";
+  @Test
+  public void testListInvoicesResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"invoices\":["
+            + "{\"id\":\"inv-1\",\"state\":\"INVOICE_STATE_BILLED\",\"billing_month\":1,\"billing_year\":2025},"
+            + "{\"id\":\"inv-2\",\"state\":\"INVOICE_STATE_PAID\",\"billing_month\":12,\"billing_year\":2024}"
+            + "]"
+            + "}";
 
-        ListInvoicesResponse response = objectMapper.readValue(json, ListInvoicesResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getInvoices());
-        assertEquals(2, response.getInvoices().length);
-        assertEquals("inv-1", response.getInvoices()[0].getId());
-    }
+    ListInvoicesResponse response = objectMapper.readValue(json, ListInvoicesResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getInvoices());
+    assertEquals(2, response.getInvoices().length);
+    assertEquals("inv-1", response.getInvoices()[0].getId());
+  }
 }

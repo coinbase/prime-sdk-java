@@ -18,53 +18,43 @@ package com.coinbase.prime.financing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Update Funding Settings
- */
+/** Update Funding Settings */
 public class UpdateFundingSettingsResponse {
-    /**
-     * Identifier for the created activity / proposal
-     */
-    @JsonProperty("activity_id")
-    private String activityId;
+  /** Identifier for the created activity / proposal */
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    /**
-     * Type of the activity (e.g. PCS proposal type)
-     */
-    @JsonProperty("activity_type")
-    private String activityType;
+  /** Type of the activity (e.g. PCS proposal type) */
+  @JsonProperty("activity_type")
+  private String activityType;
 
-    /**
-     * Number of approvals still required before the change applies
-     */
-    @JsonProperty("num_approvals_remaining")
-    private Integer numApprovalsRemaining;
+  /** Number of approvals still required before the change applies */
+  @JsonProperty("num_approvals_remaining")
+  private Integer numApprovalsRemaining;
 
-    public UpdateFundingSettingsResponse() {
-    }
+  public UpdateFundingSettingsResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getActivityType() {
-        return activityType;
-    }
+  public String getActivityType() {
+    return activityType;
+  }
 
-    public void setActivityType(String activityType) {
-        this.activityType = activityType;
-    }
+  public void setActivityType(String activityType) {
+    this.activityType = activityType;
+  }
 
-    public Integer getNumApprovalsRemaining() {
-        return numApprovalsRemaining;
-    }
+  public Integer getNumApprovalsRemaining() {
+    return numApprovalsRemaining;
+  }
 
-    public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
-        this.numApprovalsRemaining = numApprovalsRemaining;
-    }
-
+  public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
+    this.numApprovalsRemaining = numApprovalsRemaining;
+  }
 }

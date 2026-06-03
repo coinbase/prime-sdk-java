@@ -16,79 +16,71 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Portfolio Withdrawal Power
- */
+/** Get Portfolio Withdrawal Power */
 public class GetPortfolioWithdrawalPowerRequest {
-    /**
-     * The unique ID of the portfolio
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  /** The unique ID of the portfolio */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * The currency symbol
-     */
-    @JsonProperty("symbol")
+  /** The currency symbol */
+  @JsonProperty("symbol")
+  private String symbol;
+
+  public GetPortfolioWithdrawalPowerRequest() {}
+
+  public GetPortfolioWithdrawalPowerRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.symbol = builder.symbol;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String symbol;
 
-    public GetPortfolioWithdrawalPowerRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetPortfolioWithdrawalPowerRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetPortfolioWithdrawalPowerRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPortfolioWithdrawalPowerRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String symbol;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public GetPortfolioWithdrawalPowerRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPortfolioWithdrawalPowerRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

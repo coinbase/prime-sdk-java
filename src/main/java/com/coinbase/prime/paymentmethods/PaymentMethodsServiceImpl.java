@@ -21,32 +21,34 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
-public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements PaymentMethodsService {
-    public PaymentMethodsServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl
+    implements PaymentMethodsService {
+  public PaymentMethodsServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/payment-methods", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPaymentMethodsResponse>() {});
-    }
+  @Override
+  public ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/payment-methods", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPaymentMethodsResponse>() {});
+  }
 
-    @Override
-    public GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPaymentMethodDetailsResponse>() {});
-    }
-
+  @Override
+  public GetPaymentMethodDetailsResponse getPaymentMethodDetails(
+      GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPaymentMethodDetailsResponse>() {});
+  }
 }

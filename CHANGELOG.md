@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.1] - 2026-06-03
+
+### Changed
+
+- Marked `coinbase-samples/prime-sdk-java` as deprecated in the README.
+- Documented migration to [coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java) and `coinbase-prime-sdk-java` **1.9.0+** on Maven Central.
+- Added Spotless (Google Java Format) and applied formatting across the codebase.
+
+### Notes
+
+- No intentional API changes.
+
 ## [1.8.0] - 2026-MAY-13
 
 ### Added

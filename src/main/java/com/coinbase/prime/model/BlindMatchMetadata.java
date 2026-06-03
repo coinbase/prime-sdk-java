@@ -19,107 +19,101 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
-    /**
-     * BlindMatchMetadata contains metadata specific to blind match advanced transfers.
-     */
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/** BlindMatchMetadata contains metadata specific to blind match advanced transfers. */
 public class BlindMatchMetadata {
-    @JsonProperty("reference_id")
+  @JsonProperty("reference_id")
+  private String referenceId;
+
+  /** The intended time of Transfer settlement in YYYYMMDD format */
+  @JsonProperty("settlement_date")
+  private String settlementDate;
+
+  /** Optional date of the original Trade in YYYYMMMDD format */
+  @JsonProperty("trade_date")
+  private String tradeDate;
+
+  /**
+   * Optional time of transfer settlement in HHMM format in UTC. If not provided, it defaults to
+   * 09:30 Eastern Time.
+   */
+  @JsonProperty("settlement_time")
+  private String settlementTime;
+
+  public BlindMatchMetadata() {}
+
+  public BlindMatchMetadata(Builder builder) {
+    this.referenceId = builder.referenceId;
+    this.settlementDate = builder.settlementDate;
+    this.tradeDate = builder.tradeDate;
+    this.settlementTime = builder.settlementTime;
+  }
+
+  public String getReferenceId() {
+    return referenceId;
+  }
+
+  public void setReferenceId(String referenceId) {
+    this.referenceId = referenceId;
+  }
+
+  public String getSettlementDate() {
+    return settlementDate;
+  }
+
+  public void setSettlementDate(String settlementDate) {
+    this.settlementDate = settlementDate;
+  }
+
+  public String getTradeDate() {
+    return tradeDate;
+  }
+
+  public void setTradeDate(String tradeDate) {
+    this.tradeDate = tradeDate;
+  }
+
+  public String getSettlementTime() {
+    return settlementTime;
+  }
+
+  public void setSettlementTime(String settlementTime) {
+    this.settlementTime = settlementTime;
+  }
+
+  public static class Builder {
     private String referenceId;
 
-    /**
-     * The intended time of Transfer settlement in YYYYMMDD format
-     */
-    @JsonProperty("settlement_date")
     private String settlementDate;
 
-    /**
-     * Optional date of the original Trade in YYYYMMMDD format
-     */
-    @JsonProperty("trade_date")
     private String tradeDate;
 
-    /**
-     * Optional time of transfer settlement in HHMM format in UTC. If not provided, it defaults to 09:30 Eastern Time.
-     */
-    @JsonProperty("settlement_time")
     private String settlementTime;
 
-    public BlindMatchMetadata() {
+    public Builder referenceId(String referenceId) {
+      this.referenceId = referenceId;
+      return this;
     }
 
-    public BlindMatchMetadata(Builder builder) {
-        this.referenceId = builder.referenceId;
-        this.settlementDate = builder.settlementDate;
-        this.tradeDate = builder.tradeDate;
-        this.settlementTime = builder.settlementTime;
-    }
-    public String getReferenceId() {
-        return referenceId;
+    public Builder settlementDate(String settlementDate) {
+      this.settlementDate = settlementDate;
+      return this;
     }
 
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
-    }
-    public String getSettlementDate() {
-        return settlementDate;
+    public Builder tradeDate(String tradeDate) {
+      this.tradeDate = tradeDate;
+      return this;
     }
 
-    public void setSettlementDate(String settlementDate) {
-        this.settlementDate = settlementDate;
-    }
-    public String getTradeDate() {
-        return tradeDate;
+    public Builder settlementTime(String settlementTime) {
+      this.settlementTime = settlementTime;
+      return this;
     }
 
-    public void setTradeDate(String tradeDate) {
-        this.tradeDate = tradeDate;
+    public BlindMatchMetadata build() {
+      return new BlindMatchMetadata(this);
     }
-    public String getSettlementTime() {
-        return settlementTime;
-    }
-
-    public void setSettlementTime(String settlementTime) {
-        this.settlementTime = settlementTime;
-    }
-    public static class Builder {
-        private String referenceId;
-
-        private String settlementDate;
-
-        private String tradeDate;
-
-        private String settlementTime;
-
-        public Builder referenceId(String referenceId) {
-            this.referenceId = referenceId;
-            return this;
-        }
-
-        public Builder settlementDate(String settlementDate) {
-            this.settlementDate = settlementDate;
-            return this;
-        }
-
-        public Builder tradeDate(String tradeDate) {
-            this.tradeDate = tradeDate;
-            return this;
-        }
-
-        public Builder settlementTime(String settlementTime) {
-            this.settlementTime = settlementTime;
-            return this;
-        }
-
-        public BlindMatchMetadata build() {
-            return new BlindMatchMetadata(this);
-        }
-    }
+  }
 }
-

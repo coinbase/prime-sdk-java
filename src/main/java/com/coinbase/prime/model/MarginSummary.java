@@ -19,699 +19,676 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.AssetBalance;
-import com.coinbase.prime.model.LoanInfo;
-import com.coinbase.prime.model.MarginAddOn;
-import com.coinbase.prime.model.MarketRate;
-import com.coinbase.prime.model.PmAssetInfo;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MarginSummary {
-    /**
-     * The unique ID of the entity
-     */
-    @JsonProperty("entity_id")
+  /** The unique ID of the entity */
+  @JsonProperty("entity_id")
+  private String entityId;
+
+  /**
+   * The margin equity at the entity level. Margin Equity = LMV + SMV + Trading Cash Balance + Short
+   * Collateral - Pending Withdrawals
+   */
+  @JsonProperty("margin_equity")
+  private String marginEquity;
+
+  /** USD notional value of required equity in entity portfolios */
+  @JsonProperty("margin_requirement")
+  private String marginRequirement;
+
+  /** margin_equity - margin_requirement */
+  @JsonProperty("excess_deficit")
+  private String excessDeficit;
+
+  /** The raw amount of portfolio margin credit used */
+  @JsonProperty("pm_credit_consumed")
+  private String pmCreditConsumed;
+
+  /**
+   * The maximum trade finance credit limit. This field is deprecated and will be removed in the
+   * future.
+   */
+  @JsonProperty("tf_credit_limit")
+  private String tfCreditLimit;
+
+  /**
+   * The amount of trade finance credit used (USD). This field is deprecated and will be removed in
+   * the future.
+   */
+  @JsonProperty("tf_credit_consumed")
+  private String tfCreditConsumed;
+
+  /** TF Asset Adjusted Value (USD). This field is deprecated and will be removed in the future. */
+  @JsonProperty("tf_adjusted_asset_value")
+  private String tfAdjustedAssetValue;
+
+  /**
+   * TF Adjusted Liability Value (USD). This field is deprecated and will be removed in the future.
+   */
+  @JsonProperty("tf_adjusted_liability_value")
+  private String tfAdjustedLiabilityValue;
+
+  /**
+   * The amount of adjusted credit used. This field is deprecated and will be removed in the future.
+   */
+  @JsonProperty("tf_adjusted_credit_consumed")
+  private String tfAdjustedCreditConsumed;
+
+  /** The amount of adjusted equity. This field is deprecated and will be removed in the future. */
+  @JsonProperty("tf_adjusted_equity")
+  private String tfAdjustedEquity;
+
+  /** Whether or not a entity is frozen due to balance outstanding or other reason */
+  @JsonProperty("frozen")
+  private boolean frozen;
+
+  /** The reason why a entity is frozen */
+  @JsonProperty("frozen_reason")
+  private String frozenReason;
+
+  /**
+   * Whether TF is enabled for the entity. This field is deprecated and will be removed in the
+   * future.
+   */
+  @JsonProperty("tf_enabled")
+  private boolean tfEnabled;
+
+  /** Whether PM is enabled for the entity */
+  @JsonProperty("pm_enabled")
+  private boolean pmEnabled;
+
+  /** Market rates for the list of assets */
+  @JsonProperty("market_rates")
+  private List<MarketRate> marketRates;
+
+  /** Asset Balances across portfolios */
+  @JsonProperty("asset_balances")
+  private List<AssetBalance> assetBalances;
+
+  /**
+   * Trade finance debit loan amounts. This field is deprecated and will be removed in the future.
+   */
+  @JsonProperty("tf_loans")
+  private List<LoanInfo> tfLoans;
+
+  /** Portfolio Margin debit loan amounts */
+  @JsonProperty("pm_loans")
+  private List<LoanInfo> pmLoans;
+
+  /** Short collateral amounts */
+  @JsonProperty("short_collateral")
+  private List<LoanInfo> shortCollateral;
+
+  /** Gross market value (GMV) = LMV + Abs (SMV) */
+  @JsonProperty("gross_market_value")
+  private String grossMarketValue;
+
+  /** Net Market Value (NMV) = LMV + SMV */
+  @JsonProperty("net_market_value")
+  private String netMarketValue;
+
+  /** Long Market Value (LMV) = Sum of positive notional for all assets */
+  @JsonProperty("long_market_value")
+  private String longMarketValue;
+
+  /** Non_Marginable LMV: Sum of positive notional for each non-margin eligible coin */
+  @JsonProperty("non_marginable_long_market_value")
+  private String nonMarginableLongMarketValue;
+
+  /** Short Market Value (SMV) = Sum of negative notional for each margin eligible coin */
+  @JsonProperty("short_market_value")
+  private String shortMarketValue;
+
+  /** Gross Leverage = GMV / Margin Requirement */
+  @JsonProperty("gross_leverage")
+  private String grossLeverage;
+
+  /** Net Exposure = (LMV + SMV) / GMV */
+  @JsonProperty("net_exposure")
+  private String netExposure;
+
+  @JsonProperty("portfolio_stress_triggered")
+  private MarginAddOn portfolioStressTriggered;
+
+  /** PM asset info netted across the entity */
+  @JsonProperty("pm_asset_info")
+  private List<PmAssetInfo> pmAssetInfo;
+
+  /** PM limit that monitors gross notional borrowings (crypto + fiat) */
+  @JsonProperty("pm_credit_limit")
+  private String pmCreditLimit;
+
+  /** PM limit that monitors excess deficit */
+  @JsonProperty("pm_margin_limit")
+  private String pmMarginLimit;
+
+  /** The amount of the margin limit that is consumed by the excess deficit */
+  @JsonProperty("pm_margin_consumed")
+  private String pmMarginConsumed;
+
+  public MarginSummary() {}
+
+  public MarginSummary(Builder builder) {
+    this.entityId = builder.entityId;
+    this.marginEquity = builder.marginEquity;
+    this.marginRequirement = builder.marginRequirement;
+    this.excessDeficit = builder.excessDeficit;
+    this.pmCreditConsumed = builder.pmCreditConsumed;
+    this.tfCreditLimit = builder.tfCreditLimit;
+    this.tfCreditConsumed = builder.tfCreditConsumed;
+    this.tfAdjustedAssetValue = builder.tfAdjustedAssetValue;
+    this.tfAdjustedLiabilityValue = builder.tfAdjustedLiabilityValue;
+    this.tfAdjustedCreditConsumed = builder.tfAdjustedCreditConsumed;
+    this.tfAdjustedEquity = builder.tfAdjustedEquity;
+    this.frozen = builder.frozen;
+    this.frozenReason = builder.frozenReason;
+    this.tfEnabled = builder.tfEnabled;
+    this.pmEnabled = builder.pmEnabled;
+    this.marketRates = builder.marketRates;
+    this.assetBalances = builder.assetBalances;
+    this.tfLoans = builder.tfLoans;
+    this.pmLoans = builder.pmLoans;
+    this.shortCollateral = builder.shortCollateral;
+    this.grossMarketValue = builder.grossMarketValue;
+    this.netMarketValue = builder.netMarketValue;
+    this.longMarketValue = builder.longMarketValue;
+    this.nonMarginableLongMarketValue = builder.nonMarginableLongMarketValue;
+    this.shortMarketValue = builder.shortMarketValue;
+    this.grossLeverage = builder.grossLeverage;
+    this.netExposure = builder.netExposure;
+    this.portfolioStressTriggered = builder.portfolioStressTriggered;
+    this.pmAssetInfo = builder.pmAssetInfo;
+    this.pmCreditLimit = builder.pmCreditLimit;
+    this.pmMarginLimit = builder.pmMarginLimit;
+    this.pmMarginConsumed = builder.pmMarginConsumed;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getMarginEquity() {
+    return marginEquity;
+  }
+
+  public void setMarginEquity(String marginEquity) {
+    this.marginEquity = marginEquity;
+  }
+
+  public String getMarginRequirement() {
+    return marginRequirement;
+  }
+
+  public void setMarginRequirement(String marginRequirement) {
+    this.marginRequirement = marginRequirement;
+  }
+
+  public String getExcessDeficit() {
+    return excessDeficit;
+  }
+
+  public void setExcessDeficit(String excessDeficit) {
+    this.excessDeficit = excessDeficit;
+  }
+
+  public String getPmCreditConsumed() {
+    return pmCreditConsumed;
+  }
+
+  public void setPmCreditConsumed(String pmCreditConsumed) {
+    this.pmCreditConsumed = pmCreditConsumed;
+  }
+
+  public String getTfCreditLimit() {
+    return tfCreditLimit;
+  }
+
+  public void setTfCreditLimit(String tfCreditLimit) {
+    this.tfCreditLimit = tfCreditLimit;
+  }
+
+  public String getTfCreditConsumed() {
+    return tfCreditConsumed;
+  }
+
+  public void setTfCreditConsumed(String tfCreditConsumed) {
+    this.tfCreditConsumed = tfCreditConsumed;
+  }
+
+  public String getTfAdjustedAssetValue() {
+    return tfAdjustedAssetValue;
+  }
+
+  public void setTfAdjustedAssetValue(String tfAdjustedAssetValue) {
+    this.tfAdjustedAssetValue = tfAdjustedAssetValue;
+  }
+
+  public String getTfAdjustedLiabilityValue() {
+    return tfAdjustedLiabilityValue;
+  }
+
+  public void setTfAdjustedLiabilityValue(String tfAdjustedLiabilityValue) {
+    this.tfAdjustedLiabilityValue = tfAdjustedLiabilityValue;
+  }
+
+  public String getTfAdjustedCreditConsumed() {
+    return tfAdjustedCreditConsumed;
+  }
+
+  public void setTfAdjustedCreditConsumed(String tfAdjustedCreditConsumed) {
+    this.tfAdjustedCreditConsumed = tfAdjustedCreditConsumed;
+  }
+
+  public String getTfAdjustedEquity() {
+    return tfAdjustedEquity;
+  }
+
+  public void setTfAdjustedEquity(String tfAdjustedEquity) {
+    this.tfAdjustedEquity = tfAdjustedEquity;
+  }
+
+  public boolean getFrozen() {
+    return frozen;
+  }
+
+  public void setFrozen(boolean frozen) {
+    this.frozen = frozen;
+  }
+
+  public String getFrozenReason() {
+    return frozenReason;
+  }
+
+  public void setFrozenReason(String frozenReason) {
+    this.frozenReason = frozenReason;
+  }
+
+  public boolean getTfEnabled() {
+    return tfEnabled;
+  }
+
+  public void setTfEnabled(boolean tfEnabled) {
+    this.tfEnabled = tfEnabled;
+  }
+
+  public boolean getPmEnabled() {
+    return pmEnabled;
+  }
+
+  public void setPmEnabled(boolean pmEnabled) {
+    this.pmEnabled = pmEnabled;
+  }
+
+  public List<MarketRate> getMarketRates() {
+    return marketRates;
+  }
+
+  public void setMarketRates(List<MarketRate> marketRates) {
+    this.marketRates = marketRates;
+  }
+
+  public List<AssetBalance> getAssetBalances() {
+    return assetBalances;
+  }
+
+  public void setAssetBalances(List<AssetBalance> assetBalances) {
+    this.assetBalances = assetBalances;
+  }
+
+  public List<LoanInfo> getTfLoans() {
+    return tfLoans;
+  }
+
+  public void setTfLoans(List<LoanInfo> tfLoans) {
+    this.tfLoans = tfLoans;
+  }
+
+  public List<LoanInfo> getPmLoans() {
+    return pmLoans;
+  }
+
+  public void setPmLoans(List<LoanInfo> pmLoans) {
+    this.pmLoans = pmLoans;
+  }
+
+  public List<LoanInfo> getShortCollateral() {
+    return shortCollateral;
+  }
+
+  public void setShortCollateral(List<LoanInfo> shortCollateral) {
+    this.shortCollateral = shortCollateral;
+  }
+
+  public String getGrossMarketValue() {
+    return grossMarketValue;
+  }
+
+  public void setGrossMarketValue(String grossMarketValue) {
+    this.grossMarketValue = grossMarketValue;
+  }
+
+  public String getNetMarketValue() {
+    return netMarketValue;
+  }
+
+  public void setNetMarketValue(String netMarketValue) {
+    this.netMarketValue = netMarketValue;
+  }
+
+  public String getLongMarketValue() {
+    return longMarketValue;
+  }
+
+  public void setLongMarketValue(String longMarketValue) {
+    this.longMarketValue = longMarketValue;
+  }
+
+  public String getNonMarginableLongMarketValue() {
+    return nonMarginableLongMarketValue;
+  }
+
+  public void setNonMarginableLongMarketValue(String nonMarginableLongMarketValue) {
+    this.nonMarginableLongMarketValue = nonMarginableLongMarketValue;
+  }
+
+  public String getShortMarketValue() {
+    return shortMarketValue;
+  }
+
+  public void setShortMarketValue(String shortMarketValue) {
+    this.shortMarketValue = shortMarketValue;
+  }
+
+  public String getGrossLeverage() {
+    return grossLeverage;
+  }
+
+  public void setGrossLeverage(String grossLeverage) {
+    this.grossLeverage = grossLeverage;
+  }
+
+  public String getNetExposure() {
+    return netExposure;
+  }
+
+  public void setNetExposure(String netExposure) {
+    this.netExposure = netExposure;
+  }
+
+  public MarginAddOn getPortfolioStressTriggered() {
+    return portfolioStressTriggered;
+  }
+
+  public void setPortfolioStressTriggered(MarginAddOn portfolioStressTriggered) {
+    this.portfolioStressTriggered = portfolioStressTriggered;
+  }
+
+  public List<PmAssetInfo> getPmAssetInfo() {
+    return pmAssetInfo;
+  }
+
+  public void setPmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
+    this.pmAssetInfo = pmAssetInfo;
+  }
+
+  public String getPmCreditLimit() {
+    return pmCreditLimit;
+  }
+
+  public void setPmCreditLimit(String pmCreditLimit) {
+    this.pmCreditLimit = pmCreditLimit;
+  }
+
+  public String getPmMarginLimit() {
+    return pmMarginLimit;
+  }
+
+  public void setPmMarginLimit(String pmMarginLimit) {
+    this.pmMarginLimit = pmMarginLimit;
+  }
+
+  public String getPmMarginConsumed() {
+    return pmMarginConsumed;
+  }
+
+  public void setPmMarginConsumed(String pmMarginConsumed) {
+    this.pmMarginConsumed = pmMarginConsumed;
+  }
+
+  public static class Builder {
     private String entityId;
 
-    /**
-     * The margin equity at the entity level. Margin Equity = LMV + SMV + Trading Cash Balance + Short Collateral - Pending Withdrawals
-     */
-    @JsonProperty("margin_equity")
     private String marginEquity;
 
-    /**
-     * USD notional value of required equity in entity portfolios
-     */
-    @JsonProperty("margin_requirement")
     private String marginRequirement;
 
-    /**
-     * margin_equity - margin_requirement
-     */
-    @JsonProperty("excess_deficit")
     private String excessDeficit;
 
-    /**
-     * The raw amount of portfolio margin credit used
-     */
-    @JsonProperty("pm_credit_consumed")
     private String pmCreditConsumed;
 
-    /**
-     * The maximum trade finance credit limit. This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_credit_limit")
     private String tfCreditLimit;
 
-    /**
-     * The amount of trade finance credit used (USD). This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_credit_consumed")
     private String tfCreditConsumed;
 
-    /**
-     * TF Asset Adjusted Value (USD). This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_adjusted_asset_value")
     private String tfAdjustedAssetValue;
 
-    /**
-     * TF Adjusted Liability Value (USD). This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_adjusted_liability_value")
     private String tfAdjustedLiabilityValue;
 
-    /**
-     * The amount of adjusted credit used. This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_adjusted_credit_consumed")
     private String tfAdjustedCreditConsumed;
 
-    /**
-     * The amount of adjusted equity. This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_adjusted_equity")
     private String tfAdjustedEquity;
 
-    /**
-     * Whether or not a entity is frozen due to balance outstanding or other reason
-     */
-    @JsonProperty("frozen")
     private boolean frozen;
 
-    /**
-     * The reason why a entity is frozen
-     */
-    @JsonProperty("frozen_reason")
     private String frozenReason;
 
-    /**
-     * Whether TF is enabled for the entity. This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_enabled")
     private boolean tfEnabled;
 
-    /**
-     * Whether PM is enabled for the entity
-     */
-    @JsonProperty("pm_enabled")
     private boolean pmEnabled;
 
-    /**
-     * Market rates for the list of assets
-     */
-    @JsonProperty("market_rates")
     private List<MarketRate> marketRates;
 
-    /**
-     * Asset Balances across portfolios
-     */
-    @JsonProperty("asset_balances")
     private List<AssetBalance> assetBalances;
 
-    /**
-     * Trade finance debit loan amounts. This field is deprecated and will be removed in the future.
-     */
-    @JsonProperty("tf_loans")
     private List<LoanInfo> tfLoans;
 
-    /**
-     * Portfolio Margin debit loan amounts
-     */
-    @JsonProperty("pm_loans")
     private List<LoanInfo> pmLoans;
 
-    /**
-     * Short collateral amounts
-     */
-    @JsonProperty("short_collateral")
     private List<LoanInfo> shortCollateral;
 
-    /**
-     * Gross market value (GMV) = LMV + Abs (SMV)
-     */
-    @JsonProperty("gross_market_value")
     private String grossMarketValue;
 
-    /**
-     * Net Market Value (NMV) = LMV + SMV
-     */
-    @JsonProperty("net_market_value")
     private String netMarketValue;
 
-    /**
-     * Long Market Value (LMV) = Sum of positive notional for all assets
-     */
-    @JsonProperty("long_market_value")
     private String longMarketValue;
 
-    /**
-     * Non_Marginable LMV: Sum of positive notional for each non-margin eligible coin
-     */
-    @JsonProperty("non_marginable_long_market_value")
     private String nonMarginableLongMarketValue;
 
-    /**
-     * Short Market Value (SMV) = Sum of negative notional for each margin eligible coin
-     */
-    @JsonProperty("short_market_value")
     private String shortMarketValue;
 
-    /**
-     * Gross Leverage = GMV / Margin Requirement
-     */
-    @JsonProperty("gross_leverage")
     private String grossLeverage;
 
-    /**
-     * Net Exposure = (LMV + SMV) / GMV
-     */
-    @JsonProperty("net_exposure")
     private String netExposure;
 
-    @JsonProperty("portfolio_stress_triggered")
     private MarginAddOn portfolioStressTriggered;
 
-    /**
-     * PM asset info netted across the entity
-     */
-    @JsonProperty("pm_asset_info")
     private List<PmAssetInfo> pmAssetInfo;
 
-    /**
-     * PM limit that monitors gross notional borrowings (crypto + fiat)
-     */
-    @JsonProperty("pm_credit_limit")
     private String pmCreditLimit;
 
-    /**
-     * PM limit that monitors excess deficit
-     */
-    @JsonProperty("pm_margin_limit")
     private String pmMarginLimit;
 
-    /**
-     * The amount of the margin limit that is consumed by the excess deficit
-     */
-    @JsonProperty("pm_margin_consumed")
     private String pmMarginConsumed;
 
-    public MarginSummary() {
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public MarginSummary(Builder builder) {
-        this.entityId = builder.entityId;
-        this.marginEquity = builder.marginEquity;
-        this.marginRequirement = builder.marginRequirement;
-        this.excessDeficit = builder.excessDeficit;
-        this.pmCreditConsumed = builder.pmCreditConsumed;
-        this.tfCreditLimit = builder.tfCreditLimit;
-        this.tfCreditConsumed = builder.tfCreditConsumed;
-        this.tfAdjustedAssetValue = builder.tfAdjustedAssetValue;
-        this.tfAdjustedLiabilityValue = builder.tfAdjustedLiabilityValue;
-        this.tfAdjustedCreditConsumed = builder.tfAdjustedCreditConsumed;
-        this.tfAdjustedEquity = builder.tfAdjustedEquity;
-        this.frozen = builder.frozen;
-        this.frozenReason = builder.frozenReason;
-        this.tfEnabled = builder.tfEnabled;
-        this.pmEnabled = builder.pmEnabled;
-        this.marketRates = builder.marketRates;
-        this.assetBalances = builder.assetBalances;
-        this.tfLoans = builder.tfLoans;
-        this.pmLoans = builder.pmLoans;
-        this.shortCollateral = builder.shortCollateral;
-        this.grossMarketValue = builder.grossMarketValue;
-        this.netMarketValue = builder.netMarketValue;
-        this.longMarketValue = builder.longMarketValue;
-        this.nonMarginableLongMarketValue = builder.nonMarginableLongMarketValue;
-        this.shortMarketValue = builder.shortMarketValue;
-        this.grossLeverage = builder.grossLeverage;
-        this.netExposure = builder.netExposure;
-        this.portfolioStressTriggered = builder.portfolioStressTriggered;
-        this.pmAssetInfo = builder.pmAssetInfo;
-        this.pmCreditLimit = builder.pmCreditLimit;
-        this.pmMarginLimit = builder.pmMarginLimit;
-        this.pmMarginConsumed = builder.pmMarginConsumed;
+    public Builder marginEquity(String marginEquity) {
+      this.marginEquity = marginEquity;
+      return this;
     }
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-    public String getMarginEquity() {
-        return marginEquity;
-    }
-
-    public void setMarginEquity(String marginEquity) {
-        this.marginEquity = marginEquity;
-    }
-    public String getMarginRequirement() {
-        return marginRequirement;
-    }
 
-    public void setMarginRequirement(String marginRequirement) {
-        this.marginRequirement = marginRequirement;
+    public Builder marginRequirement(String marginRequirement) {
+      this.marginRequirement = marginRequirement;
+      return this;
     }
-    public String getExcessDeficit() {
-        return excessDeficit;
-    }
 
-    public void setExcessDeficit(String excessDeficit) {
-        this.excessDeficit = excessDeficit;
-    }
-    public String getPmCreditConsumed() {
-        return pmCreditConsumed;
+    public Builder excessDeficit(String excessDeficit) {
+      this.excessDeficit = excessDeficit;
+      return this;
     }
 
-    public void setPmCreditConsumed(String pmCreditConsumed) {
-        this.pmCreditConsumed = pmCreditConsumed;
+    public Builder pmCreditConsumed(String pmCreditConsumed) {
+      this.pmCreditConsumed = pmCreditConsumed;
+      return this;
     }
-    public String getTfCreditLimit() {
-        return tfCreditLimit;
-    }
 
-    public void setTfCreditLimit(String tfCreditLimit) {
-        this.tfCreditLimit = tfCreditLimit;
+    public Builder tfCreditLimit(String tfCreditLimit) {
+      this.tfCreditLimit = tfCreditLimit;
+      return this;
     }
-    public String getTfCreditConsumed() {
-        return tfCreditConsumed;
-    }
 
-    public void setTfCreditConsumed(String tfCreditConsumed) {
-        this.tfCreditConsumed = tfCreditConsumed;
-    }
-    public String getTfAdjustedAssetValue() {
-        return tfAdjustedAssetValue;
+    public Builder tfCreditConsumed(String tfCreditConsumed) {
+      this.tfCreditConsumed = tfCreditConsumed;
+      return this;
     }
 
-    public void setTfAdjustedAssetValue(String tfAdjustedAssetValue) {
-        this.tfAdjustedAssetValue = tfAdjustedAssetValue;
+    public Builder tfAdjustedAssetValue(String tfAdjustedAssetValue) {
+      this.tfAdjustedAssetValue = tfAdjustedAssetValue;
+      return this;
     }
-    public String getTfAdjustedLiabilityValue() {
-        return tfAdjustedLiabilityValue;
-    }
 
-    public void setTfAdjustedLiabilityValue(String tfAdjustedLiabilityValue) {
-        this.tfAdjustedLiabilityValue = tfAdjustedLiabilityValue;
+    public Builder tfAdjustedLiabilityValue(String tfAdjustedLiabilityValue) {
+      this.tfAdjustedLiabilityValue = tfAdjustedLiabilityValue;
+      return this;
     }
-    public String getTfAdjustedCreditConsumed() {
-        return tfAdjustedCreditConsumed;
-    }
 
-    public void setTfAdjustedCreditConsumed(String tfAdjustedCreditConsumed) {
-        this.tfAdjustedCreditConsumed = tfAdjustedCreditConsumed;
-    }
-    public String getTfAdjustedEquity() {
-        return tfAdjustedEquity;
+    public Builder tfAdjustedCreditConsumed(String tfAdjustedCreditConsumed) {
+      this.tfAdjustedCreditConsumed = tfAdjustedCreditConsumed;
+      return this;
     }
 
-    public void setTfAdjustedEquity(String tfAdjustedEquity) {
-        this.tfAdjustedEquity = tfAdjustedEquity;
+    public Builder tfAdjustedEquity(String tfAdjustedEquity) {
+      this.tfAdjustedEquity = tfAdjustedEquity;
+      return this;
     }
-    public boolean getFrozen() {
-        return frozen;
-    }
 
-    public void setFrozen(boolean frozen) {
-        this.frozen = frozen;
+    public Builder frozen(boolean frozen) {
+      this.frozen = frozen;
+      return this;
     }
-    public String getFrozenReason() {
-        return frozenReason;
-    }
 
-    public void setFrozenReason(String frozenReason) {
-        this.frozenReason = frozenReason;
-    }
-    public boolean getTfEnabled() {
-        return tfEnabled;
+    public Builder frozenReason(String frozenReason) {
+      this.frozenReason = frozenReason;
+      return this;
     }
 
-    public void setTfEnabled(boolean tfEnabled) {
-        this.tfEnabled = tfEnabled;
+    public Builder tfEnabled(boolean tfEnabled) {
+      this.tfEnabled = tfEnabled;
+      return this;
     }
-    public boolean getPmEnabled() {
-        return pmEnabled;
-    }
 
-    public void setPmEnabled(boolean pmEnabled) {
-        this.pmEnabled = pmEnabled;
+    public Builder pmEnabled(boolean pmEnabled) {
+      this.pmEnabled = pmEnabled;
+      return this;
     }
-    public List<MarketRate> getMarketRates() {
-        return marketRates;
-    }
 
-    public void setMarketRates(List<MarketRate> marketRates) {
-        this.marketRates = marketRates;
-    }
-    public List<AssetBalance> getAssetBalances() {
-        return assetBalances;
+    public Builder marketRates(List<MarketRate> marketRates) {
+      this.marketRates = marketRates;
+      return this;
     }
 
-    public void setAssetBalances(List<AssetBalance> assetBalances) {
-        this.assetBalances = assetBalances;
+    public Builder assetBalances(List<AssetBalance> assetBalances) {
+      this.assetBalances = assetBalances;
+      return this;
     }
-    public List<LoanInfo> getTfLoans() {
-        return tfLoans;
-    }
 
-    public void setTfLoans(List<LoanInfo> tfLoans) {
-        this.tfLoans = tfLoans;
+    public Builder tfLoans(List<LoanInfo> tfLoans) {
+      this.tfLoans = tfLoans;
+      return this;
     }
-    public List<LoanInfo> getPmLoans() {
-        return pmLoans;
-    }
 
-    public void setPmLoans(List<LoanInfo> pmLoans) {
-        this.pmLoans = pmLoans;
-    }
-    public List<LoanInfo> getShortCollateral() {
-        return shortCollateral;
+    public Builder pmLoans(List<LoanInfo> pmLoans) {
+      this.pmLoans = pmLoans;
+      return this;
     }
 
-    public void setShortCollateral(List<LoanInfo> shortCollateral) {
-        this.shortCollateral = shortCollateral;
+    public Builder shortCollateral(List<LoanInfo> shortCollateral) {
+      this.shortCollateral = shortCollateral;
+      return this;
     }
-    public String getGrossMarketValue() {
-        return grossMarketValue;
-    }
 
-    public void setGrossMarketValue(String grossMarketValue) {
-        this.grossMarketValue = grossMarketValue;
+    public Builder grossMarketValue(String grossMarketValue) {
+      this.grossMarketValue = grossMarketValue;
+      return this;
     }
-    public String getNetMarketValue() {
-        return netMarketValue;
-    }
 
-    public void setNetMarketValue(String netMarketValue) {
-        this.netMarketValue = netMarketValue;
-    }
-    public String getLongMarketValue() {
-        return longMarketValue;
+    public Builder netMarketValue(String netMarketValue) {
+      this.netMarketValue = netMarketValue;
+      return this;
     }
 
-    public void setLongMarketValue(String longMarketValue) {
-        this.longMarketValue = longMarketValue;
+    public Builder longMarketValue(String longMarketValue) {
+      this.longMarketValue = longMarketValue;
+      return this;
     }
-    public String getNonMarginableLongMarketValue() {
-        return nonMarginableLongMarketValue;
-    }
 
-    public void setNonMarginableLongMarketValue(String nonMarginableLongMarketValue) {
-        this.nonMarginableLongMarketValue = nonMarginableLongMarketValue;
+    public Builder nonMarginableLongMarketValue(String nonMarginableLongMarketValue) {
+      this.nonMarginableLongMarketValue = nonMarginableLongMarketValue;
+      return this;
     }
-    public String getShortMarketValue() {
-        return shortMarketValue;
-    }
 
-    public void setShortMarketValue(String shortMarketValue) {
-        this.shortMarketValue = shortMarketValue;
-    }
-    public String getGrossLeverage() {
-        return grossLeverage;
+    public Builder shortMarketValue(String shortMarketValue) {
+      this.shortMarketValue = shortMarketValue;
+      return this;
     }
 
-    public void setGrossLeverage(String grossLeverage) {
-        this.grossLeverage = grossLeverage;
+    public Builder grossLeverage(String grossLeverage) {
+      this.grossLeverage = grossLeverage;
+      return this;
     }
-    public String getNetExposure() {
-        return netExposure;
-    }
 
-    public void setNetExposure(String netExposure) {
-        this.netExposure = netExposure;
+    public Builder netExposure(String netExposure) {
+      this.netExposure = netExposure;
+      return this;
     }
-    public MarginAddOn getPortfolioStressTriggered() {
-        return portfolioStressTriggered;
-    }
 
-    public void setPortfolioStressTriggered(MarginAddOn portfolioStressTriggered) {
-        this.portfolioStressTriggered = portfolioStressTriggered;
-    }
-    public List<PmAssetInfo> getPmAssetInfo() {
-        return pmAssetInfo;
+    public Builder portfolioStressTriggered(MarginAddOn portfolioStressTriggered) {
+      this.portfolioStressTriggered = portfolioStressTriggered;
+      return this;
     }
 
-    public void setPmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
-        this.pmAssetInfo = pmAssetInfo;
+    public Builder pmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
+      this.pmAssetInfo = pmAssetInfo;
+      return this;
     }
-    public String getPmCreditLimit() {
-        return pmCreditLimit;
-    }
 
-    public void setPmCreditLimit(String pmCreditLimit) {
-        this.pmCreditLimit = pmCreditLimit;
+    public Builder pmCreditLimit(String pmCreditLimit) {
+      this.pmCreditLimit = pmCreditLimit;
+      return this;
     }
-    public String getPmMarginLimit() {
-        return pmMarginLimit;
-    }
 
-    public void setPmMarginLimit(String pmMarginLimit) {
-        this.pmMarginLimit = pmMarginLimit;
-    }
-    public String getPmMarginConsumed() {
-        return pmMarginConsumed;
+    public Builder pmMarginLimit(String pmMarginLimit) {
+      this.pmMarginLimit = pmMarginLimit;
+      return this;
     }
 
-    public void setPmMarginConsumed(String pmMarginConsumed) {
-        this.pmMarginConsumed = pmMarginConsumed;
+    public Builder pmMarginConsumed(String pmMarginConsumed) {
+      this.pmMarginConsumed = pmMarginConsumed;
+      return this;
     }
-    public static class Builder {
-        private String entityId;
-
-        private String marginEquity;
-
-        private String marginRequirement;
-
-        private String excessDeficit;
-
-        private String pmCreditConsumed;
-
-        private String tfCreditLimit;
-
-        private String tfCreditConsumed;
-
-        private String tfAdjustedAssetValue;
-
-        private String tfAdjustedLiabilityValue;
-
-        private String tfAdjustedCreditConsumed;
-
-        private String tfAdjustedEquity;
-
-        private boolean frozen;
-
-        private String frozenReason;
-
-        private boolean tfEnabled;
-
-        private boolean pmEnabled;
-
-        private List<MarketRate> marketRates;
-
-        private List<AssetBalance> assetBalances;
-
-        private List<LoanInfo> tfLoans;
-
-        private List<LoanInfo> pmLoans;
-
-        private List<LoanInfo> shortCollateral;
-
-        private String grossMarketValue;
-
-        private String netMarketValue;
-
-        private String longMarketValue;
-
-        private String nonMarginableLongMarketValue;
-
-        private String shortMarketValue;
-
-        private String grossLeverage;
-
-        private String netExposure;
-
-        private MarginAddOn portfolioStressTriggered;
-
-        private List<PmAssetInfo> pmAssetInfo;
-
-        private String pmCreditLimit;
-
-        private String pmMarginLimit;
-
-        private String pmMarginConsumed;
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder marginEquity(String marginEquity) {
-            this.marginEquity = marginEquity;
-            return this;
-        }
-
-        public Builder marginRequirement(String marginRequirement) {
-            this.marginRequirement = marginRequirement;
-            return this;
-        }
-
-        public Builder excessDeficit(String excessDeficit) {
-            this.excessDeficit = excessDeficit;
-            return this;
-        }
-
-        public Builder pmCreditConsumed(String pmCreditConsumed) {
-            this.pmCreditConsumed = pmCreditConsumed;
-            return this;
-        }
-
-        public Builder tfCreditLimit(String tfCreditLimit) {
-            this.tfCreditLimit = tfCreditLimit;
-            return this;
-        }
-
-        public Builder tfCreditConsumed(String tfCreditConsumed) {
-            this.tfCreditConsumed = tfCreditConsumed;
-            return this;
-        }
-
-        public Builder tfAdjustedAssetValue(String tfAdjustedAssetValue) {
-            this.tfAdjustedAssetValue = tfAdjustedAssetValue;
-            return this;
-        }
-
-        public Builder tfAdjustedLiabilityValue(String tfAdjustedLiabilityValue) {
-            this.tfAdjustedLiabilityValue = tfAdjustedLiabilityValue;
-            return this;
-        }
-
-        public Builder tfAdjustedCreditConsumed(String tfAdjustedCreditConsumed) {
-            this.tfAdjustedCreditConsumed = tfAdjustedCreditConsumed;
-            return this;
-        }
-
-        public Builder tfAdjustedEquity(String tfAdjustedEquity) {
-            this.tfAdjustedEquity = tfAdjustedEquity;
-            return this;
-        }
-
-        public Builder frozen(boolean frozen) {
-            this.frozen = frozen;
-            return this;
-        }
-
-        public Builder frozenReason(String frozenReason) {
-            this.frozenReason = frozenReason;
-            return this;
-        }
-
-        public Builder tfEnabled(boolean tfEnabled) {
-            this.tfEnabled = tfEnabled;
-            return this;
-        }
-
-        public Builder pmEnabled(boolean pmEnabled) {
-            this.pmEnabled = pmEnabled;
-            return this;
-        }
-
-        public Builder marketRates(List<MarketRate> marketRates) {
-            this.marketRates = marketRates;
-            return this;
-        }
-
-        public Builder assetBalances(List<AssetBalance> assetBalances) {
-            this.assetBalances = assetBalances;
-            return this;
-        }
-
-        public Builder tfLoans(List<LoanInfo> tfLoans) {
-            this.tfLoans = tfLoans;
-            return this;
-        }
-
-        public Builder pmLoans(List<LoanInfo> pmLoans) {
-            this.pmLoans = pmLoans;
-            return this;
-        }
-
-        public Builder shortCollateral(List<LoanInfo> shortCollateral) {
-            this.shortCollateral = shortCollateral;
-            return this;
-        }
-
-        public Builder grossMarketValue(String grossMarketValue) {
-            this.grossMarketValue = grossMarketValue;
-            return this;
-        }
-
-        public Builder netMarketValue(String netMarketValue) {
-            this.netMarketValue = netMarketValue;
-            return this;
-        }
-
-        public Builder longMarketValue(String longMarketValue) {
-            this.longMarketValue = longMarketValue;
-            return this;
-        }
-
-        public Builder nonMarginableLongMarketValue(String nonMarginableLongMarketValue) {
-            this.nonMarginableLongMarketValue = nonMarginableLongMarketValue;
-            return this;
-        }
-
-        public Builder shortMarketValue(String shortMarketValue) {
-            this.shortMarketValue = shortMarketValue;
-            return this;
-        }
-
-        public Builder grossLeverage(String grossLeverage) {
-            this.grossLeverage = grossLeverage;
-            return this;
-        }
-
-        public Builder netExposure(String netExposure) {
-            this.netExposure = netExposure;
-            return this;
-        }
-
-        public Builder portfolioStressTriggered(MarginAddOn portfolioStressTriggered) {
-            this.portfolioStressTriggered = portfolioStressTriggered;
-            return this;
-        }
-
-        public Builder pmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
-            this.pmAssetInfo = pmAssetInfo;
-            return this;
-        }
-
-        public Builder pmCreditLimit(String pmCreditLimit) {
-            this.pmCreditLimit = pmCreditLimit;
-            return this;
-        }
-
-        public Builder pmMarginLimit(String pmMarginLimit) {
-            this.pmMarginLimit = pmMarginLimit;
-            return this;
-        }
-
-        public Builder pmMarginConsumed(String pmMarginConsumed) {
-            this.pmMarginConsumed = pmMarginConsumed;
-            return this;
-        }
 
-        public MarginSummary build() {
-            return new MarginSummary(this);
-        }
+    public MarginSummary build() {
+      return new MarginSummary(this);
     }
+  }
 }
-

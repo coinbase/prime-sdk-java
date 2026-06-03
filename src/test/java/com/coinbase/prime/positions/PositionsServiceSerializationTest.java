@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.positions;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,75 +25,75 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class PositionsServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    // ==================== ListAggregatePositions Tests ====================
+  // ==================== ListAggregatePositions Tests ====================
 
-    @Test
-    public void testListAggregatePositionsRequestConstruction() throws CoinbaseClientException {
-        ListAggregatePositionsRequest request = new ListAggregatePositionsRequest.Builder()
-                .entityId("entity-123")
-                .build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testListAggregatePositionsRequestConstruction() throws CoinbaseClientException {
+    ListAggregatePositionsRequest request =
+        new ListAggregatePositionsRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListAggregatePositionsRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListAggregatePositionsRequest.Builder().build());
-    }
+  @Test
+  public void testListAggregatePositionsRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class, () -> new ListAggregatePositionsRequest.Builder().build());
+  }
 
-    @Test
-    public void testListAggregatePositionsResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"positions\":["
-                + "{\"symbol\":\"BTC\",\"amount\":\"0.5\",\"cost_basis\":\"25000.00\"},"
-                + "{\"symbol\":\"ETH\",\"amount\":\"5.0\",\"cost_basis\":\"15000.00\"}"
-                + "],"
-                + "\"pagination\":{\"has_next\":false}"
-                + "}";
+  @Test
+  public void testListAggregatePositionsResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"positions\":["
+            + "{\"symbol\":\"BTC\",\"amount\":\"0.5\",\"cost_basis\":\"25000.00\"},"
+            + "{\"symbol\":\"ETH\",\"amount\":\"5.0\",\"cost_basis\":\"15000.00\"}"
+            + "],"
+            + "\"pagination\":{\"has_next\":false}"
+            + "}";
 
-        ListAggregatePositionsResponse response = objectMapper.readValue(json, ListAggregatePositionsResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getPositions());
-        assertEquals(2, response.getPositions().length);
-    }
+    ListAggregatePositionsResponse response =
+        objectMapper.readValue(json, ListAggregatePositionsResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getPositions());
+    assertEquals(2, response.getPositions().length);
+  }
 
-    // ==================== ListPositions Tests ====================
+  // ==================== ListPositions Tests ====================
 
-    @Test
-    public void testListPositionsRequestConstruction() throws CoinbaseClientException {
-        ListPositionsRequest request = new ListPositionsRequest.Builder()
-                .entityId("entity-123")
-                .build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testListPositionsRequestConstruction() throws CoinbaseClientException {
+    ListPositionsRequest request =
+        new ListPositionsRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListPositionsResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"positions\":["
-                + "{\"symbol\":\"BTC\",\"amount\":\"1.0\",\"cost_basis\":\"50000.00\"},"
-                + "{\"symbol\":\"ETH\",\"amount\":\"10.0\",\"cost_basis\":\"30000.00\"}"
-                + "],"
-                + "\"pagination\":{\"next_cursor\":\"pos-cursor\",\"has_next\":true}"
-                + "}";
+  @Test
+  public void testListPositionsResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"positions\":["
+            + "{\"symbol\":\"BTC\",\"amount\":\"1.0\",\"cost_basis\":\"50000.00\"},"
+            + "{\"symbol\":\"ETH\",\"amount\":\"10.0\",\"cost_basis\":\"30000.00\"}"
+            + "],"
+            + "\"pagination\":{\"next_cursor\":\"pos-cursor\",\"has_next\":true}"
+            + "}";
 
-        ListPositionsResponse response = objectMapper.readValue(json, ListPositionsResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getPositions());
-        assertEquals(2, response.getPositions().length);
-        assertNotNull(response.getPagination());
-    }
+    ListPositionsResponse response = objectMapper.readValue(json, ListPositionsResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getPositions());
+    assertEquals(2, response.getPositions().length);
+    assertNotNull(response.getPagination());
+  }
 }

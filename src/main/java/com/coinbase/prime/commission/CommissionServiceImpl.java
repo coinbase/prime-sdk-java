@@ -21,22 +21,21 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class CommissionServiceImpl extends CoinbaseServiceImpl implements CommissionService {
-    public CommissionServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public CommissionServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/commission", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioCommissionResponse>() {});
-    }
-
+  @Override
+  public GetPortfolioCommissionResponse getPortfolioCommission(
+      GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/commission", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioCommissionResponse>() {});
+  }
 }

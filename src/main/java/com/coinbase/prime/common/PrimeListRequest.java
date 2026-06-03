@@ -20,42 +20,42 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class PrimeListRequest {
-    private String cursor;
+  private String cursor;
 
-    @JsonProperty("sort_direction")
-    private SortDirection sortDirection;
-    private Integer limit;
+  @JsonProperty("sort_direction")
+  private SortDirection sortDirection;
 
-    public PrimeListRequest(String cursor, SortDirection sortDirection, Integer limit) {
-        this.cursor = cursor;
-        this.sortDirection = sortDirection;
-        this.limit = limit;
-    }
+  private Integer limit;
 
-    public PrimeListRequest() {
-    }
+  public PrimeListRequest(String cursor, SortDirection sortDirection, Integer limit) {
+    this.cursor = cursor;
+    this.sortDirection = sortDirection;
+    this.limit = limit;
+  }
 
-    public String getCursor() {
-        return cursor;
-    }
+  public PrimeListRequest() {}
 
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
+  public String getCursor() {
+    return cursor;
+  }
 
-    public SortDirection getSortDirection() {
-        return sortDirection;
-    }
+  public void setCursor(String cursor) {
+    this.cursor = cursor;
+  }
 
-    public void setSortDirection(SortDirection direction) {
-        this.sortDirection = direction;
-    }
+  public SortDirection getSortDirection() {
+    return sortDirection;
+  }
 
-    public Integer getLimit() {
-        return limit;
-    }
+  public void setSortDirection(SortDirection direction) {
+    this.sortDirection = direction;
+  }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
+  public Integer getLimit() {
+    return limit;
+  }
+
+  public void setLimit(Integer limit) {
+    this.limit = limit;
+  }
 }

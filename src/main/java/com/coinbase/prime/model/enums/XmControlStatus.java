@@ -26,4 +26,3 @@ public enum XmControlStatus {
   TRADES_ONLY,
   SESSION_LOCKED
 }
-

@@ -20,9 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * AssetChangeType identifies the type of asset change
-     */
+/** AssetChangeType identifies the type of asset change */
 public enum AssetChangeType {
   BALANCE_TRANSFER,
   BALANCE_APPROVAL,
@@ -30,4 +28,3 @@ public enum AssetChangeType {
   ITEM_APPROVAL,
   ITEM_APPROVAL_ALL
 }
-

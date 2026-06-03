@@ -16,79 +16,71 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Entity Positions
- */
+/** Get Entity Positions */
 public class GetPositionsRequest {
-    /**
-     * Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
-    private String entityId;
+  /** Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
 
-    /**
-     * Product ID. Optional
-     */
-    @JsonProperty("product_id")
+  /** Product ID. Optional */
+  @JsonProperty("product_id")
+  private String productId;
+
+  public GetPositionsRequest() {}
+
+  public GetPositionsRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.productId = builder.productId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public static class Builder {
+    private String entityId;
     private String productId;
 
-    public GetPositionsRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetPositionsRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.productId = builder.productId;
+    public Builder productId(String productId) {
+      this.productId = productId;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public GetPositionsRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPositionsRequest(this);
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String productId;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public GetPositionsRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPositionsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

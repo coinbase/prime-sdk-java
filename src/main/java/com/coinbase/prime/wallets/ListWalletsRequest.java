@@ -16,128 +16,124 @@
 
 package com.coinbase.prime.wallets;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Portfolio Wallets
- */
+/** List Portfolio Wallets */
 public class ListWalletsRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty("type")
+  private WalletType type;
+
+  @JsonProperty("symbols")
+  private String[] symbols;
+
+  @JsonProperty("get_network_unified_wallets")
+  private Boolean getNetworkUnifiedWallets;
+
+  public ListWalletsRequest() {}
+
+  public ListWalletsRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.type = builder.type;
+    this.symbols = builder.symbols;
+    this.getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public WalletType getType() {
+    return type;
+  }
+
+  public void setType(WalletType type) {
+    this.type = type;
+  }
+
+  public String[] getSymbols() {
+    return symbols;
+  }
+
+  public void setSymbols(String[] symbols) {
+    this.symbols = symbols;
+  }
+
+  public Boolean getGetNetworkUnifiedWallets() {
+    return getNetworkUnifiedWallets;
+  }
+
+  public void setGetNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+    this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty("type")
     private WalletType type;
-
-    @JsonProperty("symbols")
     private String[] symbols;
-
-    @JsonProperty("get_network_unified_wallets")
     private Boolean getNetworkUnifiedWallets;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListWalletsRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListWalletsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.type = builder.type;
-        this.symbols = builder.symbols;
-        this.getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
+    public Builder type(WalletType type) {
+      this.type = type;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder symbols(String[] symbols) {
+      this.symbols = symbols;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder getNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+      this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
+      return this;
     }
 
-    public WalletType getType() {
-        return type;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setType(WalletType type) {
-        this.type = type;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public String[] getSymbols() {
-        return symbols;
+    public ListWalletsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListWalletsRequest(this);
     }
 
-    public void setSymbols(String[] symbols) {
-        this.symbols = symbols;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public Boolean getGetNetworkUnifiedWallets() {
-        return getNetworkUnifiedWallets;
-    }
-
-    public void setGetNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
-        this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private WalletType type;
-        private String[] symbols;
-        private Boolean getNetworkUnifiedWallets;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder type(WalletType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder symbols(String[] symbols) {
-            this.symbols = symbols;
-            return this;
-        }
-
-        public Builder getNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
-            this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListWalletsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListWalletsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

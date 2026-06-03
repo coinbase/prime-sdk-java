@@ -28,13 +28,15 @@ public class CreateAddressBookEntry {
   public static void main(String[] args) {
     try {
       if (args.length < 3) {
-        System.err.println("Usage: CreateAddressBookEntry <address> <currency_symbol> <name> [account_identifier]");
+        System.err.println(
+            "Usage: CreateAddressBookEntry <address> <currency_symbol> <name> [account_identifier]");
         System.err.println("Example: CreateAddressBookEntry 0x1234...abcd BTC \"My Wallet\"");
         System.err.println("Example: CreateAddressBookEntry 0x1234...abcd ETH \"Savings\" acc-123");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -43,14 +45,22 @@ public class CreateAddressBookEntry {
       String name = args[2];
       String accountIdentifier = args.length > 3 ? args[3] : null;
 
-      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Creating entry: " + name + " (" + currencySymbol + ") " + address);
+      System.out.println(
+          "Using IDs: Portfolio ID: "
+              + portfolioId
+              + ", Creating entry: "
+              + name
+              + " ("
+              + currencySymbol
+              + ") "
+              + address);
 
       CreateAddressBookEntryRequest.Builder builder =
           new CreateAddressBookEntryRequest.Builder()
-          .portfolioId(portfolioId)
-          .address(address)
-          .currencySymbol(currencySymbol)
-          .name(name);
+              .portfolioId(portfolioId)
+              .address(address)
+              .currencySymbol(currencySymbol)
+              .name(name);
 
       if (accountIdentifier != null) {
         builder.accountIdentifier(accountIdentifier);
@@ -59,7 +69,8 @@ public class CreateAddressBookEntry {
       AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
       CreateAddressBookEntryResponse response = service.createAddressBookEntry(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

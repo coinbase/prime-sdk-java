@@ -19,167 +19,159 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.EstimateType;
 import com.coinbase.prime.model.enums.UnstakeType;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 
 public class UnstakingStatus {
-    /**
-     * Amount being unstaked (whole amount, e.g., 16 ETH)
-     */
-    @JsonProperty("amount")
+  /** Amount being unstaked (whole amount, e.g., 16 ETH) */
+  @JsonProperty("amount")
+  private String amount;
+
+  @JsonProperty("unstake_type")
+  private UnstakeType unstakeType;
+
+  /** Estimated date when unstaking will complete (ISO 8601 format) */
+  @JsonProperty("finishing_at")
+  private OffsetDateTime finishingAt;
+
+  /** Estimated hours until this unstaking request completes */
+  @JsonProperty("remaining_hours")
+  private Long remainingHours;
+
+  /** Timestamp when the unstake request was originally created */
+  @JsonProperty("requested_at")
+  private OffsetDateTime requestedAt;
+
+  @JsonProperty("estimate_type")
+  private EstimateType estimateType;
+
+  /** Detailed explanation of the estimate status for display to users. */
+  @JsonProperty("estimate_description")
+  private String estimateDescription;
+
+  public UnstakingStatus() {}
+
+  public UnstakingStatus(Builder builder) {
+    this.amount = builder.amount;
+    this.unstakeType = builder.unstakeType;
+    this.finishingAt = builder.finishingAt;
+    this.remainingHours = builder.remainingHours;
+    this.requestedAt = builder.requestedAt;
+    this.estimateType = builder.estimateType;
+    this.estimateDescription = builder.estimateDescription;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public UnstakeType getUnstakeType() {
+    return unstakeType;
+  }
+
+  public void setUnstakeType(UnstakeType unstakeType) {
+    this.unstakeType = unstakeType;
+  }
+
+  public OffsetDateTime getFinishingAt() {
+    return finishingAt;
+  }
+
+  public void setFinishingAt(OffsetDateTime finishingAt) {
+    this.finishingAt = finishingAt;
+  }
+
+  public Long getRemainingHours() {
+    return remainingHours;
+  }
+
+  public void setRemainingHours(Long remainingHours) {
+    this.remainingHours = remainingHours;
+  }
+
+  public OffsetDateTime getRequestedAt() {
+    return requestedAt;
+  }
+
+  public void setRequestedAt(OffsetDateTime requestedAt) {
+    this.requestedAt = requestedAt;
+  }
+
+  public EstimateType getEstimateType() {
+    return estimateType;
+  }
+
+  public void setEstimateType(EstimateType estimateType) {
+    this.estimateType = estimateType;
+  }
+
+  public String getEstimateDescription() {
+    return estimateDescription;
+  }
+
+  public void setEstimateDescription(String estimateDescription) {
+    this.estimateDescription = estimateDescription;
+  }
+
+  public static class Builder {
     private String amount;
 
-    @JsonProperty("unstake_type")
     private UnstakeType unstakeType;
 
-    /**
-     * Estimated date when unstaking will complete (ISO 8601 format)
-     */
-    @JsonProperty("finishing_at")
     private OffsetDateTime finishingAt;
 
-    /**
-     * Estimated hours until this unstaking request completes
-     */
-    @JsonProperty("remaining_hours")
     private Long remainingHours;
 
-    /**
-     * Timestamp when the unstake request was originally created
-     */
-    @JsonProperty("requested_at")
     private OffsetDateTime requestedAt;
 
-    @JsonProperty("estimate_type")
     private EstimateType estimateType;
 
-    /**
-     * Detailed explanation of the estimate status for display to users.
-     */
-    @JsonProperty("estimate_description")
     private String estimateDescription;
 
-    public UnstakingStatus() {
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public UnstakingStatus(Builder builder) {
-        this.amount = builder.amount;
-        this.unstakeType = builder.unstakeType;
-        this.finishingAt = builder.finishingAt;
-        this.remainingHours = builder.remainingHours;
-        this.requestedAt = builder.requestedAt;
-        this.estimateType = builder.estimateType;
-        this.estimateDescription = builder.estimateDescription;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder unstakeType(UnstakeType unstakeType) {
+      this.unstakeType = unstakeType;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public UnstakeType getUnstakeType() {
-        return unstakeType;
+    public Builder finishingAt(OffsetDateTime finishingAt) {
+      this.finishingAt = finishingAt;
+      return this;
     }
 
-    public void setUnstakeType(UnstakeType unstakeType) {
-        this.unstakeType = unstakeType;
-    }
-    public OffsetDateTime getFinishingAt() {
-        return finishingAt;
+    public Builder remainingHours(Long remainingHours) {
+      this.remainingHours = remainingHours;
+      return this;
     }
 
-    public void setFinishingAt(OffsetDateTime finishingAt) {
-        this.finishingAt = finishingAt;
-    }
-    public Long getRemainingHours() {
-        return remainingHours;
+    public Builder requestedAt(OffsetDateTime requestedAt) {
+      this.requestedAt = requestedAt;
+      return this;
     }
 
-    public void setRemainingHours(Long remainingHours) {
-        this.remainingHours = remainingHours;
-    }
-    public OffsetDateTime getRequestedAt() {
-        return requestedAt;
+    public Builder estimateType(EstimateType estimateType) {
+      this.estimateType = estimateType;
+      return this;
     }
 
-    public void setRequestedAt(OffsetDateTime requestedAt) {
-        this.requestedAt = requestedAt;
-    }
-    public EstimateType getEstimateType() {
-        return estimateType;
+    public Builder estimateDescription(String estimateDescription) {
+      this.estimateDescription = estimateDescription;
+      return this;
     }
 
-    public void setEstimateType(EstimateType estimateType) {
-        this.estimateType = estimateType;
+    public UnstakingStatus build() {
+      return new UnstakingStatus(this);
     }
-    public String getEstimateDescription() {
-        return estimateDescription;
-    }
-
-    public void setEstimateDescription(String estimateDescription) {
-        this.estimateDescription = estimateDescription;
-    }
-    public static class Builder {
-        private String amount;
-
-        private UnstakeType unstakeType;
-
-        private OffsetDateTime finishingAt;
-
-        private Long remainingHours;
-
-        private OffsetDateTime requestedAt;
-
-        private EstimateType estimateType;
-
-        private String estimateDescription;
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder unstakeType(UnstakeType unstakeType) {
-            this.unstakeType = unstakeType;
-            return this;
-        }
-
-        public Builder finishingAt(OffsetDateTime finishingAt) {
-            this.finishingAt = finishingAt;
-            return this;
-        }
-
-        public Builder remainingHours(Long remainingHours) {
-            this.remainingHours = remainingHours;
-            return this;
-        }
-
-        public Builder requestedAt(OffsetDateTime requestedAt) {
-            this.requestedAt = requestedAt;
-            return this;
-        }
-
-        public Builder estimateType(EstimateType estimateType) {
-            this.estimateType = estimateType;
-            return this;
-        }
-
-        public Builder estimateDescription(String estimateDescription) {
-            this.estimateDescription = estimateDescription;
-            return this;
-        }
-
-        public UnstakingStatus build() {
-            return new UnstakingStatus(this);
-        }
-    }
+  }
 }
-

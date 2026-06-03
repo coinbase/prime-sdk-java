@@ -16,67 +16,70 @@
 
 package com.coinbase.prime.client;
 
-import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.client.CoinbaseNetHttpClient;
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.CoinbasePrimeErrorMessage;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.utils.Constants;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 import java.util.List;
 
 public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
-    public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, String baseUrl) {
-        super(credentials, baseUrl);
+  public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, String baseUrl) {
+    super(credentials, baseUrl);
+  }
+
+  public CoinbasePrimeClient(
+      CoinbasePrimeCredentials credentials, String baseUrl, HttpClient client) {
+    super(credentials, baseUrl, client);
+  }
+
+  public CoinbasePrimeClient(CoinbasePrimeCredentials credentials) {
+    super(credentials, Constants.CB_PRIME_BASE_URL);
+  }
+
+  public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, HttpClient client) {
+    super(credentials, Constants.CB_PRIME_BASE_URL, client);
+  }
+
+  /**
+   * Returns a new client with the given base URL; credentials and behavior are otherwise unchanged.
+   * Prefer this for single-call version overrides (e.g. {@code v2}) without mutating the shared
+   * client.
+   */
+  public CoinbasePrimeClient withBaseUrl(String baseUrl) {
+    CoinbaseCredentials credentials = getCredentials();
+    if (!(credentials instanceof CoinbasePrimeCredentials)) {
+      throw new IllegalStateException("Credentials must be CoinbasePrimeCredentials");
+    }
+    return new CoinbasePrimeClient((CoinbasePrimeCredentials) credentials, baseUrl);
+  }
+
+  @Override
+  protected <T> T handleResponse(
+      HttpResponse<String> response,
+      List<Integer> expectedStatusCodes,
+      TypeReference<T> responseClass)
+      throws CoinbasePrimeException {
+    if (!expectedStatusCodes.contains(response.statusCode())) {
+      try {
+        CoinbasePrimeErrorMessage errorMessage =
+            this.mapper.readValue(response.body(), CoinbasePrimeErrorMessage.class);
+        errorMessage.setStatusCode(response.statusCode());
+        throw errorMessage.createCoinbaseException();
+      } catch (Exception e) {
+        throw new CoinbasePrimeException(response.statusCode(), response.body());
+      }
     }
 
-    public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, String baseUrl, HttpClient client) {
-        super(credentials, baseUrl, client);
+    try {
+      return this.mapper.readValue(response.body(), responseClass);
+    } catch (Throwable e) {
+      throw new CoinbaseClientException("Failed to deserialize class", e);
     }
-
-    public CoinbasePrimeClient(CoinbasePrimeCredentials credentials) {
-        super(credentials, Constants.CB_PRIME_BASE_URL);
-    }
-
-    public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, HttpClient client) {
-        super(credentials, Constants.CB_PRIME_BASE_URL, client);
-    }
-
-    /**
-     * Returns a new client with the given base URL; credentials and behavior are otherwise unchanged.
-     * Prefer this for single-call version overrides (e.g. {@code v2}) without mutating the shared client.
-     */
-    public CoinbasePrimeClient withBaseUrl(String baseUrl) {
-        CoinbaseCredentials credentials = getCredentials();
-        if (!(credentials instanceof CoinbasePrimeCredentials)) {
-            throw new IllegalStateException("Credentials must be CoinbasePrimeCredentials");
-        }
-        return new CoinbasePrimeClient((CoinbasePrimeCredentials) credentials, baseUrl);
-    }
-
-    @Override
-    protected <T> T handleResponse(
-            HttpResponse<String> response,
-            List<Integer> expectedStatusCodes,
-            TypeReference<T> responseClass) throws CoinbasePrimeException {
-        if (!expectedStatusCodes.contains(response.statusCode())) {
-            try {
-                CoinbasePrimeErrorMessage errorMessage = this.mapper.readValue(response.body(), CoinbasePrimeErrorMessage.class);
-                errorMessage.setStatusCode(response.statusCode());
-                throw errorMessage.createCoinbaseException();
-            } catch (Exception e) {
-                throw new CoinbasePrimeException(response.statusCode(), response.body());
-            }
-        }
-
-        try {
-            return this.mapper.readValue(response.body(), responseClass);
-        } catch (Throwable e) {
-            throw new CoinbaseClientException("Failed to deserialize class", e);
-        }
-    }
+  }
 }

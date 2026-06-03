@@ -18,25 +18,19 @@ package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Edit Order (Beta)
- */
+/** Edit Order (Beta) */
 public class EditOrderResponse {
-    /**
-     * The ID of the order being edited
-     */
-    @JsonProperty("order_id")
-    private String orderId;
+  /** The ID of the order being edited */
+  @JsonProperty("order_id")
+  private String orderId;
 
-    public EditOrderResponse() {
-    }
+  public EditOrderResponse() {}
 
-    public String getOrderId() {
-        return orderId;
-    }
+  public String getOrderId() {
+    return orderId;
+  }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
 }

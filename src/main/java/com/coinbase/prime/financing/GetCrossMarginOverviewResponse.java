@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.CrossMarginOverview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Exchange Cross Margin Overview
- */
+/** Get Exchange Cross Margin Overview */
 public class GetCrossMarginOverviewResponse {
-    @JsonProperty("overview")
-    private CrossMarginOverview overview;
+  @JsonProperty("overview")
+  private CrossMarginOverview overview;
 
-    public GetCrossMarginOverviewResponse() {
-    }
+  public GetCrossMarginOverviewResponse() {}
 
-    public CrossMarginOverview getOverview() {
-        return overview;
-    }
+  public CrossMarginOverview getOverview() {
+    return overview;
+  }
 
-    public void setOverview(CrossMarginOverview overview) {
-        this.overview = overview;
-    }
-
+  public void setOverview(CrossMarginOverview overview) {
+    this.overview = overview;
+  }
 }

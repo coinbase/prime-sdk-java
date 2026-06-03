@@ -27,4 +27,3 @@ public enum MarginAddOnType {
   MACRO_STRESS,
   SHORT_BIASED_STRESS
 }
-

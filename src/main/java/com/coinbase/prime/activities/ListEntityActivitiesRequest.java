@@ -16,9 +16,11 @@
 
 package com.coinbase.prime.activities;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.ActivityCategory;
 import com.coinbase.prime.model.enums.ActivityLevel;
 import com.coinbase.prime.model.enums.ActivityStatus;
@@ -26,192 +28,186 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Entity Activities
- */
+/** List Entity Activities */
 public class ListEntityActivitiesRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  @JsonProperty("activity_level")
+  private ActivityLevel activityLevel;
+
+  @JsonProperty("symbols")
+  private String[] symbols;
+
+  @JsonProperty("categories")
+  private ActivityCategory[] categories;
+
+  @JsonProperty("statuses")
+  private ActivityStatus[] statuses;
+
+  @JsonProperty("start_time")
+  private String startTime;
+
+  @JsonProperty("end_time")
+  private String endTime;
+
+  @JsonProperty("get_network_unified_activities")
+  private Boolean getNetworkUnifiedActivities;
+
+  public ListEntityActivitiesRequest() {}
+
+  public ListEntityActivitiesRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.entityId = builder.entityId;
+    this.activityLevel = builder.activityLevel;
+    this.symbols = builder.symbols;
+    this.categories = builder.categories;
+    this.statuses = builder.statuses;
+    this.startTime = builder.startTime;
+    this.endTime = builder.endTime;
+    this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public ActivityLevel getActivityLevel() {
+    return activityLevel;
+  }
+
+  public void setActivityLevel(ActivityLevel activityLevel) {
+    this.activityLevel = activityLevel;
+  }
+
+  public String[] getSymbols() {
+    return symbols;
+  }
+
+  public void setSymbols(String[] symbols) {
+    this.symbols = symbols;
+  }
+
+  public ActivityCategory[] getCategories() {
+    return categories;
+  }
+
+  public void setCategories(ActivityCategory[] categories) {
+    this.categories = categories;
+  }
+
+  public ActivityStatus[] getStatuses() {
+    return statuses;
+  }
+
+  public void setStatuses(ActivityStatus[] statuses) {
+    this.statuses = statuses;
+  }
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+  public Boolean getGetNetworkUnifiedActivities() {
+    return getNetworkUnifiedActivities;
+  }
+
+  public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+    this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+  }
+
+  public static class Builder {
     private String entityId;
-
-    @JsonProperty("activity_level")
     private ActivityLevel activityLevel;
-
-    @JsonProperty("symbols")
     private String[] symbols;
-
-    @JsonProperty("categories")
     private ActivityCategory[] categories;
-
-    @JsonProperty("statuses")
     private ActivityStatus[] statuses;
-
-    @JsonProperty("start_time")
     private String startTime;
-
-    @JsonProperty("end_time")
     private String endTime;
-
-    @JsonProperty("get_network_unified_activities")
     private Boolean getNetworkUnifiedActivities;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListEntityActivitiesRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ListEntityActivitiesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.entityId = builder.entityId;
-        this.activityLevel = builder.activityLevel;
-        this.symbols = builder.symbols;
-        this.categories = builder.categories;
-        this.statuses = builder.statuses;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+    public Builder activityLevel(ActivityLevel activityLevel) {
+      this.activityLevel = activityLevel;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder symbols(String[] symbols) {
+      this.symbols = symbols;
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public Builder categories(ActivityCategory[] categories) {
+      this.categories = categories;
+      return this;
     }
 
-    public ActivityLevel getActivityLevel() {
-        return activityLevel;
+    public Builder statuses(ActivityStatus[] statuses) {
+      this.statuses = statuses;
+      return this;
     }
 
-    public void setActivityLevel(ActivityLevel activityLevel) {
-        this.activityLevel = activityLevel;
+    public Builder startTime(String startTime) {
+      this.startTime = startTime;
+      return this;
     }
 
-    public String[] getSymbols() {
-        return symbols;
+    public Builder endTime(String endTime) {
+      this.endTime = endTime;
+      return this;
     }
 
-    public void setSymbols(String[] symbols) {
-        this.symbols = symbols;
+    public Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+      this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+      return this;
     }
 
-    public ActivityCategory[] getCategories() {
-        return categories;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setCategories(ActivityCategory[] categories) {
-        this.categories = categories;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public ActivityStatus[] getStatuses() {
-        return statuses;
+    public ListEntityActivitiesRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListEntityActivitiesRequest(this);
     }
 
-    public void setStatuses(ActivityStatus[] statuses) {
-        this.statuses = statuses;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public Boolean getGetNetworkUnifiedActivities() {
-        return getNetworkUnifiedActivities;
-    }
-
-    public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
-        this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private ActivityLevel activityLevel;
-        private String[] symbols;
-        private ActivityCategory[] categories;
-        private ActivityStatus[] statuses;
-        private String startTime;
-        private String endTime;
-        private Boolean getNetworkUnifiedActivities;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder activityLevel(ActivityLevel activityLevel) {
-            this.activityLevel = activityLevel;
-            return this;
-        }
-
-        public Builder symbols(String[] symbols) {
-            this.symbols = symbols;
-            return this;
-        }
-
-        public Builder categories(ActivityCategory[] categories) {
-            this.categories = categories;
-            return this;
-        }
-
-        public Builder statuses(ActivityStatus[] statuses) {
-            this.statuses = statuses;
-            return this;
-        }
-
-        public Builder startTime(String startTime) {
-            this.startTime = startTime;
-            return this;
-        }
-
-        public Builder endTime(String endTime) {
-            this.endTime = endTime;
-            return this;
-        }
-
-        public Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
-            this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListEntityActivitiesRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListEntityActivitiesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

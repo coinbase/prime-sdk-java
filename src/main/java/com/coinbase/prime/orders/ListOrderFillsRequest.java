@@ -16,95 +16,91 @@
 
 package com.coinbase.prime.orders;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Order Fills
- */
+/** List Order Fills */
 public class ListOrderFillsRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty(required = true, value = "order_id")
+  @JsonIgnore
+  private String orderId;
+
+  public ListOrderFillsRequest() {}
+
+  public ListOrderFillsRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.orderId = builder.orderId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty(required = true, value = "order_id")
-    @JsonIgnore
     private String orderId;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListOrderFillsRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListOrderFillsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.orderId = builder.orderId;
+    public Builder orderId(String orderId) {
+      this.orderId = orderId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public ListOrderFillsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListOrderFillsRequest(this);
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.orderId)) {
+        throw new CoinbaseClientException("OrderId is required");
+      }
     }
-
-    public static class Builder {
-        private String portfolioId;
-        private String orderId;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListOrderFillsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListOrderFillsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.orderId)) {
-                throw new CoinbaseClientException("OrderId is required");
-            }
-        }
-    }
+  }
 }

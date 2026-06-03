@@ -18,121 +18,117 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Transfer
- */
+/** Create Transfer */
 public class CreateTransferResponse {
-    @JsonProperty("activity_id")
-    private String activityId;
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    @JsonProperty("approval_url")
-    private String approvalUrl;
+  @JsonProperty("approval_url")
+  private String approvalUrl;
 
-    @JsonProperty("symbol")
-    private String symbol;
+  @JsonProperty("symbol")
+  private String symbol;
 
-    @JsonProperty("amount")
-    private String amount;
+  @JsonProperty("amount")
+  private String amount;
 
-    @JsonProperty("fee")
-    private String fee;
+  @JsonProperty("fee")
+  private String fee;
 
-    @JsonProperty("destination_address")
-    private String destinationAddress;
+  @JsonProperty("destination_address")
+  private String destinationAddress;
 
-    @JsonProperty("destination_type")
-    private String destinationType;
+  @JsonProperty("destination_type")
+  private String destinationType;
 
-    @JsonProperty("source_address")
-    private String sourceAddress;
+  @JsonProperty("source_address")
+  private String sourceAddress;
 
-    @JsonProperty("source_type")
-    private String sourceType;
+  @JsonProperty("source_type")
+  private String sourceType;
 
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    public CreateTransferResponse() {
-    }
+  public CreateTransferResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getApprovalUrl() {
-        return approvalUrl;
-    }
+  public String getApprovalUrl() {
+    return approvalUrl;
+  }
 
-    public void setApprovalUrl(String approvalUrl) {
-        this.approvalUrl = approvalUrl;
-    }
+  public void setApprovalUrl(String approvalUrl) {
+    this.approvalUrl = approvalUrl;
+  }
 
-    public String getSymbol() {
-        return symbol;
-    }
+  public String getSymbol() {
+    return symbol;
+  }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
 
-    public String getAmount() {
-        return amount;
-    }
+  public String getAmount() {
+    return amount;
+  }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
 
-    public String getFee() {
-        return fee;
-    }
+  public String getFee() {
+    return fee;
+  }
 
-    public void setFee(String fee) {
-        this.fee = fee;
-    }
+  public void setFee(String fee) {
+    this.fee = fee;
+  }
 
-    public String getDestinationAddress() {
-        return destinationAddress;
-    }
+  public String getDestinationAddress() {
+    return destinationAddress;
+  }
 
-    public void setDestinationAddress(String destinationAddress) {
-        this.destinationAddress = destinationAddress;
-    }
+  public void setDestinationAddress(String destinationAddress) {
+    this.destinationAddress = destinationAddress;
+  }
 
-    public String getDestinationType() {
-        return destinationType;
-    }
+  public String getDestinationType() {
+    return destinationType;
+  }
 
-    public void setDestinationType(String destinationType) {
-        this.destinationType = destinationType;
-    }
+  public void setDestinationType(String destinationType) {
+    this.destinationType = destinationType;
+  }
 
-    public String getSourceAddress() {
-        return sourceAddress;
-    }
+  public String getSourceAddress() {
+    return sourceAddress;
+  }
 
-    public void setSourceAddress(String sourceAddress) {
-        this.sourceAddress = sourceAddress;
-    }
+  public void setSourceAddress(String sourceAddress) {
+    this.sourceAddress = sourceAddress;
+  }
 
-    public String getSourceType() {
-        return sourceType;
-    }
+  public String getSourceType() {
+    return sourceType;
+  }
 
-    public void setSourceType(String sourceType) {
-        this.sourceType = sourceType;
-    }
+  public void setSourceType(String sourceType) {
+    this.sourceType = sourceType;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 }

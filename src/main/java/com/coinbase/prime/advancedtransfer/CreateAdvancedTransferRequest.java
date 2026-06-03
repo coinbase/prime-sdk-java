@@ -16,80 +16,72 @@
 
 package com.coinbase.prime.advancedtransfer;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AdvancedTransfer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Advanced Transfer
- */
+/** Create Advanced Transfer */
 public class CreateAdvancedTransferRequest {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  /** The portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * AdvancedTransfer represents a complex transfer operation such as a blind match settlement.
-     */
-    @JsonProperty("advanced_transfer")
+  /** AdvancedTransfer represents a complex transfer operation such as a blind match settlement. */
+  @JsonProperty("advanced_transfer")
+  private AdvancedTransfer advancedTransfer;
+
+  public CreateAdvancedTransferRequest() {}
+
+  public CreateAdvancedTransferRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.advancedTransfer = builder.advancedTransfer;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public AdvancedTransfer getAdvancedTransfer() {
+    return advancedTransfer;
+  }
+
+  public void setAdvancedTransfer(AdvancedTransfer advancedTransfer) {
+    this.advancedTransfer = advancedTransfer;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private AdvancedTransfer advancedTransfer;
 
-    public CreateAdvancedTransferRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public CreateAdvancedTransferRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.advancedTransfer = builder.advancedTransfer;
+    public Builder advancedTransfer(AdvancedTransfer advancedTransfer) {
+      this.advancedTransfer = advancedTransfer;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public CreateAdvancedTransferRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateAdvancedTransferRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public AdvancedTransfer getAdvancedTransfer() {
-        return advancedTransfer;
-    }
-
-    public void setAdvancedTransfer(AdvancedTransfer advancedTransfer) {
-        this.advancedTransfer = advancedTransfer;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private AdvancedTransfer advancedTransfer;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder advancedTransfer(AdvancedTransfer advancedTransfer) {
-            this.advancedTransfer = advancedTransfer;
-            return this;
-        }
-
-        public CreateAdvancedTransferRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateAdvancedTransferRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

@@ -16,95 +16,91 @@
 
 package com.coinbase.prime.wallets;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Create Wallet Deposit Address
- */
+/** Create Wallet Deposit Address */
 public class CreateWalletDepositAddressRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  @JsonProperty("network_id")
+  private String networkId;
+
+  public CreateWalletDepositAddressRequest() {}
+
+  public CreateWalletDepositAddressRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+    this.networkId = builder.networkId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public String getNetworkId() {
+    return networkId;
+  }
+
+  public void setNetworkId(String networkId) {
+    this.networkId = networkId;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
     private String walletId;
-
-    @JsonProperty("network_id")
     private String networkId;
 
-    public CreateWalletDepositAddressRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public CreateWalletDepositAddressRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.networkId = builder.networkId;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder networkId(String networkId) {
+      this.networkId = networkId;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public CreateWalletDepositAddressRequest build() throws CoinbaseClientException {
+      validate();
+      return new CreateWalletDepositAddressRequest(this);
     }
 
-    public String getWalletId() {
-        return walletId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
-
-    public String getNetworkId() {
-        return networkId;
-    }
-
-    public void setNetworkId(String networkId) {
-        this.networkId = networkId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-        private String networkId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder networkId(String networkId) {
-            this.networkId = networkId;
-            return this;
-        }
-
-        public CreateWalletDepositAddressRequest build() throws CoinbaseClientException {
-            validate();
-            return new CreateWalletDepositAddressRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

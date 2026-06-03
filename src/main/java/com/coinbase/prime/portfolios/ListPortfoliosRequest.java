@@ -16,21 +16,17 @@
 
 package com.coinbase.prime.portfolios;
 
-/**
- * List all portfolios associated with a given entity.
- */
+/** List all portfolios associated with a given entity. */
 public class ListPortfoliosRequest {
 
-    public ListPortfoliosRequest() {
+  public ListPortfoliosRequest() {}
+
+  public static class Builder {
+
+    public Builder() {}
+
+    public ListPortfoliosRequest build() {
+      return new ListPortfoliosRequest();
     }
-
-    public static class Builder {
-
-        public Builder() {
-        }
-
-        public ListPortfoliosRequest build() {
-            return new ListPortfoliosRequest();
-        }
-    }
+  }
 }

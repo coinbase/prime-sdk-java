@@ -26,4 +26,3 @@ public enum XmCallType {
   CALL_TYPE_URGENT,
   CALL_TYPE_DEBIT
 }
-

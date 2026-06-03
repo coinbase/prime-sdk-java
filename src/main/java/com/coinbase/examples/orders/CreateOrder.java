@@ -25,20 +25,21 @@ import com.coinbase.prime.orders.CreateOrderRequest;
 import com.coinbase.prime.orders.CreateOrderResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class CreateOrder {
   public static void main(String[] args) {
     try {
       if (args.length < 5) {
-        System.err.println("Usage: CreateOrder <product_id> <side> <type> <basequantity|quotevalue> <amount>");
+        System.err.println(
+            "Usage: CreateOrder <product_id> <side> <type> <basequantity|quotevalue> <amount>");
         System.err.println("Example: CreateOrder BTC-USD BUY MARKET basequantity 0.001");
         System.err.println("Example: CreateOrder ETH-USD SELL LIMIT quotevalue 1000.00");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -49,14 +50,25 @@ public class CreateOrder {
       String amount = args[4];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
-      System.out.println("Order parameters: " + productId + " " + side + " " + type + " " + quantityType + "=" + amount);
+      System.out.println(
+          "Order parameters: "
+              + productId
+              + " "
+              + side
+              + " "
+              + type
+              + " "
+              + quantityType
+              + "="
+              + amount);
 
-      CreateOrderRequest.Builder builder = new CreateOrderRequest.Builder()
-          .portfolioId(portfolioId)
-          .productId(productId)
-          .side(side)
-          .type(type)
-          .clientOrderId(UUID.randomUUID().toString());
+      CreateOrderRequest.Builder builder =
+          new CreateOrderRequest.Builder()
+              .portfolioId(portfolioId)
+              .productId(productId)
+              .side(side)
+              .type(type)
+              .clientOrderId(UUID.randomUUID().toString());
 
       if (quantityType.equals("basequantity")) {
         builder.baseQuantity(amount);
@@ -70,7 +82,8 @@ public class CreateOrder {
       OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
       CreateOrderResponse response = ordersService.createOrder(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

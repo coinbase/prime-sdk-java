@@ -21,32 +21,31 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class ProductsServiceImpl extends CoinbaseServiceImpl implements ProductsService {
-    public ProductsServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public ProductsServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/products", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioProductsResponse>() {});
-    }
+  @Override
+  public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/products", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPortfolioProductsResponse>() {});
+  }
 
-    @Override
-    public GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/candles", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetCandlesResponse>() {});
-    }
-
+  @Override
+  public GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/candles", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetCandlesResponse>() {});
+  }
 }

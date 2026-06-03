@@ -25,26 +25,30 @@ import com.coinbase.prime.onchainaddressbook.OnchainAddressBookService;
 import com.coinbase.prime.utils.Utils;
 
 public class DeleteOnchainAddressGroup {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-            String addressGroupId = args[0];
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String addressGroupId = args[0];
 
-            System.out.println("Using Portfolio ID: " + portfolioId + ", Address Group ID: " + addressGroupId);
+      System.out.println(
+          "Using Portfolio ID: " + portfolioId + ", Address Group ID: " + addressGroupId);
 
-            OnchainAddressBookService service = PrimeServiceFactory.createOnchainAddressBookService(client);
-            DeleteOnchainAddressGroupResponse response = service.deleteOnchainAddressGroup(
-                    new DeleteOnchainAddressGroupRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .addressGroupId(addressGroupId)
-                            .build());
+      OnchainAddressBookService service =
+          PrimeServiceFactory.createOnchainAddressBookService(client);
+      DeleteOnchainAddressGroupResponse response =
+          service.deleteOnchainAddressGroup(
+              new DeleteOnchainAddressGroupRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .addressGroupId(addressGroupId)
+                  .build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

@@ -20,37 +20,48 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit matrix.
+ * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit
+ * matrix.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-    /**
-     * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit matrix.
-     */
+/**
+ * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit
+ * matrix.
+ */
 public class TierPairRateEntry {
-    /**
-     * First tier in the pair.
-     */
-    @JsonProperty("tier_a")
-    private String tierA;
+  /** First tier in the pair. */
+  @JsonProperty("tier_a")
+  private String tierA;
 
-    /**
-     * Second tier in the pair.
-     */
-    @JsonProperty("tier_b")
-    private String tierB;
+  /** Second tier in the pair. */
+  @JsonProperty("tier_b")
+  private String tierB;
 
-    /**
-     * Credit rate for this tier pair.
-     */
-    @JsonProperty("rate")
-    private String rate;
+  /** Credit rate for this tier pair. */
+  @JsonProperty("rate")
+  private String rate;
 
-    public String getTierA() { return tierA; }
-    public void setTierA(String tierA) { this.tierA = tierA; }
+  public String getTierA() {
+    return tierA;
+  }
 
-    public String getTierB() { return tierB; }
-    public void setTierB(String tierB) { this.tierB = tierB; }
+  public void setTierA(String tierA) {
+    this.tierA = tierA;
+  }
 
-    public String getRate() { return rate; }
-    public void setRate(String rate) { this.rate = rate; }
+  public String getTierB() {
+    return tierB;
+  }
+
+  public void setTierB(String tierB) {
+    this.tierB = tierB;
+  }
+
+  public String getRate() {
+    return rate;
+  }
+
+  public void setRate(String rate) {
+    this.rate = rate;
+  }
 }

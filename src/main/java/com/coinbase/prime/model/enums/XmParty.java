@@ -25,4 +25,3 @@ public enum XmParty {
   CBE,
   FCM
 }
-

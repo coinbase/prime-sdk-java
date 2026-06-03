@@ -16,49 +16,45 @@
 
 package com.coinbase.prime.balances;
 
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.DefiBalance;
 import com.coinbase.prime.model.OnchainBalance;
-import com.coinbase.prime.common.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Onchain Wallet Balances
- */
+/** List Onchain Wallet Balances */
 public class ListOnchainWalletBalancesResponse {
-    @JsonProperty("balances")
-    private OnchainBalance[] balances;
+  @JsonProperty("balances")
+  private OnchainBalance[] balances;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    @JsonProperty("defi_balances")
-    private DefiBalance[] defiBalances;
+  @JsonProperty("defi_balances")
+  private DefiBalance[] defiBalances;
 
-    public ListOnchainWalletBalancesResponse() {
-    }
+  public ListOnchainWalletBalancesResponse() {}
 
-    public OnchainBalance[] getBalances() {
-        return balances;
-    }
+  public OnchainBalance[] getBalances() {
+    return balances;
+  }
 
-    public void setBalances(OnchainBalance[] balances) {
-        this.balances = balances;
-    }
+  public void setBalances(OnchainBalance[] balances) {
+    this.balances = balances;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 
-    public DefiBalance[] getDefiBalances() {
-        return defiBalances;
-    }
+  public DefiBalance[] getDefiBalances() {
+    return defiBalances;
+  }
 
-    public void setDefiBalances(DefiBalance[] defiBalances) {
-        this.defiBalances = defiBalances;
-    }
-
+  public void setDefiBalances(DefiBalance[] defiBalances) {
+    this.defiBalances = defiBalances;
+  }
 }

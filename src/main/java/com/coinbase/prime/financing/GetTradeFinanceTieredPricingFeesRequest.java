@@ -16,73 +16,69 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Trade Finance Tiered Pricing Fees
- */
+/** Get Trade Finance Tiered Pricing Fees */
 public class GetTradeFinanceTieredPricingFeesRequest {
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
-    private String entityId;
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
 
-    @JsonProperty("effective_at")
+  @JsonProperty("effective_at")
+  private String effectiveAt;
+
+  public GetTradeFinanceTieredPricingFeesRequest() {}
+
+  public GetTradeFinanceTieredPricingFeesRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.effectiveAt = builder.effectiveAt;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getEffectiveAt() {
+    return effectiveAt;
+  }
+
+  public void setEffectiveAt(String effectiveAt) {
+    this.effectiveAt = effectiveAt;
+  }
+
+  public static class Builder {
+    private String entityId;
     private String effectiveAt;
 
-    public GetTradeFinanceTieredPricingFeesRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetTradeFinanceTieredPricingFeesRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.effectiveAt = builder.effectiveAt;
+    public Builder effectiveAt(String effectiveAt) {
+      this.effectiveAt = effectiveAt;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public GetTradeFinanceTieredPricingFeesRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetTradeFinanceTieredPricingFeesRequest(this);
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public String getEffectiveAt() {
-        return effectiveAt;
-    }
-
-    public void setEffectiveAt(String effectiveAt) {
-        this.effectiveAt = effectiveAt;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String effectiveAt;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder effectiveAt(String effectiveAt) {
-            this.effectiveAt = effectiveAt;
-            return this;
-        }
-
-        public GetTradeFinanceTieredPricingFeesRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetTradeFinanceTieredPricingFeesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

@@ -20,12 +20,9 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - UNKNOWN_VISIBILITY_STATUS: nil - VISIBLE: Visible - HIDDEN: Hidden - SPAM: Spam
-     */
+/** - UNKNOWN_VISIBILITY_STATUS: nil - VISIBLE: Visible - HIDDEN: Hidden - SPAM: Spam */
 public enum VisibilityStatus {
   VISIBLE,
   HIDDEN,
   SPAM
 }
-

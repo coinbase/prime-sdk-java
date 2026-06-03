@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.MarginInformation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Margin Information
- */
+/** Get Margin Information */
 public class GetMarginInformationResponse {
-    @JsonProperty("margin_information")
-    private MarginInformation marginInformation;
+  @JsonProperty("margin_information")
+  private MarginInformation marginInformation;
 
-    public GetMarginInformationResponse() {
-    }
+  public GetMarginInformationResponse() {}
 
-    public MarginInformation getMarginInformation() {
-        return marginInformation;
-    }
+  public MarginInformation getMarginInformation() {
+    return marginInformation;
+  }
 
-    public void setMarginInformation(MarginInformation marginInformation) {
-        this.marginInformation = marginInformation;
-    }
-
+  public void setMarginInformation(MarginInformation marginInformation) {
+    this.marginInformation = marginInformation;
+  }
 }

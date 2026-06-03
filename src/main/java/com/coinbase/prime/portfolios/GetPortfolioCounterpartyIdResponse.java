@@ -20,19 +20,17 @@ import com.coinbase.prime.model.Counterparty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetPortfolioCounterpartyIdResponse {
-    /** The counterparty information for the portfolio */
-    @JsonProperty("counterparty")
-    private Counterparty counterparty;
+  /** The counterparty information for the portfolio */
+  @JsonProperty("counterparty")
+  private Counterparty counterparty;
 
-    public GetPortfolioCounterpartyIdResponse() {
-    }
+  public GetPortfolioCounterpartyIdResponse() {}
 
-    public Counterparty getCounterparty() {
-        return counterparty;
-    }
+  public Counterparty getCounterparty() {
+    return counterparty;
+  }
 
-    public void setCounterparty(Counterparty counterparty) {
-        this.counterparty = counterparty;
-    }
-
+  public void setCounterparty(Counterparty counterparty) {
+    this.counterparty = counterparty;
+  }
 }

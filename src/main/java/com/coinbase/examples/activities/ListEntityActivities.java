@@ -27,7 +27,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListEntityActivities {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String entityId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_ENTITY_ID");
 
@@ -35,12 +36,13 @@ public class ListEntityActivities {
 
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
       ListEntityActivitiesResponse response =
-          service.listEntityActivities(new ListEntityActivitiesRequest.Builder().entityId(entityId).build());
+          service.listEntityActivities(
+              new ListEntityActivitiesRequest.Builder().entityId(entityId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
-

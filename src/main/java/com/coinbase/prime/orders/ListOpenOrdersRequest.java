@@ -16,165 +16,161 @@
 
 package com.coinbase.prime.orders;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Open Orders
- */
+/** List Open Orders */
 public class ListOpenOrdersRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  @JsonProperty("product_ids")
+  private String[] productIds;
+
+  @JsonProperty("order_type")
+  private OrderType orderType;
+
+  @JsonProperty("start_date")
+  private String startDate;
+
+  @JsonProperty("order_side")
+  private OrderSide orderSide;
+
+  @JsonProperty("end_date")
+  private String endDate;
+
+  public ListOpenOrdersRequest() {}
+
+  public ListOpenOrdersRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.productIds = builder.productIds;
+    this.orderType = builder.orderType;
+    this.startDate = builder.startDate;
+    this.orderSide = builder.orderSide;
+    this.endDate = builder.endDate;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String[] getProductIds() {
+    return productIds;
+  }
+
+  public void setProductIds(String[] productIds) {
+    this.productIds = productIds;
+  }
+
+  public OrderType getOrderType() {
+    return orderType;
+  }
+
+  public void setOrderType(OrderType orderType) {
+    this.orderType = orderType;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public OrderSide getOrderSide() {
+    return orderSide;
+  }
+
+  public void setOrderSide(OrderSide orderSide) {
+    this.orderSide = orderSide;
+  }
+
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    @JsonProperty("product_ids")
     private String[] productIds;
-
-    @JsonProperty("order_type")
     private OrderType orderType;
-
-    @JsonProperty("start_date")
     private String startDate;
-
-    @JsonProperty("order_side")
     private OrderSide orderSide;
-
-    @JsonProperty("end_date")
     private String endDate;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListOpenOrdersRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListOpenOrdersRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.productIds = builder.productIds;
-        this.orderType = builder.orderType;
-        this.startDate = builder.startDate;
-        this.orderSide = builder.orderSide;
-        this.endDate = builder.endDate;
+    public Builder productIds(String[] productIds) {
+      this.productIds = productIds;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder orderType(OrderType orderType) {
+      this.orderType = orderType;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder startDate(String startDate) {
+      this.startDate = startDate;
+      return this;
     }
 
-    public String[] getProductIds() {
-        return productIds;
+    public Builder orderSide(OrderSide orderSide) {
+      this.orderSide = orderSide;
+      return this;
     }
 
-    public void setProductIds(String[] productIds) {
-        this.productIds = productIds;
+    public Builder endDate(String endDate) {
+      this.endDate = endDate;
+      return this;
     }
 
-    public OrderType getOrderType() {
-        return orderType;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setOrderType(OrderType orderType) {
-        this.orderType = orderType;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public ListOpenOrdersRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListOpenOrdersRequest(this);
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public OrderSide getOrderSide() {
-        return orderSide;
-    }
-
-    public void setOrderSide(OrderSide orderSide) {
-        this.orderSide = orderSide;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String[] productIds;
-        private OrderType orderType;
-        private String startDate;
-        private OrderSide orderSide;
-        private String endDate;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder productIds(String[] productIds) {
-            this.productIds = productIds;
-            return this;
-        }
-
-        public Builder orderType(OrderType orderType) {
-            this.orderType = orderType;
-            return this;
-        }
-
-        public Builder startDate(String startDate) {
-            this.startDate = startDate;
-            return this;
-        }
-
-        public Builder orderSide(OrderSide orderSide) {
-            this.orderSide = orderSide;
-            return this;
-        }
-
-        public Builder endDate(String endDate) {
-            this.endDate = endDate;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListOpenOrdersRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListOpenOrdersRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

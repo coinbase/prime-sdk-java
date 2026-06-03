@@ -19,22 +19,18 @@ package com.coinbase.prime.portfolios;
 import com.coinbase.prime.model.Portfolio;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Portfolio by Portfolio ID
- */
+/** Get Portfolio by Portfolio ID */
 public class GetPortfolioResponse {
-    @JsonProperty("portfolio")
-    private Portfolio portfolio;
+  @JsonProperty("portfolio")
+  private Portfolio portfolio;
 
-    public GetPortfolioResponse() {
-    }
+  public GetPortfolioResponse() {}
 
-    public Portfolio getPortfolio() {
-        return portfolio;
-    }
+  public Portfolio getPortfolio() {
+    return portfolio;
+  }
 
-    public void setPortfolio(Portfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-
+  public void setPortfolio(Portfolio portfolio) {
+    this.portfolio = portfolio;
+  }
 }

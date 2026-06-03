@@ -18,151 +18,127 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Transfer
- */
+/** Create Transfer */
 public class CreateWalletTransferResponse {
-    /**
-     * The activity ID for the transfer
-     */
-    @JsonProperty("activity_id")
-    private String activityId;
+  /** The activity ID for the transfer */
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    /**
-     * A URL to the activity associated with this transfer for approval
-     */
-    @JsonProperty("approval_url")
-    private String approvalUrl;
+  /** A URL to the activity associated with this transfer for approval */
+  @JsonProperty("approval_url")
+  private String approvalUrl;
 
-    /**
-     * The currency symbol of the transfer
-     */
-    @JsonProperty("symbol")
-    private String symbol;
+  /** The currency symbol of the transfer */
+  @JsonProperty("symbol")
+  private String symbol;
 
-    /**
-     * The amount of the transfer
-     */
-    @JsonProperty("amount")
-    private String amount;
+  /** The amount of the transfer */
+  @JsonProperty("amount")
+  private String amount;
 
-    /**
-     * The network fee associated with the transfer
-     */
-    @JsonProperty("fee")
-    private String fee;
+  /** The network fee associated with the transfer */
+  @JsonProperty("fee")
+  private String fee;
 
-    /**
-     * The destination address of the transfer
-     */
-    @JsonProperty("destination_address")
-    private String destinationAddress;
+  /** The destination address of the transfer */
+  @JsonProperty("destination_address")
+  private String destinationAddress;
 
-    /**
-     * The destination type of the transfer
-     */
-    @JsonProperty("destination_type")
-    private String destinationType;
+  /** The destination type of the transfer */
+  @JsonProperty("destination_type")
+  private String destinationType;
 
-    /**
-     * The source address used for the transfer
-     */
-    @JsonProperty("source_address")
-    private String sourceAddress;
+  /** The source address used for the transfer */
+  @JsonProperty("source_address")
+  private String sourceAddress;
 
-    /**
-     * The source type used for the transfer
-     */
-    @JsonProperty("source_type")
-    private String sourceType;
+  /** The source type used for the transfer */
+  @JsonProperty("source_type")
+  private String sourceType;
 
-    /**
-     * The id of the just created transaction
-     */
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  /** The id of the just created transaction */
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    public CreateWalletTransferResponse() {
-    }
+  public CreateWalletTransferResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getApprovalUrl() {
-        return approvalUrl;
-    }
+  public String getApprovalUrl() {
+    return approvalUrl;
+  }
 
-    public void setApprovalUrl(String approvalUrl) {
-        this.approvalUrl = approvalUrl;
-    }
+  public void setApprovalUrl(String approvalUrl) {
+    this.approvalUrl = approvalUrl;
+  }
 
-    public String getSymbol() {
-        return symbol;
-    }
+  public String getSymbol() {
+    return symbol;
+  }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
 
-    public String getAmount() {
-        return amount;
-    }
+  public String getAmount() {
+    return amount;
+  }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
 
-    public String getFee() {
-        return fee;
-    }
+  public String getFee() {
+    return fee;
+  }
 
-    public void setFee(String fee) {
-        this.fee = fee;
-    }
+  public void setFee(String fee) {
+    this.fee = fee;
+  }
 
-    public String getDestinationAddress() {
-        return destinationAddress;
-    }
+  public String getDestinationAddress() {
+    return destinationAddress;
+  }
 
-    public void setDestinationAddress(String destinationAddress) {
-        this.destinationAddress = destinationAddress;
-    }
+  public void setDestinationAddress(String destinationAddress) {
+    this.destinationAddress = destinationAddress;
+  }
 
-    public String getDestinationType() {
-        return destinationType;
-    }
+  public String getDestinationType() {
+    return destinationType;
+  }
 
-    public void setDestinationType(String destinationType) {
-        this.destinationType = destinationType;
-    }
+  public void setDestinationType(String destinationType) {
+    this.destinationType = destinationType;
+  }
 
-    public String getSourceAddress() {
-        return sourceAddress;
-    }
+  public String getSourceAddress() {
+    return sourceAddress;
+  }
 
-    public void setSourceAddress(String sourceAddress) {
-        this.sourceAddress = sourceAddress;
-    }
+  public void setSourceAddress(String sourceAddress) {
+    this.sourceAddress = sourceAddress;
+  }
 
-    public String getSourceType() {
-        return sourceType;
-    }
+  public String getSourceType() {
+    return sourceType;
+  }
 
-    public void setSourceType(String sourceType) {
-        this.sourceType = sourceType;
-    }
+  public void setSourceType(String sourceType) {
+    this.sourceType = sourceType;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 }

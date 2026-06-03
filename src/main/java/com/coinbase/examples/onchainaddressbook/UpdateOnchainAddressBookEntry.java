@@ -26,46 +26,56 @@ import com.coinbase.prime.onchainaddressbook.OnchainAddressBookService;
 import com.coinbase.prime.onchainaddressbook.UpdateOnchainAddressBookEntryRequest;
 import com.coinbase.prime.onchainaddressbook.UpdateOnchainAddressBookEntryResponse;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.Arrays;
 
 public class UpdateOnchainAddressBookEntry {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            String addressGroupId = args[0];
-            String groupName = args[1];
-            String networkType = args[2];
-            String address = args[3];
+      String addressGroupId = args[0];
+      String groupName = args[1];
+      String networkType = args[2];
+      String address = args[3];
 
-            System.out.println("Using Portfolio ID: " + portfolioId + ", Address Group ID: " + addressGroupId
-                    + ", Group Name: " + groupName + ", Network: " + networkType + ", Address: " + address);
+      System.out.println(
+          "Using Portfolio ID: "
+              + portfolioId
+              + ", Address Group ID: "
+              + addressGroupId
+              + ", Group Name: "
+              + groupName
+              + ", Network: "
+              + networkType
+              + ", Address: "
+              + address);
 
-            AddressEntry addressEntry = new AddressEntry.Builder()
-                    .address(address)
-                    .build();
+      AddressEntry addressEntry = new AddressEntry.Builder().address(address).build();
 
-            AddressGroup addressGroup = new AddressGroup.Builder()
-                    .id(addressGroupId)
-                    .name(groupName)
-                    .networkType(NetworkType.valueOf(networkType))
-                    .addresses(Arrays.asList(addressEntry))
-                    .build();
+      AddressGroup addressGroup =
+          new AddressGroup.Builder()
+              .id(addressGroupId)
+              .name(groupName)
+              .networkType(NetworkType.valueOf(networkType))
+              .addresses(Arrays.asList(addressEntry))
+              .build();
 
-            OnchainAddressBookService service = PrimeServiceFactory.createOnchainAddressBookService(client);
-            UpdateOnchainAddressBookEntryResponse response = service.updateOnchainAddressBookEntry(
-                    new UpdateOnchainAddressBookEntryRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .addressGroup(addressGroup)
-                            .build());
+      OnchainAddressBookService service =
+          PrimeServiceFactory.createOnchainAddressBookService(client);
+      UpdateOnchainAddressBookEntryResponse response =
+          service.updateOnchainAddressBookEntry(
+              new UpdateOnchainAddressBookEntryRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .addressGroup(addressGroup)
+                  .build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

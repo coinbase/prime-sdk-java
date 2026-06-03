@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.MarginSummaryHistorical;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Margin Call Summaries
- */
+/** List Margin Call Summaries */
 public class ListMarginCallSummariesResponse {
-    @JsonProperty("margin_summaries")
-    private MarginSummaryHistorical[] marginSummaries;
+  @JsonProperty("margin_summaries")
+  private MarginSummaryHistorical[] marginSummaries;
 
-    public ListMarginCallSummariesResponse() {
-    }
+  public ListMarginCallSummariesResponse() {}
 
-    public MarginSummaryHistorical[] getMarginSummaries() {
-        return marginSummaries;
-    }
+  public MarginSummaryHistorical[] getMarginSummaries() {
+    return marginSummaries;
+  }
 
-    public void setMarginSummaries(MarginSummaryHistorical[] marginSummaries) {
-        this.marginSummaries = marginSummaries;
-    }
-
+  public void setMarginSummaries(MarginSummaryHistorical[] marginSummaries) {
+    this.marginSummaries = marginSummaries;
+  }
 }

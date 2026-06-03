@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.balances;
 
-import com.coinbase.prime.model.EntityBalance;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.EntityBalance;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Entity Balances
- */
+/** List Entity Balances */
 public class ListEntityBalancesResponse {
-    @JsonProperty("balances")
-    private EntityBalance[] balances;
+  @JsonProperty("balances")
+  private EntityBalance[] balances;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListEntityBalancesResponse() {
-    }
+  public ListEntityBalancesResponse() {}
 
-    public EntityBalance[] getBalances() {
-        return balances;
-    }
+  public EntityBalance[] getBalances() {
+    return balances;
+  }
 
-    public void setBalances(EntityBalance[] balances) {
-        this.balances = balances;
-    }
+  public void setBalances(EntityBalance[] balances) {
+    this.balances = balances;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

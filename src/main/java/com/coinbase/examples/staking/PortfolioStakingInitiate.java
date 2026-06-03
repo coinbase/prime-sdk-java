@@ -23,28 +23,30 @@ import com.coinbase.prime.staking.PortfolioStakingInitiateRequest;
 import com.coinbase.prime.staking.PortfolioStakingInitiateResponse;
 import com.coinbase.prime.staking.StakingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.UUID;
 
 public class PortfolioStakingInitiate {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            StakingService service = PrimeServiceFactory.createStakingService(client);
-            PortfolioStakingInitiateResponse response = service.portfolioStakingInitiate(
-                    new PortfolioStakingInitiateRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .idempotencyKey(UUID.randomUUID().toString())
-                            .currencySymbol("ETH")
-                            .amount("1.0")
-                            .build());
+      StakingService service = PrimeServiceFactory.createStakingService(client);
+      PortfolioStakingInitiateResponse response =
+          service.portfolioStakingInitiate(
+              new PortfolioStakingInitiateRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .idempotencyKey(UUID.randomUUID().toString())
+                  .currencySymbol("ETH")
+                  .amount("1.0")
+                  .build());
 
-            System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

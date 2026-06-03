@@ -19,22 +19,18 @@ package com.coinbase.prime.portfolios;
 import com.coinbase.prime.model.Portfolio;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Portfolios
- */
+/** List Portfolios */
 public class ListPortfoliosResponse {
-    @JsonProperty("portfolios")
-    private Portfolio[] portfolios;
+  @JsonProperty("portfolios")
+  private Portfolio[] portfolios;
 
-    public ListPortfoliosResponse() {
-    }
+  public ListPortfoliosResponse() {}
 
-    public Portfolio[] getPortfolios() {
-        return portfolios;
-    }
+  public Portfolio[] getPortfolios() {
+    return portfolios;
+  }
 
-    public void setPortfolios(Portfolio[] portfolios) {
-        this.portfolios = portfolios;
-    }
-
+  public void setPortfolios(Portfolio[] portfolios) {
+    this.portfolios = portfolios;
+  }
 }

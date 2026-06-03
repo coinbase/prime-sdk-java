@@ -16,77 +16,73 @@
 
 package com.coinbase.prime.allocations;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Net Allocations by Netting ID
- */
+/** Get Net Allocations by Netting ID */
 public class ListAllocationsByNettingIdRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    @JsonProperty(required = true, value = "netting_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "netting_id")
+  @JsonIgnore
+  private String nettingId;
+
+  public ListAllocationsByNettingIdRequest() {}
+
+  public ListAllocationsByNettingIdRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.nettingId = builder.nettingId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getNettingId() {
+    return nettingId;
+  }
+
+  public void setNettingId(String nettingId) {
+    this.nettingId = nettingId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String nettingId;
 
-    public ListAllocationsByNettingIdRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListAllocationsByNettingIdRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.nettingId = builder.nettingId;
+    public Builder nettingId(String nettingId) {
+      this.nettingId = nettingId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public ListAllocationsByNettingIdRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListAllocationsByNettingIdRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.nettingId)) {
+        throw new CoinbaseClientException("NettingId is required");
+      }
     }
-
-    public String getNettingId() {
-        return nettingId;
-    }
-
-    public void setNettingId(String nettingId) {
-        this.nettingId = nettingId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String nettingId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder nettingId(String nettingId) {
-            this.nettingId = nettingId;
-            return this;
-        }
-
-        public ListAllocationsByNettingIdRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListAllocationsByNettingIdRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.nettingId)) {
-                throw new CoinbaseClientException("NettingId is required");
-            }
-        }
-    }
+  }
 }

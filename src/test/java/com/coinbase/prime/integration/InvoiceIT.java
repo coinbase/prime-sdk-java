@@ -16,6 +16,9 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.invoice.InvoiceService;
 import com.coinbase.prime.invoice.ListInvoicesRequest;
@@ -23,36 +26,32 @@ import com.coinbase.prime.invoice.ListInvoicesResponse;
 import com.coinbase.prime.model.enums.InvoiceState;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class InvoiceIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListInvoices() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        InvoiceService service = PrimeServiceFactory.createInvoiceService(client);
-        ListInvoicesResponse response = service.listInvoices(
-                new ListInvoicesRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListInvoices() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    InvoiceService service = PrimeServiceFactory.createInvoiceService(client);
+    ListInvoicesResponse response =
+        service.listInvoices(new ListInvoicesRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListInvoicesWithOptionals() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        InvoiceService service = PrimeServiceFactory.createInvoiceService(client);
-        ListInvoicesResponse response = service.listInvoices(
-                new ListInvoicesRequest.Builder()
-                        .entityId(entityId)
-                        .states(new InvoiceState[]{InvoiceState.INVOICE_STATE_BILLED})
-                        .billingYear(2025)
-                        .billingMonth(1)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListInvoicesWithOptionals() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    InvoiceService service = PrimeServiceFactory.createInvoiceService(client);
+    ListInvoicesResponse response =
+        service.listInvoices(
+            new ListInvoicesRequest.Builder()
+                .entityId(entityId)
+                .states(new InvoiceState[] {InvoiceState.INVOICE_STATE_BILLED})
+                .billingYear(2025)
+                .billingMonth(1)
+                .limit(5)
+                .build());
+    assertNotNull(response);
+  }
 }

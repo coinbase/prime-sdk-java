@@ -16,168 +16,154 @@
 
 package com.coinbase.prime.transactions;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.TravelRuleParty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Submit Deposit Travel Rule Data
- */
+/** Submit Deposit Travel Rule Data */
 public class SubmitDepositTravelRuleDataRequest {
-    /**
-     * The portfolio ID that owns the transaction
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The portfolio ID that owns the transaction */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The transaction ID associated with the entry */
+  @JsonProperty(required = true, value = "transaction_id")
+  @JsonIgnore
+  private String transactionId;
+
+  /** Represents a party in a travel rule transfer (originator or beneficiary). */
+  @JsonProperty("originator")
+  private TravelRuleParty originator;
+
+  /** Represents a party in a travel rule transfer (originator or beneficiary). */
+  @JsonProperty("beneficiary")
+  private TravelRuleParty beneficiary;
+
+  /**
+   * True if user owns the counterparty address (self-transfer) If false, beneficiary is required
+   */
+  @JsonProperty("is_self")
+  private Boolean isSelf;
+
+  /** True to skip wallet ownership verification */
+  @JsonProperty("opt_out_of_ownership_verification")
+  private Boolean optOutOfOwnershipVerification;
+
+  public SubmitDepositTravelRuleDataRequest() {}
+
+  public SubmitDepositTravelRuleDataRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.transactionId = builder.transactionId;
+    this.originator = builder.originator;
+    this.beneficiary = builder.beneficiary;
+    this.isSelf = builder.isSelf;
+    this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
+
+  public TravelRuleParty getOriginator() {
+    return originator;
+  }
+
+  public void setOriginator(TravelRuleParty originator) {
+    this.originator = originator;
+  }
+
+  public TravelRuleParty getBeneficiary() {
+    return beneficiary;
+  }
+
+  public void setBeneficiary(TravelRuleParty beneficiary) {
+    this.beneficiary = beneficiary;
+  }
+
+  public Boolean getIsSelf() {
+    return isSelf;
+  }
+
+  public void setIsSelf(Boolean isSelf) {
+    this.isSelf = isSelf;
+  }
+
+  public Boolean getOptOutOfOwnershipVerification() {
+    return optOutOfOwnershipVerification;
+  }
+
+  public void setOptOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+    this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The transaction ID associated with the entry
-     */
-    @JsonProperty(required = true, value = "transaction_id")
-    @JsonIgnore
     private String transactionId;
-
-    /**
-     * Represents a party in a travel rule transfer (originator or beneficiary).
-     */
-    @JsonProperty("originator")
     private TravelRuleParty originator;
-
-    /**
-     * Represents a party in a travel rule transfer (originator or beneficiary).
-     */
-    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
-
-    /**
-     * True if user owns the counterparty address (self-transfer) If false, beneficiary is required
-     */
-    @JsonProperty("is_self")
     private Boolean isSelf;
-
-    /**
-     * True to skip wallet ownership verification
-     */
-    @JsonProperty("opt_out_of_ownership_verification")
     private Boolean optOutOfOwnershipVerification;
 
-    public SubmitDepositTravelRuleDataRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public SubmitDepositTravelRuleDataRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.transactionId = builder.transactionId;
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.isSelf = builder.isSelf;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+    public Builder transactionId(String transactionId) {
+      this.transactionId = transactionId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder originator(TravelRuleParty originator) {
+      this.originator = originator;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder beneficiary(TravelRuleParty beneficiary) {
+      this.beneficiary = beneficiary;
+      return this;
     }
 
-    public String getTransactionId() {
-        return transactionId;
+    public Builder isSelf(Boolean isSelf) {
+      this.isSelf = isSelf;
+      return this;
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
+    public Builder optOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+      this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+      return this;
     }
 
-    public TravelRuleParty getOriginator() {
-        return originator;
+    public SubmitDepositTravelRuleDataRequest build() throws CoinbaseClientException {
+      validate();
+      return new SubmitDepositTravelRuleDataRequest(this);
     }
 
-    public void setOriginator(TravelRuleParty originator) {
-        this.originator = originator;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.transactionId)) {
+        throw new CoinbaseClientException("TransactionId is required");
+      }
     }
-
-    public TravelRuleParty getBeneficiary() {
-        return beneficiary;
-    }
-
-    public void setBeneficiary(TravelRuleParty beneficiary) {
-        this.beneficiary = beneficiary;
-    }
-
-    public Boolean getIsSelf() {
-        return isSelf;
-    }
-
-    public void setIsSelf(Boolean isSelf) {
-        this.isSelf = isSelf;
-    }
-
-    public Boolean getOptOutOfOwnershipVerification() {
-        return optOutOfOwnershipVerification;
-    }
-
-    public void setOptOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
-        this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String transactionId;
-        private TravelRuleParty originator;
-        private TravelRuleParty beneficiary;
-        private Boolean isSelf;
-        private Boolean optOutOfOwnershipVerification;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public Builder originator(TravelRuleParty originator) {
-            this.originator = originator;
-            return this;
-        }
-
-        public Builder beneficiary(TravelRuleParty beneficiary) {
-            this.beneficiary = beneficiary;
-            return this;
-        }
-
-        public Builder isSelf(Boolean isSelf) {
-            this.isSelf = isSelf;
-            return this;
-        }
-
-        public Builder optOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
-            this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
-            return this;
-        }
-
-        public SubmitDepositTravelRuleDataRequest build() throws CoinbaseClientException {
-            validate();
-            return new SubmitDepositTravelRuleDataRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.transactionId)) {
-                throw new CoinbaseClientException("TransactionId is required");
-            }
-        }
-    }
+  }
 }

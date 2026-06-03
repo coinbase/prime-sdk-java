@@ -20,33 +20,29 @@ import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Transaction;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Portfolio Transactions
- */
+/** List Portfolio Transactions */
 public class ListPortfolioTransactionsResponse {
-    @JsonProperty("transactions")
-    private Transaction[] transactions;
+  @JsonProperty("transactions")
+  private Transaction[] transactions;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListPortfolioTransactionsResponse() {
-    }
+  public ListPortfolioTransactionsResponse() {}
 
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
+  public Transaction[] getTransactions() {
+    return transactions;
+  }
 
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
+  public void setTransactions(Transaction[] transactions) {
+    this.transactions = transactions;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

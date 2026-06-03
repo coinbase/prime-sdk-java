@@ -16,87 +16,88 @@
 
 package com.coinbase.prime.credentials;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.utils.Constants;
+import java.net.URI;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.net.URI;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class CoinbasePrimeCredentialsTest {
-    
-    private CoinbasePrimeCredentials credentials;
-    
-    @BeforeEach
-    public void setUp() throws CoinbaseClientException {
-        // Create test credentials for testing
-        credentials = new CoinbasePrimeCredentials(
-            "test-access-key",
-            "test-passphrase", 
-            "test-signing-key"
-        );
-    }
 
-    @Test
-    public void testUserAgentHeaderContainsCorrectVersion() throws CoinbaseClientException {
-        // User-Agent must match Constants.SDK_VERSION (kept in sync with pom.xml).
-        URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
-        Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
-        
-        String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
-        assertNotNull(userAgent, "User-Agent header should be present");
-        assertEquals("prime-sdk-java/" + Constants.SDK_VERSION, userAgent,
-            "User-Agent header should contain correct SDK version");
-    }
+  private CoinbasePrimeCredentials credentials;
 
-    @Test
-    public void testUserAgentHeaderIsPresent() throws CoinbaseClientException {
-        URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
-        Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
-        
-        assertTrue(headers.containsKey(Constants.CB_USER_AGENT_HEADER), 
-            "User-Agent header should be present in auth headers");
-    }
+  @BeforeEach
+  public void setUp() throws CoinbaseClientException {
+    // Create test credentials for testing
+    credentials =
+        new CoinbasePrimeCredentials("test-access-key", "test-passphrase", "test-signing-key");
+  }
 
-    @Test
-    public void testUserAgentHeaderFormat() throws CoinbaseClientException {
-        URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
-        Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
-        
-        String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
-        assertNotNull(userAgent);
-        
-        // Verify format: "prime-sdk-java/{version}"
-        assertTrue(userAgent.startsWith("prime-sdk-java/"), 
-            "User-Agent should start with 'prime-sdk-java/'");
-        
-        String version = userAgent.substring("prime-sdk-java/".length());
-        assertFalse(version.isEmpty(), "Version part should not be empty");
-        
-        // Should match semantic versioning pattern
-        String versionPattern = "^\\d+\\.\\d+\\.\\d+$";
-        assertTrue(version.matches(versionPattern), 
-            "Version should follow semantic versioning format");
-    }
+  @Test
+  public void testUserAgentHeaderContainsCorrectVersion() throws CoinbaseClientException {
+    // User-Agent must match Constants.SDK_VERSION (kept in sync with pom.xml).
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
 
-    @Test 
-    public void testAllRequiredHeadersArePresent() throws CoinbaseClientException {
-        URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
-        Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
-        
-        // Verify all required headers are present
-        assertTrue(headers.containsKey(Constants.CB_ACCESS_KEY_HEADER), 
-            "Access key header should be present");
-        assertTrue(headers.containsKey(Constants.CB_ACCESS_SIGNATURE_HEADER), 
-            "Signature header should be present");
-        assertTrue(headers.containsKey(Constants.CB_ACCESS_TIMESTAMP_HEADER), 
-            "Timestamp header should be present");
-        assertTrue(headers.containsKey(Constants.CB_ACCESS_PHRASE_HEADER), 
-            "Passphrase header should be present");
-        assertTrue(headers.containsKey(Constants.CB_USER_AGENT_HEADER), 
-            "User-Agent header should be present");
-    }
+    String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
+    assertNotNull(userAgent, "User-Agent header should be present");
+    assertEquals(
+        "prime-sdk-java/" + Constants.SDK_VERSION,
+        userAgent,
+        "User-Agent header should contain correct SDK version");
+  }
+
+  @Test
+  public void testUserAgentHeaderIsPresent() throws CoinbaseClientException {
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
+
+    assertTrue(
+        headers.containsKey(Constants.CB_USER_AGENT_HEADER),
+        "User-Agent header should be present in auth headers");
+  }
+
+  @Test
+  public void testUserAgentHeaderFormat() throws CoinbaseClientException {
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
+
+    String userAgent = headers.get(Constants.CB_USER_AGENT_HEADER);
+    assertNotNull(userAgent);
+
+    // Verify format: "prime-sdk-java/{version}"
+    assertTrue(
+        userAgent.startsWith("prime-sdk-java/"), "User-Agent should start with 'prime-sdk-java/'");
+
+    String version = userAgent.substring("prime-sdk-java/".length());
+    assertFalse(version.isEmpty(), "Version part should not be empty");
+
+    // Should match semantic versioning pattern
+    String versionPattern = "^\\d+\\.\\d+\\.\\d+$";
+    assertTrue(version.matches(versionPattern), "Version should follow semantic versioning format");
+  }
+
+  @Test
+  public void testAllRequiredHeadersArePresent() throws CoinbaseClientException {
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
+
+    // Verify all required headers are present
+    assertTrue(
+        headers.containsKey(Constants.CB_ACCESS_KEY_HEADER), "Access key header should be present");
+    assertTrue(
+        headers.containsKey(Constants.CB_ACCESS_SIGNATURE_HEADER),
+        "Signature header should be present");
+    assertTrue(
+        headers.containsKey(Constants.CB_ACCESS_TIMESTAMP_HEADER),
+        "Timestamp header should be present");
+    assertTrue(
+        headers.containsKey(Constants.CB_ACCESS_PHRASE_HEADER),
+        "Passphrase header should be present");
+    assertTrue(
+        headers.containsKey(Constants.CB_USER_AGENT_HEADER), "User-Agent header should be present");
+  }
 }

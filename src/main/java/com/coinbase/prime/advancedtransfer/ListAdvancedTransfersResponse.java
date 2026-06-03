@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.advancedtransfer;
 
-import com.coinbase.prime.model.AdvancedTransfer;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.AdvancedTransfer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * ListAdvancedTransfersResponse contains the list of advanced transfers and pagination info.
- */
+/** ListAdvancedTransfersResponse contains the list of advanced transfers and pagination info. */
 public class ListAdvancedTransfersResponse {
-    @JsonProperty("advanced_transfers")
-    private AdvancedTransfer[] advancedTransfers;
+  @JsonProperty("advanced_transfers")
+  private AdvancedTransfer[] advancedTransfers;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListAdvancedTransfersResponse() {
-    }
+  public ListAdvancedTransfersResponse() {}
 
-    public AdvancedTransfer[] getAdvancedTransfers() {
-        return advancedTransfers;
-    }
+  public AdvancedTransfer[] getAdvancedTransfers() {
+    return advancedTransfers;
+  }
 
-    public void setAdvancedTransfers(AdvancedTransfer[] advancedTransfers) {
-        this.advancedTransfers = advancedTransfers;
-    }
+  public void setAdvancedTransfers(AdvancedTransfer[] advancedTransfers) {
+    this.advancedTransfers = advancedTransfers;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

@@ -20,37 +20,29 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - REWARD_SUBTYPE_UNKNOWN: An unknown reward subtype, reward subtype may not be supported in the API response yet - MEV_REWARD: A maximal extractable value reward i.e. sol mev rewards - INFLATION_REWARD: An inflationary reward i.e. solana inflationary rewards - BLOCK_REWARD: A block reward i.e. solana block rewards - VALIDATOR_REWARD: A validator reward i.e. ethereum validator (consensus layer) rewards - TRANSACTION_REWARD: A transaction reward i.e. ethereum transaction (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward i.e. coinbase pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL dividend reward i.e. dividends from BUIDL fund holdings
-     */
+/**
+ * - REWARD_SUBTYPE_UNKNOWN: An unknown reward subtype, reward subtype may not be supported in the
+ * API response yet - MEV_REWARD: A maximal extractable value reward i.e. sol mev rewards -
+ * INFLATION_REWARD: An inflationary reward i.e. solana inflationary rewards - BLOCK_REWARD: A block
+ * reward i.e. solana block rewards - VALIDATOR_REWARD: A validator reward i.e. ethereum validator
+ * (consensus layer) rewards - TRANSACTION_REWARD: A transaction reward i.e. ethereum transaction
+ * (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward i.e. coinbase
+ * pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL dividend reward
+ * i.e. dividends from BUIDL fund holdings
+ */
 public enum RewardSubtype {
-  /**
-   * A maximal extractable value reward
-   */
+  /** A maximal extractable value reward */
   MEV_REWARD,
-  /**
-   * An inflationary reward
-   */
+  /** An inflationary reward */
   INFLATION_REWARD,
-  /**
-   * A block reward
-   */
+  /** A block reward */
   BLOCK_REWARD,
-  /**
-   * A validator reward
-   */
+  /** A validator reward */
   VALIDATOR_REWARD,
-  /**
-   * A transaction reward
-   */
+  /** A transaction reward */
   TRANSACTION_REWARD,
-  /**
-   * A staking fee rebate reward
-   */
+  /** A staking fee rebate reward */
   STAKING_FEE_REBATE_REWARD,
-  /**
-   * A BUIDL dividend reward
-   */
+  /** A BUIDL dividend reward */
   BUIDL_DIVIDEND
 }
-

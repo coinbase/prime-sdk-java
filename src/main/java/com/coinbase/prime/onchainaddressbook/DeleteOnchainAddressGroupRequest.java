@@ -16,77 +16,73 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Delete Onchain Address Group
- */
+/** Delete Onchain Address Group */
 public class DeleteOnchainAddressGroupRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    @JsonProperty(required = true, value = "address_group_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "address_group_id")
+  @JsonIgnore
+  private String addressGroupId;
+
+  public DeleteOnchainAddressGroupRequest() {}
+
+  public DeleteOnchainAddressGroupRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.addressGroupId = builder.addressGroupId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getAddressGroupId() {
+    return addressGroupId;
+  }
+
+  public void setAddressGroupId(String addressGroupId) {
+    this.addressGroupId = addressGroupId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String addressGroupId;
 
-    public DeleteOnchainAddressGroupRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public DeleteOnchainAddressGroupRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.addressGroupId = builder.addressGroupId;
+    public Builder addressGroupId(String addressGroupId) {
+      this.addressGroupId = addressGroupId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public DeleteOnchainAddressGroupRequest build() throws CoinbaseClientException {
+      validate();
+      return new DeleteOnchainAddressGroupRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.addressGroupId)) {
+        throw new CoinbaseClientException("AddressGroupId is required");
+      }
     }
-
-    public String getAddressGroupId() {
-        return addressGroupId;
-    }
-
-    public void setAddressGroupId(String addressGroupId) {
-        this.addressGroupId = addressGroupId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String addressGroupId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder addressGroupId(String addressGroupId) {
-            this.addressGroupId = addressGroupId;
-            return this;
-        }
-
-        public DeleteOnchainAddressGroupRequest build() throws CoinbaseClientException {
-            validate();
-            return new DeleteOnchainAddressGroupRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.addressGroupId)) {
-                throw new CoinbaseClientException("AddressGroupId is required");
-            }
-        }
-    }
+  }
 }

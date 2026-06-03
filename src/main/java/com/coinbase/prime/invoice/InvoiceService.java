@@ -20,17 +20,16 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface InvoiceService {
-    /**
-     * List Invoices.
-     * <p>
-     * Retrieve a list of invoices belonging to an entity
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+  /**
+   * List Invoices.
+   *
+   * <p>Retrieve a list of invoices belonging to an entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListInvoicesResponse listInvoices(ListInvoicesRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.allocations;
 
-import com.coinbase.prime.model.Allocation;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.Allocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Portfolio Allocations
- */
+/** List Portfolio Allocations */
 public class ListPortfolioAllocationsResponse {
-    @JsonProperty("allocations")
-    private Allocation[] allocations;
+  @JsonProperty("allocations")
+  private Allocation[] allocations;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListPortfolioAllocationsResponse() {
-    }
+  public ListPortfolioAllocationsResponse() {}
 
-    public Allocation[] getAllocations() {
-        return allocations;
-    }
+  public Allocation[] getAllocations() {
+    return allocations;
+  }
 
-    public void setAllocations(Allocation[] allocations) {
-        this.allocations = allocations;
-    }
+  public void setAllocations(Allocation[] allocations) {
+    this.allocations = allocations;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

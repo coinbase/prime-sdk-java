@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.activities;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,118 +25,123 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class ActivitiesServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    // ==================== GetActivity Tests ====================
+  // ==================== GetActivity Tests ====================
 
-    @Test
-    public void testGetActivityRequestConstruction() {
-        GetActivityRequest request = new GetActivityRequest("activity-123");
-        assertNotNull(request);
-        assertEquals("activity-123", request.getActivityId());
-    }
+  @Test
+  public void testGetActivityRequestConstruction() {
+    GetActivityRequest request = new GetActivityRequest("activity-123");
+    assertNotNull(request);
+    assertEquals("activity-123", request.getActivityId());
+  }
 
-    @Test
-    public void testGetActivityResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"activity\":{"
-                + "\"id\":\"activity-123\","
-                + "\"category\":\"ACTIVITY_CATEGORY_ORDER\","
-                + "\"status\":\"ACTIVITY_STATUS_COMPLETED\""
-                + "}"
-                + "}";
+  @Test
+  public void testGetActivityResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"activity\":{"
+            + "\"id\":\"activity-123\","
+            + "\"category\":\"ACTIVITY_CATEGORY_ORDER\","
+            + "\"status\":\"ACTIVITY_STATUS_COMPLETED\""
+            + "}"
+            + "}";
 
-        GetActivityResponse response = objectMapper.readValue(json, GetActivityResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getActivity());
-        assertEquals("activity-123", response.getActivity().getId());
-    }
+    GetActivityResponse response = objectMapper.readValue(json, GetActivityResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getActivity());
+    assertEquals("activity-123", response.getActivity().getId());
+  }
 
-    // ==================== GetPortfolioActivity Tests ====================
+  // ==================== GetPortfolioActivity Tests ====================
 
-    @Test
-    public void testGetPortfolioActivityRequestConstruction() throws CoinbaseClientException {
-        GetPortfolioActivityRequest request = new GetPortfolioActivityRequest.Builder()
-                .portfolioId("portfolio-123")
-                .activityId("activity-456")
-                .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-        assertEquals("activity-456", request.getActivityId());
-    }
+  @Test
+  public void testGetPortfolioActivityRequestConstruction() throws CoinbaseClientException {
+    GetPortfolioActivityRequest request =
+        new GetPortfolioActivityRequest.Builder()
+            .portfolioId("portfolio-123")
+            .activityId("activity-456")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+    assertEquals("activity-456", request.getActivityId());
+  }
 
-    @Test
-    public void testGetPortfolioActivityRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new GetPortfolioActivityRequest.Builder()
-                        .activityId("activity-456")
-                        .build());
+  @Test
+  public void testGetPortfolioActivityRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new GetPortfolioActivityRequest.Builder().activityId("activity-456").build());
 
-        assertThrows(CoinbaseClientException.class, () ->
-                new GetPortfolioActivityRequest.Builder()
-                        .portfolioId("portfolio-123")
-                        .build());
-    }
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new GetPortfolioActivityRequest.Builder().portfolioId("portfolio-123").build());
+  }
 
-    @Test
-    public void testGetPortfolioActivityResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"activity\":{"
-                + "\"id\":\"activity-789\","
-                + "\"category\":\"ACTIVITY_CATEGORY_TRANSACTION\","
-                + "\"status\":\"ACTIVITY_STATUS_PROCESSING\""
-                + "}"
-                + "}";
+  @Test
+  public void testGetPortfolioActivityResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"activity\":{"
+            + "\"id\":\"activity-789\","
+            + "\"category\":\"ACTIVITY_CATEGORY_TRANSACTION\","
+            + "\"status\":\"ACTIVITY_STATUS_PROCESSING\""
+            + "}"
+            + "}";
 
-        GetPortfolioActivityResponse response = objectMapper.readValue(json, GetPortfolioActivityResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getActivity());
-        assertEquals("activity-789", response.getActivity().getId());
-    }
+    GetPortfolioActivityResponse response =
+        objectMapper.readValue(json, GetPortfolioActivityResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getActivity());
+    assertEquals("activity-789", response.getActivity().getId());
+  }
 
-    // ==================== ListPortfolioActivities Tests ====================
+  // ==================== ListPortfolioActivities Tests ====================
 
-    @Test
-    public void testListPortfolioActivitiesRequestConstruction() throws CoinbaseClientException {
-        ListPortfolioActivitiesRequest request = new ListPortfolioActivitiesRequest.Builder()
-                .portfolioId("portfolio-123")
-                .symbols(new String[]{"BTC", "ETH"})
-                .startTime("2025-01-01T00:00:00Z")
-                .endTime("2025-12-31T23:59:59Z")
-                .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioActivitiesRequestConstruction() throws CoinbaseClientException {
+    ListPortfolioActivitiesRequest request =
+        new ListPortfolioActivitiesRequest.Builder()
+            .portfolioId("portfolio-123")
+            .symbols(new String[] {"BTC", "ETH"})
+            .startTime("2025-01-01T00:00:00Z")
+            .endTime("2025-12-31T23:59:59Z")
+            .build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    @Test
-    public void testListPortfolioActivitiesRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListPortfolioActivitiesRequest.Builder().portfolioId(null).build());
-    }
+  @Test
+  public void testListPortfolioActivitiesRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new ListPortfolioActivitiesRequest.Builder().portfolioId(null).build());
+  }
 
-    @Test
-    public void testListPortfolioActivitiesResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"activities\":["
-                + "{\"id\":\"act-1\",\"category\":\"ACTIVITY_CATEGORY_ORDER\"},"
-                + "{\"id\":\"act-2\",\"category\":\"ACTIVITY_CATEGORY_TRANSACTION\"}"
-                + "],"
-                + "\"pagination\":{\"next_cursor\":\"cursor-123\",\"has_next\":true}"
-                + "}";
+  @Test
+  public void testListPortfolioActivitiesResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"activities\":["
+            + "{\"id\":\"act-1\",\"category\":\"ACTIVITY_CATEGORY_ORDER\"},"
+            + "{\"id\":\"act-2\",\"category\":\"ACTIVITY_CATEGORY_TRANSACTION\"}"
+            + "],"
+            + "\"pagination\":{\"next_cursor\":\"cursor-123\",\"has_next\":true}"
+            + "}";
 
-        ListPortfolioActivitiesResponse response = objectMapper.readValue(json, ListPortfolioActivitiesResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getActivities());
-        assertEquals(2, response.getActivities().length);
-        assertEquals("act-1", response.getActivities()[0].getId());
-    }
+    ListPortfolioActivitiesResponse response =
+        objectMapper.readValue(json, ListPortfolioActivitiesResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getActivities());
+    assertEquals(2, response.getActivities().length);
+    assertEquals("act-1", response.getActivities()[0].getId());
+  }
 }

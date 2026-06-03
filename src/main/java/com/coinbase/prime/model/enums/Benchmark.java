@@ -27,4 +27,3 @@ public enum Benchmark {
   SOFR_365,
   CRYPTO_RFR
 }
-

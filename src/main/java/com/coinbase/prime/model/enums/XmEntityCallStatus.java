@@ -28,4 +28,3 @@ public enum XmEntityCallStatus {
   ENTITY_AGED_CALL,
   ENTITY_OPEN_DEBIT_CALL
 }
-

@@ -16,58 +16,52 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Onchain Address Groups
- */
+/** List Onchain Address Groups */
 public class ListOnchainAddressGroupsRequest {
-    /**
-     * Portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** Portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  public ListOnchainAddressGroupsRequest() {}
+
+  public ListOnchainAddressGroupsRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public static class Builder {
     private String portfolioId;
 
-    public ListOnchainAddressGroupsRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListOnchainAddressGroupsRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
+    public ListOnchainAddressGroupsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListOnchainAddressGroupsRequest(this);
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public ListOnchainAddressGroupsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListOnchainAddressGroupsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

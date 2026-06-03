@@ -16,55 +16,51 @@
 
 package com.coinbase.prime.advancedtransfer;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Portfolio Counterparty ID
- */
+/** Get Portfolio Counterparty ID */
 public class GetPortfolioCounterpartyIdRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  public GetPortfolioCounterpartyIdRequest() {}
+
+  public GetPortfolioCounterpartyIdRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public static class Builder {
     private String portfolioId;
 
-    public GetPortfolioCounterpartyIdRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetPortfolioCounterpartyIdRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
+    public GetPortfolioCounterpartyIdRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPortfolioCounterpartyIdRequest(this);
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public GetPortfolioCounterpartyIdRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPortfolioCounterpartyIdRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

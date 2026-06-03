@@ -19,22 +19,18 @@ package com.coinbase.prime.advancedtransfer;
 import com.coinbase.prime.model.Counterparty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Portfolio Counterparty ID
- */
+/** Get Portfolio Counterparty ID */
 public class GetPortfolioCounterpartyResponse {
-    @JsonProperty("counterparty")
-    private Counterparty counterparty;
+  @JsonProperty("counterparty")
+  private Counterparty counterparty;
 
-    public GetPortfolioCounterpartyResponse() {
-    }
+  public GetPortfolioCounterpartyResponse() {}
 
-    public Counterparty getCounterparty() {
-        return counterparty;
-    }
+  public Counterparty getCounterparty() {
+    return counterparty;
+  }
 
-    public void setCounterparty(Counterparty counterparty) {
-        this.counterparty = counterparty;
-    }
-
+  public void setCounterparty(Counterparty counterparty) {
+    this.counterparty = counterparty;
+  }
 }

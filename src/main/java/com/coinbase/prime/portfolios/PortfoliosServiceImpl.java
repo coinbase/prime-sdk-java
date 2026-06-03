@@ -21,42 +21,43 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements PortfoliosService {
-    public PortfoliosServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public PortfoliosServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                "/portfolios",
-                request,
-                List.of(200),
-                new TypeReference<ListPortfoliosResponse>() {});
-    }
+  @Override
+  public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        "/portfolios",
+        request,
+        List.of(200),
+        new TypeReference<ListPortfoliosResponse>() {});
+  }
 
-    @Override
-    public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioResponse>() {});
-    }
+  @Override
+  public GetPortfolioResponse getPortfolio(GetPortfolioRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioResponse>() {});
+  }
 
-    @Override
-    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
-    }
-
+  @Override
+  public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
+      GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
+  }
 }

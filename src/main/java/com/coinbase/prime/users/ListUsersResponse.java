@@ -16,37 +16,33 @@
 
 package com.coinbase.prime.users;
 
-import com.coinbase.prime.model.EntityUser;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.EntityUser;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Users
- */
+/** List Users */
 public class ListUsersResponse {
-    @JsonProperty("users")
-    private EntityUser[] users;
+  @JsonProperty("users")
+  private EntityUser[] users;
 
-    @JsonProperty("pagination")
-    private Pagination pagination;
+  @JsonProperty("pagination")
+  private Pagination pagination;
 
-    public ListUsersResponse() {
-    }
+  public ListUsersResponse() {}
 
-    public EntityUser[] getUsers() {
-        return users;
-    }
+  public EntityUser[] getUsers() {
+    return users;
+  }
 
-    public void setUsers(EntityUser[] users) {
-        this.users = users;
-    }
+  public void setUsers(EntityUser[] users) {
+    this.users = users;
+  }
 
-    public Pagination getPagination() {
-        return pagination;
-    }
+  public Pagination getPagination() {
+    return pagination;
+  }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
+  public void setPagination(Pagination pagination) {
+    this.pagination = pagination;
+  }
 }

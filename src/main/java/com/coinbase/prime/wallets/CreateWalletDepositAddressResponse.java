@@ -19,44 +19,40 @@ package com.coinbase.prime.wallets;
 import com.coinbase.prime.model.Network;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Wallet Deposit Address
- */
+/** Create Wallet Deposit Address */
 public class CreateWalletDepositAddressResponse {
-    @JsonProperty("address")
-    private String address;
+  @JsonProperty("address")
+  private String address;
 
-    @JsonProperty("account_identifier")
-    private String accountIdentifier;
+  @JsonProperty("account_identifier")
+  private String accountIdentifier;
 
-    @JsonProperty("network")
-    private Network network;
+  @JsonProperty("network")
+  private Network network;
 
-    public CreateWalletDepositAddressResponse() {
-    }
+  public CreateWalletDepositAddressResponse() {}
 
-    public String getAddress() {
-        return address;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-    public String getAccountIdentifier() {
-        return accountIdentifier;
-    }
+  public String getAccountIdentifier() {
+    return accountIdentifier;
+  }
 
-    public void setAccountIdentifier(String accountIdentifier) {
-        this.accountIdentifier = accountIdentifier;
-    }
+  public void setAccountIdentifier(String accountIdentifier) {
+    this.accountIdentifier = accountIdentifier;
+  }
 
-    public Network getNetwork() {
-        return network;
-    }
+  public Network getNetwork() {
+    return network;
+  }
 
-    public void setNetwork(Network network) {
-        this.network = network;
-    }
-
+  public void setNetwork(Network network) {
+    this.network = network;
+  }
 }

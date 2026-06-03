@@ -19,22 +19,18 @@ package com.coinbase.prime.activities;
 import com.coinbase.prime.model.Activity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Activity by Activity ID
- */
+/** Get Activity by Activity ID */
 public class GetPortfolioActivityResponse {
-    @JsonProperty("activity")
-    private Activity activity;
+  @JsonProperty("activity")
+  private Activity activity;
 
-    public GetPortfolioActivityResponse() {
-    }
+  public GetPortfolioActivityResponse() {}
 
-    public Activity getActivity() {
-        return activity;
-    }
+  public Activity getActivity() {
+    return activity;
+  }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
+  public void setActivity(Activity activity) {
+    this.activity = activity;
+  }
 }

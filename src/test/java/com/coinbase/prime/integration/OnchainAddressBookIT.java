@@ -16,26 +16,26 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.onchainaddressbook.ListOnchainAddressGroupsRequest;
 import com.coinbase.prime.onchainaddressbook.ListOnchainAddressGroupsResponse;
 import com.coinbase.prime.onchainaddressbook.OnchainAddressBookService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class OnchainAddressBookIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListOnchainAddressGroups() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        OnchainAddressBookService service = PrimeServiceFactory.createOnchainAddressBookService(client);
-        ListOnchainAddressGroupsResponse response = service.listOnchainAddressGroups(
-                new ListOnchainAddressGroupsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListOnchainAddressGroups() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    OnchainAddressBookService service = PrimeServiceFactory.createOnchainAddressBookService(client);
+    ListOnchainAddressGroupsResponse response =
+        service.listOnchainAddressGroups(
+            new ListOnchainAddressGroupsRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 }

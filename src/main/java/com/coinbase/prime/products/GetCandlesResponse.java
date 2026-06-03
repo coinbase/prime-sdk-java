@@ -19,22 +19,18 @@ package com.coinbase.prime.products;
 import com.coinbase.prime.model.Candle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Candle response structure
- */
+/** Candle response structure */
 public class GetCandlesResponse {
-    @JsonProperty("candles")
-    private Candle[] candles;
+  @JsonProperty("candles")
+  private Candle[] candles;
 
-    public GetCandlesResponse() {
-    }
+  public GetCandlesResponse() {}
 
-    public Candle[] getCandles() {
-        return candles;
-    }
+  public Candle[] getCandles() {
+    return candles;
+  }
 
-    public void setCandles(Candle[] candles) {
-        this.candles = candles;
-    }
-
+  public void setCandles(Candle[] candles) {
+    this.candles = candles;
+  }
 }

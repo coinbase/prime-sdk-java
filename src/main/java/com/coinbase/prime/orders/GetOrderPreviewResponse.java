@@ -21,253 +21,249 @@ import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Order Preview
- */
+/** Get Order Preview */
 public class GetOrderPreviewResponse {
-    @JsonProperty("portfolio_id")
-    private String portfolioId;
+  @JsonProperty("portfolio_id")
+  private String portfolioId;
 
-    @JsonProperty("product_id")
-    private String productId;
+  @JsonProperty("product_id")
+  private String productId;
 
-    @JsonProperty("side")
-    private OrderSide side;
+  @JsonProperty("side")
+  private OrderSide side;
 
-    @JsonProperty("type")
-    private OrderType type;
+  @JsonProperty("type")
+  private OrderType type;
 
-    @JsonProperty("base_quantity")
-    private String baseQuantity;
+  @JsonProperty("base_quantity")
+  private String baseQuantity;
 
-    @JsonProperty("quote_value")
-    private String quoteValue;
+  @JsonProperty("quote_value")
+  private String quoteValue;
 
-    @JsonProperty("limit_price")
-    private String limitPrice;
+  @JsonProperty("limit_price")
+  private String limitPrice;
 
-    @JsonProperty("start_time")
-    private String startTime;
+  @JsonProperty("start_time")
+  private String startTime;
 
-    @JsonProperty("expiry_time")
-    private String expiryTime;
+  @JsonProperty("expiry_time")
+  private String expiryTime;
 
-    @JsonProperty("time_in_force")
-    private TimeInForceType timeInForce;
+  @JsonProperty("time_in_force")
+  private TimeInForceType timeInForce;
 
-    @JsonProperty("commission")
-    private String commission;
+  @JsonProperty("commission")
+  private String commission;
 
-    @JsonProperty("slippage")
-    private String slippage;
+  @JsonProperty("slippage")
+  private String slippage;
 
-    @JsonProperty("best_bid")
-    private String bestBid;
+  @JsonProperty("best_bid")
+  private String bestBid;
 
-    @JsonProperty("best_ask")
-    private String bestAsk;
+  @JsonProperty("best_ask")
+  private String bestAsk;
 
-    @JsonProperty("average_filled_price")
-    private String averageFilledPrice;
+  @JsonProperty("average_filled_price")
+  private String averageFilledPrice;
 
-    @JsonProperty("order_total")
-    private String orderTotal;
+  @JsonProperty("order_total")
+  private String orderTotal;
 
-    @JsonProperty("historical_pov")
-    private String historicalPov;
+  @JsonProperty("historical_pov")
+  private String historicalPov;
 
-    @JsonProperty("is_raise_exact")
-    private Boolean isRaiseExact;
+  @JsonProperty("is_raise_exact")
+  private Boolean isRaiseExact;
 
-    @JsonProperty("stop_price")
-    private String stopPrice;
+  @JsonProperty("stop_price")
+  private String stopPrice;
 
-    @JsonProperty("display_size")
-    private String displaySize;
+  @JsonProperty("display_size")
+  private String displaySize;
 
-    @JsonProperty("display_quote_size")
-    private String displayQuoteSize;
+  @JsonProperty("display_quote_size")
+  private String displayQuoteSize;
 
-    @JsonProperty("display_base_size")
-    private String displayBaseSize;
+  @JsonProperty("display_base_size")
+  private String displayBaseSize;
 
-    public GetOrderPreviewResponse() {
-    }
+  public GetOrderPreviewResponse() {}
 
-    public String getPortfolioId() {
-        return portfolioId;
-    }
+  public String getPortfolioId() {
+    return portfolioId;
+  }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
 
-    public String getProductId() {
-        return productId;
-    }
+  public String getProductId() {
+    return productId;
+  }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
 
-    public OrderSide getSide() {
-        return side;
-    }
+  public OrderSide getSide() {
+    return side;
+  }
 
-    public void setSide(OrderSide side) {
-        this.side = side;
-    }
+  public void setSide(OrderSide side) {
+    this.side = side;
+  }
 
-    public OrderType getType() {
-        return type;
-    }
+  public OrderType getType() {
+    return type;
+  }
 
-    public void setType(OrderType type) {
-        this.type = type;
-    }
+  public void setType(OrderType type) {
+    this.type = type;
+  }
 
-    public String getBaseQuantity() {
-        return baseQuantity;
-    }
-
-    public void setBaseQuantity(String baseQuantity) {
-        this.baseQuantity = baseQuantity;
-    }
-
-    public String getQuoteValue() {
-        return quoteValue;
-    }
-
-    public void setQuoteValue(String quoteValue) {
-        this.quoteValue = quoteValue;
-    }
-
-    public String getLimitPrice() {
-        return limitPrice;
-    }
-
-    public void setLimitPrice(String limitPrice) {
-        this.limitPrice = limitPrice;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getExpiryTime() {
-        return expiryTime;
-    }
-
-    public void setExpiryTime(String expiryTime) {
-        this.expiryTime = expiryTime;
-    }
-
-    public TimeInForceType getTimeInForce() {
-        return timeInForce;
-    }
-
-    public void setTimeInForce(TimeInForceType timeInForce) {
-        this.timeInForce = timeInForce;
-    }
-
-    public String getCommission() {
-        return commission;
-    }
-
-    public void setCommission(String commission) {
-        this.commission = commission;
-    }
-
-    public String getSlippage() {
-        return slippage;
-    }
-
-    public void setSlippage(String slippage) {
-        this.slippage = slippage;
-    }
-
-    public String getBestBid() {
-        return bestBid;
-    }
-
-    public void setBestBid(String bestBid) {
-        this.bestBid = bestBid;
-    }
-
-    public String getBestAsk() {
-        return bestAsk;
-    }
-
-    public void setBestAsk(String bestAsk) {
-        this.bestAsk = bestAsk;
-    }
-
-    public String getAverageFilledPrice() {
-        return averageFilledPrice;
-    }
-
-    public void setAverageFilledPrice(String averageFilledPrice) {
-        this.averageFilledPrice = averageFilledPrice;
-    }
-
-    public String getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(String orderTotal) {
-        this.orderTotal = orderTotal;
-    }
-
-    public String getHistoricalPov() {
-        return historicalPov;
-    }
-
-    public void setHistoricalPov(String historicalPov) {
-        this.historicalPov = historicalPov;
-    }
-
-    public Boolean getIsRaiseExact() {
-        return isRaiseExact;
-    }
-
-    public void setIsRaiseExact(Boolean isRaiseExact) {
-        this.isRaiseExact = isRaiseExact;
-    }
-
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public void setStopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-    }
-
-    public String getDisplaySize() {
-        return displaySize;
-    }
-
-    public void setDisplaySize(String displaySize) {
-        this.displaySize = displaySize;
-    }
-
-    public String getDisplayQuoteSize() {
-        return displayQuoteSize;
-    }
-
-    public void setDisplayQuoteSize(String displayQuoteSize) {
-        this.displayQuoteSize = displayQuoteSize;
-    }
-
-    public String getDisplayBaseSize() {
-        return displayBaseSize;
-    }
-
-    public void setDisplayBaseSize(String displayBaseSize) {
-        this.displayBaseSize = displayBaseSize;
-    }
-
+  public String getBaseQuantity() {
+    return baseQuantity;
+  }
+
+  public void setBaseQuantity(String baseQuantity) {
+    this.baseQuantity = baseQuantity;
+  }
+
+  public String getQuoteValue() {
+    return quoteValue;
+  }
+
+  public void setQuoteValue(String quoteValue) {
+    this.quoteValue = quoteValue;
+  }
+
+  public String getLimitPrice() {
+    return limitPrice;
+  }
+
+  public void setLimitPrice(String limitPrice) {
+    this.limitPrice = limitPrice;
+  }
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+  public String getExpiryTime() {
+    return expiryTime;
+  }
+
+  public void setExpiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+  }
+
+  public TimeInForceType getTimeInForce() {
+    return timeInForce;
+  }
+
+  public void setTimeInForce(TimeInForceType timeInForce) {
+    this.timeInForce = timeInForce;
+  }
+
+  public String getCommission() {
+    return commission;
+  }
+
+  public void setCommission(String commission) {
+    this.commission = commission;
+  }
+
+  public String getSlippage() {
+    return slippage;
+  }
+
+  public void setSlippage(String slippage) {
+    this.slippage = slippage;
+  }
+
+  public String getBestBid() {
+    return bestBid;
+  }
+
+  public void setBestBid(String bestBid) {
+    this.bestBid = bestBid;
+  }
+
+  public String getBestAsk() {
+    return bestAsk;
+  }
+
+  public void setBestAsk(String bestAsk) {
+    this.bestAsk = bestAsk;
+  }
+
+  public String getAverageFilledPrice() {
+    return averageFilledPrice;
+  }
+
+  public void setAverageFilledPrice(String averageFilledPrice) {
+    this.averageFilledPrice = averageFilledPrice;
+  }
+
+  public String getOrderTotal() {
+    return orderTotal;
+  }
+
+  public void setOrderTotal(String orderTotal) {
+    this.orderTotal = orderTotal;
+  }
+
+  public String getHistoricalPov() {
+    return historicalPov;
+  }
+
+  public void setHistoricalPov(String historicalPov) {
+    this.historicalPov = historicalPov;
+  }
+
+  public Boolean getIsRaiseExact() {
+    return isRaiseExact;
+  }
+
+  public void setIsRaiseExact(Boolean isRaiseExact) {
+    this.isRaiseExact = isRaiseExact;
+  }
+
+  public String getStopPrice() {
+    return stopPrice;
+  }
+
+  public void setStopPrice(String stopPrice) {
+    this.stopPrice = stopPrice;
+  }
+
+  public String getDisplaySize() {
+    return displaySize;
+  }
+
+  public void setDisplaySize(String displaySize) {
+    this.displaySize = displaySize;
+  }
+
+  public String getDisplayQuoteSize() {
+    return displayQuoteSize;
+  }
+
+  public void setDisplayQuoteSize(String displayQuoteSize) {
+    this.displayQuoteSize = displayQuoteSize;
+  }
+
+  public String getDisplayBaseSize() {
+    return displayBaseSize;
+  }
+
+  public void setDisplayBaseSize(String displayBaseSize) {
+    this.displayBaseSize = displayBaseSize;
+  }
 }

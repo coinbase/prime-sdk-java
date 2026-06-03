@@ -27,12 +27,17 @@ import com.coinbase.prime.utils.Utils;
 public class GetTransaction {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String transactionId = args.length > 0 ? args[0] : "TRANSACTION_ID_HERE";
 
-      System.out.println("Getting transaction: Portfolio ID: " + portfolioId + ", Transaction ID: " + transactionId);
+      System.out.println(
+          "Getting transaction: Portfolio ID: "
+              + portfolioId
+              + ", Transaction ID: "
+              + transactionId);
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
       GetTransactionResponse response =
@@ -42,10 +47,10 @@ public class GetTransaction {
                   .transactionId(transactionId)
                   .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
-

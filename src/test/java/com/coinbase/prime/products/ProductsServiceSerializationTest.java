@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.products;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.CandlesGranularity;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,95 +26,99 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class ProductsServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    // ==================== GetCandles Tests ====================
+  // ==================== GetCandles Tests ====================
 
-    @Test
-    public void testGetCandlesRequestSerialization() throws JsonProcessingException {
-        GetCandlesRequest request = new GetCandlesRequest.Builder()
-                .portfolioId("portfolio-123")
+  @Test
+  public void testGetCandlesRequestSerialization() throws JsonProcessingException {
+    GetCandlesRequest request =
+        new GetCandlesRequest.Builder()
+            .portfolioId("portfolio-123")
+            .productId("BTC-USD")
+            .startTime("2025-01-01T00:00:00Z")
+            .endTime("2025-01-02T00:00:00Z")
+            .granularity(CandlesGranularity.ONE_DAY)
+            .build();
+
+    String json = objectMapper.writeValueAsString(request);
+    assertNotNull(json);
+    assertTrue(json.contains("\"product_id\":\"BTC-USD\""));
+    assertTrue(json.contains("\"start_time\":\"2025-01-01T00:00:00Z\""));
+    assertTrue(json.contains("\"end_time\":\"2025-01-02T00:00:00Z\""));
+    assertTrue(json.contains("\"granularity\":\"ONE_DAY\""));
+    assertFalse(json.contains("\"portfolio_id\""));
+  }
+
+  @Test
+  public void testGetCandlesRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () ->
+            new GetCandlesRequest.Builder()
                 .productId("BTC-USD")
                 .startTime("2025-01-01T00:00:00Z")
                 .endTime("2025-01-02T00:00:00Z")
                 .granularity(CandlesGranularity.ONE_DAY)
-                .build();
+                .build());
+  }
 
-        String json = objectMapper.writeValueAsString(request);
-        assertNotNull(json);
-        assertTrue(json.contains("\"product_id\":\"BTC-USD\""));
-        assertTrue(json.contains("\"start_time\":\"2025-01-01T00:00:00Z\""));
-        assertTrue(json.contains("\"end_time\":\"2025-01-02T00:00:00Z\""));
-        assertTrue(json.contains("\"granularity\":\"ONE_DAY\""));
-        assertFalse(json.contains("\"portfolio_id\""));
-    }
+  @Test
+  public void testGetCandlesResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"candles\":["
+            + "{\"open\":\"49000.00\",\"high\":\"50000.00\",\"low\":\"48000.00\",\"close\":\"49500.00\",\"volume\":\"1000.0\"},"
+            + "{\"open\":\"49500.00\",\"high\":\"51000.00\",\"low\":\"49000.00\",\"close\":\"50500.00\",\"volume\":\"1200.0\"}"
+            + "]"
+            + "}";
 
-    @Test
-    public void testGetCandlesRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new GetCandlesRequest.Builder()
-                        .productId("BTC-USD")
-                        .startTime("2025-01-01T00:00:00Z")
-                        .endTime("2025-01-02T00:00:00Z")
-                        .granularity(CandlesGranularity.ONE_DAY)
-                        .build());
-    }
+    GetCandlesResponse response = objectMapper.readValue(json, GetCandlesResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getCandles());
+    assertEquals(2, response.getCandles().length);
+  }
 
-    @Test
-    public void testGetCandlesResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"candles\":["
-                + "{\"open\":\"49000.00\",\"high\":\"50000.00\",\"low\":\"48000.00\",\"close\":\"49500.00\",\"volume\":\"1000.0\"},"
-                + "{\"open\":\"49500.00\",\"high\":\"51000.00\",\"low\":\"49000.00\",\"close\":\"50500.00\",\"volume\":\"1200.0\"}"
-                + "]"
-                + "}";
+  // ==================== ListPortfolioProducts Tests ====================
 
-        GetCandlesResponse response = objectMapper.readValue(json, GetCandlesResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getCandles());
-        assertEquals(2, response.getCandles().length);
-    }
+  @Test
+  public void testListPortfolioProductsRequestConstruction() throws CoinbaseClientException {
+    ListPortfolioProductsRequest request =
+        new ListPortfolioProductsRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
 
-    // ==================== ListPortfolioProducts Tests ====================
+  @Test
+  public void testListPortfolioProductsRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class, () -> new ListPortfolioProductsRequest.Builder().build());
+  }
 
-    @Test
-    public void testListPortfolioProductsRequestConstruction() throws CoinbaseClientException {
-        ListPortfolioProductsRequest request = new ListPortfolioProductsRequest.Builder()
-                .portfolioId("portfolio-123")
-                .build();
-        assertNotNull(request);
-        assertEquals("portfolio-123", request.getPortfolioId());
-    }
+  @Test
+  public void testListPortfolioProductsResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"products\":["
+            + "{\"id\":\"BTC-USD\",\"base_currency\":\"BTC\",\"quote_currency\":\"USD\"},"
+            + "{\"id\":\"ETH-USD\",\"base_currency\":\"ETH\",\"quote_currency\":\"USD\"}"
+            + "],"
+            + "\"pagination\":{\"has_next\":false}"
+            + "}";
 
-    @Test
-    public void testListPortfolioProductsRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListPortfolioProductsRequest.Builder().build());
-    }
-
-    @Test
-    public void testListPortfolioProductsResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"products\":["
-                + "{\"id\":\"BTC-USD\",\"base_currency\":\"BTC\",\"quote_currency\":\"USD\"},"
-                + "{\"id\":\"ETH-USD\",\"base_currency\":\"ETH\",\"quote_currency\":\"USD\"}"
-                + "],"
-                + "\"pagination\":{\"has_next\":false}"
-                + "}";
-
-        ListPortfolioProductsResponse response = objectMapper.readValue(json, ListPortfolioProductsResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getProducts());
-        assertEquals(2, response.getProducts().length);
-        assertEquals("BTC-USD", response.getProducts()[0].getId());
-    }
+    ListPortfolioProductsResponse response =
+        objectMapper.readValue(json, ListPortfolioProductsResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getProducts());
+    assertEquals(2, response.getProducts().length);
+    assertEquals("BTC-USD", response.getProducts()[0].getId());
+  }
 }

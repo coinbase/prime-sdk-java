@@ -20,71 +20,71 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Pagination {
-    @JsonProperty("next_cursor")
+  @JsonProperty("next_cursor")
+  private String nextCursor;
+
+  @JsonProperty("sort_direction")
+  private SortDirection sortDirection;
+
+  @JsonProperty("has_next")
+  private boolean hasNext;
+
+  public Pagination() {}
+
+  public Pagination(Builder builder) {
+    this.nextCursor = builder.nextCursor;
+    this.sortDirection = builder.sortDirection;
+    this.hasNext = builder.hasNext;
+  }
+
+  public String getNextCursor() {
+    return nextCursor;
+  }
+
+  public void setNextCursor(String nextCursor) {
+    this.nextCursor = nextCursor;
+  }
+
+  public SortDirection getSortDirection() {
+    return sortDirection;
+  }
+
+  public void setSortDirection(SortDirection sortDirection) {
+    this.sortDirection = sortDirection;
+  }
+
+  public boolean isHasNext() {
+    return hasNext;
+  }
+
+  public void setHasNext(boolean hasNext) {
+    this.hasNext = hasNext;
+  }
+
+  public static class Builder {
     private String nextCursor;
-
-    @JsonProperty("sort_direction")
     private SortDirection sortDirection;
-
-    @JsonProperty("has_next")
     private boolean hasNext;
 
-    public Pagination() {}
+    public Builder() {}
 
-    public Pagination(Builder builder) {
-        this.nextCursor = builder.nextCursor;
-        this.sortDirection = builder.sortDirection;
-        this.hasNext = builder.hasNext;
+    public Builder nextCursor(String nextCursor) {
+      this.nextCursor = nextCursor;
+      return this;
     }
 
-    public String getNextCursor() {
-        return nextCursor;
+    public Builder sortDirection(SortDirection sortDirection) {
+      this.sortDirection = sortDirection;
+      return this;
     }
 
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
+    public Builder hasNext(boolean hasNext) {
+      this.hasNext = hasNext;
+      return this;
     }
 
-    public SortDirection getSortDirection() {
-        return sortDirection;
+    public Pagination build() {
+      return new Pagination(this);
     }
-
-    public void setSortDirection(SortDirection sortDirection) {
-        this.sortDirection = sortDirection;
-    }
-
-    public boolean isHasNext() {
-        return hasNext;
-    }
-
-    public void setHasNext(boolean hasNext) {
-        this.hasNext = hasNext;
-    }
-
-    public static class Builder {
-        private String nextCursor;
-        private SortDirection sortDirection;
-        private boolean hasNext;
-
-        public Builder() {}
-
-        public Builder nextCursor(String nextCursor) {
-            this.nextCursor = nextCursor;
-            return this;
-        }
-
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
-            return this;
-        }
-
-        public Builder hasNext(boolean hasNext) {
-            this.hasNext = hasNext;
-            return this;
-        }
-
-        public Pagination build() {
-            return new Pagination(this);
-        }
-    }
+  }
 }

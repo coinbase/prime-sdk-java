@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.commission;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,48 +25,51 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class CommissionServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    @Test
-    public void testGetPortfolioCommissionRequestSerialization() throws CoinbaseClientException, JsonProcessingException {
-        GetPortfolioCommissionRequest request = new GetPortfolioCommissionRequest.Builder()
-                .portfolioId("portfolio-123")
-                .productId("BTC-USD")
-                .build();
+  @Test
+  public void testGetPortfolioCommissionRequestSerialization()
+      throws CoinbaseClientException, JsonProcessingException {
+    GetPortfolioCommissionRequest request =
+        new GetPortfolioCommissionRequest.Builder()
+            .portfolioId("portfolio-123")
+            .productId("BTC-USD")
+            .build();
 
-        String json = objectMapper.writeValueAsString(request);
-        assertNotNull(json);
-        assertTrue(json.contains("\"product_id\":\"BTC-USD\""));
-        assertFalse(json.contains("portfolio_id"));
-    }
+    String json = objectMapper.writeValueAsString(request);
+    assertNotNull(json);
+    assertTrue(json.contains("\"product_id\":\"BTC-USD\""));
+    assertFalse(json.contains("portfolio_id"));
+  }
 
-    @Test
-    public void testGetPortfolioCommissionRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new GetPortfolioCommissionRequest.Builder().build());
-    }
+  @Test
+  public void testGetPortfolioCommissionRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class, () -> new GetPortfolioCommissionRequest.Builder().build());
+  }
 
-    @Test
-    public void testGetPortfolioCommissionResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"commission\":{"
-                + "\"type\":\"COMMISSION_TYPE_TAKER\","
-                + "\"rate\":\"0.0005\""
-                + "}"
-                + "}";
+  @Test
+  public void testGetPortfolioCommissionResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"commission\":{"
+            + "\"type\":\"COMMISSION_TYPE_TAKER\","
+            + "\"rate\":\"0.0005\""
+            + "}"
+            + "}";
 
-        GetPortfolioCommissionResponse response = objectMapper.readValue(json, GetPortfolioCommissionResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getCommission());
-        assertEquals("0.0005", response.getCommission().getRate());
-    }
+    GetPortfolioCommissionResponse response =
+        objectMapper.readValue(json, GetPortfolioCommissionResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getCommission());
+    assertEquals("0.0005", response.getCommission().getRate());
+  }
 }

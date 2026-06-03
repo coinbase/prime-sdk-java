@@ -21,22 +21,20 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsService {
-    public AssetsServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public AssetsServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/assets", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAssetsResponse>() {});
-    }
-
+  @Override
+  public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/assets", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAssetsResponse>() {});
+  }
 }

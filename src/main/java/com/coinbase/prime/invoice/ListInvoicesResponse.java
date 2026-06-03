@@ -19,22 +19,18 @@ package com.coinbase.prime.invoice;
 import com.coinbase.prime.model.Invoice;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Invoices
- */
+/** List Invoices */
 public class ListInvoicesResponse {
-    @JsonProperty("invoices")
-    private Invoice[] invoices;
+  @JsonProperty("invoices")
+  private Invoice[] invoices;
 
-    public ListInvoicesResponse() {
-    }
+  public ListInvoicesResponse() {}
 
-    public Invoice[] getInvoices() {
-        return invoices;
-    }
+  public Invoice[] getInvoices() {
+    return invoices;
+  }
 
-    public void setInvoices(Invoice[] invoices) {
-        this.invoices = invoices;
-    }
-
+  public void setInvoices(Invoice[] invoices) {
+    this.invoices = invoices;
+  }
 }

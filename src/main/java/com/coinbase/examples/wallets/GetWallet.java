@@ -19,18 +19,24 @@ package com.coinbase.examples.wallets;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.utils.Utils;
 import com.coinbase.prime.wallets.GetWalletRequest;
 import com.coinbase.prime.wallets.GetWalletResponse;
 import com.coinbase.prime.wallets.WalletsService;
-import com.coinbase.prime.utils.Utils;
 
 public class GetWallet {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID") != null ? System.getenv("COINBASE_PRIME_WALLET_ID") : "wallet-id-here";
+      String walletId =
+          args.length > 0
+              ? args[0]
+              : System.getenv("COINBASE_PRIME_WALLET_ID") != null
+                  ? System.getenv("COINBASE_PRIME_WALLET_ID")
+                  : "wallet-id-here";
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
@@ -39,7 +45,8 @@ public class GetWallet {
           service.getWallet(
               new GetWalletRequest.Builder().portfolioId(portfolioId).walletId(walletId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

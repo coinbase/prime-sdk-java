@@ -21,17 +21,16 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface CommissionService {
 
-    /**
-     * Get Portfolio Commission.
-     * <p>
-     * Retrieve commission associated with a given portfolio
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+  /**
+   * Get Portfolio Commission.
+   *
+   * <p>Retrieve commission associated with a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

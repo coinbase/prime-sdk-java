@@ -28,7 +28,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListPortfolioBalances {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -51,8 +52,8 @@ public class ListPortfolioBalances {
         System.out.println("Balance type: " + balanceType);
       }
 
-      ListPortfolioBalancesRequest.Builder builder = new ListPortfolioBalancesRequest.Builder()
-          .portfolioId(portfolioId);
+      ListPortfolioBalancesRequest.Builder builder =
+          new ListPortfolioBalancesRequest.Builder().portfolioId(portfolioId);
 
       if (symbols != null) {
         builder.symbols(symbols);
@@ -64,7 +65,8 @@ public class ListPortfolioBalances {
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
       ListPortfolioBalancesResponse response = service.listPortfolioBalances(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

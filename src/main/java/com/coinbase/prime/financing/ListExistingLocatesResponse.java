@@ -19,22 +19,18 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.ExistingLocate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Existing Locates
- */
+/** List Existing Locates */
 public class ListExistingLocatesResponse {
-    @JsonProperty("locates")
-    private ExistingLocate[] locates;
+  @JsonProperty("locates")
+  private ExistingLocate[] locates;
 
-    public ListExistingLocatesResponse() {
-    }
+  public ListExistingLocatesResponse() {}
 
-    public ExistingLocate[] getLocates() {
-        return locates;
-    }
+  public ExistingLocate[] getLocates() {
+    return locates;
+  }
 
-    public void setLocates(ExistingLocate[] locates) {
-        this.locates = locates;
-    }
-
+  public void setLocates(ExistingLocate[] locates) {
+    this.locates = locates;
+  }
 }

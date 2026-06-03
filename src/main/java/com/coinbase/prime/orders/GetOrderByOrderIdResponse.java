@@ -19,22 +19,18 @@ package com.coinbase.prime.orders;
 import com.coinbase.prime.model.Order;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Order by Order ID
- */
+/** Get Order by Order ID */
 public class GetOrderByOrderIdResponse {
-    @JsonProperty("order")
-    private Order order;
+  @JsonProperty("order")
+  private Order order;
 
-    public GetOrderByOrderIdResponse() {
-    }
+  public GetOrderByOrderIdResponse() {}
 
-    public Order getOrder() {
-        return order;
-    }
+  public Order getOrder() {
+    return order;
+  }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
+  public void setOrder(Order order) {
+    this.order = order;
+  }
 }

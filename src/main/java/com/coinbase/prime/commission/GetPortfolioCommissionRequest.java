@@ -16,76 +16,70 @@
 
 package com.coinbase.prime.commission;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Portfolio Commission
- */
+/** Get Portfolio Commission */
 public class GetPortfolioCommissionRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * Specific trading pair to check commission (e.g BTC-USD)
-     */
-    @JsonProperty("product_id")
+  /** Specific trading pair to check commission (e.g BTC-USD) */
+  @JsonProperty("product_id")
+  private String productId;
+
+  public GetPortfolioCommissionRequest() {}
+
+  public GetPortfolioCommissionRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.productId = builder.productId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String productId;
 
-    public GetPortfolioCommissionRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetPortfolioCommissionRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
+    public Builder productId(String productId) {
+      this.productId = productId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetPortfolioCommissionRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPortfolioCommissionRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String productId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public GetPortfolioCommissionRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPortfolioCommissionRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

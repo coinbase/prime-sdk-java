@@ -16,113 +16,107 @@
 
 package com.coinbase.prime.balances;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Entity Balances
- */
+/** List Entity Balances */
 public class ListPortfolioBalancesRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** A list of symbols by which to filter the response */
+  @JsonProperty("symbols")
+  private String[] symbols;
+
+  @JsonProperty("balance_type")
+  private PortfolioBalanceType balanceType;
+
+  public ListPortfolioBalancesRequest() {}
+
+  public ListPortfolioBalancesRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.symbols = builder.symbols;
+    this.balanceType = builder.balanceType;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String[] getSymbols() {
+    return symbols;
+  }
+
+  public void setSymbols(String[] symbols) {
+    this.symbols = symbols;
+  }
+
+  public PortfolioBalanceType getBalanceType() {
+    return balanceType;
+  }
+
+  public void setBalanceType(PortfolioBalanceType balanceType) {
+    this.balanceType = balanceType;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * A list of symbols by which to filter the response
-     */
-    @JsonProperty("symbols")
     private String[] symbols;
-
-    @JsonProperty("balance_type")
     private PortfolioBalanceType balanceType;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListPortfolioBalancesRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListPortfolioBalancesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.symbols = builder.symbols;
-        this.balanceType = builder.balanceType;
+    public Builder symbols(String[] symbols) {
+      this.symbols = symbols;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder balanceType(PortfolioBalanceType balanceType) {
+      this.balanceType = balanceType;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public String[] getSymbols() {
-        return symbols;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public void setSymbols(String[] symbols) {
-        this.symbols = symbols;
+    public ListPortfolioBalancesRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListPortfolioBalancesRequest(this);
     }
 
-    public PortfolioBalanceType getBalanceType() {
-        return balanceType;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setBalanceType(PortfolioBalanceType balanceType) {
-        this.balanceType = balanceType;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String[] symbols;
-        private PortfolioBalanceType balanceType;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder symbols(String[] symbols) {
-            this.symbols = symbols;
-            return this;
-        }
-
-        public Builder balanceType(PortfolioBalanceType balanceType) {
-            this.balanceType = balanceType;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListPortfolioBalancesRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListPortfolioBalancesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

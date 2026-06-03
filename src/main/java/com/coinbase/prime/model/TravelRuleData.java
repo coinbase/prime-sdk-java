@@ -19,153 +19,142 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.TravelRuleParty;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
-    /**
-     * Data object used for withdrawals.
-     */
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/** Data object used for withdrawals. */
 public class TravelRuleData {
-    /**
-     * Represents a party in a travel rule transfer (originator or beneficiary).
-     */
-    @JsonProperty("beneficiary")
+  /** Represents a party in a travel rule transfer (originator or beneficiary). */
+  @JsonProperty("beneficiary")
+  private TravelRuleParty beneficiary;
+
+  /** Represents a party in a travel rule transfer (originator or beneficiary). */
+  @JsonProperty("originator")
+  private TravelRuleParty originator;
+
+  /** True if user owns the counterparty address (self-transfer) */
+  @JsonProperty("is_self")
+  private boolean isSelf;
+
+  /** True if Coinbase is being used as an intermediary for a customer transfer. */
+  @JsonProperty("is_intermediary")
+  private boolean isIntermediary;
+
+  /** True to skip wallet ownership verification */
+  @JsonProperty("opt_out_of_ownership_verification")
+  private boolean optOutOfOwnershipVerification;
+
+  /**
+   * Whether the originating VASP attests to verified wallet ownership. When true with
+   * is_intermediary, enables automatic VASP data enrichment from the legal entity.
+   */
+  @JsonProperty("attest_verified_wallet_ownership")
+  private boolean attestVerifiedWalletOwnership;
+
+  public TravelRuleData() {}
+
+  public TravelRuleData(Builder builder) {
+    this.beneficiary = builder.beneficiary;
+    this.originator = builder.originator;
+    this.isSelf = builder.isSelf;
+    this.isIntermediary = builder.isIntermediary;
+    this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+    this.attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
+  }
+
+  public TravelRuleParty getBeneficiary() {
+    return beneficiary;
+  }
+
+  public void setBeneficiary(TravelRuleParty beneficiary) {
+    this.beneficiary = beneficiary;
+  }
+
+  public TravelRuleParty getOriginator() {
+    return originator;
+  }
+
+  public void setOriginator(TravelRuleParty originator) {
+    this.originator = originator;
+  }
+
+  public boolean getIsSelf() {
+    return isSelf;
+  }
+
+  public void setIsSelf(boolean isSelf) {
+    this.isSelf = isSelf;
+  }
+
+  public boolean getIsIntermediary() {
+    return isIntermediary;
+  }
+
+  public void setIsIntermediary(boolean isIntermediary) {
+    this.isIntermediary = isIntermediary;
+  }
+
+  public boolean getOptOutOfOwnershipVerification() {
+    return optOutOfOwnershipVerification;
+  }
+
+  public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
+    this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+  }
+
+  public boolean getAttestVerifiedWalletOwnership() {
+    return attestVerifiedWalletOwnership;
+  }
+
+  public void setAttestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
+    this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
+  }
+
+  public static class Builder {
     private TravelRuleParty beneficiary;
 
-    /**
-     * Represents a party in a travel rule transfer (originator or beneficiary).
-     */
-    @JsonProperty("originator")
     private TravelRuleParty originator;
 
-    /**
-     * True if user owns the counterparty address (self-transfer)
-     */
-    @JsonProperty("is_self")
     private boolean isSelf;
 
-    /**
-     * True if Coinbase is being used as an intermediary for a customer transfer.
-     */
-    @JsonProperty("is_intermediary")
     private boolean isIntermediary;
 
-    /**
-     * True to skip wallet ownership verification
-     */
-    @JsonProperty("opt_out_of_ownership_verification")
     private boolean optOutOfOwnershipVerification;
 
-    /**
-     * Whether the originating VASP attests to verified wallet ownership. When true with is_intermediary, enables automatic VASP data enrichment from the legal entity.
-     */
-    @JsonProperty("attest_verified_wallet_ownership")
     private boolean attestVerifiedWalletOwnership;
 
-    public TravelRuleData() {
+    public Builder beneficiary(TravelRuleParty beneficiary) {
+      this.beneficiary = beneficiary;
+      return this;
     }
 
-    public TravelRuleData(Builder builder) {
-        this.beneficiary = builder.beneficiary;
-        this.originator = builder.originator;
-        this.isSelf = builder.isSelf;
-        this.isIntermediary = builder.isIntermediary;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
-        this.attestVerifiedWalletOwnership = builder.attestVerifiedWalletOwnership;
-    }
-    public TravelRuleParty getBeneficiary() {
-        return beneficiary;
+    public Builder originator(TravelRuleParty originator) {
+      this.originator = originator;
+      return this;
     }
 
-    public void setBeneficiary(TravelRuleParty beneficiary) {
-        this.beneficiary = beneficiary;
-    }
-    public TravelRuleParty getOriginator() {
-        return originator;
+    public Builder isSelf(boolean isSelf) {
+      this.isSelf = isSelf;
+      return this;
     }
 
-    public void setOriginator(TravelRuleParty originator) {
-        this.originator = originator;
-    }
-    public boolean getIsSelf() {
-        return isSelf;
+    public Builder isIntermediary(boolean isIntermediary) {
+      this.isIntermediary = isIntermediary;
+      return this;
     }
 
-    public void setIsSelf(boolean isSelf) {
-        this.isSelf = isSelf;
-    }
-    public boolean getIsIntermediary() {
-        return isIntermediary;
+    public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
+      this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+      return this;
     }
 
-    public void setIsIntermediary(boolean isIntermediary) {
-        this.isIntermediary = isIntermediary;
-    }
-    public boolean getOptOutOfOwnershipVerification() {
-        return optOutOfOwnershipVerification;
+    public Builder attestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
+      this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
+      return this;
     }
 
-    public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
-        this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+    public TravelRuleData build() {
+      return new TravelRuleData(this);
     }
-    public boolean getAttestVerifiedWalletOwnership() {
-        return attestVerifiedWalletOwnership;
-    }
-
-    public void setAttestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
-        this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
-    }
-    public static class Builder {
-        private TravelRuleParty beneficiary;
-
-        private TravelRuleParty originator;
-
-        private boolean isSelf;
-
-        private boolean isIntermediary;
-
-        private boolean optOutOfOwnershipVerification;
-
-        private boolean attestVerifiedWalletOwnership;
-
-        public Builder beneficiary(TravelRuleParty beneficiary) {
-            this.beneficiary = beneficiary;
-            return this;
-        }
-
-        public Builder originator(TravelRuleParty originator) {
-            this.originator = originator;
-            return this;
-        }
-
-        public Builder isSelf(boolean isSelf) {
-            this.isSelf = isSelf;
-            return this;
-        }
-
-        public Builder isIntermediary(boolean isIntermediary) {
-            this.isIntermediary = isIntermediary;
-            return this;
-        }
-
-        public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
-            this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
-            return this;
-        }
-
-        public Builder attestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
-            this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
-            return this;
-        }
-
-        public TravelRuleData build() {
-            return new TravelRuleData(this);
-        }
-    }
+  }
 }
-

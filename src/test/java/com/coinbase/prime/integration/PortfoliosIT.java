@@ -16,6 +16,9 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.portfolios.GetPortfolioRequest;
 import com.coinbase.prime.portfolios.GetPortfolioResponse;
@@ -24,25 +27,24 @@ import com.coinbase.prime.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class PortfoliosIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListPortfolios() throws Exception {
-        PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-        ListPortfoliosResponse response = service.listPortfolios(new ListPortfoliosRequest.Builder().build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolios() throws Exception {
+    PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
+    ListPortfoliosResponse response =
+        service.listPortfolios(new ListPortfoliosRequest.Builder().build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetPortfolio() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-        GetPortfolioResponse response = service.getPortfolio(
-                new GetPortfolioRequest.Builder().portfolioId(portfolioId).build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolio() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
+    GetPortfolioResponse response =
+        service.getPortfolio(new GetPortfolioRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 }

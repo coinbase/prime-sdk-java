@@ -18,25 +18,19 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Response after submitting travel rule data for a deposit
- */
+/** Response after submitting travel rule data for a deposit */
 public class SubmitDepositTravelRuleDataResponse {
-    /**
-     * Whether additional ownership verification is required
-     */
-    @JsonProperty("ownership_verification_required")
-    private Boolean ownershipVerificationRequired;
+  /** Whether additional ownership verification is required */
+  @JsonProperty("ownership_verification_required")
+  private Boolean ownershipVerificationRequired;
 
-    public SubmitDepositTravelRuleDataResponse() {
-    }
+  public SubmitDepositTravelRuleDataResponse() {}
 
-    public Boolean getOwnershipVerificationRequired() {
-        return ownershipVerificationRequired;
-    }
+  public Boolean getOwnershipVerificationRequired() {
+    return ownershipVerificationRequired;
+  }
 
-    public void setOwnershipVerificationRequired(Boolean ownershipVerificationRequired) {
-        this.ownershipVerificationRequired = ownershipVerificationRequired;
-    }
-
+  public void setOwnershipVerificationRequired(Boolean ownershipVerificationRequired) {
+    this.ownershipVerificationRequired = ownershipVerificationRequired;
+  }
 }

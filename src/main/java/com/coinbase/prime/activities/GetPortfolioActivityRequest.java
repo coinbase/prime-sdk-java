@@ -16,80 +16,74 @@
 
 package com.coinbase.prime.activities;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Activity by Activity ID
- */
+/** Get Activity by Activity ID */
 public class GetPortfolioActivityRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * Id of the activity to retrieve
-     */
-    @JsonProperty(required = true, value = "activity_id")
-    @JsonIgnore
+  /** Id of the activity to retrieve */
+  @JsonProperty(required = true, value = "activity_id")
+  @JsonIgnore
+  private String activityId;
+
+  public GetPortfolioActivityRequest() {}
+
+  public GetPortfolioActivityRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.activityId = builder.activityId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getActivityId() {
+    return activityId;
+  }
+
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String activityId;
 
-    public GetPortfolioActivityRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetPortfolioActivityRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.activityId = builder.activityId;
+    public Builder activityId(String activityId) {
+      this.activityId = activityId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetPortfolioActivityRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetPortfolioActivityRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.activityId)) {
+        throw new CoinbaseClientException("ActivityId is required");
+      }
     }
-
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public GetPortfolioActivityRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetPortfolioActivityRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.activityId)) {
-                throw new CoinbaseClientException("ActivityId is required");
-            }
-        }
-    }
+  }
 }

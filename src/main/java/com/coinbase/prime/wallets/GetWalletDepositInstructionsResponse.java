@@ -20,33 +20,29 @@ import com.coinbase.prime.model.WalletCryptoDepositInstructions;
 import com.coinbase.prime.model.WalletFiatDepositInstructions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Wallet Deposit Instructions
- */
+/** Get Wallet Deposit Instructions */
 public class GetWalletDepositInstructionsResponse {
-    @JsonProperty("crypto_instructions")
-    private WalletCryptoDepositInstructions cryptoInstructions;
+  @JsonProperty("crypto_instructions")
+  private WalletCryptoDepositInstructions cryptoInstructions;
 
-    @JsonProperty("fiat_instructions")
-    private WalletFiatDepositInstructions fiatInstructions;
+  @JsonProperty("fiat_instructions")
+  private WalletFiatDepositInstructions fiatInstructions;
 
-    public GetWalletDepositInstructionsResponse() {
-    }
+  public GetWalletDepositInstructionsResponse() {}
 
-    public WalletCryptoDepositInstructions getCryptoInstructions() {
-        return cryptoInstructions;
-    }
+  public WalletCryptoDepositInstructions getCryptoInstructions() {
+    return cryptoInstructions;
+  }
 
-    public void setCryptoInstructions(WalletCryptoDepositInstructions cryptoInstructions) {
-        this.cryptoInstructions = cryptoInstructions;
-    }
+  public void setCryptoInstructions(WalletCryptoDepositInstructions cryptoInstructions) {
+    this.cryptoInstructions = cryptoInstructions;
+  }
 
-    public WalletFiatDepositInstructions getFiatInstructions() {
-        return fiatInstructions;
-    }
+  public WalletFiatDepositInstructions getFiatInstructions() {
+    return fiatInstructions;
+  }
 
-    public void setFiatInstructions(WalletFiatDepositInstructions fiatInstructions) {
-        this.fiatInstructions = fiatInstructions;
-    }
-
+  public void setFiatInstructions(WalletFiatDepositInstructions fiatInstructions) {
+    this.fiatInstructions = fiatInstructions;
+  }
 }

@@ -27,7 +27,8 @@ import com.coinbase.prime.utils.Utils;
 public class GetPortfolioActivity {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String activityId = args.length > 0 ? args[0] : "ACTIVITY_ID_HERE";
@@ -36,16 +37,17 @@ public class GetPortfolioActivity {
       System.out.println("Using Activity ID: " + activityId);
 
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
-      GetPortfolioActivityResponse response = service.getPortfolioActivity(
-          new GetPortfolioActivityRequest.Builder()
-              .portfolioId(portfolioId)
-              .activityId(activityId)
-              .build());
+      GetPortfolioActivityResponse response =
+          service.getPortfolioActivity(
+              new GetPortfolioActivityRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .activityId(activityId)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
-

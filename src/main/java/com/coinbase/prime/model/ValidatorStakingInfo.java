@@ -19,68 +19,59 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.StakingStatus;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ValidatorStakingInfo {
-    /**
-     * The validator address (public key)
-     */
-    @JsonProperty("validator_address")
+  /** The validator address (public key) */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  /** List of active staking requests for this validator */
+  @JsonProperty("statuses")
+  private List<StakingStatus> statuses;
+
+  public ValidatorStakingInfo() {}
+
+  public ValidatorStakingInfo(Builder builder) {
+    this.validatorAddress = builder.validatorAddress;
+    this.statuses = builder.statuses;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public List<StakingStatus> getStatuses() {
+    return statuses;
+  }
+
+  public void setStatuses(List<StakingStatus> statuses) {
+    this.statuses = statuses;
+  }
+
+  public static class Builder {
     private String validatorAddress;
 
-    /**
-     * List of active staking requests for this validator
-     */
-    @JsonProperty("statuses")
     private List<StakingStatus> statuses;
 
-    public ValidatorStakingInfo() {
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public ValidatorStakingInfo(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.statuses = builder.statuses;
-    }
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public Builder statuses(List<StakingStatus> statuses) {
+      this.statuses = statuses;
+      return this;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
+    public ValidatorStakingInfo build() {
+      return new ValidatorStakingInfo(this);
     }
-    public List<StakingStatus> getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(List<StakingStatus> statuses) {
-        this.statuses = statuses;
-    }
-    public static class Builder {
-        private String validatorAddress;
-
-        private List<StakingStatus> statuses;
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public Builder statuses(List<StakingStatus> statuses) {
-            this.statuses = statuses;
-            return this;
-        }
-
-        public ValidatorStakingInfo build() {
-            return new ValidatorStakingInfo(this);
-        }
-    }
+  }
 }
-

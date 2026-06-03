@@ -16,147 +16,137 @@
 
 package com.coinbase.prime.wallets;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Wallet Deposit Instructions
- */
+/** Get Wallet Deposit Instructions */
 public class GetWalletDepositInstructionsRequest {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The wallet ID */
+  @JsonProperty(required = true, value = "wallet_id")
+  @JsonIgnore
+  private String walletId;
+
+  /**
+   * The deposit type - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit -
+   * WIRE: A wire deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT
+   * deposit - SEPA: A SEPA deposit (Single Euro Payments Area)
+   */
+  @JsonProperty("deposit_type")
+  private WalletDepositInstructionType depositType;
+
+  /** The name of the network The network id: base, bitcoin, ethereum, solana etc */
+  @JsonProperty("network.id")
+  private String networkId;
+
+  /** The network type The network type: mainnet, testnet, etc */
+  @JsonProperty("network.type")
+  private String networkType;
+
+  public GetWalletDepositInstructionsRequest() {}
+
+  public GetWalletDepositInstructionsRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.walletId = builder.walletId;
+    this.depositType = builder.depositType;
+    this.networkId = builder.networkId;
+    this.networkType = builder.networkType;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getWalletId() {
+    return walletId;
+  }
+
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
+
+  public WalletDepositInstructionType getDepositType() {
+    return depositType;
+  }
+
+  public void setDepositType(WalletDepositInstructionType depositType) {
+    this.depositType = depositType;
+  }
+
+  public String getNetworkId() {
+    return networkId;
+  }
+
+  public void setNetworkId(String networkId) {
+    this.networkId = networkId;
+  }
+
+  public String getNetworkType() {
+    return networkType;
+  }
+
+  public void setNetworkType(String networkType) {
+    this.networkType = networkType;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The wallet ID
-     */
-    @JsonProperty(required = true, value = "wallet_id")
-    @JsonIgnore
     private String walletId;
-
-    /**
-     * The deposit type - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit - SEPA: A SEPA deposit (Single Euro Payments Area)
-     */
-    @JsonProperty("deposit_type")
     private WalletDepositInstructionType depositType;
-
-    /**
-     * The name of the network The network id: base, bitcoin, ethereum, solana etc
-     */
-    @JsonProperty("network.id")
     private String networkId;
-
-    /**
-     * The network type The network type: mainnet, testnet, etc
-     */
-    @JsonProperty("network.type")
     private String networkType;
 
-    public GetWalletDepositInstructionsRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetWalletDepositInstructionsRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.walletId = builder.walletId;
-        this.depositType = builder.depositType;
-        this.networkId = builder.networkId;
-        this.networkType = builder.networkType;
+    public Builder walletId(String walletId) {
+      this.walletId = walletId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder depositType(WalletDepositInstructionType depositType) {
+      this.depositType = depositType;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder networkId(String networkId) {
+      this.networkId = networkId;
+      return this;
     }
 
-    public String getWalletId() {
-        return walletId;
+    public Builder networkType(String networkType) {
+      this.networkType = networkType;
+      return this;
     }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
+    public GetWalletDepositInstructionsRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetWalletDepositInstructionsRequest(this);
     }
 
-    public WalletDepositInstructionType getDepositType() {
-        return depositType;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.walletId)) {
+        throw new CoinbaseClientException("WalletId is required");
+      }
     }
-
-    public void setDepositType(WalletDepositInstructionType depositType) {
-        this.depositType = depositType;
-    }
-
-    public String getNetworkId() {
-        return networkId;
-    }
-
-    public void setNetworkId(String networkId) {
-        this.networkId = networkId;
-    }
-
-    public String getNetworkType() {
-        return networkType;
-    }
-
-    public void setNetworkType(String networkType) {
-        this.networkType = networkType;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String walletId;
-        private WalletDepositInstructionType depositType;
-        private String networkId;
-        private String networkType;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder depositType(WalletDepositInstructionType depositType) {
-            this.depositType = depositType;
-            return this;
-        }
-
-        public Builder networkId(String networkId) {
-            this.networkId = networkId;
-            return this;
-        }
-
-        public Builder networkType(String networkType) {
-            this.networkType = networkType;
-            return this;
-        }
-
-        public GetWalletDepositInstructionsRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetWalletDepositInstructionsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId is required");
-            }
-        }
-    }
+  }
 }

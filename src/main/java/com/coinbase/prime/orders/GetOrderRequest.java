@@ -16,77 +16,73 @@
 
 package com.coinbase.prime.orders;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Order by Order ID
- */
+/** Get Order by Order ID */
 public class GetOrderRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    @JsonProperty(required = true, value = "order_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "order_id")
+  @JsonIgnore
+  private String orderId;
+
+  public GetOrderRequest() {}
+
+  public GetOrderRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.orderId = builder.orderId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String orderId;
 
-    public GetOrderRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetOrderRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.orderId = builder.orderId;
+    public Builder orderId(String orderId) {
+      this.orderId = orderId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetOrderRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetOrderRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.orderId)) {
+        throw new CoinbaseClientException("OrderId is required");
+      }
     }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String orderId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
-        }
-
-        public GetOrderRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetOrderRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.orderId)) {
-                throw new CoinbaseClientException("OrderId is required");
-            }
-        }
-    }
+  }
 }

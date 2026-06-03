@@ -28,4 +28,3 @@ public enum ActivityCategory {
   ACTIVITY_CATEGORY_ALLOCATION,
   ACTIVITY_CATEGORY_LENDING
 }
-

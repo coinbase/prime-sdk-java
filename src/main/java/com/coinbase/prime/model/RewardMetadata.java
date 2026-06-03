@@ -19,45 +19,48 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.RewardSubtype;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class RewardMetadata {
-    /**
-     * - REWARD_SUBTYPE_UNKNOWN: An unknown reward subtype, reward subtype may not be supported in the API response yet - MEV_REWARD: A maximal extractable value reward i.e. sol mev rewards - INFLATION_REWARD: An inflationary reward i.e. solana inflationary rewards - BLOCK_REWARD: A block reward i.e. solana block rewards - VALIDATOR_REWARD: A validator reward i.e. ethereum validator (consensus layer) rewards - TRANSACTION_REWARD: A transaction reward i.e. ethereum transaction (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward i.e. coinbase pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL dividend reward i.e. dividends from BUIDL fund holdings
-     */
-    @JsonProperty("subtype")
+  /**
+   * - REWARD_SUBTYPE_UNKNOWN: An unknown reward subtype, reward subtype may not be supported in the
+   * API response yet - MEV_REWARD: A maximal extractable value reward i.e. sol mev rewards -
+   * INFLATION_REWARD: An inflationary reward i.e. solana inflationary rewards - BLOCK_REWARD: A
+   * block reward i.e. solana block rewards - VALIDATOR_REWARD: A validator reward i.e. ethereum
+   * validator (consensus layer) rewards - TRANSACTION_REWARD: A transaction reward i.e. ethereum
+   * transaction (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward
+   * i.e. coinbase pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL
+   * dividend reward i.e. dividends from BUIDL fund holdings
+   */
+  @JsonProperty("subtype")
+  private RewardSubtype subtype;
+
+  public RewardMetadata() {}
+
+  public RewardMetadata(Builder builder) {
+    this.subtype = builder.subtype;
+  }
+
+  public RewardSubtype getSubtype() {
+    return subtype;
+  }
+
+  public void setSubtype(RewardSubtype subtype) {
+    this.subtype = subtype;
+  }
+
+  public static class Builder {
     private RewardSubtype subtype;
 
-    public RewardMetadata() {
+    public Builder subtype(RewardSubtype subtype) {
+      this.subtype = subtype;
+      return this;
     }
 
-    public RewardMetadata(Builder builder) {
-        this.subtype = builder.subtype;
+    public RewardMetadata build() {
+      return new RewardMetadata(this);
     }
-    public RewardSubtype getSubtype() {
-        return subtype;
-    }
-
-    public void setSubtype(RewardSubtype subtype) {
-        this.subtype = subtype;
-    }
-    public static class Builder {
-        private RewardSubtype subtype;
-
-        public Builder subtype(RewardSubtype subtype) {
-            this.subtype = subtype;
-            return this;
-        }
-
-        public RewardMetadata build() {
-            return new RewardMetadata(this);
-        }
-    }
+  }
 }
-

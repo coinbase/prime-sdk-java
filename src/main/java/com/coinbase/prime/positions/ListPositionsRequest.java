@@ -16,76 +16,70 @@
 
 package com.coinbase.prime.positions;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Entity Positions
- */
+/** List Entity Positions */
 public class ListPositionsRequest extends PrimeListRequest {
-    /**
-     * The unique ID of the entity
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** The unique ID of the entity */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  public ListPositionsRequest() {}
+
+  public ListPositionsRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.entityId = builder.entityId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public static class Builder {
     private String entityId;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListPositionsRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ListPositionsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.entityId = builder.entityId;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public ListPositionsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListPositionsRequest(this);
     }
 
-    public static class Builder {
-        private String entityId;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListPositionsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListPositionsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
+  }
 }

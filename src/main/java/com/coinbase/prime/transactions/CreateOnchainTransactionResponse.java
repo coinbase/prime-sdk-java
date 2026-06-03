@@ -18,25 +18,19 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Onchain Transaction
- */
+/** Create Onchain Transaction */
 public class CreateOnchainTransactionResponse {
-    /**
-     * Unique identifier for the created transaction
-     */
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  /** Unique identifier for the created transaction */
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    public CreateOnchainTransactionResponse() {
-    }
+  public CreateOnchainTransactionResponse() {}
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 }

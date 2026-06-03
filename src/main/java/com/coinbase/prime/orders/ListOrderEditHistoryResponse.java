@@ -20,44 +20,40 @@ import com.coinbase.prime.model.LimitOrderEdit;
 import com.coinbase.prime.model.OrderEdit;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Order Edit History
- */
+/** List Order Edit History */
 public class ListOrderEditHistoryResponse {
-    @JsonProperty("order_id")
-    private String orderId;
+  @JsonProperty("order_id")
+  private String orderId;
 
-    @JsonProperty("order_edit_history")
-    private LimitOrderEdit[] orderEditHistory;
+  @JsonProperty("order_edit_history")
+  private LimitOrderEdit[] orderEditHistory;
 
-    @JsonProperty("edit_history")
-    private OrderEdit[] editHistory;
+  @JsonProperty("edit_history")
+  private OrderEdit[] editHistory;
 
-    public ListOrderEditHistoryResponse() {
-    }
+  public ListOrderEditHistoryResponse() {}
 
-    public String getOrderId() {
-        return orderId;
-    }
+  public String getOrderId() {
+    return orderId;
+  }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
 
-    public LimitOrderEdit[] getOrderEditHistory() {
-        return orderEditHistory;
-    }
+  public LimitOrderEdit[] getOrderEditHistory() {
+    return orderEditHistory;
+  }
 
-    public void setOrderEditHistory(LimitOrderEdit[] orderEditHistory) {
-        this.orderEditHistory = orderEditHistory;
-    }
+  public void setOrderEditHistory(LimitOrderEdit[] orderEditHistory) {
+    this.orderEditHistory = orderEditHistory;
+  }
 
-    public OrderEdit[] getEditHistory() {
-        return editHistory;
-    }
+  public OrderEdit[] getEditHistory() {
+    return editHistory;
+  }
 
-    public void setEditHistory(OrderEdit[] editHistory) {
-        this.editHistory = editHistory;
-    }
-
+  public void setEditHistory(OrderEdit[] editHistory) {
+    this.editHistory = editHistory;
+  }
 }

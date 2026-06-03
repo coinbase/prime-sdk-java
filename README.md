@@ -1,5 +1,7 @@
 # Coinbase Prime Java SDK
 
+The canonical source repository is **[coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java)**. The former [coinbase-samples/prime-sdk-java](https://github.com/coinbase-samples/prime-sdk-java) repository is deprecated. Maven Central releases **1.9.0+** are published from the canonical repository.
+
 [![Maven Central](https://img.shields.io/maven-central/v/com.coinbase.prime/coinbase-prime-sdk-java.svg)](https://central.sonatype.com/artifact/com.coinbase.prime/coinbase-prime-sdk-java)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

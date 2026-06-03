@@ -16,100 +16,90 @@
 
 package com.coinbase.prime.financing;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Entity Locate Availabilities
- */
+/** Get Entity Locate Availabilities */
 public class GetEntityLocateAvailabilitiesRequest {
-    /**
-     * The unique ID of the entity
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** The unique ID of the entity */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  /** Deprecated: Use locate_date instead */
+  @JsonProperty("conversion_date")
+  private String conversionDate;
+
+  /** The date of the locate availability in YYYY-MM-DD format */
+  @JsonProperty("locate_date")
+  private String locateDate;
+
+  public GetEntityLocateAvailabilitiesRequest() {}
+
+  public GetEntityLocateAvailabilitiesRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.conversionDate = builder.conversionDate;
+    this.locateDate = builder.locateDate;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getConversionDate() {
+    return conversionDate;
+  }
+
+  public void setConversionDate(String conversionDate) {
+    this.conversionDate = conversionDate;
+  }
+
+  public String getLocateDate() {
+    return locateDate;
+  }
+
+  public void setLocateDate(String locateDate) {
+    this.locateDate = locateDate;
+  }
+
+  public static class Builder {
     private String entityId;
-
-    /**
-     * Deprecated: Use locate_date instead
-     */
-    @JsonProperty("conversion_date")
     private String conversionDate;
-
-    /**
-     * The date of the locate availability in YYYY-MM-DD format
-     */
-    @JsonProperty("locate_date")
     private String locateDate;
 
-    public GetEntityLocateAvailabilitiesRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetEntityLocateAvailabilitiesRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.conversionDate = builder.conversionDate;
-        this.locateDate = builder.locateDate;
+    public Builder conversionDate(String conversionDate) {
+      this.conversionDate = conversionDate;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Builder locateDate(String locateDate) {
+      this.locateDate = locateDate;
+      return this;
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public GetEntityLocateAvailabilitiesRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetEntityLocateAvailabilitiesRequest(this);
     }
 
-    public String getConversionDate() {
-        return conversionDate;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setConversionDate(String conversionDate) {
-        this.conversionDate = conversionDate;
-    }
-
-    public String getLocateDate() {
-        return locateDate;
-    }
-
-    public void setLocateDate(String locateDate) {
-        this.locateDate = locateDate;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String conversionDate;
-        private String locateDate;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder conversionDate(String conversionDate) {
-            this.conversionDate = conversionDate;
-            return this;
-        }
-
-        public Builder locateDate(String locateDate) {
-            this.locateDate = locateDate;
-            return this;
-        }
-
-        public GetEntityLocateAvailabilitiesRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetEntityLocateAvailabilitiesRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

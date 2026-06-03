@@ -21,7 +21,7 @@
   <description>Sample Java SDK for the Coinbase Prime REST APIs</description>
   <groupId>com.coinbase.prime</groupId>
   <url>https://github.com/coinbase-samples/prime-sdk-java</url>
-  <version>1.8.0</version>
+  <version>1.8.1</version>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -70,6 +70,19 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.43.0</version>
+        <configuration>
+          <java>
+            <googleJavaFormat>
+              <version>1.24.0</version>
+              <style>GOOGLE</style>
+            </googleJavaFormat>
+          </java>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

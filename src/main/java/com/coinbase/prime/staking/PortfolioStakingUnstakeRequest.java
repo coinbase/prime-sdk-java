@@ -16,140 +16,131 @@
 
 package com.coinbase.prime.staking;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.PortfolioStakingMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Request to unstake currency across a portfolio
- */
+/** Request to unstake currency across a portfolio */
 public class PortfolioStakingUnstakeRequest {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /**
+   * The client generated idempotency key (uuid required) for requested execution. Subsequent
+   * requests using the same key will not create new transactions.
+   */
+  @JsonProperty("idempotency_key")
+  private String idempotencyKey;
+
+  /** The currency symbol to unstake */
+  @JsonProperty("currency_symbol")
+  private String currencySymbol;
+
+  /** The quantity of the chosen currency to unstake */
+  @JsonProperty("amount")
+  private String amount;
+
+  @JsonProperty("metadata")
+  private PortfolioStakingMetadata metadata;
+
+  public PortfolioStakingUnstakeRequest() {}
+
+  public PortfolioStakingUnstakeRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.idempotencyKey = builder.idempotencyKey;
+    this.currencySymbol = builder.currencySymbol;
+    this.amount = builder.amount;
+    this.metadata = builder.metadata;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getIdempotencyKey() {
+    return idempotencyKey;
+  }
+
+  public void setIdempotencyKey(String idempotencyKey) {
+    this.idempotencyKey = idempotencyKey;
+  }
+
+  public String getCurrencySymbol() {
+    return currencySymbol;
+  }
+
+  public void setCurrencySymbol(String currencySymbol) {
+    this.currencySymbol = currencySymbol;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public PortfolioStakingMetadata getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(PortfolioStakingMetadata metadata) {
+    this.metadata = metadata;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The client generated idempotency key (uuid required) for requested execution. Subsequent requests using the same key will not create new transactions.
-     */
-    @JsonProperty("idempotency_key")
     private String idempotencyKey;
-
-    /**
-     * The currency symbol to unstake
-     */
-    @JsonProperty("currency_symbol")
     private String currencySymbol;
-
-    /**
-     * The quantity of the chosen currency to unstake
-     */
-    @JsonProperty("amount")
     private String amount;
-
-    @JsonProperty("metadata")
     private PortfolioStakingMetadata metadata;
 
-    public PortfolioStakingUnstakeRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public PortfolioStakingUnstakeRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.idempotencyKey = builder.idempotencyKey;
-        this.currencySymbol = builder.currencySymbol;
-        this.amount = builder.amount;
-        this.metadata = builder.metadata;
+    public Builder idempotencyKey(String idempotencyKey) {
+      this.idempotencyKey = idempotencyKey;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder currencySymbol(String currencySymbol) {
+      this.currencySymbol = currencySymbol;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public String getIdempotencyKey() {
-        return idempotencyKey;
+    public Builder metadata(PortfolioStakingMetadata metadata) {
+      this.metadata = metadata;
+      return this;
     }
 
-    public void setIdempotencyKey(String idempotencyKey) {
-        this.idempotencyKey = idempotencyKey;
+    public PortfolioStakingUnstakeRequest build() throws CoinbaseClientException {
+      validate();
+      return new PortfolioStakingUnstakeRequest(this);
     }
 
-    public String getCurrencySymbol() {
-        return currencySymbol;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public PortfolioStakingMetadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(PortfolioStakingMetadata metadata) {
-        this.metadata = metadata;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String idempotencyKey;
-        private String currencySymbol;
-        private String amount;
-        private PortfolioStakingMetadata metadata;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder idempotencyKey(String idempotencyKey) {
-            this.idempotencyKey = idempotencyKey;
-            return this;
-        }
-
-        public Builder currencySymbol(String currencySymbol) {
-            this.currencySymbol = currencySymbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder metadata(PortfolioStakingMetadata metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        public PortfolioStakingUnstakeRequest build() throws CoinbaseClientException {
-            validate();
-            return new PortfolioStakingUnstakeRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

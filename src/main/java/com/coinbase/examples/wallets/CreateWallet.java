@@ -20,38 +20,48 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.WalletType;
+import com.coinbase.prime.utils.Utils;
 import com.coinbase.prime.wallets.CreateWalletRequest;
 import com.coinbase.prime.wallets.CreateWalletResponse;
 import com.coinbase.prime.wallets.WalletsService;
-import com.coinbase.prime.utils.Utils;
 
 public class CreateWallet {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      
+
       String walletName = args[0];
       String symbol = args[1];
       WalletType walletType = WalletType.VAULT; // Default to VAULT
 
-      System.out.println("Creating wallet: Portfolio ID: " + portfolioId + ", Name: " + walletName + ", Symbol: " + symbol + ", Type: " + walletType);
+      System.out.println(
+          "Creating wallet: Portfolio ID: "
+              + portfolioId
+              + ", Name: "
+              + walletName
+              + ", Symbol: "
+              + symbol
+              + ", Type: "
+              + walletType);
 
       WalletsService service = PrimeServiceFactory.createWalletsService(client);
-      CreateWalletResponse response = service.createWallet(
-          new CreateWalletRequest.Builder()
-              .portfolioId(portfolioId)
-              .name(walletName)
-              .symbol(symbol)
-              .type(walletType)
-              .build());
+      CreateWalletResponse response =
+          service.createWallet(
+              new CreateWalletRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .name(walletName)
+                  .symbol(symbol)
+                  .type(walletType)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       System.err.println("\n✗ Failed to create wallet:");
       e.printStackTrace();
     }
   }
 }
-

@@ -19,119 +19,151 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * XM 2.0 risk parameters for an asset tier.
- */
+/** XM 2.0 risk parameters for an asset tier. */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-    /**
-     * XM 2.0 risk parameters for an asset tier.
-     */
+/** XM 2.0 risk parameters for an asset tier. */
 public class CrossMarginRiskParameters {
-    /**
-     * Asset tier identifier.
-     */
-    @JsonProperty("asset_tier")
-    private String assetTier;
+  /** Asset tier identifier. */
+  @JsonProperty("asset_tier")
+  private String assetTier;
 
-    /**
-     * Base ratio for long positions.
-     */
-    @JsonProperty("base_ratio_long")
-    private String baseRatioLong;
+  /** Base ratio for long positions. */
+  @JsonProperty("base_ratio_long")
+  private String baseRatioLong;
 
-    /**
-     * Base ratio for short positions.
-     */
-    @JsonProperty("base_ratio_short")
-    private String baseRatioShort;
+  /** Base ratio for short positions. */
+  @JsonProperty("base_ratio_short")
+  private String baseRatioShort;
 
-    /**
-     * Volatility rate for long positions.
-     */
-    @JsonProperty("volatility_rate_long")
-    private String volatilityRateLong;
+  /** Volatility rate for long positions. */
+  @JsonProperty("volatility_rate_long")
+  private String volatilityRateLong;
 
-    /**
-     * Volatility rate for short positions.
-     */
-    @JsonProperty("volatility_rate_short")
-    private String volatilityRateShort;
+  /** Volatility rate for short positions. */
+  @JsonProperty("volatility_rate_short")
+  private String volatilityRateShort;
 
-    /**
-     * Volatility low threshold.
-     */
-    @JsonProperty("volatility_low_threshold")
-    private String volatilityLowThreshold;
+  /** Volatility low threshold. */
+  @JsonProperty("volatility_low_threshold")
+  private String volatilityLowThreshold;
 
-    /**
-     * Volatility high threshold.
-     */
-    @JsonProperty("volatility_high_threshold")
-    private String volatilityHighThreshold;
+  /** Volatility high threshold. */
+  @JsonProperty("volatility_high_threshold")
+  private String volatilityHighThreshold;
 
-    /**
-     * Liquidity A for long positions.
-     */
-    @JsonProperty("liquidity_a_long")
-    private String liquidityALong;
+  /** Liquidity A for long positions. */
+  @JsonProperty("liquidity_a_long")
+  private String liquidityALong;
 
-    /**
-     * Liquidity A for short positions.
-     */
-    @JsonProperty("liquidity_a_short")
-    private String liquidityAShort;
+  /** Liquidity A for short positions. */
+  @JsonProperty("liquidity_a_short")
+  private String liquidityAShort;
 
-    /**
-     * Liquidity B for short positions.
-     */
-    @JsonProperty("liquidity_b_short")
-    private String liquidityBShort;
+  /** Liquidity B for short positions. */
+  @JsonProperty("liquidity_b_short")
+  private String liquidityBShort;
 
-    /**
-     * Liquidity threshold.
-     */
-    @JsonProperty("liquidity_threshold")
-    private String liquidityThreshold;
+  /** Liquidity threshold. */
+  @JsonProperty("liquidity_threshold")
+  private String liquidityThreshold;
 
-    /**
-     * Basis offset credit rate.
-     */
-    @JsonProperty("basis_offset_credit_rate")
-    private String basisOffsetCreditRate;
+  /** Basis offset credit rate. */
+  @JsonProperty("basis_offset_credit_rate")
+  private String basisOffsetCreditRate;
 
-    public String getAssetTier() { return assetTier; }
-    public void setAssetTier(String assetTier) { this.assetTier = assetTier; }
+  public String getAssetTier() {
+    return assetTier;
+  }
 
-    public String getBaseRatioLong() { return baseRatioLong; }
-    public void setBaseRatioLong(String baseRatioLong) { this.baseRatioLong = baseRatioLong; }
+  public void setAssetTier(String assetTier) {
+    this.assetTier = assetTier;
+  }
 
-    public String getBaseRatioShort() { return baseRatioShort; }
-    public void setBaseRatioShort(String baseRatioShort) { this.baseRatioShort = baseRatioShort; }
+  public String getBaseRatioLong() {
+    return baseRatioLong;
+  }
 
-    public String getVolatilityRateLong() { return volatilityRateLong; }
-    public void setVolatilityRateLong(String volatilityRateLong) { this.volatilityRateLong = volatilityRateLong; }
+  public void setBaseRatioLong(String baseRatioLong) {
+    this.baseRatioLong = baseRatioLong;
+  }
 
-    public String getVolatilityRateShort() { return volatilityRateShort; }
-    public void setVolatilityRateShort(String volatilityRateShort) { this.volatilityRateShort = volatilityRateShort; }
+  public String getBaseRatioShort() {
+    return baseRatioShort;
+  }
 
-    public String getVolatilityLowThreshold() { return volatilityLowThreshold; }
-    public void setVolatilityLowThreshold(String volatilityLowThreshold) { this.volatilityLowThreshold = volatilityLowThreshold; }
+  public void setBaseRatioShort(String baseRatioShort) {
+    this.baseRatioShort = baseRatioShort;
+  }
 
-    public String getVolatilityHighThreshold() { return volatilityHighThreshold; }
-    public void setVolatilityHighThreshold(String volatilityHighThreshold) { this.volatilityHighThreshold = volatilityHighThreshold; }
+  public String getVolatilityRateLong() {
+    return volatilityRateLong;
+  }
 
-    public String getLiquidityALong() { return liquidityALong; }
-    public void setLiquidityALong(String liquidityALong) { this.liquidityALong = liquidityALong; }
+  public void setVolatilityRateLong(String volatilityRateLong) {
+    this.volatilityRateLong = volatilityRateLong;
+  }
 
-    public String getLiquidityAShort() { return liquidityAShort; }
-    public void setLiquidityAShort(String liquidityAShort) { this.liquidityAShort = liquidityAShort; }
+  public String getVolatilityRateShort() {
+    return volatilityRateShort;
+  }
 
-    public String getLiquidityBShort() { return liquidityBShort; }
-    public void setLiquidityBShort(String liquidityBShort) { this.liquidityBShort = liquidityBShort; }
+  public void setVolatilityRateShort(String volatilityRateShort) {
+    this.volatilityRateShort = volatilityRateShort;
+  }
 
-    public String getLiquidityThreshold() { return liquidityThreshold; }
-    public void setLiquidityThreshold(String liquidityThreshold) { this.liquidityThreshold = liquidityThreshold; }
+  public String getVolatilityLowThreshold() {
+    return volatilityLowThreshold;
+  }
 
-    public String getBasisOffsetCreditRate() { return basisOffsetCreditRate; }
-    public void setBasisOffsetCreditRate(String basisOffsetCreditRate) { this.basisOffsetCreditRate = basisOffsetCreditRate; }
+  public void setVolatilityLowThreshold(String volatilityLowThreshold) {
+    this.volatilityLowThreshold = volatilityLowThreshold;
+  }
+
+  public String getVolatilityHighThreshold() {
+    return volatilityHighThreshold;
+  }
+
+  public void setVolatilityHighThreshold(String volatilityHighThreshold) {
+    this.volatilityHighThreshold = volatilityHighThreshold;
+  }
+
+  public String getLiquidityALong() {
+    return liquidityALong;
+  }
+
+  public void setLiquidityALong(String liquidityALong) {
+    this.liquidityALong = liquidityALong;
+  }
+
+  public String getLiquidityAShort() {
+    return liquidityAShort;
+  }
+
+  public void setLiquidityAShort(String liquidityAShort) {
+    this.liquidityAShort = liquidityAShort;
+  }
+
+  public String getLiquidityBShort() {
+    return liquidityBShort;
+  }
+
+  public void setLiquidityBShort(String liquidityBShort) {
+    this.liquidityBShort = liquidityBShort;
+  }
+
+  public String getLiquidityThreshold() {
+    return liquidityThreshold;
+  }
+
+  public void setLiquidityThreshold(String liquidityThreshold) {
+    this.liquidityThreshold = liquidityThreshold;
+  }
+
+  public String getBasisOffsetCreditRate() {
+    return basisOffsetCreditRate;
+  }
+
+  public void setBasisOffsetCreditRate(String basisOffsetCreditRate) {
+    this.basisOffsetCreditRate = basisOffsetCreditRate;
+  }
 }

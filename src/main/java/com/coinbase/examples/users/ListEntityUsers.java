@@ -25,22 +25,23 @@ import com.coinbase.prime.users.UsersService;
 import com.coinbase.prime.utils.Utils;
 
 public class ListEntityUsers {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
-            System.out.println("Using Entity ID: " + entityId);
+      System.out.println("Using Entity ID: " + entityId);
 
-            UsersService service = PrimeServiceFactory.createUsersService(client);
-            ListEntityUsersResponse response =
-                    service.listEntityUsers(new ListEntityUsersRequest.Builder().entityId(entityId).build());
+      UsersService service = PrimeServiceFactory.createUsersService(client);
+      ListEntityUsersResponse response =
+          service.listEntityUsers(new ListEntityUsersRequest.Builder().entityId(entityId).build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

@@ -19,44 +19,40 @@ package com.coinbase.prime.addressbook;
 import com.coinbase.prime.model.enums.CustodyActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Address Book Entry
- */
+/** Create Address Book Entry */
 public class CreateAddressBookEntryResponse {
-    @JsonProperty("activity_type")
-    private CustodyActivityType activityType;
+  @JsonProperty("activity_type")
+  private CustodyActivityType activityType;
 
-    @JsonProperty("num_approvals_remaining")
-    private Integer numApprovalsRemaining;
+  @JsonProperty("num_approvals_remaining")
+  private Integer numApprovalsRemaining;
 
-    @JsonProperty("activity_id")
-    private String activityId;
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    public CreateAddressBookEntryResponse() {
-    }
+  public CreateAddressBookEntryResponse() {}
 
-    public CustodyActivityType getActivityType() {
-        return activityType;
-    }
+  public CustodyActivityType getActivityType() {
+    return activityType;
+  }
 
-    public void setActivityType(CustodyActivityType activityType) {
-        this.activityType = activityType;
-    }
+  public void setActivityType(CustodyActivityType activityType) {
+    this.activityType = activityType;
+  }
 
-    public Integer getNumApprovalsRemaining() {
-        return numApprovalsRemaining;
-    }
+  public Integer getNumApprovalsRemaining() {
+    return numApprovalsRemaining;
+  }
 
-    public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
-        this.numApprovalsRemaining = numApprovalsRemaining;
-    }
+  public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
+    this.numApprovalsRemaining = numApprovalsRemaining;
+  }
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 }

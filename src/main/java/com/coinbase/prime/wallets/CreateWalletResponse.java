@@ -20,78 +20,69 @@ import com.coinbase.prime.model.enums.NetworkFamily;
 import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Create Wallet
- */
+/** Create Wallet */
 public class CreateWalletResponse {
-    /**
-     * The id of activity
-     */
-    @JsonProperty("activity_id")
-    private String activityId;
+  /** The id of activity */
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    /**
-     * The name of the wallet
-     */
-    @JsonProperty("name")
-    private String name;
+  /** The name of the wallet */
+  @JsonProperty("name")
+  private String name;
 
-    /**
-     * The asset stored in the wallet
-     */
-    @JsonProperty("symbol")
-    private String symbol;
+  /** The asset stored in the wallet */
+  @JsonProperty("symbol")
+  private String symbol;
 
-    /**
-     * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
-     */
-    @JsonProperty("wallet_type")
-    private WalletType walletType;
+  /**
+   * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types
+   * (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
+   */
+  @JsonProperty("wallet_type")
+  private WalletType walletType;
 
-    @JsonProperty("network_family")
-    private NetworkFamily networkFamily;
+  @JsonProperty("network_family")
+  private NetworkFamily networkFamily;
 
-    public CreateWalletResponse() {
-    }
+  public CreateWalletResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getSymbol() {
-        return symbol;
-    }
+  public String getSymbol() {
+    return symbol;
+  }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
 
-    public WalletType getWalletType() {
-        return walletType;
-    }
+  public WalletType getWalletType() {
+    return walletType;
+  }
 
-    public void setWalletType(WalletType walletType) {
-        this.walletType = walletType;
-    }
+  public void setWalletType(WalletType walletType) {
+    this.walletType = walletType;
+  }
 
-    public NetworkFamily getNetworkFamily() {
-        return networkFamily;
-    }
+  public NetworkFamily getNetworkFamily() {
+    return networkFamily;
+  }
 
-    public void setNetworkFamily(NetworkFamily networkFamily) {
-        this.networkFamily = networkFamily;
-    }
-
+  public void setNetworkFamily(NetworkFamily networkFamily) {
+    this.networkFamily = networkFamily;
+  }
 }

@@ -16,58 +16,52 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get FCM Margin Call Details
- */
+/** Get FCM Margin Call Details */
 public class GetFcmMarginCallDetailsRequest {
-    /**
-     * Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  /** Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  public GetFcmMarginCallDetailsRequest() {}
+
+  public GetFcmMarginCallDetailsRequest(Builder builder) {
+    this.entityId = builder.entityId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public static class Builder {
     private String entityId;
 
-    public GetFcmMarginCallDetailsRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public GetFcmMarginCallDetailsRequest(Builder builder) {
-        this.entityId = builder.entityId;
+    public GetFcmMarginCallDetailsRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetFcmMarginCallDetailsRequest(this);
     }
 
-    public String getEntityId() {
-        return entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public static class Builder {
-        private String entityId;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public GetFcmMarginCallDetailsRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetFcmMarginCallDetailsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

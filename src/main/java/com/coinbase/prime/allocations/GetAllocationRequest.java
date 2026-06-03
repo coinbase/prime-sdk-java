@@ -16,83 +16,75 @@
 
 package com.coinbase.prime.allocations;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Allocation by ID
- */
+/** Get Allocation by ID */
 public class GetAllocationRequest {
-    /**
-     * The portfolio ID of the allocation
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  /** The portfolio ID of the allocation */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * The ID of the allocation
-     */
-    @JsonProperty(required = true, value = "allocation_id")
-    @JsonIgnore
+  /** The ID of the allocation */
+  @JsonProperty(required = true, value = "allocation_id")
+  @JsonIgnore
+  private String allocationId;
+
+  public GetAllocationRequest() {}
+
+  public GetAllocationRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.allocationId = builder.allocationId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getAllocationId() {
+    return allocationId;
+  }
+
+  public void setAllocationId(String allocationId) {
+    this.allocationId = allocationId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String allocationId;
 
-    public GetAllocationRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetAllocationRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.allocationId = builder.allocationId;
+    public Builder allocationId(String allocationId) {
+      this.allocationId = allocationId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetAllocationRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetAllocationRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.allocationId)) {
+        throw new CoinbaseClientException("AllocationId is required");
+      }
     }
-
-    public String getAllocationId() {
-        return allocationId;
-    }
-
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String allocationId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
-        }
-
-        public GetAllocationRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetAllocationRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.allocationId)) {
-                throw new CoinbaseClientException("AllocationId is required");
-            }
-        }
-    }
+  }
 }

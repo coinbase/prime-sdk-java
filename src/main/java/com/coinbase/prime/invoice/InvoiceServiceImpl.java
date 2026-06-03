@@ -21,22 +21,21 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class InvoiceServiceImpl extends CoinbaseServiceImpl implements InvoiceService {
-    public InvoiceServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public InvoiceServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/invoices", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListInvoicesResponse>() {});
-    }
-
+  @Override
+  public ListInvoicesResponse listInvoices(ListInvoicesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/invoices", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListInvoicesResponse>() {});
+  }
 }

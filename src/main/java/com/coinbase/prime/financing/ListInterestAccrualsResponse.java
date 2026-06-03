@@ -19,33 +19,29 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.Accrual;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Interest Accruals
- */
+/** List Interest Accruals */
 public class ListInterestAccrualsResponse {
-    @JsonProperty("total_notional_accrual")
-    private String totalNotionalAccrual;
+  @JsonProperty("total_notional_accrual")
+  private String totalNotionalAccrual;
 
-    @JsonProperty("accruals")
-    private Accrual[] accruals;
+  @JsonProperty("accruals")
+  private Accrual[] accruals;
 
-    public ListInterestAccrualsResponse() {
-    }
+  public ListInterestAccrualsResponse() {}
 
-    public String getTotalNotionalAccrual() {
-        return totalNotionalAccrual;
-    }
+  public String getTotalNotionalAccrual() {
+    return totalNotionalAccrual;
+  }
 
-    public void setTotalNotionalAccrual(String totalNotionalAccrual) {
-        this.totalNotionalAccrual = totalNotionalAccrual;
-    }
+  public void setTotalNotionalAccrual(String totalNotionalAccrual) {
+    this.totalNotionalAccrual = totalNotionalAccrual;
+  }
 
-    public Accrual[] getAccruals() {
-        return accruals;
-    }
+  public Accrual[] getAccruals() {
+    return accruals;
+  }
 
-    public void setAccruals(Accrual[] accruals) {
-        this.accruals = accruals;
-    }
-
+  public void setAccruals(Accrual[] accruals) {
+    this.accruals = accruals;
+  }
 }

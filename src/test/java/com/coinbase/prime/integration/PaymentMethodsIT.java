@@ -16,26 +16,25 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.paymentmethods.ListPaymentMethodsRequest;
 import com.coinbase.prime.paymentmethods.ListPaymentMethodsResponse;
 import com.coinbase.prime.paymentmethods.PaymentMethodsService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class PaymentMethodsIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListPaymentMethods() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
-        ListPaymentMethodsResponse response = service.listPaymentMethods(
-                new ListPaymentMethodsRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPaymentMethods() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
+    ListPaymentMethodsResponse response =
+        service.listPaymentMethods(
+            new ListPaymentMethodsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 }

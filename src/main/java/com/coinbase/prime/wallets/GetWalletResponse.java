@@ -19,22 +19,18 @@ package com.coinbase.prime.wallets;
 import com.coinbase.prime.model.Wallet;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Wallet by Wallet ID
- */
+/** Get Wallet by Wallet ID */
 public class GetWalletResponse {
-    @JsonProperty("wallet")
-    private Wallet wallet;
+  @JsonProperty("wallet")
+  private Wallet wallet;
 
-    public GetWalletResponse() {
-    }
+  public GetWalletResponse() {}
 
-    public Wallet getWallet() {
-        return wallet;
-    }
+  public Wallet getWallet() {
+    return wallet;
+  }
 
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
-    }
-
+  public void setWallet(Wallet wallet) {
+    this.wallet = wallet;
+  }
 }

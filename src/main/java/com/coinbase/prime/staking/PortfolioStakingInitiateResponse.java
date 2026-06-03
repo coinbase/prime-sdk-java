@@ -18,39 +18,31 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Request to stake currency in a portfolio
- */
+/** Request to stake currency in a portfolio */
 public class PortfolioStakingInitiateResponse {
-    /**
-     * The ID for the created activity
-     */
-    @JsonProperty("activity_id")
-    private String activityId;
+  /** The ID for the created activity */
+  @JsonProperty("activity_id")
+  private String activityId;
 
-    /**
-     * The ID for the created transaction
-     */
-    @JsonProperty("transaction_id")
-    private String transactionId;
+  /** The ID for the created transaction */
+  @JsonProperty("transaction_id")
+  private String transactionId;
 
-    public PortfolioStakingInitiateResponse() {
-    }
+  public PortfolioStakingInitiateResponse() {}
 
-    public String getActivityId() {
-        return activityId;
-    }
+  public String getActivityId() {
+    return activityId;
+  }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
+  public String getTransactionId() {
+    return transactionId;
+  }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
 }

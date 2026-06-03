@@ -16,55 +16,51 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Entity Futures Sweeps
- */
+/** List Entity Futures Sweeps */
 public class ListEntityFuturesSweepsRequest {
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
+
+  public ListEntityFuturesSweepsRequest() {}
+
+  public ListEntityFuturesSweepsRequest(Builder builder) {
+    this.entityId = builder.entityId;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public static class Builder {
     private String entityId;
 
-    public ListEntityFuturesSweepsRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public ListEntityFuturesSweepsRequest(Builder builder) {
-        this.entityId = builder.entityId;
+    public ListEntityFuturesSweepsRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListEntityFuturesSweepsRequest(this);
     }
 
-    public String getEntityId() {
-        return entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public static class Builder {
-        private String entityId;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public ListEntityFuturesSweepsRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListEntityFuturesSweepsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

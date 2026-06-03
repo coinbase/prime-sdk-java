@@ -27,19 +27,20 @@ import com.coinbase.prime.utils.Utils;
 public class GetPortfolioCommission {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
 
       CommissionService service = PrimeServiceFactory.createCommissionService(client);
-      GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-          new GetPortfolioCommissionRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      GetPortfolioCommissionResponse response =
+          service.getPortfolioCommission(
+              new GetPortfolioCommissionRequest.Builder().portfolioId(portfolioId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

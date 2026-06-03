@@ -30,13 +30,15 @@ public class CreateOrderPreview {
   public static void main(String[] args) {
     try {
       if (args.length < 5) {
-        System.err.println("Usage: CreateOrderPreview <product_id> <side> <type> <basequantity|quotevalue> <amount>");
+        System.err.println(
+            "Usage: CreateOrderPreview <product_id> <side> <type> <basequantity|quotevalue> <amount>");
         System.err.println("Example: CreateOrderPreview BTC-USD BUY MARKET basequantity 0.001");
         System.err.println("Example: CreateOrderPreview ETH-USD SELL LIMIT quotevalue 1000.00");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -47,13 +49,24 @@ public class CreateOrderPreview {
       String amount = args[4];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
-      System.out.println("Order parameters: " + productId + " " + side + " " + type + " " + quantityType + "=" + amount);
+      System.out.println(
+          "Order parameters: "
+              + productId
+              + " "
+              + side
+              + " "
+              + type
+              + " "
+              + quantityType
+              + "="
+              + amount);
 
-      GetOrderPreviewRequest.Builder builder = new GetOrderPreviewRequest.Builder()
-          .portfolioId(portfolioId)
-          .productId(productId)
-          .side(side)
-          .type(type);
+      GetOrderPreviewRequest.Builder builder =
+          new GetOrderPreviewRequest.Builder()
+              .portfolioId(portfolioId)
+              .productId(productId)
+              .side(side)
+              .type(type);
 
       if (quantityType.equals("basequantity")) {
         builder.baseQuantity(amount);
@@ -67,7 +80,8 @@ public class CreateOrderPreview {
       OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
       GetOrderPreviewResponse response = ordersService.getOrderPreview(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

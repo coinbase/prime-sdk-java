@@ -27,7 +27,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListOnchainWalletBalances {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
@@ -35,13 +36,15 @@ public class ListOnchainWalletBalances {
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListOnchainWalletBalancesResponse response = service.listOnchainWalletBalances(
-          new ListOnchainWalletBalancesRequest.Builder()
-              .portfolioId(portfolioId)
-              .walletId(walletId)
-              .build());
+      ListOnchainWalletBalancesResponse response =
+          service.listOnchainWalletBalances(
+              new ListOnchainWalletBalancesRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .walletId(walletId)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

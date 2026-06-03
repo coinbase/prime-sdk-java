@@ -20,54 +20,58 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface OnchainAddressBookService {
-    /**
-     * Update Onchain Address Book Entry.
-     * <p>
-     * Updates an entry to the portfolio's onchain address groups
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /**
-     * Create Onchain Address Book Entry.
-     * <p>
-     * Creates an entry to the portfolio's onchain address groups
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /**
-     * Delete Onchain Address Group.
-     * <p>
-     * Deletes an entry in the portfolio's onchain address groups
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+  /**
+   * Update Onchain Address Book Entry.
+   *
+   * <p>Updates an entry to the portfolio's onchain address groups
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(
+      UpdateOnchainAddressBookEntryRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 
-    /**
-     * List Onchain Address Groups.
-     * <p>
-     * Lists all onchain address groups for a given portfolio ID
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+  /**
+   * Create Onchain Address Book Entry.
+   *
+   * <p>Creates an entry to the portfolio's onchain address groups
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(
+      CreateOnchainAddressBookEntryRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 
+  /**
+   * Delete Onchain Address Group.
+   *
+   * <p>Deletes an entry in the portfolio's onchain address groups
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(
+      DeleteOnchainAddressGroupRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Onchain Address Groups.
+   *
+   * <p>Lists all onchain address groups for a given portfolio ID
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

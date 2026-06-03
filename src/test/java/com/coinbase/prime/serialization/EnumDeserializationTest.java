@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.serialization;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.prime.model.Order;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,106 +28,107 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Tests enum deserialization behavior, particularly for unknown values
- * Verifies SDK properly handles REST API enum responses
+ * Tests enum deserialization behavior, particularly for unknown values Verifies SDK properly
+ * handles REST API enum responses
  */
 public class EnumDeserializationTest {
 
-    private ObjectMapper strictMapper;
-    private ObjectMapper lenientMapper;
+  private ObjectMapper strictMapper;
+  private ObjectMapper lenientMapper;
 
-    @BeforeEach
-    public void setUp() {
-        // Strict mapper - fails on unknown enum values (default behavior)
-        strictMapper = new ObjectMapper();
-        strictMapper.registerModule(new JavaTimeModule());
+  @BeforeEach
+  public void setUp() {
+    // Strict mapper - fails on unknown enum values (default behavior)
+    strictMapper = new ObjectMapper();
+    strictMapper.registerModule(new JavaTimeModule());
 
-        // Lenient mapper - allows unknown enum values
-        lenientMapper = new ObjectMapper();
-        lenientMapper.registerModule(new JavaTimeModule());
-        lenientMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+    // Lenient mapper - allows unknown enum values
+    lenientMapper = new ObjectMapper();
+    lenientMapper.registerModule(new JavaTimeModule());
+    lenientMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+  }
+
+  @Test
+  public void testKnownTimeInForceValues() throws JsonProcessingException {
+    String[] validValues = {
+      "GOOD_UNTIL_DATE_TIME", "GOOD_UNTIL_CANCELLED", "IMMEDIATE_OR_CANCEL", "FILL_OR_KILL"
+    };
+
+    for (String value : validValues) {
+      String json = String.format("{\"id\":\"order-123\",\"time_in_force\":\"%s\"}", value);
+      Order order = strictMapper.readValue(json, Order.class);
+      assertNotNull(order);
+      assertNotNull(order.getTimeInForce(), "TimeInForce should not be null for: " + value);
     }
+  }
 
-    @Test
-    public void testKnownTimeInForceValues() throws JsonProcessingException {
-        String[] validValues = {
-            "GOOD_UNTIL_DATE_TIME",
-            "GOOD_UNTIL_CANCELLED",
-            "IMMEDIATE_OR_CANCEL",
-            "FILL_OR_KILL"
-        };
+  @Test
+  public void testUnknownTimeInForceWithStrictMapper() {
+    // For REST API, unknown values should throw exception by default
+    String json = "{\"id\":\"order-123\",\"time_in_force\":\"UNKNOWN_TIME_IN_FORCE\"}";
 
-        for (String value : validValues) {
-            String json = String.format("{\"id\":\"order-123\",\"time_in_force\":\"%s\"}", value);
-            Order order = strictMapper.readValue(json, Order.class);
-            assertNotNull(order);
-            assertNotNull(order.getTimeInForce(), "TimeInForce should not be null for: " + value);
-        }
-    }
+    assertThrows(
+        InvalidFormatException.class,
+        () -> {
+          strictMapper.readValue(json, Order.class);
+        },
+        "Strict mapper should throw exception for unknown enum values");
+  }
 
-    @Test
-    public void testUnknownTimeInForceWithStrictMapper() {
-        // For REST API, unknown values should throw exception by default
-        String json = "{\"id\":\"order-123\",\"time_in_force\":\"UNKNOWN_TIME_IN_FORCE\"}";
+  @Test
+  public void testUnknownTimeInForceWithLenientMapper() throws JsonProcessingException {
+    // Lenient mapper converts unknown values to null
+    String json = "{\"id\":\"order-123\",\"time_in_force\":\"UNKNOWN_TIME_IN_FORCE\"}";
 
-        assertThrows(InvalidFormatException.class, () -> {
-            strictMapper.readValue(json, Order.class);
-        }, "Strict mapper should throw exception for unknown enum values");
-    }
+    Order order = lenientMapper.readValue(json, Order.class);
 
-    @Test
-    public void testUnknownTimeInForceWithLenientMapper() throws JsonProcessingException {
-        // Lenient mapper converts unknown values to null
-        String json = "{\"id\":\"order-123\",\"time_in_force\":\"UNKNOWN_TIME_IN_FORCE\"}";
+    assertNotNull(order);
+    assertNull(order.getTimeInForce(), "Unknown enum value should be null with lenient mapper");
+  }
 
-        Order order = lenientMapper.readValue(json, Order.class);
+  @Test
+  public void testNullTimeInForce() throws JsonProcessingException {
+    String json = "{\"id\":\"order-123\",\"time_in_force\":null}";
 
-        assertNotNull(order);
-        assertNull(order.getTimeInForce(), "Unknown enum value should be null with lenient mapper");
-    }
+    Order order = strictMapper.readValue(json, Order.class);
 
-    @Test
-    public void testNullTimeInForce() throws JsonProcessingException {
-        String json = "{\"id\":\"order-123\",\"time_in_force\":null}";
+    assertNotNull(order);
+    assertNull(order.getTimeInForce());
+  }
 
-        Order order = strictMapper.readValue(json, Order.class);
+  @Test
+  public void testMissingTimeInForce() throws JsonProcessingException {
+    String json = "{\"id\":\"order-123\",\"product_id\":\"BTC-USD\"}";
 
-        assertNotNull(order);
-        assertNull(order.getTimeInForce());
-    }
+    Order order = strictMapper.readValue(json, Order.class);
 
-    @Test
-    public void testMissingTimeInForce() throws JsonProcessingException {
-        String json = "{\"id\":\"order-123\",\"product_id\":\"BTC-USD\"}";
+    assertNotNull(order);
+    assertNull(order.getTimeInForce());
+  }
 
-        Order order = strictMapper.readValue(json, Order.class);
+  @Test
+  public void testTimeInForceSerialization() throws JsonProcessingException {
+    Order order = new Order();
+    order.setId("order-456");
+    order.setTimeInForce(TimeInForceType.GOOD_UNTIL_CANCELLED);
 
-        assertNotNull(order);
-        assertNull(order.getTimeInForce());
-    }
+    String json = strictMapper.writeValueAsString(order);
 
-    @Test
-    public void testTimeInForceSerialization() throws JsonProcessingException {
-        Order order = new Order();
-        order.setId("order-456");
-        order.setTimeInForce(TimeInForceType.GOOD_UNTIL_CANCELLED);
+    assertNotNull(json);
+    assertTrue(json.contains("\"time_in_force\":\"GOOD_UNTIL_CANCELLED\""));
+  }
 
-        String json = strictMapper.writeValueAsString(order);
+  @Test
+  public void testCaseSensitiveTimeInForce() {
+    // Enum values are case-sensitive
+    String json = "{\"id\":\"order-123\",\"time_in_force\":\"good_until_cancelled\"}";
 
-        assertNotNull(json);
-        assertTrue(json.contains("\"time_in_force\":\"GOOD_UNTIL_CANCELLED\""));
-    }
-
-    @Test
-    public void testCaseSensitiveTimeInForce() {
-        // Enum values are case-sensitive
-        String json = "{\"id\":\"order-123\",\"time_in_force\":\"good_until_cancelled\"}";
-
-        assertThrows(InvalidFormatException.class, () -> {
-            strictMapper.readValue(json, Order.class);
-        }, "Lowercase enum values should fail");
-    }
+    assertThrows(
+        InvalidFormatException.class,
+        () -> {
+          strictMapper.readValue(json, Order.class);
+        },
+        "Lowercase enum values should fail");
+  }
 }

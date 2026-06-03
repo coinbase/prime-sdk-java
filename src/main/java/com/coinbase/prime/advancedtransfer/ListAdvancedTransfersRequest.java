@@ -16,183 +16,167 @@
 
 package com.coinbase.prime.advancedtransfer;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.AdvancedTransferState;
 import com.coinbase.prime.model.enums.AdvancedTransferType;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * List Advanced Transfers
- */
+/** List Advanced Transfers */
 public class ListAdvancedTransfersRequest extends PrimeListRequest {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
+  /** The portfolio ID */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
+
+  /** The state of the Advanced Transfer to filter by */
+  @JsonProperty("state")
+  private AdvancedTransferState state;
+
+  /** The type of the Advanced Transfer to filter by */
+  @JsonProperty("type")
+  private AdvancedTransferType type;
+
+  /** UTC timestamp of creation from which to filter the response (inclusive, ISO-8601 format) */
+  @JsonProperty("start_time")
+  private String startTime;
+
+  /** UTC timestamp of creation until which to filter the response (exclusive, ISO-8601 format) */
+  @JsonProperty("end_time")
+  private String endTime;
+
+  /** The reference ID of the Advanced Transfer to filter by */
+  @JsonProperty("reference_id")
+  private String referenceId;
+
+  public ListAdvancedTransfersRequest() {}
+
+  public ListAdvancedTransfersRequest(Builder builder) {
+    super(builder.cursor, builder.sortDirection, builder.limit);
+    this.portfolioId = builder.portfolioId;
+    this.state = builder.state;
+    this.type = builder.type;
+    this.startTime = builder.startTime;
+    this.endTime = builder.endTime;
+    this.referenceId = builder.referenceId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public AdvancedTransferState getState() {
+    return state;
+  }
+
+  public void setState(AdvancedTransferState state) {
+    this.state = state;
+  }
+
+  public AdvancedTransferType getType() {
+    return type;
+  }
+
+  public void setType(AdvancedTransferType type) {
+    this.type = type;
+  }
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+  public String getReferenceId() {
+    return referenceId;
+  }
+
+  public void setReferenceId(String referenceId) {
+    this.referenceId = referenceId;
+  }
+
+  public static class Builder {
     private String portfolioId;
-
-    /**
-     * The state of the Advanced Transfer to filter by
-     */
-    @JsonProperty("state")
     private AdvancedTransferState state;
-
-    /**
-     * The type of the Advanced Transfer to filter by
-     */
-    @JsonProperty("type")
     private AdvancedTransferType type;
-
-    /**
-     * UTC timestamp of creation from which to filter the response (inclusive, ISO-8601 format)
-     */
-    @JsonProperty("start_time")
     private String startTime;
-
-    /**
-     * UTC timestamp of creation until which to filter the response (exclusive, ISO-8601 format)
-     */
-    @JsonProperty("end_time")
     private String endTime;
-
-    /**
-     * The reference ID of the Advanced Transfer to filter by
-     */
-    @JsonProperty("reference_id")
     private String referenceId;
+    private String cursor;
+    private SortDirection sortDirection;
+    private Integer limit;
 
-    public ListAdvancedTransfersRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public ListAdvancedTransfersRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
-        this.portfolioId = builder.portfolioId;
-        this.state = builder.state;
-        this.type = builder.type;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.referenceId = builder.referenceId;
+    public Builder state(AdvancedTransferState state) {
+      this.state = state;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder type(AdvancedTransferType type) {
+      this.type = type;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    public Builder startTime(String startTime) {
+      this.startTime = startTime;
+      return this;
     }
 
-    public AdvancedTransferState getState() {
-        return state;
+    public Builder endTime(String endTime) {
+      this.endTime = endTime;
+      return this;
     }
 
-    public void setState(AdvancedTransferState state) {
-        this.state = state;
+    public Builder referenceId(String referenceId) {
+      this.referenceId = referenceId;
+      return this;
     }
 
-    public AdvancedTransferType getType() {
-        return type;
+    public Builder limit(Integer limit) {
+      this.limit = limit;
+      return this;
     }
 
-    public void setType(AdvancedTransferType type) {
-        this.type = type;
+    public Builder pagination(Pagination pagination) {
+      this.cursor = pagination.getNextCursor();
+      this.sortDirection = pagination.getSortDirection();
+      return this;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public ListAdvancedTransfersRequest build() throws CoinbaseClientException {
+      validate();
+      return new ListAdvancedTransfersRequest(this);
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
     }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private AdvancedTransferState state;
-        private AdvancedTransferType type;
-        private String startTime;
-        private String endTime;
-        private String referenceId;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder state(AdvancedTransferState state) {
-            this.state = state;
-            return this;
-        }
-
-        public Builder type(AdvancedTransferType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder startTime(String startTime) {
-            this.startTime = startTime;
-            return this;
-        }
-
-        public Builder endTime(String endTime) {
-            this.endTime = endTime;
-            return this;
-        }
-
-        public Builder referenceId(String referenceId) {
-            this.referenceId = referenceId;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
-            return this;
-        }
-
-        public ListAdvancedTransfersRequest build() throws CoinbaseClientException {
-            validate();
-            return new ListAdvancedTransfersRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
-    }
+  }
 }

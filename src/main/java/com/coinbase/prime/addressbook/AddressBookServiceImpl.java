@@ -21,32 +21,32 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class AddressBookServiceImpl extends CoinbaseServiceImpl implements AddressBookService {
-    public AddressBookServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public AddressBookServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListAddressBookResponse listAddressBook(ListAddressBookRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/address_book", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAddressBookResponse>() {});
-    }
+  @Override
+  public ListAddressBookResponse listAddressBook(ListAddressBookRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/address_book", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListAddressBookResponse>() {});
+  }
 
-    @Override
-    public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/address_book", request.getPortfolioId()),
-                request,
-                List.of(201, 200),
-                new TypeReference<CreateAddressBookEntryResponse>() {});
-    }
-
+  @Override
+  public CreateAddressBookEntryResponse createAddressBookEntry(
+      CreateAddressBookEntryRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/address_book", request.getPortfolioId()),
+        request,
+        List.of(201, 200),
+        new TypeReference<CreateAddressBookEntryResponse>() {});
+  }
 }

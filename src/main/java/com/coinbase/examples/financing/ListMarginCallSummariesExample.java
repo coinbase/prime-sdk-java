@@ -25,21 +25,22 @@ import com.coinbase.prime.financing.ListMarginCallSummariesResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListMarginCallSummariesExample {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials =
-                    new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
-            FinancingService service = PrimeServiceFactory.createFinancingService(client);
-            ListMarginCallSummariesResponse response = service.listMarginCallSummaries(
-                    new ListMarginCallSummariesRequest.Builder().entityId(entityId).build());
+      FinancingService service = PrimeServiceFactory.createFinancingService(client);
+      ListMarginCallSummariesResponse response =
+          service.listMarginCallSummaries(
+              new ListMarginCallSummariesRequest.Builder().entityId(entityId).build());
 
-            System.out.println(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

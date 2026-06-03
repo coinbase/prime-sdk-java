@@ -25,26 +25,29 @@ import com.coinbase.prime.paymentmethods.PaymentMethodsService;
 import com.coinbase.prime.utils.Utils;
 
 public class GetPaymentMethodDetails {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
-            String paymentMethodId = args[0];
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+      String paymentMethodId = args[0];
 
-            System.out.println("Using Entity ID: " + entityId + ", Payment Method ID: " + paymentMethodId);
+      System.out.println(
+          "Using Entity ID: " + entityId + ", Payment Method ID: " + paymentMethodId);
 
-            PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
-            GetPaymentMethodDetailsResponse response = service.getPaymentMethodDetails(
-                    new GetPaymentMethodDetailsRequest.Builder()
-                            .entityId(entityId)
-                            .paymentMethodId(paymentMethodId)
-                            .build());
+      PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
+      GetPaymentMethodDetailsResponse response =
+          service.getPaymentMethodDetails(
+              new GetPaymentMethodDetailsRequest.Builder()
+                  .entityId(entityId)
+                  .paymentMethodId(paymentMethodId)
+                  .build());
 
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

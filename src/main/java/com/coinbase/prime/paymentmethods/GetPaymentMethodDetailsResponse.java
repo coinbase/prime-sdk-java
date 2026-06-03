@@ -19,22 +19,18 @@ package com.coinbase.prime.paymentmethods;
 import com.coinbase.prime.model.PaymentMethodDetails;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Entity Payment Method
- */
+/** Get Entity Payment Method */
 public class GetPaymentMethodDetailsResponse {
-    @JsonProperty("details")
-    private PaymentMethodDetails details;
+  @JsonProperty("details")
+  private PaymentMethodDetails details;
 
-    public GetPaymentMethodDetailsResponse() {
-    }
+  public GetPaymentMethodDetailsResponse() {}
 
-    public PaymentMethodDetails getDetails() {
-        return details;
-    }
+  public PaymentMethodDetails getDetails() {
+    return details;
+  }
 
-    public void setDetails(PaymentMethodDetails details) {
-        this.details = details;
-    }
-
+  public void setDetails(PaymentMethodDetails details) {
+    this.details = details;
+  }
 }

@@ -24,17 +24,19 @@ import com.coinbase.prime.financing.ListFinancingEligibleAssetsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListFinancingEligibleAssets {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
-            FinancingService service = PrimeServiceFactory.createFinancingService(client);
-            ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets();
+      FinancingService service = PrimeServiceFactory.createFinancingService(client);
+      ListFinancingEligibleAssetsResponse response = service.listFinancingEligibleAssets();
 
-            System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(
+          new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

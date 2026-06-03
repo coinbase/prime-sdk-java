@@ -18,67 +18,61 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get FCM Equity
- */
+/** Get FCM Equity */
 public class GetFcmEquityResponse {
-    /**
-     * Prior EOD account equity (ending balance + realized P&amp;L + commissions/fees)
-     */
-    @JsonProperty("eod_account_equity")
-    private String eodAccountEquity;
+  /** Prior EOD account equity (ending balance + realized P&amp;L + commissions/fees) */
+  @JsonProperty("eod_account_equity")
+  private String eodAccountEquity;
 
-    /**
-     * Prior EOD unrealized P&amp;L on open futures positions
-     */
-    @JsonProperty("eod_unrealized_pnl")
-    private String eodUnrealizedPnl;
+  /** Prior EOD unrealized P&amp;L on open futures positions */
+  @JsonProperty("eod_unrealized_pnl")
+  private String eodUnrealizedPnl;
 
-    /**
-     * Current Derivatives Account Balance minus prior EOD margin requirement. (Positive = excess; negative = deficit)
-     */
-    @JsonProperty("current_excess_deficit")
-    private String currentExcessDeficit;
+  /**
+   * Current Derivatives Account Balance minus prior EOD margin requirement. (Positive = excess;
+   * negative = deficit)
+   */
+  @JsonProperty("current_excess_deficit")
+  private String currentExcessDeficit;
 
-    /**
-     * Excess funds in the Derivatives account available to transfer ("sweep") to the designated funding portfolio
-     */
-    @JsonProperty("available_to_sweep")
-    private String availableToSweep;
+  /**
+   * Excess funds in the Derivatives account available to transfer ("sweep") to the designated
+   * funding portfolio
+   */
+  @JsonProperty("available_to_sweep")
+  private String availableToSweep;
 
-    public GetFcmEquityResponse() {
-    }
+  public GetFcmEquityResponse() {}
 
-    public String getEodAccountEquity() {
-        return eodAccountEquity;
-    }
+  public String getEodAccountEquity() {
+    return eodAccountEquity;
+  }
 
-    public void setEodAccountEquity(String eodAccountEquity) {
-        this.eodAccountEquity = eodAccountEquity;
-    }
+  public void setEodAccountEquity(String eodAccountEquity) {
+    this.eodAccountEquity = eodAccountEquity;
+  }
 
-    public String getEodUnrealizedPnl() {
-        return eodUnrealizedPnl;
-    }
+  public String getEodUnrealizedPnl() {
+    return eodUnrealizedPnl;
+  }
 
-    public void setEodUnrealizedPnl(String eodUnrealizedPnl) {
-        this.eodUnrealizedPnl = eodUnrealizedPnl;
-    }
+  public void setEodUnrealizedPnl(String eodUnrealizedPnl) {
+    this.eodUnrealizedPnl = eodUnrealizedPnl;
+  }
 
-    public String getCurrentExcessDeficit() {
-        return currentExcessDeficit;
-    }
+  public String getCurrentExcessDeficit() {
+    return currentExcessDeficit;
+  }
 
-    public void setCurrentExcessDeficit(String currentExcessDeficit) {
-        this.currentExcessDeficit = currentExcessDeficit;
-    }
+  public void setCurrentExcessDeficit(String currentExcessDeficit) {
+    this.currentExcessDeficit = currentExcessDeficit;
+  }
 
-    public String getAvailableToSweep() {
-        return availableToSweep;
-    }
+  public String getAvailableToSweep() {
+    return availableToSweep;
+  }
 
-    public void setAvailableToSweep(String availableToSweep) {
-        this.availableToSweep = availableToSweep;
-    }
-
+  public void setAvailableToSweep(String availableToSweep) {
+    this.availableToSweep = availableToSweep;
+  }
 }

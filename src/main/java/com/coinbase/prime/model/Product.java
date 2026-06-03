@@ -19,300 +19,280 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.FcmTradingSessionDetails;
-import com.coinbase.prime.model.FutureProductDetails;
+
 import com.coinbase.prime.model.enums.ProductPermissions;
 import com.coinbase.prime.model.enums.ProductType;
-import com.coinbase.prime.model.RfqProductDetails;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Product {
-    /**
-     * The product ID, written as &#x60;BASE-QUOTE&#x60;
-     */
-    @JsonProperty("id")
+  /** The product ID, written as &#x60;BASE-QUOTE&#x60; */
+  @JsonProperty("id")
+  private String id;
+
+  /** The smallest permitted unit of denomination for the base asset (varies by product) */
+  @JsonProperty("base_increment")
+  private String baseIncrement;
+
+  /** The smallest permitted unit of denomination for the quote asset (varies by product) */
+  @JsonProperty("quote_increment")
+  private String quoteIncrement;
+
+  /** The minimum size (in base asset units) for which an order can be placed */
+  @JsonProperty("base_min_size")
+  private String baseMinSize;
+
+  /** The minimum size (in quote asset units) for which an order can be placed */
+  @JsonProperty("quote_min_size")
+  private String quoteMinSize;
+
+  /** The maximum size (in base asset units) for which an order can be placed */
+  @JsonProperty("base_max_size")
+  private String baseMaxSize;
+
+  /** The maximum size (in quote asset units) for which an order can be placed */
+  @JsonProperty("quote_max_size")
+  private String quoteMaxSize;
+
+  /** Permissions given to the user for a product */
+  @JsonProperty("permissions")
+  private List<ProductPermissions> permissions;
+
+  /** The smallest permitted price increment for the product */
+  @JsonProperty("price_increment")
+  private String priceIncrement;
+
+  @JsonProperty("rfq_product_details")
+  private RfqProductDetails rfqProductDetails;
+
+  /** - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product */
+  @JsonProperty("product_type")
+  private ProductType productType;
+
+  /** FcmTradingSessionDetails contains trading session details for FCM products */
+  @JsonProperty("fcm_trading_session_details")
+  private FcmTradingSessionDetails fcmTradingSessionDetails;
+
+  /** FutureProductDetails contains details specific to futures products */
+  @JsonProperty("future_product_details")
+  private FutureProductDetails futureProductDetails;
+
+  public Product() {}
+
+  public Product(Builder builder) {
+    this.id = builder.id;
+    this.baseIncrement = builder.baseIncrement;
+    this.quoteIncrement = builder.quoteIncrement;
+    this.baseMinSize = builder.baseMinSize;
+    this.quoteMinSize = builder.quoteMinSize;
+    this.baseMaxSize = builder.baseMaxSize;
+    this.quoteMaxSize = builder.quoteMaxSize;
+    this.permissions = builder.permissions;
+    this.priceIncrement = builder.priceIncrement;
+    this.rfqProductDetails = builder.rfqProductDetails;
+    this.productType = builder.productType;
+    this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
+    this.futureProductDetails = builder.futureProductDetails;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getBaseIncrement() {
+    return baseIncrement;
+  }
+
+  public void setBaseIncrement(String baseIncrement) {
+    this.baseIncrement = baseIncrement;
+  }
+
+  public String getQuoteIncrement() {
+    return quoteIncrement;
+  }
+
+  public void setQuoteIncrement(String quoteIncrement) {
+    this.quoteIncrement = quoteIncrement;
+  }
+
+  public String getBaseMinSize() {
+    return baseMinSize;
+  }
+
+  public void setBaseMinSize(String baseMinSize) {
+    this.baseMinSize = baseMinSize;
+  }
+
+  public String getQuoteMinSize() {
+    return quoteMinSize;
+  }
+
+  public void setQuoteMinSize(String quoteMinSize) {
+    this.quoteMinSize = quoteMinSize;
+  }
+
+  public String getBaseMaxSize() {
+    return baseMaxSize;
+  }
+
+  public void setBaseMaxSize(String baseMaxSize) {
+    this.baseMaxSize = baseMaxSize;
+  }
+
+  public String getQuoteMaxSize() {
+    return quoteMaxSize;
+  }
+
+  public void setQuoteMaxSize(String quoteMaxSize) {
+    this.quoteMaxSize = quoteMaxSize;
+  }
+
+  public List<ProductPermissions> getPermissions() {
+    return permissions;
+  }
+
+  public void setPermissions(List<ProductPermissions> permissions) {
+    this.permissions = permissions;
+  }
+
+  public String getPriceIncrement() {
+    return priceIncrement;
+  }
+
+  public void setPriceIncrement(String priceIncrement) {
+    this.priceIncrement = priceIncrement;
+  }
+
+  public RfqProductDetails getRfqProductDetails() {
+    return rfqProductDetails;
+  }
+
+  public void setRfqProductDetails(RfqProductDetails rfqProductDetails) {
+    this.rfqProductDetails = rfqProductDetails;
+  }
+
+  public ProductType getProductType() {
+    return productType;
+  }
+
+  public void setProductType(ProductType productType) {
+    this.productType = productType;
+  }
+
+  public FcmTradingSessionDetails getFcmTradingSessionDetails() {
+    return fcmTradingSessionDetails;
+  }
+
+  public void setFcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
+    this.fcmTradingSessionDetails = fcmTradingSessionDetails;
+  }
+
+  public FutureProductDetails getFutureProductDetails() {
+    return futureProductDetails;
+  }
+
+  public void setFutureProductDetails(FutureProductDetails futureProductDetails) {
+    this.futureProductDetails = futureProductDetails;
+  }
+
+  public static class Builder {
     private String id;
 
-    /**
-     * The smallest permitted unit of denomination for the base asset (varies by product)
-     */
-    @JsonProperty("base_increment")
     private String baseIncrement;
 
-    /**
-     * The smallest permitted unit of denomination for the quote asset (varies by product)
-     */
-    @JsonProperty("quote_increment")
     private String quoteIncrement;
 
-    /**
-     * The minimum size (in base asset units) for which an order can be placed
-     */
-    @JsonProperty("base_min_size")
     private String baseMinSize;
 
-    /**
-     * The minimum size (in quote asset units) for which an order can be placed
-     */
-    @JsonProperty("quote_min_size")
     private String quoteMinSize;
 
-    /**
-     * The maximum size (in base asset units) for which an order can be placed
-     */
-    @JsonProperty("base_max_size")
     private String baseMaxSize;
 
-    /**
-     * The maximum size (in quote asset units) for which an order can be placed
-     */
-    @JsonProperty("quote_max_size")
     private String quoteMaxSize;
 
-    /**
-     * Permissions given to the user for a product
-     */
-    @JsonProperty("permissions")
     private List<ProductPermissions> permissions;
 
-    /**
-     * The smallest permitted price increment for the product
-     */
-    @JsonProperty("price_increment")
     private String priceIncrement;
 
-    @JsonProperty("rfq_product_details")
     private RfqProductDetails rfqProductDetails;
 
-    /**
-     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
-     */
-    @JsonProperty("product_type")
     private ProductType productType;
 
-    /**
-     * FcmTradingSessionDetails contains trading session details for FCM products
-     */
-    @JsonProperty("fcm_trading_session_details")
     private FcmTradingSessionDetails fcmTradingSessionDetails;
 
-    /**
-     * FutureProductDetails contains details specific to futures products
-     */
-    @JsonProperty("future_product_details")
     private FutureProductDetails futureProductDetails;
 
-    public Product() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public Product(Builder builder) {
-        this.id = builder.id;
-        this.baseIncrement = builder.baseIncrement;
-        this.quoteIncrement = builder.quoteIncrement;
-        this.baseMinSize = builder.baseMinSize;
-        this.quoteMinSize = builder.quoteMinSize;
-        this.baseMaxSize = builder.baseMaxSize;
-        this.quoteMaxSize = builder.quoteMaxSize;
-        this.permissions = builder.permissions;
-        this.priceIncrement = builder.priceIncrement;
-        this.rfqProductDetails = builder.rfqProductDetails;
-        this.productType = builder.productType;
-        this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
-        this.futureProductDetails = builder.futureProductDetails;
-    }
-    public String getId() {
-        return id;
+    public Builder baseIncrement(String baseIncrement) {
+      this.baseIncrement = baseIncrement;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getBaseIncrement() {
-        return baseIncrement;
+    public Builder quoteIncrement(String quoteIncrement) {
+      this.quoteIncrement = quoteIncrement;
+      return this;
     }
 
-    public void setBaseIncrement(String baseIncrement) {
-        this.baseIncrement = baseIncrement;
-    }
-    public String getQuoteIncrement() {
-        return quoteIncrement;
+    public Builder baseMinSize(String baseMinSize) {
+      this.baseMinSize = baseMinSize;
+      return this;
     }
 
-    public void setQuoteIncrement(String quoteIncrement) {
-        this.quoteIncrement = quoteIncrement;
-    }
-    public String getBaseMinSize() {
-        return baseMinSize;
+    public Builder quoteMinSize(String quoteMinSize) {
+      this.quoteMinSize = quoteMinSize;
+      return this;
     }
 
-    public void setBaseMinSize(String baseMinSize) {
-        this.baseMinSize = baseMinSize;
-    }
-    public String getQuoteMinSize() {
-        return quoteMinSize;
+    public Builder baseMaxSize(String baseMaxSize) {
+      this.baseMaxSize = baseMaxSize;
+      return this;
     }
 
-    public void setQuoteMinSize(String quoteMinSize) {
-        this.quoteMinSize = quoteMinSize;
-    }
-    public String getBaseMaxSize() {
-        return baseMaxSize;
+    public Builder quoteMaxSize(String quoteMaxSize) {
+      this.quoteMaxSize = quoteMaxSize;
+      return this;
     }
 
-    public void setBaseMaxSize(String baseMaxSize) {
-        this.baseMaxSize = baseMaxSize;
-    }
-    public String getQuoteMaxSize() {
-        return quoteMaxSize;
+    public Builder permissions(List<ProductPermissions> permissions) {
+      this.permissions = permissions;
+      return this;
     }
 
-    public void setQuoteMaxSize(String quoteMaxSize) {
-        this.quoteMaxSize = quoteMaxSize;
-    }
-    public List<ProductPermissions> getPermissions() {
-        return permissions;
+    public Builder priceIncrement(String priceIncrement) {
+      this.priceIncrement = priceIncrement;
+      return this;
     }
 
-    public void setPermissions(List<ProductPermissions> permissions) {
-        this.permissions = permissions;
-    }
-    public String getPriceIncrement() {
-        return priceIncrement;
+    public Builder rfqProductDetails(RfqProductDetails rfqProductDetails) {
+      this.rfqProductDetails = rfqProductDetails;
+      return this;
     }
 
-    public void setPriceIncrement(String priceIncrement) {
-        this.priceIncrement = priceIncrement;
-    }
-    public RfqProductDetails getRfqProductDetails() {
-        return rfqProductDetails;
+    public Builder productType(ProductType productType) {
+      this.productType = productType;
+      return this;
     }
 
-    public void setRfqProductDetails(RfqProductDetails rfqProductDetails) {
-        this.rfqProductDetails = rfqProductDetails;
-    }
-    public ProductType getProductType() {
-        return productType;
+    public Builder fcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
+      this.fcmTradingSessionDetails = fcmTradingSessionDetails;
+      return this;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-    public FcmTradingSessionDetails getFcmTradingSessionDetails() {
-        return fcmTradingSessionDetails;
+    public Builder futureProductDetails(FutureProductDetails futureProductDetails) {
+      this.futureProductDetails = futureProductDetails;
+      return this;
     }
 
-    public void setFcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
-        this.fcmTradingSessionDetails = fcmTradingSessionDetails;
+    public Product build() {
+      return new Product(this);
     }
-    public FutureProductDetails getFutureProductDetails() {
-        return futureProductDetails;
-    }
-
-    public void setFutureProductDetails(FutureProductDetails futureProductDetails) {
-        this.futureProductDetails = futureProductDetails;
-    }
-    public static class Builder {
-        private String id;
-
-        private String baseIncrement;
-
-        private String quoteIncrement;
-
-        private String baseMinSize;
-
-        private String quoteMinSize;
-
-        private String baseMaxSize;
-
-        private String quoteMaxSize;
-
-        private List<ProductPermissions> permissions;
-
-        private String priceIncrement;
-
-        private RfqProductDetails rfqProductDetails;
-
-        private ProductType productType;
-
-        private FcmTradingSessionDetails fcmTradingSessionDetails;
-
-        private FutureProductDetails futureProductDetails;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder baseIncrement(String baseIncrement) {
-            this.baseIncrement = baseIncrement;
-            return this;
-        }
-
-        public Builder quoteIncrement(String quoteIncrement) {
-            this.quoteIncrement = quoteIncrement;
-            return this;
-        }
-
-        public Builder baseMinSize(String baseMinSize) {
-            this.baseMinSize = baseMinSize;
-            return this;
-        }
-
-        public Builder quoteMinSize(String quoteMinSize) {
-            this.quoteMinSize = quoteMinSize;
-            return this;
-        }
-
-        public Builder baseMaxSize(String baseMaxSize) {
-            this.baseMaxSize = baseMaxSize;
-            return this;
-        }
-
-        public Builder quoteMaxSize(String quoteMaxSize) {
-            this.quoteMaxSize = quoteMaxSize;
-            return this;
-        }
-
-        public Builder permissions(List<ProductPermissions> permissions) {
-            this.permissions = permissions;
-            return this;
-        }
-
-        public Builder priceIncrement(String priceIncrement) {
-            this.priceIncrement = priceIncrement;
-            return this;
-        }
-
-        public Builder rfqProductDetails(RfqProductDetails rfqProductDetails) {
-            this.rfqProductDetails = rfqProductDetails;
-            return this;
-        }
-
-        public Builder productType(ProductType productType) {
-            this.productType = productType;
-            return this;
-        }
-
-        public Builder fcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
-            this.fcmTradingSessionDetails = fcmTradingSessionDetails;
-            return this;
-        }
-
-        public Builder futureProductDetails(FutureProductDetails futureProductDetails) {
-            this.futureProductDetails = futureProductDetails;
-            return this;
-        }
-
-        public Product build() {
-            return new Product(this);
-        }
-    }
+  }
 }
-

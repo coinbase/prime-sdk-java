@@ -19,22 +19,18 @@ package com.coinbase.prime.balances;
 import com.coinbase.prime.model.Balance;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Wallet Balance
- */
+/** Get Wallet Balance */
 public class GetWalletBalanceResponse {
-    @JsonProperty("balance")
-    private Balance balance;
+  @JsonProperty("balance")
+  private Balance balance;
 
-    public GetWalletBalanceResponse() {
-    }
+  public GetWalletBalanceResponse() {}
 
-    public Balance getBalance() {
-        return balance;
-    }
+  public Balance getBalance() {
+    return balance;
+  }
 
-    public void setBalance(Balance balance) {
-        this.balance = balance;
-    }
-
+  public void setBalance(Balance balance) {
+    this.balance = balance;
+  }
 }

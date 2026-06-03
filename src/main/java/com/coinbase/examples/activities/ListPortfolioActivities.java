@@ -28,7 +28,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListPortfolioActivities {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -38,7 +39,7 @@ public class ListPortfolioActivities {
       // Parse categories from CSV if provided as second argument
       ListPortfolioActivitiesRequest.Builder builder =
           new ListPortfolioActivitiesRequest.Builder().portfolioId(portfolioId);
-      
+
       if (args.length > 0 && !args[0].isEmpty()) {
         String[] symbols = args[0].split(",");
         for (int i = 0; i < symbols.length; i++) {
@@ -47,11 +48,11 @@ public class ListPortfolioActivities {
         builder.symbols(symbols);
         System.out.println("Filtering by symbols: " + String.join(", ", symbols));
       }
-      
+
       if (args.length > 1 && !args[1].isEmpty()) {
         String[] categoryStrings = args[1].split(",");
         ActivityCategory[] categories = new ActivityCategory[categoryStrings.length];
-        
+
         for (int i = 0; i < categoryStrings.length; i++) {
           try {
             categories[i] = ActivityCategory.valueOf(categoryStrings[i].trim());
@@ -60,7 +61,7 @@ public class ListPortfolioActivities {
             return;
           }
         }
-        
+
         builder.categories(categories);
         System.out.println("Filtering by categories: " + String.join(", ", categoryStrings));
       }
@@ -68,7 +69,8 @@ public class ListPortfolioActivities {
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
       ListPortfolioActivitiesResponse response = service.listPortfolioActivities(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -19,81 +19,67 @@ package com.coinbase.prime.staking;
 import com.coinbase.prime.model.ValidatorUnstakingInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Get Unstaking Status
- */
+/** Get Unstaking Status */
 public class GetUnstakingStatusResponse {
-    /**
-     * The portfolio ID
-     */
-    @JsonProperty("portfolio_id")
-    private String portfolioId;
+  /** The portfolio ID */
+  @JsonProperty("portfolio_id")
+  private String portfolioId;
 
-    /**
-     * The wallet ID
-     */
-    @JsonProperty("wallet_id")
-    private String walletId;
+  /** The wallet ID */
+  @JsonProperty("wallet_id")
+  private String walletId;
 
-    /**
-     * The wallet address
-     */
-    @JsonProperty("wallet_address")
-    private String walletAddress;
+  /** The wallet address */
+  @JsonProperty("wallet_address")
+  private String walletAddress;
 
-    /**
-     * Current timestamp at time of API call
-     */
-    @JsonProperty("current_timestamp")
-    private String currentTimestamp;
+  /** Current timestamp at time of API call */
+  @JsonProperty("current_timestamp")
+  private String currentTimestamp;
 
-    /**
-     * List of validators with unstaking information for this wallet
-     */
-    @JsonProperty("validators")
-    private ValidatorUnstakingInfo[] validators;
+  /** List of validators with unstaking information for this wallet */
+  @JsonProperty("validators")
+  private ValidatorUnstakingInfo[] validators;
 
-    public GetUnstakingStatusResponse() {
-    }
+  public GetUnstakingStatusResponse() {}
 
-    public String getPortfolioId() {
-        return portfolioId;
-    }
+  public String getPortfolioId() {
+    return portfolioId;
+  }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
 
-    public String getWalletId() {
-        return walletId;
-    }
+  public String getWalletId() {
+    return walletId;
+  }
 
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
+  public void setWalletId(String walletId) {
+    this.walletId = walletId;
+  }
 
-    public String getWalletAddress() {
-        return walletAddress;
-    }
+  public String getWalletAddress() {
+    return walletAddress;
+  }
 
-    public void setWalletAddress(String walletAddress) {
-        this.walletAddress = walletAddress;
-    }
+  public void setWalletAddress(String walletAddress) {
+    this.walletAddress = walletAddress;
+  }
 
-    public String getCurrentTimestamp() {
-        return currentTimestamp;
-    }
+  public String getCurrentTimestamp() {
+    return currentTimestamp;
+  }
 
-    public void setCurrentTimestamp(String currentTimestamp) {
-        this.currentTimestamp = currentTimestamp;
-    }
+  public void setCurrentTimestamp(String currentTimestamp) {
+    this.currentTimestamp = currentTimestamp;
+  }
 
-    public ValidatorUnstakingInfo[] getValidators() {
-        return validators;
-    }
+  public ValidatorUnstakingInfo[] getValidators() {
+    return validators;
+  }
 
-    public void setValidators(ValidatorUnstakingInfo[] validators) {
-        this.validators = validators;
-    }
-
+  public void setValidators(ValidatorUnstakingInfo[] validators) {
+    this.validators = validators;
+  }
 }

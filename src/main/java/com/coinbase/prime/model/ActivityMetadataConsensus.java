@@ -19,65 +19,58 @@
  */
 
 package com.coinbase.prime.model;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 
 public class ActivityMetadataConsensus {
-    /**
-     * Deadline for approval of an activity
-     */
-    @JsonProperty("approval_deadline")
+  /** Deadline for approval of an activity */
+  @JsonProperty("approval_deadline")
+  private String approvalDeadline;
+
+  /** If activity has passed consensus threshold */
+  @JsonProperty("has_passed_consensus")
+  private boolean hasPassedConsensus;
+
+  public ActivityMetadataConsensus() {}
+
+  public ActivityMetadataConsensus(Builder builder) {
+    this.approvalDeadline = builder.approvalDeadline;
+    this.hasPassedConsensus = builder.hasPassedConsensus;
+  }
+
+  public String getApprovalDeadline() {
+    return approvalDeadline;
+  }
+
+  public void setApprovalDeadline(String approvalDeadline) {
+    this.approvalDeadline = approvalDeadline;
+  }
+
+  public boolean getHasPassedConsensus() {
+    return hasPassedConsensus;
+  }
+
+  public void setHasPassedConsensus(boolean hasPassedConsensus) {
+    this.hasPassedConsensus = hasPassedConsensus;
+  }
+
+  public static class Builder {
     private String approvalDeadline;
 
-    /**
-     * If activity has passed consensus threshold
-     */
-    @JsonProperty("has_passed_consensus")
     private boolean hasPassedConsensus;
 
-    public ActivityMetadataConsensus() {
+    public Builder approvalDeadline(String approvalDeadline) {
+      this.approvalDeadline = approvalDeadline;
+      return this;
     }
 
-    public ActivityMetadataConsensus(Builder builder) {
-        this.approvalDeadline = builder.approvalDeadline;
-        this.hasPassedConsensus = builder.hasPassedConsensus;
-    }
-    public String getApprovalDeadline() {
-        return approvalDeadline;
+    public Builder hasPassedConsensus(boolean hasPassedConsensus) {
+      this.hasPassedConsensus = hasPassedConsensus;
+      return this;
     }
 
-    public void setApprovalDeadline(String approvalDeadline) {
-        this.approvalDeadline = approvalDeadline;
+    public ActivityMetadataConsensus build() {
+      return new ActivityMetadataConsensus(this);
     }
-    public boolean getHasPassedConsensus() {
-        return hasPassedConsensus;
-    }
-
-    public void setHasPassedConsensus(boolean hasPassedConsensus) {
-        this.hasPassedConsensus = hasPassedConsensus;
-    }
-    public static class Builder {
-        private String approvalDeadline;
-
-        private boolean hasPassedConsensus;
-
-        public Builder approvalDeadline(String approvalDeadline) {
-            this.approvalDeadline = approvalDeadline;
-            return this;
-        }
-
-        public Builder hasPassedConsensus(boolean hasPassedConsensus) {
-            this.hasPassedConsensus = hasPassedConsensus;
-            return this;
-        }
-
-        public ActivityMetadataConsensus build() {
-            return new ActivityMetadataConsensus(this);
-        }
-    }
+  }
 }
-

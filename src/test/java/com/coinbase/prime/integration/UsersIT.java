@@ -16,62 +16,57 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.users.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class UsersIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListEntityUsers() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        UsersService service = PrimeServiceFactory.createUsersService(client);
-        ListEntityUsersResponse response = service.listEntityUsers(
-                new ListEntityUsersRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListEntityUsers() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    UsersService service = PrimeServiceFactory.createUsersService(client);
+    ListEntityUsersResponse response =
+        service.listEntityUsers(new ListEntityUsersRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListEntityUsersWithPagination() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        UsersService service = PrimeServiceFactory.createUsersService(client);
-        ListEntityUsersResponse response = service.listEntityUsers(
-                new ListEntityUsersRequest.Builder()
-                        .entityId(entityId)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListEntityUsersWithPagination() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    UsersService service = PrimeServiceFactory.createUsersService(client);
+    ListEntityUsersResponse response =
+        service.listEntityUsers(
+            new ListEntityUsersRequest.Builder().entityId(entityId).limit(5).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPortfolioUsers() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        UsersService service = PrimeServiceFactory.createUsersService(client);
-        ListPortfolioUsersResponse response = service.listPortfolioUsers(
-                new ListPortfolioUsersRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioUsers() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    UsersService service = PrimeServiceFactory.createUsersService(client);
+    ListPortfolioUsersResponse response =
+        service.listPortfolioUsers(
+            new ListPortfolioUsersRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPortfolioUsersWithPagination() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        UsersService service = PrimeServiceFactory.createUsersService(client);
-        ListPortfolioUsersResponse response = service.listPortfolioUsers(
-                new ListPortfolioUsersRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioUsersWithPagination() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    UsersService service = PrimeServiceFactory.createUsersService(client);
+    ListPortfolioUsersResponse response =
+        service.listPortfolioUsers(
+            new ListPortfolioUsersRequest.Builder().portfolioId(portfolioId).limit(5).build());
+    assertNotNull(response);
+  }
 }

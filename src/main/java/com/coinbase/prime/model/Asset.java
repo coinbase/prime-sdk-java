@@ -19,152 +19,139 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.NetworkDetails;
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Asset {
-    /**
-     * The name of the asset
-     */
-    @JsonProperty("name")
+  /** The name of the asset */
+  @JsonProperty("name")
+  private String name;
+
+  /** The mutable series of letters used to identify the asset */
+  @JsonProperty("symbol")
+  private String symbol;
+
+  /** The number of decimals supported for the asset */
+  @JsonProperty("decimal_precision")
+  private String decimalPrecision;
+
+  /** Indicates whether this asset can be traded */
+  @JsonProperty("trading_supported")
+  private boolean tradingSupported;
+
+  /** Base URL to our recommended block explorer (crypto only) */
+  @JsonProperty("explorer_url")
+  private String explorerUrl;
+
+  /** List of networks supported by this asset */
+  @JsonProperty("networks")
+  private List<NetworkDetails> networks;
+
+  public Asset() {}
+
+  public Asset(Builder builder) {
+    this.name = builder.name;
+    this.symbol = builder.symbol;
+    this.decimalPrecision = builder.decimalPrecision;
+    this.tradingSupported = builder.tradingSupported;
+    this.explorerUrl = builder.explorerUrl;
+    this.networks = builder.networks;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public String getDecimalPrecision() {
+    return decimalPrecision;
+  }
+
+  public void setDecimalPrecision(String decimalPrecision) {
+    this.decimalPrecision = decimalPrecision;
+  }
+
+  public boolean getTradingSupported() {
+    return tradingSupported;
+  }
+
+  public void setTradingSupported(boolean tradingSupported) {
+    this.tradingSupported = tradingSupported;
+  }
+
+  public String getExplorerUrl() {
+    return explorerUrl;
+  }
+
+  public void setExplorerUrl(String explorerUrl) {
+    this.explorerUrl = explorerUrl;
+  }
+
+  public List<NetworkDetails> getNetworks() {
+    return networks;
+  }
+
+  public void setNetworks(List<NetworkDetails> networks) {
+    this.networks = networks;
+  }
+
+  public static class Builder {
     private String name;
 
-    /**
-     * The mutable series of letters used to identify the asset
-     */
-    @JsonProperty("symbol")
     private String symbol;
 
-    /**
-     * The number of decimals supported for the asset
-     */
-    @JsonProperty("decimal_precision")
     private String decimalPrecision;
 
-    /**
-     * Indicates whether this asset can be traded
-     */
-    @JsonProperty("trading_supported")
     private boolean tradingSupported;
 
-    /**
-     * Base URL to our recommended block explorer (crypto only)
-     */
-    @JsonProperty("explorer_url")
     private String explorerUrl;
 
-    /**
-     * List of networks supported by this asset
-     */
-    @JsonProperty("networks")
     private List<NetworkDetails> networks;
 
-    public Asset() {
+    public Builder name(String name) {
+      this.name = name;
+      return this;
     }
 
-    public Asset(Builder builder) {
-        this.name = builder.name;
-        this.symbol = builder.symbol;
-        this.decimalPrecision = builder.decimalPrecision;
-        this.tradingSupported = builder.tradingSupported;
-        this.explorerUrl = builder.explorerUrl;
-        this.networks = builder.networks;
-    }
-    public String getName() {
-        return name;
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getSymbol() {
-        return symbol;
+    public Builder decimalPrecision(String decimalPrecision) {
+      this.decimalPrecision = decimalPrecision;
+      return this;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-    public String getDecimalPrecision() {
-        return decimalPrecision;
+    public Builder tradingSupported(boolean tradingSupported) {
+      this.tradingSupported = tradingSupported;
+      return this;
     }
 
-    public void setDecimalPrecision(String decimalPrecision) {
-        this.decimalPrecision = decimalPrecision;
-    }
-    public boolean getTradingSupported() {
-        return tradingSupported;
+    public Builder explorerUrl(String explorerUrl) {
+      this.explorerUrl = explorerUrl;
+      return this;
     }
 
-    public void setTradingSupported(boolean tradingSupported) {
-        this.tradingSupported = tradingSupported;
-    }
-    public String getExplorerUrl() {
-        return explorerUrl;
+    public Builder networks(List<NetworkDetails> networks) {
+      this.networks = networks;
+      return this;
     }
 
-    public void setExplorerUrl(String explorerUrl) {
-        this.explorerUrl = explorerUrl;
+    public Asset build() {
+      return new Asset(this);
     }
-    public List<NetworkDetails> getNetworks() {
-        return networks;
-    }
-
-    public void setNetworks(List<NetworkDetails> networks) {
-        this.networks = networks;
-    }
-    public static class Builder {
-        private String name;
-
-        private String symbol;
-
-        private String decimalPrecision;
-
-        private boolean tradingSupported;
-
-        private String explorerUrl;
-
-        private List<NetworkDetails> networks;
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder decimalPrecision(String decimalPrecision) {
-            this.decimalPrecision = decimalPrecision;
-            return this;
-        }
-
-        public Builder tradingSupported(boolean tradingSupported) {
-            this.tradingSupported = tradingSupported;
-            return this;
-        }
-
-        public Builder explorerUrl(String explorerUrl) {
-            this.explorerUrl = explorerUrl;
-            return this;
-        }
-
-        public Builder networks(List<NetworkDetails> networks) {
-            this.networks = networks;
-            return this;
-        }
-
-        public Asset build() {
-            return new Asset(this);
-        }
-    }
+  }
 }
-

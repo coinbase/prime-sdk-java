@@ -23,19 +23,21 @@ import com.coinbase.prime.transactions.CreateWalletTransferRequest;
 import com.coinbase.prime.transactions.CreateWalletTransferResponse;
 import com.coinbase.prime.transactions.TransactionsService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class CreateWalletTransfer {
   public static void main(String[] args) {
     try {
       if (args.length < 4) {
-        System.err.println("Usage: CreateWalletTransfer <source-wallet-id> <amount> <currency-symbol> <destination-wallet-id>");
-        System.err.println("Example: CreateWalletTransfer wallet-id-123 1.5 ETH destination-wallet-id-456");
+        System.err.println(
+            "Usage: CreateWalletTransfer <source-wallet-id> <amount> <currency-symbol> <destination-wallet-id>");
+        System.err.println(
+            "Example: CreateWalletTransfer wallet-id-123 1.5 ETH destination-wallet-id-456");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String sourceWalletId = args[0];
@@ -44,23 +46,34 @@ public class CreateWalletTransfer {
       String destinationWalletId = args[3];
       String idempotencyKey = UUID.randomUUID().toString();
 
-      System.out.println("Creating wallet transfer: Portfolio ID: " + portfolioId + ", Source Wallet: " + sourceWalletId + ", Amount: " + amount + " " + currencySymbol + ", Destination: " + destinationWalletId);
+      System.out.println(
+          "Creating wallet transfer: Portfolio ID: "
+              + portfolioId
+              + ", Source Wallet: "
+              + sourceWalletId
+              + ", Amount: "
+              + amount
+              + " "
+              + currencySymbol
+              + ", Destination: "
+              + destinationWalletId);
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
-      CreateWalletTransferResponse response = service.createWalletTransfer(
-          new CreateWalletTransferRequest.Builder()
-              .portfolioId(portfolioId)
-              .walletId(sourceWalletId)
-              .amount(amount)
-              .currencySymbol(currencySymbol)
-              .destination(destinationWalletId)
-              .idempotencyKey(idempotencyKey)
-              .build());
+      CreateWalletTransferResponse response =
+          service.createWalletTransfer(
+              new CreateWalletTransferRequest.Builder()
+                  .portfolioId(portfolioId)
+                  .walletId(sourceWalletId)
+                  .amount(amount)
+                  .currencySymbol(currencySymbol)
+                  .destination(destinationWalletId)
+                  .idempotencyKey(idempotencyKey)
+                  .build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
-

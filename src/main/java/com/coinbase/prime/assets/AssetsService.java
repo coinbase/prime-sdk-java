@@ -20,17 +20,16 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AssetsService {
-    /**
-     * List Assets.
-     * <p>
-     * List all assets available for a given entity
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
+  /**
+   * List Assets.
+   *
+   * <p>List all assets available for a given entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListAssetsResponse listAssets(ListAssetsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

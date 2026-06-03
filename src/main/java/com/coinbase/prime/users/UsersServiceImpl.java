@@ -21,32 +21,32 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
-
 import java.util.List;
 
 public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersService {
-    public UsersServiceImpl(CoinbasePrimeClient client) {
-        super(client);
-    }
+  public UsersServiceImpl(CoinbasePrimeClient client) {
+    super(client);
+  }
 
-    @Override
-    public ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/users", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityUsersResponse>() {});
-    }
+  @Override
+  public ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/users", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityUsersResponse>() {});
+  }
 
-    @Override
-    public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/users", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioUsersResponse>() {});
-    }
-
+  @Override
+  public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/users", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPortfolioUsersResponse>() {});
+  }
 }

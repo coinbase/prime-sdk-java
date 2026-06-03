@@ -16,117 +16,123 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
 import com.coinbase.prime.model.enums.WalletType;
 import com.coinbase.prime.wallets.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class WalletsIT extends BaseIntegrationTest {
 
-    private String resolveWalletId() throws Exception {
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        ListWalletsResponse wallets = service.listWallets(
-                new ListWalletsRequest.Builder().portfolioId(portfolioId).build());
-        if (wallets == null || wallets.getWallets() == null || wallets.getWallets().length == 0) {
-            return null;
-        }
-        return wallets.getWallets()[0].getId();
+  private String resolveWalletId() throws Exception {
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    ListWalletsResponse wallets =
+        service.listWallets(new ListWalletsRequest.Builder().portfolioId(portfolioId).build());
+    if (wallets == null || wallets.getWallets() == null || wallets.getWallets().length == 0) {
+      return null;
     }
+    return wallets.getWallets()[0].getId();
+  }
 
-    @Test
-    public void testListWallets() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        ListWalletsResponse response = service.listWallets(
-                new ListWalletsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListWallets() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    ListWalletsResponse response =
+        service.listWallets(new ListWalletsRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListWalletsWithOptionals() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        ListWalletsResponse response = service.listWallets(
-                new ListWalletsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .type(WalletType.TRADING)
-                        .symbols(new String[]{"BTC", "ETH", "USDC"})
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListWalletsWithOptionals() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    ListWalletsResponse response =
+        service.listWallets(
+            new ListWalletsRequest.Builder()
+                .portfolioId(portfolioId)
+                .type(WalletType.TRADING)
+                .symbols(new String[] {"BTC", "ETH", "USDC"})
+                .limit(5)
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetWallet() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        String walletId = resolveWalletId();
-        assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
+  @Test
+  public void testGetWallet() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    String walletId = resolveWalletId();
+    assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
 
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        GetWalletResponse response = service.getWallet(
-                new GetWalletRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .walletId(walletId)
-                        .build());
-        assertNotNull(response);
-    }
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    GetWalletResponse response =
+        service.getWallet(
+            new GetWalletRequest.Builder().portfolioId(portfolioId).walletId(walletId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListWalletAddresses() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        String walletId = resolveWalletId();
-        assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
+  @Test
+  public void testListWalletAddresses() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    String walletId = resolveWalletId();
+    assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
 
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        ListWalletAddressesResponse response = service.listWalletAddresses(
-                new ListWalletAddressesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .walletId(walletId)
-                        .build());
-        assertNotNull(response);
-    }
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    ListWalletAddressesResponse response =
+        service.listWalletAddresses(
+            new ListWalletAddressesRequest.Builder()
+                .portfolioId(portfolioId)
+                .walletId(walletId)
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListWalletAddressesWithPagination() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        String walletId = resolveWalletId();
-        assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
+  @Test
+  public void testListWalletAddressesWithPagination() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    String walletId = resolveWalletId();
+    assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
 
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        ListWalletAddressesResponse response = service.listWalletAddresses(
-                new ListWalletAddressesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .walletId(walletId)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    ListWalletAddressesResponse response =
+        service.listWalletAddresses(
+            new ListWalletAddressesRequest.Builder()
+                .portfolioId(portfolioId)
+                .walletId(walletId)
+                .limit(5)
+                .build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetWalletDepositInstructions() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        String walletId = resolveWalletId();
-        assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
+  @Test
+  public void testGetWalletDepositInstructions() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    String walletId = resolveWalletId();
+    assumeTrue(walletId != null, "Skipping: no wallets found for portfolio");
 
-        WalletsService service = PrimeServiceFactory.createWalletsService(client);
-        GetWalletDepositInstructionsResponse response = service.getWalletDepositInstructions(
-                new GetWalletDepositInstructionsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .walletId(walletId)
-                        .depositType(WalletDepositInstructionType.CRYPTO)
-                        .build());
-        assertNotNull(response);
-    }
+    WalletsService service = PrimeServiceFactory.createWalletsService(client);
+    GetWalletDepositInstructionsResponse response =
+        service.getWalletDepositInstructions(
+            new GetWalletDepositInstructionsRequest.Builder()
+                .portfolioId(portfolioId)
+                .walletId(walletId)
+                .depositType(WalletDepositInstructionType.CRYPTO)
+                .build());
+    assertNotNull(response);
+  }
 }

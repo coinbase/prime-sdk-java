@@ -20,29 +20,29 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface UsersService {
-    /**
-     * List Users.
-     * <p>
-     * List all users associated with a given entity
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /**
-     * List Portfolio Users.
-     * <p>
-     * List all users associated with a given portfolio
-     * </p>
-     *
-     * @param request the request parameters for this operation
-     * @return the response payload for this operation
-     * @throws CoinbaseClientException if the request fails client-side validation
-     * @throws CoinbasePrimeException if the Prime API returns an error response
-     */
-    ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+  /**
+   * List Users.
+   *
+   * <p>List all users associated with a given entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 
+  /**
+   * List Portfolio Users.
+   *
+   * <p>List all users associated with a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

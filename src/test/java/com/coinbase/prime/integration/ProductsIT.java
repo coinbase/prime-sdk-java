@@ -16,54 +16,55 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.CandlesGranularity;
 import com.coinbase.prime.products.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class ProductsIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListPortfolioProducts() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        ProductsService service = PrimeServiceFactory.createProductsService(client);
-        ListPortfolioProductsResponse response = service.listPortfolioProducts(
-                new ListPortfolioProductsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioProducts() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    ProductsService service = PrimeServiceFactory.createProductsService(client);
+    ListPortfolioProductsResponse response =
+        service.listPortfolioProducts(
+            new ListPortfolioProductsRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPortfolioProductsWithPagination() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        ProductsService service = PrimeServiceFactory.createProductsService(client);
-        ListPortfolioProductsResponse response = service.listPortfolioProducts(
-                new ListPortfolioProductsRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .limit(10)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPortfolioProductsWithPagination() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    ProductsService service = PrimeServiceFactory.createProductsService(client);
+    ListPortfolioProductsResponse response =
+        service.listPortfolioProducts(
+            new ListPortfolioProductsRequest.Builder().portfolioId(portfolioId).limit(10).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetCandles() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        ProductsService service = PrimeServiceFactory.createProductsService(client);
-        GetCandlesResponse response = service.getCandles(
-                new GetCandlesRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .productId("BTC-USD")
-                        .startTime("2025-01-01T00:00:00Z")
-                        .endTime("2025-01-02T00:00:00Z")
-                        .granularity(CandlesGranularity.ONE_HOUR)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetCandles() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    ProductsService service = PrimeServiceFactory.createProductsService(client);
+    GetCandlesResponse response =
+        service.getCandles(
+            new GetCandlesRequest.Builder()
+                .portfolioId(portfolioId)
+                .productId("BTC-USD")
+                .startTime("2025-01-01T00:00:00Z")
+                .endTime("2025-01-02T00:00:00Z")
+                .granularity(CandlesGranularity.ONE_HOUR)
+                .build());
+    assertNotNull(response);
+  }
 }

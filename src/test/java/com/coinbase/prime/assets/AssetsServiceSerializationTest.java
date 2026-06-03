@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.assets;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,46 +25,47 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class AssetsServiceSerializationTest {
 
-    private ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-        objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
+  @BeforeEach
+  public void setUp() {
+    objectMapper =
+        new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  }
 
-    @Test
-    public void testListAssetsRequestConstruction() throws CoinbaseClientException {
-        ListAssetsRequest request = new ListAssetsRequest.Builder().entityId("entity-123").build();
-        assertNotNull(request);
-        assertEquals("entity-123", request.getEntityId());
-    }
+  @Test
+  public void testListAssetsRequestConstruction() throws CoinbaseClientException {
+    ListAssetsRequest request = new ListAssetsRequest.Builder().entityId("entity-123").build();
+    assertNotNull(request);
+    assertEquals("entity-123", request.getEntityId());
+  }
 
-    @Test
-    public void testListAssetsRequestBuilderValidation() {
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListAssetsRequest.Builder().entityId(null).build());
-        assertThrows(CoinbaseClientException.class, () ->
-                new ListAssetsRequest.Builder().entityId("").build());
-    }
+  @Test
+  public void testListAssetsRequestBuilderValidation() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new ListAssetsRequest.Builder().entityId(null).build());
+    assertThrows(
+        CoinbaseClientException.class, () -> new ListAssetsRequest.Builder().entityId("").build());
+  }
 
-    @Test
-    public void testListAssetsResponseDeserialization() throws JsonProcessingException {
-        String json = "{"
-                + "\"assets\":["
-                + "{\"name\":\"Bitcoin\",\"symbol\":\"BTC\",\"decimal_precision\":\"8\"},"
-                + "{\"name\":\"Ethereum\",\"symbol\":\"ETH\",\"decimal_precision\":\"18\"}"
-                + "]"
-                + "}";
+  @Test
+  public void testListAssetsResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"assets\":["
+            + "{\"name\":\"Bitcoin\",\"symbol\":\"BTC\",\"decimal_precision\":\"8\"},"
+            + "{\"name\":\"Ethereum\",\"symbol\":\"ETH\",\"decimal_precision\":\"18\"}"
+            + "]"
+            + "}";
 
-        ListAssetsResponse response = objectMapper.readValue(json, ListAssetsResponse.class);
-        assertNotNull(response);
-        assertNotNull(response.getAssets());
-        assertEquals(2, response.getAssets().length);
-        assertEquals("BTC", response.getAssets()[0].getSymbol());
-        assertEquals("ETH", response.getAssets()[1].getSymbol());
-    }
+    ListAssetsResponse response = objectMapper.readValue(json, ListAssetsResponse.class);
+    assertNotNull(response);
+    assertNotNull(response.getAssets());
+    assertEquals(2, response.getAssets().length);
+    assertEquals("BTC", response.getAssets()[0].getSymbol());
+    assertEquals("ETH", response.getAssets()[1].getSymbol());
+  }
 }

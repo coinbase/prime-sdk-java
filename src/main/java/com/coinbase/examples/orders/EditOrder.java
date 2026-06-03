@@ -23,20 +23,21 @@ import com.coinbase.prime.orders.EditOrderRequest;
 import com.coinbase.prime.orders.EditOrderResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
-
 import java.util.UUID;
 
 public class EditOrder {
   public static void main(String[] args) {
     try {
       if (args.length < 5) {
-        System.err.println("Usage: EditOrder <order_id> <orig_client_order_id> <quotevalue|basequantity> <amount> <limit_price>");
+        System.err.println(
+            "Usage: EditOrder <order_id> <orig_client_order_id> <quotevalue|basequantity> <amount> <limit_price>");
         System.err.println("Example: EditOrder abc123 orig-uuid-456 basequantity 15.0 51000.00");
         System.err.println("Example: EditOrder abc123 orig-uuid-456 quotevalue 1000.00 51000.00");
         System.exit(1);
       }
 
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
       String orderId = args[0];
@@ -47,14 +48,29 @@ public class EditOrder {
       String limitPrice = args[4];
       String newClientOrderId = UUID.randomUUID().toString();
 
-      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId + ", Original Client Order ID: " + origClientOrderId + ", New Client Order ID: " + newClientOrderId + ", Edit parameters: " + quantityType + " = " + amount + ", limit_price = " + limitPrice);
+      System.out.println(
+          "Using IDs: Portfolio ID: "
+              + portfolioId
+              + ", Order ID: "
+              + orderId
+              + ", Original Client Order ID: "
+              + origClientOrderId
+              + ", New Client Order ID: "
+              + newClientOrderId
+              + ", Edit parameters: "
+              + quantityType
+              + " = "
+              + amount
+              + ", limit_price = "
+              + limitPrice);
 
-      EditOrderRequest.Builder builder = new EditOrderRequest.Builder()
-          .portfolioId(portfolioId)
-          .orderId(orderId)
-          .origClientOrderId(origClientOrderId)
-          .clientOrderId(newClientOrderId)
-          .limitPrice(limitPrice);
+      EditOrderRequest.Builder builder =
+          new EditOrderRequest.Builder()
+              .portfolioId(portfolioId)
+              .orderId(orderId)
+              .origClientOrderId(origClientOrderId)
+              .clientOrderId(newClientOrderId)
+              .limitPrice(limitPrice);
 
       if (quantityType.equals("basequantity")) {
         builder.baseQuantity(amount);
@@ -68,7 +84,8 @@ public class EditOrder {
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
       EditOrderResponse response = service.editOrder(builder.build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

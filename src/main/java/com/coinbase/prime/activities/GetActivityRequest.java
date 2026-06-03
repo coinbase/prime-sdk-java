@@ -16,62 +16,56 @@
 
 package com.coinbase.prime.activities;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Activity by Activity ID
- */
+/** Get Activity by Activity ID */
 public class GetActivityRequest {
-    /**
-     * Id of the activity to retrieve
-     */
-    @JsonProperty(required = true, value = "activity_id")
-    @JsonIgnore
+  /** Id of the activity to retrieve */
+  @JsonProperty(required = true, value = "activity_id")
+  @JsonIgnore
+  private String activityId;
+
+  public GetActivityRequest() {}
+
+  public GetActivityRequest(String activityId) {
+    this.activityId = activityId;
+  }
+
+  public GetActivityRequest(Builder builder) {
+    this.activityId = builder.activityId;
+  }
+
+  public String getActivityId() {
+    return activityId;
+  }
+
+  public void setActivityId(String activityId) {
+    this.activityId = activityId;
+  }
+
+  public static class Builder {
     private String activityId;
 
-    public GetActivityRequest() {
+    public Builder() {}
+
+    public Builder activityId(String activityId) {
+      this.activityId = activityId;
+      return this;
     }
 
-    public GetActivityRequest(String activityId) {
-        this.activityId = activityId;
+    public GetActivityRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetActivityRequest(this);
     }
 
-    public GetActivityRequest(Builder builder) {
-        this.activityId = builder.activityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.activityId)) {
+        throw new CoinbaseClientException("ActivityId is required");
+      }
     }
-
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
-    public static class Builder {
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public GetActivityRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetActivityRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.activityId)) {
-                throw new CoinbaseClientException("ActivityId is required");
-            }
-        }
-    }
+  }
 }

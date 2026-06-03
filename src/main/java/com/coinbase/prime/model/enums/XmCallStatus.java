@@ -27,4 +27,3 @@ public enum XmCallStatus {
   CALL_STATUS_SETTLED,
   CALL_STATUS_CANCELED
 }
-

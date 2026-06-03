@@ -19,33 +19,29 @@ package com.coinbase.prime.futures;
 import com.coinbase.prime.model.FuturesSweep;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * List Entity Futures Sweeps
- */
+/** List Entity Futures Sweeps */
 public class ListEntityFuturesSweepsResponse {
-    @JsonProperty("sweeps")
-    private FuturesSweep[] sweeps;
+  @JsonProperty("sweeps")
+  private FuturesSweep[] sweeps;
 
-    @JsonProperty("auto_sweep")
-    private Boolean autoSweep;
+  @JsonProperty("auto_sweep")
+  private Boolean autoSweep;
 
-    public ListEntityFuturesSweepsResponse() {
-    }
+  public ListEntityFuturesSweepsResponse() {}
 
-    public FuturesSweep[] getSweeps() {
-        return sweeps;
-    }
+  public FuturesSweep[] getSweeps() {
+    return sweeps;
+  }
 
-    public void setSweeps(FuturesSweep[] sweeps) {
-        this.sweeps = sweeps;
-    }
+  public void setSweeps(FuturesSweep[] sweeps) {
+    this.sweeps = sweeps;
+  }
 
-    public Boolean getAutoSweep() {
-        return autoSweep;
-    }
+  public Boolean getAutoSweep() {
+    return autoSweep;
+  }
 
-    public void setAutoSweep(Boolean autoSweep) {
-        this.autoSweep = autoSweep;
-    }
-
+  public void setAutoSweep(Boolean autoSweep) {
+    this.autoSweep = autoSweep;
+  }
 }

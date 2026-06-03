@@ -16,26 +16,24 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.assets.AssetsService;
 import com.coinbase.prime.assets.ListAssetsRequest;
 import com.coinbase.prime.assets.ListAssetsResponse;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class AssetsIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListAssets() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        AssetsService service = PrimeServiceFactory.createAssetsService(client);
-        ListAssetsResponse response = service.listAssets(
-                new ListAssetsRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListAssets() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    AssetsService service = PrimeServiceFactory.createAssetsService(client);
+    ListAssetsResponse response =
+        service.listAssets(new ListAssetsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 }

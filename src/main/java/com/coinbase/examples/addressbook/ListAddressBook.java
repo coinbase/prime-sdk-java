@@ -27,7 +27,8 @@ import com.coinbase.prime.utils.Utils;
 public class ListAddressBook {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
@@ -35,9 +36,11 @@ public class ListAddressBook {
 
       AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
       ListAddressBookResponse response =
-          service.listAddressBook(new ListAddressBookRequest.Builder().portfolioId(portfolioId).build());
+          service.listAddressBook(
+              new ListAddressBookRequest.Builder().portfolioId(portfolioId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

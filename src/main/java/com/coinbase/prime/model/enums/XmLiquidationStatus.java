@@ -28,4 +28,3 @@ public enum XmLiquidationStatus {
   XM_LIQUIDATION_STATUS_CANCELED,
   XM_LIQUIDATION_STATUS_FAILED
 }
-

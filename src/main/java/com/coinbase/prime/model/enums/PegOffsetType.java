@@ -20,21 +20,16 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - UNKNOWN_PEG_OFFSET_TYPE: nil value - PEG_OFFSET_TYPE_PRICE: Offset specified in price units - PEG_OFFSET_TYPE_BPS: Offset specified in basis points (BPS) - PEG_OFFSET_TYPE_DEPTH: Offset specified in depth
-     */
+/**
+ * - UNKNOWN_PEG_OFFSET_TYPE: nil value - PEG_OFFSET_TYPE_PRICE: Offset specified in price units -
+ * PEG_OFFSET_TYPE_BPS: Offset specified in basis points (BPS) - PEG_OFFSET_TYPE_DEPTH: Offset
+ * specified in depth
+ */
 public enum PegOffsetType {
-  /**
-   * Offset specified in price units
-   */
+  /** Offset specified in price units */
   PEG_OFFSET_TYPE_PRICE,
-  /**
-   * Offset specified in basis points (BPS)
-   */
+  /** Offset specified in basis points (BPS) */
   PEG_OFFSET_TYPE_BPS,
-  /**
-   * Offset specified in depth
-   */
+  /** Offset specified in depth */
   PEG_OFFSET_TYPE_DEPTH
 }
-

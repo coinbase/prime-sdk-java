@@ -17,8 +17,8 @@
 package com.coinbase.prime.model.enums;
 
 public enum PrimeXMControlStatus {
-    XM_CONTROL_STATUS_UNSPECIFIED,
-    TRADES_AND_WITHDRAWALS,
-    TRADES_ONLY,
-    SESSION_LOCKED
+  XM_CONTROL_STATUS_UNSPECIFIED,
+  TRADES_AND_WITHDRAWALS,
+  TRADES_ONLY,
+  SESSION_LOCKED
 }

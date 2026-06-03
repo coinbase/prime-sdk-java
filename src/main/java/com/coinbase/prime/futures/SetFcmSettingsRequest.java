@@ -16,79 +16,71 @@
 
 package com.coinbase.prime.futures;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Set FCM Settings
- */
+/** Set FCM Settings */
 public class SetFcmSettingsRequest {
-    /**
-     * Entity ID
-     */
-    @JsonProperty(required = true, value = "entity_id")
-    @JsonIgnore
-    private String entityId;
+  /** Entity ID */
+  @JsonProperty(required = true, value = "entity_id")
+  @JsonIgnore
+  private String entityId;
 
-    /**
-     * Target CFM Excess amount to set. Only non-negative number is allowed
-     */
-    @JsonProperty("target_derivatives_excess")
+  /** Target CFM Excess amount to set. Only non-negative number is allowed */
+  @JsonProperty("target_derivatives_excess")
+  private String targetDerivativesExcess;
+
+  public SetFcmSettingsRequest() {}
+
+  public SetFcmSettingsRequest(Builder builder) {
+    this.entityId = builder.entityId;
+    this.targetDerivativesExcess = builder.targetDerivativesExcess;
+  }
+
+  public String getEntityId() {
+    return entityId;
+  }
+
+  public void setEntityId(String entityId) {
+    this.entityId = entityId;
+  }
+
+  public String getTargetDerivativesExcess() {
+    return targetDerivativesExcess;
+  }
+
+  public void setTargetDerivativesExcess(String targetDerivativesExcess) {
+    this.targetDerivativesExcess = targetDerivativesExcess;
+  }
+
+  public static class Builder {
+    private String entityId;
     private String targetDerivativesExcess;
 
-    public SetFcmSettingsRequest() {
+    public Builder() {}
+
+    public Builder entityId(String entityId) {
+      this.entityId = entityId;
+      return this;
     }
 
-    public SetFcmSettingsRequest(Builder builder) {
-        this.entityId = builder.entityId;
-        this.targetDerivativesExcess = builder.targetDerivativesExcess;
+    public Builder targetDerivativesExcess(String targetDerivativesExcess) {
+      this.targetDerivativesExcess = targetDerivativesExcess;
+      return this;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public SetFcmSettingsRequest build() throws CoinbaseClientException {
+      validate();
+      return new SetFcmSettingsRequest(this);
     }
 
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.entityId)) {
+        throw new CoinbaseClientException("EntityId is required");
+      }
     }
-
-    public String getTargetDerivativesExcess() {
-        return targetDerivativesExcess;
-    }
-
-    public void setTargetDerivativesExcess(String targetDerivativesExcess) {
-        this.targetDerivativesExcess = targetDerivativesExcess;
-    }
-
-    public static class Builder {
-        private String entityId;
-        private String targetDerivativesExcess;
-
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        public Builder targetDerivativesExcess(String targetDerivativesExcess) {
-            this.targetDerivativesExcess = targetDerivativesExcess;
-            return this;
-        }
-
-        public SetFcmSettingsRequest build() throws CoinbaseClientException {
-            validate();
-            return new SetFcmSettingsRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId is required");
-            }
-        }
-    }
+  }
 }

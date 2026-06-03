@@ -16,62 +16,56 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.positions.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class PositionsIT extends BaseIntegrationTest {
 
-    @Test
-    public void testListPositions() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListEntityPositionsResponse response = service.listEntityPositions(
-                new ListEntityPositionsRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPositions() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    PositionsService service = PrimeServiceFactory.createPositionsService(client);
+    ListEntityPositionsResponse response =
+        service.listEntityPositions(
+            new ListEntityPositionsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListPositionsWithPagination() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListEntityPositionsResponse response = service.listEntityPositions(
-                new ListEntityPositionsRequest.Builder()
-                        .entityId(entityId)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListPositionsWithPagination() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    PositionsService service = PrimeServiceFactory.createPositionsService(client);
+    ListEntityPositionsResponse response =
+        service.listEntityPositions(
+            new ListEntityPositionsRequest.Builder().entityId(entityId).limit(5).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListAggregatePositions() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListAggregateEntityPositionsResponse response = service.listAggregateEntityPositions(
-                new ListAggregateEntityPositionsRequest.Builder()
-                        .entityId(entityId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListAggregatePositions() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    PositionsService service = PrimeServiceFactory.createPositionsService(client);
+    ListAggregateEntityPositionsResponse response =
+        service.listAggregateEntityPositions(
+            new ListAggregateEntityPositionsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testListAggregatePositionsWithPagination() throws Exception {
-        assumeTrue(entityId != null && !entityId.isEmpty(),
-                "Skipping: COINBASE_PRIME_ENTITY_ID not set");
-        PositionsService service = PrimeServiceFactory.createPositionsService(client);
-        ListAggregateEntityPositionsResponse response = service.listAggregateEntityPositions(
-                new ListAggregateEntityPositionsRequest.Builder()
-                        .entityId(entityId)
-                        .limit(5)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testListAggregatePositionsWithPagination() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    PositionsService service = PrimeServiceFactory.createPositionsService(client);
+    ListAggregateEntityPositionsResponse response =
+        service.listAggregateEntityPositions(
+            new ListAggregateEntityPositionsRequest.Builder().entityId(entityId).limit(5).build());
+    assertNotNull(response);
+  }
 }

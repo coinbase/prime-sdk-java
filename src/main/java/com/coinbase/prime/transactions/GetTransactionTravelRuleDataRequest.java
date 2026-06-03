@@ -16,83 +16,75 @@
 
 package com.coinbase.prime.transactions;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
-/**
- * Get Transaction Travel Rule Data
- */
+/** Get Transaction Travel Rule Data */
 public class GetTransactionTravelRuleDataRequest {
-    /**
-     * The portfolio ID that owns the transaction
-     */
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+  /** The portfolio ID that owns the transaction */
+  @JsonProperty(required = true, value = "portfolio_id")
+  @JsonIgnore
+  private String portfolioId;
 
-    /**
-     * The transaction ID to look up travel rule data for
-     */
-    @JsonProperty(required = true, value = "transaction_id")
-    @JsonIgnore
+  /** The transaction ID to look up travel rule data for */
+  @JsonProperty(required = true, value = "transaction_id")
+  @JsonIgnore
+  private String transactionId;
+
+  public GetTransactionTravelRuleDataRequest() {}
+
+  public GetTransactionTravelRuleDataRequest(Builder builder) {
+    this.portfolioId = builder.portfolioId;
+    this.transactionId = builder.transactionId;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
+
+  public static class Builder {
+    private String portfolioId;
     private String transactionId;
 
-    public GetTransactionTravelRuleDataRequest() {
+    public Builder() {}
+
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public GetTransactionTravelRuleDataRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.transactionId = builder.transactionId;
+    public Builder transactionId(String transactionId) {
+      this.transactionId = transactionId;
+      return this;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public GetTransactionTravelRuleDataRequest build() throws CoinbaseClientException {
+      validate();
+      return new GetTransactionTravelRuleDataRequest(this);
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
+    private void validate() throws CoinbaseClientException {
+      if (isNullOrEmpty(this.portfolioId)) {
+        throw new CoinbaseClientException("PortfolioId is required");
+      }
+      if (isNullOrEmpty(this.transactionId)) {
+        throw new CoinbaseClientException("TransactionId is required");
+      }
     }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public GetTransactionTravelRuleDataRequest build() throws CoinbaseClientException {
-            validate();
-            return new GetTransactionTravelRuleDataRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.transactionId)) {
-                throw new CoinbaseClientException("TransactionId is required");
-            }
-        }
-    }
+  }
 }

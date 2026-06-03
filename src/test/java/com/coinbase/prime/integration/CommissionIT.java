@@ -16,39 +16,41 @@
 
 package com.coinbase.prime.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import com.coinbase.prime.commission.CommissionService;
 import com.coinbase.prime.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 public class CommissionIT extends BaseIntegrationTest {
 
-    @Test
-    public void testGetPortfolioCommission() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        CommissionService service = PrimeServiceFactory.createCommissionService(client);
-        GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-                new GetPortfolioCommissionRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioCommission() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    CommissionService service = PrimeServiceFactory.createCommissionService(client);
+    GetPortfolioCommissionResponse response =
+        service.getPortfolioCommission(
+            new GetPortfolioCommissionRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 
-    @Test
-    public void testGetPortfolioCommissionWithProductId() throws Exception {
-        assumeTrue(portfolioId != null && !portfolioId.isEmpty(),
-                "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
-        CommissionService service = PrimeServiceFactory.createCommissionService(client);
-        GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-                new GetPortfolioCommissionRequest.Builder()
-                        .portfolioId(portfolioId)
-                        .productId("BTC-USD")
-                        .build());
-        assertNotNull(response);
-    }
+  @Test
+  public void testGetPortfolioCommissionWithProductId() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    CommissionService service = PrimeServiceFactory.createCommissionService(client);
+    GetPortfolioCommissionResponse response =
+        service.getPortfolioCommission(
+            new GetPortfolioCommissionRequest.Builder()
+                .portfolioId(portfolioId)
+                .productId("BTC-USD")
+                .build());
+    assertNotNull(response);
+  }
 }

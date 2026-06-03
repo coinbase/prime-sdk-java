@@ -27,19 +27,20 @@ import com.coinbase.prime.utils.Utils;
 public class ListPortfolioTransactions {
   public static void main(String[] args) {
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       System.out.println("Using Portfolio ID: " + portfolioId);
 
       TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
-      ListPortfolioTransactionsResponse response = service.listPortfolioTransactions(
-          new ListPortfolioTransactionsRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      ListPortfolioTransactionsResponse response =
+          service.listPortfolioTransactions(
+              new ListPortfolioTransactionsRequest.Builder().portfolioId(portfolioId).build());
 
-      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

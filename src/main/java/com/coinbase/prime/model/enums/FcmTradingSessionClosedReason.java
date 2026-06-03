@@ -20,25 +20,19 @@
 
 package com.coinbase.prime.model.enums;
 
-    /**
-     * - FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED: Undefined closed reason - FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE: Regular market close - FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE: Exchange maintenance - FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE: Vendor maintenance
-     */
+/**
+ * - FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED: Undefined closed reason -
+ * FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE: Regular market close -
+ * FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE: Exchange maintenance -
+ * FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE: Vendor maintenance
+ */
 public enum FcmTradingSessionClosedReason {
-  /**
-   * Undefined closed reason
-   */
+  /** Undefined closed reason */
   FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED,
-  /**
-   * Regular market close
-   */
+  /** Regular market close */
   FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE,
-  /**
-   * Exchange maintenance
-   */
+  /** Exchange maintenance */
   FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE,
-  /**
-   * Vendor maintenance
-   */
+  /** Vendor maintenance */
   FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE
 }
-
