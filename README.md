@@ -1,13 +1,13 @@
 # Coinbase Prime Java SDK
 
-The canonical source repository is **[coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java)**. The former [coinbase-samples/prime-sdk-java](https://github.com/coinbase-samples/prime-sdk-java) repository is deprecated. Maven Central releases **1.9.0+** are published from the canonical repository.
-
 [![Maven Central](https://img.shields.io/maven-central/v/com.coinbase.prime/coinbase-prime-sdk-java.svg)](https://central.sonatype.com/artifact/com.coinbase.prime/coinbase-prime-sdk-java)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Overview
 
 The *Coinbase Prime Java SDK* is a sample library that demonstrates the usage of the [Coinbase Prime](https://prime.coinbase.com/) API via its [REST APIs](https://docs.cdp.coinbase.com/prime/reference).
+
+**Repository:** [coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java)
 
 ## License
 
@@ -182,4 +182,4 @@ Release history and API changes are documented in [CHANGELOG.md](CHANGELOG.md).
 
 If you discover a security vulnerability within this SDK, please see our [Security Policy](SECURITY.md) for disclosure information.
 
-For non-security bugs and feature requests, use [GitHub Issues](https://github.com/coinbase-samples/prime-sdk-java/issues).
+For non-security bugs and feature requests, use [GitHub Issues](https://github.com/coinbase/prime-sdk-java/issues).

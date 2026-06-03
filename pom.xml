@@ -20,12 +20,12 @@
   <name>Coinbase Prime Java SDK</name>
   <description>Sample Java SDK for the Coinbase Prime REST APIs</description>
   <groupId>com.coinbase.prime</groupId>
-  <url>https://github.com/coinbase-samples/prime-sdk-java</url>
-  <version>1.8.1</version>
+  <url>https://github.com/coinbase/prime-sdk-java</url>
+  <version>1.9.0</version>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
-      <url>https://github.com/coinbase-samples/prime-sdk-java/blob/main/LICENSE</url>
+      <url>https://github.com/coinbase/prime-sdk-java/blob/main/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -39,8 +39,8 @@
     </developer>
   </developers>
   <scm>
-    <developerConnection>scm:git@github.com:coinbase-samples/prime-sdk-java.git</developerConnection>
-    <url>https://github.com/coinbase-samples/prime-sdk-java/tree/main</url>
+    <developerConnection>scm:git@github.com:coinbase/prime-sdk-java.git</developerConnection>
+    <url>https://github.com/coinbase/prime-sdk-java/tree/main</url>
     <tag>HEAD</tag>
   </scm>
   <properties>

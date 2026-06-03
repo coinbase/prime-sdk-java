@@ -23,7 +23,7 @@ public class Constants {
   public static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
   public static final String CB_USER_AGENT_HEADER = "User-Agent";
   public static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com/v1";
-  public static final String SDK_VERSION = "1.8.1";
+  public static final String SDK_VERSION = "1.9.0";
 
   /**
    * Replaces a trailing {@code /vN} segment with {@code /}{@code version}. Used when an endpoint is

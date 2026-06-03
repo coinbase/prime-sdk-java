@@ -24,7 +24,7 @@ public class ConstantsTest {
 
   @Test
   public void testSdkVersionIsCorrect() {
-    assertEquals("1.8.1", Constants.SDK_VERSION, "SDK_VERSION should match the version in pom.xml");
+    assertEquals("1.9.0", Constants.SDK_VERSION, "SDK_VERSION should match the version in pom.xml");
   }
 
   @Test

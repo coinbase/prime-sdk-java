@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.9.0] - 2026-06-03
+
+### Changed
+
+- Moved the canonical repository to [coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java).
+- Added GitHub Actions for format, lint, test, Salus security scan, and Maven Central publish.
+- Added `.github/CODEOWNERS` for `@coinbase/prime-sdk-java-write` and `@coinbase/prime-sdk-java-admin`.
+
+### Notes
+
+- No intentional API breaking changes; minor bump signals repository migration.
+- Spotless (Google Java Format) was introduced in **1.8.1**; this release adds CI that runs `spotless:check`.
+- Equivalent to **1.8.0** on coinbase-samples aside from repository, tooling, and formatting.
+
 ## [1.8.1] - 2026-06-03
 
 ### Changed
