@@ -27,23 +27,41 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Submit Deposit Travel Rule Data
  */
 public class SubmitDepositTravelRuleDataRequest {
+    /**
+     * The portfolio ID that owns the transaction
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The transaction ID associated with the entry
+     */
     @JsonProperty(required = true, value = "transaction_id")
     @JsonIgnore
     private String transactionId;
 
+    /**
+     * Represents a party in a travel rule transfer (originator or beneficiary).
+     */
     @JsonProperty("originator")
     private TravelRuleParty originator;
 
+    /**
+     * Represents a party in a travel rule transfer (originator or beneficiary).
+     */
     @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
+    /**
+     * True if user owns the counterparty address (self-transfer) If false, beneficiary is required
+     */
     @JsonProperty("is_self")
     private Boolean isSelf;
 
+    /**
+     * True to skip wallet ownership verification
+     */
     @JsonProperty("opt_out_of_ownership_verification")
     private Boolean optOutOfOwnershipVerification;
 

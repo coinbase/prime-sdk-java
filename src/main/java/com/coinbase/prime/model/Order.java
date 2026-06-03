@@ -62,6 +62,9 @@ public class Order {
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
+     */
     @JsonProperty("side")
     private OrderSide side;
 
@@ -71,6 +74,9 @@ public class Order {
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
+    /**
+     * - UNKNOWN_ORDER_TYPE: nil value - MARKET: A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order) - LIMIT: A [limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order) - TWAP: A [time-weighted average price order](https://en.wikipedia.org/wiki/Time-weighted_average_price) - BLOCK: A [block trade](https://en.wikipedia.org/wiki/Block_trade) - VWAP: A [volume-weighted average price order](https://en.wikipedia.org/wiki/Volume-weighted_average_price) - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order) - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote) - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+     */
     @JsonProperty("type")
     private OrderType type;
 
@@ -104,9 +110,15 @@ public class Order {
     @JsonProperty("expiry_time")
     private OffsetDateTime expiryTime;
 
+    /**
+     * - UNKNOWN_ORDER_STATUS: nil value - OPEN: The order is open but unfilled - FILLED: The order was filled - CANCELLED: The order was cancelled - EXPIRED: The order has expired - FAILED: Order submission failed - PENDING: The order has been sent but is not yet confirmed
+     */
     @JsonProperty("status")
     private OrderStatus status;
 
+    /**
+     * - UNKNOWN_TIME_IN_FORCE: nil value - GOOD_UNTIL_DATE_TIME: Expires at a certain date/time - GOOD_UNTIL_CANCELLED: Order stays on the books until cancelled - IMMEDIATE_OR_CANCEL: Order is executed immediately at submission or is cancelled - FILL_OR_KILL: Order is executed immediately and fully at submission or is cancelled
+     */
     @JsonProperty("time_in_force")
     private TimeInForceType timeInForce;
 
@@ -236,6 +248,9 @@ public class Order {
     @JsonProperty("wig_level")
     private String wigLevel;
 
+    /**
+     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
+     */
     @JsonProperty("product_type")
     private ProductType productType;
 

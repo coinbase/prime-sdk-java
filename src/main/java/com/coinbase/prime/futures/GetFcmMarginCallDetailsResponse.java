@@ -23,6 +23,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get FCM Margin Call Details
  */
 public class GetFcmMarginCallDetailsResponse {
+    /**
+     * List of margin calls
+     */
     @JsonProperty("margin_calls")
     private FcmMarginCall[] marginCalls;
 

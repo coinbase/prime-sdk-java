@@ -20,6 +20,9 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * States
+     */
 public enum InvoiceState {
   INVOICE_STATE_UNSPECIFIED,
   INVOICE_STATE_IMPORTED,

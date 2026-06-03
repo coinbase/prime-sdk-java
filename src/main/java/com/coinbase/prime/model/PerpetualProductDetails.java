@@ -27,6 +27,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
+    /**
+     * PerpetualProductDetails contains details specific to perpetual futures products
+     */
 public class PerpetualProductDetails {
     /**
      * Open interest

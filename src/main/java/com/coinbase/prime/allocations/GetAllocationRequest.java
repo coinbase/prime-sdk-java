@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Allocation by ID
  */
 public class GetAllocationRequest {
+    /**
+     * The portfolio ID of the allocation
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the allocation
+     */
     @JsonProperty(required = true, value = "allocation_id")
     @JsonIgnore
     private String allocationId;

@@ -22,7 +22,7 @@ import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * List Portfolio Balances
+ * List Entity Balances
  */
 public class ListPortfolioBalancesResponse {
     @JsonProperty("balances")

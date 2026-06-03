@@ -20,7 +20,7 @@ import com.coinbase.prime.model.Candle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Get Public Product Candles (Beta)
+ * Candle response structure
  */
 public class GetCandlesResponse {
     @JsonProperty("candles")

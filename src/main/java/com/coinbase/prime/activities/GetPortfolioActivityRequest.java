@@ -23,13 +23,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Get Portfolio Activity by Activity ID
+ * Get Activity by Activity ID
  */
 public class GetPortfolioActivityRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Id of the activity to retrieve
+     */
     @JsonProperty(required = true, value = "activity_id")
     @JsonIgnore
     private String activityId;

@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Transaction by Transaction ID
  */
 public class GetTransactionRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The transaction ID
+     */
     @JsonProperty(required = true, value = "transaction_id")
     @JsonIgnore
     private String transactionId;

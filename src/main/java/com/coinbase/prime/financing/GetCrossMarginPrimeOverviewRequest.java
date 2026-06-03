@@ -23,11 +23,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Get Prime Cross Margin Overview (Beta) — uses /v2 path.
- * Requires a CoinbasePrimeClient initialized with base URL
- * "https://api.prime.coinbase.com" (without the /v1 suffix).
+ * Get Exchange Cross Margin Overview
  */
 public class GetCrossMarginPrimeOverviewRequest {
+    /**
+     * XM customer Prime Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

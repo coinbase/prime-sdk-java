@@ -27,6 +27,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class CommissionDetailTotal {
+    /**
+     * Total commission amount charged for the order This is the sum of all commission charged on the order
+     */
     @JsonProperty("total_commission")
     private String totalCommission;
 
@@ -42,9 +45,15 @@ public class CommissionDetailTotal {
     @JsonProperty("venue_commission")
     private String venueCommission;
 
+    /**
+     * CES Commission
+     */
     @JsonProperty("ces_commission")
     private String cesCommission;
 
+    /**
+     * Financing Commission
+     */
     @JsonProperty("financing_commission")
     private String financingCommission;
 

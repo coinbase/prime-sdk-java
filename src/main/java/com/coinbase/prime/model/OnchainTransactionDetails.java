@@ -35,6 +35,9 @@ public class OnchainTransactionDetails {
     @JsonProperty("signed_transaction")
     private String signedTransaction;
 
+    /**
+     * New message for risk assessment details
+     */
     @JsonProperty("risk_assessment")
     private RiskAssessment riskAssessment;
 
@@ -74,6 +77,9 @@ public class OnchainTransactionDetails {
     @JsonProperty("failure_reason")
     private String failureReason;
 
+    /**
+     * - SIGNING_STATUS_UNKNOWN: Unknown signing status - SIGNED: Transaction has been signed - UNSIGNED: Transaction is unsigned
+     */
     @JsonProperty("signing_status")
     private SigningStatus signingStatus;
 

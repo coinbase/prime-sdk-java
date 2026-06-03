@@ -28,6 +28,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class UserAction {
+    /**
+     * Action is the available user action types
+     */
     @JsonProperty("action")
     private Action action;
 

@@ -28,21 +28,39 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class WalletFiatDepositInstructions {
+    /**
+     * The id of the wallet
+     */
     @JsonProperty("id")
     private String id;
 
+    /**
+     * The name of the wallet
+     */
     @JsonProperty("name")
     private String name;
 
+    /**
+     * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit - SEPA: A SEPA deposit (Single Euro Payments Area)
+     */
     @JsonProperty("type")
     private WalletDepositInstructionType type;
 
+    /**
+     * The fiat account number
+     */
     @JsonProperty("account_number")
     private String accountNumber;
 
+    /**
+     * The fiat routing number
+     */
     @JsonProperty("routing_number")
     private String routingNumber;
 
+    /**
+     * Reference code to be used as a memo/description
+     */
     @JsonProperty("reference_code")
     private String referenceCode;
 

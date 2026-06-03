@@ -20,6 +20,30 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AddressBookService {
+    /**
+     * Get Address Book.
+     * <p>
+     * Gets a list of address book addresses
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListAddressBookResponse listAddressBook(ListAddressBookRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Create Address Book Entry.
+     * <p>
+     * Creates an entry for a portfolio's trusted addresses
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

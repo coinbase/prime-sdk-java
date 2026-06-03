@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Transaction Travel Rule Data
  */
 public class GetTransactionTravelRuleDataRequest {
+    /**
+     * The portfolio ID that owns the transaction
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The transaction ID to look up travel rule data for
+     */
     @JsonProperty(required = true, value = "transaction_id")
     @JsonIgnore
     private String transactionId;

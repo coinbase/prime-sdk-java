@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Set FCM Settings
  */
 public class SetFcmSettingsResponse {
+    /**
+     * Success
+     */
     @JsonProperty("success")
     private Boolean success;
 

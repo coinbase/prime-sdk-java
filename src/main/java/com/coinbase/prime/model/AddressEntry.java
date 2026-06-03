@@ -35,6 +35,9 @@ public class AddressEntry {
     @JsonProperty("address")
     private String address;
 
+    /**
+     * List of compatible chain IDs for a given address, empty for Solana
+     */
     @JsonProperty("chain_ids")
     private List<String> chainIds;
 

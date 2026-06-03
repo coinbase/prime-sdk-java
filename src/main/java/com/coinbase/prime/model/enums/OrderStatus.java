@@ -20,12 +20,33 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - UNKNOWN_ORDER_STATUS: nil value - OPEN: The order is open but unfilled - FILLED: The order was filled - CANCELLED: The order was cancelled - EXPIRED: The order has expired - FAILED: Order submission failed - PENDING: The order has been sent but is not yet confirmed
+     */
 public enum OrderStatus {
+  /**
+   * The order is open but unfilled
+   */
   OPEN,
+  /**
+   * The order was filled
+   */
   FILLED,
+  /**
+   * The order was cancelled
+   */
   CANCELLED,
+  /**
+   * The order has expired
+   */
   EXPIRED,
+  /**
+   * Order submission failed
+   */
   FAILED,
+  /**
+   * The order has been sent but is not yet confirmed
+   */
   PENDING
 }
 

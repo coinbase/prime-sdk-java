@@ -29,14 +29,23 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Wallet Addresses
  */
 public class ListWalletAddressesRequest extends PrimeListRequest {
+    /**
+     * The portfolio ID associated with the wallet
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID for which to retrieve all deposit addresses
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * The blockchain network name and type, provide an empty network to retrieve addresses across all networks for this wallet
+     */
     @JsonProperty("network_id")
     private String networkId;
 

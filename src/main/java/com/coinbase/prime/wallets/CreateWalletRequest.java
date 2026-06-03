@@ -29,19 +29,34 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Wallet
  */
 public class CreateWalletRequest {
+    /**
+     * Portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The name of the wallet
+     */
     @JsonProperty("name")
     private String name;
 
+    /**
+     * The asset stored in the wallet. Should not be specified when wallet_type is ONCHAIN
+     */
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
+     */
     @JsonProperty("wallet_type")
     private WalletType type;
 
+    /**
+     * idem
+     */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 

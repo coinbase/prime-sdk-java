@@ -20,9 +20,21 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - RISK_MANAGEMENT_TYPE_UNSPECIFIED: Unspecified risk management type - RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM: Risk is managed by FCM (Futures Commission Merchant) - RISK_MANAGEMENT_TYPE_MANAGED_BY_VENUE: Risk is managed by the venue
+     */
 public enum RiskManagementType {
+  /**
+   * Unspecified risk management type
+   */
   RISK_MANAGEMENT_TYPE_UNSPECIFIED,
+  /**
+   * Risk is managed by FCM (Futures Commission Merchant)
+   */
   RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM,
+  /**
+   * Risk is managed by the venue
+   */
   RISK_MANAGEMENT_TYPE_MANAGED_BY_VENUE
 }
 

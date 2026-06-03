@@ -40,7 +40,7 @@ public class Balance {
     private String amount;
 
     /**
-     * Amount that is currently held in obligation to an open order&#39;s position or a pending withdrawal
+     * Amount that is currently held in obligation to an open order's position or a pending withdrawal
      */
     @JsonProperty("holds")
     private String holds;

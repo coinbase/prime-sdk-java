@@ -30,6 +30,9 @@ public class GetPortfolioCommissionRequest {
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Specific trading pair to check commission (e.g BTC-USD)
+     */
     @JsonProperty("product_id")
     private String productId;
 

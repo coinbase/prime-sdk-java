@@ -26,41 +26,77 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Edit Order (Beta)
  */
 public class EditOrderRequest {
+    /**
+     * The ID of the portfolio that owns the order
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The ID of the order being edited
+     */
     @JsonProperty(required = true, value = "order_id")
     @JsonIgnore
     private String orderId;
 
+    /**
+     * Deprecated: The product ID of the order being edited
+     */
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * The client order ID of the order being edited
+     */
     @JsonProperty("orig_client_order_id")
     private String origClientOrderId;
 
+    /**
+     * The updated version of the client order ID
+     */
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
+    /**
+     * Order size in base asset units (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required)
+     */
     @JsonProperty("base_quantity")
     private String baseQuantity;
 
+    /**
+     * Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or receive (when selling); the quantity in base units will be determined based on the market liquidity and indicated &#x60;quote_value&#x60; (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required)
+     */
     @JsonProperty("quote_value")
     private String quoteValue;
 
+    /**
+     * The limit price (required for TWAP, VWAP, LIMIT, and STOP_LIMIT orders)
+     */
     @JsonProperty("limit_price")
     private String limitPrice;
 
+    /**
+     * The expiry time of the order in UTC (TWAP, VWAP, LIMIT, and STOP_LIMIT GTD only)
+     */
     @JsonProperty("expiry_time")
     private String expiryTime;
 
+    /**
+     * The maximum order size that will show up on venue order books. Specifying a value here effectively makes a LIMIT order into an "iceberg" style order.
+     */
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
 
+    /**
+     * The maximum order size that will show up on venue order books. Specifying a value here effectively makes a LIMIT order into an "iceberg" style order.
+     */
     @JsonProperty("display_base_size")
     private String displayBaseSize;
 
+    /**
+     * Specifies the stop price at which the order activates. The order is activated if the last trade price on Coinbase Exchange crosses the stop price specified on the order
+     */
     @JsonProperty("stop_price")
     private String stopPrice;
 

@@ -20,9 +20,68 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AllocationsService {
+
+    /**
+     * Create Portfolio Allocations.
+     * <p>
+     * Create allocation for a given portfolio
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Create Portfolio Net Allocations.
+     * <p>
+     * Create net allocation for a given portfolio
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Portfolio Allocations.
+     * <p>
+     * List historical allocations for a given portfolio
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * Get Net Allocations by Netting ID.
+     * <p>
+     * Retrieve an allocation by netting ID
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListAllocationsByNettingIdResponse listAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Allocation by ID.
+     * <p>
+     * Retrieve an allocation by allocation ID
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

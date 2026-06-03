@@ -19,14 +19,29 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit matrix.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * TierPairRateEntry represents a single (tier_a, tier_b) -&gt; rate entry in an offset credit matrix.
+     */
 public class TierPairRateEntry {
+    /**
+     * First tier in the pair.
+     */
     @JsonProperty("tier_a")
     private String tierA;
 
+    /**
+     * Second tier in the pair.
+     */
     @JsonProperty("tier_b")
     private String tierB;
 
+    /**
+     * Credit rate for this tier pair.
+     */
     @JsonProperty("rate")
     private String rate;
 

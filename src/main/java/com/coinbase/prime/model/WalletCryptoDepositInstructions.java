@@ -41,6 +41,9 @@ public class WalletCryptoDepositInstructions {
     @JsonProperty("name")
     private String name;
 
+    /**
+     * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit - SEPA: A SEPA deposit (Single Euro Payments Area)
+     */
     @JsonProperty("type")
     private WalletDepositInstructionType type;
 
@@ -57,7 +60,7 @@ public class WalletCryptoDepositInstructions {
     private String accountIdentifier;
 
     /**
-     * The blockchain network&#39;s terminology for the unique identifier used to identify the receiver of the transaction (different blockchain networks use different names, such as &#x60;destination_tag&#x60; or &#x60;memo&#x60;)
+     * The blockchain network's terminology for the unique identifier used to identify the receiver of the transaction (different blockchain networks use different names, such as &#x60;destination_tag&#x60; or &#x60;memo&#x60;)
      */
     @JsonProperty("account_identifier_name")
     private String accountIdentifierName;

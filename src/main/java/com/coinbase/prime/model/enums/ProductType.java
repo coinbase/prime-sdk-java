@@ -20,8 +20,17 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
+     */
 public enum ProductType {
+  /**
+   * Spot product
+   */
   SPOT,
+  /**
+   * Future product
+   */
   FUTURE
 }
 

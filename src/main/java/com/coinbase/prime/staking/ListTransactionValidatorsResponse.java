@@ -24,6 +24,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * List Transaction Validators
  */
 public class ListTransactionValidatorsResponse {
+    /**
+     * List of transaction-to-validator associations. Each entry represents one transaction staking to one validator.
+     */
     @JsonProperty("transaction_validators")
     private TransactionValidator[] transactionValidators;
 

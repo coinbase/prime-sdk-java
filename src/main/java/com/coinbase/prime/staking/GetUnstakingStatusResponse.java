@@ -23,18 +23,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get Unstaking Status
  */
 public class GetUnstakingStatusResponse {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty("wallet_id")
     private String walletId;
 
+    /**
+     * The wallet address
+     */
     @JsonProperty("wallet_address")
     private String walletAddress;
 
+    /**
+     * Current timestamp at time of API call
+     */
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
+    /**
+     * List of validators with unstaking information for this wallet
+     */
     @JsonProperty("validators")
     private ValidatorUnstakingInfo[] validators;
 

@@ -35,13 +35,13 @@ public class Position {
     private String symbol;
 
     /**
-     * The long position based on &#39;reference&#39; value
+     * The long position based on 'reference' value
      */
     @JsonProperty("long")
     private String _long;
 
     /**
-     * The short position based on &#39;reference&#39; value
+     * The short position based on 'reference' value
      */
     @JsonProperty("short")
     private String _short;

@@ -26,14 +26,23 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Preview Unstake
  */
 public class PreviewUnstakeRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * Amount to preview unstaking
+     */
     @JsonProperty("amount")
     private String amount;
 

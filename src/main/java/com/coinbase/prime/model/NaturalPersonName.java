@@ -26,13 +26,25 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Natural person name components
+     */
 public class NaturalPersonName {
+    /**
+     * Given/first name
+     */
     @JsonProperty("first_name")
     private String firstName;
 
+    /**
+     * optional middle name (currently unused)
+     */
     @JsonProperty("middle_name")
     private String middleName;
 
+    /**
+     * Family/last name
+     */
     @JsonProperty("last_name")
     private String lastName;
 

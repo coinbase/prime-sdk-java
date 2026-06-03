@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Portfolio Withdrawal Power
  */
 public class GetPortfolioWithdrawalPowerRequest {
+    /**
+     * The unique ID of the portfolio
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The currency symbol
+     */
     @JsonProperty("symbol")
     private String symbol;
 

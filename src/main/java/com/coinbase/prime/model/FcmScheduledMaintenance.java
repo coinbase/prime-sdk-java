@@ -27,6 +27,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
+    /**
+     * FcmScheduledMaintenance contains scheduled maintenance window information
+     */
 public class FcmScheduledMaintenance {
     /**
      * Maintenance window start time

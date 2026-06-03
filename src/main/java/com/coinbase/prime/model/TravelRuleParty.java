@@ -30,27 +30,48 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Represents a party in a travel rule transfer (originator or beneficiary).
+     */
 public class TravelRuleParty {
+    /**
+     * Legal name (for entities or simple name format)
+     */
     @JsonProperty("name")
     private String name;
 
+    /**
+     * Natural person name components
+     */
     @JsonProperty("natural_person_name")
     private NaturalPersonName naturalPersonName;
 
+    /**
+     * Detailed address information
+     */
     @JsonProperty("address")
     private DetailedAddress address;
 
+    /**
+     * - TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED: Default unspecified wallet type - TRAVEL_RULE_WALLET_TYPE_VASP: Centralized exchange wallet - TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED: Self-hosted/custodial wallet
+     */
     @JsonProperty("wallet_type")
     private TravelRuleWalletType walletType;
 
+    /**
+     * VASP identifier when wallet_type is VASP
+     */
     @JsonProperty("vasp_id")
     private String vaspId;
 
+    /**
+     * VASP name fallback when vasp_id is unknown
+     */
     @JsonProperty("vasp_name")
     private String vaspName;
 
     /**
-     * Personal identifier for travel rule compliance. For individuals: passport number, national ID, driver&#39;s license. For institutions: LEI (Legal Entity Identifier).
+     * Personal identifier for travel rule compliance. For individuals: passport number, national ID, driver's license. For institutions: LEI (Legal Entity Identifier).
      */
     @JsonProperty("personal_id")
     private String personalId;

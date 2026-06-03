@@ -61,6 +61,9 @@ public class PortfolioUser {
     @JsonProperty("entity_id")
     private String entityId;
 
+    /**
+     * - USER_ROLE_UNKNOWN: nil value - AUDITOR: An auditor - SIGNATORY: A signatory - ADMIN: An admin - INITIATOR: An initiator - REVIEWER: A reviewer - TRADER: A trader - FULL_TRADER: A trader with full permissions - TEAM_MANAGER: A team manager - APPROVER: An approver - TAX_MANAGER: A tax manager - BUSINESS_MANAGER: A business manager
+     */
     @JsonProperty("role")
     private UserRole role;
 

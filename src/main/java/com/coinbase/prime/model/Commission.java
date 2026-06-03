@@ -34,7 +34,7 @@ public class Commission {
     private String type;
 
     /**
-     * Commission rate (in whole percentage. Commission of 15bps is \&quot;0.0015\&quot;)
+     * Commission rate (in whole percentage. Commission of 15bps is "0.0015")
      */
     @JsonProperty("rate")
     private String rate;

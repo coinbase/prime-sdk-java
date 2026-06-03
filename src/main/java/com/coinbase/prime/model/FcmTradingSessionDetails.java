@@ -30,6 +30,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
+    /**
+     * FcmTradingSessionDetails contains trading session details for FCM products
+     */
 public class FcmTradingSessionDetails {
     /**
      * Whether the trading session is currently open
@@ -49,6 +52,9 @@ public class FcmTradingSessionDetails {
     @JsonProperty("close_time")
     private OffsetDateTime closeTime;
 
+    /**
+     * - FCM_TRADING_SESSION_STATE_UNDEFINED: Undefined session state - FCM_TRADING_SESSION_STATE_PRE_OPEN: Pre-open state, orders can be placed and cancelled - FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL: Pre-open state, orders cannot be cancelled - FCM_TRADING_SESSION_STATE_OPEN: Trading session is open - FCM_TRADING_SESSION_STATE_CLOSE: Trading session is closed - FCM_TRADING_SESSION_STATE_HALTED: Trading session is halted
+     */
     @JsonProperty("session_state")
     private FcmTradingSessionState sessionState;
 
@@ -58,9 +64,15 @@ public class FcmTradingSessionDetails {
     @JsonProperty("after_hours_order_entry_disabled")
     private boolean afterHoursOrderEntryDisabled;
 
+    /**
+     * - FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED: Undefined closed reason - FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE: Regular market close - FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE: Exchange maintenance - FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE: Vendor maintenance
+     */
     @JsonProperty("closed_reason")
     private FcmTradingSessionClosedReason closedReason;
 
+    /**
+     * FcmScheduledMaintenance contains scheduled maintenance window information
+     */
     @JsonProperty("maintenance")
     private FcmScheduledMaintenance maintenance;
 

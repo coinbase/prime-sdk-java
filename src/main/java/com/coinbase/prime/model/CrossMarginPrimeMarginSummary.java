@@ -19,53 +19,107 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Cross-margin account summary and nested breakdowns.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * Cross-margin account summary and nested breakdowns.
+     */
 public class CrossMarginPrimeMarginSummary {
+    /**
+     * Cross Margin Margin Requirement (XMMR) notional.
+     */
     @JsonProperty("margin_requirement")
     private String marginRequirement;
 
+    /**
+     * Equity notional.
+     */
     @JsonProperty("account_equity")
     private String accountEquity;
 
+    /**
+     * Equity - XMMR (margin excess is &gt; 0).
+     */
     @JsonProperty("margin_excess_shortfall")
     private String marginExcessShortfall;
 
+    /**
+     * Credit consumed from Cross Margin Credit Limit (XMCL).
+     */
     @JsonProperty("consumed_credit")
     private String consumedCredit;
 
+    /**
+     * XM Credit Limit (XMCL) is the maximum notional USD of total fiat and digital asset loans.
+     */
     @JsonProperty("xm_credit_limit")
     private String xmCreditLimit;
 
+    /**
+     * XM Margin Limit (XMML) is the maximum notional USD deficit.
+     */
     @JsonProperty("xm_margin_limit")
     private String xmMarginLimit;
 
+    /**
+     * Amount of the XM margin limit consumed by excess deficit.
+     */
     @JsonProperty("consumed_margin_limit")
     private String consumedMarginLimit;
 
+    /**
+     * Equity attributed by spot.
+     */
     @JsonProperty("spot_equity")
     private String spotEquity;
 
+    /**
+     * Equity attributed by futures.
+     */
     @JsonProperty("futures_equity")
     private String futuresEquity;
 
+    /**
+     * Gross market value.
+     */
     @JsonProperty("gross_market_value")
     private String grossMarketValue;
 
+    /**
+     * Net market value.
+     */
     @JsonProperty("net_market_value")
     private String netMarketValue;
 
+    /**
+     * Net exposure.
+     */
     @JsonProperty("net_exposure")
     private String netExposure;
 
+    /**
+     * Gross leverage.
+     */
     @JsonProperty("gross_leverage")
     private String grossLeverage;
 
+    /**
+     * Equity ratio.
+     */
     @JsonProperty("equity_ratio")
     private String equityRatio;
 
+    /**
+     * Deficit ratio.
+     */
     @JsonProperty("deficit_ratio")
     private String deficitRatio;
 
+    /**
+     * FCM excess available to return.
+     */
     @JsonProperty("fcm_excess_available_to_return")
     private String fcmExcessAvailableToReturn;
 

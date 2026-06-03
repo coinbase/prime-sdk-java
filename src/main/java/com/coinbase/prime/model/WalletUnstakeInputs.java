@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+    /**
+     * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet. Requirements and supported fields vary by asset type.
+     */
 public class WalletUnstakeInputs {
     /**
      * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available

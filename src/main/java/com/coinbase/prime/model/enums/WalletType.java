@@ -20,11 +20,29 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
+     */
 public enum WalletType {
+  /**
+   * A crypto vault
+   */
   VAULT,
+  /**
+   * A trading wallet
+   */
   TRADING,
+  /**
+   * Other wallet types (like consumer, etc)
+   */
   WALLET_TYPE_OTHER,
+  /**
+   * A QC Wallet
+   */
   QC,
+  /**
+   * An Onchain wallet
+   */
   ONCHAIN
 }
 

@@ -34,6 +34,9 @@ public class PaymentMethodSummary {
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: Silvergate exchange network - METHOD_SWIFT: Swift
+     */
     @JsonProperty("payment_method_type")
     private PaymentMethodType paymentMethodType;
 

@@ -26,6 +26,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * BlindMatchMetadata contains metadata specific to blind match advanced transfers.
+     */
 public class BlindMatchMetadata {
     @JsonProperty("reference_id")
     private String referenceId;

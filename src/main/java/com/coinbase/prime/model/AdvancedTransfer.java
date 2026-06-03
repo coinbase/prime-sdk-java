@@ -32,19 +32,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+    /**
+     * AdvancedTransfer represents a complex transfer operation such as a blind match settlement.
+     */
 public class AdvancedTransfer {
     @JsonProperty("id")
     private String id;
 
+    /**
+     * AdvancedTransferType specifies the type of advanced transfer.
+     */
     @JsonProperty("type")
     private AdvancedTransferType type;
 
+    /**
+     * AdvancedTransferState represents the lifecycle state of an advanced transfer.
+     */
     @JsonProperty("state")
     private AdvancedTransferState state;
 
     @JsonProperty("fund_movements")
     private List<FundMovement> fundMovements;
 
+    /**
+     * BlindMatchMetadata contains metadata specific to blind match advanced transfers.
+     */
     @JsonProperty("blind_match_metadata")
     private BlindMatchMetadata blindMatchMetadata;
 

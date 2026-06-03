@@ -20,7 +20,7 @@ import com.coinbase.prime.model.Activity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Get Portfolio Activity by Activity ID
+ * Get Activity by Activity ID
  */
 public class GetPortfolioActivityResponse {
     @JsonProperty("activity")

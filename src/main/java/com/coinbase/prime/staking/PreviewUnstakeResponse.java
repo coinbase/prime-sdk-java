@@ -20,21 +20,36 @@ import com.coinbase.prime.model.ValidatorUnstakePreview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Preview Unstake
+ * PreviewUnstakeResponse contains the response data from previewing an unstaking operation.
  */
 public class PreviewUnstakeResponse {
+    /**
+     * Estimated amount that would be unstaked
+     */
     @JsonProperty("estimated_amount")
     private String estimatedAmount;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty("wallet_id")
     private String walletId;
 
+    /**
+     * The blockchain address of the wallet
+     */
     @JsonProperty("wallet_address")
     private String walletAddress;
 
+    /**
+     * Timestamp at which this preview was generated (ISO 8601)
+     */
     @JsonProperty("current_timestamp")
     private String currentTimestamp;
 
+    /**
+     * Per-validator breakdown of the unstake simulation
+     */
     @JsonProperty("validators")
     private ValidatorUnstakePreview[] validators;
 

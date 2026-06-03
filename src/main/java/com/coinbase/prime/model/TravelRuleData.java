@@ -27,13 +27,25 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Data object used for withdrawals.
+     */
 public class TravelRuleData {
+    /**
+     * Represents a party in a travel rule transfer (originator or beneficiary).
+     */
     @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
+    /**
+     * Represents a party in a travel rule transfer (originator or beneficiary).
+     */
     @JsonProperty("originator")
     private TravelRuleParty originator;
 
+    /**
+     * True if user owns the counterparty address (self-transfer)
+     */
     @JsonProperty("is_self")
     private boolean isSelf;
 
@@ -43,6 +55,9 @@ public class TravelRuleData {
     @JsonProperty("is_intermediary")
     private boolean isIntermediary;
 
+    /**
+     * True to skip wallet ownership verification
+     */
     @JsonProperty("opt_out_of_ownership_verification")
     private boolean optOutOfOwnershipVerification;
 

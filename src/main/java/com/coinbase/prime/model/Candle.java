@@ -27,7 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
+    /**
+     * Represents a single candle data point
+     */
 public class Candle {
+    /**
+     * Timestamp for the start of the candle period
+     */
     @JsonProperty("timestamp")
     private OffsetDateTime timestamp;
 

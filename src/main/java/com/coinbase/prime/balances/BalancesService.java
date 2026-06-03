@@ -20,8 +20,56 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface BalancesService {
+
+    /**
+     * List Entity Balances.
+     * <p>
+     * List all balances for a specific entity
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * List Entity Balances.
+     * <p>
+     * List all balances for a specific entity
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Wallet Balance.
+     * <p>
+     * Query balance for a specific wallet
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Onchain Wallet Balances.
+     * <p>
+     * Query balances for a specific onchain wallet
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

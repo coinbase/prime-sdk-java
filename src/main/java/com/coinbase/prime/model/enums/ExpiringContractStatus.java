@@ -20,9 +20,21 @@
 
 package com.coinbase.prime.model.enums;
 
+    /**
+     * - EXPIRING_CONTRACT_STATUS_UNKNOWN: Unknown/unset — returns all expiring contracts (backward compatible default) - EXPIRING_CONTRACT_STATUS_UNEXPIRED: Only unexpired contracts (contract_expiry is in the future) - EXPIRING_CONTRACT_STATUS_EXPIRED: Only expired contracts (contract_expiry is in the past) - EXPIRING_CONTRACT_STATUS_ALL: All contracts regardless of expiry status
+     */
 public enum ExpiringContractStatus {
+  /**
+   * Only unexpired contracts (contract_expiry is in the future)
+   */
   EXPIRING_CONTRACT_STATUS_UNEXPIRED,
+  /**
+   * Only expired contracts (contract_expiry is in the past)
+   */
   EXPIRING_CONTRACT_STATUS_EXPIRED,
+  /**
+   * All contracts regardless of expiry status
+   */
   EXPIRING_CONTRACT_STATUS_ALL
 }
 

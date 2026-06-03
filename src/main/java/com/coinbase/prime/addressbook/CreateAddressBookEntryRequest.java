@@ -26,22 +26,40 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Address Book Entry
  */
 public class CreateAddressBookEntryRequest {
+    /**
+     * Portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Crypto address to add
+     */
     @JsonProperty("address")
     private String address;
 
+    /**
+     * Currency symbol of address to add
+     */
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    /**
+     * Name of address book entry
+     */
     @JsonProperty("name")
     private String name;
 
+    /**
+     * Account Identifier (memo/destination tag)
+     */
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
+    /**
+     * List of compatible chain IDs for the address, empty for Solana
+     */
     @JsonProperty("chain_ids")
     private String[] chainIds;
 

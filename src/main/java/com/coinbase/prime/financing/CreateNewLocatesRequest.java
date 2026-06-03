@@ -26,19 +26,34 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create New Locates
  */
 public class CreateNewLocatesRequest {
+    /**
+     * The unique ID of the portfolio
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * Currency symbol
+     */
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * Locate Amount
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * Deprecated: Use locate_date instead
+     */
     @JsonProperty("conversion_date")
     private String conversionDate;
 
+    /**
+     * The target date of the locate (YYYY-MM-DD)
+     */
     @JsonProperty("locate_date")
     private String locateDate;
 

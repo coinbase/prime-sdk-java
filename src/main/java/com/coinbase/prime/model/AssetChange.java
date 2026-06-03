@@ -30,6 +30,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class AssetChange {
+    /**
+     * AssetChangeType identifies the type of asset change
+     */
     @JsonProperty("type")
     private AssetChangeType type;
 

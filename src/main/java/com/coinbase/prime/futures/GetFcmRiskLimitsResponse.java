@@ -23,27 +23,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Get FCM Risk Limits
  */
 public class GetFcmRiskLimitsResponse {
+    /**
+     * Risk Limit set for a client
+     */
     @JsonProperty("cfm_risk_limit")
     private String cfmRiskLimit;
 
+    /**
+     * Limit utilization calculated based on total margin and PnLs
+     */
     @JsonProperty("cfm_risk_limit_utilization")
     private String cfmRiskLimitUtilization;
 
+    /**
+     * The total margin required for both positions and open orders
+     */
     @JsonProperty("cfm_total_margin")
     private String cfmTotalMargin;
 
+    /**
+     * Open Trade Equity accrued during the current trading session
+     */
     @JsonProperty("cfm_delta_ote")
     private String cfmDeltaOte;
 
+    /**
+     * Unsettled realized PNL for positions closed intraday
+     */
     @JsonProperty("cfm_unsettled_realized_pnl")
     private String cfmUnsettledRealizedPnl;
 
+    /**
+     * Unsettled accrued funding PNL from the last settlement
+     */
     @JsonProperty("cfm_unsettled_accrued_funding_pnl")
     private String cfmUnsettledAccruedFundingPnl;
 
+    /**
+     * Margin utilization as a decimal percentage between 0 and 1 (e.g. 0.5 means 50%)
+     */
     @JsonProperty("margin_utilization_percent")
     private String marginUtilizationPercent;
 
+    /**
+     * The margin health state of an FCM account. - FCM_MARGIN_HEALTH_STATE_UNSPECIFIED: Unspecified margin health state. - FCM_MARGIN_HEALTH_STATE_HEALTHY: Account margin is healthy. - FCM_MARGIN_HEALTH_STATE_RESTRICTED: Account margin is restricted. - FCM_MARGIN_HEALTH_STATE_PRE_LIQUIDATION: Account is approaching liquidation. - FCM_MARGIN_HEALTH_STATE_LIQUIDATION: Account is in liquidation.
+     */
     @JsonProperty("margin_health_state")
     private FcmMarginHealthState marginHealthState;
 

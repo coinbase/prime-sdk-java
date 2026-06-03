@@ -27,20 +27,35 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Wallet Deposit Instructions
  */
 public class GetWalletDepositInstructionsRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * The deposit type - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit - SEPA: A SEPA deposit (Single Euro Payments Area)
+     */
     @JsonProperty("deposit_type")
     private WalletDepositInstructionType depositType;
 
+    /**
+     * The name of the network The network id: base, bitcoin, ethereum, solana etc
+     */
     @JsonProperty("network.id")
     private String networkId;
 
+    /**
+     * The network type The network type: mainnet, testnet, etc
+     */
     @JsonProperty("network.type")
     private String networkType;
 

@@ -55,6 +55,9 @@ public class Activity {
     @JsonProperty("type")
     private PrimeActivityType type;
 
+    /**
+     * - ACTIVITY_SECONDARY_TYPE_BUY: Order secondary types - ACTIVITY_SECONDARY_TYPE_INTERNAL_TRANSFER: Transaction secondary types - ACTIVITY_SECONDARY_TYPE_WEB3_SIGNER: Onchain secondary types
+     */
     @JsonProperty("secondary_type")
     private ActivitySecondaryType secondaryType;
 
@@ -112,6 +115,9 @@ public class Activity {
     @JsonProperty("updated_at")
     private String updatedAt;
 
+    /**
+     * HierarchyType are the enums for various hierarchies within Prime, ex Entity, Organization, Portfolio
+     */
     @JsonProperty("hierarchy_type")
     private HierarchyType hierarchyType;
 

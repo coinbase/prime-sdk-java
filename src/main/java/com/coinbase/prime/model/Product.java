@@ -91,12 +91,21 @@ public class Product {
     @JsonProperty("rfq_product_details")
     private RfqProductDetails rfqProductDetails;
 
+    /**
+     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
+     */
     @JsonProperty("product_type")
     private ProductType productType;
 
+    /**
+     * FcmTradingSessionDetails contains trading session details for FCM products
+     */
     @JsonProperty("fcm_trading_session_details")
     private FcmTradingSessionDetails fcmTradingSessionDetails;
 
+    /**
+     * FutureProductDetails contains details specific to futures products
+     */
     @JsonProperty("future_product_details")
     private FutureProductDetails futureProductDetails;
 

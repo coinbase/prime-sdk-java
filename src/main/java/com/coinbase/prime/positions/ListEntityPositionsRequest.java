@@ -29,6 +29,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * List Entity Positions
  */
 public class ListEntityPositionsRequest extends PrimeListRequest {
+    /**
+     * The unique ID of the entity
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

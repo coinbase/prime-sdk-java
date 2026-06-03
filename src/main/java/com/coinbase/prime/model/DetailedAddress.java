@@ -26,25 +26,49 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * Detailed address information
+     */
 public class DetailedAddress {
+    /**
+     * Primary address line
+     */
     @JsonProperty("address_1")
     private String address1;
 
+    /**
+     * Secondary address line (optional)
+     */
     @JsonProperty("address_2")
     private String address2;
 
+    /**
+     * Tertiary address line (optional)
+     */
     @JsonProperty("address_3")
     private String address3;
 
+    /**
+     * City name
+     */
     @JsonProperty("city")
     private String city;
 
+    /**
+     * State or province
+     */
     @JsonProperty("state")
     private String state;
 
+    /**
+     * ISO 3166-1 alpha-2 country code
+     */
     @JsonProperty("country_code")
     private String countryCode;
 
+    /**
+     * Postal/ZIP code
+     */
     @JsonProperty("postal_code")
     private String postalCode;
 

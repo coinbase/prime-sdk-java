@@ -63,6 +63,9 @@ public class Allocation {
     @JsonProperty("product_id")
     private String productId;
 
+    /**
+     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
+     */
     @JsonProperty("side")
     private OrderSide side;
 

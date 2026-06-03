@@ -24,36 +24,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Create Withdrawal
  */
 public class CreateWalletWithdrawalResponse {
+    /**
+     * The activity ID associated with the withdrawal
+     */
     @JsonProperty("activity_id")
     private String activityId;
 
+    /**
+     * A URL to the activity in the Prime application
+     */
     @JsonProperty("approval_url")
     private String approvalUrl;
 
+    /**
+     * The currency symbol associated with the withdrawal
+     */
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * The amount of the withdrawal
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * The network fee associated with the withdrawal
+     */
     @JsonProperty("fee")
     private String fee;
 
+    /**
+     * The destination type used for the withdrawal
+     */
     @JsonProperty("destination_type")
     private String destinationType;
 
+    /**
+     * The source type used for the withdrawal
+     */
     @JsonProperty("source_type")
     private String sourceType;
 
     @JsonProperty("blockchain_destination")
     private BlockchainAddress blockchainDestination;
 
+    /**
+     * Represents a destination for a counterparty payment
+     */
     @JsonProperty("counterparty_destination")
     private CounterpartyDestination counterpartyDestination;
 
     @JsonProperty("blockchain_source")
     private BlockchainAddress blockchainSource;
 
+    /**
+     * The id of the just created transaction
+     */
     @JsonProperty("transaction_id")
     private String transactionId;
 

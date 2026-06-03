@@ -109,11 +109,6 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 new TypeReference<GetTransactionTravelRuleDataResponse>() {});
     }
 
-    /**
-     * Submit travel rule data for an existing deposit transaction.
-     * <p>
-     * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
-     */
     @Override
     public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbasePrimeException {
         return this.request(

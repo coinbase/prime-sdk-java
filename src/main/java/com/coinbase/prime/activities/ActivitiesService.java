@@ -20,8 +20,56 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface ActivitiesService {
+    /**
+     * List Activities.
+     * <p>
+     * List all activities associated with a given portfolio
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /**
+     * List Entity Activities.
+     * <p>
+     * List all activities associated with a given entity
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Activity by Activity ID.
+     * <p>
+     * Retrieve an activity by its activity ID - this endpoint can retrieve both portfolio and
+     * entity activities when passed the appropriate API key
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     GetActivityResponse getActivity(GetActivityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Activity by Activity ID.
+     * <p>
+     * Retrieve an activity by its activity ID
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

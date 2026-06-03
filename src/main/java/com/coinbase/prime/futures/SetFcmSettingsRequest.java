@@ -26,10 +26,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Set FCM Settings
  */
 public class SetFcmSettingsRequest {
+    /**
+     * Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    /**
+     * Target CFM Excess amount to set. Only non-negative number is allowed
+     */
     @JsonProperty("target_derivatives_excess")
     private String targetDerivativesExcess;
 

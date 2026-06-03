@@ -20,15 +20,79 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AdvancedTransferService {
-    ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     /**
+     * List Advanced Transfers.
+     * <p>
+     * List advanced transfers for a given portfolio. This API is currently not available to
+     * all clients. Please reach out to Prime Operations with any questions
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
+    ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Create Advanced Transfer.
+     * <p>
+     * Create advanced transfer for a given portfolio. This API is currently not available to
+     * all clients. Please reach out to Prime Operations with any questions
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
+    CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Cancel Advanced Transfer.
+     * <p>
+     * Cancel advanced transfer for a given portfolio. This API is currently not available to
+     * all clients. Please reach out to Prime Operations with any questions
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
+    CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * List transactions associated with an Advanced Transfer.
+     * <p>
+     * List transactions associated with an Advanced Transfer. This API is currently not
+     * available to all clients. Please reach out to Prime Operations with any questions
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
+    ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+
+    /**
+     * Get Portfolio Counterparty ID.
+     * <p>
+     * Retrieve the counterparty ID for a given portfolio
+     * </p>
+     *
      * @deprecated Prefer {@link com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId(com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdRequest)}
      * — this route is scoped to portfolios in the REST API.
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
      */
     @Deprecated
     GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

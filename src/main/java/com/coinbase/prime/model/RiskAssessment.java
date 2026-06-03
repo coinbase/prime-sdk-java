@@ -26,6 +26,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
+    /**
+     * New message for risk assessment details
+     */
 public class RiskAssessment {
     /**
      * Indicates if the transaction has been flagged for compliance concerns

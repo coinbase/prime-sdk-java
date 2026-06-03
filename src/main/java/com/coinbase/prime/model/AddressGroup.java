@@ -41,6 +41,9 @@ public class AddressGroup {
     @JsonProperty("network_type")
     private NetworkType networkType;
 
+    /**
+     * A list of addresses within the group
+     */
     @JsonProperty("addresses")
     private List<AddressEntry> addresses;
 

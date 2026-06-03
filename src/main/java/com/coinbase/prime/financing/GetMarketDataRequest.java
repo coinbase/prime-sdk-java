@@ -28,6 +28,9 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Get Market Data (Beta)
  */
 public class GetMarketDataRequest extends PrimeListRequest {
+    /**
+     * Prime Entity ID
+     */
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;

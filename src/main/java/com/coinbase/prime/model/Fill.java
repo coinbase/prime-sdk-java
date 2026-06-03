@@ -55,6 +55,9 @@ public class Fill {
     @JsonProperty("client_product_id")
     private String clientProductId;
 
+    /**
+     * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order
+     */
     @JsonProperty("side")
     private OrderSide side;
 
@@ -106,6 +109,9 @@ public class Fill {
     @JsonProperty("ces_commission")
     private String cesCommission;
 
+    /**
+     * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product
+     */
     @JsonProperty("product_type")
     private ProductType productType;
 

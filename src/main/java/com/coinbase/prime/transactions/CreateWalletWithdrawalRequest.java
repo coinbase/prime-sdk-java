@@ -31,23 +31,41 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  * Create Withdrawal
  */
 public class CreateWalletWithdrawalRequest {
+    /**
+     * The portfolio ID
+     */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    /**
+     * The wallet ID
+     */
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
 
+    /**
+     * The amount in whole units of the withdrawal
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * - UNKNOWN_DESTINATION: nil value - DESTINATION_PAYMENT_METHOD: A fiat bank account linked to a payment method id via Payment Method Service - DESTINATION_BLOCKCHAIN: A blockchain network address - DESTINATION_WALLET: An on platform wallet UUID NOTE: this is not usable in the withdrawals endpoint only transfers - DESTINATION_COUNTERPARTY: Counterparty ID
+     */
     @JsonProperty("destination_type")
     private DestinationType destinationType;
 
+    /**
+     * The idempotency key associated with the withdrawal
+     */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    /**
+     * The currency symbol for the withdrawal
+     */
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
@@ -57,9 +75,15 @@ public class CreateWalletWithdrawalRequest {
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
+    /**
+     * Represents a destination for a counterparty payment
+     */
     @JsonProperty("counterparty")
     private CounterpartyDestination counterparty;
 
+    /**
+     * Data object used for withdrawals.
+     */
     @JsonProperty("travel_rule_data")
     private TravelRuleData travelRuleData;
 

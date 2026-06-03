@@ -22,33 +22,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Create Transfer
  */
 public class CreateWalletTransferResponse {
+    /**
+     * The activity ID for the transfer
+     */
     @JsonProperty("activity_id")
     private String activityId;
 
+    /**
+     * A URL to the activity associated with this transfer for approval
+     */
     @JsonProperty("approval_url")
     private String approvalUrl;
 
+    /**
+     * The currency symbol of the transfer
+     */
     @JsonProperty("symbol")
     private String symbol;
 
+    /**
+     * The amount of the transfer
+     */
     @JsonProperty("amount")
     private String amount;
 
+    /**
+     * The network fee associated with the transfer
+     */
     @JsonProperty("fee")
     private String fee;
 
+    /**
+     * The destination address of the transfer
+     */
     @JsonProperty("destination_address")
     private String destinationAddress;
 
+    /**
+     * The destination type of the transfer
+     */
     @JsonProperty("destination_type")
     private String destinationType;
 
+    /**
+     * The source address used for the transfer
+     */
     @JsonProperty("source_address")
     private String sourceAddress;
 
+    /**
+     * The source type used for the transfer
+     */
     @JsonProperty("source_type")
     private String sourceType;
 
+    /**
+     * The id of the just created transaction
+     */
     @JsonProperty("transaction_id")
     private String transactionId;
 

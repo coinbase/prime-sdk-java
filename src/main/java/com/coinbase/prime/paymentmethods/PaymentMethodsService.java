@@ -20,6 +20,30 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PaymentMethodsService {
+    /**
+     * List Entity Payment Methods.
+     * <p>
+     * Retrieve all payment methods for a given entity
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
+    /**
+     * Get Entity Payment Method.
+     * <p>
+     * Get payment method details by id for a given entity
+     * </p>
+     *
+     * @param request the request parameters for this operation
+     * @return the response payload for this operation
+     * @throws CoinbaseClientException if the request fails client-side validation
+     * @throws CoinbasePrimeException if the Prime API returns an error response
+     */
     GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+
 }

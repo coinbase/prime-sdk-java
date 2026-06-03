@@ -27,12 +27,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DefiBalance {
+    /**
+     * Network this asset is on (ie "ethereum-mainnet")
+     */
     @JsonProperty("network")
     private String network;
 
+    /**
+     * a set of rules and standards that define how data is exchanged (ie "Aave V4 ")
+     */
     @JsonProperty("protocol")
     private String protocol;
 
+    /**
+     * Total USD value
+     */
     @JsonProperty("net_usd_value")
     private String netUsdValue;
 
