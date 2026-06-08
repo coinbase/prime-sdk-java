@@ -28,21 +28,6 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     super(client);
   }
 
-  /**
-   * @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)}
-   */
-  @Deprecated
-  @Override
-  public ListAggregatePositionsResponse listAggregatePositions(
-      ListAggregatePositionsRequest request) throws CoinbasePrimeException {
-    return this.request(
-        HttpMethod.GET,
-        String.format("/entities/%s/aggregate_positions", request.getEntityId()),
-        request,
-        List.of(200),
-        new TypeReference<ListAggregatePositionsResponse>() {});
-  }
-
   @Override
   public ListAggregateEntityPositionsResponse listAggregateEntityPositions(
       ListAggregateEntityPositionsRequest request) throws CoinbasePrimeException {
@@ -63,20 +48,5 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
         request,
         List.of(200),
         new TypeReference<ListEntityPositionsResponse>() {});
-  }
-
-  /**
-   * @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)}
-   */
-  @Deprecated
-  @Override
-  public ListPositionsResponse listPositions(ListPositionsRequest request)
-      throws CoinbasePrimeException {
-    return this.request(
-        HttpMethod.GET,
-        String.format("/entities/%s/positions", request.getEntityId()),
-        request,
-        List.of(200),
-        new TypeReference<ListPositionsResponse>() {});
   }
 }

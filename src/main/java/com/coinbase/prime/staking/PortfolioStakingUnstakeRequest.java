@@ -20,6 +20,7 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.PortfolioStakingMetadata;
+import com.coinbase.prime.model.enums.ValidatorProvider;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -48,6 +49,9 @@ public class PortfolioStakingUnstakeRequest {
   @JsonProperty("metadata")
   private PortfolioStakingMetadata metadata;
 
+  @JsonProperty("validator_provider")
+  private ValidatorProvider validatorProvider;
+
   public PortfolioStakingUnstakeRequest() {}
 
   public PortfolioStakingUnstakeRequest(Builder builder) {
@@ -56,6 +60,7 @@ public class PortfolioStakingUnstakeRequest {
     this.currencySymbol = builder.currencySymbol;
     this.amount = builder.amount;
     this.metadata = builder.metadata;
+    this.validatorProvider = builder.validatorProvider;
   }
 
   public String getPortfolioId() {
@@ -98,12 +103,21 @@ public class PortfolioStakingUnstakeRequest {
     this.metadata = metadata;
   }
 
+  public ValidatorProvider getValidatorProvider() {
+    return validatorProvider;
+  }
+
+  public void setValidatorProvider(ValidatorProvider validatorProvider) {
+    this.validatorProvider = validatorProvider;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String idempotencyKey;
     private String currencySymbol;
     private String amount;
     private PortfolioStakingMetadata metadata;
+    private ValidatorProvider validatorProvider;
 
     public Builder() {}
 
@@ -129,6 +143,11 @@ public class PortfolioStakingUnstakeRequest {
 
     public Builder metadata(PortfolioStakingMetadata metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    public Builder validatorProvider(ValidatorProvider validatorProvider) {
+      this.validatorProvider = validatorProvider;
       return this;
     }
 

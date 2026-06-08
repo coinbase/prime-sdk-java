@@ -46,18 +46,14 @@ public class EditOrderRequest {
   @JsonProperty("client_order_id")
   private String clientOrderId;
 
-  /**
-   * Order size in base asset units (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is
-   * required)
-   */
+  /** Order size in base asset units (either `base_quantity` or `quote_value` is required) */
   @JsonProperty("base_quantity")
   private String baseQuantity;
 
   /**
    * Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or
    * receive (when selling); the quantity in base units will be determined based on the market
-   * liquidity and indicated &#x60;quote_value&#x60; (either &#x60;base_quantity&#x60; or
-   * &#x60;quote_value&#x60; is required)
+   * liquidity and indicated `quote_value` (either `base_quantity` or `quote_value` is required)
    */
   @JsonProperty("quote_value")
   private String quoteValue;

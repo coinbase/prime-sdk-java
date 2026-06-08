@@ -35,24 +35,26 @@ public class PositionsServiceSerializationTest {
         new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
-  // ==================== ListAggregatePositions Tests ====================
+  // ==================== ListAggregateEntityPositions Tests ====================
 
   @Test
-  public void testListAggregatePositionsRequestConstruction() throws CoinbaseClientException {
-    ListAggregatePositionsRequest request =
-        new ListAggregatePositionsRequest.Builder().entityId("entity-123").build();
+  public void testListAggregateEntityPositionsRequestConstruction() throws CoinbaseClientException {
+    ListAggregateEntityPositionsRequest request =
+        new ListAggregateEntityPositionsRequest.Builder().entityId("entity-123").build();
     assertNotNull(request);
     assertEquals("entity-123", request.getEntityId());
   }
 
   @Test
-  public void testListAggregatePositionsRequestBuilderValidation() {
+  public void testListAggregateEntityPositionsRequestBuilderValidation() {
     assertThrows(
-        CoinbaseClientException.class, () -> new ListAggregatePositionsRequest.Builder().build());
+        CoinbaseClientException.class,
+        () -> new ListAggregateEntityPositionsRequest.Builder().build());
   }
 
   @Test
-  public void testListAggregatePositionsResponseDeserialization() throws JsonProcessingException {
+  public void testListAggregateEntityPositionsResponseDeserialization()
+      throws JsonProcessingException {
     String json =
         "{"
             + "\"positions\":["
@@ -62,25 +64,25 @@ public class PositionsServiceSerializationTest {
             + "\"pagination\":{\"has_next\":false}"
             + "}";
 
-    ListAggregatePositionsResponse response =
-        objectMapper.readValue(json, ListAggregatePositionsResponse.class);
+    ListAggregateEntityPositionsResponse response =
+        objectMapper.readValue(json, ListAggregateEntityPositionsResponse.class);
     assertNotNull(response);
     assertNotNull(response.getPositions());
     assertEquals(2, response.getPositions().length);
   }
 
-  // ==================== ListPositions Tests ====================
+  // ==================== ListEntityPositions Tests ====================
 
   @Test
-  public void testListPositionsRequestConstruction() throws CoinbaseClientException {
-    ListPositionsRequest request =
-        new ListPositionsRequest.Builder().entityId("entity-123").build();
+  public void testListEntityPositionsRequestConstruction() throws CoinbaseClientException {
+    ListEntityPositionsRequest request =
+        new ListEntityPositionsRequest.Builder().entityId("entity-123").build();
     assertNotNull(request);
     assertEquals("entity-123", request.getEntityId());
   }
 
   @Test
-  public void testListPositionsResponseDeserialization() throws JsonProcessingException {
+  public void testListEntityPositionsResponseDeserialization() throws JsonProcessingException {
     String json =
         "{"
             + "\"positions\":["
@@ -90,7 +92,8 @@ public class PositionsServiceSerializationTest {
             + "\"pagination\":{\"next_cursor\":\"pos-cursor\",\"has_next\":true}"
             + "}";
 
-    ListPositionsResponse response = objectMapper.readValue(json, ListPositionsResponse.class);
+    ListEntityPositionsResponse response =
+        objectMapper.readValue(json, ListEntityPositionsResponse.class);
     assertNotNull(response);
     assertNotNull(response.getPositions());
     assertEquals(2, response.getPositions().length);
