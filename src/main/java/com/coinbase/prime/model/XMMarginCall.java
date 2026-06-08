@@ -20,19 +20,19 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.XmCallStatus;
-import com.coinbase.prime.model.enums.XmCallType;
-import com.coinbase.prime.model.enums.XmMarginLevel;
+import com.coinbase.prime.model.enums.XMCallStatus;
+import com.coinbase.prime.model.enums.XMCallType;
+import com.coinbase.prime.model.enums.XMMarginLevel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-public class XmMarginCall {
+/** XMMarginCall contains details about a margin call in Cross Margin */
+public class XMMarginCall {
   /** Financing margin call UUID */
   @JsonProperty("margin_call_id")
   private String marginCallId;
 
   /** Margin call currency */
-  @JsonProperty("currency")
   private String currency;
 
   /** Call amount (notional) as of the margin call creation */
@@ -43,17 +43,40 @@ public class XmMarginCall {
   @JsonProperty("outstanding_notional_amount")
   private String outstandingNotionalAmount;
 
+  /**
+   * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time - CALL_TYPE_URGENT:
+   * Evaluated in realtime - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
+   */
   @JsonProperty("margin_call_type")
-  private XmCallType marginCallType;
+  private XMCallType marginCallType;
 
+  /**
+   * - CALL_STATUS_OPEN: Margin call is open and not expired - CALL_STATUS_AGED: Margin call is open
+   * and it is expired - CALL_STATUS_SETTLED: Margin call is fully settled - CALL_STATUS_CANCELED:
+   * Margin call was canceled by Credit Risk
+   */
   @JsonProperty("margin_call_status")
-  private XmCallStatus marginCallStatus;
+  private XMCallStatus marginCallStatus;
 
+  /**
+   * - HEALTHY_THRESHOLD: Margin level is healthy - DEFICIT_THRESHOLD: Margin level is breaching the
+   * deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the
+   * case by the scheduled next Margin Call time (as defined in the margin methodology) -
+   * WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in
+   * the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as
+   * defined in the margin methodology). WT is differentiated from DT in that it means margin health
+   * is approaching the UMCT - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and,
+   * as defined in the margin methodology, this will trigger an urgent margin call -
+   * LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined
+   * in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation
+   * may commence.
+   */
   @JsonProperty("called_with_margin_level")
-  private XmMarginLevel calledWithMarginLevel;
+  private XMMarginLevel calledWithMarginLevel;
 
+  /** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
   @JsonProperty("called_with_margin_summary")
-  private XmSummary calledWithMarginSummary;
+  private XMSummary calledWithMarginSummary;
 
   /** Timestamp when the margin call settlement is due */
   @JsonProperty("due_at")
@@ -67,9 +90,9 @@ public class XmMarginCall {
   @JsonProperty("updated_at")
   private OffsetDateTime updatedAt;
 
-  public XmMarginCall() {}
+  public XMMarginCall() {}
 
-  public XmMarginCall(Builder builder) {
+  public XMMarginCall(Builder builder) {
     this.marginCallId = builder.marginCallId;
     this.currency = builder.currency;
     this.initialNotionalAmount = builder.initialNotionalAmount;
@@ -115,35 +138,35 @@ public class XmMarginCall {
     this.outstandingNotionalAmount = outstandingNotionalAmount;
   }
 
-  public XmCallType getMarginCallType() {
+  public XMCallType getMarginCallType() {
     return marginCallType;
   }
 
-  public void setMarginCallType(XmCallType marginCallType) {
+  public void setMarginCallType(XMCallType marginCallType) {
     this.marginCallType = marginCallType;
   }
 
-  public XmCallStatus getMarginCallStatus() {
+  public XMCallStatus getMarginCallStatus() {
     return marginCallStatus;
   }
 
-  public void setMarginCallStatus(XmCallStatus marginCallStatus) {
+  public void setMarginCallStatus(XMCallStatus marginCallStatus) {
     this.marginCallStatus = marginCallStatus;
   }
 
-  public XmMarginLevel getCalledWithMarginLevel() {
+  public XMMarginLevel getCalledWithMarginLevel() {
     return calledWithMarginLevel;
   }
 
-  public void setCalledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
+  public void setCalledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
     this.calledWithMarginLevel = calledWithMarginLevel;
   }
 
-  public XmSummary getCalledWithMarginSummary() {
+  public XMSummary getCalledWithMarginSummary() {
     return calledWithMarginSummary;
   }
 
-  public void setCalledWithMarginSummary(XmSummary calledWithMarginSummary) {
+  public void setCalledWithMarginSummary(XMSummary calledWithMarginSummary) {
     this.calledWithMarginSummary = calledWithMarginSummary;
   }
 
@@ -180,13 +203,13 @@ public class XmMarginCall {
 
     private String outstandingNotionalAmount;
 
-    private XmCallType marginCallType;
+    private XMCallType marginCallType;
 
-    private XmCallStatus marginCallStatus;
+    private XMCallStatus marginCallStatus;
 
-    private XmMarginLevel calledWithMarginLevel;
+    private XMMarginLevel calledWithMarginLevel;
 
-    private XmSummary calledWithMarginSummary;
+    private XMSummary calledWithMarginSummary;
 
     private OffsetDateTime dueAt;
 
@@ -214,22 +237,22 @@ public class XmMarginCall {
       return this;
     }
 
-    public Builder marginCallType(XmCallType marginCallType) {
+    public Builder marginCallType(XMCallType marginCallType) {
       this.marginCallType = marginCallType;
       return this;
     }
 
-    public Builder marginCallStatus(XmCallStatus marginCallStatus) {
+    public Builder marginCallStatus(XMCallStatus marginCallStatus) {
       this.marginCallStatus = marginCallStatus;
       return this;
     }
 
-    public Builder calledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
+    public Builder calledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
       this.calledWithMarginLevel = calledWithMarginLevel;
       return this;
     }
 
-    public Builder calledWithMarginSummary(XmSummary calledWithMarginSummary) {
+    public Builder calledWithMarginSummary(XMSummary calledWithMarginSummary) {
       this.calledWithMarginSummary = calledWithMarginSummary;
       return this;
     }
@@ -249,8 +272,8 @@ public class XmMarginCall {
       return this;
     }
 
-    public XmMarginCall build() {
-      return new XmMarginCall(this);
+    public XMMarginCall build() {
+      return new XMMarginCall(this);
     }
   }
 }

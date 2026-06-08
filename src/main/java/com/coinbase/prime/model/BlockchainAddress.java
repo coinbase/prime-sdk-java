@@ -24,14 +24,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BlockchainAddress {
   /** The address on the network */
-  @JsonProperty("address")
   private String address;
 
   /** The account identifier (used on some chains to distinguish accounts using the same address) */
   @JsonProperty("account_identifier")
   private String accountIdentifier;
 
-  @JsonProperty("network")
   private Network network;
 
   public BlockchainAddress() {}

@@ -26,11 +26,9 @@ import java.time.OffsetDateTime;
 /** LimitOrderEdit represents an order edit that is accepted */
 public class LimitOrderEdit {
   /** New price for the edited order */
-  @JsonProperty("price")
   private String price;
 
   /** New size for the edited order */
-  @JsonProperty("size")
   private String size;
 
   /** New display size for the edited order */

@@ -26,8 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Product {
-  /** The product ID, written as &#x60;BASE-QUOTE&#x60; */
-  @JsonProperty("id")
+  /** The product ID, written as `BASE-QUOTE` */
   private String id;
 
   /** The smallest permitted unit of denomination for the base asset (varies by product) */
@@ -55,7 +54,6 @@ public class Product {
   private String quoteMaxSize;
 
   /** Permissions given to the user for a product */
-  @JsonProperty("permissions")
   private List<ProductPermissions> permissions;
 
   /** The smallest permitted price increment for the product */

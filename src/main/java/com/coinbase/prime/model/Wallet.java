@@ -27,22 +27,18 @@ import java.time.OffsetDateTime;
 
 public class Wallet {
   /** The unique UUID for the wallet */
-  @JsonProperty("id")
   private String id;
 
   /** The name of the wallet */
-  @JsonProperty("name")
   private String name;
 
   /** The asset stored in the wallet */
-  @JsonProperty("symbol")
   private String symbol;
 
   /**
    * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types
    * (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
    */
-  @JsonProperty("type")
   private WalletType type;
 
   /** The UTC timestamp when this wallet was created */
@@ -50,13 +46,10 @@ public class Wallet {
   private OffsetDateTime createdAt;
 
   /** The active address of the wallet */
-  @JsonProperty("address")
   private String address;
 
-  @JsonProperty("visibility")
   private WalletVisibility visibility;
 
-  @JsonProperty("network")
   private Network network;
 
   public Wallet() {}

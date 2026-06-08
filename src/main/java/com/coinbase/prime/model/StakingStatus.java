@@ -26,7 +26,6 @@ import java.time.OffsetDateTime;
 
 public class StakingStatus {
   /** Amount being staked (whole amount, e.g., 16 ETH) */
-  @JsonProperty("amount")
   private String amount;
 
   @JsonProperty("stake_type")

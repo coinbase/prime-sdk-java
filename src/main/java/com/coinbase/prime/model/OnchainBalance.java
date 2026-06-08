@@ -24,13 +24,12 @@ import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnchainBalance {
-  @JsonProperty("asset")
   private OnchainAsset asset;
 
   /** The total amount in whole units with full precision. */
-  @JsonProperty("amount")
   private String amount;
 
+  /** - UNKNOWN_VISIBILITY_STATUS: nil - VISIBLE: Visible - HIDDEN: Hidden - SPAM: Spam */
   @JsonProperty("visibility_status")
   private VisibilityStatus visibilityStatus;
 

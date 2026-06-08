@@ -25,11 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /** Data object used for withdrawals. */
 public class TravelRuleData {
   /** Represents a party in a travel rule transfer (originator or beneficiary). */
-  @JsonProperty("beneficiary")
   private TravelRuleParty beneficiary;
 
   /** Represents a party in a travel rule transfer (originator or beneficiary). */
-  @JsonProperty("originator")
   private TravelRuleParty originator;
 
   /** True if user owns the counterparty address (self-transfer) */

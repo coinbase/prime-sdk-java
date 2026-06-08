@@ -20,8 +20,6 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * WalletClaimRewardsInputs contains the custom inputs for claim rewards operations on a wallet.
  * Requirements and supported fields vary by asset type.
@@ -31,7 +29,6 @@ public class WalletClaimRewardsInputs {
    * Optional amount to claim rewards (ETH only). If omitted, the wallet will claim the maximum
    * amount available
    */
-  @JsonProperty("amount")
   private String amount;
 
   public WalletClaimRewardsInputs() {}

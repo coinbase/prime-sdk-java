@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.XmLiquidationStatus;
+import com.coinbase.prime.model.enums.XMLiquidationStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** ActiveLiquidationSummary provides a summary of the active or most recent XM liquidation */
@@ -36,8 +36,7 @@ public class ActiveLiquidationSummary {
    * XM_LIQUIDATION_STATUS_CANCELED: Liquidation was canceled - XM_LIQUIDATION_STATUS_FAILED:
    * Liquidation failed
    */
-  @JsonProperty("status")
-  private XmLiquidationStatus status;
+  private XMLiquidationStatus status;
 
   /** USD notional shortfall amount that triggered the liquidation */
   @JsonProperty("shortfall_amount")
@@ -59,11 +58,11 @@ public class ActiveLiquidationSummary {
     this.liquidationId = liquidationId;
   }
 
-  public XmLiquidationStatus getStatus() {
+  public XMLiquidationStatus getStatus() {
     return status;
   }
 
-  public void setStatus(XmLiquidationStatus status) {
+  public void setStatus(XMLiquidationStatus status) {
     this.status = status;
   }
 
@@ -78,7 +77,7 @@ public class ActiveLiquidationSummary {
   public static class Builder {
     private String liquidationId;
 
-    private XmLiquidationStatus status;
+    private XMLiquidationStatus status;
 
     private String shortfallAmount;
 
@@ -87,7 +86,7 @@ public class ActiveLiquidationSummary {
       return this;
     }
 
-    public Builder status(XmLiquidationStatus status) {
+    public Builder status(XMLiquidationStatus status) {
       this.status = status;
       return this;
     }

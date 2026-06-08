@@ -26,10 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class FcmMarginCall {
-  @JsonProperty("type")
   private FcmMarginCallType type;
 
-  @JsonProperty("state")
   private FcmMarginCallState state;
 
   /** Initial margin call amount to settle */

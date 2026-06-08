@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Position {
   /** Asset symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The long position based on 'reference' value */

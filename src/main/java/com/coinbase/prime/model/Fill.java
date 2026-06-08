@@ -27,7 +27,6 @@ import java.time.OffsetDateTime;
 
 public class Fill {
   /** The unique ID of the fill */
-  @JsonProperty("id")
   private String id;
 
   /** The order ID of the fill */
@@ -43,7 +42,6 @@ public class Fill {
   private String clientProductId;
 
   /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
-  @JsonProperty("side")
   private OrderSide side;
 
   /** Filled size (in base asset units) */
@@ -55,19 +53,15 @@ public class Fill {
   private String filledValue;
 
   /** The price of the fill */
-  @JsonProperty("price")
   private String price;
 
   /** The date and time of the fill */
-  @JsonProperty("time")
   private OffsetDateTime time;
 
   /** The commission incurred for the fill */
-  @JsonProperty("commission")
   private String commission;
 
   /** The name of the venue */
-  @JsonProperty("venue")
   private String venue;
 
   /** The venue fees incurred for the fill */

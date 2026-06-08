@@ -20,15 +20,11 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class WithdrawalPower {
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** Withdrawal power */
-  @JsonProperty("amount")
   private String amount;
 
   public WithdrawalPower() {}

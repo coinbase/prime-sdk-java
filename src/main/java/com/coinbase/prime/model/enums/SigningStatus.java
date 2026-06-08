@@ -25,6 +25,8 @@ package com.coinbase.prime.model.enums;
  * UNSIGNED: Transaction is unsigned
  */
 public enum SigningStatus {
+  /** Transaction has been signed */
   SIGNED,
+  /** Transaction is unsigned */
   UNSIGNED
 }

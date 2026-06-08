@@ -29,7 +29,6 @@ public class FcmPosition {
   @JsonProperty("product_id")
   private String productId;
 
-  @JsonProperty("side")
   private FcmPositionSide side;
 
   /** Number of contracts */

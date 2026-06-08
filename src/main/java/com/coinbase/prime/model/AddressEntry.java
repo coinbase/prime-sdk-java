@@ -24,10 +24,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class AddressEntry {
-  @JsonProperty("name")
   private String name;
 
-  @JsonProperty("address")
   private String address;
 
   /** List of compatible chain IDs for a given address, empty for Solana */

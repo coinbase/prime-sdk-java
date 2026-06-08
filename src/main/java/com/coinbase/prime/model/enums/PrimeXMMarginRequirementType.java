@@ -20,11 +20,19 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum XmLiquidationStatus {
-  XM_LIQUIDATION_STATUS_UNSET,
-  XM_LIQUIDATION_STATUS_PRE_LIQUIDATION,
-  XM_LIQUIDATION_STATUS_LIQUIDATING,
-  XM_LIQUIDATION_STATUS_LIQUIDATED,
-  XM_LIQUIDATION_STATUS_CANCELED,
-  XM_LIQUIDATION_STATUS_FAILED
+/**
+ * - MARGIN_REQUIREMENT_TYPE_DMR_PLUS_PMR: Integrated (netted) cross-margin requirement for spot
+ * assets and all derivatives contracts. - MARGIN_REQUIREMENT_TYPE_IPMR_PLUS_IFMR: Combined
+ * cross-margin requirement: Integrated Portfolio Margin (IPMR) plus Ineligible Futures Margin
+ * (IFMR).
+ */
+public enum PrimeXMMarginRequirementType {
+  MARGIN_REQUIREMENT_TYPE_UNSPECIFIED,
+  /** Integrated (netted) cross-margin requirement for spot assets and all derivatives contracts. */
+  MARGIN_REQUIREMENT_TYPE_DMR_PLUS_PMR,
+  /**
+   * Combined cross-margin requirement: Integrated Portfolio Margin (IPMR) plus Ineligible Futures
+   * Margin (IFMR).
+   */
+  MARGIN_REQUIREMENT_TYPE_IPMR_PLUS_IFMR
 }

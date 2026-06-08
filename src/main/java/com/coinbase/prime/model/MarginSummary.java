@@ -29,8 +29,8 @@ public class MarginSummary {
   private String entityId;
 
   /**
-   * The margin equity at the entity level. Margin Equity = LMV + SMV + Trading Cash Balance + Short
-   * Collateral - Pending Withdrawals
+   * The margin equity at the entity level. Margin Equity &#x3D; LMV + SMV + Trading Cash Balance +
+   * Short Collateral - Pending Withdrawals
    */
   @JsonProperty("margin_equity")
   private String marginEquity;
@@ -82,7 +82,6 @@ public class MarginSummary {
   private String tfAdjustedEquity;
 
   /** Whether or not a entity is frozen due to balance outstanding or other reason */
-  @JsonProperty("frozen")
   private boolean frozen;
 
   /** The reason why a entity is frozen */
@@ -122,15 +121,15 @@ public class MarginSummary {
   @JsonProperty("short_collateral")
   private List<LoanInfo> shortCollateral;
 
-  /** Gross market value (GMV) = LMV + Abs (SMV) */
+  /** Gross market value (GMV) &#x3D; LMV + Abs (SMV) */
   @JsonProperty("gross_market_value")
   private String grossMarketValue;
 
-  /** Net Market Value (NMV) = LMV + SMV */
+  /** Net Market Value (NMV) &#x3D; LMV + SMV */
   @JsonProperty("net_market_value")
   private String netMarketValue;
 
-  /** Long Market Value (LMV) = Sum of positive notional for all assets */
+  /** Long Market Value (LMV) &#x3D; Sum of positive notional for all assets */
   @JsonProperty("long_market_value")
   private String longMarketValue;
 
@@ -138,15 +137,15 @@ public class MarginSummary {
   @JsonProperty("non_marginable_long_market_value")
   private String nonMarginableLongMarketValue;
 
-  /** Short Market Value (SMV) = Sum of negative notional for each margin eligible coin */
+  /** Short Market Value (SMV) &#x3D; Sum of negative notional for each margin eligible coin */
   @JsonProperty("short_market_value")
   private String shortMarketValue;
 
-  /** Gross Leverage = GMV / Margin Requirement */
+  /** Gross Leverage &#x3D; GMV / Margin Requirement */
   @JsonProperty("gross_leverage")
   private String grossLeverage;
 
-  /** Net Exposure = (LMV + SMV) / GMV */
+  /** Net Exposure &#x3D; (LMV + SMV) / GMV */
   @JsonProperty("net_exposure")
   private String netExposure;
 

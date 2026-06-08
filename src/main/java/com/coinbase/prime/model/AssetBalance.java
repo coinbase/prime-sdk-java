@@ -28,11 +28,9 @@ public class AssetBalance {
   private String portfolioId;
 
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** Balance amount */
-  @JsonProperty("amount")
   private String amount;
 
   /** Notional balance amount */

@@ -21,25 +21,19 @@
 package com.coinbase.prime.model;
 
 import com.coinbase.prime.model.enums.AssetChangeType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AssetChange {
   /** AssetChangeType identifies the type of asset change */
-  @JsonProperty("type")
   private AssetChangeType type;
 
   /** The currency symbol associated with the balance operation */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The amount in whole units being transferred or approved */
-  @JsonProperty("amount")
   private String amount;
 
-  @JsonProperty("collection")
   private NftCollection collection;
 
-  @JsonProperty("item")
   private NftItem item;
 
   public AssetChange() {}

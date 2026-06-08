@@ -20,10 +20,16 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum XmCallStatus {
-  XM_CALL_STATUS_UNSPECIFIED,
-  CALL_STATUS_OPEN,
-  CALL_STATUS_AGED,
-  CALL_STATUS_SETTLED,
-  CALL_STATUS_CANCELED
+/**
+ * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time - CALL_TYPE_URGENT:
+ * Evaluated in realtime - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
+ */
+public enum XMCallType {
+  XM_CALL_TYPE_UNSPECIFIED,
+  /** Evaluated at standard margin call evaluation time */
+  CALL_TYPE_STANDARD,
+  /** Evaluated in realtime */
+  CALL_TYPE_URGENT,
+  /** Evaluated at debit call evaluation time */
+  CALL_TYPE_DEBIT
 }

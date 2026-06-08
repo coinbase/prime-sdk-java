@@ -25,7 +25,6 @@ import java.time.OffsetDateTime;
 
 public class OrderEdit {
   /** New price for the edited order */
-  @JsonProperty("price")
   private String price;
 
   /** New base quantity for the edited order, populated if order is in base size */

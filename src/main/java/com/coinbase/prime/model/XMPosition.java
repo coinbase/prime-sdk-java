@@ -22,9 +22,9 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class XmPosition {
+/** XMPosition */
+public class XMPosition {
   /** Position currency */
-  @JsonProperty("currency")
   private String currency;
 
   /** Current market price */
@@ -123,9 +123,9 @@ public class XmPosition {
   @JsonProperty("total_position_margin")
   private String totalPositionMargin;
 
-  public XmPosition() {}
+  public XMPosition() {}
 
-  public XmPosition(Builder builder) {
+  public XMPosition(Builder builder) {
     this.currency = builder.currency;
     this.marketPrice = builder.marketPrice;
     this.marginEligible = builder.marginEligible;
@@ -529,8 +529,8 @@ public class XmPosition {
       return this;
     }
 
-    public XmPosition build() {
-      return new XmPosition(this);
+    public XMPosition build() {
+      return new XMPosition(this);
     }
   }
 }

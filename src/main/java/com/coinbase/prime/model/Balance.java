@@ -24,17 +24,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Balance {
   /** The display symbol for the asset */
-  @JsonProperty("symbol")
   private String symbol;
 
-  /** The total amount in whole units with full precision. Includes the &#x60;holds&#x60; amount. */
-  @JsonProperty("amount")
+  /** The total amount in whole units with full precision. Includes the `holds` amount. */
   private String amount;
 
   /**
    * Amount that is currently held in obligation to an open order's position or a pending withdrawal
    */
-  @JsonProperty("holds")
   private String holds;
 
   /**

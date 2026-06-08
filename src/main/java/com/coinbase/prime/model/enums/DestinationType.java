@@ -27,8 +27,12 @@ package com.coinbase.prime.model.enums;
  * withdrawals endpoint only transfers - DESTINATION_COUNTERPARTY: Counterparty ID
  */
 public enum DestinationType {
+  /** A fiat bank account linked to a payment method id via Payment Method Service */
   DESTINATION_PAYMENT_METHOD,
+  /** A blockchain network address */
   DESTINATION_BLOCKCHAIN,
+  /** An on platform wallet UUID */
   DESTINATION_WALLET,
+  /** Counterparty ID */
   DESTINATION_COUNTERPARTY
 }

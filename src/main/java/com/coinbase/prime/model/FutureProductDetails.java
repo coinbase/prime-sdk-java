@@ -60,7 +60,6 @@ public class FutureProductDetails {
   private RiskManagementType riskManagedBy;
 
   /** The venue this product trades on */
-  @JsonProperty("venue")
   private String venue;
 
   /** Descriptive name for the product group */

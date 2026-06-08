@@ -28,7 +28,6 @@ import java.util.List;
 
 public class Transaction {
   /** The ID of the transaction */
-  @JsonProperty("id")
   private String id;
 
   /** The wallet ID of the transaction */
@@ -69,7 +68,6 @@ public class Transaction {
    * On-chain transaction initiated with Prime Onchain Wallet - PORTFOLIO_STAKE: Portfolio-level
    * staking operation - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation
    */
-  @JsonProperty("type")
   private TransactionType type;
 
   /**
@@ -103,11 +101,9 @@ public class Transaction {
    * status - TRANSACTION_CONSTRUCTED: The transaction bctx is constructed but not yet broadcasting
    * on chain This is a non-terminal status
    */
-  @JsonProperty("status")
   private TransactionStatus status;
 
   /** The asset symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The transaction creation time (as a UTC timestamp) */
@@ -119,7 +115,6 @@ public class Transaction {
   private OffsetDateTime completedAt;
 
   /** The transaction amount in whole units */
-  @JsonProperty("amount")
   private String amount;
 
   @JsonProperty("transfer_from")
@@ -133,7 +128,6 @@ public class Transaction {
   private String networkFees;
 
   /** The fees that the customer paid for the transaction (in whole units) */
-  @JsonProperty("fees")
   private String fees;
 
   /** The asset in which fees will be paid */
@@ -155,15 +149,13 @@ public class Transaction {
   @JsonProperty("estimated_network_fees")
   private EstimatedNetworkFees estimatedNetworkFees;
 
-  /** The network name specific to web3/onchain wallet transactions */
-  @JsonProperty("network")
+  /** The network name specific to onchain/onchain wallet transactions */
   private String network;
 
-  /** The estimated asset changes (web3) */
+  /** The estimated asset changes (onchain) */
   @JsonProperty("estimated_asset_changes")
   private List<AssetChange> estimatedAssetChanges;
 
-  @JsonProperty("metadata")
   private TransactionMetadata metadata;
 
   /** The idempotency key associated with the transaction creation request */

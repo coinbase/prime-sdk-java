@@ -23,13 +23,13 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-public class XmRiskNettingInfo {
+public class XMRiskNettingInfo {
   /**
    * Derivatives Clearing Organization Margin Requirement (DMR) is the margin requirement for all
    * futures positions, derived from the Derivatives Clearing Organization model
    */
-  @JsonProperty("nodal_margin_requirement")
-  private String nodalMarginRequirement;
+  @JsonProperty("dco_margin_requirement")
+  private String dcoMarginRequirement;
 
   /**
    * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived
@@ -90,12 +90,12 @@ public class XmRiskNettingInfo {
 
   /** Netted positions used in the model calculation */
   @JsonProperty("xm_positions")
-  private List<XmPosition> xmPositions;
+  private List<XMPosition> xmPositions;
 
-  public XmRiskNettingInfo() {}
+  public XMRiskNettingInfo() {}
 
-  public XmRiskNettingInfo(Builder builder) {
-    this.nodalMarginRequirement = builder.nodalMarginRequirement;
+  public XMRiskNettingInfo(Builder builder) {
+    this.dcoMarginRequirement = builder.dcoMarginRequirement;
     this.portfolioMarginRequirement = builder.portfolioMarginRequirement;
     this.integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
     this.ineligibleFuturesMarginRequirement = builder.ineligibleFuturesMarginRequirement;
@@ -111,12 +111,12 @@ public class XmRiskNettingInfo {
     this.xmPositions = builder.xmPositions;
   }
 
-  public String getNodalMarginRequirement() {
-    return nodalMarginRequirement;
+  public String getDcoMarginRequirement() {
+    return dcoMarginRequirement;
   }
 
-  public void setNodalMarginRequirement(String nodalMarginRequirement) {
-    this.nodalMarginRequirement = nodalMarginRequirement;
+  public void setDcoMarginRequirement(String dcoMarginRequirement) {
+    this.dcoMarginRequirement = dcoMarginRequirement;
   }
 
   public String getPortfolioMarginRequirement() {
@@ -215,16 +215,16 @@ public class XmRiskNettingInfo {
     this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
   }
 
-  public List<XmPosition> getXmPositions() {
+  public List<XMPosition> getXmPositions() {
     return xmPositions;
   }
 
-  public void setXmPositions(List<XmPosition> xmPositions) {
+  public void setXmPositions(List<XMPosition> xmPositions) {
     this.xmPositions = xmPositions;
   }
 
   public static class Builder {
-    private String nodalMarginRequirement;
+    private String dcoMarginRequirement;
 
     private String portfolioMarginRequirement;
 
@@ -250,10 +250,10 @@ public class XmRiskNettingInfo {
 
     private List<MarginAddOn> allIntegratedScenarioAddons;
 
-    private List<XmPosition> xmPositions;
+    private List<XMPosition> xmPositions;
 
-    public Builder nodalMarginRequirement(String nodalMarginRequirement) {
-      this.nodalMarginRequirement = nodalMarginRequirement;
+    public Builder dcoMarginRequirement(String dcoMarginRequirement) {
+      this.dcoMarginRequirement = dcoMarginRequirement;
       return this;
     }
 
@@ -318,13 +318,13 @@ public class XmRiskNettingInfo {
       return this;
     }
 
-    public Builder xmPositions(List<XmPosition> xmPositions) {
+    public Builder xmPositions(List<XMPosition> xmPositions) {
       this.xmPositions = xmPositions;
       return this;
     }
 
-    public XmRiskNettingInfo build() {
-      return new XmRiskNettingInfo(this);
+    public XMRiskNettingInfo build() {
+      return new XMRiskNettingInfo(this);
     }
   }
 }

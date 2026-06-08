@@ -26,10 +26,13 @@ package com.coinbase.prime.model.enums;
  */
 public enum ActivitySecondaryType {
   NO_SECONDARY_TYPE,
+  /** Order secondary types */
   ACTIVITY_SECONDARY_TYPE_BUY,
   ACTIVITY_SECONDARY_TYPE_SELL,
+  /** Transaction secondary types */
   ACTIVITY_SECONDARY_TYPE_INTERNAL_TRANSFER,
   ACTIVITY_SECONDARY_TYPE_SWEEP_TRANSFER_TYPE,
+  /** Onchain secondary types */
   ACTIVITY_SECONDARY_TYPE_WEB3_SIGNER,
   ACTIVITY_SECONDARY_TYPE_WEB3_WALLET
 }

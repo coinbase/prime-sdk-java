@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConversionDetail {
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** Trade finance balance after the conversion */

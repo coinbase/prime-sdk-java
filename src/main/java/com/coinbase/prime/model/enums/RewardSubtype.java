@@ -28,7 +28,8 @@ package com.coinbase.prime.model.enums;
  * (consensus layer) rewards - TRANSACTION_REWARD: A transaction reward i.e. ethereum transaction
  * (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward i.e. coinbase
  * pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL dividend reward
- * i.e. dividends from BUIDL fund holdings
+ * i.e. dividends from BUIDL fund holdings - CUSTOM_STABLECOIN_REWARD: A custom stablecoin reward
+ * i.e. USDC reward payouts
  */
 public enum RewardSubtype {
   /** A maximal extractable value reward */
@@ -44,5 +45,7 @@ public enum RewardSubtype {
   /** A staking fee rebate reward */
   STAKING_FEE_REBATE_REWARD,
   /** A BUIDL dividend reward */
-  BUIDL_DIVIDEND
+  BUIDL_DIVIDEND,
+  /** A custom stablecoin reward */
+  CUSTOM_STABLECOIN_REWARD
 }

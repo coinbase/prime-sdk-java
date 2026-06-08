@@ -24,15 +24,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PmAssetInfo {
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** Nominal amount of the currency */
-  @JsonProperty("amount")
   private String amount;
 
   /** Spot price for the currency */
-  @JsonProperty("price")
   private String price;
 
   /** Notional amount of the currency */
@@ -51,7 +48,7 @@ public class PmAssetInfo {
   @JsonProperty("base_margin_requirement")
   private String baseMarginRequirement;
 
-  /** Notional amount of the currency&#39;s base margin requirement */
+  /** Notional amount of the currency's base margin requirement */
   @JsonProperty("base_margin_requirement_notional")
   private String baseMarginRequirementNotional;
 

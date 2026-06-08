@@ -27,10 +27,16 @@ package com.coinbase.prime.model.enums;
  * addresses - COUNTERPARTY_ID: Counterparty ID
  */
 public enum TransferLocationType {
+  /** The ID of a fiat payment method */
   PAYMENT_METHOD,
+  /** The ID of a wallet */
   WALLET,
+  /** A cryptocurrency address */
   ADDRESS,
+  /** Another type of transfer location: Blockchain Network, Coinbase */
   OTHER,
+  /** Multiple cryptocurrency addresses */
   MULTIPLE_ADDRESSES,
+  /** Counterparty ID */
   COUNTERPARTY_ID
 }

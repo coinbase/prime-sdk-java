@@ -23,11 +23,9 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NetworkDetails {
-  @JsonProperty("network")
   private Network network;
 
   /** The name of the network */
-  @JsonProperty("name")
   private String name;
 
   /** The maximum number of decimals supported for this network */

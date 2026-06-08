@@ -25,11 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WalletFiatDepositInstructions {
   /** The id of the wallet */
-  @JsonProperty("id")
   private String id;
 
   /** The name of the wallet */
-  @JsonProperty("name")
   private String name;
 
   /**
@@ -37,7 +35,6 @@ public class WalletFiatDepositInstructions {
    * deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit -
    * SEPA: A SEPA deposit (Single Euro Payments Area)
    */
-  @JsonProperty("type")
   private WalletDepositInstructionType type;
 
   /** The fiat account number */

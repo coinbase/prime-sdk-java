@@ -20,15 +20,11 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class TieredPricingFee {
   /** Asset symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The fee in bps */
-  @JsonProperty("fee")
   private String fee;
 
   public TieredPricingFee() {}

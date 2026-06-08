@@ -20,10 +20,7 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ActivityMetadataAccount {
-  @JsonProperty("consensus")
   private ActivityMetadataConsensus consensus;
 
   public ActivityMetadataAccount() {}

@@ -20,9 +20,9 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.XmControlStatus;
-import com.coinbase.prime.model.enums.XmEntityCallStatus;
-import com.coinbase.prime.model.enums.XmMarginLevel;
+import com.coinbase.prime.model.enums.XMControlStatus;
+import com.coinbase.prime.model.enums.XMEntityCallStatus;
+import com.coinbase.prime.model.enums.XMMarginLevel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -36,22 +36,22 @@ public class CrossMarginOverview {
    * disabled.
    */
   @JsonProperty("control_status")
-  private XmControlStatus controlStatus;
+  private XMControlStatus controlStatus;
 
   /**
    * XMEntityCallStatus summarizes the state of open margin calls or debit calls. When multiple
    * calls exist, the status reflects the highest priority call type. Priority order (highest to
-   * lowest): aged &gt; urgent &gt; standard &gt; debit. - ENTITY_NO_CALL: There are no margin calls
-   * or debit calls. - ENTITY_OPEN_STANDARD_CALL: There is a standard margin call. There may also be
-   * debit calls, but there are no urgent margin calls or expired calls.. - ENTITY_OPEN_URGENT_CALL:
-   * There is an urgent margin call. There may also be standard margin calls or debit calls, but
-   * there are no expired calls. - ENTITY_AGED_CALL: At least one open margin call (standard or
-   * urgent) or debit call is aged. This will trigger the SESSION_LOCKED control status. -
+   * lowest): aged > urgent > standard > debit. - ENTITY_NO_CALL: There are no margin calls or debit
+   * calls. - ENTITY_OPEN_STANDARD_CALL: There is a standard margin call. There may also be debit
+   * calls, but there are no urgent margin calls or expired calls.. - ENTITY_OPEN_URGENT_CALL: There
+   * is an urgent margin call. There may also be standard margin calls or debit calls, but there are
+   * no expired calls. - ENTITY_AGED_CALL: At least one open margin call (standard or urgent) or
+   * debit call is aged. This will trigger the SESSION_LOCKED control status. -
    * ENTITY_OPEN_DEBIT_CALL: There is a debit call. There are no standard margin calls, urgent
    * margin calls, or expired calls.
    */
   @JsonProperty("call_status")
-  private XmEntityCallStatus callStatus;
+  private XMEntityCallStatus callStatus;
 
   /**
    * - HEALTHY_THRESHOLD: Margin level is healthy - DEFICIT_THRESHOLD: Margin level is breaching the
@@ -67,19 +67,19 @@ public class CrossMarginOverview {
    * may commence.
    */
   @JsonProperty("margin_level")
-  private XmMarginLevel marginLevel;
+  private XMMarginLevel marginLevel;
 
   /** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
   @JsonProperty("margin_summary")
-  private XmSummary marginSummary;
+  private XMSummary marginSummary;
 
   /** List of active XM margin calls */
   @JsonProperty("active_margin_calls")
-  private List<XmMarginCall> activeMarginCalls;
+  private List<XMMarginCall> activeMarginCalls;
 
   /** List of active XM loans */
   @JsonProperty("active_loans")
-  private List<XmLoan> activeLoans;
+  private List<XMLoan> activeLoans;
 
   /** ActiveLiquidationSummary provides a summary of the active or most recent XM liquidation */
   @JsonProperty("active_liquidation")
@@ -97,51 +97,51 @@ public class CrossMarginOverview {
     this.activeLiquidation = builder.activeLiquidation;
   }
 
-  public XmControlStatus getControlStatus() {
+  public XMControlStatus getControlStatus() {
     return controlStatus;
   }
 
-  public void setControlStatus(XmControlStatus controlStatus) {
+  public void setControlStatus(XMControlStatus controlStatus) {
     this.controlStatus = controlStatus;
   }
 
-  public XmEntityCallStatus getCallStatus() {
+  public XMEntityCallStatus getCallStatus() {
     return callStatus;
   }
 
-  public void setCallStatus(XmEntityCallStatus callStatus) {
+  public void setCallStatus(XMEntityCallStatus callStatus) {
     this.callStatus = callStatus;
   }
 
-  public XmMarginLevel getMarginLevel() {
+  public XMMarginLevel getMarginLevel() {
     return marginLevel;
   }
 
-  public void setMarginLevel(XmMarginLevel marginLevel) {
+  public void setMarginLevel(XMMarginLevel marginLevel) {
     this.marginLevel = marginLevel;
   }
 
-  public XmSummary getMarginSummary() {
+  public XMSummary getMarginSummary() {
     return marginSummary;
   }
 
-  public void setMarginSummary(XmSummary marginSummary) {
+  public void setMarginSummary(XMSummary marginSummary) {
     this.marginSummary = marginSummary;
   }
 
-  public List<XmMarginCall> getActiveMarginCalls() {
+  public List<XMMarginCall> getActiveMarginCalls() {
     return activeMarginCalls;
   }
 
-  public void setActiveMarginCalls(List<XmMarginCall> activeMarginCalls) {
+  public void setActiveMarginCalls(List<XMMarginCall> activeMarginCalls) {
     this.activeMarginCalls = activeMarginCalls;
   }
 
-  public List<XmLoan> getActiveLoans() {
+  public List<XMLoan> getActiveLoans() {
     return activeLoans;
   }
 
-  public void setActiveLoans(List<XmLoan> activeLoans) {
+  public void setActiveLoans(List<XMLoan> activeLoans) {
     this.activeLoans = activeLoans;
   }
 
@@ -154,46 +154,46 @@ public class CrossMarginOverview {
   }
 
   public static class Builder {
-    private XmControlStatus controlStatus;
+    private XMControlStatus controlStatus;
 
-    private XmEntityCallStatus callStatus;
+    private XMEntityCallStatus callStatus;
 
-    private XmMarginLevel marginLevel;
+    private XMMarginLevel marginLevel;
 
-    private XmSummary marginSummary;
+    private XMSummary marginSummary;
 
-    private List<XmMarginCall> activeMarginCalls;
+    private List<XMMarginCall> activeMarginCalls;
 
-    private List<XmLoan> activeLoans;
+    private List<XMLoan> activeLoans;
 
     private ActiveLiquidationSummary activeLiquidation;
 
-    public Builder controlStatus(XmControlStatus controlStatus) {
+    public Builder controlStatus(XMControlStatus controlStatus) {
       this.controlStatus = controlStatus;
       return this;
     }
 
-    public Builder callStatus(XmEntityCallStatus callStatus) {
+    public Builder callStatus(XMEntityCallStatus callStatus) {
       this.callStatus = callStatus;
       return this;
     }
 
-    public Builder marginLevel(XmMarginLevel marginLevel) {
+    public Builder marginLevel(XMMarginLevel marginLevel) {
       this.marginLevel = marginLevel;
       return this;
     }
 
-    public Builder marginSummary(XmSummary marginSummary) {
+    public Builder marginSummary(XMSummary marginSummary) {
       this.marginSummary = marginSummary;
       return this;
     }
 
-    public Builder activeMarginCalls(List<XmMarginCall> activeMarginCalls) {
+    public Builder activeMarginCalls(List<XMMarginCall> activeMarginCalls) {
       this.activeMarginCalls = activeMarginCalls;
       return this;
     }
 
-    public Builder activeLoans(List<XmLoan> activeLoans) {
+    public Builder activeLoans(List<XMLoan> activeLoans) {
       this.activeLoans = activeLoans;
       return this;
     }

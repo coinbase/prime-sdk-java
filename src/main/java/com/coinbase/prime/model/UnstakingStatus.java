@@ -27,7 +27,6 @@ import java.time.OffsetDateTime;
 
 public class UnstakingStatus {
   /** Amount being unstaked (whole amount, e.g., 16 ETH) */
-  @JsonProperty("amount")
   private String amount;
 
   @JsonProperty("unstake_type")

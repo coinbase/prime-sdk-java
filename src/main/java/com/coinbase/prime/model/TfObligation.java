@@ -22,13 +22,13 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/** Trade finance obligation information */
 public class TfObligation {
   /** The unique ID of the portfolio */
   @JsonProperty("portfolio_id")
   private String portfolioId;
 
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** Current amount due */

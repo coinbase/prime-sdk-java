@@ -36,7 +36,6 @@ public class ExistingLocate {
   private String portfolioId;
 
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The requested locate amount */
@@ -48,7 +47,6 @@ public class ExistingLocate {
   private String interestRate;
 
   /** The locate status */
-  @JsonProperty("status")
   private String status;
 
   /** The approved locate amount */

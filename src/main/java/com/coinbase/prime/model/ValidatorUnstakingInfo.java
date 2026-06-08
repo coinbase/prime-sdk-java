@@ -29,7 +29,6 @@ public class ValidatorUnstakingInfo {
   private String validatorAddress;
 
   /** List of active unstaking requests for this validator */
-  @JsonProperty("statuses")
   private List<UnstakingStatus> statuses;
 
   public ValidatorUnstakingInfo() {}

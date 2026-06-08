@@ -22,7 +22,8 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class XmSummary {
+/** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
+public class XMSummary {
   /** Cross Margin Margin Requirement (XMMR) notional */
   @JsonProperty("margin_requirement")
   private String marginRequirement;
@@ -31,7 +32,7 @@ public class XmSummary {
   @JsonProperty("account_equity")
   private String accountEquity;
 
-  /** Equity - XMMR (margin excess is &gt; 0) */
+  /** Equity - XMMR (margin excess is > 0) */
   @JsonProperty("margin_excess_shortfall")
   private String marginExcessShortfall;
 
@@ -56,11 +57,11 @@ public class XmSummary {
   private String futuresEquity;
 
   @JsonProperty("risk_netting_info")
-  private XmRiskNettingInfo riskNettingInfo;
+  private XMRiskNettingInfo riskNettingInfo;
 
-  public XmSummary() {}
+  public XMSummary() {}
 
-  public XmSummary(Builder builder) {
+  public XMSummary(Builder builder) {
     this.marginRequirement = builder.marginRequirement;
     this.accountEquity = builder.accountEquity;
     this.marginExcessShortfall = builder.marginExcessShortfall;
@@ -136,11 +137,11 @@ public class XmSummary {
     this.futuresEquity = futuresEquity;
   }
 
-  public XmRiskNettingInfo getRiskNettingInfo() {
+  public XMRiskNettingInfo getRiskNettingInfo() {
     return riskNettingInfo;
   }
 
-  public void setRiskNettingInfo(XmRiskNettingInfo riskNettingInfo) {
+  public void setRiskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
     this.riskNettingInfo = riskNettingInfo;
   }
 
@@ -161,7 +162,7 @@ public class XmSummary {
 
     private String futuresEquity;
 
-    private XmRiskNettingInfo riskNettingInfo;
+    private XMRiskNettingInfo riskNettingInfo;
 
     public Builder marginRequirement(String marginRequirement) {
       this.marginRequirement = marginRequirement;
@@ -203,13 +204,13 @@ public class XmSummary {
       return this;
     }
 
-    public Builder riskNettingInfo(XmRiskNettingInfo riskNettingInfo) {
+    public Builder riskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
       this.riskNettingInfo = riskNettingInfo;
       return this;
     }
 
-    public XmSummary build() {
-      return new XmSummary(this);
+    public XMSummary build() {
+      return new XMSummary(this);
     }
   }
 }

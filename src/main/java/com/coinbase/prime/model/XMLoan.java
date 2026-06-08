@@ -20,17 +20,22 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.XmParty;
+import com.coinbase.prime.model.enums.XMParty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-public class XmLoan {
+/** XMLoan contains details about a Cross Margin loan */
+public class XMLoan {
   /** Financing loan UUID */
   @JsonProperty("loan_id")
   private String loanId;
 
+  /**
+   * - CBE: Coinbase Exchange, trading venue that can receive the XM loan - FCM: Coinbase’s Futures
+   * Commission Merchant, trading venue that can receive the XM loan
+   */
   @JsonProperty("loan_party")
-  private XmParty loanParty;
+  private XMParty loanParty;
 
   /** Loan principal currency */
   @JsonProperty("principal_currency")
@@ -56,9 +61,9 @@ public class XmLoan {
   @JsonProperty("updated_at")
   private OffsetDateTime updatedAt;
 
-  public XmLoan() {}
+  public XMLoan() {}
 
-  public XmLoan(Builder builder) {
+  public XMLoan(Builder builder) {
     this.loanId = builder.loanId;
     this.loanParty = builder.loanParty;
     this.principalCurrency = builder.principalCurrency;
@@ -77,11 +82,11 @@ public class XmLoan {
     this.loanId = loanId;
   }
 
-  public XmParty getLoanParty() {
+  public XMParty getLoanParty() {
     return loanParty;
   }
 
-  public void setLoanParty(XmParty loanParty) {
+  public void setLoanParty(XMParty loanParty) {
     this.loanParty = loanParty;
   }
 
@@ -136,7 +141,7 @@ public class XmLoan {
   public static class Builder {
     private String loanId;
 
-    private XmParty loanParty;
+    private XMParty loanParty;
 
     private String principalCurrency;
 
@@ -155,7 +160,7 @@ public class XmLoan {
       return this;
     }
 
-    public Builder loanParty(XmParty loanParty) {
+    public Builder loanParty(XMParty loanParty) {
       this.loanParty = loanParty;
       return this;
     }
@@ -190,8 +195,8 @@ public class XmLoan {
       return this;
     }
 
-    public XmLoan build() {
-      return new XmLoan(this);
+    public XMLoan build() {
+      return new XMLoan(this);
     }
   }
 }

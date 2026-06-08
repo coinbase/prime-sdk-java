@@ -23,10 +23,8 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
-  @JsonProperty("originator")
   private TravelRuleParty originator;
 
-  @JsonProperty("beneficiary")
   private TravelRuleParty beneficiary;
 
   @JsonProperty("is_self")

@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RfqProductDetails {
   /** Whether the product is tradable via RFQ */
-  @JsonProperty("tradable")
   private boolean tradable;
 
   /** Deprecated: Value will be an empty string */

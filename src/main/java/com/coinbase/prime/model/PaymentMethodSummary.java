@@ -24,10 +24,8 @@ import com.coinbase.prime.model.enums.PaymentMethodType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PaymentMethodSummary {
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("symbol")
   private String symbol;
 
   /**

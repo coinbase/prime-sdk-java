@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EntityBalance {
   /** The display symbol for the asset */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The long balance */

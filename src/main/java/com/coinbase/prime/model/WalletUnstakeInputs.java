@@ -32,7 +32,6 @@ public class WalletUnstakeInputs {
    * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount
    * available
    */
-  @JsonProperty("amount")
   private String amount;
 
   /**

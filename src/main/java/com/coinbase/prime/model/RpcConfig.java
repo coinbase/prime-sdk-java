@@ -28,7 +28,6 @@ public class RpcConfig {
   private boolean skipBroadcast;
 
   /** Custom blockchain node RPC URL. (EVM-only) */
-  @JsonProperty("url")
   private String url;
 
   public RpcConfig() {}

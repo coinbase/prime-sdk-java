@@ -20,13 +20,9 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class AggregatedFiatBalance {
-  @JsonProperty("total")
   private String total;
 
-  @JsonProperty("holds")
   private String holds;
 
   public AggregatedFiatBalance() {}

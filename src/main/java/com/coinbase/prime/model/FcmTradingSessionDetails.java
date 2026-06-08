@@ -63,7 +63,6 @@ public class FcmTradingSessionDetails {
   private FcmTradingSessionClosedReason closedReason;
 
   /** FcmScheduledMaintenance contains scheduled maintenance window information */
-  @JsonProperty("maintenance")
   private FcmScheduledMaintenance maintenance;
 
   /** Settlement timestamp from previous trading day */

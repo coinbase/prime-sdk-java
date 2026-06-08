@@ -25,11 +25,9 @@ import java.time.OffsetDateTime;
 
 public class AmountDue {
   /** The currency this loan is due in */
-  @JsonProperty("currency")
   private String currency;
 
   /** The amount due */
-  @JsonProperty("amount")
   private String amount;
 
   /** The date this settlement is due, expressed in UTC */

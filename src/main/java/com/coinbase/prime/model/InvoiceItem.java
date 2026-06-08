@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Invoice item */
 public class InvoiceItem {
-  @JsonProperty("description")
   private String description;
 
   @JsonProperty("currency_symbol")
@@ -35,19 +34,15 @@ public class InvoiceItem {
   @JsonProperty("invoice_type")
   private InvoiceType invoiceType;
 
-  @JsonProperty("rate")
   private Double rate;
 
-  @JsonProperty("quantity")
   private Double quantity;
 
-  @JsonProperty("price")
   private Double price;
 
   @JsonProperty("average_auc")
   private Double averageAuc;
 
-  @JsonProperty("total")
   private Double total;
 
   public InvoiceItem() {}

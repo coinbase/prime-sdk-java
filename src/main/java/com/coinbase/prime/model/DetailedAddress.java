@@ -37,11 +37,9 @@ public class DetailedAddress {
   private String address3;
 
   /** City name */
-  @JsonProperty("city")
   private String city;
 
   /** State or province */
-  @JsonProperty("state")
   private String state;
 
   /** ISO 3166-1 alpha-2 country code */

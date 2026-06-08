@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserAction {
   /** Action is the available user action types */
-  @JsonProperty("action")
   private Action action;
 
   /** Id of the user who executed the action */
@@ -33,7 +32,6 @@ public class UserAction {
   private String userId;
 
   /** Time the action was taken */
-  @JsonProperty("timestamp")
   private String timestamp;
 
   public UserAction() {}

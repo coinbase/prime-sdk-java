@@ -24,11 +24,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DisplayUser {
   /** User UUID */
-  @JsonProperty("id")
   private String id;
 
   /** User full name */
-  @JsonProperty("name")
   private String name;
 
   /** User avatar URL */

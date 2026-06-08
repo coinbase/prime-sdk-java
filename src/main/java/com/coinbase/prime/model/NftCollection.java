@@ -20,11 +20,8 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class NftCollection {
   /** NFT collection name */
-  @JsonProperty("name")
   private String name;
 
   public NftCollection() {}

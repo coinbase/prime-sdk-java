@@ -20,17 +20,18 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class DateOfBirth {
-  @JsonProperty("year")
-  private Long year;
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+  private Integer year;
 
-  @JsonProperty("month")
-  private Long month;
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  private Integer month;
 
-  @JsonProperty("day")
-  private Long day;
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  private Integer day;
 
   public DateOfBirth() {}
 
@@ -40,48 +41,48 @@ public class DateOfBirth {
     this.day = builder.day;
   }
 
-  public Long getYear() {
+  public Integer getYear() {
     return year;
   }
 
-  public void setYear(Long year) {
+  public void setYear(Integer year) {
     this.year = year;
   }
 
-  public Long getMonth() {
+  public Integer getMonth() {
     return month;
   }
 
-  public void setMonth(Long month) {
+  public void setMonth(Integer month) {
     this.month = month;
   }
 
-  public Long getDay() {
+  public Integer getDay() {
     return day;
   }
 
-  public void setDay(Long day) {
+  public void setDay(Integer day) {
     this.day = day;
   }
 
   public static class Builder {
-    private Long year;
+    private Integer year;
 
-    private Long month;
+    private Integer month;
 
-    private Long day;
+    private Integer day;
 
-    public Builder year(Long year) {
+    public Builder year(Integer year) {
       this.year = year;
       return this;
     }
 
-    public Builder month(Long month) {
+    public Builder month(Integer month) {
       this.month = month;
       return this;
     }
 
-    public Builder day(Long day) {
+    public Builder day(Integer day) {
       this.day = day;
       return this;
     }

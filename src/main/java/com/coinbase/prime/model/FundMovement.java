@@ -20,23 +20,16 @@
 
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /** FundMovement represents a single movement of funds between two counterparties. */
 public class FundMovement {
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("source")
   private TransferLocation source;
 
-  @JsonProperty("target")
   private TransferLocation target;
 
-  @JsonProperty("currency")
   private String currency;
 
-  @JsonProperty("amount")
   private String amount;
 
   public FundMovement() {}

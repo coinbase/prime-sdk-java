@@ -26,7 +26,6 @@ import java.util.List;
 
 /** Invoice */
 public class Invoice {
-  @JsonProperty("id")
   private String id;
 
   @JsonProperty("billing_month")
@@ -42,7 +41,6 @@ public class Invoice {
   private String invoiceNumber;
 
   /** States */
-  @JsonProperty("state")
   private InvoiceState state;
 
   @JsonProperty("usd_amount_paid")

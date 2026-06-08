@@ -31,7 +31,6 @@ public class Accrual {
   private String accrualId;
 
   /** The date of accrual in UTC */
-  @JsonProperty("date")
   private String date;
 
   /** The unique ID of the portfolio */
@@ -39,7 +38,6 @@ public class Accrual {
   private String portfolioId;
 
   /** The currency symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   @JsonProperty("loan_type")
@@ -65,7 +63,6 @@ public class Accrual {
   @JsonProperty("loan_amount")
   private String loanAmount;
 
-  @JsonProperty("benchmark")
   private Benchmark benchmark;
 
   /** Daily interest rate fetched from the benchmark source */
@@ -73,7 +70,6 @@ public class Accrual {
   private String benchmarkRate;
 
   /** Daily spread offset from the benchmark rate */
-  @JsonProperty("spread")
   private String spread;
 
   @JsonProperty("rate_type")

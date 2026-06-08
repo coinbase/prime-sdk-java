@@ -30,15 +30,12 @@ public class TransferLocation {
    * of transfer location: Blockchain Network, Coinbase - MULTIPLE_ADDRESSES: Multiple
    * cryptocurrency addresses - COUNTERPARTY_ID: Counterparty ID
    */
-  @JsonProperty("type")
   private TransferLocationType type;
 
   /** The value of the transfer location: payment method ID, wallet ID or crypto address */
-  @JsonProperty("value")
   private String value;
 
   /** The crypto address of the transfer location */
-  @JsonProperty("address")
   private String address;
 
   /**

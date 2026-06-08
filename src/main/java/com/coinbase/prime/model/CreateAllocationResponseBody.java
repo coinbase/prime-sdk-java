@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateAllocationResponseBody {
   /** The success boolean for the post allocation */
-  @JsonProperty("success")
   private boolean success;
 
   /** The allocation id for the post allocation */

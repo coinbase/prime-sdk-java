@@ -29,7 +29,6 @@ public class ValidatorStakingInfo {
   private String validatorAddress;
 
   /** List of active staking requests for this validator */
-  @JsonProperty("statuses")
   private List<StakingStatus> statuses;
 
   public ValidatorStakingInfo() {}

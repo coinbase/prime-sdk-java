@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateNetAllocationResponseBody {
   /** The success boolean for the post net allocation */
-  @JsonProperty("success")
   private boolean success;
 
   /** The netting_id for the post net allocation */

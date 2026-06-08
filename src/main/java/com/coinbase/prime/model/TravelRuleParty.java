@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /** Represents a party in a travel rule transfer (originator or beneficiary). */
 public class TravelRuleParty {
   /** Legal name (for entities or simple name format) */
-  @JsonProperty("name")
   private String name;
 
   /** Natural person name components */
@@ -34,7 +33,6 @@ public class TravelRuleParty {
   private NaturalPersonName naturalPersonName;
 
   /** Detailed address information */
-  @JsonProperty("address")
   private DetailedAddress address;
 
   /**
@@ -60,6 +58,13 @@ public class TravelRuleParty {
   @JsonProperty("personal_id")
   private String personalId;
 
+  /**
+   * * A full date, with non-zero year, month, and day values. * A month and day, with a zero year
+   * (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year
+   * and month, with a zero day (for example, a credit card expiration date). Related types: *
+   * [google.type.TimeOfDay][google.type.TimeOfDay] * [google.type.DateTime][google.type.DateTime] *
+   * [google.protobuf.Timestamp][google.protobuf.Timestamp]
+   */
   @JsonProperty("date_of_birth")
   private DateOfBirth dateOfBirth;
 

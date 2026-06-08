@@ -26,17 +26,14 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 public class AddressGroup {
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("name")
   private String name;
 
   @JsonProperty("network_type")
   private NetworkType networkType;
 
   /** A list of addresses within the group */
-  @JsonProperty("addresses")
   private List<AddressEntry> addresses;
 
   @JsonProperty("added_at")

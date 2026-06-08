@@ -27,9 +27,14 @@ package com.coinbase.prime.model.enums;
  * across networks and wallet types (vault + trading + prime custody)
  */
 public enum PortfolioBalanceType {
+  /** Trading balances */
   TRADING_BALANCES,
+  /** Vault balances */
   VAULT_BALANCES,
+  /** Total balances (The sum of vault and trading + prime custody) */
   TOTAL_BALANCES,
+  /** Prime custody balances */
   PRIME_CUSTODY_BALANCES,
+  /** Unified total balance across networks and wallet types (vault + trading + prime custody) */
   UNIFIED_TOTAL_BALANCES
 }

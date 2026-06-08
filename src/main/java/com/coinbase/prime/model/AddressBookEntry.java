@@ -26,7 +26,6 @@ import java.time.OffsetDateTime;
 
 public class AddressBookEntry {
   /** UUID identifying this address book entry */
-  @JsonProperty("id")
   private String id;
 
   /** Currency symbol */
@@ -34,11 +33,9 @@ public class AddressBookEntry {
   private String currencySymbol;
 
   /** Name for this address book entry */
-  @JsonProperty("name")
   private String name;
 
   /** Cryptocurrency address */
-  @JsonProperty("address")
   private String address;
 
   /** Memo or destination tag for currencies which support them */
@@ -50,7 +47,6 @@ public class AddressBookEntry {
   private String accountIdentifierName;
 
   /** State of this address book entry */
-  @JsonProperty("state")
   private String state;
 
   /** Link to a blockchain explorer */
@@ -68,7 +64,6 @@ public class AddressBookEntry {
   @JsonProperty("added_by")
   private DisplayUser addedBy;
 
-  @JsonProperty("type")
   private AddressBookType type;
 
   /** counterparty id */

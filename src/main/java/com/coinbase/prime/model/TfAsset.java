@@ -22,9 +22,9 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/** TFAsset represents an asset eligible for Trade Finance with adjustment factors */
 public class TfAsset {
   /** The asset symbol */
-  @JsonProperty("symbol")
   private String symbol;
 
   /** The asset adjustment factor for Trade Finance */
