@@ -76,4 +76,15 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl
         List.of(200),
         new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
   }
+
+  @Override
+  public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
+      GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
+  }
 }

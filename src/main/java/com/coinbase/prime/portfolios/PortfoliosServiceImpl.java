@@ -50,6 +50,10 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
         new TypeReference<GetPortfolioResponse>() {});
   }
 
+  /**
+   * @deprecated Prefer {@link com.coinbase.prime.advancedtransfer.AdvancedTransferService}
+   */
+  @Deprecated
   @Override
   public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
       GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {

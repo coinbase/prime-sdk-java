@@ -77,4 +77,18 @@ public interface AdvancedTransferService {
   ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(
       ListAdvancedTransferTransactionsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Portfolio Counterparty ID.
+   *
+   * <p>Retrieve the counterparty ID for a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
+      GetPortfolioCounterpartyIdRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }
