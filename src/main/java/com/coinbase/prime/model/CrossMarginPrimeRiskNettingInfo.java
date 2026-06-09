@@ -149,11 +149,11 @@ public class CrossMarginPrimeRiskNettingInfo {
         integratedPortfolioMarginOffsetCreditBreakdown;
   }
 
-  public List<CrossMarginPrimeXMPosition> getXmPositions() {
+  public List<CrossMarginPrimeXMPosition> getXMPositions() {
     return xmPositions;
   }
 
-  public void setXmPositions(List<CrossMarginPrimeXMPosition> xmPositions) {
+  public void setXMPositions(List<CrossMarginPrimeXMPosition> xmPositions) {
     this.xmPositions = xmPositions;
   }
 

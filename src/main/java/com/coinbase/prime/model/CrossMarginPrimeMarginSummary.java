@@ -198,19 +198,19 @@ public class CrossMarginPrimeMarginSummary {
     this.consumedCredit = consumedCredit;
   }
 
-  public String getXmCreditLimit() {
+  public String getXMCreditLimit() {
     return xmCreditLimit;
   }
 
-  public void setXmCreditLimit(String xmCreditLimit) {
+  public void setXMCreditLimit(String xmCreditLimit) {
     this.xmCreditLimit = xmCreditLimit;
   }
 
-  public String getXmMarginLimit() {
+  public String getXMMarginLimit() {
     return xmMarginLimit;
   }
 
-  public void setXmMarginLimit(String xmMarginLimit) {
+  public void setXMMarginLimit(String xmMarginLimit) {
     this.xmMarginLimit = xmMarginLimit;
   }
 

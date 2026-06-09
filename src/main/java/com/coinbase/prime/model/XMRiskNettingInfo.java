@@ -213,11 +213,11 @@ public class XMRiskNettingInfo {
     this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
   }
 
-  public List<XMPosition> getXmPositions() {
+  public List<XMPosition> getXMPositions() {
     return xmPositions;
   }
 
-  public void setXmPositions(List<XMPosition> xmPositions) {
+  public void setXMPositions(List<XMPosition> xmPositions) {
     this.xmPositions = xmPositions;
   }
 
