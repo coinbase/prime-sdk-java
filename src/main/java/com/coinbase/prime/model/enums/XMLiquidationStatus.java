@@ -19,33 +19,22 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - XM_LIQUIDATION_STATUS_PRE_LIQUIDATION: Liquidation is in the pre-liquidation phase
- * - XM_LIQUIDATION_STATUS_LIQUIDATING: Liquidation is actively in progress
- * - XM_LIQUIDATION_STATUS_LIQUIDATED: Liquidation has completed successfully
- * - XM_LIQUIDATION_STATUS_CANCELED: Liquidation was canceled
- * - XM_LIQUIDATION_STATUS_FAILED: Liquidation failed
+ * - XM_LIQUIDATION_STATUS_PRE_LIQUIDATION: Liquidation is in the pre-liquidation phase -
+ * XM_LIQUIDATION_STATUS_LIQUIDATING: Liquidation is actively in progress -
+ * XM_LIQUIDATION_STATUS_LIQUIDATED: Liquidation has completed successfully -
+ * XM_LIQUIDATION_STATUS_CANCELED: Liquidation was canceled - XM_LIQUIDATION_STATUS_FAILED:
+ * Liquidation failed
  */
 public enum XMLiquidationStatus {
   XM_LIQUIDATION_STATUS_UNSET,
-  /**
-   * Liquidation is in the pre-liquidation phase
-   */
+  /** Liquidation is in the pre-liquidation phase */
   XM_LIQUIDATION_STATUS_PRE_LIQUIDATION,
-  /**
-   * Liquidation is actively in progress
-   */
+  /** Liquidation is actively in progress */
   XM_LIQUIDATION_STATUS_LIQUIDATING,
-  /**
-   * Liquidation has completed successfully
-   */
+  /** Liquidation has completed successfully */
   XM_LIQUIDATION_STATUS_LIQUIDATED,
-  /**
-   * Liquidation was canceled
-   */
+  /** Liquidation was canceled */
   XM_LIQUIDATION_STATUS_CANCELED,
-  /**
-   * Liquidation failed
-   */
+  /** Liquidation failed */
   XM_LIQUIDATION_STATUS_FAILED
 }
-

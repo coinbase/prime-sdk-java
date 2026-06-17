@@ -22,4 +22,3 @@ public enum SortDirection {
   DESC,
   ASC
 }
-

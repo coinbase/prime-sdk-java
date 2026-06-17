@@ -17,37 +17,38 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PaymentMethodDestination {
-    /** The payment method id to pay out */
-    @JsonProperty("payment_method_id")
+  /** The payment method id to pay out */
+  @JsonProperty("payment_method_id")
+  private String paymentMethodId;
+
+  public PaymentMethodDestination() {}
+
+  public PaymentMethodDestination(Builder builder) {
+    this.paymentMethodId = builder.paymentMethodId;
+  }
+
+  public String getPaymentMethodId() {
+    return paymentMethodId;
+  }
+
+  public void setPaymentMethodId(String paymentMethodId) {
+    this.paymentMethodId = paymentMethodId;
+  }
+
+  public static class Builder {
     private String paymentMethodId;
 
-    public PaymentMethodDestination() {
+    public Builder paymentMethodId(String paymentMethodId) {
+      this.paymentMethodId = paymentMethodId;
+      return this;
     }
 
-    public PaymentMethodDestination(Builder builder) {
-        this.paymentMethodId = builder.paymentMethodId;
+    public PaymentMethodDestination build() {
+      return new PaymentMethodDestination(this);
     }
-    public String getPaymentMethodId() {
-        return paymentMethodId;
-    }
-
-    public void setPaymentMethodId(String paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
-    }
-    public static class Builder {
-        private String paymentMethodId;
-
-        public Builder paymentMethodId(String paymentMethodId) {
-            this.paymentMethodId = paymentMethodId;
-            return this;
-        }
-
-        public PaymentMethodDestination build() {
-            return new PaymentMethodDestination(this);
-        }
-    }
+  }
 }
-

@@ -18,10 +18,7 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * AdvancedTransferType specifies the type of advanced transfer.
- */
+/** AdvancedTransferType specifies the type of advanced transfer. */
 public enum AdvancedTransferType {
   ADVANCED_TRANSFER_TYPE_BLIND_MATCH
 }
-

@@ -23,35 +23,36 @@ package com.coinbase.prime.model;
  * Requirements and supported fields vary by asset type.
  */
 public class WalletClaimRewardsInputs {
-    /**
-     * Optional amount to claim rewards (ETH only). If omitted, the wallet will claim the maximum amount available
-     */
+  /**
+   * Optional amount to claim rewards (ETH only). If omitted, the wallet will claim the maximum
+   * amount available
+   */
+  private String amount;
+
+  public WalletClaimRewardsInputs() {}
+
+  public WalletClaimRewardsInputs(Builder builder) {
+    this.amount = builder.amount;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public static class Builder {
     private String amount;
 
-    public WalletClaimRewardsInputs() {
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public WalletClaimRewardsInputs(Builder builder) {
-        this.amount = builder.amount;
+    public WalletClaimRewardsInputs build() {
+      return new WalletClaimRewardsInputs(this);
     }
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public static class Builder {
-        private String amount;
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public WalletClaimRewardsInputs build() {
-            return new WalletClaimRewardsInputs(this);
-        }
-    }
+  }
 }
-

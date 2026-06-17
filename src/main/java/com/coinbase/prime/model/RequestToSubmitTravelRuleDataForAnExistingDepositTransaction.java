@@ -17,89 +17,92 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.TravelRuleParty;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
+  private TravelRuleParty originator;
+
+  private TravelRuleParty beneficiary;
+
+  @JsonProperty("is_self")
+  private boolean isSelf;
+
+  @JsonProperty("opt_out_of_ownership_verification")
+  private boolean optOutOfOwnershipVerification;
+
+  public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction() {}
+
+  public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction(Builder builder) {
+    this.originator = builder.originator;
+    this.beneficiary = builder.beneficiary;
+    this.isSelf = builder.isSelf;
+    this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
+  }
+
+  public TravelRuleParty getOriginator() {
+    return originator;
+  }
+
+  public void setOriginator(TravelRuleParty originator) {
+    this.originator = originator;
+  }
+
+  public TravelRuleParty getBeneficiary() {
+    return beneficiary;
+  }
+
+  public void setBeneficiary(TravelRuleParty beneficiary) {
+    this.beneficiary = beneficiary;
+  }
+
+  public boolean getIsSelf() {
+    return isSelf;
+  }
+
+  public void setIsSelf(boolean isSelf) {
+    this.isSelf = isSelf;
+  }
+
+  public boolean getOptOutOfOwnershipVerification() {
+    return optOutOfOwnershipVerification;
+  }
+
+  public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
+    this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+  }
+
+  public static class Builder {
     private TravelRuleParty originator;
 
     private TravelRuleParty beneficiary;
 
-    @JsonProperty("is_self")
     private boolean isSelf;
 
-    @JsonProperty("opt_out_of_ownership_verification")
     private boolean optOutOfOwnershipVerification;
 
-    public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction() {
+    public Builder originator(TravelRuleParty originator) {
+      this.originator = originator;
+      return this;
     }
 
-    public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction(Builder builder) {
-        this.originator = builder.originator;
-        this.beneficiary = builder.beneficiary;
-        this.isSelf = builder.isSelf;
-        this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
-    }
-    public TravelRuleParty getOriginator() {
-        return originator;
+    public Builder beneficiary(TravelRuleParty beneficiary) {
+      this.beneficiary = beneficiary;
+      return this;
     }
 
-    public void setOriginator(TravelRuleParty originator) {
-        this.originator = originator;
-    }
-    public TravelRuleParty getBeneficiary() {
-        return beneficiary;
+    public Builder isSelf(boolean isSelf) {
+      this.isSelf = isSelf;
+      return this;
     }
 
-    public void setBeneficiary(TravelRuleParty beneficiary) {
-        this.beneficiary = beneficiary;
-    }
-    public boolean getIsSelf() {
-        return isSelf;
+    public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
+      this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
+      return this;
     }
 
-    public void setIsSelf(boolean isSelf) {
-        this.isSelf = isSelf;
+    public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction build() {
+      return new RequestToSubmitTravelRuleDataForAnExistingDepositTransaction(this);
     }
-    public boolean getOptOutOfOwnershipVerification() {
-        return optOutOfOwnershipVerification;
-    }
-
-    public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
-        this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
-    }
-    public static class Builder {
-        private TravelRuleParty originator;
-
-        private TravelRuleParty beneficiary;
-
-        private boolean isSelf;
-
-        private boolean optOutOfOwnershipVerification;
-
-        public Builder originator(TravelRuleParty originator) {
-            this.originator = originator;
-            return this;
-        }
-
-        public Builder beneficiary(TravelRuleParty beneficiary) {
-            this.beneficiary = beneficiary;
-            return this;
-        }
-
-        public Builder isSelf(boolean isSelf) {
-            this.isSelf = isSelf;
-            return this;
-        }
-
-        public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
-            this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
-            return this;
-        }
-
-        public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction build() {
-            return new RequestToSubmitTravelRuleDataForAnExistingDepositTransaction(this);
-        }
-    }
+  }
 }
-

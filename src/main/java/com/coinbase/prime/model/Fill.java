@@ -17,332 +17,314 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.CommissionDetailTotal;
+
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.ProductType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class Fill {
-    /**
-     * The unique ID of the fill
-     */
+  /** The unique ID of the fill */
+  private String id;
+
+  /** The order ID of the fill */
+  @JsonProperty("order_id")
+  private String orderId;
+
+  /** The product ID of the fill */
+  @JsonProperty("product_id")
+  private String productId;
+
+  /** The client product ID of the fill indictating the settlment currency */
+  @JsonProperty("client_product_id")
+  private String clientProductId;
+
+  /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+  private OrderSide side;
+
+  /** Filled size (in base asset units) */
+  @JsonProperty("filled_quantity")
+  private String filledQuantity;
+
+  /** Filled value (in quote asset units) */
+  @JsonProperty("filled_value")
+  private String filledValue;
+
+  /** The price of the fill */
+  private String price;
+
+  /** The date and time of the fill */
+  private OffsetDateTime time;
+
+  /** The commission incurred for the fill */
+  private String commission;
+
+  /** The name of the venue */
+  private String venue;
+
+  /** The venue fees incurred for the fill */
+  @JsonProperty("venue_fees")
+  private String venueFees;
+
+  /** The CES commission incurred for the fill */
+  @JsonProperty("ces_commission")
+  private String cesCommission;
+
+  /** - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product */
+  @JsonProperty("product_type")
+  private ProductType productType;
+
+  @JsonProperty("commission_detail_total")
+  private CommissionDetailTotal commissionDetailTotal;
+
+  public Fill() {}
+
+  public Fill(Builder builder) {
+    this.id = builder.id;
+    this.orderId = builder.orderId;
+    this.productId = builder.productId;
+    this.clientProductId = builder.clientProductId;
+    this.side = builder.side;
+    this.filledQuantity = builder.filledQuantity;
+    this.filledValue = builder.filledValue;
+    this.price = builder.price;
+    this.time = builder.time;
+    this.commission = builder.commission;
+    this.venue = builder.venue;
+    this.venueFees = builder.venueFees;
+    this.cesCommission = builder.cesCommission;
+    this.productType = builder.productType;
+    this.commissionDetailTotal = builder.commissionDetailTotal;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public String getClientProductId() {
+    return clientProductId;
+  }
+
+  public void setClientProductId(String clientProductId) {
+    this.clientProductId = clientProductId;
+  }
+
+  public OrderSide getSide() {
+    return side;
+  }
+
+  public void setSide(OrderSide side) {
+    this.side = side;
+  }
+
+  public String getFilledQuantity() {
+    return filledQuantity;
+  }
+
+  public void setFilledQuantity(String filledQuantity) {
+    this.filledQuantity = filledQuantity;
+  }
+
+  public String getFilledValue() {
+    return filledValue;
+  }
+
+  public void setFilledValue(String filledValue) {
+    this.filledValue = filledValue;
+  }
+
+  public String getPrice() {
+    return price;
+  }
+
+  public void setPrice(String price) {
+    this.price = price;
+  }
+
+  public OffsetDateTime getTime() {
+    return time;
+  }
+
+  public void setTime(OffsetDateTime time) {
+    this.time = time;
+  }
+
+  public String getCommission() {
+    return commission;
+  }
+
+  public void setCommission(String commission) {
+    this.commission = commission;
+  }
+
+  public String getVenue() {
+    return venue;
+  }
+
+  public void setVenue(String venue) {
+    this.venue = venue;
+  }
+
+  public String getVenueFees() {
+    return venueFees;
+  }
+
+  public void setVenueFees(String venueFees) {
+    this.venueFees = venueFees;
+  }
+
+  public String getCesCommission() {
+    return cesCommission;
+  }
+
+  public void setCesCommission(String cesCommission) {
+    this.cesCommission = cesCommission;
+  }
+
+  public ProductType getProductType() {
+    return productType;
+  }
+
+  public void setProductType(ProductType productType) {
+    this.productType = productType;
+  }
+
+  public CommissionDetailTotal getCommissionDetailTotal() {
+    return commissionDetailTotal;
+  }
+
+  public void setCommissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+    this.commissionDetailTotal = commissionDetailTotal;
+  }
+
+  public static class Builder {
     private String id;
 
-    /**
-     * The order ID of the fill
-     */
-    @JsonProperty("order_id")
     private String orderId;
 
-    /**
-     * The product ID of the fill
-     */
-    @JsonProperty("product_id")
     private String productId;
 
-    /**
-     * The client product ID of the fill indictating the settlment currency
-     */
-    @JsonProperty("client_product_id")
     private String clientProductId;
 
-    /**
-     * - UNKNOWN_ORDER_SIDE: nil value
-     * - BUY: Buy order
-     * - SELL: Sell order
-     */
     private OrderSide side;
 
-    /**
-     * Filled size (in base asset units)
-     */
-    @JsonProperty("filled_quantity")
     private String filledQuantity;
 
-    /**
-     * Filled value (in quote asset units)
-     */
-    @JsonProperty("filled_value")
     private String filledValue;
 
-    /**
-     * The price of the fill
-     */
     private String price;
 
-    /**
-     * The date and time of the fill
-     */
     private OffsetDateTime time;
 
-    /**
-     * The commission incurred for the fill
-     */
     private String commission;
 
-    /**
-     * The name of the venue
-     */
     private String venue;
 
-    /**
-     * The venue fees incurred for the fill
-     */
-    @JsonProperty("venue_fees")
     private String venueFees;
 
-    /**
-     * The CES commission incurred for the fill
-     */
-    @JsonProperty("ces_commission")
     private String cesCommission;
 
-    /**
-     * - UNKNOWN_PRODUCT_TYPE: Unknown product type
-     * - SPOT: Spot product
-     * - FUTURE: Future product
-     */
-    @JsonProperty("product_type")
     private ProductType productType;
 
-    @JsonProperty("commission_detail_total")
     private CommissionDetailTotal commissionDetailTotal;
 
-    public Fill() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public Fill(Builder builder) {
-        this.id = builder.id;
-        this.orderId = builder.orderId;
-        this.productId = builder.productId;
-        this.clientProductId = builder.clientProductId;
-        this.side = builder.side;
-        this.filledQuantity = builder.filledQuantity;
-        this.filledValue = builder.filledValue;
-        this.price = builder.price;
-        this.time = builder.time;
-        this.commission = builder.commission;
-        this.venue = builder.venue;
-        this.venueFees = builder.venueFees;
-        this.cesCommission = builder.cesCommission;
-        this.productType = builder.productType;
-        this.commissionDetailTotal = builder.commissionDetailTotal;
-    }
-    public String getId() {
-        return id;
+    public Builder orderId(String orderId) {
+      this.orderId = orderId;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getOrderId() {
-        return orderId;
+    public Builder productId(String productId) {
+      this.productId = productId;
+      return this;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-    public String getProductId() {
-        return productId;
+    public Builder clientProductId(String clientProductId) {
+      this.clientProductId = clientProductId;
+      return this;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-    public String getClientProductId() {
-        return clientProductId;
+    public Builder side(OrderSide side) {
+      this.side = side;
+      return this;
     }
 
-    public void setClientProductId(String clientProductId) {
-        this.clientProductId = clientProductId;
-    }
-    public OrderSide getSide() {
-        return side;
+    public Builder filledQuantity(String filledQuantity) {
+      this.filledQuantity = filledQuantity;
+      return this;
     }
 
-    public void setSide(OrderSide side) {
-        this.side = side;
-    }
-    public String getFilledQuantity() {
-        return filledQuantity;
+    public Builder filledValue(String filledValue) {
+      this.filledValue = filledValue;
+      return this;
     }
 
-    public void setFilledQuantity(String filledQuantity) {
-        this.filledQuantity = filledQuantity;
-    }
-    public String getFilledValue() {
-        return filledValue;
+    public Builder price(String price) {
+      this.price = price;
+      return this;
     }
 
-    public void setFilledValue(String filledValue) {
-        this.filledValue = filledValue;
-    }
-    public String getPrice() {
-        return price;
+    public Builder time(OffsetDateTime time) {
+      this.time = time;
+      return this;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-    public OffsetDateTime getTime() {
-        return time;
+    public Builder commission(String commission) {
+      this.commission = commission;
+      return this;
     }
 
-    public void setTime(OffsetDateTime time) {
-        this.time = time;
-    }
-    public String getCommission() {
-        return commission;
+    public Builder venue(String venue) {
+      this.venue = venue;
+      return this;
     }
 
-    public void setCommission(String commission) {
-        this.commission = commission;
-    }
-    public String getVenue() {
-        return venue;
+    public Builder venueFees(String venueFees) {
+      this.venueFees = venueFees;
+      return this;
     }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-    public String getVenueFees() {
-        return venueFees;
+    public Builder cesCommission(String cesCommission) {
+      this.cesCommission = cesCommission;
+      return this;
     }
 
-    public void setVenueFees(String venueFees) {
-        this.venueFees = venueFees;
-    }
-    public String getCesCommission() {
-        return cesCommission;
+    public Builder productType(ProductType productType) {
+      this.productType = productType;
+      return this;
     }
 
-    public void setCesCommission(String cesCommission) {
-        this.cesCommission = cesCommission;
-    }
-    public ProductType getProductType() {
-        return productType;
+    public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+      this.commissionDetailTotal = commissionDetailTotal;
+      return this;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
+    public Fill build() {
+      return new Fill(this);
     }
-    public CommissionDetailTotal getCommissionDetailTotal() {
-        return commissionDetailTotal;
-    }
-
-    public void setCommissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
-        this.commissionDetailTotal = commissionDetailTotal;
-    }
-    public static class Builder {
-        private String id;
-
-        private String orderId;
-
-        private String productId;
-
-        private String clientProductId;
-
-        private OrderSide side;
-
-        private String filledQuantity;
-
-        private String filledValue;
-
-        private String price;
-
-        private OffsetDateTime time;
-
-        private String commission;
-
-        private String venue;
-
-        private String venueFees;
-
-        private String cesCommission;
-
-        private ProductType productType;
-
-        private CommissionDetailTotal commissionDetailTotal;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public Builder clientProductId(String clientProductId) {
-            this.clientProductId = clientProductId;
-            return this;
-        }
-
-        public Builder side(OrderSide side) {
-            this.side = side;
-            return this;
-        }
-
-        public Builder filledQuantity(String filledQuantity) {
-            this.filledQuantity = filledQuantity;
-            return this;
-        }
-
-        public Builder filledValue(String filledValue) {
-            this.filledValue = filledValue;
-            return this;
-        }
-
-        public Builder price(String price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder time(OffsetDateTime time) {
-            this.time = time;
-            return this;
-        }
-
-        public Builder commission(String commission) {
-            this.commission = commission;
-            return this;
-        }
-
-        public Builder venue(String venue) {
-            this.venue = venue;
-            return this;
-        }
-
-        public Builder venueFees(String venueFees) {
-            this.venueFees = venueFees;
-            return this;
-        }
-
-        public Builder cesCommission(String cesCommission) {
-            this.cesCommission = cesCommission;
-            return this;
-        }
-
-        public Builder productType(ProductType productType) {
-            this.productType = productType;
-            return this;
-        }
-
-        public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
-            this.commissionDetailTotal = commissionDetailTotal;
-            return this;
-        }
-
-        public Fill build() {
-            return new Fill(this);
-        }
-    }
+  }
 }
-

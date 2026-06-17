@@ -17,312 +17,312 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.MarginAddOn;
-import com.coinbase.prime.model.XMPosition;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class XMRiskNettingInfo {
-    /**
-     * Derivatives Clearing Organization Margin Requirement (DMR) is the margin requirement for all futures positions, derived from the Derivatives Clearing Organization model
-     */
-    @JsonProperty("dco_margin_requirement")
+  /**
+   * Derivatives Clearing Organization Margin Requirement (DMR) is the margin requirement for all
+   * futures positions, derived from the Derivatives Clearing Organization model
+   */
+  @JsonProperty("dco_margin_requirement")
+  private String dcoMarginRequirement;
+
+  /**
+   * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived
+   * from the XM model
+   */
+  @JsonProperty("portfolio_margin_requirement")
+  private String portfolioMarginRequirement;
+
+  /**
+   * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions
+   * + futures positions with underlying assets eligible in Portfolio Margin, via the XM model with
+   * one-leg netting
+   */
+  @JsonProperty("integrated_portfolio_margin_requirement")
+  private String integratedPortfolioMarginRequirement;
+
+  /**
+   * Ineligible Futures Margin Requirement (IFMR) is the margin requirement for IPMR-ineligible
+   * futures contracts
+   */
+  @JsonProperty("ineligible_futures_margin_requirement")
+  private String ineligibleFuturesMarginRequirement;
+
+  /** Position margin requirement for all spot positions */
+  @JsonProperty("position_margin_requirement")
+  private String positionMarginRequirement;
+
+  /** Portfolio margin addon for all spot positions */
+  @JsonProperty("portfolio_margin_addon")
+  private String portfolioMarginAddon;
+
+  /** Position margin requirement for spot + futures positions */
+  @JsonProperty("integrated_position_margin_requirement")
+  private String integratedPositionMarginRequirement;
+
+  /** Portfolio margin addon for spot + futures positions */
+  @JsonProperty("integrated_portfolio_margin_addon")
+  private String integratedPortfolioMarginAddon;
+
+  /** Post-netting USD notional for all futures positions */
+  @JsonProperty("netted_futures_notional")
+  private String nettedFuturesNotional;
+
+  /** Total basis gross market value of all XM-eligible positions (i.e. crypto underliers) */
+  @JsonProperty("total_gmv_basis")
+  private String totalGmvBasis;
+
+  /** Integrated Portfolio Margin cash balance */
+  @JsonProperty("ipm_cash_balance")
+  private String ipmCashBalance;
+
+  @JsonProperty("integrated_scenario_addon")
+  private MarginAddOn integratedScenarioAddon;
+
+  /** All integrated scenario add-ons */
+  @JsonProperty("all_integrated_scenario_addons")
+  private List<MarginAddOn> allIntegratedScenarioAddons;
+
+  /** Netted positions used in the model calculation */
+  @JsonProperty("xm_positions")
+  private List<XMPosition> xmPositions;
+
+  public XMRiskNettingInfo() {}
+
+  public XMRiskNettingInfo(Builder builder) {
+    this.dcoMarginRequirement = builder.dcoMarginRequirement;
+    this.portfolioMarginRequirement = builder.portfolioMarginRequirement;
+    this.integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
+    this.ineligibleFuturesMarginRequirement = builder.ineligibleFuturesMarginRequirement;
+    this.positionMarginRequirement = builder.positionMarginRequirement;
+    this.portfolioMarginAddon = builder.portfolioMarginAddon;
+    this.integratedPositionMarginRequirement = builder.integratedPositionMarginRequirement;
+    this.integratedPortfolioMarginAddon = builder.integratedPortfolioMarginAddon;
+    this.nettedFuturesNotional = builder.nettedFuturesNotional;
+    this.totalGmvBasis = builder.totalGmvBasis;
+    this.ipmCashBalance = builder.ipmCashBalance;
+    this.integratedScenarioAddon = builder.integratedScenarioAddon;
+    this.allIntegratedScenarioAddons = builder.allIntegratedScenarioAddons;
+    this.xmPositions = builder.xmPositions;
+  }
+
+  public String getDcoMarginRequirement() {
+    return dcoMarginRequirement;
+  }
+
+  public void setDcoMarginRequirement(String dcoMarginRequirement) {
+    this.dcoMarginRequirement = dcoMarginRequirement;
+  }
+
+  public String getPortfolioMarginRequirement() {
+    return portfolioMarginRequirement;
+  }
+
+  public void setPortfolioMarginRequirement(String portfolioMarginRequirement) {
+    this.portfolioMarginRequirement = portfolioMarginRequirement;
+  }
+
+  public String getIntegratedPortfolioMarginRequirement() {
+    return integratedPortfolioMarginRequirement;
+  }
+
+  public void setIntegratedPortfolioMarginRequirement(String integratedPortfolioMarginRequirement) {
+    this.integratedPortfolioMarginRequirement = integratedPortfolioMarginRequirement;
+  }
+
+  public String getIneligibleFuturesMarginRequirement() {
+    return ineligibleFuturesMarginRequirement;
+  }
+
+  public void setIneligibleFuturesMarginRequirement(String ineligibleFuturesMarginRequirement) {
+    this.ineligibleFuturesMarginRequirement = ineligibleFuturesMarginRequirement;
+  }
+
+  public String getPositionMarginRequirement() {
+    return positionMarginRequirement;
+  }
+
+  public void setPositionMarginRequirement(String positionMarginRequirement) {
+    this.positionMarginRequirement = positionMarginRequirement;
+  }
+
+  public String getPortfolioMarginAddon() {
+    return portfolioMarginAddon;
+  }
+
+  public void setPortfolioMarginAddon(String portfolioMarginAddon) {
+    this.portfolioMarginAddon = portfolioMarginAddon;
+  }
+
+  public String getIntegratedPositionMarginRequirement() {
+    return integratedPositionMarginRequirement;
+  }
+
+  public void setIntegratedPositionMarginRequirement(String integratedPositionMarginRequirement) {
+    this.integratedPositionMarginRequirement = integratedPositionMarginRequirement;
+  }
+
+  public String getIntegratedPortfolioMarginAddon() {
+    return integratedPortfolioMarginAddon;
+  }
+
+  public void setIntegratedPortfolioMarginAddon(String integratedPortfolioMarginAddon) {
+    this.integratedPortfolioMarginAddon = integratedPortfolioMarginAddon;
+  }
+
+  public String getNettedFuturesNotional() {
+    return nettedFuturesNotional;
+  }
+
+  public void setNettedFuturesNotional(String nettedFuturesNotional) {
+    this.nettedFuturesNotional = nettedFuturesNotional;
+  }
+
+  public String getTotalGmvBasis() {
+    return totalGmvBasis;
+  }
+
+  public void setTotalGmvBasis(String totalGmvBasis) {
+    this.totalGmvBasis = totalGmvBasis;
+  }
+
+  public String getIpmCashBalance() {
+    return ipmCashBalance;
+  }
+
+  public void setIpmCashBalance(String ipmCashBalance) {
+    this.ipmCashBalance = ipmCashBalance;
+  }
+
+  public MarginAddOn getIntegratedScenarioAddon() {
+    return integratedScenarioAddon;
+  }
+
+  public void setIntegratedScenarioAddon(MarginAddOn integratedScenarioAddon) {
+    this.integratedScenarioAddon = integratedScenarioAddon;
+  }
+
+  public List<MarginAddOn> getAllIntegratedScenarioAddons() {
+    return allIntegratedScenarioAddons;
+  }
+
+  public void setAllIntegratedScenarioAddons(List<MarginAddOn> allIntegratedScenarioAddons) {
+    this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
+  }
+
+  public List<XMPosition> getXMPositions() {
+    return xmPositions;
+  }
+
+  public void setXMPositions(List<XMPosition> xmPositions) {
+    this.xmPositions = xmPositions;
+  }
+
+  public static class Builder {
     private String dcoMarginRequirement;
 
-    /**
-     * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived from the XM model
-     */
-    @JsonProperty("portfolio_margin_requirement")
     private String portfolioMarginRequirement;
 
-    /**
-     * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the XM model with one-leg netting
-     */
-    @JsonProperty("integrated_portfolio_margin_requirement")
     private String integratedPortfolioMarginRequirement;
 
-    /**
-     * Ineligible Futures Margin Requirement (IFMR) is the margin requirement for IPMR-ineligible futures contracts
-     */
-    @JsonProperty("ineligible_futures_margin_requirement")
     private String ineligibleFuturesMarginRequirement;
 
-    /**
-     * Position margin requirement for all spot positions
-     */
-    @JsonProperty("position_margin_requirement")
     private String positionMarginRequirement;
 
-    /**
-     * Portfolio margin addon for all spot positions
-     */
-    @JsonProperty("portfolio_margin_addon")
     private String portfolioMarginAddon;
 
-    /**
-     * Position margin requirement for spot + futures positions
-     */
-    @JsonProperty("integrated_position_margin_requirement")
     private String integratedPositionMarginRequirement;
 
-    /**
-     * Portfolio margin addon for spot + futures positions
-     */
-    @JsonProperty("integrated_portfolio_margin_addon")
     private String integratedPortfolioMarginAddon;
 
-    /**
-     * Post-netting USD notional for all futures positions
-     */
-    @JsonProperty("netted_futures_notional")
     private String nettedFuturesNotional;
 
-    /**
-     * Total basis gross market value of all XM-eligible positions (i.e. crypto underliers)
-     */
-    @JsonProperty("total_gmv_basis")
     private String totalGmvBasis;
 
-    /**
-     * Integrated Portfolio Margin cash balance
-     */
-    @JsonProperty("ipm_cash_balance")
     private String ipmCashBalance;
 
-    @JsonProperty("integrated_scenario_addon")
     private MarginAddOn integratedScenarioAddon;
 
-    /**
-     * All integrated scenario add-ons
-     */
-    @JsonProperty("all_integrated_scenario_addons")
     private List<MarginAddOn> allIntegratedScenarioAddons;
 
-    /**
-     * Netted positions used in the model calculation
-     */
-    @JsonProperty("xm_positions")
     private List<XMPosition> xmPositions;
 
-    public XMRiskNettingInfo() {
+    public Builder dcoMarginRequirement(String dcoMarginRequirement) {
+      this.dcoMarginRequirement = dcoMarginRequirement;
+      return this;
     }
 
-    public XMRiskNettingInfo(Builder builder) {
-        this.dcoMarginRequirement = builder.dcoMarginRequirement;
-        this.portfolioMarginRequirement = builder.portfolioMarginRequirement;
-        this.integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
-        this.ineligibleFuturesMarginRequirement = builder.ineligibleFuturesMarginRequirement;
-        this.positionMarginRequirement = builder.positionMarginRequirement;
-        this.portfolioMarginAddon = builder.portfolioMarginAddon;
-        this.integratedPositionMarginRequirement = builder.integratedPositionMarginRequirement;
-        this.integratedPortfolioMarginAddon = builder.integratedPortfolioMarginAddon;
-        this.nettedFuturesNotional = builder.nettedFuturesNotional;
-        this.totalGmvBasis = builder.totalGmvBasis;
-        this.ipmCashBalance = builder.ipmCashBalance;
-        this.integratedScenarioAddon = builder.integratedScenarioAddon;
-        this.allIntegratedScenarioAddons = builder.allIntegratedScenarioAddons;
-        this.xmPositions = builder.xmPositions;
-    }
-    public String getDcoMarginRequirement() {
-        return dcoMarginRequirement;
+    public Builder portfolioMarginRequirement(String portfolioMarginRequirement) {
+      this.portfolioMarginRequirement = portfolioMarginRequirement;
+      return this;
     }
 
-    public void setDcoMarginRequirement(String dcoMarginRequirement) {
-        this.dcoMarginRequirement = dcoMarginRequirement;
-    }
-    public String getPortfolioMarginRequirement() {
-        return portfolioMarginRequirement;
-    }
-
-    public void setPortfolioMarginRequirement(String portfolioMarginRequirement) {
-        this.portfolioMarginRequirement = portfolioMarginRequirement;
-    }
-    public String getIntegratedPortfolioMarginRequirement() {
-        return integratedPortfolioMarginRequirement;
+    public Builder integratedPortfolioMarginRequirement(
+        String integratedPortfolioMarginRequirement) {
+      this.integratedPortfolioMarginRequirement = integratedPortfolioMarginRequirement;
+      return this;
     }
 
-    public void setIntegratedPortfolioMarginRequirement(String integratedPortfolioMarginRequirement) {
-        this.integratedPortfolioMarginRequirement = integratedPortfolioMarginRequirement;
-    }
-    public String getIneligibleFuturesMarginRequirement() {
-        return ineligibleFuturesMarginRequirement;
+    public Builder ineligibleFuturesMarginRequirement(String ineligibleFuturesMarginRequirement) {
+      this.ineligibleFuturesMarginRequirement = ineligibleFuturesMarginRequirement;
+      return this;
     }
 
-    public void setIneligibleFuturesMarginRequirement(String ineligibleFuturesMarginRequirement) {
-        this.ineligibleFuturesMarginRequirement = ineligibleFuturesMarginRequirement;
-    }
-    public String getPositionMarginRequirement() {
-        return positionMarginRequirement;
+    public Builder positionMarginRequirement(String positionMarginRequirement) {
+      this.positionMarginRequirement = positionMarginRequirement;
+      return this;
     }
 
-    public void setPositionMarginRequirement(String positionMarginRequirement) {
-        this.positionMarginRequirement = positionMarginRequirement;
-    }
-    public String getPortfolioMarginAddon() {
-        return portfolioMarginAddon;
+    public Builder portfolioMarginAddon(String portfolioMarginAddon) {
+      this.portfolioMarginAddon = portfolioMarginAddon;
+      return this;
     }
 
-    public void setPortfolioMarginAddon(String portfolioMarginAddon) {
-        this.portfolioMarginAddon = portfolioMarginAddon;
-    }
-    public String getIntegratedPositionMarginRequirement() {
-        return integratedPositionMarginRequirement;
+    public Builder integratedPositionMarginRequirement(String integratedPositionMarginRequirement) {
+      this.integratedPositionMarginRequirement = integratedPositionMarginRequirement;
+      return this;
     }
 
-    public void setIntegratedPositionMarginRequirement(String integratedPositionMarginRequirement) {
-        this.integratedPositionMarginRequirement = integratedPositionMarginRequirement;
-    }
-    public String getIntegratedPortfolioMarginAddon() {
-        return integratedPortfolioMarginAddon;
+    public Builder integratedPortfolioMarginAddon(String integratedPortfolioMarginAddon) {
+      this.integratedPortfolioMarginAddon = integratedPortfolioMarginAddon;
+      return this;
     }
 
-    public void setIntegratedPortfolioMarginAddon(String integratedPortfolioMarginAddon) {
-        this.integratedPortfolioMarginAddon = integratedPortfolioMarginAddon;
-    }
-    public String getNettedFuturesNotional() {
-        return nettedFuturesNotional;
+    public Builder nettedFuturesNotional(String nettedFuturesNotional) {
+      this.nettedFuturesNotional = nettedFuturesNotional;
+      return this;
     }
 
-    public void setNettedFuturesNotional(String nettedFuturesNotional) {
-        this.nettedFuturesNotional = nettedFuturesNotional;
-    }
-    public String getTotalGmvBasis() {
-        return totalGmvBasis;
+    public Builder totalGmvBasis(String totalGmvBasis) {
+      this.totalGmvBasis = totalGmvBasis;
+      return this;
     }
 
-    public void setTotalGmvBasis(String totalGmvBasis) {
-        this.totalGmvBasis = totalGmvBasis;
-    }
-    public String getIpmCashBalance() {
-        return ipmCashBalance;
+    public Builder ipmCashBalance(String ipmCashBalance) {
+      this.ipmCashBalance = ipmCashBalance;
+      return this;
     }
 
-    public void setIpmCashBalance(String ipmCashBalance) {
-        this.ipmCashBalance = ipmCashBalance;
-    }
-    public MarginAddOn getIntegratedScenarioAddon() {
-        return integratedScenarioAddon;
+    public Builder integratedScenarioAddon(MarginAddOn integratedScenarioAddon) {
+      this.integratedScenarioAddon = integratedScenarioAddon;
+      return this;
     }
 
-    public void setIntegratedScenarioAddon(MarginAddOn integratedScenarioAddon) {
-        this.integratedScenarioAddon = integratedScenarioAddon;
-    }
-    public List<MarginAddOn> getAllIntegratedScenarioAddons() {
-        return allIntegratedScenarioAddons;
+    public Builder allIntegratedScenarioAddons(List<MarginAddOn> allIntegratedScenarioAddons) {
+      this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
+      return this;
     }
 
-    public void setAllIntegratedScenarioAddons(List<MarginAddOn> allIntegratedScenarioAddons) {
-        this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
-    }
-    public List<XMPosition> getXMPositions() {
-        return xmPositions;
+    public Builder xmPositions(List<XMPosition> xmPositions) {
+      this.xmPositions = xmPositions;
+      return this;
     }
 
-    public void setXMPositions(List<XMPosition> xmPositions) {
-        this.xmPositions = xmPositions;
+    public XMRiskNettingInfo build() {
+      return new XMRiskNettingInfo(this);
     }
-    public static class Builder {
-        private String dcoMarginRequirement;
-
-        private String portfolioMarginRequirement;
-
-        private String integratedPortfolioMarginRequirement;
-
-        private String ineligibleFuturesMarginRequirement;
-
-        private String positionMarginRequirement;
-
-        private String portfolioMarginAddon;
-
-        private String integratedPositionMarginRequirement;
-
-        private String integratedPortfolioMarginAddon;
-
-        private String nettedFuturesNotional;
-
-        private String totalGmvBasis;
-
-        private String ipmCashBalance;
-
-        private MarginAddOn integratedScenarioAddon;
-
-        private List<MarginAddOn> allIntegratedScenarioAddons;
-
-        private List<XMPosition> xmPositions;
-
-        public Builder dcoMarginRequirement(String dcoMarginRequirement) {
-            this.dcoMarginRequirement = dcoMarginRequirement;
-            return this;
-        }
-
-        public Builder portfolioMarginRequirement(String portfolioMarginRequirement) {
-            this.portfolioMarginRequirement = portfolioMarginRequirement;
-            return this;
-        }
-
-        public Builder integratedPortfolioMarginRequirement(String integratedPortfolioMarginRequirement) {
-            this.integratedPortfolioMarginRequirement = integratedPortfolioMarginRequirement;
-            return this;
-        }
-
-        public Builder ineligibleFuturesMarginRequirement(String ineligibleFuturesMarginRequirement) {
-            this.ineligibleFuturesMarginRequirement = ineligibleFuturesMarginRequirement;
-            return this;
-        }
-
-        public Builder positionMarginRequirement(String positionMarginRequirement) {
-            this.positionMarginRequirement = positionMarginRequirement;
-            return this;
-        }
-
-        public Builder portfolioMarginAddon(String portfolioMarginAddon) {
-            this.portfolioMarginAddon = portfolioMarginAddon;
-            return this;
-        }
-
-        public Builder integratedPositionMarginRequirement(String integratedPositionMarginRequirement) {
-            this.integratedPositionMarginRequirement = integratedPositionMarginRequirement;
-            return this;
-        }
-
-        public Builder integratedPortfolioMarginAddon(String integratedPortfolioMarginAddon) {
-            this.integratedPortfolioMarginAddon = integratedPortfolioMarginAddon;
-            return this;
-        }
-
-        public Builder nettedFuturesNotional(String nettedFuturesNotional) {
-            this.nettedFuturesNotional = nettedFuturesNotional;
-            return this;
-        }
-
-        public Builder totalGmvBasis(String totalGmvBasis) {
-            this.totalGmvBasis = totalGmvBasis;
-            return this;
-        }
-
-        public Builder ipmCashBalance(String ipmCashBalance) {
-            this.ipmCashBalance = ipmCashBalance;
-            return this;
-        }
-
-        public Builder integratedScenarioAddon(MarginAddOn integratedScenarioAddon) {
-            this.integratedScenarioAddon = integratedScenarioAddon;
-            return this;
-        }
-
-        public Builder allIntegratedScenarioAddons(List<MarginAddOn> allIntegratedScenarioAddons) {
-            this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
-            return this;
-        }
-
-        public Builder xmPositions(List<XMPosition> xmPositions) {
-            this.xmPositions = xmPositions;
-            return this;
-        }
-
-        public XMRiskNettingInfo build() {
-            return new XMRiskNettingInfo(this);
-        }
-    }
+  }
 }
-

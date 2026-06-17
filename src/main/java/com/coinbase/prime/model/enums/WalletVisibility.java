@@ -23,4 +23,3 @@ public enum WalletVisibility {
   WALLET_VISIBILITY_VISIBLE,
   WALLET_VISIBILITY_HIDDEN
 }
-

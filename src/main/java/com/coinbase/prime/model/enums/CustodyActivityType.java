@@ -49,4 +49,3 @@ public enum CustodyActivityType {
   ACTIVITY_TYPE_WEB3_MESSAGE,
   ACTIVITY_TYPE_CLAIM_REWARDS
 }
-

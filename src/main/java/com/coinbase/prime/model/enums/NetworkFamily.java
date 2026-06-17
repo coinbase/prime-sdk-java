@@ -23,4 +23,3 @@ public enum NetworkFamily {
   NETWORK_FAMILY_EVM,
   NETWORK_FAMILY_SOLANA
 }
-

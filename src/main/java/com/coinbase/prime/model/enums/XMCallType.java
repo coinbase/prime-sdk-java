@@ -19,23 +19,15 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time
- * - CALL_TYPE_URGENT: Evaluated in realtime
- * - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
+ * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time - CALL_TYPE_URGENT:
+ * Evaluated in realtime - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
  */
 public enum XMCallType {
   XM_CALL_TYPE_UNSPECIFIED,
-  /**
-   * Evaluated at standard margin call evaluation time
-   */
+  /** Evaluated at standard margin call evaluation time */
   CALL_TYPE_STANDARD,
-  /**
-   * Evaluated in realtime
-   */
+  /** Evaluated in realtime */
   CALL_TYPE_URGENT,
-  /**
-   * Evaluated at debit call evaluation time
-   */
+  /** Evaluated at debit call evaluation time */
   CALL_TYPE_DEBIT
 }
-

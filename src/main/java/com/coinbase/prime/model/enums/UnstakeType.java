@@ -23,4 +23,3 @@ public enum UnstakeType {
   UNSTAKE_TYPE_PARTIAL,
   UNSTAKE_TYPE_FULL
 }
-

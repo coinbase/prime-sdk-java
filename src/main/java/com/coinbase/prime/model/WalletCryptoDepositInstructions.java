@@ -17,164 +17,163 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.Network;
+
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WalletCryptoDepositInstructions {
-    /**
-     * The ID of the wallet
-     */
+  /** The ID of the wallet */
+  private String id;
+
+  /** The name of the wallet */
+  private String name;
+
+  /**
+   * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire
+   * deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit -
+   * SEPA: A SEPA deposit (Single Euro Payments Area)
+   */
+  private WalletDepositInstructionType type;
+
+  /** The address of the wallet */
+  private String address;
+
+  /**
+   * The tag/memo of the address, if applicable -- required for certain assets (e.g. XRP, XLM, etc.)
+   */
+  @JsonProperty("account_identifier")
+  private String accountIdentifier;
+
+  /**
+   * The blockchain network's terminology for the unique identifier used to identify the receiver of
+   * the transaction (different blockchain networks use different names, such as `destination_tag`
+   * or `memo`)
+   */
+  @JsonProperty("account_identifier_name")
+  private String accountIdentifierName;
+
+  private Network network;
+
+  public WalletCryptoDepositInstructions() {}
+
+  public WalletCryptoDepositInstructions(Builder builder) {
+    this.id = builder.id;
+    this.name = builder.name;
+    this.type = builder.type;
+    this.address = builder.address;
+    this.accountIdentifier = builder.accountIdentifier;
+    this.accountIdentifierName = builder.accountIdentifierName;
+    this.network = builder.network;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public WalletDepositInstructionType getType() {
+    return type;
+  }
+
+  public void setType(WalletDepositInstructionType type) {
+    this.type = type;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getAccountIdentifier() {
+    return accountIdentifier;
+  }
+
+  public void setAccountIdentifier(String accountIdentifier) {
+    this.accountIdentifier = accountIdentifier;
+  }
+
+  public String getAccountIdentifierName() {
+    return accountIdentifierName;
+  }
+
+  public void setAccountIdentifierName(String accountIdentifierName) {
+    this.accountIdentifierName = accountIdentifierName;
+  }
+
+  public Network getNetwork() {
+    return network;
+  }
+
+  public void setNetwork(Network network) {
+    this.network = network;
+  }
+
+  public static class Builder {
     private String id;
 
-    /**
-     * The name of the wallet
-     */
     private String name;
 
-    /**
-     * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value
-     * - CRYPTO: A cryptocurrency deposit
-     * - WIRE: A wire deposit
-     * - SEN: DEPRECATED. A Silvergate Exchange Network deposit
-     * - SWIFT: A SWIFT deposit
-     * - SEPA: A SEPA deposit (Single Euro Payments Area)
-     */
     private WalletDepositInstructionType type;
 
-    /**
-     * The address of the wallet
-     */
     private String address;
 
-    /**
-     * The tag/memo of the address, if applicable -- required for certain assets (e.g. XRP, XLM, etc.)
-     */
-    @JsonProperty("account_identifier")
     private String accountIdentifier;
 
-    /**
-     * The blockchain network's terminology for the unique identifier used to identify the receiver of the transaction (different blockchain networks use different names, such as `destination_tag` or `memo`)
-     */
-    @JsonProperty("account_identifier_name")
     private String accountIdentifierName;
 
     private Network network;
 
-    public WalletCryptoDepositInstructions() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public WalletCryptoDepositInstructions(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.type = builder.type;
-        this.address = builder.address;
-        this.accountIdentifier = builder.accountIdentifier;
-        this.accountIdentifierName = builder.accountIdentifierName;
-        this.network = builder.network;
-    }
-    public String getId() {
-        return id;
+    public Builder name(String name) {
+      this.name = name;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
+    public Builder type(WalletDepositInstructionType type) {
+      this.type = type;
+      return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public WalletDepositInstructionType getType() {
-        return type;
+    public Builder address(String address) {
+      this.address = address;
+      return this;
     }
 
-    public void setType(WalletDepositInstructionType type) {
-        this.type = type;
-    }
-    public String getAddress() {
-        return address;
+    public Builder accountIdentifier(String accountIdentifier) {
+      this.accountIdentifier = accountIdentifier;
+      return this;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getAccountIdentifier() {
-        return accountIdentifier;
+    public Builder accountIdentifierName(String accountIdentifierName) {
+      this.accountIdentifierName = accountIdentifierName;
+      return this;
     }
 
-    public void setAccountIdentifier(String accountIdentifier) {
-        this.accountIdentifier = accountIdentifier;
-    }
-    public String getAccountIdentifierName() {
-        return accountIdentifierName;
+    public Builder network(Network network) {
+      this.network = network;
+      return this;
     }
 
-    public void setAccountIdentifierName(String accountIdentifierName) {
-        this.accountIdentifierName = accountIdentifierName;
+    public WalletCryptoDepositInstructions build() {
+      return new WalletCryptoDepositInstructions(this);
     }
-    public Network getNetwork() {
-        return network;
-    }
-
-    public void setNetwork(Network network) {
-        this.network = network;
-    }
-    public static class Builder {
-        private String id;
-
-        private String name;
-
-        private WalletDepositInstructionType type;
-
-        private String address;
-
-        private String accountIdentifier;
-
-        private String accountIdentifierName;
-
-        private Network network;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder type(WalletDepositInstructionType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder address(String address) {
-            this.address = address;
-            return this;
-        }
-
-        public Builder accountIdentifier(String accountIdentifier) {
-            this.accountIdentifier = accountIdentifier;
-            return this;
-        }
-
-        public Builder accountIdentifierName(String accountIdentifierName) {
-            this.accountIdentifierName = accountIdentifierName;
-            return this;
-        }
-
-        public Builder network(Network network) {
-            this.network = network;
-            return this;
-        }
-
-        public WalletCryptoDepositInstructions build() {
-            return new WalletCryptoDepositInstructions(this);
-        }
-    }
+  }
 }
-

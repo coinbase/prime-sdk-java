@@ -19,33 +19,43 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - HEALTHY_THRESHOLD: Margin level is healthy
- * - DEFICIT_THRESHOLD: Margin level is breaching the deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the margin methodology)
- * - WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined in the margin methodology). WT is differentiated from DT in that it means margin health is approaching the UMCT
- * - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger an urgent margin call
- * - LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
+ * - HEALTHY_THRESHOLD: Margin level is healthy - DEFICIT_THRESHOLD: Margin level is breaching the
+ * deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the
+ * case by the scheduled next Margin Call time (as defined in the margin methodology) -
+ * WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in the
+ * issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined
+ * in the margin methodology). WT is differentiated from DT in that it means margin health is
+ * approaching the UMCT - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and, as
+ * defined in the margin methodology, this will trigger an urgent margin call -
+ * LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined
+ * in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation
+ * may commence.
  */
 public enum PrimeXMMarginLevel {
   XM_MARGIN_LEVEL_UNSPECIFIED,
-  /**
-   * Margin level is healthy
-   */
+  /** Margin level is healthy */
   HEALTHY_THRESHOLD,
   /**
-   * Margin level is breaching the deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the margin methodology)
+   * Margin level is breaching the deficit threshold (DT) which will result in the issuance of a
+   * Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the
+   * margin methodology)
    */
   DEFICIT_THRESHOLD,
   /**
-   * Margin level is breaching the warning threshold (WT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined in the margin methodology). WT is differentiated from DT in that it means margin health is approaching the UMCT
+   * Margin level is breaching the warning threshold (WT) which will result in the issuance of a
+   * Margin Call if this is still the case by the scheduled next Margin Call (as defined in the
+   * margin methodology). WT is differentiated from DT in that it means margin health is approaching
+   * the UMCT
    */
   WARNING_THRESHOLD,
   /**
-   * Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger an urgent margin call
+   * Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger
+   * an urgent margin call
    */
   URGENT_MARGIN_CALL_THRESHOLD,
   /**
-   * Margin level is breaching the liquidation threshold (LT) and, as defined in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
+   * Margin level is breaching the liquidation threshold (LT) and, as defined in the margin
+   * methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
    */
   LIQUIDATION_THRESHOLD
 }
-

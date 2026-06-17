@@ -26,4 +26,3 @@ public enum ValidatorStatus {
   VALIDATOR_STATUS_EXITED,
   VALIDATOR_STATUS_WITHDRAWN
 }
-

@@ -23,4 +23,3 @@ public enum NetworkType {
   NETWORK_TYPE_EVM,
   NETWORK_TYPE_SOLANA
 }
-

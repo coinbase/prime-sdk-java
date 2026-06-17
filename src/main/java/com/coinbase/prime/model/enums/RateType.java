@@ -25,4 +25,3 @@ public enum RateType {
   APR_365,
   APR
 }
-

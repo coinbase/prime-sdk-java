@@ -19,55 +19,52 @@
 package com.coinbase.prime.model;
 
 public class TieredPricingFee {
-    /**
-     * Asset symbol
-     */
+  /** Asset symbol */
+  private String symbol;
+
+  /** The fee in bps */
+  private String fee;
+
+  public TieredPricingFee() {}
+
+  public TieredPricingFee(Builder builder) {
+    this.symbol = builder.symbol;
+    this.fee = builder.fee;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public String getFee() {
+    return fee;
+  }
+
+  public void setFee(String fee) {
+    this.fee = fee;
+  }
+
+  public static class Builder {
     private String symbol;
 
-    /**
-     * The fee in bps
-     */
     private String fee;
 
-    public TieredPricingFee() {
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public TieredPricingFee(Builder builder) {
-        this.symbol = builder.symbol;
-        this.fee = builder.fee;
-    }
-    public String getSymbol() {
-        return symbol;
+    public Builder fee(String fee) {
+      this.fee = fee;
+      return this;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public TieredPricingFee build() {
+      return new TieredPricingFee(this);
     }
-    public String getFee() {
-        return fee;
-    }
-
-    public void setFee(String fee) {
-        this.fee = fee;
-    }
-    public static class Builder {
-        private String symbol;
-
-        private String fee;
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder fee(String fee) {
-            this.fee = fee;
-            return this;
-        }
-
-        public TieredPricingFee build() {
-            return new TieredPricingFee(this);
-        }
-    }
+  }
 }
-

@@ -19,23 +19,27 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
- * - TRADES_ONLY: Allowed to trade but not withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
- * - SESSION_LOCKED: Not allowed to trade or withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+ * - TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw. See XM Margin Methodology for full
+ * description of when trading and withdrawals are enabled or disabled. - TRADES_ONLY: Allowed to
+ * trade but not withdraw. See XM Margin Methodology for full description of when trading and
+ * withdrawals are enabled or disabled. - SESSION_LOCKED: Not allowed to trade or withdraw. See XM
+ * Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
  */
 public enum XMControlStatus {
   XM_CONTROL_STATUS_UNSPECIFIED,
   /**
-   * Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+   * Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading
+   * and withdrawals are enabled or disabled.
    */
   TRADES_AND_WITHDRAWALS,
   /**
-   * Allowed to trade but not withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+   * Allowed to trade but not withdraw. See XM Margin Methodology for full description of when
+   * trading and withdrawals are enabled or disabled.
    */
   TRADES_ONLY,
   /**
-   * Not allowed to trade or withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+   * Not allowed to trade or withdraw. See XM Margin Methodology for full description of when
+   * trading and withdrawals are enabled or disabled.
    */
   SESSION_LOCKED
 }
-

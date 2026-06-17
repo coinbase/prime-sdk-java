@@ -17,162 +17,161 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CommissionDetailTotal {
-    /**
-     * Total commission amount charged for the order
-     * This is the sum of all commission charged on the order
-     */
-    @JsonProperty("total_commission")
+  /**
+   * Total commission amount charged for the order This is the sum of all commission charged on the
+   * order
+   */
+  @JsonProperty("total_commission")
+  private String totalCommission;
+
+  /** CB fee */
+  @JsonProperty("client_commission")
+  private String clientCommission;
+
+  /** Exchange fees */
+  @JsonProperty("venue_commission")
+  private String venueCommission;
+
+  /** CES Commission */
+  @JsonProperty("ces_commission")
+  private String cesCommission;
+
+  /** Financing Commission */
+  @JsonProperty("financing_commission")
+  private String financingCommission;
+
+  /** NFA fees */
+  @JsonProperty("regulatory_commission")
+  private String regulatoryCommission;
+
+  /** Clearing fees */
+  @JsonProperty("clearing_commission")
+  private String clearingCommission;
+
+  public CommissionDetailTotal() {}
+
+  public CommissionDetailTotal(Builder builder) {
+    this.totalCommission = builder.totalCommission;
+    this.clientCommission = builder.clientCommission;
+    this.venueCommission = builder.venueCommission;
+    this.cesCommission = builder.cesCommission;
+    this.financingCommission = builder.financingCommission;
+    this.regulatoryCommission = builder.regulatoryCommission;
+    this.clearingCommission = builder.clearingCommission;
+  }
+
+  public String getTotalCommission() {
+    return totalCommission;
+  }
+
+  public void setTotalCommission(String totalCommission) {
+    this.totalCommission = totalCommission;
+  }
+
+  public String getClientCommission() {
+    return clientCommission;
+  }
+
+  public void setClientCommission(String clientCommission) {
+    this.clientCommission = clientCommission;
+  }
+
+  public String getVenueCommission() {
+    return venueCommission;
+  }
+
+  public void setVenueCommission(String venueCommission) {
+    this.venueCommission = venueCommission;
+  }
+
+  public String getCesCommission() {
+    return cesCommission;
+  }
+
+  public void setCesCommission(String cesCommission) {
+    this.cesCommission = cesCommission;
+  }
+
+  public String getFinancingCommission() {
+    return financingCommission;
+  }
+
+  public void setFinancingCommission(String financingCommission) {
+    this.financingCommission = financingCommission;
+  }
+
+  public String getRegulatoryCommission() {
+    return regulatoryCommission;
+  }
+
+  public void setRegulatoryCommission(String regulatoryCommission) {
+    this.regulatoryCommission = regulatoryCommission;
+  }
+
+  public String getClearingCommission() {
+    return clearingCommission;
+  }
+
+  public void setClearingCommission(String clearingCommission) {
+    this.clearingCommission = clearingCommission;
+  }
+
+  public static class Builder {
     private String totalCommission;
 
-    /**
-     * CB fee
-     */
-    @JsonProperty("client_commission")
     private String clientCommission;
 
-    /**
-     * Exchange fees
-     */
-    @JsonProperty("venue_commission")
     private String venueCommission;
 
-    /** CES Commission */
-    @JsonProperty("ces_commission")
     private String cesCommission;
 
-    /** Financing Commission */
-    @JsonProperty("financing_commission")
     private String financingCommission;
 
-    /**
-     * NFA fees
-     */
-    @JsonProperty("regulatory_commission")
     private String regulatoryCommission;
 
-    /**
-     * Clearing fees
-     */
-    @JsonProperty("clearing_commission")
     private String clearingCommission;
 
-    public CommissionDetailTotal() {
+    public Builder totalCommission(String totalCommission) {
+      this.totalCommission = totalCommission;
+      return this;
     }
 
-    public CommissionDetailTotal(Builder builder) {
-        this.totalCommission = builder.totalCommission;
-        this.clientCommission = builder.clientCommission;
-        this.venueCommission = builder.venueCommission;
-        this.cesCommission = builder.cesCommission;
-        this.financingCommission = builder.financingCommission;
-        this.regulatoryCommission = builder.regulatoryCommission;
-        this.clearingCommission = builder.clearingCommission;
-    }
-    public String getTotalCommission() {
-        return totalCommission;
+    public Builder clientCommission(String clientCommission) {
+      this.clientCommission = clientCommission;
+      return this;
     }
 
-    public void setTotalCommission(String totalCommission) {
-        this.totalCommission = totalCommission;
-    }
-    public String getClientCommission() {
-        return clientCommission;
+    public Builder venueCommission(String venueCommission) {
+      this.venueCommission = venueCommission;
+      return this;
     }
 
-    public void setClientCommission(String clientCommission) {
-        this.clientCommission = clientCommission;
-    }
-    public String getVenueCommission() {
-        return venueCommission;
+    public Builder cesCommission(String cesCommission) {
+      this.cesCommission = cesCommission;
+      return this;
     }
 
-    public void setVenueCommission(String venueCommission) {
-        this.venueCommission = venueCommission;
-    }
-    public String getCesCommission() {
-        return cesCommission;
+    public Builder financingCommission(String financingCommission) {
+      this.financingCommission = financingCommission;
+      return this;
     }
 
-    public void setCesCommission(String cesCommission) {
-        this.cesCommission = cesCommission;
-    }
-    public String getFinancingCommission() {
-        return financingCommission;
+    public Builder regulatoryCommission(String regulatoryCommission) {
+      this.regulatoryCommission = regulatoryCommission;
+      return this;
     }
 
-    public void setFinancingCommission(String financingCommission) {
-        this.financingCommission = financingCommission;
-    }
-    public String getRegulatoryCommission() {
-        return regulatoryCommission;
+    public Builder clearingCommission(String clearingCommission) {
+      this.clearingCommission = clearingCommission;
+      return this;
     }
 
-    public void setRegulatoryCommission(String regulatoryCommission) {
-        this.regulatoryCommission = regulatoryCommission;
+    public CommissionDetailTotal build() {
+      return new CommissionDetailTotal(this);
     }
-    public String getClearingCommission() {
-        return clearingCommission;
-    }
-
-    public void setClearingCommission(String clearingCommission) {
-        this.clearingCommission = clearingCommission;
-    }
-    public static class Builder {
-        private String totalCommission;
-
-        private String clientCommission;
-
-        private String venueCommission;
-
-        private String cesCommission;
-
-        private String financingCommission;
-
-        private String regulatoryCommission;
-
-        private String clearingCommission;
-
-        public Builder totalCommission(String totalCommission) {
-            this.totalCommission = totalCommission;
-            return this;
-        }
-
-        public Builder clientCommission(String clientCommission) {
-            this.clientCommission = clientCommission;
-            return this;
-        }
-
-        public Builder venueCommission(String venueCommission) {
-            this.venueCommission = venueCommission;
-            return this;
-        }
-
-        public Builder cesCommission(String cesCommission) {
-            this.cesCommission = cesCommission;
-            return this;
-        }
-
-        public Builder financingCommission(String financingCommission) {
-            this.financingCommission = financingCommission;
-            return this;
-        }
-
-        public Builder regulatoryCommission(String regulatoryCommission) {
-            this.regulatoryCommission = regulatoryCommission;
-            return this;
-        }
-
-        public Builder clearingCommission(String clearingCommission) {
-            this.clearingCommission = clearingCommission;
-            return this;
-        }
-
-        public CommissionDetailTotal build() {
-            return new CommissionDetailTotal(this);
-        }
-    }
+  }
 }
-

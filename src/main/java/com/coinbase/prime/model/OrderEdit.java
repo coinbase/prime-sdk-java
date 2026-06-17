@@ -17,189 +17,201 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class OrderEdit {
-    /** New price for the edited order */
+  /** New price for the edited order */
+  private String price;
+
+  /** New base quantity for the edited order, populated if order is in base size */
+  @JsonProperty("base_quantity")
+  private String baseQuantity;
+
+  /** New quote value for the edited order, populated if order is in quote size */
+  @JsonProperty("quote_value")
+  private String quoteValue;
+
+  /** Display base size for the edited order, populated if order is in base size */
+  @JsonProperty("display_base_size")
+  private String displayBaseSize;
+
+  /** Display quote size for the edited order, populated if order is in quote size */
+  @JsonProperty("display_quote_size")
+  private String displayQuoteSize;
+
+  /** New stop price for the edited order */
+  @JsonProperty("stop_price")
+  private String stopPrice;
+
+  /** New expiry/end time for the edited order */
+  @JsonProperty("expiry_time")
+  private OffsetDateTime expiryTime;
+
+  /** Time when the edit was accepted */
+  @JsonProperty("accept_time")
+  private OffsetDateTime acceptTime;
+
+  /**
+   * The new client order identifier that the order adopted after the replacement was successfully
+   * accepted
+   */
+  @JsonProperty("client_order_id")
+  private String clientOrderId;
+
+  public OrderEdit() {}
+
+  public OrderEdit(Builder builder) {
+    this.price = builder.price;
+    this.baseQuantity = builder.baseQuantity;
+    this.quoteValue = builder.quoteValue;
+    this.displayBaseSize = builder.displayBaseSize;
+    this.displayQuoteSize = builder.displayQuoteSize;
+    this.stopPrice = builder.stopPrice;
+    this.expiryTime = builder.expiryTime;
+    this.acceptTime = builder.acceptTime;
+    this.clientOrderId = builder.clientOrderId;
+  }
+
+  public String getPrice() {
+    return price;
+  }
+
+  public void setPrice(String price) {
+    this.price = price;
+  }
+
+  public String getBaseQuantity() {
+    return baseQuantity;
+  }
+
+  public void setBaseQuantity(String baseQuantity) {
+    this.baseQuantity = baseQuantity;
+  }
+
+  public String getQuoteValue() {
+    return quoteValue;
+  }
+
+  public void setQuoteValue(String quoteValue) {
+    this.quoteValue = quoteValue;
+  }
+
+  public String getDisplayBaseSize() {
+    return displayBaseSize;
+  }
+
+  public void setDisplayBaseSize(String displayBaseSize) {
+    this.displayBaseSize = displayBaseSize;
+  }
+
+  public String getDisplayQuoteSize() {
+    return displayQuoteSize;
+  }
+
+  public void setDisplayQuoteSize(String displayQuoteSize) {
+    this.displayQuoteSize = displayQuoteSize;
+  }
+
+  public String getStopPrice() {
+    return stopPrice;
+  }
+
+  public void setStopPrice(String stopPrice) {
+    this.stopPrice = stopPrice;
+  }
+
+  public OffsetDateTime getExpiryTime() {
+    return expiryTime;
+  }
+
+  public void setExpiryTime(OffsetDateTime expiryTime) {
+    this.expiryTime = expiryTime;
+  }
+
+  public OffsetDateTime getAcceptTime() {
+    return acceptTime;
+  }
+
+  public void setAcceptTime(OffsetDateTime acceptTime) {
+    this.acceptTime = acceptTime;
+  }
+
+  public String getClientOrderId() {
+    return clientOrderId;
+  }
+
+  public void setClientOrderId(String clientOrderId) {
+    this.clientOrderId = clientOrderId;
+  }
+
+  public static class Builder {
     private String price;
 
-    /** New base quantity for the edited order, populated if order is in base size */
-    @JsonProperty("base_quantity")
     private String baseQuantity;
 
-    /** New quote value for the edited order, populated if order is in quote size */
-    @JsonProperty("quote_value")
     private String quoteValue;
 
-    /** Display base size for the edited order, populated if order is in base size */
-    @JsonProperty("display_base_size")
     private String displayBaseSize;
 
-    /** Display quote size for the edited order, populated if order is in quote size */
-    @JsonProperty("display_quote_size")
     private String displayQuoteSize;
 
-    /** New stop price for the edited order */
-    @JsonProperty("stop_price")
     private String stopPrice;
 
-    /** New expiry/end time for the edited order */
-    @JsonProperty("expiry_time")
     private OffsetDateTime expiryTime;
 
-    /** Time when the edit was accepted */
-    @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
-    /** The new client order identifier that the order adopted after the replacement was successfully accepted */
-    @JsonProperty("client_order_id")
     private String clientOrderId;
 
-    public OrderEdit() {
+    public Builder price(String price) {
+      this.price = price;
+      return this;
     }
 
-    public OrderEdit(Builder builder) {
-        this.price = builder.price;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.displayBaseSize = builder.displayBaseSize;
-        this.displayQuoteSize = builder.displayQuoteSize;
-        this.stopPrice = builder.stopPrice;
-        this.expiryTime = builder.expiryTime;
-        this.acceptTime = builder.acceptTime;
-        this.clientOrderId = builder.clientOrderId;
-    }
-    public String getPrice() {
-        return price;
+    public Builder baseQuantity(String baseQuantity) {
+      this.baseQuantity = baseQuantity;
+      return this;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-    public String getBaseQuantity() {
-        return baseQuantity;
+    public Builder quoteValue(String quoteValue) {
+      this.quoteValue = quoteValue;
+      return this;
     }
 
-    public void setBaseQuantity(String baseQuantity) {
-        this.baseQuantity = baseQuantity;
-    }
-    public String getQuoteValue() {
-        return quoteValue;
+    public Builder displayBaseSize(String displayBaseSize) {
+      this.displayBaseSize = displayBaseSize;
+      return this;
     }
 
-    public void setQuoteValue(String quoteValue) {
-        this.quoteValue = quoteValue;
-    }
-    public String getDisplayBaseSize() {
-        return displayBaseSize;
+    public Builder displayQuoteSize(String displayQuoteSize) {
+      this.displayQuoteSize = displayQuoteSize;
+      return this;
     }
 
-    public void setDisplayBaseSize(String displayBaseSize) {
-        this.displayBaseSize = displayBaseSize;
-    }
-    public String getDisplayQuoteSize() {
-        return displayQuoteSize;
+    public Builder stopPrice(String stopPrice) {
+      this.stopPrice = stopPrice;
+      return this;
     }
 
-    public void setDisplayQuoteSize(String displayQuoteSize) {
-        this.displayQuoteSize = displayQuoteSize;
-    }
-    public String getStopPrice() {
-        return stopPrice;
+    public Builder expiryTime(OffsetDateTime expiryTime) {
+      this.expiryTime = expiryTime;
+      return this;
     }
 
-    public void setStopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-    }
-    public OffsetDateTime getExpiryTime() {
-        return expiryTime;
+    public Builder acceptTime(OffsetDateTime acceptTime) {
+      this.acceptTime = acceptTime;
+      return this;
     }
 
-    public void setExpiryTime(OffsetDateTime expiryTime) {
-        this.expiryTime = expiryTime;
-    }
-    public OffsetDateTime getAcceptTime() {
-        return acceptTime;
+    public Builder clientOrderId(String clientOrderId) {
+      this.clientOrderId = clientOrderId;
+      return this;
     }
 
-    public void setAcceptTime(OffsetDateTime acceptTime) {
-        this.acceptTime = acceptTime;
+    public OrderEdit build() {
+      return new OrderEdit(this);
     }
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
-
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
-    }
-    public static class Builder {
-        private String price;
-
-        private String baseQuantity;
-
-        private String quoteValue;
-
-        private String displayBaseSize;
-
-        private String displayQuoteSize;
-
-        private String stopPrice;
-
-        private OffsetDateTime expiryTime;
-
-        private OffsetDateTime acceptTime;
-
-        private String clientOrderId;
-
-        public Builder price(String price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder baseQuantity(String baseQuantity) {
-            this.baseQuantity = baseQuantity;
-            return this;
-        }
-
-        public Builder quoteValue(String quoteValue) {
-            this.quoteValue = quoteValue;
-            return this;
-        }
-
-        public Builder displayBaseSize(String displayBaseSize) {
-            this.displayBaseSize = displayBaseSize;
-            return this;
-        }
-
-        public Builder displayQuoteSize(String displayQuoteSize) {
-            this.displayQuoteSize = displayQuoteSize;
-            return this;
-        }
-
-        public Builder stopPrice(String stopPrice) {
-            this.stopPrice = stopPrice;
-            return this;
-        }
-
-        public Builder expiryTime(OffsetDateTime expiryTime) {
-            this.expiryTime = expiryTime;
-            return this;
-        }
-
-        public Builder acceptTime(OffsetDateTime acceptTime) {
-            this.acceptTime = acceptTime;
-            return this;
-        }
-
-        public Builder clientOrderId(String clientOrderId) {
-            this.clientOrderId = clientOrderId;
-            return this;
-        }
-
-        public OrderEdit build() {
-            return new OrderEdit(this);
-        }
-    }
+  }
 }
-
