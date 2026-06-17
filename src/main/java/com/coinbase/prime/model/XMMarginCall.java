@@ -17,261 +17,261 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.XMCallStatus;
 import com.coinbase.prime.model.enums.XMCallType;
 import com.coinbase.prime.model.enums.XMMarginLevel;
+import com.coinbase.prime.model.XMSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** XMMarginCall contains details about a margin call in Cross Margin */
 public class XMMarginCall {
-  /** Financing margin call UUID */
-  @JsonProperty("margin_call_id")
-  private String marginCallId;
-
-  /** Margin call currency */
-  private String currency;
-
-  /** Call amount (notional) as of the margin call creation */
-  @JsonProperty("initial_notional_amount")
-  private String initialNotionalAmount;
-
-  /** Current outstanding call amount (notional) */
-  @JsonProperty("outstanding_notional_amount")
-  private String outstandingNotionalAmount;
-
-  /**
-   * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time - CALL_TYPE_URGENT:
-   * Evaluated in realtime - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
-   */
-  @JsonProperty("margin_call_type")
-  private XMCallType marginCallType;
-
-  /**
-   * - CALL_STATUS_OPEN: Margin call is open and not expired - CALL_STATUS_AGED: Margin call is open
-   * and it is expired - CALL_STATUS_SETTLED: Margin call is fully settled - CALL_STATUS_CANCELED:
-   * Margin call was canceled by Credit Risk
-   */
-  @JsonProperty("margin_call_status")
-  private XMCallStatus marginCallStatus;
-
-  /**
-   * - HEALTHY_THRESHOLD: Margin level is healthy - DEFICIT_THRESHOLD: Margin level is breaching the
-   * deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the
-   * case by the scheduled next Margin Call time (as defined in the margin methodology) -
-   * WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in
-   * the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as
-   * defined in the margin methodology). WT is differentiated from DT in that it means margin health
-   * is approaching the UMCT - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and,
-   * as defined in the margin methodology, this will trigger an urgent margin call -
-   * LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined
-   * in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation
-   * may commence.
-   */
-  @JsonProperty("called_with_margin_level")
-  private XMMarginLevel calledWithMarginLevel;
-
-  /** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
-  @JsonProperty("called_with_margin_summary")
-  private XMSummary calledWithMarginSummary;
-
-  /** Timestamp when the margin call settlement is due */
-  @JsonProperty("due_at")
-  private OffsetDateTime dueAt;
-
-  /** Timestamp when the margin call was created */
-  @JsonProperty("created_at")
-  private OffsetDateTime createdAt;
-
-  /** Timestamp when the margin call was last updated */
-  @JsonProperty("updated_at")
-  private OffsetDateTime updatedAt;
-
-  public XMMarginCall() {}
-
-  public XMMarginCall(Builder builder) {
-    this.marginCallId = builder.marginCallId;
-    this.currency = builder.currency;
-    this.initialNotionalAmount = builder.initialNotionalAmount;
-    this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
-    this.marginCallType = builder.marginCallType;
-    this.marginCallStatus = builder.marginCallStatus;
-    this.calledWithMarginLevel = builder.calledWithMarginLevel;
-    this.calledWithMarginSummary = builder.calledWithMarginSummary;
-    this.dueAt = builder.dueAt;
-    this.createdAt = builder.createdAt;
-    this.updatedAt = builder.updatedAt;
-  }
-
-  public String getMarginCallId() {
-    return marginCallId;
-  }
-
-  public void setMarginCallId(String marginCallId) {
-    this.marginCallId = marginCallId;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getInitialNotionalAmount() {
-    return initialNotionalAmount;
-  }
-
-  public void setInitialNotionalAmount(String initialNotionalAmount) {
-    this.initialNotionalAmount = initialNotionalAmount;
-  }
-
-  public String getOutstandingNotionalAmount() {
-    return outstandingNotionalAmount;
-  }
-
-  public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
-    this.outstandingNotionalAmount = outstandingNotionalAmount;
-  }
-
-  public XMCallType getMarginCallType() {
-    return marginCallType;
-  }
-
-  public void setMarginCallType(XMCallType marginCallType) {
-    this.marginCallType = marginCallType;
-  }
-
-  public XMCallStatus getMarginCallStatus() {
-    return marginCallStatus;
-  }
-
-  public void setMarginCallStatus(XMCallStatus marginCallStatus) {
-    this.marginCallStatus = marginCallStatus;
-  }
-
-  public XMMarginLevel getCalledWithMarginLevel() {
-    return calledWithMarginLevel;
-  }
-
-  public void setCalledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
-    this.calledWithMarginLevel = calledWithMarginLevel;
-  }
-
-  public XMSummary getCalledWithMarginSummary() {
-    return calledWithMarginSummary;
-  }
-
-  public void setCalledWithMarginSummary(XMSummary calledWithMarginSummary) {
-    this.calledWithMarginSummary = calledWithMarginSummary;
-  }
-
-  public OffsetDateTime getDueAt() {
-    return dueAt;
-  }
-
-  public void setDueAt(OffsetDateTime dueAt) {
-    this.dueAt = dueAt;
-  }
-
-  public OffsetDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public OffsetDateTime getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(OffsetDateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
-
-  public static class Builder {
+    /**
+     * Financing margin call UUID
+     */
+    @JsonProperty("margin_call_id")
     private String marginCallId;
 
+    /**
+     * Margin call currency
+     */
     private String currency;
 
+    /**
+     * Call amount (notional) as of the margin call creation
+     */
+    @JsonProperty("initial_notional_amount")
     private String initialNotionalAmount;
 
+    /**
+     * Current outstanding call amount (notional)
+     */
+    @JsonProperty("outstanding_notional_amount")
     private String outstandingNotionalAmount;
 
+    /**
+     * - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time
+     * - CALL_TYPE_URGENT: Evaluated in realtime
+     * - CALL_TYPE_DEBIT: Evaluated at debit call evaluation time
+     */
+    @JsonProperty("margin_call_type")
     private XMCallType marginCallType;
 
+    /**
+     * - CALL_STATUS_OPEN: Margin call is open and not expired
+     * - CALL_STATUS_AGED: Margin call is open and it is expired
+     * - CALL_STATUS_SETTLED: Margin call is fully settled
+     * - CALL_STATUS_CANCELED: Margin call was canceled by Credit Risk
+     */
+    @JsonProperty("margin_call_status")
     private XMCallStatus marginCallStatus;
 
+    /**
+     * - HEALTHY_THRESHOLD: Margin level is healthy
+     * - DEFICIT_THRESHOLD: Margin level is breaching the deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the margin methodology)
+     * - WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined in the margin methodology). WT is differentiated from DT in that it means margin health is approaching the UMCT
+     * - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger an urgent margin call
+     * - LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
+     */
+    @JsonProperty("called_with_margin_level")
     private XMMarginLevel calledWithMarginLevel;
 
+    /** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
+    @JsonProperty("called_with_margin_summary")
     private XMSummary calledWithMarginSummary;
 
+    /**
+     * Timestamp when the margin call settlement is due
+     */
+    @JsonProperty("due_at")
     private OffsetDateTime dueAt;
 
+    /**
+     * Timestamp when the margin call was created
+     */
+    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
+    /**
+     * Timestamp when the margin call was last updated
+     */
+    @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
-    public Builder marginCallId(String marginCallId) {
-      this.marginCallId = marginCallId;
-      return this;
+    public XMMarginCall() {
     }
 
-    public Builder currency(String currency) {
-      this.currency = currency;
-      return this;
+    public XMMarginCall(Builder builder) {
+        this.marginCallId = builder.marginCallId;
+        this.currency = builder.currency;
+        this.initialNotionalAmount = builder.initialNotionalAmount;
+        this.outstandingNotionalAmount = builder.outstandingNotionalAmount;
+        this.marginCallType = builder.marginCallType;
+        this.marginCallStatus = builder.marginCallStatus;
+        this.calledWithMarginLevel = builder.calledWithMarginLevel;
+        this.calledWithMarginSummary = builder.calledWithMarginSummary;
+        this.dueAt = builder.dueAt;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
+    }
+    public String getMarginCallId() {
+        return marginCallId;
     }
 
-    public Builder initialNotionalAmount(String initialNotionalAmount) {
-      this.initialNotionalAmount = initialNotionalAmount;
-      return this;
+    public void setMarginCallId(String marginCallId) {
+        this.marginCallId = marginCallId;
+    }
+    public String getCurrency() {
+        return currency;
     }
 
-    public Builder outstandingNotionalAmount(String outstandingNotionalAmount) {
-      this.outstandingNotionalAmount = outstandingNotionalAmount;
-      return this;
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+    public String getInitialNotionalAmount() {
+        return initialNotionalAmount;
     }
 
-    public Builder marginCallType(XMCallType marginCallType) {
-      this.marginCallType = marginCallType;
-      return this;
+    public void setInitialNotionalAmount(String initialNotionalAmount) {
+        this.initialNotionalAmount = initialNotionalAmount;
+    }
+    public String getOutstandingNotionalAmount() {
+        return outstandingNotionalAmount;
     }
 
-    public Builder marginCallStatus(XMCallStatus marginCallStatus) {
-      this.marginCallStatus = marginCallStatus;
-      return this;
+    public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
+        this.outstandingNotionalAmount = outstandingNotionalAmount;
+    }
+    public XMCallType getMarginCallType() {
+        return marginCallType;
     }
 
-    public Builder calledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
-      this.calledWithMarginLevel = calledWithMarginLevel;
-      return this;
+    public void setMarginCallType(XMCallType marginCallType) {
+        this.marginCallType = marginCallType;
+    }
+    public XMCallStatus getMarginCallStatus() {
+        return marginCallStatus;
     }
 
-    public Builder calledWithMarginSummary(XMSummary calledWithMarginSummary) {
-      this.calledWithMarginSummary = calledWithMarginSummary;
-      return this;
+    public void setMarginCallStatus(XMCallStatus marginCallStatus) {
+        this.marginCallStatus = marginCallStatus;
+    }
+    public XMMarginLevel getCalledWithMarginLevel() {
+        return calledWithMarginLevel;
     }
 
-    public Builder dueAt(OffsetDateTime dueAt) {
-      this.dueAt = dueAt;
-      return this;
+    public void setCalledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
+        this.calledWithMarginLevel = calledWithMarginLevel;
+    }
+    public XMSummary getCalledWithMarginSummary() {
+        return calledWithMarginSummary;
     }
 
-    public Builder createdAt(OffsetDateTime createdAt) {
-      this.createdAt = createdAt;
-      return this;
+    public void setCalledWithMarginSummary(XMSummary calledWithMarginSummary) {
+        this.calledWithMarginSummary = calledWithMarginSummary;
+    }
+    public OffsetDateTime getDueAt() {
+        return dueAt;
     }
 
-    public Builder updatedAt(OffsetDateTime updatedAt) {
-      this.updatedAt = updatedAt;
-      return this;
+    public void setDueAt(OffsetDateTime dueAt) {
+        this.dueAt = dueAt;
+    }
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public XMMarginCall build() {
-      return new XMMarginCall(this);
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
-  }
+    public OffsetDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    public static class Builder {
+        private String marginCallId;
+
+        private String currency;
+
+        private String initialNotionalAmount;
+
+        private String outstandingNotionalAmount;
+
+        private XMCallType marginCallType;
+
+        private XMCallStatus marginCallStatus;
+
+        private XMMarginLevel calledWithMarginLevel;
+
+        private XMSummary calledWithMarginSummary;
+
+        private OffsetDateTime dueAt;
+
+        private OffsetDateTime createdAt;
+
+        private OffsetDateTime updatedAt;
+
+        public Builder marginCallId(String marginCallId) {
+            this.marginCallId = marginCallId;
+            return this;
+        }
+
+        public Builder currency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        public Builder initialNotionalAmount(String initialNotionalAmount) {
+            this.initialNotionalAmount = initialNotionalAmount;
+            return this;
+        }
+
+        public Builder outstandingNotionalAmount(String outstandingNotionalAmount) {
+            this.outstandingNotionalAmount = outstandingNotionalAmount;
+            return this;
+        }
+
+        public Builder marginCallType(XMCallType marginCallType) {
+            this.marginCallType = marginCallType;
+            return this;
+        }
+
+        public Builder marginCallStatus(XMCallStatus marginCallStatus) {
+            this.marginCallStatus = marginCallStatus;
+            return this;
+        }
+
+        public Builder calledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
+            this.calledWithMarginLevel = calledWithMarginLevel;
+            return this;
+        }
+
+        public Builder calledWithMarginSummary(XMSummary calledWithMarginSummary) {
+            this.calledWithMarginSummary = calledWithMarginSummary;
+            return this;
+        }
+
+        public Builder dueAt(OffsetDateTime dueAt) {
+            this.dueAt = dueAt;
+            return this;
+        }
+
+        public Builder createdAt(OffsetDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder updatedAt(OffsetDateTime updatedAt) {
+            this.updatedAt = updatedAt;
+            return this;
+        }
+
+        public XMMarginCall build() {
+            return new XMMarginCall(this);
+        }
+    }
 }
+

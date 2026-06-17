@@ -17,76 +17,75 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.MatchMetadata;
+import com.coinbase.prime.model.RewardMetadata;
+import com.coinbase.prime.model.OnchainTransactionMetadata;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TransactionMetadata {
-  @JsonProperty("match_metadata")
-  private MatchMetadata matchMetadata;
-
-  @JsonProperty("web3_transaction_metadata")
-  private OnchainTransactionMetadata onchainTransactionMetadata;
-
-  @JsonProperty("reward_metadata")
-  private RewardMetadata rewardMetadata;
-
-  public TransactionMetadata() {}
-
-  public TransactionMetadata(Builder builder) {
-    this.matchMetadata = builder.matchMetadata;
-    this.onchainTransactionMetadata = builder.onchainTransactionMetadata;
-    this.rewardMetadata = builder.rewardMetadata;
-  }
-
-  public MatchMetadata getMatchMetadata() {
-    return matchMetadata;
-  }
-
-  public void setMatchMetadata(MatchMetadata matchMetadata) {
-    this.matchMetadata = matchMetadata;
-  }
-
-  public OnchainTransactionMetadata getWeb3TransactionMetadata() {
-    return onchainTransactionMetadata;
-  }
-
-  public void setWeb3TransactionMetadata(OnchainTransactionMetadata onchainTransactionMetadata) {
-    this.onchainTransactionMetadata = onchainTransactionMetadata;
-  }
-
-  public RewardMetadata getRewardMetadata() {
-    return rewardMetadata;
-  }
-
-  public void setRewardMetadata(RewardMetadata rewardMetadata) {
-    this.rewardMetadata = rewardMetadata;
-  }
-
-  public static class Builder {
+    @JsonProperty("match_metadata")
     private MatchMetadata matchMetadata;
 
+    @JsonProperty("web3_transaction_metadata")
     private OnchainTransactionMetadata onchainTransactionMetadata;
 
+    @JsonProperty("reward_metadata")
     private RewardMetadata rewardMetadata;
 
-    public Builder matchMetadata(MatchMetadata matchMetadata) {
-      this.matchMetadata = matchMetadata;
-      return this;
+    public TransactionMetadata() {
     }
 
-    public Builder onchainTransactionMetadata(
-        OnchainTransactionMetadata onchainTransactionMetadata) {
-      this.onchainTransactionMetadata = onchainTransactionMetadata;
-      return this;
+    public TransactionMetadata(Builder builder) {
+        this.matchMetadata = builder.matchMetadata;
+        this.onchainTransactionMetadata = builder.onchainTransactionMetadata;
+        this.rewardMetadata = builder.rewardMetadata;
+    }
+    public MatchMetadata getMatchMetadata() {
+        return matchMetadata;
     }
 
-    public Builder rewardMetadata(RewardMetadata rewardMetadata) {
-      this.rewardMetadata = rewardMetadata;
-      return this;
+    public void setMatchMetadata(MatchMetadata matchMetadata) {
+        this.matchMetadata = matchMetadata;
+    }
+    public OnchainTransactionMetadata getWeb3TransactionMetadata() {
+        return onchainTransactionMetadata;
     }
 
-    public TransactionMetadata build() {
-      return new TransactionMetadata(this);
+    public void setWeb3TransactionMetadata(OnchainTransactionMetadata onchainTransactionMetadata) {
+        this.onchainTransactionMetadata = onchainTransactionMetadata;
     }
-  }
+    public RewardMetadata getRewardMetadata() {
+        return rewardMetadata;
+    }
+
+    public void setRewardMetadata(RewardMetadata rewardMetadata) {
+        this.rewardMetadata = rewardMetadata;
+    }
+    public static class Builder {
+        private MatchMetadata matchMetadata;
+
+        private OnchainTransactionMetadata onchainTransactionMetadata;
+
+        private RewardMetadata rewardMetadata;
+
+        public Builder matchMetadata(MatchMetadata matchMetadata) {
+            this.matchMetadata = matchMetadata;
+            return this;
+        }
+
+        public Builder onchainTransactionMetadata(OnchainTransactionMetadata onchainTransactionMetadata) {
+            this.onchainTransactionMetadata = onchainTransactionMetadata;
+            return this;
+        }
+
+        public Builder rewardMetadata(RewardMetadata rewardMetadata) {
+            this.rewardMetadata = rewardMetadata;
+            return this;
+        }
+
+        public TransactionMetadata build() {
+            return new TransactionMetadata(this);
+        }
+    }
 }
+

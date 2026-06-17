@@ -19,15 +19,22 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - CONTRACT_EXPIRY_TYPE_UNSPECIFIED: Unspecified contract expiry type -
- * CONTRACT_EXPIRY_TYPE_EXPIRING: Expiring futures contract - CONTRACT_EXPIRY_TYPE_PERPETUAL:
- * Perpetual futures contract (no expiry)
+ * - CONTRACT_EXPIRY_TYPE_UNSPECIFIED: Unspecified contract expiry type
+ * - CONTRACT_EXPIRY_TYPE_EXPIRING: Expiring futures contract
+ * - CONTRACT_EXPIRY_TYPE_PERPETUAL: Perpetual futures contract (no expiry)
  */
 public enum ContractExpiryType {
-  /** Unspecified contract expiry type */
+  /**
+   * Unspecified contract expiry type
+   */
   CONTRACT_EXPIRY_TYPE_UNSPECIFIED,
-  /** Expiring futures contract */
+  /**
+   * Expiring futures contract
+   */
   CONTRACT_EXPIRY_TYPE_EXPIRING,
-  /** Perpetual futures contract (no expiry) */
+  /**
+   * Perpetual futures contract (no expiry)
+   */
   CONTRACT_EXPIRY_TYPE_PERPETUAL
 }
+

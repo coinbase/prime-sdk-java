@@ -18,9 +18,12 @@
 
 package com.coinbase.prime.model.enums;
 
-/** Travel rule compliance status for a transaction */
+/**
+ * Travel rule compliance status for a transaction
+ */
 public enum TravelRuleStatus {
   TRAVEL_RULE_STATUS_UNSPECIFIED,
   TRAVEL_RULE_STATUS_PENDING,
   TRAVEL_RULE_STATUS_SUBMITTED
 }
+

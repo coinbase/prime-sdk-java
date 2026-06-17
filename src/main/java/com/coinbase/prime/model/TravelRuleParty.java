@@ -17,231 +17,231 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.DetailedAddress;
+import com.coinbase.prime.model.NaturalPersonName;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
+import com.coinbase.prime.model.DateOfBirth;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Represents a party in a travel rule transfer (originator or beneficiary). */
 public class TravelRuleParty {
-  /** Legal name (for entities or simple name format) */
-  private String name;
-
-  /** Natural person name components */
-  @JsonProperty("natural_person_name")
-  private NaturalPersonName naturalPersonName;
-
-  /** Detailed address information */
-  private DetailedAddress address;
-
-  /**
-   * - TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED: Default unspecified wallet type -
-   * TRAVEL_RULE_WALLET_TYPE_VASP: Centralized exchange wallet -
-   * TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED: Self-hosted/custodial wallet
-   */
-  @JsonProperty("wallet_type")
-  private TravelRuleWalletType walletType;
-
-  /** VASP identifier when wallet_type is VASP */
-  @JsonProperty("vasp_id")
-  private String vaspId;
-
-  /** VASP name fallback when vasp_id is unknown */
-  @JsonProperty("vasp_name")
-  private String vaspName;
-
-  /**
-   * Personal identifier for travel rule compliance. For individuals: passport number, national ID,
-   * driver's license. For institutions: LEI (Legal Entity Identifier).
-   */
-  @JsonProperty("personal_id")
-  private String personalId;
-
-  /**
-   * * A full date, with non-zero year, month, and day values. * A month and day, with a zero year
-   * (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year
-   * and month, with a zero day (for example, a credit card expiration date). Related types: *
-   * [google.type.TimeOfDay][google.type.TimeOfDay] * [google.type.DateTime][google.type.DateTime] *
-   * [google.protobuf.Timestamp][google.protobuf.Timestamp]
-   */
-  @JsonProperty("date_of_birth")
-  private DateOfBirth dateOfBirth;
-
-  /** Telephone number for contact purposes. */
-  @JsonProperty("telephone_number")
-  private String telephoneNumber;
-
-  /** Account identifier for travel rule compliance. If not provided, defaults to portfolio ID. */
-  @JsonProperty("account_id")
-  private String accountId;
-
-  public TravelRuleParty() {}
-
-  public TravelRuleParty(Builder builder) {
-    this.name = builder.name;
-    this.naturalPersonName = builder.naturalPersonName;
-    this.address = builder.address;
-    this.walletType = builder.walletType;
-    this.vaspId = builder.vaspId;
-    this.vaspName = builder.vaspName;
-    this.personalId = builder.personalId;
-    this.dateOfBirth = builder.dateOfBirth;
-    this.telephoneNumber = builder.telephoneNumber;
-    this.accountId = builder.accountId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public NaturalPersonName getNaturalPersonName() {
-    return naturalPersonName;
-  }
-
-  public void setNaturalPersonName(NaturalPersonName naturalPersonName) {
-    this.naturalPersonName = naturalPersonName;
-  }
-
-  public DetailedAddress getAddress() {
-    return address;
-  }
-
-  public void setAddress(DetailedAddress address) {
-    this.address = address;
-  }
-
-  public TravelRuleWalletType getWalletType() {
-    return walletType;
-  }
-
-  public void setWalletType(TravelRuleWalletType walletType) {
-    this.walletType = walletType;
-  }
-
-  public String getVaspId() {
-    return vaspId;
-  }
-
-  public void setVaspId(String vaspId) {
-    this.vaspId = vaspId;
-  }
-
-  public String getVaspName() {
-    return vaspName;
-  }
-
-  public void setVaspName(String vaspName) {
-    this.vaspName = vaspName;
-  }
-
-  public String getPersonalId() {
-    return personalId;
-  }
-
-  public void setPersonalId(String personalId) {
-    this.personalId = personalId;
-  }
-
-  public DateOfBirth getDateOfBirth() {
-    return dateOfBirth;
-  }
-
-  public void setDateOfBirth(DateOfBirth dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
-  public String getTelephoneNumber() {
-    return telephoneNumber;
-  }
-
-  public void setTelephoneNumber(String telephoneNumber) {
-    this.telephoneNumber = telephoneNumber;
-  }
-
-  public String getAccountId() {
-    return accountId;
-  }
-
-  public void setAccountId(String accountId) {
-    this.accountId = accountId;
-  }
-
-  public static class Builder {
+    /** Legal name (for entities or simple name format) */
     private String name;
 
+    /** Natural person name components */
+    @JsonProperty("natural_person_name")
     private NaturalPersonName naturalPersonName;
 
+    /** Detailed address information */
     private DetailedAddress address;
 
+    /**
+     * - TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED: Default unspecified wallet type
+     * - TRAVEL_RULE_WALLET_TYPE_VASP: Centralized exchange wallet
+     * - TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED: Self-hosted/custodial wallet
+     */
+    @JsonProperty("wallet_type")
     private TravelRuleWalletType walletType;
 
+    /** VASP identifier when wallet_type is VASP */
+    @JsonProperty("vasp_id")
     private String vaspId;
 
+    /** VASP name fallback when vasp_id is unknown */
+    @JsonProperty("vasp_name")
     private String vaspName;
 
+    /**
+     * Personal identifier for travel rule compliance. For individuals: passport number, national ID, driver's license. For institutions: LEI (Legal Entity Identifier).
+     */
+    @JsonProperty("personal_id")
     private String personalId;
 
+    /**
+     * * A full date, with non-zero year, month, and day values.
+     * * A month and day, with a zero year (for example, an anniversary).
+     * * A year on its own, with a zero month and a zero day.
+     * * A year and month, with a zero day (for example, a credit card expiration
+     * date).
+     * Related types:
+     * * [google.type.TimeOfDay][google.type.TimeOfDay]
+     * * [google.type.DateTime][google.type.DateTime]
+     * * [google.protobuf.Timestamp][google.protobuf.Timestamp]
+     */
+    @JsonProperty("date_of_birth")
     private DateOfBirth dateOfBirth;
 
+    /**
+     * Telephone number for contact purposes.
+     */
+    @JsonProperty("telephone_number")
     private String telephoneNumber;
 
+    /**
+     * Account identifier for travel rule compliance. If not provided, defaults to portfolio ID.
+     */
+    @JsonProperty("account_id")
     private String accountId;
 
-    public Builder name(String name) {
-      this.name = name;
-      return this;
+    public TravelRuleParty() {
     }
 
-    public Builder naturalPersonName(NaturalPersonName naturalPersonName) {
-      this.naturalPersonName = naturalPersonName;
-      return this;
+    public TravelRuleParty(Builder builder) {
+        this.name = builder.name;
+        this.naturalPersonName = builder.naturalPersonName;
+        this.address = builder.address;
+        this.walletType = builder.walletType;
+        this.vaspId = builder.vaspId;
+        this.vaspName = builder.vaspName;
+        this.personalId = builder.personalId;
+        this.dateOfBirth = builder.dateOfBirth;
+        this.telephoneNumber = builder.telephoneNumber;
+        this.accountId = builder.accountId;
+    }
+    public String getName() {
+        return name;
     }
 
-    public Builder address(DetailedAddress address) {
-      this.address = address;
-      return this;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public NaturalPersonName getNaturalPersonName() {
+        return naturalPersonName;
     }
 
-    public Builder walletType(TravelRuleWalletType walletType) {
-      this.walletType = walletType;
-      return this;
+    public void setNaturalPersonName(NaturalPersonName naturalPersonName) {
+        this.naturalPersonName = naturalPersonName;
+    }
+    public DetailedAddress getAddress() {
+        return address;
     }
 
-    public Builder vaspId(String vaspId) {
-      this.vaspId = vaspId;
-      return this;
+    public void setAddress(DetailedAddress address) {
+        this.address = address;
+    }
+    public TravelRuleWalletType getWalletType() {
+        return walletType;
     }
 
-    public Builder vaspName(String vaspName) {
-      this.vaspName = vaspName;
-      return this;
+    public void setWalletType(TravelRuleWalletType walletType) {
+        this.walletType = walletType;
+    }
+    public String getVaspId() {
+        return vaspId;
     }
 
-    public Builder personalId(String personalId) {
-      this.personalId = personalId;
-      return this;
+    public void setVaspId(String vaspId) {
+        this.vaspId = vaspId;
+    }
+    public String getVaspName() {
+        return vaspName;
     }
 
-    public Builder dateOfBirth(DateOfBirth dateOfBirth) {
-      this.dateOfBirth = dateOfBirth;
-      return this;
+    public void setVaspName(String vaspName) {
+        this.vaspName = vaspName;
+    }
+    public String getPersonalId() {
+        return personalId;
     }
 
-    public Builder telephoneNumber(String telephoneNumber) {
-      this.telephoneNumber = telephoneNumber;
-      return this;
+    public void setPersonalId(String personalId) {
+        this.personalId = personalId;
+    }
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public Builder accountId(String accountId) {
-      this.accountId = accountId;
-      return this;
+    public void setDateOfBirth(DateOfBirth dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public TravelRuleParty build() {
-      return new TravelRuleParty(this);
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
-  }
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+    public static class Builder {
+        private String name;
+
+        private NaturalPersonName naturalPersonName;
+
+        private DetailedAddress address;
+
+        private TravelRuleWalletType walletType;
+
+        private String vaspId;
+
+        private String vaspName;
+
+        private String personalId;
+
+        private DateOfBirth dateOfBirth;
+
+        private String telephoneNumber;
+
+        private String accountId;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder naturalPersonName(NaturalPersonName naturalPersonName) {
+            this.naturalPersonName = naturalPersonName;
+            return this;
+        }
+
+        public Builder address(DetailedAddress address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder walletType(TravelRuleWalletType walletType) {
+            this.walletType = walletType;
+            return this;
+        }
+
+        public Builder vaspId(String vaspId) {
+            this.vaspId = vaspId;
+            return this;
+        }
+
+        public Builder vaspName(String vaspName) {
+            this.vaspName = vaspName;
+            return this;
+        }
+
+        public Builder personalId(String personalId) {
+            this.personalId = personalId;
+            return this;
+        }
+
+        public Builder dateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public Builder telephoneNumber(String telephoneNumber) {
+            this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+
+        public Builder accountId(String accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        public TravelRuleParty build() {
+            return new TravelRuleParty(this);
+        }
+    }
 }
+

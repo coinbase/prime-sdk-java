@@ -17,120 +17,125 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** PerpetualProductDetails contains details specific to perpetual futures products */
 public class PerpetualProductDetails {
-  /** Open interest */
-  @JsonProperty("open_interest")
-  private String openInterest;
-
-  /** Current funding rate */
-  @JsonProperty("funding_rate")
-  private String fundingRate;
-
-  /** Next funding time */
-  @JsonProperty("funding_time")
-  private OffsetDateTime fundingTime;
-
-  /** Maximum leverage allowed */
-  @JsonProperty("max_leverage")
-  private String maxLeverage;
-
-  /** The type of underlying for the perpetual product */
-  @JsonProperty("underlying_type")
-  private String underlyingType;
-
-  public PerpetualProductDetails() {}
-
-  public PerpetualProductDetails(Builder builder) {
-    this.openInterest = builder.openInterest;
-    this.fundingRate = builder.fundingRate;
-    this.fundingTime = builder.fundingTime;
-    this.maxLeverage = builder.maxLeverage;
-    this.underlyingType = builder.underlyingType;
-  }
-
-  public String getOpenInterest() {
-    return openInterest;
-  }
-
-  public void setOpenInterest(String openInterest) {
-    this.openInterest = openInterest;
-  }
-
-  public String getFundingRate() {
-    return fundingRate;
-  }
-
-  public void setFundingRate(String fundingRate) {
-    this.fundingRate = fundingRate;
-  }
-
-  public OffsetDateTime getFundingTime() {
-    return fundingTime;
-  }
-
-  public void setFundingTime(OffsetDateTime fundingTime) {
-    this.fundingTime = fundingTime;
-  }
-
-  public String getMaxLeverage() {
-    return maxLeverage;
-  }
-
-  public void setMaxLeverage(String maxLeverage) {
-    this.maxLeverage = maxLeverage;
-  }
-
-  public String getUnderlyingType() {
-    return underlyingType;
-  }
-
-  public void setUnderlyingType(String underlyingType) {
-    this.underlyingType = underlyingType;
-  }
-
-  public static class Builder {
+    /**
+     * Open interest
+     */
+    @JsonProperty("open_interest")
     private String openInterest;
 
+    /**
+     * Current funding rate
+     */
+    @JsonProperty("funding_rate")
     private String fundingRate;
 
+    /**
+     * Next funding time
+     */
+    @JsonProperty("funding_time")
     private OffsetDateTime fundingTime;
 
+    /**
+     * Maximum leverage allowed
+     */
+    @JsonProperty("max_leverage")
     private String maxLeverage;
 
+    /**
+     * The type of underlying for the perpetual product
+     */
+    @JsonProperty("underlying_type")
     private String underlyingType;
 
-    public Builder openInterest(String openInterest) {
-      this.openInterest = openInterest;
-      return this;
+    public PerpetualProductDetails() {
     }
 
-    public Builder fundingRate(String fundingRate) {
-      this.fundingRate = fundingRate;
-      return this;
+    public PerpetualProductDetails(Builder builder) {
+        this.openInterest = builder.openInterest;
+        this.fundingRate = builder.fundingRate;
+        this.fundingTime = builder.fundingTime;
+        this.maxLeverage = builder.maxLeverage;
+        this.underlyingType = builder.underlyingType;
+    }
+    public String getOpenInterest() {
+        return openInterest;
     }
 
-    public Builder fundingTime(OffsetDateTime fundingTime) {
-      this.fundingTime = fundingTime;
-      return this;
+    public void setOpenInterest(String openInterest) {
+        this.openInterest = openInterest;
+    }
+    public String getFundingRate() {
+        return fundingRate;
     }
 
-    public Builder maxLeverage(String maxLeverage) {
-      this.maxLeverage = maxLeverage;
-      return this;
+    public void setFundingRate(String fundingRate) {
+        this.fundingRate = fundingRate;
+    }
+    public OffsetDateTime getFundingTime() {
+        return fundingTime;
     }
 
-    public Builder underlyingType(String underlyingType) {
-      this.underlyingType = underlyingType;
-      return this;
+    public void setFundingTime(OffsetDateTime fundingTime) {
+        this.fundingTime = fundingTime;
+    }
+    public String getMaxLeverage() {
+        return maxLeverage;
     }
 
-    public PerpetualProductDetails build() {
-      return new PerpetualProductDetails(this);
+    public void setMaxLeverage(String maxLeverage) {
+        this.maxLeverage = maxLeverage;
     }
-  }
+    public String getUnderlyingType() {
+        return underlyingType;
+    }
+
+    public void setUnderlyingType(String underlyingType) {
+        this.underlyingType = underlyingType;
+    }
+    public static class Builder {
+        private String openInterest;
+
+        private String fundingRate;
+
+        private OffsetDateTime fundingTime;
+
+        private String maxLeverage;
+
+        private String underlyingType;
+
+        public Builder openInterest(String openInterest) {
+            this.openInterest = openInterest;
+            return this;
+        }
+
+        public Builder fundingRate(String fundingRate) {
+            this.fundingRate = fundingRate;
+            return this;
+        }
+
+        public Builder fundingTime(OffsetDateTime fundingTime) {
+            this.fundingTime = fundingTime;
+            return this;
+        }
+
+        public Builder maxLeverage(String maxLeverage) {
+            this.maxLeverage = maxLeverage;
+            return this;
+        }
+
+        public Builder underlyingType(String underlyingType) {
+            this.underlyingType = underlyingType;
+            return this;
+        }
+
+        public PerpetualProductDetails build() {
+            return new PerpetualProductDetails(this);
+        }
+    }
 }
+

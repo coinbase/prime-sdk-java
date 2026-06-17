@@ -17,96 +17,99 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.PositionReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Position {
-  /** Asset symbol */
-  private String symbol;
-
-  /** The long position based on 'reference' value */
-  @JsonProperty("long")
-  private String _long;
-
-  /** The short position based on 'reference' value */
-  @JsonProperty("short")
-  private String _short;
-
-  @JsonProperty("position_reference")
-  private PositionReference positionReference;
-
-  public Position() {}
-
-  public Position(Builder builder) {
-    this.symbol = builder.symbol;
-    this._long = builder._long;
-    this._short = builder._short;
-    this.positionReference = builder.positionReference;
-  }
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
-
-  public String getLong() {
-    return _long;
-  }
-
-  public void setLong(String _long) {
-    this._long = _long;
-  }
-
-  public String getShort() {
-    return _short;
-  }
-
-  public void setShort(String _short) {
-    this._short = _short;
-  }
-
-  public PositionReference getPositionReference() {
-    return positionReference;
-  }
-
-  public void setPositionReference(PositionReference positionReference) {
-    this.positionReference = positionReference;
-  }
-
-  public static class Builder {
+    /**
+     * Asset symbol
+     */
     private String symbol;
 
+    /**
+     * The long position based on 'reference' value
+     */
+    @JsonProperty("long")
     private String _long;
 
+    /**
+     * The short position based on 'reference' value
+     */
+    @JsonProperty("short")
     private String _short;
 
+    @JsonProperty("position_reference")
     private PositionReference positionReference;
 
-    public Builder symbol(String symbol) {
-      this.symbol = symbol;
-      return this;
+    public Position() {
     }
 
-    public Builder _long(String _long) {
-      this._long = _long;
-      return this;
+    public Position(Builder builder) {
+        this.symbol = builder.symbol;
+        this._long = builder._long;
+        this._short = builder._short;
+        this.positionReference = builder.positionReference;
+    }
+    public String getSymbol() {
+        return symbol;
     }
 
-    public Builder _short(String _short) {
-      this._short = _short;
-      return this;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+    public String getLong() {
+        return _long;
     }
 
-    public Builder positionReference(PositionReference positionReference) {
-      this.positionReference = positionReference;
-      return this;
+    public void setLong(String _long) {
+        this._long = _long;
+    }
+    public String getShort() {
+        return _short;
     }
 
-    public Position build() {
-      return new Position(this);
+    public void setShort(String _short) {
+        this._short = _short;
     }
-  }
+    public PositionReference getPositionReference() {
+        return positionReference;
+    }
+
+    public void setPositionReference(PositionReference positionReference) {
+        this.positionReference = positionReference;
+    }
+    public static class Builder {
+        private String symbol;
+
+        private String _long;
+
+        private String _short;
+
+        private PositionReference positionReference;
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder _long(String _long) {
+            this._long = _long;
+            return this;
+        }
+
+        public Builder _short(String _short) {
+            this._short = _short;
+            return this;
+        }
+
+        public Builder positionReference(PositionReference positionReference) {
+            this.positionReference = positionReference;
+            return this;
+        }
+
+        public Position build() {
+            return new Position(this);
+        }
+    }
 }
+

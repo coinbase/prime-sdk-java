@@ -19,18 +19,30 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - UNKNOWN_DESTINATION: nil value - DESTINATION_PAYMENT_METHOD: A fiat bank account linked to a
- * payment method id via Payment Method Service - DESTINATION_BLOCKCHAIN: A blockchain network
- * address - DESTINATION_WALLET: An on platform wallet UUID NOTE: this is not usable in the
- * withdrawals endpoint only transfers - DESTINATION_COUNTERPARTY: Counterparty ID
+ * - UNKNOWN_DESTINATION: nil value
+ * - DESTINATION_PAYMENT_METHOD: A fiat bank account linked to a payment method id via Payment Method Service
+ * - DESTINATION_BLOCKCHAIN: A blockchain network address
+ * - DESTINATION_WALLET: An on platform wallet UUID
+ * NOTE: this is not usable in the withdrawals endpoint
+ * only transfers
+ * - DESTINATION_COUNTERPARTY: Counterparty ID
  */
 public enum DestinationType {
-  /** A fiat bank account linked to a payment method id via Payment Method Service */
+  /**
+   * A fiat bank account linked to a payment method id via Payment Method Service
+   */
   DESTINATION_PAYMENT_METHOD,
-  /** A blockchain network address */
+  /**
+   * A blockchain network address
+   */
   DESTINATION_BLOCKCHAIN,
-  /** An on platform wallet UUID */
+  /**
+   * An on platform wallet UUID
+   */
   DESTINATION_WALLET,
-  /** Counterparty ID */
+  /**
+   * Counterparty ID
+   */
   DESTINATION_COUNTERPARTY
 }
+

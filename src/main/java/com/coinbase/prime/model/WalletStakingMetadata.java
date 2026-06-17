@@ -17,49 +17,44 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * WalletStakingMetadata contains optional metadata for wallet staking requests. external_id tags
- * the discrete TWS transaction stake/unstake create; automatic reward crediting (e.g. SOL
- * inflation) does not produce one. StakingClaimRewardsRequest intentionally omits this field; add
- * metadata to claim rewards only if a supported network's claim flow creates a discrete TWS
- * transaction clients need to tag.
+ * WalletStakingMetadata contains optional metadata for wallet staking requests.
+ * external_id tags the discrete TWS transaction stake/unstake create; automatic reward crediting (e.g. SOL inflation) does not produce one.
+ * StakingClaimRewardsRequest intentionally omits this field; add metadata to claim rewards only if a supported network's claim flow creates a discrete TWS transaction clients need to tag.
  */
 public class WalletStakingMetadata {
-  /**
-   * An optional custom identifier (up to 255 bytes) to attach to the transaction. This is not a
-   * searchable transaction field. Retries with the same idempotency_key must use the same
-   * external_id; a differing value on retry will be silently ignored.
-   */
-  @JsonProperty("external_id")
-  private String externalId;
-
-  public WalletStakingMetadata() {}
-
-  public WalletStakingMetadata(Builder builder) {
-    this.externalId = builder.externalId;
-  }
-
-  public String getExternalId() {
-    return externalId;
-  }
-
-  public void setExternalId(String externalId) {
-    this.externalId = externalId;
-  }
-
-  public static class Builder {
+    /**
+     * An optional custom identifier (up to 255 bytes) to attach to the transaction. This is not a searchable transaction field. Retries with the same idempotency_key must use the same external_id; a differing value on retry will be silently ignored.
+     */
+    @JsonProperty("external_id")
     private String externalId;
 
-    public Builder externalId(String externalId) {
-      this.externalId = externalId;
-      return this;
+    public WalletStakingMetadata() {
     }
 
-    public WalletStakingMetadata build() {
-      return new WalletStakingMetadata(this);
+    public WalletStakingMetadata(Builder builder) {
+        this.externalId = builder.externalId;
     }
-  }
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+    public static class Builder {
+        private String externalId;
+
+        public Builder externalId(String externalId) {
+            this.externalId = externalId;
+            return this;
+        }
+
+        public WalletStakingMetadata build() {
+            return new WalletStakingMetadata(this);
+        }
+    }
 }
+

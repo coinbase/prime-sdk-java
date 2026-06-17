@@ -17,119 +17,124 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Breakdown of the components of spot equity. */
 public class CrossMarginPrimeSpotEquityBreakdown {
-  /** PM cash balance component of spot equity. */
-  @JsonProperty("cash_balance")
-  private String cashBalance;
-
-  /** Long market value component of spot equity. */
-  @JsonProperty("long_market_value")
-  private String longMarketValue;
-
-  /** Short market value component of spot equity. */
-  @JsonProperty("short_market_value")
-  private String shortMarketValue;
-
-  /** Short collateral component of spot equity. */
-  @JsonProperty("short_collateral")
-  private String shortCollateral;
-
-  /** Pending transfers affecting spot equity. */
-  @JsonProperty("pending_transfers")
-  private String pendingTransfers;
-
-  public CrossMarginPrimeSpotEquityBreakdown() {}
-
-  public CrossMarginPrimeSpotEquityBreakdown(Builder builder) {
-    this.cashBalance = builder.cashBalance;
-    this.longMarketValue = builder.longMarketValue;
-    this.shortMarketValue = builder.shortMarketValue;
-    this.shortCollateral = builder.shortCollateral;
-    this.pendingTransfers = builder.pendingTransfers;
-  }
-
-  public String getCashBalance() {
-    return cashBalance;
-  }
-
-  public void setCashBalance(String cashBalance) {
-    this.cashBalance = cashBalance;
-  }
-
-  public String getLongMarketValue() {
-    return longMarketValue;
-  }
-
-  public void setLongMarketValue(String longMarketValue) {
-    this.longMarketValue = longMarketValue;
-  }
-
-  public String getShortMarketValue() {
-    return shortMarketValue;
-  }
-
-  public void setShortMarketValue(String shortMarketValue) {
-    this.shortMarketValue = shortMarketValue;
-  }
-
-  public String getShortCollateral() {
-    return shortCollateral;
-  }
-
-  public void setShortCollateral(String shortCollateral) {
-    this.shortCollateral = shortCollateral;
-  }
-
-  public String getPendingTransfers() {
-    return pendingTransfers;
-  }
-
-  public void setPendingTransfers(String pendingTransfers) {
-    this.pendingTransfers = pendingTransfers;
-  }
-
-  public static class Builder {
+    /**
+     * PM cash balance component of spot equity.
+     */
+    @JsonProperty("cash_balance")
     private String cashBalance;
 
+    /**
+     * Long market value component of spot equity.
+     */
+    @JsonProperty("long_market_value")
     private String longMarketValue;
 
+    /**
+     * Short market value component of spot equity.
+     */
+    @JsonProperty("short_market_value")
     private String shortMarketValue;
 
+    /**
+     * Short collateral component of spot equity.
+     */
+    @JsonProperty("short_collateral")
     private String shortCollateral;
 
+    /**
+     * Pending transfers affecting spot equity.
+     */
+    @JsonProperty("pending_transfers")
     private String pendingTransfers;
 
-    public Builder cashBalance(String cashBalance) {
-      this.cashBalance = cashBalance;
-      return this;
+    public CrossMarginPrimeSpotEquityBreakdown() {
     }
 
-    public Builder longMarketValue(String longMarketValue) {
-      this.longMarketValue = longMarketValue;
-      return this;
+    public CrossMarginPrimeSpotEquityBreakdown(Builder builder) {
+        this.cashBalance = builder.cashBalance;
+        this.longMarketValue = builder.longMarketValue;
+        this.shortMarketValue = builder.shortMarketValue;
+        this.shortCollateral = builder.shortCollateral;
+        this.pendingTransfers = builder.pendingTransfers;
+    }
+    public String getCashBalance() {
+        return cashBalance;
     }
 
-    public Builder shortMarketValue(String shortMarketValue) {
-      this.shortMarketValue = shortMarketValue;
-      return this;
+    public void setCashBalance(String cashBalance) {
+        this.cashBalance = cashBalance;
+    }
+    public String getLongMarketValue() {
+        return longMarketValue;
     }
 
-    public Builder shortCollateral(String shortCollateral) {
-      this.shortCollateral = shortCollateral;
-      return this;
+    public void setLongMarketValue(String longMarketValue) {
+        this.longMarketValue = longMarketValue;
+    }
+    public String getShortMarketValue() {
+        return shortMarketValue;
     }
 
-    public Builder pendingTransfers(String pendingTransfers) {
-      this.pendingTransfers = pendingTransfers;
-      return this;
+    public void setShortMarketValue(String shortMarketValue) {
+        this.shortMarketValue = shortMarketValue;
+    }
+    public String getShortCollateral() {
+        return shortCollateral;
     }
 
-    public CrossMarginPrimeSpotEquityBreakdown build() {
-      return new CrossMarginPrimeSpotEquityBreakdown(this);
+    public void setShortCollateral(String shortCollateral) {
+        this.shortCollateral = shortCollateral;
     }
-  }
+    public String getPendingTransfers() {
+        return pendingTransfers;
+    }
+
+    public void setPendingTransfers(String pendingTransfers) {
+        this.pendingTransfers = pendingTransfers;
+    }
+    public static class Builder {
+        private String cashBalance;
+
+        private String longMarketValue;
+
+        private String shortMarketValue;
+
+        private String shortCollateral;
+
+        private String pendingTransfers;
+
+        public Builder cashBalance(String cashBalance) {
+            this.cashBalance = cashBalance;
+            return this;
+        }
+
+        public Builder longMarketValue(String longMarketValue) {
+            this.longMarketValue = longMarketValue;
+            return this;
+        }
+
+        public Builder shortMarketValue(String shortMarketValue) {
+            this.shortMarketValue = shortMarketValue;
+            return this;
+        }
+
+        public Builder shortCollateral(String shortCollateral) {
+            this.shortCollateral = shortCollateral;
+            return this;
+        }
+
+        public Builder pendingTransfers(String pendingTransfers) {
+            this.pendingTransfers = pendingTransfers;
+            return this;
+        }
+
+        public CrossMarginPrimeSpotEquityBreakdown build() {
+            return new CrossMarginPrimeSpotEquityBreakdown(this);
+        }
+    }
 }
+

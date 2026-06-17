@@ -17,116 +17,118 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.SweepAmount;
 import com.coinbase.prime.model.enums.FuturesSweepStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class FuturesSweep {
-  /** Sweep ID */
-  private String id;
-
-  @JsonProperty("requested_amount")
-  private SweepAmount requestedAmount;
-
-  /** Should sweep all */
-  @JsonProperty("should_sweep_all")
-  private boolean shouldSweepAll;
-
-  private FuturesSweepStatus status;
-
-  /** Scheduled time */
-  @JsonProperty("scheduled_time")
-  private OffsetDateTime scheduledTime;
-
-  public FuturesSweep() {}
-
-  public FuturesSweep(Builder builder) {
-    this.id = builder.id;
-    this.requestedAmount = builder.requestedAmount;
-    this.shouldSweepAll = builder.shouldSweepAll;
-    this.status = builder.status;
-    this.scheduledTime = builder.scheduledTime;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public SweepAmount getRequestedAmount() {
-    return requestedAmount;
-  }
-
-  public void setRequestedAmount(SweepAmount requestedAmount) {
-    this.requestedAmount = requestedAmount;
-  }
-
-  public boolean getShouldSweepAll() {
-    return shouldSweepAll;
-  }
-
-  public void setShouldSweepAll(boolean shouldSweepAll) {
-    this.shouldSweepAll = shouldSweepAll;
-  }
-
-  public FuturesSweepStatus getStatus() {
-    return status;
-  }
-
-  public void setStatus(FuturesSweepStatus status) {
-    this.status = status;
-  }
-
-  public OffsetDateTime getScheduledTime() {
-    return scheduledTime;
-  }
-
-  public void setScheduledTime(OffsetDateTime scheduledTime) {
-    this.scheduledTime = scheduledTime;
-  }
-
-  public static class Builder {
+    /**
+     * Sweep ID
+     */
     private String id;
 
+    @JsonProperty("requested_amount")
     private SweepAmount requestedAmount;
 
+    /**
+     * Should sweep all
+     */
+    @JsonProperty("should_sweep_all")
     private boolean shouldSweepAll;
 
     private FuturesSweepStatus status;
 
+    /**
+     * Scheduled time
+     */
+    @JsonProperty("scheduled_time")
     private OffsetDateTime scheduledTime;
 
-    public Builder id(String id) {
-      this.id = id;
-      return this;
+    public FuturesSweep() {
     }
 
-    public Builder requestedAmount(SweepAmount requestedAmount) {
-      this.requestedAmount = requestedAmount;
-      return this;
+    public FuturesSweep(Builder builder) {
+        this.id = builder.id;
+        this.requestedAmount = builder.requestedAmount;
+        this.shouldSweepAll = builder.shouldSweepAll;
+        this.status = builder.status;
+        this.scheduledTime = builder.scheduledTime;
+    }
+    public String getId() {
+        return id;
     }
 
-    public Builder shouldSweepAll(boolean shouldSweepAll) {
-      this.shouldSweepAll = shouldSweepAll;
-      return this;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public SweepAmount getRequestedAmount() {
+        return requestedAmount;
     }
 
-    public Builder status(FuturesSweepStatus status) {
-      this.status = status;
-      return this;
+    public void setRequestedAmount(SweepAmount requestedAmount) {
+        this.requestedAmount = requestedAmount;
+    }
+    public boolean getShouldSweepAll() {
+        return shouldSweepAll;
     }
 
-    public Builder scheduledTime(OffsetDateTime scheduledTime) {
-      this.scheduledTime = scheduledTime;
-      return this;
+    public void setShouldSweepAll(boolean shouldSweepAll) {
+        this.shouldSweepAll = shouldSweepAll;
+    }
+    public FuturesSweepStatus getStatus() {
+        return status;
     }
 
-    public FuturesSweep build() {
-      return new FuturesSweep(this);
+    public void setStatus(FuturesSweepStatus status) {
+        this.status = status;
     }
-  }
+    public OffsetDateTime getScheduledTime() {
+        return scheduledTime;
+    }
+
+    public void setScheduledTime(OffsetDateTime scheduledTime) {
+        this.scheduledTime = scheduledTime;
+    }
+    public static class Builder {
+        private String id;
+
+        private SweepAmount requestedAmount;
+
+        private boolean shouldSweepAll;
+
+        private FuturesSweepStatus status;
+
+        private OffsetDateTime scheduledTime;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder requestedAmount(SweepAmount requestedAmount) {
+            this.requestedAmount = requestedAmount;
+            return this;
+        }
+
+        public Builder shouldSweepAll(boolean shouldSweepAll) {
+            this.shouldSweepAll = shouldSweepAll;
+            return this;
+        }
+
+        public Builder status(FuturesSweepStatus status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder scheduledTime(OffsetDateTime scheduledTime) {
+            this.scheduledTime = scheduledTime;
+            return this;
+        }
+
+        public FuturesSweep build() {
+            return new FuturesSweep(this);
+        }
+    }
 }
+

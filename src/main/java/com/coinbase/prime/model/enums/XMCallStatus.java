@@ -19,18 +19,28 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - CALL_STATUS_OPEN: Margin call is open and not expired - CALL_STATUS_AGED: Margin call is open
- * and it is expired - CALL_STATUS_SETTLED: Margin call is fully settled - CALL_STATUS_CANCELED:
- * Margin call was canceled by Credit Risk
+ * - CALL_STATUS_OPEN: Margin call is open and not expired
+ * - CALL_STATUS_AGED: Margin call is open and it is expired
+ * - CALL_STATUS_SETTLED: Margin call is fully settled
+ * - CALL_STATUS_CANCELED: Margin call was canceled by Credit Risk
  */
 public enum XMCallStatus {
   XM_CALL_STATUS_UNSPECIFIED,
-  /** Margin call is open and not expired */
+  /**
+   * Margin call is open and not expired
+   */
   CALL_STATUS_OPEN,
-  /** Margin call is open and it is expired */
+  /**
+   * Margin call is open and it is expired
+   */
   CALL_STATUS_AGED,
-  /** Margin call is fully settled */
+  /**
+   * Margin call is fully settled
+   */
   CALL_STATUS_SETTLED,
-  /** Margin call was canceled by Credit Risk */
+  /**
+   * Margin call was canceled by Credit Risk
+   */
   CALL_STATUS_CANCELED
 }
+

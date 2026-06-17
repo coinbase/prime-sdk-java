@@ -17,59 +17,61 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Details for a custom stablecoin reward payout transaction */
 public class CustomStablecoinRewardDetails {
-  /** ISO-formatted start date of the reward period (e.g. 2025-02-01T00:00:00Z) */
-  @JsonProperty("start_date")
-  private String startDate;
-
-  /** ISO-formatted end date of the reward period (e.g. 2025-02-28T00:00:00Z) */
-  @JsonProperty("end_date")
-  private String endDate;
-
-  public CustomStablecoinRewardDetails() {}
-
-  public CustomStablecoinRewardDetails(Builder builder) {
-    this.startDate = builder.startDate;
-    this.endDate = builder.endDate;
-  }
-
-  public String getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
-  }
-
-  public String getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
-  }
-
-  public static class Builder {
+    /**
+     * ISO-formatted start date of the reward period (e.g. 2025-02-01T00:00:00Z)
+     */
+    @JsonProperty("start_date")
     private String startDate;
 
+    /**
+     * ISO-formatted end date of the reward period (e.g. 2025-02-28T00:00:00Z)
+     */
+    @JsonProperty("end_date")
     private String endDate;
 
-    public Builder startDate(String startDate) {
-      this.startDate = startDate;
-      return this;
+    public CustomStablecoinRewardDetails() {
     }
 
-    public Builder endDate(String endDate) {
-      this.endDate = endDate;
-      return this;
+    public CustomStablecoinRewardDetails(Builder builder) {
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
+    }
+    public String getStartDate() {
+        return startDate;
     }
 
-    public CustomStablecoinRewardDetails build() {
-      return new CustomStablecoinRewardDetails(this);
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
-  }
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+    public static class Builder {
+        private String startDate;
+
+        private String endDate;
+
+        public Builder startDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder endDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public CustomStablecoinRewardDetails build() {
+            return new CustomStablecoinRewardDetails(this);
+        }
+    }
 }
+

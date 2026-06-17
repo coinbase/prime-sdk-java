@@ -17,249 +17,255 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.ContractExpiryType;
+import com.coinbase.prime.model.PerpetualProductDetails;
 import com.coinbase.prime.model.enums.RiskManagementType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** FutureProductDetails contains details specific to futures products */
 public class FutureProductDetails {
-  /** Contract code identifier */
-  @JsonProperty("contract_code")
-  private String contractCode;
-
-  /** Contract size */
-  @JsonProperty("contract_size")
-  private String contractSize;
-
-  /** Contract expiry timestamp */
-  @JsonProperty("contract_expiry")
-  private OffsetDateTime contractExpiry;
-
-  /** Contract root unit (underlying asset) */
-  @JsonProperty("contract_root_unit")
-  private String contractRootUnit;
-
-  /**
-   * - CONTRACT_EXPIRY_TYPE_UNSPECIFIED: Unspecified contract expiry type -
-   * CONTRACT_EXPIRY_TYPE_EXPIRING: Expiring futures contract - CONTRACT_EXPIRY_TYPE_PERPETUAL:
-   * Perpetual futures contract (no expiry)
-   */
-  @JsonProperty("contract_expiry_type")
-  private ContractExpiryType contractExpiryType;
-
-  /**
-   * - RISK_MANAGEMENT_TYPE_UNSPECIFIED: Unspecified risk management type -
-   * RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM: Risk is managed by FCM (Futures Commission Merchant) -
-   * RISK_MANAGEMENT_TYPE_MANAGED_BY_VENUE: Risk is managed by the venue
-   */
-  @JsonProperty("risk_managed_by")
-  private RiskManagementType riskManagedBy;
-
-  /** The venue this product trades on */
-  private String venue;
-
-  /** Descriptive name for the product group */
-  @JsonProperty("group_description")
-  private String groupDescription;
-
-  /** IANA time zone for contract expiration */
-  @JsonProperty("contract_expiry_timezone")
-  private String contractExpiryTimezone;
-
-  /** Short version of the group description */
-  @JsonProperty("group_short_description")
-  private String groupShortDescription;
-
-  /** PerpetualProductDetails contains details specific to perpetual futures products */
-  @JsonProperty("perpetual_details")
-  private PerpetualProductDetails perpetualDetails;
-
-  public FutureProductDetails() {}
-
-  public FutureProductDetails(Builder builder) {
-    this.contractCode = builder.contractCode;
-    this.contractSize = builder.contractSize;
-    this.contractExpiry = builder.contractExpiry;
-    this.contractRootUnit = builder.contractRootUnit;
-    this.contractExpiryType = builder.contractExpiryType;
-    this.riskManagedBy = builder.riskManagedBy;
-    this.venue = builder.venue;
-    this.groupDescription = builder.groupDescription;
-    this.contractExpiryTimezone = builder.contractExpiryTimezone;
-    this.groupShortDescription = builder.groupShortDescription;
-    this.perpetualDetails = builder.perpetualDetails;
-  }
-
-  public String getContractCode() {
-    return contractCode;
-  }
-
-  public void setContractCode(String contractCode) {
-    this.contractCode = contractCode;
-  }
-
-  public String getContractSize() {
-    return contractSize;
-  }
-
-  public void setContractSize(String contractSize) {
-    this.contractSize = contractSize;
-  }
-
-  public OffsetDateTime getContractExpiry() {
-    return contractExpiry;
-  }
-
-  public void setContractExpiry(OffsetDateTime contractExpiry) {
-    this.contractExpiry = contractExpiry;
-  }
-
-  public String getContractRootUnit() {
-    return contractRootUnit;
-  }
-
-  public void setContractRootUnit(String contractRootUnit) {
-    this.contractRootUnit = contractRootUnit;
-  }
-
-  public ContractExpiryType getContractExpiryType() {
-    return contractExpiryType;
-  }
-
-  public void setContractExpiryType(ContractExpiryType contractExpiryType) {
-    this.contractExpiryType = contractExpiryType;
-  }
-
-  public RiskManagementType getRiskManagedBy() {
-    return riskManagedBy;
-  }
-
-  public void setRiskManagedBy(RiskManagementType riskManagedBy) {
-    this.riskManagedBy = riskManagedBy;
-  }
-
-  public String getVenue() {
-    return venue;
-  }
-
-  public void setVenue(String venue) {
-    this.venue = venue;
-  }
-
-  public String getGroupDescription() {
-    return groupDescription;
-  }
-
-  public void setGroupDescription(String groupDescription) {
-    this.groupDescription = groupDescription;
-  }
-
-  public String getContractExpiryTimezone() {
-    return contractExpiryTimezone;
-  }
-
-  public void setContractExpiryTimezone(String contractExpiryTimezone) {
-    this.contractExpiryTimezone = contractExpiryTimezone;
-  }
-
-  public String getGroupShortDescription() {
-    return groupShortDescription;
-  }
-
-  public void setGroupShortDescription(String groupShortDescription) {
-    this.groupShortDescription = groupShortDescription;
-  }
-
-  public PerpetualProductDetails getPerpetualDetails() {
-    return perpetualDetails;
-  }
-
-  public void setPerpetualDetails(PerpetualProductDetails perpetualDetails) {
-    this.perpetualDetails = perpetualDetails;
-  }
-
-  public static class Builder {
+    /**
+     * Contract code identifier
+     */
+    @JsonProperty("contract_code")
     private String contractCode;
 
+    /**
+     * Contract size
+     */
+    @JsonProperty("contract_size")
     private String contractSize;
 
+    /**
+     * Contract expiry timestamp
+     */
+    @JsonProperty("contract_expiry")
     private OffsetDateTime contractExpiry;
 
+    /**
+     * Contract root unit (underlying asset)
+     */
+    @JsonProperty("contract_root_unit")
     private String contractRootUnit;
 
+    /**
+     * - CONTRACT_EXPIRY_TYPE_UNSPECIFIED: Unspecified contract expiry type
+     * - CONTRACT_EXPIRY_TYPE_EXPIRING: Expiring futures contract
+     * - CONTRACT_EXPIRY_TYPE_PERPETUAL: Perpetual futures contract (no expiry)
+     */
+    @JsonProperty("contract_expiry_type")
     private ContractExpiryType contractExpiryType;
 
+    /**
+     * - RISK_MANAGEMENT_TYPE_UNSPECIFIED: Unspecified risk management type
+     * - RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM: Risk is managed by FCM (Futures Commission Merchant)
+     * - RISK_MANAGEMENT_TYPE_MANAGED_BY_VENUE: Risk is managed by the venue
+     */
+    @JsonProperty("risk_managed_by")
     private RiskManagementType riskManagedBy;
 
+    /**
+     * The venue this product trades on
+     */
     private String venue;
 
+    /**
+     * Descriptive name for the product group
+     */
+    @JsonProperty("group_description")
     private String groupDescription;
 
+    /**
+     * IANA time zone for contract expiration
+     */
+    @JsonProperty("contract_expiry_timezone")
     private String contractExpiryTimezone;
 
+    /**
+     * Short version of the group description
+     */
+    @JsonProperty("group_short_description")
     private String groupShortDescription;
 
+    /** PerpetualProductDetails contains details specific to perpetual futures products */
+    @JsonProperty("perpetual_details")
     private PerpetualProductDetails perpetualDetails;
 
-    public Builder contractCode(String contractCode) {
-      this.contractCode = contractCode;
-      return this;
+    public FutureProductDetails() {
     }
 
-    public Builder contractSize(String contractSize) {
-      this.contractSize = contractSize;
-      return this;
+    public FutureProductDetails(Builder builder) {
+        this.contractCode = builder.contractCode;
+        this.contractSize = builder.contractSize;
+        this.contractExpiry = builder.contractExpiry;
+        this.contractRootUnit = builder.contractRootUnit;
+        this.contractExpiryType = builder.contractExpiryType;
+        this.riskManagedBy = builder.riskManagedBy;
+        this.venue = builder.venue;
+        this.groupDescription = builder.groupDescription;
+        this.contractExpiryTimezone = builder.contractExpiryTimezone;
+        this.groupShortDescription = builder.groupShortDescription;
+        this.perpetualDetails = builder.perpetualDetails;
+    }
+    public String getContractCode() {
+        return contractCode;
     }
 
-    public Builder contractExpiry(OffsetDateTime contractExpiry) {
-      this.contractExpiry = contractExpiry;
-      return this;
+    public void setContractCode(String contractCode) {
+        this.contractCode = contractCode;
+    }
+    public String getContractSize() {
+        return contractSize;
     }
 
-    public Builder contractRootUnit(String contractRootUnit) {
-      this.contractRootUnit = contractRootUnit;
-      return this;
+    public void setContractSize(String contractSize) {
+        this.contractSize = contractSize;
+    }
+    public OffsetDateTime getContractExpiry() {
+        return contractExpiry;
     }
 
-    public Builder contractExpiryType(ContractExpiryType contractExpiryType) {
-      this.contractExpiryType = contractExpiryType;
-      return this;
+    public void setContractExpiry(OffsetDateTime contractExpiry) {
+        this.contractExpiry = contractExpiry;
+    }
+    public String getContractRootUnit() {
+        return contractRootUnit;
     }
 
-    public Builder riskManagedBy(RiskManagementType riskManagedBy) {
-      this.riskManagedBy = riskManagedBy;
-      return this;
+    public void setContractRootUnit(String contractRootUnit) {
+        this.contractRootUnit = contractRootUnit;
+    }
+    public ContractExpiryType getContractExpiryType() {
+        return contractExpiryType;
     }
 
-    public Builder venue(String venue) {
-      this.venue = venue;
-      return this;
+    public void setContractExpiryType(ContractExpiryType contractExpiryType) {
+        this.contractExpiryType = contractExpiryType;
+    }
+    public RiskManagementType getRiskManagedBy() {
+        return riskManagedBy;
     }
 
-    public Builder groupDescription(String groupDescription) {
-      this.groupDescription = groupDescription;
-      return this;
+    public void setRiskManagedBy(RiskManagementType riskManagedBy) {
+        this.riskManagedBy = riskManagedBy;
+    }
+    public String getVenue() {
+        return venue;
     }
 
-    public Builder contractExpiryTimezone(String contractExpiryTimezone) {
-      this.contractExpiryTimezone = contractExpiryTimezone;
-      return this;
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+    public String getGroupDescription() {
+        return groupDescription;
     }
 
-    public Builder groupShortDescription(String groupShortDescription) {
-      this.groupShortDescription = groupShortDescription;
-      return this;
+    public void setGroupDescription(String groupDescription) {
+        this.groupDescription = groupDescription;
+    }
+    public String getContractExpiryTimezone() {
+        return contractExpiryTimezone;
     }
 
-    public Builder perpetualDetails(PerpetualProductDetails perpetualDetails) {
-      this.perpetualDetails = perpetualDetails;
-      return this;
+    public void setContractExpiryTimezone(String contractExpiryTimezone) {
+        this.contractExpiryTimezone = contractExpiryTimezone;
+    }
+    public String getGroupShortDescription() {
+        return groupShortDescription;
     }
 
-    public FutureProductDetails build() {
-      return new FutureProductDetails(this);
+    public void setGroupShortDescription(String groupShortDescription) {
+        this.groupShortDescription = groupShortDescription;
     }
-  }
+    public PerpetualProductDetails getPerpetualDetails() {
+        return perpetualDetails;
+    }
+
+    public void setPerpetualDetails(PerpetualProductDetails perpetualDetails) {
+        this.perpetualDetails = perpetualDetails;
+    }
+    public static class Builder {
+        private String contractCode;
+
+        private String contractSize;
+
+        private OffsetDateTime contractExpiry;
+
+        private String contractRootUnit;
+
+        private ContractExpiryType contractExpiryType;
+
+        private RiskManagementType riskManagedBy;
+
+        private String venue;
+
+        private String groupDescription;
+
+        private String contractExpiryTimezone;
+
+        private String groupShortDescription;
+
+        private PerpetualProductDetails perpetualDetails;
+
+        public Builder contractCode(String contractCode) {
+            this.contractCode = contractCode;
+            return this;
+        }
+
+        public Builder contractSize(String contractSize) {
+            this.contractSize = contractSize;
+            return this;
+        }
+
+        public Builder contractExpiry(OffsetDateTime contractExpiry) {
+            this.contractExpiry = contractExpiry;
+            return this;
+        }
+
+        public Builder contractRootUnit(String contractRootUnit) {
+            this.contractRootUnit = contractRootUnit;
+            return this;
+        }
+
+        public Builder contractExpiryType(ContractExpiryType contractExpiryType) {
+            this.contractExpiryType = contractExpiryType;
+            return this;
+        }
+
+        public Builder riskManagedBy(RiskManagementType riskManagedBy) {
+            this.riskManagedBy = riskManagedBy;
+            return this;
+        }
+
+        public Builder venue(String venue) {
+            this.venue = venue;
+            return this;
+        }
+
+        public Builder groupDescription(String groupDescription) {
+            this.groupDescription = groupDescription;
+            return this;
+        }
+
+        public Builder contractExpiryTimezone(String contractExpiryTimezone) {
+            this.contractExpiryTimezone = contractExpiryTimezone;
+            return this;
+        }
+
+        public Builder groupShortDescription(String groupShortDescription) {
+            this.groupShortDescription = groupShortDescription;
+            return this;
+        }
+
+        public Builder perpetualDetails(PerpetualProductDetails perpetualDetails) {
+            this.perpetualDetails = perpetualDetails;
+            return this;
+        }
+
+        public FutureProductDetails build() {
+            return new FutureProductDetails(this);
+        }
+    }
 }
+

@@ -17,58 +17,60 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MatchMetadata {
-  /** The reference id of the match */
-  @JsonProperty("reference_id")
-  private String referenceId;
-
-  /** The settlement date of the match */
-  @JsonProperty("settlement_date")
-  private String settlementDate;
-
-  public MatchMetadata() {}
-
-  public MatchMetadata(Builder builder) {
-    this.referenceId = builder.referenceId;
-    this.settlementDate = builder.settlementDate;
-  }
-
-  public String getReferenceId() {
-    return referenceId;
-  }
-
-  public void setReferenceId(String referenceId) {
-    this.referenceId = referenceId;
-  }
-
-  public String getSettlementDate() {
-    return settlementDate;
-  }
-
-  public void setSettlementDate(String settlementDate) {
-    this.settlementDate = settlementDate;
-  }
-
-  public static class Builder {
+    /**
+     * The reference id of the match
+     */
+    @JsonProperty("reference_id")
     private String referenceId;
 
+    /**
+     * The settlement date of the match
+     */
+    @JsonProperty("settlement_date")
     private String settlementDate;
 
-    public Builder referenceId(String referenceId) {
-      this.referenceId = referenceId;
-      return this;
+    public MatchMetadata() {
     }
 
-    public Builder settlementDate(String settlementDate) {
-      this.settlementDate = settlementDate;
-      return this;
+    public MatchMetadata(Builder builder) {
+        this.referenceId = builder.referenceId;
+        this.settlementDate = builder.settlementDate;
+    }
+    public String getReferenceId() {
+        return referenceId;
     }
 
-    public MatchMetadata build() {
-      return new MatchMetadata(this);
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
-  }
+    public String getSettlementDate() {
+        return settlementDate;
+    }
+
+    public void setSettlementDate(String settlementDate) {
+        this.settlementDate = settlementDate;
+    }
+    public static class Builder {
+        private String referenceId;
+
+        private String settlementDate;
+
+        public Builder referenceId(String referenceId) {
+            this.referenceId = referenceId;
+            return this;
+        }
+
+        public Builder settlementDate(String settlementDate) {
+            this.settlementDate = settlementDate;
+            return this;
+        }
+
+        public MatchMetadata build() {
+            return new MatchMetadata(this);
+        }
+    }
 }
+

@@ -17,178 +17,170 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** LimitOrderEdit represents an order edit that is accepted */
 public class LimitOrderEdit {
-  /** New price for the edited order */
-  private String price;
-
-  /** New size for the edited order */
-  private String size;
-
-  /** New display size for the edited order */
-  @JsonProperty("display_size")
-  private String displaySize;
-
-  /** New stop price for the edited order */
-  @JsonProperty("stop_price")
-  private String stopPrice;
-
-  /** New stop limit price for the edited order */
-  @JsonProperty("stop_limit_price")
-  private String stopLimitPrice;
-
-  /** New end time for the edited order */
-  @JsonProperty("end_time")
-  private OffsetDateTime endTime;
-
-  /** Time when the edit was accepted */
-  @JsonProperty("accept_time")
-  private OffsetDateTime acceptTime;
-
-  /** Client order id of the order being replaced */
-  @JsonProperty("client_order_id")
-  private String clientOrderId;
-
-  public LimitOrderEdit() {}
-
-  public LimitOrderEdit(Builder builder) {
-    this.price = builder.price;
-    this.size = builder.size;
-    this.displaySize = builder.displaySize;
-    this.stopPrice = builder.stopPrice;
-    this.stopLimitPrice = builder.stopLimitPrice;
-    this.endTime = builder.endTime;
-    this.acceptTime = builder.acceptTime;
-    this.clientOrderId = builder.clientOrderId;
-  }
-
-  public String getPrice() {
-    return price;
-  }
-
-  public void setPrice(String price) {
-    this.price = price;
-  }
-
-  public String getSize() {
-    return size;
-  }
-
-  public void setSize(String size) {
-    this.size = size;
-  }
-
-  public String getDisplaySize() {
-    return displaySize;
-  }
-
-  public void setDisplaySize(String displaySize) {
-    this.displaySize = displaySize;
-  }
-
-  public String getStopPrice() {
-    return stopPrice;
-  }
-
-  public void setStopPrice(String stopPrice) {
-    this.stopPrice = stopPrice;
-  }
-
-  public String getStopLimitPrice() {
-    return stopLimitPrice;
-  }
-
-  public void setStopLimitPrice(String stopLimitPrice) {
-    this.stopLimitPrice = stopLimitPrice;
-  }
-
-  public OffsetDateTime getEndTime() {
-    return endTime;
-  }
-
-  public void setEndTime(OffsetDateTime endTime) {
-    this.endTime = endTime;
-  }
-
-  public OffsetDateTime getAcceptTime() {
-    return acceptTime;
-  }
-
-  public void setAcceptTime(OffsetDateTime acceptTime) {
-    this.acceptTime = acceptTime;
-  }
-
-  public String getClientOrderId() {
-    return clientOrderId;
-  }
-
-  public void setClientOrderId(String clientOrderId) {
-    this.clientOrderId = clientOrderId;
-  }
-
-  public static class Builder {
+    /** New price for the edited order */
     private String price;
 
+    /** New size for the edited order */
     private String size;
 
+    /** New display size for the edited order */
+    @JsonProperty("display_size")
     private String displaySize;
 
+    /** New stop price for the edited order */
+    @JsonProperty("stop_price")
     private String stopPrice;
 
+    /** New stop limit price for the edited order */
+    @JsonProperty("stop_limit_price")
     private String stopLimitPrice;
 
+    /** New end time for the edited order */
+    @JsonProperty("end_time")
     private OffsetDateTime endTime;
 
+    /** Time when the edit was accepted */
+    @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
+    /** Client order id of the order being replaced */
+    @JsonProperty("client_order_id")
     private String clientOrderId;
 
-    public Builder price(String price) {
-      this.price = price;
-      return this;
+    public LimitOrderEdit() {
     }
 
-    public Builder size(String size) {
-      this.size = size;
-      return this;
+    public LimitOrderEdit(Builder builder) {
+        this.price = builder.price;
+        this.size = builder.size;
+        this.displaySize = builder.displaySize;
+        this.stopPrice = builder.stopPrice;
+        this.stopLimitPrice = builder.stopLimitPrice;
+        this.endTime = builder.endTime;
+        this.acceptTime = builder.acceptTime;
+        this.clientOrderId = builder.clientOrderId;
+    }
+    public String getPrice() {
+        return price;
     }
 
-    public Builder displaySize(String displaySize) {
-      this.displaySize = displaySize;
-      return this;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+    public String getSize() {
+        return size;
     }
 
-    public Builder stopPrice(String stopPrice) {
-      this.stopPrice = stopPrice;
-      return this;
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public String getDisplaySize() {
+        return displaySize;
     }
 
-    public Builder stopLimitPrice(String stopLimitPrice) {
-      this.stopLimitPrice = stopLimitPrice;
-      return this;
+    public void setDisplaySize(String displaySize) {
+        this.displaySize = displaySize;
+    }
+    public String getStopPrice() {
+        return stopPrice;
     }
 
-    public Builder endTime(OffsetDateTime endTime) {
-      this.endTime = endTime;
-      return this;
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+    public String getStopLimitPrice() {
+        return stopLimitPrice;
     }
 
-    public Builder acceptTime(OffsetDateTime acceptTime) {
-      this.acceptTime = acceptTime;
-      return this;
+    public void setStopLimitPrice(String stopLimitPrice) {
+        this.stopLimitPrice = stopLimitPrice;
+    }
+    public OffsetDateTime getEndTime() {
+        return endTime;
     }
 
-    public Builder clientOrderId(String clientOrderId) {
-      this.clientOrderId = clientOrderId;
-      return this;
+    public void setEndTime(OffsetDateTime endTime) {
+        this.endTime = endTime;
+    }
+    public OffsetDateTime getAcceptTime() {
+        return acceptTime;
     }
 
-    public LimitOrderEdit build() {
-      return new LimitOrderEdit(this);
+    public void setAcceptTime(OffsetDateTime acceptTime) {
+        this.acceptTime = acceptTime;
     }
-  }
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
+
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
+    public static class Builder {
+        private String price;
+
+        private String size;
+
+        private String displaySize;
+
+        private String stopPrice;
+
+        private String stopLimitPrice;
+
+        private OffsetDateTime endTime;
+
+        private OffsetDateTime acceptTime;
+
+        private String clientOrderId;
+
+        public Builder price(String price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder size(String size) {
+            this.size = size;
+            return this;
+        }
+
+        public Builder displaySize(String displaySize) {
+            this.displaySize = displaySize;
+            return this;
+        }
+
+        public Builder stopPrice(String stopPrice) {
+            this.stopPrice = stopPrice;
+            return this;
+        }
+
+        public Builder stopLimitPrice(String stopLimitPrice) {
+            this.stopLimitPrice = stopLimitPrice;
+            return this;
+        }
+
+        public Builder endTime(OffsetDateTime endTime) {
+            this.endTime = endTime;
+            return this;
+        }
+
+        public Builder acceptTime(OffsetDateTime acceptTime) {
+            this.acceptTime = acceptTime;
+            return this;
+        }
+
+        public Builder clientOrderId(String clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return this;
+        }
+
+        public LimitOrderEdit build() {
+            return new LimitOrderEdit(this);
+        }
+    }
 }
+

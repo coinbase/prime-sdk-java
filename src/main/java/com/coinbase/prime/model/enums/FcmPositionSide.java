@@ -23,3 +23,4 @@ public enum FcmPositionSide {
   LONG,
   SHORT
 }
+

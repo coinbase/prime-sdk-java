@@ -18,7 +18,9 @@
 
 package com.coinbase.prime.model.enums;
 
-/** Enum for candle granularity (time intervals) */
+/**
+ * Enum for candle granularity (time intervals)
+ */
 public enum CandlesGranularity {
   ONE_MINUTE,
   FIVE_MINUTES,
@@ -30,3 +32,4 @@ public enum CandlesGranularity {
   TWO_HOURS,
   FOUR_HOURS
 }
+

@@ -18,7 +18,9 @@
 
 package com.coinbase.prime.model.enums;
 
-/** Types */
+/**
+ * Types
+ */
 public enum InvoiceType {
   INVOICE_TYPE_UNSPECIFIED,
   INVOICE_TYPE_AUC_FEE,
@@ -27,3 +29,4 @@ public enum InvoiceType {
   INVOICE_TYPE_NEW_WALLET_FEE,
   INVOICE_TYPE_STAKING_FEE
 }
+

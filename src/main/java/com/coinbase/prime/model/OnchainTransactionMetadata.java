@@ -17,58 +17,61 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.AssetChange;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class OnchainTransactionMetadata {
-  /** The transaction type label of the confirmed transaction post settlement */
-  private String label;
-
-  /** The confirmed asset changes (onchain) */
-  @JsonProperty("confirmed_asset_changes")
-  private List<AssetChange> confirmedAssetChanges;
-
-  public OnchainTransactionMetadata() {}
-
-  public OnchainTransactionMetadata(Builder builder) {
-    this.label = builder.label;
-    this.confirmedAssetChanges = builder.confirmedAssetChanges;
-  }
-
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-  public List<AssetChange> getConfirmedAssetChanges() {
-    return confirmedAssetChanges;
-  }
-
-  public void setConfirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
-    this.confirmedAssetChanges = confirmedAssetChanges;
-  }
-
-  public static class Builder {
+    /**
+     * The transaction type label of the confirmed transaction post settlement
+     */
     private String label;
 
+    /**
+     * The confirmed asset changes (onchain)
+     */
+    @JsonProperty("confirmed_asset_changes")
     private List<AssetChange> confirmedAssetChanges;
 
-    public Builder label(String label) {
-      this.label = label;
-      return this;
+    public OnchainTransactionMetadata() {
     }
 
-    public Builder confirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
-      this.confirmedAssetChanges = confirmedAssetChanges;
-      return this;
+    public OnchainTransactionMetadata(Builder builder) {
+        this.label = builder.label;
+        this.confirmedAssetChanges = builder.confirmedAssetChanges;
+    }
+    public String getLabel() {
+        return label;
     }
 
-    public OnchainTransactionMetadata build() {
-      return new OnchainTransactionMetadata(this);
+    public void setLabel(String label) {
+        this.label = label;
     }
-  }
+    public List<AssetChange> getConfirmedAssetChanges() {
+        return confirmedAssetChanges;
+    }
+
+    public void setConfirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
+        this.confirmedAssetChanges = confirmedAssetChanges;
+    }
+    public static class Builder {
+        private String label;
+
+        private List<AssetChange> confirmedAssetChanges;
+
+        public Builder label(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public Builder confirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
+            this.confirmedAssetChanges = confirmedAssetChanges;
+            return this;
+        }
+
+        public OnchainTransactionMetadata build() {
+            return new OnchainTransactionMetadata(this);
+        }
+    }
 }
+

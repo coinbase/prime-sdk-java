@@ -23,3 +23,4 @@ public enum StakeType {
   STAKE_TYPE_INITIAL_DEPOSIT,
   STAKE_TYPE_TOP_UP
 }
+

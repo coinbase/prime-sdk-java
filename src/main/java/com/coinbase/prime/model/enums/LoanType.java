@@ -27,3 +27,4 @@ public enum LoanType {
   SHORT_COLLATERAL,
   CROSS_MARGIN
 }
+

@@ -25,3 +25,4 @@ public enum FcmMarginCallState {
   FCM_MARGIN_CALL_STATE_DEFAULT,
   FCM_MARGIN_CALL_STATE_OFFICIAL
 }
+
