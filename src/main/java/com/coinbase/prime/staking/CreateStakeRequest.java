@@ -20,6 +20,7 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.WalletStakeInputs;
+import com.coinbase.prime.model.WalletStakingMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,6 +40,9 @@ public class CreateStakeRequest {
   @JsonProperty("inputs")
   private WalletStakeInputs inputs;
 
+  @JsonProperty("metadata")
+  private WalletStakingMetadata metadata;
+
   public CreateStakeRequest() {}
 
   public CreateStakeRequest(Builder builder) {
@@ -46,6 +50,7 @@ public class CreateStakeRequest {
     this.walletId = builder.walletId;
     this.idempotencyKey = builder.idempotencyKey;
     this.inputs = builder.inputs;
+    this.metadata = builder.metadata;
   }
 
   public String getPortfolioId() {
@@ -80,11 +85,20 @@ public class CreateStakeRequest {
     this.inputs = inputs;
   }
 
+  public WalletStakingMetadata getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(WalletStakingMetadata metadata) {
+    this.metadata = metadata;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String walletId;
     private String idempotencyKey;
     private WalletStakeInputs inputs;
+    private WalletStakingMetadata metadata;
 
     public Builder() {}
 
@@ -105,6 +119,11 @@ public class CreateStakeRequest {
 
     public Builder inputs(WalletStakeInputs inputs) {
       this.inputs = inputs;
+      return this;
+    }
+
+    public Builder metadata(WalletStakingMetadata metadata) {
+      this.metadata = metadata;
       return this;
     }
 

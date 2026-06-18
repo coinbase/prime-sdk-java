@@ -1,0 +1,36 @@
+/*
+ * Copyright 2025-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *  Do not edit the class manually.
+ */
+
+package com.coinbase.prime.model.enums;
+
+/**
+ * - CALL_STATUS_OPEN: Margin call is open and not expired - CALL_STATUS_AGED: Margin call is open
+ * and it is expired - CALL_STATUS_SETTLED: Margin call is fully settled - CALL_STATUS_CANCELED:
+ * Margin call was canceled by Credit Risk
+ */
+public enum XMCallStatus {
+  XM_CALL_STATUS_UNSPECIFIED,
+  /** Margin call is open and not expired */
+  CALL_STATUS_OPEN,
+  /** Margin call is open and it is expired */
+  CALL_STATUS_AGED,
+  /** Margin call is fully settled */
+  CALL_STATUS_SETTLED,
+  /** Margin call was canceled by Credit Risk */
+  CALL_STATUS_CANCELED
+}

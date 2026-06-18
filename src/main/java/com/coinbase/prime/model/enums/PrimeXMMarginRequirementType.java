@@ -1,0 +1,36 @@
+/*
+ * Copyright 2026-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *  Do not edit the class manually.
+ */
+
+package com.coinbase.prime.model.enums;
+
+/**
+ * - MARGIN_REQUIREMENT_TYPE_DMR_PLUS_PMR: Integrated (netted) cross-margin requirement for spot
+ * assets and all derivatives contracts. - MARGIN_REQUIREMENT_TYPE_IPMR_PLUS_IFMR: Combined
+ * cross-margin requirement: Integrated Portfolio Margin (IPMR) plus Ineligible Futures Margin
+ * (IFMR).
+ */
+public enum PrimeXMMarginRequirementType {
+  MARGIN_REQUIREMENT_TYPE_UNSPECIFIED,
+  /** Integrated (netted) cross-margin requirement for spot assets and all derivatives contracts. */
+  MARGIN_REQUIREMENT_TYPE_DMR_PLUS_PMR,
+  /**
+   * Combined cross-margin requirement: Integrated Portfolio Margin (IPMR) plus Ineligible Futures
+   * Margin (IFMR).
+   */
+  MARGIN_REQUIREMENT_TYPE_IPMR_PLUS_IFMR
+}

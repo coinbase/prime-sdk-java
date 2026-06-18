@@ -83,15 +83,11 @@ public interface AdvancedTransferService {
    *
    * <p>Retrieve the counterparty ID for a given portfolio
    *
-   * @deprecated Prefer {@link
-   *     com.coinbase.prime.portfolios.PortfoliosService#getPortfolioCounterpartyId(com.coinbase.prime.portfolios.GetPortfolioCounterpartyIdRequest)}
-   *     — this route is scoped to portfolios in the REST API.
    * @param request the request parameters for this operation
    * @return the response payload for this operation
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
-  @Deprecated
   GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
       GetPortfolioCounterpartyIdRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;

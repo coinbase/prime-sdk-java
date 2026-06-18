@@ -1,0 +1,8 @@
+public enum {{classname}} {
+{{#allowableValues}}{{#enumVars}}{{#enumDescription}}
+  /**
+   * {{.}}
+   */
+{{/enumDescription}}
+  {{name}}{{^-last}},{{/-last}}{{#-last}}{{/-last}}
+{{/enumVars}}{{/allowableValues}}}

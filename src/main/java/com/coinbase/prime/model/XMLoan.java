@@ -1,0 +1,200 @@
+/*
+ * Copyright 2025-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *  Do not edit the class manually.
+ */
+
+package com.coinbase.prime.model;
+
+import com.coinbase.prime.model.enums.XMParty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+
+/** XMLoan contains details about a Cross Margin loan */
+public class XMLoan {
+  /** Financing loan UUID */
+  @JsonProperty("loan_id")
+  private String loanId;
+
+  /**
+   * - CBE: Coinbase Exchange, trading venue that can receive the XM loan - FCM: Coinbase’s Futures
+   * Commission Merchant, trading venue that can receive the XM loan
+   */
+  @JsonProperty("loan_party")
+  private XMParty loanParty;
+
+  /** Loan principal currency */
+  @JsonProperty("principal_currency")
+  private String principalCurrency;
+
+  /** Loan principal currency market price */
+  @JsonProperty("principal_currency_market_price")
+  private String principalCurrencyMarketPrice;
+
+  /** Principal amount (nominal) as of loan initiation */
+  @JsonProperty("initial_principal_amount")
+  private String initialPrincipalAmount;
+
+  /** Current outstanding amount (nominal) */
+  @JsonProperty("outstanding_principal_amount")
+  private String outstandingPrincipalAmount;
+
+  /** Timestamp when the loan was created / initiated */
+  @JsonProperty("created_at")
+  private OffsetDateTime createdAt;
+
+  /** Timestamp when the loan was last updated */
+  @JsonProperty("updated_at")
+  private OffsetDateTime updatedAt;
+
+  public XMLoan() {}
+
+  public XMLoan(Builder builder) {
+    this.loanId = builder.loanId;
+    this.loanParty = builder.loanParty;
+    this.principalCurrency = builder.principalCurrency;
+    this.principalCurrencyMarketPrice = builder.principalCurrencyMarketPrice;
+    this.initialPrincipalAmount = builder.initialPrincipalAmount;
+    this.outstandingPrincipalAmount = builder.outstandingPrincipalAmount;
+    this.createdAt = builder.createdAt;
+    this.updatedAt = builder.updatedAt;
+  }
+
+  public String getLoanId() {
+    return loanId;
+  }
+
+  public void setLoanId(String loanId) {
+    this.loanId = loanId;
+  }
+
+  public XMParty getLoanParty() {
+    return loanParty;
+  }
+
+  public void setLoanParty(XMParty loanParty) {
+    this.loanParty = loanParty;
+  }
+
+  public String getPrincipalCurrency() {
+    return principalCurrency;
+  }
+
+  public void setPrincipalCurrency(String principalCurrency) {
+    this.principalCurrency = principalCurrency;
+  }
+
+  public String getPrincipalCurrencyMarketPrice() {
+    return principalCurrencyMarketPrice;
+  }
+
+  public void setPrincipalCurrencyMarketPrice(String principalCurrencyMarketPrice) {
+    this.principalCurrencyMarketPrice = principalCurrencyMarketPrice;
+  }
+
+  public String getInitialPrincipalAmount() {
+    return initialPrincipalAmount;
+  }
+
+  public void setInitialPrincipalAmount(String initialPrincipalAmount) {
+    this.initialPrincipalAmount = initialPrincipalAmount;
+  }
+
+  public String getOutstandingPrincipalAmount() {
+    return outstandingPrincipalAmount;
+  }
+
+  public void setOutstandingPrincipalAmount(String outstandingPrincipalAmount) {
+    this.outstandingPrincipalAmount = outstandingPrincipalAmount;
+  }
+
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public static class Builder {
+    private String loanId;
+
+    private XMParty loanParty;
+
+    private String principalCurrency;
+
+    private String principalCurrencyMarketPrice;
+
+    private String initialPrincipalAmount;
+
+    private String outstandingPrincipalAmount;
+
+    private OffsetDateTime createdAt;
+
+    private OffsetDateTime updatedAt;
+
+    public Builder loanId(String loanId) {
+      this.loanId = loanId;
+      return this;
+    }
+
+    public Builder loanParty(XMParty loanParty) {
+      this.loanParty = loanParty;
+      return this;
+    }
+
+    public Builder principalCurrency(String principalCurrency) {
+      this.principalCurrency = principalCurrency;
+      return this;
+    }
+
+    public Builder principalCurrencyMarketPrice(String principalCurrencyMarketPrice) {
+      this.principalCurrencyMarketPrice = principalCurrencyMarketPrice;
+      return this;
+    }
+
+    public Builder initialPrincipalAmount(String initialPrincipalAmount) {
+      this.initialPrincipalAmount = initialPrincipalAmount;
+      return this;
+    }
+
+    public Builder outstandingPrincipalAmount(String outstandingPrincipalAmount) {
+      this.outstandingPrincipalAmount = outstandingPrincipalAmount;
+      return this;
+    }
+
+    public Builder createdAt(OffsetDateTime createdAt) {
+      this.createdAt = createdAt;
+      return this;
+    }
+
+    public Builder updatedAt(OffsetDateTime updatedAt) {
+      this.updatedAt = updatedAt;
+      return this;
+    }
+
+    public XMLoan build() {
+      return new XMLoan(this);
+    }
+  }
+}

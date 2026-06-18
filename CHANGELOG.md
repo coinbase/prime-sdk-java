@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.10.0] - 2026-JUN-17
+
+### Added
+
+#### New & Updated Models
+
+- **`CrossMarginPrimeDerivativesEquityBreakdown`**, **`CrossMarginPrimeRiskNettingInfo`**, **`CrossMarginPrimeSpotEquityBreakdown`**, **`CrossMarginPrimeXMPosition`**: Cross-margin Prime overview breakdown types
+- **`CustomStablecoinRewardDetails`**: Custom stablecoin reward metadata
+- **`PrimeXMMarginCallThresholds`**, **`PrimeXMMarginRequirementBreakdown`**, **`PrimeXMMarginThreshold`**, **`PrimeXMOffsetCreditBreakdown`**: Prime XM margin detail types
+- **`WalletStakingMetadata`**: Wallet staking metadata payload
+- **`DateOfBirth`**: Date-of-birth value type
+- Regenerated models include class and field Javadoc from OpenAPI `title` / `description`
+
+#### New Enums
+
+- **`PrimeXMHealthStatus`**, **`PrimeXMMarginRequirementType`**, **`PrimeXMMarginThresholdType`**
+- **`XMControlStatus`**, **`XMEntityCallStatus`**, **`XMMarginLevel`**
+- **`ValidatorProvider`**: ETH validator service providers for staking unstake requests
+
+### Changed
+
+- **Cross-margin model renames** (update imports): `XmLoan` → **`XMLoan`**, `XmMarginCall` → **`XMMarginCall`**, `XmPosition` → **`XMPosition`**, `XmRiskNettingInfo` → **`XMRiskNettingInfo`**, `XmSummary` → **`XMSummary`**
+- **Cross-margin enum renames** (update imports): `XmCallStatus` → **`XMCallStatus`**, `XmCallType` → **`XMCallType`**, `XmControlStatus` → **`XMControlStatus`**, `XmEntityCallStatus` → **`XMEntityCallStatus`**, `XmLiquidationStatus` → **`XMLiquidationStatus`**, `XmParty` → **`XMParty`**
+- **`CreateStakeRequest`** / **`CreateUnstakeRequest`**: Added `metadata` (`WalletStakingMetadata`) for wallet staking initiate/unstake
+- **`PortfolioStakingUnstakeRequest`**: Added `validatorProvider` (`ValidatorProvider`) for portfolio unstake
+- Regenerated **`model/`** and **`model/enums/`** from the latest OpenAPI spec via restored **`tools/model-generator`**
+
+### Removed
+
+- **`TravelRuleEntry`**, **`TravelRuleWalletDetails`**, **`Vasp`**: Removed from the public OpenAPI spec
+- **`XmMarginLevel`**: Replaced by **`XMMarginLevel`** (wire values unchanged; update imports)
+- **`PositionsService.listAggregatePositions()`** / **`listPositions()`**: Use **`listAggregateEntityPositions()`** / **`listEntityPositions()`**
+- **`AdvancedTransferService.getPortfolioCounterpartyId()`**: Use **`PortfoliosService.getPortfolioCounterpartyId()`**
+- Unused legacy request/response types superseded by canonical names: **`ListUsersRequest`/`Response`** (use **`ListEntityUsersRequest`/`Response`**), **`CreateTransferRequest`/`Response`** (use **`CreateWalletTransferRequest`/`Response`**), **`CreateWithdrawalRequest`/`Response`** (use **`CreateWalletWithdrawalRequest`/`Response`**), **`CreatePortfolioStakeRequest`/`Response`** (use **`PortfolioStakingInitiateRequest`/`Response`**), **`CreatePortfolioUnstakeRequest`/`Response`** (use **`PortfolioStakingUnstakeRequest`/`Response`**), **`ClaimStakingRewardsRequest`/`Response`** (use **`ClaimRewardsRequest`/`Response`**), **`GetOrderRequest`/`Response`** (use **`GetOrderByOrderIdRequest`/`Response`**), **`ListAggregatePositionsRequest`/`Response`**, **`ListPositionsRequest`/`Response`**, **`advancedtransfer.GetPortfolioCounterpartyIdRequest`/`Response`**
+
+### Notes
+
+- Minor release: OpenAPI spec sync, regenerated models/enums, and service-layer request alignment. No new service methods.
+- Consumers on deprecated position/counterparty helpers or removed legacy types should migrate to the replacements listed above.
+
 ## [1.9.0] - 2026-06-03
 
 ### Changed
@@ -69,7 +109,7 @@
 - **`PositionsService.listAggregatePositions()`** / **`listPositions()`**: same routes as **`listAggregateEntityPositions()`** / **`listEntityPositions()`**; prefer the spec-aligned entity-named methods.
 - **`AdvancedTransferService.getPortfolioCounterpartyId()`**: prefer **`PortfoliosService.getPortfolioCounterpartyId()`** (same HTTP route).
 
-
+### Removed
 
 - **`tools/model-generator`**: removed; maintain models, requests, responses, and services against `apiSpec/prime-public-spec.yaml`
 - **`com.coinbase.prime.advancedtransfers`** package and **`AdvancedTransfersService`**: renamed to **`com.coinbase.prime.advancedtransfer`** and **`AdvancedTransferService`**; **`PrimeServiceFactory.createAdvancedTransfersService()`** replaced by **`createAdvancedTransferService()`**

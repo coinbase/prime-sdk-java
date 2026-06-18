@@ -20,11 +20,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Get FCM Equity */
 public class GetFcmEquityResponse {
-  /** Prior EOD account equity (ending balance + realized P&amp;L + commissions/fees) */
+  /** Prior EOD account equity (ending balance + realized P&L + commissions/fees) */
   @JsonProperty("eod_account_equity")
   private String eodAccountEquity;
 
-  /** Prior EOD unrealized P&amp;L on open futures positions */
+  /** Prior EOD unrealized P&L on open futures positions */
   @JsonProperty("eod_unrealized_pnl")
   private String eodUnrealizedPnl;
 

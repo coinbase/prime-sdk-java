@@ -1,0 +1,56 @@
+/*
+ * Copyright 2025-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *  Do not edit the class manually.
+ */
+
+package com.coinbase.prime.model.enums;
+
+/**
+ * XMEntityCallStatus summarizes the state of open margin calls or debit calls. When multiple calls
+ * exist, the status reflects the highest priority call type. Priority order (highest to lowest):
+ * aged > urgent > standard > debit. - ENTITY_NO_CALL: There are no margin calls or debit calls. -
+ * ENTITY_OPEN_STANDARD_CALL: There is a standard margin call. There may also be debit calls, but
+ * there are no urgent margin calls or expired calls.. - ENTITY_OPEN_URGENT_CALL: There is an urgent
+ * margin call. There may also be standard margin calls or debit calls, but there are no expired
+ * calls. - ENTITY_AGED_CALL: At least one open margin call (standard or urgent) or debit call is
+ * aged. This will trigger the SESSION_LOCKED control status. - ENTITY_OPEN_DEBIT_CALL: There is a
+ * debit call. There are no standard margin calls, urgent margin calls, or expired calls.
+ */
+public enum XMEntityCallStatus {
+  XM_ENTITY_CALL_STATUS_UNSPECIFIED,
+  /** There are no margin calls or debit calls. */
+  ENTITY_NO_CALL,
+  /**
+   * There is a standard margin call. There may also be debit calls, but there are no urgent margin
+   * calls or expired calls..
+   */
+  ENTITY_OPEN_STANDARD_CALL,
+  /**
+   * There is an urgent margin call. There may also be standard margin calls or debit calls, but
+   * there are no expired calls.
+   */
+  ENTITY_OPEN_URGENT_CALL,
+  /**
+   * At least one open margin call (standard or urgent) or debit call is aged. This will trigger the
+   * SESSION_LOCKED control status.
+   */
+  ENTITY_AGED_CALL,
+  /**
+   * There is a debit call. There are no standard margin calls, urgent margin calls, or expired
+   * calls.
+   */
+  ENTITY_OPEN_DEBIT_CALL
+}

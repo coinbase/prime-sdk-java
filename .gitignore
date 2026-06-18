@@ -7,6 +7,8 @@ dependency-reduced-pom.xml
 .classpath
 .project
 .settings
+.factorypath
+.metadata/
 .claude/settings.local.json
 
 .envrc

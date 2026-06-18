@@ -26,22 +26,6 @@ public interface PositionsService {
    *
    * <p>List paginated aggregate positions for a specific entity
    *
-   * @deprecated Prefer {@link #listAggregateEntityPositions(ListAggregateEntityPositionsRequest)} —
-   *     same REST route as the current spec.
-   * @param request the request parameters for this operation
-   * @return the response payload for this operation
-   * @throws CoinbaseClientException if the request fails client-side validation
-   * @throws CoinbasePrimeException if the Prime API returns an error response
-   */
-  @Deprecated
-  ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request)
-      throws CoinbaseClientException, CoinbasePrimeException;
-
-  /**
-   * List Aggregate Entity Positions.
-   *
-   * <p>List paginated aggregate positions for a specific entity
-   *
    * @param request the request parameters for this operation
    * @return the response payload for this operation
    * @throws CoinbaseClientException if the request fails client-side validation
@@ -62,21 +46,5 @@ public interface PositionsService {
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
   ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request)
-      throws CoinbaseClientException, CoinbasePrimeException;
-
-  /**
-   * List Entity Positions.
-   *
-   * <p>List paginated positions for a specific entity
-   *
-   * @deprecated Prefer {@link #listEntityPositions(ListEntityPositionsRequest)} — same REST route
-   *     as the current spec.
-   * @param request the request parameters for this operation
-   * @return the response payload for this operation
-   * @throws CoinbaseClientException if the request fails client-side validation
-   * @throws CoinbasePrimeException if the Prime API returns an error response
-   */
-  @Deprecated
-  ListPositionsResponse listPositions(ListPositionsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 }

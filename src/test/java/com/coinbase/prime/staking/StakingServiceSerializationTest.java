@@ -19,6 +19,8 @@ package com.coinbase.prime.staking;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.WalletStakingMetadata;
+import com.coinbase.prime.model.enums.ValidatorProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,11 +92,13 @@ public class StakingServiceSerializationTest {
             .portfolioId("portfolio-123")
             .walletId("wallet-456")
             .idempotencyKey("idem-key-def")
+            .metadata(new WalletStakingMetadata.Builder().externalId("ext-123").build())
             .build();
 
     String json = objectMapper.writeValueAsString(request);
     assertNotNull(json);
     assertTrue(json.contains("\"idempotency_key\":\"idem-key-def\""));
+    assertTrue(json.contains("\"external_id\":\"ext-123\""));
     assertFalse(json.contains("portfolio_id"));
     assertFalse(json.contains("wallet_id"));
   }
@@ -116,6 +120,24 @@ public class StakingServiceSerializationTest {
   }
 
   // ==================== CreateUnstake Tests ====================
+
+  @Test
+  public void testCreateUnstakeRequestSerialization() throws JsonProcessingException {
+    CreateUnstakeRequest request =
+        new CreateUnstakeRequest.Builder()
+            .portfolioId("portfolio-123")
+            .walletId("wallet-456")
+            .idempotencyKey("idem-key-ghi")
+            .metadata(new WalletStakingMetadata.Builder().externalId("ext-456").build())
+            .build();
+
+    String json = objectMapper.writeValueAsString(request);
+    assertNotNull(json);
+    assertTrue(json.contains("\"idempotency_key\":\"idem-key-ghi\""));
+    assertTrue(json.contains("\"external_id\":\"ext-456\""));
+    assertFalse(json.contains("portfolio_id"));
+    assertFalse(json.contains("wallet_id"));
+  }
 
   @Test
   public void testCreateUnstakeResponseDeserialization() throws JsonProcessingException {
@@ -175,6 +197,7 @@ public class StakingServiceSerializationTest {
             .idempotencyKey("idem-unstake-1")
             .currencySymbol("ETH")
             .amount("5.0")
+            .validatorProvider(ValidatorProvider.VALIDATOR_PROVIDER_FIGMENT)
             .build();
 
     String json = objectMapper.writeValueAsString(request);
@@ -182,6 +205,7 @@ public class StakingServiceSerializationTest {
     assertTrue(json.contains("\"idempotency_key\":\"idem-unstake-1\""));
     assertTrue(json.contains("\"currency_symbol\":\"ETH\""));
     assertTrue(json.contains("\"amount\":\"5.0\""));
+    assertTrue(json.contains("\"validator_provider\":\"VALIDATOR_PROVIDER_FIGMENT\""));
     assertFalse(json.contains("portfolio_id"));
   }
 

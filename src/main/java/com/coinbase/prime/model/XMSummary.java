@@ -1,0 +1,214 @@
+/*
+ * Copyright 2025-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *  Do not edit the class manually.
+ */
+
+package com.coinbase.prime.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/** XMSummary is the realtime evaluated XM margin model, containing positions and netting info */
+public class XMSummary {
+  /** Cross Margin Margin Requirement (XMMR) notional */
+  @JsonProperty("margin_requirement")
+  private String marginRequirement;
+
+  /** Equity notional */
+  @JsonProperty("account_equity")
+  private String accountEquity;
+
+  /** Equity - XMMR (margin excess is > 0) */
+  @JsonProperty("margin_excess_shortfall")
+  private String marginExcessShortfall;
+
+  /** Credit consumed from Cross Margin Credit Limit (XMCL) */
+  @JsonProperty("consumed_credit")
+  private String consumedCredit;
+
+  /** XM Credit Limit (XMCL) is the maximum notional USD of total fiat and digital asset loans */
+  @JsonProperty("xm_credit_limit")
+  private String xmCreditLimit;
+
+  /** XM Margin Limit (XMML) is the maximum notional USD deficit */
+  @JsonProperty("xm_margin_limit")
+  private String xmMarginLimit;
+
+  /** Equity attributed by spot */
+  @JsonProperty("spot_equity")
+  private String spotEquity;
+
+  /** Equity attributed by futures */
+  @JsonProperty("futures_equity")
+  private String futuresEquity;
+
+  @JsonProperty("risk_netting_info")
+  private XMRiskNettingInfo riskNettingInfo;
+
+  public XMSummary() {}
+
+  public XMSummary(Builder builder) {
+    this.marginRequirement = builder.marginRequirement;
+    this.accountEquity = builder.accountEquity;
+    this.marginExcessShortfall = builder.marginExcessShortfall;
+    this.consumedCredit = builder.consumedCredit;
+    this.xmCreditLimit = builder.xmCreditLimit;
+    this.xmMarginLimit = builder.xmMarginLimit;
+    this.spotEquity = builder.spotEquity;
+    this.futuresEquity = builder.futuresEquity;
+    this.riskNettingInfo = builder.riskNettingInfo;
+  }
+
+  public String getMarginRequirement() {
+    return marginRequirement;
+  }
+
+  public void setMarginRequirement(String marginRequirement) {
+    this.marginRequirement = marginRequirement;
+  }
+
+  public String getAccountEquity() {
+    return accountEquity;
+  }
+
+  public void setAccountEquity(String accountEquity) {
+    this.accountEquity = accountEquity;
+  }
+
+  public String getMarginExcessShortfall() {
+    return marginExcessShortfall;
+  }
+
+  public void setMarginExcessShortfall(String marginExcessShortfall) {
+    this.marginExcessShortfall = marginExcessShortfall;
+  }
+
+  public String getConsumedCredit() {
+    return consumedCredit;
+  }
+
+  public void setConsumedCredit(String consumedCredit) {
+    this.consumedCredit = consumedCredit;
+  }
+
+  public String getXMCreditLimit() {
+    return xmCreditLimit;
+  }
+
+  public void setXMCreditLimit(String xmCreditLimit) {
+    this.xmCreditLimit = xmCreditLimit;
+  }
+
+  public String getXMMarginLimit() {
+    return xmMarginLimit;
+  }
+
+  public void setXMMarginLimit(String xmMarginLimit) {
+    this.xmMarginLimit = xmMarginLimit;
+  }
+
+  public String getSpotEquity() {
+    return spotEquity;
+  }
+
+  public void setSpotEquity(String spotEquity) {
+    this.spotEquity = spotEquity;
+  }
+
+  public String getFuturesEquity() {
+    return futuresEquity;
+  }
+
+  public void setFuturesEquity(String futuresEquity) {
+    this.futuresEquity = futuresEquity;
+  }
+
+  public XMRiskNettingInfo getRiskNettingInfo() {
+    return riskNettingInfo;
+  }
+
+  public void setRiskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
+    this.riskNettingInfo = riskNettingInfo;
+  }
+
+  public static class Builder {
+    private String marginRequirement;
+
+    private String accountEquity;
+
+    private String marginExcessShortfall;
+
+    private String consumedCredit;
+
+    private String xmCreditLimit;
+
+    private String xmMarginLimit;
+
+    private String spotEquity;
+
+    private String futuresEquity;
+
+    private XMRiskNettingInfo riskNettingInfo;
+
+    public Builder marginRequirement(String marginRequirement) {
+      this.marginRequirement = marginRequirement;
+      return this;
+    }
+
+    public Builder accountEquity(String accountEquity) {
+      this.accountEquity = accountEquity;
+      return this;
+    }
+
+    public Builder marginExcessShortfall(String marginExcessShortfall) {
+      this.marginExcessShortfall = marginExcessShortfall;
+      return this;
+    }
+
+    public Builder consumedCredit(String consumedCredit) {
+      this.consumedCredit = consumedCredit;
+      return this;
+    }
+
+    public Builder xmCreditLimit(String xmCreditLimit) {
+      this.xmCreditLimit = xmCreditLimit;
+      return this;
+    }
+
+    public Builder xmMarginLimit(String xmMarginLimit) {
+      this.xmMarginLimit = xmMarginLimit;
+      return this;
+    }
+
+    public Builder spotEquity(String spotEquity) {
+      this.spotEquity = spotEquity;
+      return this;
+    }
+
+    public Builder futuresEquity(String futuresEquity) {
+      this.futuresEquity = futuresEquity;
+      return this;
+    }
+
+    public Builder riskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
+      this.riskNettingInfo = riskNettingInfo;
+      return this;
+    }
+
+    public XMSummary build() {
+      return new XMSummary(this);
+    }
+  }
+}

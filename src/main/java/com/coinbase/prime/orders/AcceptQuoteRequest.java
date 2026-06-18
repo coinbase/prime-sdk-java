@@ -30,7 +30,7 @@ public class AcceptQuoteRequest {
   @JsonIgnore
   private String portfolioId;
 
-  /** The ID of the product being traded for the order (e.g. &#x60;BTC-USD&#x60;) */
+  /** The ID of the product being traded for the order (e.g. `BTC-USD`) */
   @JsonProperty("product_id")
   private String productId;
 
