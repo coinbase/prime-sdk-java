@@ -26,3 +26,6 @@ jobs:
 
       - name: Test
         run: mvn -B test
+
+      - name: Javadoc
+        run: mvn -B javadoc:javadoc
