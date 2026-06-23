@@ -21,7 +21,7 @@
   <description>Sample Java SDK for the Coinbase Prime REST APIs</description>
   <groupId>com.coinbase.prime</groupId>
   <url>https://github.com/coinbase/prime-sdk-java</url>
-  <version>1.10.0</version>
+  <version>1.10.1</version>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -96,6 +96,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.7.0</version>
+        <configuration>
+          <doclint>none</doclint>
+        </configuration>
         <executions>
           <execution>
             <id>attach-javadocs</id>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1] - 2026-JUN-23
+
+### Fixed
+
+- **Maven Central publish**: Javadoc generation failed on model comments containing `>`, `>=`, or `->` from OpenAPI descriptions (e.g. margin threshold comparisons, call priority ordering). Disabled doclint HTML checks in `maven-javadoc-plugin` so generated comments stay human-readable while Javadoc still builds for release.
+- **CI**: PR workflow runs `mvn javadoc:javadoc` so Javadoc failures are caught before release.
+
 ## [1.10.0] - 2026-JUN-17
 
 ### Added
