@@ -5,15 +5,13 @@
 
 ## Overview
 
-The *Coinbase Prime Java SDK* is a sample library that demonstrates the usage of the [Coinbase Prime](https://prime.coinbase.com/) API via its [REST APIs](https://docs.cdp.coinbase.com/prime/reference).
+The *Coinbase Prime Java SDK* is a Java client library for the [Coinbase Prime](https://prime.coinbase.com/) [REST APIs](https://docs.cdp.coinbase.com/prime/reference).
 
 **Repository:** [coinbase/prime-sdk-java](https://github.com/coinbase/prime-sdk-java)
 
 ## License
 
-The *Coinbase Prime Java SDK* sample library is free and open source and released under the [Apache License, Version 2.0](LICENSE).
-
-The application and code are only available for demonstration purposes.
+The *Coinbase Prime Java SDK* is free and open source and released under the [Apache License, Version 2.0](LICENSE).
 
 ## Usage
 
@@ -104,7 +102,7 @@ Maven example:
 
 ## Build
 
-To build the sample library, ensure that Java Development Kit (JDK) 11+ is installed and then run:
+To build the SDK, ensure that Java Development Kit (JDK) 11+ is installed and then run:
 
 ```bash
 mvn clean install
