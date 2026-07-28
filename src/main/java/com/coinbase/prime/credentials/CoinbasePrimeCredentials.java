@@ -18,12 +18,14 @@ package com.coinbase.prime.credentials;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
+import com.coinbase.core.credentials.Signer;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Map;
 import javax.crypto.Mac;
@@ -42,6 +44,8 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
   @JsonProperty(required = false)
   private String svcAccountId;
 
+  private Signer signer;
+
   public CoinbasePrimeCredentials(String credentialsJson) throws CoinbaseClientException {
     ObjectMapper mapper = new ObjectMapper();
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -55,6 +59,48 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     } catch (Throwable e) {
       throw new CoinbaseClientException("Failed to parse credentials", e);
     }
+
+    if (isNullOrEmpty(this.accessKey)) {
+      throw new CoinbaseClientException("Access key is required");
+    }
+    if (isNullOrEmpty(this.passphrase)) {
+      throw new CoinbaseClientException("Passphrase is required");
+    }
+    if (isNullOrEmpty(this.signingKey)) {
+      throw new CoinbaseClientException("Signing key is required");
+    }
+  }
+
+  /**
+   * Constructor for a custom {@link Signer} (e.g. an HSM-backed signer), parsed from the same
+   * credentials JSON as {@link #CoinbasePrimeCredentials(String)}. The signing key is managed
+   * entirely by the {@link Signer} implementation, so {@code signingKey} is not required in the
+   * JSON for this constructor.
+   */
+  public CoinbasePrimeCredentials(String credentialsJson, Signer signer)
+      throws CoinbaseClientException {
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    try {
+      CoinbasePrimeCredentials credentials =
+          mapper.readValue(credentialsJson, CoinbasePrimeCredentials.class);
+      this.accessKey = credentials.getAccessKey();
+      this.passphrase = credentials.getPassphrase();
+      this.svcAccountId = credentials.getSvcAccountId();
+    } catch (Throwable e) {
+      throw new CoinbaseClientException("Failed to parse credentials", e);
+    }
+
+    if (isNullOrEmpty(this.accessKey)) {
+      throw new CoinbaseClientException("Access key is required");
+    }
+    if (isNullOrEmpty(this.passphrase)) {
+      throw new CoinbaseClientException("Passphrase is required");
+    }
+    if (signer == null) {
+      throw new CoinbaseClientException("Signer is required");
+    }
+    this.signer = signer;
   }
 
   /** Constructor for the standard REST API. */
@@ -109,12 +155,13 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     this.passphrase = builder.passphrase;
     this.signingKey = builder.signingKey;
     this.svcAccountId = builder.svcAccountId;
+    this.signer = builder.signer;
   }
 
   @Override
   public Map<String, String> generateAuthHeaders(String method, java.net.URI uri, String body)
       throws CoinbaseClientException {
-    long timestamp = System.currentTimeMillis() / 1000;
+    long timestamp = Instant.now().getEpochSecond();
     String path = uri.getPath();
     String signature = sign(timestamp, method, path, body);
 
@@ -128,14 +175,19 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
   private String sign(long timestamp, String method, String path, String body)
       throws CoinbaseClientException {
-    try {
-      String message = String.format("%s%s%s%s", timestamp, method, path, body);
+    String message = String.format("%s%s%s%s", timestamp, method, path, body);
+    byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
 
+    if (this.signer != null) {
+      return Base64.getEncoder().encodeToString(this.signer.sign(messageBytes));
+    }
+
+    try {
       byte[] hmacKey = this.signingKey.getBytes(StandardCharsets.UTF_8);
       Mac mac = Mac.getInstance("HmacSHA256");
       mac.init(new SecretKeySpec(hmacKey, "HmacSHA256"));
 
-      byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
+      byte[] signature = mac.doFinal(messageBytes);
       return Base64.getEncoder().encodeToString(signature);
     } catch (Throwable e) {
       throw new CoinbaseClientException("Failed to generate signature", e);
@@ -179,6 +231,7 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     private String passphrase;
     private String signingKey;
     private String svcAccountId;
+    private Signer signer;
 
     public Builder() {}
 
@@ -202,6 +255,15 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
       return this;
     }
 
+    /**
+     * Sets a custom {@link Signer} (e.g. an HSM-backed signer) to use instead of the built-in
+     * HMAC-SHA256 implementation. When set, {@code signingKey} is not required.
+     */
+    public Builder signer(Signer signer) {
+      this.signer = signer;
+      return this;
+    }
+
     public CoinbaseCredentials build() throws CoinbaseClientException {
       this.validate();
       return new CoinbasePrimeCredentials(this);
@@ -214,7 +276,7 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
       if (isNullOrEmpty(this.passphrase)) {
         throw new CoinbaseClientException("Passphrase is required");
       }
-      if (isNullOrEmpty(this.signingKey)) {
+      if (this.signer == null && isNullOrEmpty(this.signingKey)) {
         throw new CoinbaseClientException("Signing key is required");
       }
     }
