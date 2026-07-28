@@ -57,10 +57,10 @@ public class ListAssetsWithCustomSigner {
   }
 
   /**
-   * Stands in for an HSM/KMS client. Receives the exact message bytes the SDK would otherwise
-   * hash itself ({@code timestamp + method + path + body}), returns raw signature bytes — no
-   * string encoding, no Base64. The SDK Base64-encodes the result before attaching it as the
-   * {@code X-CB-ACCESS-SIGNATURE} header.
+   * Stands in for an HSM/KMS client. Receives the exact message bytes the SDK would otherwise hash
+   * itself ({@code timestamp + method + path + body}), returns raw signature bytes — no string
+   * encoding, no Base64. The SDK Base64-encodes the result before attaching it as the {@code
+   * X-CB-ACCESS-SIGNATURE} header.
    */
   private static class LocalHmacStandInForHsm implements Signer {
     private final byte[] keyBytes;
