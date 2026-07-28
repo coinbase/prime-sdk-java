@@ -18,10 +18,15 @@ package com.coinbase.prime.credentials;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.coinbase.core.credentials.Signer;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.utils.Constants;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -99,5 +104,111 @@ public class CoinbasePrimeCredentialsTest {
         "Passphrase header should be present");
     assertTrue(
         headers.containsKey(Constants.CB_USER_AGENT_HEADER), "User-Agent header should be present");
+  }
+
+  @Test
+  public void testDefaultSignatureMatchesIndependentlyComputedHmacSha256() throws Exception {
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = credentials.generateAuthHeaders("GET", testUri, "");
+
+    // Recompute the expected signature independently of CoinbasePrimeCredentials#sign, using the
+    // exact timestamp it produced, to confirm the real HMAC-SHA256 path (not a stubbed Signer)
+    // produces a byte-correct signature for a known key/message.
+    String timestamp = headers.get(Constants.CB_ACCESS_TIMESTAMP_HEADER);
+    String message = timestamp + "GET" + testUri.getPath();
+
+    Mac mac = Mac.getInstance("HmacSHA256");
+    mac.init(new SecretKeySpec("test-signing-key".getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+    String expectedSignature =
+        Base64.getEncoder().encodeToString(mac.doFinal(message.getBytes(StandardCharsets.UTF_8)));
+
+    assertEquals(expectedSignature, headers.get(Constants.CB_ACCESS_SIGNATURE_HEADER));
+  }
+
+  private static final String CREDENTIALS_JSON_WITHOUT_SIGNING_KEY =
+      "{\"accessKey\":\"test-access-key\",\"passphrase\":\"test-passphrase\"}";
+
+  @Test
+  public void testCustomSignerIsUsedForSignature() throws CoinbaseClientException {
+    byte[] fixedSignature = "custom-signature".getBytes(StandardCharsets.UTF_8);
+    Signer customSigner = message -> fixedSignature;
+    CoinbasePrimeCredentials customCredentials =
+        new CoinbasePrimeCredentials(CREDENTIALS_JSON_WITHOUT_SIGNING_KEY, customSigner);
+
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = customCredentials.generateAuthHeaders("GET", testUri, "");
+
+    assertEquals(
+        Base64.getEncoder().encodeToString(fixedSignature),
+        headers.get(Constants.CB_ACCESS_SIGNATURE_HEADER),
+        "Signature header should be the Base64 encoding of the custom Signer's output");
+  }
+
+  @Test
+  public void testCustomSignerReceivesAssembledMessageBytes() throws CoinbaseClientException {
+    java.util.concurrent.atomic.AtomicReference<byte[]> capturedMessage =
+        new java.util.concurrent.atomic.AtomicReference<>();
+    Signer customSigner =
+        message -> {
+          capturedMessage.set(message);
+          return "irrelevant-signature".getBytes(StandardCharsets.UTF_8);
+        };
+    CoinbasePrimeCredentials customCredentials =
+        new CoinbasePrimeCredentials(CREDENTIALS_JSON_WITHOUT_SIGNING_KEY, customSigner);
+
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = customCredentials.generateAuthHeaders("GET", testUri, "");
+
+    String timestamp = headers.get(Constants.CB_ACCESS_TIMESTAMP_HEADER);
+    String expectedMessage = timestamp + "GET" + testUri.getPath();
+    assertArrayEquals(expectedMessage.getBytes(StandardCharsets.UTF_8), capturedMessage.get());
+  }
+
+  @Test
+  public void testJsonConstructorRequiresSignerNonNull() {
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new CoinbasePrimeCredentials(CREDENTIALS_JSON_WITHOUT_SIGNING_KEY, null));
+  }
+
+  @Test
+  public void testJsonConstructorWithSignerRequiresAccessKey() {
+    Signer customSigner = message -> "custom-signature".getBytes(StandardCharsets.UTF_8);
+    assertThrows(
+        CoinbaseClientException.class,
+        () -> new CoinbasePrimeCredentials("{\"passphrase\":\"test-passphrase\"}", customSigner));
+  }
+
+  @Test
+  public void testBuilderDoesNotRequireSigningKeyWhenSignerIsSet() throws CoinbaseClientException {
+    byte[] fixedSignature = "custom-signature".getBytes(StandardCharsets.UTF_8);
+    Signer customSigner = message -> fixedSignature;
+    CoinbasePrimeCredentials customCredentials =
+        (CoinbasePrimeCredentials)
+            new CoinbasePrimeCredentials.Builder()
+                .accessKey("test-access-key")
+                .passphrase("test-passphrase")
+                .signer(customSigner)
+                .build();
+
+    URI testUri = URI.create("https://api.prime.coinbase.com/v1/portfolios");
+    Map<String, String> headers = customCredentials.generateAuthHeaders("GET", testUri, "");
+
+    assertEquals(
+        Base64.getEncoder().encodeToString(fixedSignature),
+        headers.get(Constants.CB_ACCESS_SIGNATURE_HEADER));
+  }
+
+  @Test
+  public void testBuilderStillRequiresSigningKeyWithoutSigner() {
+    CoinbaseClientException exception =
+        assertThrows(
+            CoinbaseClientException.class,
+            () ->
+                new CoinbasePrimeCredentials.Builder()
+                    .accessKey("test-access-key")
+                    .passphrase("test-passphrase")
+                    .build());
+    assertEquals("Signing key is required", exception.getMessage());
   }
 }

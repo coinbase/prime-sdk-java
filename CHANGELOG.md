@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.10.3] - 2026-JUL-28
+
+### Added
+
+- Added custom signer support for separate signing key storage.
+
 ## [1.10.1] - 2026-JUN-23
 
 ### Fixed
