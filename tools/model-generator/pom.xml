@@ -18,7 +18,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <openapi.generator.version>7.14.0</openapi.generator.version>
-        <jackson.version>2.16.1</jackson.version>
+        <jackson.version>2.18.9</jackson.version>
         <javapoet.version>1.13.0</javapoet.version>
         <snakeyaml.version>2.2</snakeyaml.version>
     </properties>
