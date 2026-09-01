@@ -489,4 +489,81 @@ public class FinancingServiceSerializationTest {
     assertNotNull(response.getObligations());
     assertEquals(2, response.getObligations().length);
   }
+
+  @Test
+  public void testGetConversionFeesResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"fees\":["
+            + "{\"from_currency\":\"USDC\",\"to_currency\":\"USD\",\"net_conversion_volume_mtd\":\"100.00\"}"
+            + "]"
+            + "}";
+    GetConversionFeesResponse response =
+        objectMapper.readValue(json, GetConversionFeesResponse.class);
+    assertNotNull(response);
+    assertEquals(1, response.getFees().length);
+    assertEquals("USDC", response.getFees()[0].getFromCurrency());
+  }
+
+  @Test
+  public void testGetXmLiquidationRequestOmitsEntityId() throws JsonProcessingException {
+    GetXmLiquidationRequest request =
+        new GetXmLiquidationRequest.Builder()
+            .entityId("entity-123")
+            .liquidationId("liq-1")
+            .build();
+    String json = objectMapper.writeValueAsString(request);
+    assertTrue(json.contains("\"liquidation_id\":\"liq-1\""));
+    assertFalse(json.contains("entity_id"));
+  }
+
+  @Test
+  public void testGetXmLiquidationResponseDeserialization() throws JsonProcessingException {
+    String json = "{\"liquidation\":{\"liquidation_id\":\"liq-1\"}}";
+    GetXmLiquidationResponse response =
+        objectMapper.readValue(json, GetXmLiquidationResponse.class);
+    assertNotNull(response.getLiquidation());
+    assertEquals("liq-1", response.getLiquidation().getLiquidationId());
+  }
+
+  @Test
+  public void testListXmLiquidationsRequestSerialization() throws JsonProcessingException {
+    ListXmLiquidationsRequest request =
+        new ListXmLiquidationsRequest.Builder()
+            .entityId("entity-123")
+            .status(com.coinbase.prime.model.enums.XMLiquidationStatus.XM_LIQUIDATION_STATUS_LIQUIDATED)
+            .build();
+    String json = objectMapper.writeValueAsString(request);
+    assertTrue(json.contains("\"status\":\"XM_LIQUIDATION_STATUS_LIQUIDATED\""));
+    assertFalse(json.contains("entity_id"));
+  }
+
+  @Test
+  public void testListXmLiquidationsResponseDeserialization() throws JsonProcessingException {
+    String json = "{\"liquidations\":[{\"liquidation_id\":\"liq-1\"}]}";
+    ListXmLiquidationsResponse response =
+        objectMapper.readValue(json, ListXmLiquidationsResponse.class);
+    assertEquals(1, response.getLiquidations().length);
+    assertEquals("liq-1", response.getLiquidations()[0].getLiquidationId());
+  }
+
+  @Test
+  public void testGetEntityRewardsRateResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{\"current_rate\":\"0.045\",\"available_rates\":[{\"rate\":\"0.045\",\"lower_limit\":\"0\"}]}";
+    GetEntityRewardsRateResponse response =
+        objectMapper.readValue(json, GetEntityRewardsRateResponse.class);
+    assertEquals("0.045", response.getCurrentRate());
+    assertEquals(1, response.getAvailableRates().length);
+    assertEquals("0.045", response.getAvailableRates()[0].getRate());
+  }
+
+  @Test
+  public void testGetPortfolioRewardsRateResponseDeserialization() throws JsonProcessingException {
+    String json = "{\"current_rate\":\"0.03\",\"available_rates\":[]}";
+    GetPortfolioRewardsRateResponse response =
+        objectMapper.readValue(json, GetPortfolioRewardsRateResponse.class);
+    assertEquals("0.03", response.getCurrentRate());
+    assertEquals(0, response.getAvailableRates().length);
+  }
 }

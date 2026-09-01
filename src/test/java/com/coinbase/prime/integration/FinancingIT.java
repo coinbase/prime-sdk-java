@@ -354,4 +354,55 @@ public class FinancingIT extends BaseIntegrationTest {
                 .build());
     assertNotNull(response);
   }
+
+  @Test
+  public void testGetConversionFees() throws Exception {
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetConversionFeesResponse response = service.getConversionFees();
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetXmLiquidation() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetXmLiquidationResponse response =
+        service.getXmLiquidation(new GetXmLiquidationRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testListXmLiquidations() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListXmLiquidationsResponse response =
+        service.listXmLiquidations(
+            new ListXmLiquidationsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetEntityRewardsRate() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetEntityRewardsRateResponse response =
+        service.getEntityRewardsRate(
+            new GetEntityRewardsRateRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetPortfolioRewardsRate() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioRewardsRateResponse response =
+        service.getPortfolioRewardsRate(
+            new GetPortfolioRewardsRateRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 }

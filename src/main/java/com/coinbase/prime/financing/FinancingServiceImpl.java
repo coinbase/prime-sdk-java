@@ -247,4 +247,58 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         List.of(200),
         new TypeReference<GetMarketDataResponse>() {});
   }
+
+  @Override
+  public GetConversionFeesResponse getConversionFees() throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        "/conversion/fees",
+        null,
+        List.of(200),
+        new TypeReference<GetConversionFeesResponse>() {});
+  }
+
+  @Override
+  public GetXmLiquidationResponse getXmLiquidation(GetXmLiquidationRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/cross_margin/liquidation", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetXmLiquidationResponse>() {});
+  }
+
+  @Override
+  public ListXmLiquidationsResponse listXmLiquidations(ListXmLiquidationsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/cross_margin/liquidations", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListXmLiquidationsResponse>() {});
+  }
+
+  @Override
+  public GetEntityRewardsRateResponse getEntityRewardsRate(GetEntityRewardsRateRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/rewards/rate", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetEntityRewardsRateResponse>() {});
+  }
+
+  @Override
+  public GetPortfolioRewardsRateResponse getPortfolioRewardsRate(
+      GetPortfolioRewardsRateRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/rewards/rate", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioRewardsRateResponse>() {});
+  }
 }

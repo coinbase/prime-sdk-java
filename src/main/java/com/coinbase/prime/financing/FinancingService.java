@@ -278,4 +278,71 @@ public interface FinancingService {
    */
   GetMarketDataResponse getMarketData(GetMarketDataRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Conversion Fees.
+   *
+   * <p>Get your organization's stablecoin conversion fee tiers and month-to-date net conversion
+   * volume per currency. The organization is resolved from the authenticated API key, which must
+   * be organization-scoped.
+   *
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetConversionFeesResponse getConversionFees()
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Cross Margin Liquidation.
+   *
+   * <p>Gets detailed liquidation data for an XM customer. Returns the active or most recent
+   * liquidation by default.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetXmLiquidationResponse getXmLiquidation(GetXmLiquidationRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Cross Margin Liquidations.
+   *
+   * <p>Lists historical liquidation records for an XM customer
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  ListXmLiquidationsResponse listXmLiquidations(ListXmLiquidationsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Entity Rewards Rate (Beta).
+   *
+   * <p>Returns the current rewards rate and available rate tiers for the entity.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetEntityRewardsRateResponse getEntityRewardsRate(GetEntityRewardsRateRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Portfolio Rewards Rate (Beta).
+   *
+   * <p>Returns the current rewards rate and available rate tiers for the portfolio.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetPortfolioRewardsRateResponse getPortfolioRewardsRate(GetPortfolioRewardsRateRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }
