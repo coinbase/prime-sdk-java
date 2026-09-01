@@ -17,78 +17,81 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** TFAsset represents an asset eligible for Trade Finance with adjustment factors */
 public class TfAsset {
-  /** The asset symbol */
-  private String symbol;
-
-  /** The asset adjustment factor for Trade Finance */
-  @JsonProperty("asset_adjustment")
-  private String assetAdjustment;
-
-  /** The liability adjustment factor for Trade Finance */
-  @JsonProperty("liability_adjustment")
-  private String liabilityAdjustment;
-
-  public TfAsset() {}
-
-  public TfAsset(Builder builder) {
-    this.symbol = builder.symbol;
-    this.assetAdjustment = builder.assetAdjustment;
-    this.liabilityAdjustment = builder.liabilityAdjustment;
-  }
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
-
-  public String getAssetAdjustment() {
-    return assetAdjustment;
-  }
-
-  public void setAssetAdjustment(String assetAdjustment) {
-    this.assetAdjustment = assetAdjustment;
-  }
-
-  public String getLiabilityAdjustment() {
-    return liabilityAdjustment;
-  }
-
-  public void setLiabilityAdjustment(String liabilityAdjustment) {
-    this.liabilityAdjustment = liabilityAdjustment;
-  }
-
-  public static class Builder {
+    /**
+     * The asset symbol
+     */
     private String symbol;
 
+    /**
+     * The asset adjustment factor for Trade Finance
+     */
+    @JsonProperty("asset_adjustment")
     private String assetAdjustment;
 
+    /**
+     * The liability adjustment factor for Trade Finance
+     */
+    @JsonProperty("liability_adjustment")
     private String liabilityAdjustment;
 
-    public Builder symbol(String symbol) {
-      this.symbol = symbol;
-      return this;
+    public TfAsset() {
     }
 
-    public Builder assetAdjustment(String assetAdjustment) {
-      this.assetAdjustment = assetAdjustment;
-      return this;
+    public TfAsset(Builder builder) {
+        this.symbol = builder.symbol;
+        this.assetAdjustment = builder.assetAdjustment;
+        this.liabilityAdjustment = builder.liabilityAdjustment;
+    }
+    public String getSymbol() {
+        return symbol;
     }
 
-    public Builder liabilityAdjustment(String liabilityAdjustment) {
-      this.liabilityAdjustment = liabilityAdjustment;
-      return this;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+    public String getAssetAdjustment() {
+        return assetAdjustment;
     }
 
-    public TfAsset build() {
-      return new TfAsset(this);
+    public void setAssetAdjustment(String assetAdjustment) {
+        this.assetAdjustment = assetAdjustment;
     }
-  }
+    public String getLiabilityAdjustment() {
+        return liabilityAdjustment;
+    }
+
+    public void setLiabilityAdjustment(String liabilityAdjustment) {
+        this.liabilityAdjustment = liabilityAdjustment;
+    }
+    public static class Builder {
+        private String symbol;
+
+        private String assetAdjustment;
+
+        private String liabilityAdjustment;
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder assetAdjustment(String assetAdjustment) {
+            this.assetAdjustment = assetAdjustment;
+            return this;
+        }
+
+        public Builder liabilityAdjustment(String liabilityAdjustment) {
+            this.liabilityAdjustment = liabilityAdjustment;
+            return this;
+        }
+
+        public TfAsset build() {
+            return new TfAsset(this);
+        }
+    }
 }
+

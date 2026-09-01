@@ -17,117 +17,114 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.AdvancedTransferState;
 import com.coinbase.prime.model.enums.AdvancedTransferType;
+import com.coinbase.prime.model.BlindMatchMetadata;
+import com.coinbase.prime.model.FundMovement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** AdvancedTransfer represents a complex transfer operation such as a blind match settlement. */
 public class AdvancedTransfer {
-  private String id;
-
-  /** AdvancedTransferType specifies the type of advanced transfer. */
-  private AdvancedTransferType type;
-
-  /** AdvancedTransferState represents the lifecycle state of an advanced transfer. */
-  private AdvancedTransferState state;
-
-  @JsonProperty("fund_movements")
-  private List<FundMovement> fundMovements;
-
-  /** BlindMatchMetadata contains metadata specific to blind match advanced transfers. */
-  @JsonProperty("blind_match_metadata")
-  private BlindMatchMetadata blindMatchMetadata;
-
-  public AdvancedTransfer() {}
-
-  public AdvancedTransfer(Builder builder) {
-    this.id = builder.id;
-    this.type = builder.type;
-    this.state = builder.state;
-    this.fundMovements = builder.fundMovements;
-    this.blindMatchMetadata = builder.blindMatchMetadata;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public AdvancedTransferType getType() {
-    return type;
-  }
-
-  public void setType(AdvancedTransferType type) {
-    this.type = type;
-  }
-
-  public AdvancedTransferState getState() {
-    return state;
-  }
-
-  public void setState(AdvancedTransferState state) {
-    this.state = state;
-  }
-
-  public List<FundMovement> getFundMovements() {
-    return fundMovements;
-  }
-
-  public void setFundMovements(List<FundMovement> fundMovements) {
-    this.fundMovements = fundMovements;
-  }
-
-  public BlindMatchMetadata getBlindMatchMetadata() {
-    return blindMatchMetadata;
-  }
-
-  public void setBlindMatchMetadata(BlindMatchMetadata blindMatchMetadata) {
-    this.blindMatchMetadata = blindMatchMetadata;
-  }
-
-  public static class Builder {
     private String id;
 
+    /** AdvancedTransferType specifies the type of advanced transfer. */
     private AdvancedTransferType type;
 
+    /** AdvancedTransferState represents the lifecycle state of an advanced transfer. */
     private AdvancedTransferState state;
 
+    @JsonProperty("fund_movements")
     private List<FundMovement> fundMovements;
 
+    /** BlindMatchMetadata contains metadata specific to blind match advanced transfers. */
+    @JsonProperty("blind_match_metadata")
     private BlindMatchMetadata blindMatchMetadata;
 
-    public Builder id(String id) {
-      this.id = id;
-      return this;
+    public AdvancedTransfer() {
     }
 
-    public Builder type(AdvancedTransferType type) {
-      this.type = type;
-      return this;
+    public AdvancedTransfer(Builder builder) {
+        this.id = builder.id;
+        this.type = builder.type;
+        this.state = builder.state;
+        this.fundMovements = builder.fundMovements;
+        this.blindMatchMetadata = builder.blindMatchMetadata;
+    }
+    public String getId() {
+        return id;
     }
 
-    public Builder state(AdvancedTransferState state) {
-      this.state = state;
-      return this;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public AdvancedTransferType getType() {
+        return type;
     }
 
-    public Builder fundMovements(List<FundMovement> fundMovements) {
-      this.fundMovements = fundMovements;
-      return this;
+    public void setType(AdvancedTransferType type) {
+        this.type = type;
+    }
+    public AdvancedTransferState getState() {
+        return state;
     }
 
-    public Builder blindMatchMetadata(BlindMatchMetadata blindMatchMetadata) {
-      this.blindMatchMetadata = blindMatchMetadata;
-      return this;
+    public void setState(AdvancedTransferState state) {
+        this.state = state;
+    }
+    public List<FundMovement> getFundMovements() {
+        return fundMovements;
     }
 
-    public AdvancedTransfer build() {
-      return new AdvancedTransfer(this);
+    public void setFundMovements(List<FundMovement> fundMovements) {
+        this.fundMovements = fundMovements;
     }
-  }
+    public BlindMatchMetadata getBlindMatchMetadata() {
+        return blindMatchMetadata;
+    }
+
+    public void setBlindMatchMetadata(BlindMatchMetadata blindMatchMetadata) {
+        this.blindMatchMetadata = blindMatchMetadata;
+    }
+    public static class Builder {
+        private String id;
+
+        private AdvancedTransferType type;
+
+        private AdvancedTransferState state;
+
+        private List<FundMovement> fundMovements;
+
+        private BlindMatchMetadata blindMatchMetadata;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder type(AdvancedTransferType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder state(AdvancedTransferState state) {
+            this.state = state;
+            return this;
+        }
+
+        public Builder fundMovements(List<FundMovement> fundMovements) {
+            this.fundMovements = fundMovements;
+            return this;
+        }
+
+        public Builder blindMatchMetadata(BlindMatchMetadata blindMatchMetadata) {
+            this.blindMatchMetadata = blindMatchMetadata;
+            return this;
+        }
+
+        public AdvancedTransfer build() {
+            return new AdvancedTransfer(this);
+        }
+    }
 }
+

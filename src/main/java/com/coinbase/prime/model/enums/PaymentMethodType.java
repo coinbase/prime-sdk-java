@@ -19,14 +19,23 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: Silvergate
- * exchange network - METHOD_SWIFT: Swift
+ * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value
+ * - METHOD_WIRE: Wire transfer
+ * - METHOD_SEN: Silvergate exchange network
+ * - METHOD_SWIFT: Swift
  */
 public enum PaymentMethodType {
-  /** Wire transfer */
+  /**
+   * Wire transfer
+   */
   METHOD_WIRE,
-  /** Silvergate exchange network */
+  /**
+   * Silvergate exchange network
+   */
   METHOD_SEN,
-  /** Swift */
+  /**
+   * Swift
+   */
   METHOD_SWIFT
 }
+

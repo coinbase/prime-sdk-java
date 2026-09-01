@@ -17,99 +17,103 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Breakdown of the components of derivatives equity. */
 public class CrossMarginPrimeDerivativesEquityBreakdown {
-  /** Derivatives cash balance component. */
-  @JsonProperty("cash_balance")
-  private String cashBalance;
-
-  /** Unrealized PnL component of derivatives equity. */
-  @JsonProperty("unrealized_pnl")
-  private String unrealizedPnl;
-
-  /** Realized PnL component of derivatives equity. */
-  @JsonProperty("realized_pnl")
-  private String realizedPnl;
-
-  /** Accrued funding PnL component of derivatives equity. */
-  @JsonProperty("accrued_funding_pnl")
-  private String accruedFundingPnl;
-
-  public CrossMarginPrimeDerivativesEquityBreakdown() {}
-
-  public CrossMarginPrimeDerivativesEquityBreakdown(Builder builder) {
-    this.cashBalance = builder.cashBalance;
-    this.unrealizedPnl = builder.unrealizedPnl;
-    this.realizedPnl = builder.realizedPnl;
-    this.accruedFundingPnl = builder.accruedFundingPnl;
-  }
-
-  public String getCashBalance() {
-    return cashBalance;
-  }
-
-  public void setCashBalance(String cashBalance) {
-    this.cashBalance = cashBalance;
-  }
-
-  public String getUnrealizedPnl() {
-    return unrealizedPnl;
-  }
-
-  public void setUnrealizedPnl(String unrealizedPnl) {
-    this.unrealizedPnl = unrealizedPnl;
-  }
-
-  public String getRealizedPnl() {
-    return realizedPnl;
-  }
-
-  public void setRealizedPnl(String realizedPnl) {
-    this.realizedPnl = realizedPnl;
-  }
-
-  public String getAccruedFundingPnl() {
-    return accruedFundingPnl;
-  }
-
-  public void setAccruedFundingPnl(String accruedFundingPnl) {
-    this.accruedFundingPnl = accruedFundingPnl;
-  }
-
-  public static class Builder {
+    /**
+     * Derivatives cash balance component.
+     */
+    @JsonProperty("cash_balance")
     private String cashBalance;
 
+    /**
+     * Unrealized PnL component of derivatives equity.
+     */
+    @JsonProperty("unrealized_pnl")
     private String unrealizedPnl;
 
+    /**
+     * Realized PnL component of derivatives equity.
+     */
+    @JsonProperty("realized_pnl")
     private String realizedPnl;
 
+    /**
+     * Accrued funding PnL component of derivatives equity.
+     */
+    @JsonProperty("accrued_funding_pnl")
     private String accruedFundingPnl;
 
-    public Builder cashBalance(String cashBalance) {
-      this.cashBalance = cashBalance;
-      return this;
+    public CrossMarginPrimeDerivativesEquityBreakdown() {
     }
 
-    public Builder unrealizedPnl(String unrealizedPnl) {
-      this.unrealizedPnl = unrealizedPnl;
-      return this;
+    public CrossMarginPrimeDerivativesEquityBreakdown(Builder builder) {
+        this.cashBalance = builder.cashBalance;
+        this.unrealizedPnl = builder.unrealizedPnl;
+        this.realizedPnl = builder.realizedPnl;
+        this.accruedFundingPnl = builder.accruedFundingPnl;
+    }
+    public String getCashBalance() {
+        return cashBalance;
     }
 
-    public Builder realizedPnl(String realizedPnl) {
-      this.realizedPnl = realizedPnl;
-      return this;
+    public void setCashBalance(String cashBalance) {
+        this.cashBalance = cashBalance;
+    }
+    public String getUnrealizedPnl() {
+        return unrealizedPnl;
     }
 
-    public Builder accruedFundingPnl(String accruedFundingPnl) {
-      this.accruedFundingPnl = accruedFundingPnl;
-      return this;
+    public void setUnrealizedPnl(String unrealizedPnl) {
+        this.unrealizedPnl = unrealizedPnl;
+    }
+    public String getRealizedPnl() {
+        return realizedPnl;
     }
 
-    public CrossMarginPrimeDerivativesEquityBreakdown build() {
-      return new CrossMarginPrimeDerivativesEquityBreakdown(this);
+    public void setRealizedPnl(String realizedPnl) {
+        this.realizedPnl = realizedPnl;
     }
-  }
+    public String getAccruedFundingPnl() {
+        return accruedFundingPnl;
+    }
+
+    public void setAccruedFundingPnl(String accruedFundingPnl) {
+        this.accruedFundingPnl = accruedFundingPnl;
+    }
+    public static class Builder {
+        private String cashBalance;
+
+        private String unrealizedPnl;
+
+        private String realizedPnl;
+
+        private String accruedFundingPnl;
+
+        public Builder cashBalance(String cashBalance) {
+            this.cashBalance = cashBalance;
+            return this;
+        }
+
+        public Builder unrealizedPnl(String unrealizedPnl) {
+            this.unrealizedPnl = unrealizedPnl;
+            return this;
+        }
+
+        public Builder realizedPnl(String realizedPnl) {
+            this.realizedPnl = realizedPnl;
+            return this;
+        }
+
+        public Builder accruedFundingPnl(String accruedFundingPnl) {
+            this.accruedFundingPnl = accruedFundingPnl;
+            return this;
+        }
+
+        public CrossMarginPrimeDerivativesEquityBreakdown build() {
+            return new CrossMarginPrimeDerivativesEquityBreakdown(this);
+        }
+    }
 }
+

@@ -198,7 +198,8 @@ public class PostProcessor {
                     String fileName = file.getFileName().toString();
                     if (file.toString().endsWith(".java") &&
                         !fileName.contains("Test") &&
-                        !fileName.matches(".*Api\\.java$")) { // Only skip files ending with "Api.java", not containing "Api"
+                        !fileName.matches(".*Api\\.java$") && // Only skip files ending with "Api.java", not containing "Api"
+                        !isSkippedErrorSchema(fileName)) {
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
@@ -207,6 +208,17 @@ public class PostProcessor {
         }
 
         return files;
+    }
+
+    /**
+     * Typed error-code / subcode schemas from the spec are omitted until the SDK
+     * maps HTTP errors onto them. Matching files are also ignored by
+     * {@code .openapi-generator-ignore} so they are not copied into {@code model/enums}.
+     */
+    static boolean isSkippedErrorSchema(String fileName) {
+        return fileName.endsWith("ErrorCode.java")
+            || fileName.endsWith("Subcode.java")
+            || fileName.endsWith("ErrorResponse.java");
     }
 
     private boolean isEnumFile(Path file) throws IOException {

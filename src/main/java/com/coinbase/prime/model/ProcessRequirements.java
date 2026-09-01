@@ -17,40 +17,39 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.TravelRuleStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Represents the status of various process requirements for a transaction */
 public class ProcessRequirements {
-  /** Travel rule compliance status for a transaction */
-  @JsonProperty("travel_rule_status")
-  private TravelRuleStatus travelRuleStatus;
-
-  public ProcessRequirements() {}
-
-  public ProcessRequirements(Builder builder) {
-    this.travelRuleStatus = builder.travelRuleStatus;
-  }
-
-  public TravelRuleStatus getTravelRuleStatus() {
-    return travelRuleStatus;
-  }
-
-  public void setTravelRuleStatus(TravelRuleStatus travelRuleStatus) {
-    this.travelRuleStatus = travelRuleStatus;
-  }
-
-  public static class Builder {
+    /** Travel rule compliance status for a transaction */
+    @JsonProperty("travel_rule_status")
     private TravelRuleStatus travelRuleStatus;
 
-    public Builder travelRuleStatus(TravelRuleStatus travelRuleStatus) {
-      this.travelRuleStatus = travelRuleStatus;
-      return this;
+    public ProcessRequirements() {
     }
 
-    public ProcessRequirements build() {
-      return new ProcessRequirements(this);
+    public ProcessRequirements(Builder builder) {
+        this.travelRuleStatus = builder.travelRuleStatus;
     }
-  }
+    public TravelRuleStatus getTravelRuleStatus() {
+        return travelRuleStatus;
+    }
+
+    public void setTravelRuleStatus(TravelRuleStatus travelRuleStatus) {
+        this.travelRuleStatus = travelRuleStatus;
+    }
+    public static class Builder {
+        private TravelRuleStatus travelRuleStatus;
+
+        public Builder travelRuleStatus(TravelRuleStatus travelRuleStatus) {
+            this.travelRuleStatus = travelRuleStatus;
+            return this;
+        }
+
+        public ProcessRequirements build() {
+            return new ProcessRequirements(this);
+        }
+    }
 }
+

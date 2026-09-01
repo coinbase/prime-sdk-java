@@ -18,7 +18,9 @@
 
 package com.coinbase.prime.model.enums;
 
-/** Action is the available user action types */
+/**
+ * Action is the available user action types
+ */
 public enum Action {
   OTHER_ACTION,
   ACTION_APPROVE,
@@ -26,3 +28,4 @@ public enum Action {
   ACTION_INITIATE,
   ACTION_CANCEL
 }
+

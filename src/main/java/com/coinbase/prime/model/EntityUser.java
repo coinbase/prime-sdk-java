@@ -17,161 +17,174 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.SecondaryPermission;
 import com.coinbase.prime.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class EntityUser {
-  /** The unique ID of the user */
-  private String id;
-
-  /** The name of the user */
-  private String name;
-
-  /** The email of the user */
-  private String email;
-
-  /** The entity to which this user and associated permissions are identified */
-  @JsonProperty("entity_id")
-  private String entityId;
-
-  /**
-   * - USER_ROLE_UNKNOWN: nil value - AUDITOR: An auditor - SIGNATORY: A signatory - ADMIN: An admin
-   * - INITIATOR: An initiator - REVIEWER: A reviewer - TRADER: A trader - FULL_TRADER: A trader
-   * with full permissions - TEAM_MANAGER: A team manager - APPROVER: An approver - TAX_MANAGER: A
-   * tax manager - BUSINESS_MANAGER: A business manager
-   */
-  private UserRole role;
-
-  /** All primary roles assigned to the user. */
-  private List<UserRole> roles;
-
-  /** All secondary permissions assigned to the user. */
-  @JsonProperty("secondary_permissions")
-  private List<SecondaryPermission> secondaryPermissions;
-
-  public EntityUser() {}
-
-  public EntityUser(Builder builder) {
-    this.id = builder.id;
-    this.name = builder.name;
-    this.email = builder.email;
-    this.entityId = builder.entityId;
-    this.role = builder.role;
-    this.roles = builder.roles;
-    this.secondaryPermissions = builder.secondaryPermissions;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getEntityId() {
-    return entityId;
-  }
-
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
-  }
-
-  public UserRole getRole() {
-    return role;
-  }
-
-  public void setRole(UserRole role) {
-    this.role = role;
-  }
-
-  public List<UserRole> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(List<UserRole> roles) {
-    this.roles = roles;
-  }
-
-  public List<SecondaryPermission> getSecondaryPermissions() {
-    return secondaryPermissions;
-  }
-
-  public void setSecondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
-    this.secondaryPermissions = secondaryPermissions;
-  }
-
-  public static class Builder {
+    /**
+     * The unique ID of the user
+     */
     private String id;
 
+    /**
+     * The name of the user
+     */
     private String name;
 
+    /**
+     * The email of the user
+     */
     private String email;
 
+    /**
+     * The entity to which this user and associated permissions are identified
+     */
+    @JsonProperty("entity_id")
     private String entityId;
 
+    /**
+     * - USER_ROLE_UNKNOWN: nil value
+     * - AUDITOR: An auditor
+     * - SIGNATORY: A signatory
+     * - ADMIN: An admin
+     * - INITIATOR: An initiator
+     * - REVIEWER: A reviewer
+     * - TRADER: A trader
+     * - FULL_TRADER: A trader with full permissions
+     * - TEAM_MANAGER: A team manager
+     * - APPROVER: An approver
+     * - TAX_MANAGER: A tax manager
+     * - BUSINESS_MANAGER: A business manager
+     */
     private UserRole role;
 
+    /**
+     * All primary roles assigned to the user.
+     */
     private List<UserRole> roles;
 
+    /**
+     * All secondary permissions assigned to the user.
+     */
+    @JsonProperty("secondary_permissions")
     private List<SecondaryPermission> secondaryPermissions;
 
-    public Builder id(String id) {
-      this.id = id;
-      return this;
+    public EntityUser() {
     }
 
-    public Builder name(String name) {
-      this.name = name;
-      return this;
+    public EntityUser(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.email = builder.email;
+        this.entityId = builder.entityId;
+        this.role = builder.role;
+        this.roles = builder.roles;
+        this.secondaryPermissions = builder.secondaryPermissions;
+    }
+    public String getId() {
+        return id;
     }
 
-    public Builder email(String email) {
-      this.email = email;
-      return this;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
     }
 
-    public Builder entityId(String entityId) {
-      this.entityId = entityId;
-      return this;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
     }
 
-    public Builder role(UserRole role) {
-      this.role = role;
-      return this;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEntityId() {
+        return entityId;
     }
 
-    public Builder roles(List<UserRole> roles) {
-      this.roles = roles;
-      return this;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+    public UserRole getRole() {
+        return role;
     }
 
-    public Builder secondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
-      this.secondaryPermissions = secondaryPermissions;
-      return this;
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public EntityUser build() {
-      return new EntityUser(this);
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
     }
-  }
+    public List<SecondaryPermission> getSecondaryPermissions() {
+        return secondaryPermissions;
+    }
+
+    public void setSecondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
+        this.secondaryPermissions = secondaryPermissions;
+    }
+    public static class Builder {
+        private String id;
+
+        private String name;
+
+        private String email;
+
+        private String entityId;
+
+        private UserRole role;
+
+        private List<UserRole> roles;
+
+        private List<SecondaryPermission> secondaryPermissions;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        public Builder role(UserRole role) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder roles(List<UserRole> roles) {
+            this.roles = roles;
+            return this;
+        }
+
+        public Builder secondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
+            this.secondaryPermissions = secondaryPermissions;
+            return this;
+        }
+
+        public EntityUser build() {
+            return new EntityUser(this);
+        }
+    }
 }
+

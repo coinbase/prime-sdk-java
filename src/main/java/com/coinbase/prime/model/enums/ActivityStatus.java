@@ -27,3 +27,4 @@ public enum ActivityStatus {
   ACTIVITY_STATUS_REJECTED,
   ACTIVITY_STATUS_FAILED
 }
+

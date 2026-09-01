@@ -17,60 +17,62 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** FcmScheduledMaintenance contains scheduled maintenance window information */
 public class FcmScheduledMaintenance {
-  /** Maintenance window start time */
-  @JsonProperty("start_time")
-  private OffsetDateTime startTime;
-
-  /** Maintenance window end time */
-  @JsonProperty("end_time")
-  private OffsetDateTime endTime;
-
-  public FcmScheduledMaintenance() {}
-
-  public FcmScheduledMaintenance(Builder builder) {
-    this.startTime = builder.startTime;
-    this.endTime = builder.endTime;
-  }
-
-  public OffsetDateTime getStartTime() {
-    return startTime;
-  }
-
-  public void setStartTime(OffsetDateTime startTime) {
-    this.startTime = startTime;
-  }
-
-  public OffsetDateTime getEndTime() {
-    return endTime;
-  }
-
-  public void setEndTime(OffsetDateTime endTime) {
-    this.endTime = endTime;
-  }
-
-  public static class Builder {
+    /**
+     * Maintenance window start time
+     */
+    @JsonProperty("start_time")
     private OffsetDateTime startTime;
 
+    /**
+     * Maintenance window end time
+     */
+    @JsonProperty("end_time")
     private OffsetDateTime endTime;
 
-    public Builder startTime(OffsetDateTime startTime) {
-      this.startTime = startTime;
-      return this;
+    public FcmScheduledMaintenance() {
     }
 
-    public Builder endTime(OffsetDateTime endTime) {
-      this.endTime = endTime;
-      return this;
+    public FcmScheduledMaintenance(Builder builder) {
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+    }
+    public OffsetDateTime getStartTime() {
+        return startTime;
     }
 
-    public FcmScheduledMaintenance build() {
-      return new FcmScheduledMaintenance(this);
+    public void setStartTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
     }
-  }
+    public OffsetDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(OffsetDateTime endTime) {
+        this.endTime = endTime;
+    }
+    public static class Builder {
+        private OffsetDateTime startTime;
+
+        private OffsetDateTime endTime;
+
+        public Builder startTime(OffsetDateTime startTime) {
+            this.startTime = startTime;
+            return this;
+        }
+
+        public Builder endTime(OffsetDateTime endTime) {
+            this.endTime = endTime;
+            return this;
+        }
+
+        public FcmScheduledMaintenance build() {
+            return new FcmScheduledMaintenance(this);
+        }
+    }
 }
+

@@ -19,33 +19,35 @@
 package com.coinbase.prime.model;
 
 public class NftCollection {
-  /** NFT collection name */
-  private String name;
-
-  public NftCollection() {}
-
-  public NftCollection(Builder builder) {
-    this.name = builder.name;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public static class Builder {
+    /**
+     * NFT collection name
+     */
     private String name;
 
-    public Builder name(String name) {
-      this.name = name;
-      return this;
+    public NftCollection() {
     }
 
-    public NftCollection build() {
-      return new NftCollection(this);
+    public NftCollection(Builder builder) {
+        this.name = builder.name;
     }
-  }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public static class Builder {
+        private String name;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public NftCollection build() {
+            return new NftCollection(this);
+        }
+    }
 }
+

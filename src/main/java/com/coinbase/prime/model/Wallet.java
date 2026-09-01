@@ -17,175 +17,171 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.Network;
 import com.coinbase.prime.model.enums.WalletType;
 import com.coinbase.prime.model.enums.WalletVisibility;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class Wallet {
-  /** The unique UUID for the wallet */
-  private String id;
-
-  /** The name of the wallet */
-  private String name;
-
-  /** The asset stored in the wallet */
-  private String symbol;
-
-  /**
-   * - VAULT: A crypto vault - TRADING: A trading wallet - WALLET_TYPE_OTHER: Other wallet types
-   * (like consumer, etc) - QC: A QC Wallet - ONCHAIN: An Onchain wallet
-   */
-  private WalletType type;
-
-  /** The UTC timestamp when this wallet was created */
-  @JsonProperty("created_at")
-  private OffsetDateTime createdAt;
-
-  /** The active address of the wallet */
-  private String address;
-
-  private WalletVisibility visibility;
-
-  private Network network;
-
-  public Wallet() {}
-
-  public Wallet(Builder builder) {
-    this.id = builder.id;
-    this.name = builder.name;
-    this.symbol = builder.symbol;
-    this.type = builder.type;
-    this.createdAt = builder.createdAt;
-    this.address = builder.address;
-    this.visibility = builder.visibility;
-    this.network = builder.network;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
-
-  public WalletType getType() {
-    return type;
-  }
-
-  public void setType(WalletType type) {
-    this.type = type;
-  }
-
-  public OffsetDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public WalletVisibility getVisibility() {
-    return visibility;
-  }
-
-  public void setVisibility(WalletVisibility visibility) {
-    this.visibility = visibility;
-  }
-
-  public Network getNetwork() {
-    return network;
-  }
-
-  public void setNetwork(Network network) {
-    this.network = network;
-  }
-
-  public static class Builder {
+    /** The unique UUID for the wallet */
     private String id;
 
+    /** The name of the wallet */
     private String name;
 
+    /** The asset stored in the wallet */
     private String symbol;
 
+    /**
+     * - VAULT: A crypto vault
+     * - TRADING: A trading wallet
+     * - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc)
+     * - QC: A QC Wallet
+     * - ONCHAIN: An Onchain wallet
+     */
     private WalletType type;
 
+    /** The UTC timestamp when this wallet was created */
+    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
+    /** The active address of the wallet */
     private String address;
 
     private WalletVisibility visibility;
 
     private Network network;
 
-    public Builder id(String id) {
-      this.id = id;
-      return this;
+    public Wallet() {
     }
 
-    public Builder name(String name) {
-      this.name = name;
-      return this;
+    public Wallet(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.symbol = builder.symbol;
+        this.type = builder.type;
+        this.createdAt = builder.createdAt;
+        this.address = builder.address;
+        this.visibility = builder.visibility;
+        this.network = builder.network;
+    }
+    public String getId() {
+        return id;
     }
 
-    public Builder symbol(String symbol) {
-      this.symbol = symbol;
-      return this;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
     }
 
-    public Builder type(WalletType type) {
-      this.type = type;
-      return this;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getSymbol() {
+        return symbol;
     }
 
-    public Builder createdAt(OffsetDateTime createdAt) {
-      this.createdAt = createdAt;
-      return this;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+    public WalletType getType() {
+        return type;
     }
 
-    public Builder address(String address) {
-      this.address = address;
-      return this;
+    public void setType(WalletType type) {
+        this.type = type;
+    }
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public Builder visibility(WalletVisibility visibility) {
-      this.visibility = visibility;
-      return this;
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    public String getAddress() {
+        return address;
     }
 
-    public Builder network(Network network) {
-      this.network = network;
-      return this;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public WalletVisibility getVisibility() {
+        return visibility;
     }
 
-    public Wallet build() {
-      return new Wallet(this);
+    public void setVisibility(WalletVisibility visibility) {
+        this.visibility = visibility;
     }
-  }
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+    public static class Builder {
+        private String id;
+
+        private String name;
+
+        private String symbol;
+
+        private WalletType type;
+
+        private OffsetDateTime createdAt;
+
+        private String address;
+
+        private WalletVisibility visibility;
+
+        private Network network;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder type(WalletType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder createdAt(OffsetDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder visibility(WalletVisibility visibility) {
+            this.visibility = visibility;
+            return this;
+        }
+
+        public Builder network(Network network) {
+            this.network = network;
+            return this;
+        }
+
+        public Wallet build() {
+            return new Wallet(this);
+        }
+    }
 }
+

@@ -17,34 +17,35 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.ActivityMetadataConsensus;
 
 public class ActivityMetadataAccount {
-  private ActivityMetadataConsensus consensus;
-
-  public ActivityMetadataAccount() {}
-
-  public ActivityMetadataAccount(Builder builder) {
-    this.consensus = builder.consensus;
-  }
-
-  public ActivityMetadataConsensus getConsensus() {
-    return consensus;
-  }
-
-  public void setConsensus(ActivityMetadataConsensus consensus) {
-    this.consensus = consensus;
-  }
-
-  public static class Builder {
     private ActivityMetadataConsensus consensus;
 
-    public Builder consensus(ActivityMetadataConsensus consensus) {
-      this.consensus = consensus;
-      return this;
+    public ActivityMetadataAccount() {
     }
 
-    public ActivityMetadataAccount build() {
-      return new ActivityMetadataAccount(this);
+    public ActivityMetadataAccount(Builder builder) {
+        this.consensus = builder.consensus;
     }
-  }
+    public ActivityMetadataConsensus getConsensus() {
+        return consensus;
+    }
+
+    public void setConsensus(ActivityMetadataConsensus consensus) {
+        this.consensus = consensus;
+    }
+    public static class Builder {
+        private ActivityMetadataConsensus consensus;
+
+        public Builder consensus(ActivityMetadataConsensus consensus) {
+            this.consensus = consensus;
+            return this;
+        }
+
+        public ActivityMetadataAccount build() {
+            return new ActivityMetadataAccount(this);
+        }
+    }
 }
+

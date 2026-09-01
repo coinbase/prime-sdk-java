@@ -19,32 +19,63 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - USER_ROLE_UNKNOWN: nil value - AUDITOR: An auditor - SIGNATORY: A signatory - ADMIN: An admin -
- * INITIATOR: An initiator - REVIEWER: A reviewer - TRADER: A trader - FULL_TRADER: A trader with
- * full permissions - TEAM_MANAGER: A team manager - APPROVER: An approver - TAX_MANAGER: A tax
- * manager - BUSINESS_MANAGER: A business manager
+ * - USER_ROLE_UNKNOWN: nil value
+ * - AUDITOR: An auditor
+ * - SIGNATORY: A signatory
+ * - ADMIN: An admin
+ * - INITIATOR: An initiator
+ * - REVIEWER: A reviewer
+ * - TRADER: A trader
+ * - FULL_TRADER: A trader with full permissions
+ * - TEAM_MANAGER: A team manager
+ * - APPROVER: An approver
+ * - TAX_MANAGER: A tax manager
+ * - BUSINESS_MANAGER: A business manager
  */
 public enum UserRole {
-  /** An auditor */
+  /**
+   * An auditor
+   */
   AUDITOR,
-  /** A signatory */
+  /**
+   * A signatory
+   */
   SIGNATORY,
-  /** An admin */
+  /**
+   * An admin
+   */
   ADMIN,
-  /** An initiator */
+  /**
+   * An initiator
+   */
   INITIATOR,
-  /** A reviewer */
+  /**
+   * A reviewer
+   */
   REVIEWER,
-  /** A trader */
+  /**
+   * A trader
+   */
   TRADER,
-  /** A trader with full permissions */
+  /**
+   * A trader with full permissions
+   */
   FULL_TRADER,
-  /** A team manager */
+  /**
+   * A team manager
+   */
   TEAM_MANAGER,
-  /** An approver */
+  /**
+   * An approver
+   */
   APPROVER,
-  /** A tax manager */
+  /**
+   * A tax manager
+   */
   TAX_MANAGER,
-  /** A business manager */
+  /**
+   * A business manager
+   */
   BUSINESS_MANAGER
 }
+

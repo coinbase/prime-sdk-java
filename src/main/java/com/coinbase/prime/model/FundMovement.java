@@ -17,70 +17,10 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.TransferLocation;
 
 /** FundMovement represents a single movement of funds between two counterparties. */
 public class FundMovement {
-  private String id;
-
-  private TransferLocation source;
-
-  private TransferLocation target;
-
-  private String currency;
-
-  private String amount;
-
-  public FundMovement() {}
-
-  public FundMovement(Builder builder) {
-    this.id = builder.id;
-    this.source = builder.source;
-    this.target = builder.target;
-    this.currency = builder.currency;
-    this.amount = builder.amount;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public TransferLocation getSource() {
-    return source;
-  }
-
-  public void setSource(TransferLocation source) {
-    this.source = source;
-  }
-
-  public TransferLocation getTarget() {
-    return target;
-  }
-
-  public void setTarget(TransferLocation target) {
-    this.target = target;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getAmount() {
-    return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
-
-  public static class Builder {
     private String id;
 
     private TransferLocation source;
@@ -91,33 +31,90 @@ public class FundMovement {
 
     private String amount;
 
-    public Builder id(String id) {
-      this.id = id;
-      return this;
+    public FundMovement() {
     }
 
-    public Builder source(TransferLocation source) {
-      this.source = source;
-      return this;
+    public FundMovement(Builder builder) {
+        this.id = builder.id;
+        this.source = builder.source;
+        this.target = builder.target;
+        this.currency = builder.currency;
+        this.amount = builder.amount;
+    }
+    public String getId() {
+        return id;
     }
 
-    public Builder target(TransferLocation target) {
-      this.target = target;
-      return this;
+    public void setId(String id) {
+        this.id = id;
+    }
+    public TransferLocation getSource() {
+        return source;
     }
 
-    public Builder currency(String currency) {
-      this.currency = currency;
-      return this;
+    public void setSource(TransferLocation source) {
+        this.source = source;
+    }
+    public TransferLocation getTarget() {
+        return target;
     }
 
-    public Builder amount(String amount) {
-      this.amount = amount;
-      return this;
+    public void setTarget(TransferLocation target) {
+        this.target = target;
+    }
+    public String getCurrency() {
+        return currency;
     }
 
-    public FundMovement build() {
-      return new FundMovement(this);
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
-  }
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+    public static class Builder {
+        private String id;
+
+        private TransferLocation source;
+
+        private TransferLocation target;
+
+        private String currency;
+
+        private String amount;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder source(TransferLocation source) {
+            this.source = source;
+            return this;
+        }
+
+        public Builder target(TransferLocation target) {
+            this.target = target;
+            return this;
+        }
+
+        public Builder currency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        public Builder amount(String amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public FundMovement build() {
+            return new FundMovement(this);
+        }
+    }
 }
+

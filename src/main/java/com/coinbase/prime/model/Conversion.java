@@ -17,98 +17,102 @@
  */
 
 package com.coinbase.prime.model;
-
+import com.coinbase.prime.model.ConversionDetail;
+import com.coinbase.prime.model.ShortCollateral;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Conversion {
-  /** Conversion details */
-  @JsonProperty("conversion_details")
-  private List<ConversionDetail> conversionDetails;
-
-  @JsonProperty("short_collateral")
-  private ShortCollateral shortCollateral;
-
-  /** The UTC date time used for conversion */
-  @JsonProperty("conversion_datetime")
-  private String conversionDatetime;
-
-  /** Portfolio Id */
-  @JsonProperty("portfolio_id")
-  private String portfolioId;
-
-  public Conversion() {}
-
-  public Conversion(Builder builder) {
-    this.conversionDetails = builder.conversionDetails;
-    this.shortCollateral = builder.shortCollateral;
-    this.conversionDatetime = builder.conversionDatetime;
-    this.portfolioId = builder.portfolioId;
-  }
-
-  public List<ConversionDetail> getConversionDetails() {
-    return conversionDetails;
-  }
-
-  public void setConversionDetails(List<ConversionDetail> conversionDetails) {
-    this.conversionDetails = conversionDetails;
-  }
-
-  public ShortCollateral getShortCollateral() {
-    return shortCollateral;
-  }
-
-  public void setShortCollateral(ShortCollateral shortCollateral) {
-    this.shortCollateral = shortCollateral;
-  }
-
-  public String getConversionDatetime() {
-    return conversionDatetime;
-  }
-
-  public void setConversionDatetime(String conversionDatetime) {
-    this.conversionDatetime = conversionDatetime;
-  }
-
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public static class Builder {
+    /**
+     * Conversion details
+     */
+    @JsonProperty("conversion_details")
     private List<ConversionDetail> conversionDetails;
 
+    @JsonProperty("short_collateral")
     private ShortCollateral shortCollateral;
 
+    /**
+     * The UTC date time used for conversion
+     */
+    @JsonProperty("conversion_datetime")
     private String conversionDatetime;
 
+    /**
+     * Portfolio Id
+     */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
-    public Builder conversionDetails(List<ConversionDetail> conversionDetails) {
-      this.conversionDetails = conversionDetails;
-      return this;
+    public Conversion() {
     }
 
-    public Builder shortCollateral(ShortCollateral shortCollateral) {
-      this.shortCollateral = shortCollateral;
-      return this;
+    public Conversion(Builder builder) {
+        this.conversionDetails = builder.conversionDetails;
+        this.shortCollateral = builder.shortCollateral;
+        this.conversionDatetime = builder.conversionDatetime;
+        this.portfolioId = builder.portfolioId;
+    }
+    public List<ConversionDetail> getConversionDetails() {
+        return conversionDetails;
     }
 
-    public Builder conversionDatetime(String conversionDatetime) {
-      this.conversionDatetime = conversionDatetime;
-      return this;
+    public void setConversionDetails(List<ConversionDetail> conversionDetails) {
+        this.conversionDetails = conversionDetails;
+    }
+    public ShortCollateral getShortCollateral() {
+        return shortCollateral;
     }
 
-    public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
-      return this;
+    public void setShortCollateral(ShortCollateral shortCollateral) {
+        this.shortCollateral = shortCollateral;
+    }
+    public String getConversionDatetime() {
+        return conversionDatetime;
     }
 
-    public Conversion build() {
-      return new Conversion(this);
+    public void setConversionDatetime(String conversionDatetime) {
+        this.conversionDatetime = conversionDatetime;
     }
-  }
+    public String getPortfolioId() {
+        return portfolioId;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+    public static class Builder {
+        private List<ConversionDetail> conversionDetails;
+
+        private ShortCollateral shortCollateral;
+
+        private String conversionDatetime;
+
+        private String portfolioId;
+
+        public Builder conversionDetails(List<ConversionDetail> conversionDetails) {
+            this.conversionDetails = conversionDetails;
+            return this;
+        }
+
+        public Builder shortCollateral(ShortCollateral shortCollateral) {
+            this.shortCollateral = shortCollateral;
+            return this;
+        }
+
+        public Builder conversionDatetime(String conversionDatetime) {
+            this.conversionDatetime = conversionDatetime;
+            return this;
+        }
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Conversion build() {
+            return new Conversion(this);
+        }
+    }
 }
+
