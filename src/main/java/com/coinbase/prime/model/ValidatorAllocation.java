@@ -17,63 +17,61 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ValidatorAllocation specifies the validator and amount for staking or unstaking.
- * Used for granular ETH V2 validator-level staking or unstaking operations.
+ * ValidatorAllocation specifies the validator and amount for staking or unstaking. Used for
+ * granular ETH V2 validator-level staking or unstaking operations.
  */
 public class ValidatorAllocation {
-    /**
-     * The validator address for performing staking operations
-     */
-    @JsonProperty("validator_address")
+  /** The validator address for performing staking operations */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  /** Amount for performing staking operations with this validator */
+  private String amount;
+
+  public ValidatorAllocation() {}
+
+  public ValidatorAllocation(Builder builder) {
+    this.validatorAddress = builder.validatorAddress;
+    this.amount = builder.amount;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public static class Builder {
     private String validatorAddress;
 
-    /**
-     * Amount for performing staking operations with this validator
-     */
     private String amount;
 
-    public ValidatorAllocation() {
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public ValidatorAllocation(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.amount = builder.amount;
-    }
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
+    public ValidatorAllocation build() {
+      return new ValidatorAllocation(this);
     }
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public static class Builder {
-        private String validatorAddress;
-
-        private String amount;
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public ValidatorAllocation build() {
-            return new ValidatorAllocation(this);
-        }
-    }
+  }
 }
-

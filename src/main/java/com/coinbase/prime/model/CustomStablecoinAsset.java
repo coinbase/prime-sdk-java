@@ -20,35 +20,33 @@ package com.coinbase.prime.model;
 
 /** Currency metadata of the custom stablecoin asset for the reward program */
 public class CustomStablecoinAsset {
-    /**
-     * The asset symbol (e.g. USDC, USDF)
-     */
+  /** The asset symbol (e.g. USDC, USDF) */
+  private String symbol;
+
+  public CustomStablecoinAsset() {}
+
+  public CustomStablecoinAsset(Builder builder) {
+    this.symbol = builder.symbol;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public static class Builder {
     private String symbol;
 
-    public CustomStablecoinAsset() {
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public CustomStablecoinAsset(Builder builder) {
-        this.symbol = builder.symbol;
+    public CustomStablecoinAsset build() {
+      return new CustomStablecoinAsset(this);
     }
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-    public static class Builder {
-        private String symbol;
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public CustomStablecoinAsset build() {
-            return new CustomStablecoinAsset(this);
-        }
-    }
+  }
 }
-

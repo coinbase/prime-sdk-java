@@ -17,61 +17,58 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.UnstakingStatus;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class ValidatorUnstakingInfo {
-    /**
-     * The validator address (public key)
-     */
-    @JsonProperty("validator_address")
+  /** The validator address (public key) */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  /** List of active unstaking requests for this validator */
+  private List<UnstakingStatus> statuses;
+
+  public ValidatorUnstakingInfo() {}
+
+  public ValidatorUnstakingInfo(Builder builder) {
+    this.validatorAddress = builder.validatorAddress;
+    this.statuses = builder.statuses;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public List<UnstakingStatus> getStatuses() {
+    return statuses;
+  }
+
+  public void setStatuses(List<UnstakingStatus> statuses) {
+    this.statuses = statuses;
+  }
+
+  public static class Builder {
     private String validatorAddress;
 
-    /**
-     * List of active unstaking requests for this validator
-     */
     private List<UnstakingStatus> statuses;
 
-    public ValidatorUnstakingInfo() {
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public ValidatorUnstakingInfo(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.statuses = builder.statuses;
-    }
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public Builder statuses(List<UnstakingStatus> statuses) {
+      this.statuses = statuses;
+      return this;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
+    public ValidatorUnstakingInfo build() {
+      return new ValidatorUnstakingInfo(this);
     }
-    public List<UnstakingStatus> getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(List<UnstakingStatus> statuses) {
-        this.statuses = statuses;
-    }
-    public static class Builder {
-        private String validatorAddress;
-
-        private List<UnstakingStatus> statuses;
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public Builder statuses(List<UnstakingStatus> statuses) {
-            this.statuses = statuses;
-            return this;
-        }
-
-        public ValidatorUnstakingInfo build() {
-            return new ValidatorUnstakingInfo(this);
-        }
-    }
+  }
 }
-

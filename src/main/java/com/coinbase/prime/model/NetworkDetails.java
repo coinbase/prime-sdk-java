@@ -17,287 +17,287 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.Network;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NetworkDetails {
+  private Network network;
+
+  /** The name of the network */
+  private String name;
+
+  /** The maximum number of decimals supported for this network */
+  @JsonProperty("max_decimals")
+  private String maxDecimals;
+
+  /** Indicates whether this network is the default network for the asset */
+  @JsonProperty("default")
+  private boolean _default;
+
+  /** Indicates whether this network supports trading */
+  @JsonProperty("trading_supported")
+  private boolean tradingSupported;
+
+  /** Indicates whether this network supports vault */
+  @JsonProperty("vault_supported")
+  private boolean vaultSupported;
+
+  /** Indicates whether this network supports prime custody */
+  @JsonProperty("prime_custody_supported")
+  private boolean primeCustodySupported;
+
+  /** Indicates whether this network requires a destination tag */
+  @JsonProperty("destination_tag_required")
+  private boolean destinationTagRequired;
+
+  /** Base URL to our recommended block explorer (crypto only) */
+  @JsonProperty("network_link")
+  private String networkLink;
+
+  /**
+   * Indicates the symbol that can be used to query other endpoints, related to transactions,
+   * wallets, and activities, to get information particularly for this asset on the network
+   */
+  @JsonProperty("network_scoped_symbol")
+  private String networkScopedSymbol;
+
+  /**
+   * The minimum withdrawal amount for this network. Applies to trading, prime custody, and vault
+   * wallets.
+   */
+  @JsonProperty("min_withdrawal_amount")
+  private String minWithdrawalAmount;
+
+  /**
+   * The platform maximum withdrawal amount for this network. Applies to trading, prime custody, and
+   * vault wallets. Note that Prime Transfer policies may override this value.
+   */
+  @JsonProperty("max_withdrawal_amount")
+  private String maxWithdrawalAmount;
+
+  /**
+   * The minimum deposit amount for this network. Applies to trading, prime custody, and vault
+   * wallets.
+   */
+  @JsonProperty("min_deposit_amount")
+  private String minDepositAmount;
+
+  public NetworkDetails() {}
+
+  public NetworkDetails(Builder builder) {
+    this.network = builder.network;
+    this.name = builder.name;
+    this.maxDecimals = builder.maxDecimals;
+    this._default = builder._default;
+    this.tradingSupported = builder.tradingSupported;
+    this.vaultSupported = builder.vaultSupported;
+    this.primeCustodySupported = builder.primeCustodySupported;
+    this.destinationTagRequired = builder.destinationTagRequired;
+    this.networkLink = builder.networkLink;
+    this.networkScopedSymbol = builder.networkScopedSymbol;
+    this.minWithdrawalAmount = builder.minWithdrawalAmount;
+    this.maxWithdrawalAmount = builder.maxWithdrawalAmount;
+    this.minDepositAmount = builder.minDepositAmount;
+  }
+
+  public Network getNetwork() {
+    return network;
+  }
+
+  public void setNetwork(Network network) {
+    this.network = network;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getMaxDecimals() {
+    return maxDecimals;
+  }
+
+  public void setMaxDecimals(String maxDecimals) {
+    this.maxDecimals = maxDecimals;
+  }
+
+  public boolean getDefault() {
+    return _default;
+  }
+
+  public void setDefault(boolean _default) {
+    this._default = _default;
+  }
+
+  public boolean getTradingSupported() {
+    return tradingSupported;
+  }
+
+  public void setTradingSupported(boolean tradingSupported) {
+    this.tradingSupported = tradingSupported;
+  }
+
+  public boolean getVaultSupported() {
+    return vaultSupported;
+  }
+
+  public void setVaultSupported(boolean vaultSupported) {
+    this.vaultSupported = vaultSupported;
+  }
+
+  public boolean getPrimeCustodySupported() {
+    return primeCustodySupported;
+  }
+
+  public void setPrimeCustodySupported(boolean primeCustodySupported) {
+    this.primeCustodySupported = primeCustodySupported;
+  }
+
+  public boolean getDestinationTagRequired() {
+    return destinationTagRequired;
+  }
+
+  public void setDestinationTagRequired(boolean destinationTagRequired) {
+    this.destinationTagRequired = destinationTagRequired;
+  }
+
+  public String getNetworkLink() {
+    return networkLink;
+  }
+
+  public void setNetworkLink(String networkLink) {
+    this.networkLink = networkLink;
+  }
+
+  public String getNetworkScopedSymbol() {
+    return networkScopedSymbol;
+  }
+
+  public void setNetworkScopedSymbol(String networkScopedSymbol) {
+    this.networkScopedSymbol = networkScopedSymbol;
+  }
+
+  public String getMinWithdrawalAmount() {
+    return minWithdrawalAmount;
+  }
+
+  public void setMinWithdrawalAmount(String minWithdrawalAmount) {
+    this.minWithdrawalAmount = minWithdrawalAmount;
+  }
+
+  public String getMaxWithdrawalAmount() {
+    return maxWithdrawalAmount;
+  }
+
+  public void setMaxWithdrawalAmount(String maxWithdrawalAmount) {
+    this.maxWithdrawalAmount = maxWithdrawalAmount;
+  }
+
+  public String getMinDepositAmount() {
+    return minDepositAmount;
+  }
+
+  public void setMinDepositAmount(String minDepositAmount) {
+    this.minDepositAmount = minDepositAmount;
+  }
+
+  public static class Builder {
     private Network network;
 
-    /**
-     * The name of the network
-     */
     private String name;
 
-    /**
-     * The maximum number of decimals supported for this network
-     */
-    @JsonProperty("max_decimals")
     private String maxDecimals;
 
-    /**
-     * Indicates whether this network is the default network for the asset
-     */
-    @JsonProperty("default")
     private boolean _default;
 
-    /**
-     * Indicates whether this network supports trading
-     */
-    @JsonProperty("trading_supported")
     private boolean tradingSupported;
 
-    /**
-     * Indicates whether this network supports vault
-     */
-    @JsonProperty("vault_supported")
     private boolean vaultSupported;
 
-    /**
-     * Indicates whether this network supports prime custody
-     */
-    @JsonProperty("prime_custody_supported")
     private boolean primeCustodySupported;
 
-    /**
-     * Indicates whether this network requires a destination tag
-     */
-    @JsonProperty("destination_tag_required")
     private boolean destinationTagRequired;
 
-    /**
-     * Base URL to our recommended block explorer (crypto only)
-     */
-    @JsonProperty("network_link")
     private String networkLink;
 
-    /**
-     * Indicates the symbol that can be used to query other endpoints, related to transactions, wallets, and activities, to get information particularly for this asset on the network
-     */
-    @JsonProperty("network_scoped_symbol")
     private String networkScopedSymbol;
 
-    /**
-     * The minimum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets.
-     */
-    @JsonProperty("min_withdrawal_amount")
     private String minWithdrawalAmount;
 
-    /**
-     * The platform maximum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets. Note that Prime Transfer policies may override this value.
-     */
-    @JsonProperty("max_withdrawal_amount")
     private String maxWithdrawalAmount;
 
-    /**
-     * The minimum deposit amount for this network. Applies to trading, prime custody, and vault wallets.
-     */
-    @JsonProperty("min_deposit_amount")
     private String minDepositAmount;
 
-    public NetworkDetails() {
+    public Builder network(Network network) {
+      this.network = network;
+      return this;
     }
 
-    public NetworkDetails(Builder builder) {
-        this.network = builder.network;
-        this.name = builder.name;
-        this.maxDecimals = builder.maxDecimals;
-        this._default = builder._default;
-        this.tradingSupported = builder.tradingSupported;
-        this.vaultSupported = builder.vaultSupported;
-        this.primeCustodySupported = builder.primeCustodySupported;
-        this.destinationTagRequired = builder.destinationTagRequired;
-        this.networkLink = builder.networkLink;
-        this.networkScopedSymbol = builder.networkScopedSymbol;
-        this.minWithdrawalAmount = builder.minWithdrawalAmount;
-        this.maxWithdrawalAmount = builder.maxWithdrawalAmount;
-        this.minDepositAmount = builder.minDepositAmount;
-    }
-    public Network getNetwork() {
-        return network;
+    public Builder name(String name) {
+      this.name = name;
+      return this;
     }
 
-    public void setNetwork(Network network) {
-        this.network = network;
-    }
-    public String getName() {
-        return name;
+    public Builder maxDecimals(String maxDecimals) {
+      this.maxDecimals = maxDecimals;
+      return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getMaxDecimals() {
-        return maxDecimals;
+    public Builder _default(boolean _default) {
+      this._default = _default;
+      return this;
     }
 
-    public void setMaxDecimals(String maxDecimals) {
-        this.maxDecimals = maxDecimals;
-    }
-    public boolean getDefault() {
-        return _default;
+    public Builder tradingSupported(boolean tradingSupported) {
+      this.tradingSupported = tradingSupported;
+      return this;
     }
 
-    public void setDefault(boolean _default) {
-        this._default = _default;
-    }
-    public boolean getTradingSupported() {
-        return tradingSupported;
+    public Builder vaultSupported(boolean vaultSupported) {
+      this.vaultSupported = vaultSupported;
+      return this;
     }
 
-    public void setTradingSupported(boolean tradingSupported) {
-        this.tradingSupported = tradingSupported;
-    }
-    public boolean getVaultSupported() {
-        return vaultSupported;
+    public Builder primeCustodySupported(boolean primeCustodySupported) {
+      this.primeCustodySupported = primeCustodySupported;
+      return this;
     }
 
-    public void setVaultSupported(boolean vaultSupported) {
-        this.vaultSupported = vaultSupported;
-    }
-    public boolean getPrimeCustodySupported() {
-        return primeCustodySupported;
+    public Builder destinationTagRequired(boolean destinationTagRequired) {
+      this.destinationTagRequired = destinationTagRequired;
+      return this;
     }
 
-    public void setPrimeCustodySupported(boolean primeCustodySupported) {
-        this.primeCustodySupported = primeCustodySupported;
-    }
-    public boolean getDestinationTagRequired() {
-        return destinationTagRequired;
+    public Builder networkLink(String networkLink) {
+      this.networkLink = networkLink;
+      return this;
     }
 
-    public void setDestinationTagRequired(boolean destinationTagRequired) {
-        this.destinationTagRequired = destinationTagRequired;
-    }
-    public String getNetworkLink() {
-        return networkLink;
+    public Builder networkScopedSymbol(String networkScopedSymbol) {
+      this.networkScopedSymbol = networkScopedSymbol;
+      return this;
     }
 
-    public void setNetworkLink(String networkLink) {
-        this.networkLink = networkLink;
-    }
-    public String getNetworkScopedSymbol() {
-        return networkScopedSymbol;
+    public Builder minWithdrawalAmount(String minWithdrawalAmount) {
+      this.minWithdrawalAmount = minWithdrawalAmount;
+      return this;
     }
 
-    public void setNetworkScopedSymbol(String networkScopedSymbol) {
-        this.networkScopedSymbol = networkScopedSymbol;
-    }
-    public String getMinWithdrawalAmount() {
-        return minWithdrawalAmount;
+    public Builder maxWithdrawalAmount(String maxWithdrawalAmount) {
+      this.maxWithdrawalAmount = maxWithdrawalAmount;
+      return this;
     }
 
-    public void setMinWithdrawalAmount(String minWithdrawalAmount) {
-        this.minWithdrawalAmount = minWithdrawalAmount;
-    }
-    public String getMaxWithdrawalAmount() {
-        return maxWithdrawalAmount;
+    public Builder minDepositAmount(String minDepositAmount) {
+      this.minDepositAmount = minDepositAmount;
+      return this;
     }
 
-    public void setMaxWithdrawalAmount(String maxWithdrawalAmount) {
-        this.maxWithdrawalAmount = maxWithdrawalAmount;
+    public NetworkDetails build() {
+      return new NetworkDetails(this);
     }
-    public String getMinDepositAmount() {
-        return minDepositAmount;
-    }
-
-    public void setMinDepositAmount(String minDepositAmount) {
-        this.minDepositAmount = minDepositAmount;
-    }
-    public static class Builder {
-        private Network network;
-
-        private String name;
-
-        private String maxDecimals;
-
-        private boolean _default;
-
-        private boolean tradingSupported;
-
-        private boolean vaultSupported;
-
-        private boolean primeCustodySupported;
-
-        private boolean destinationTagRequired;
-
-        private String networkLink;
-
-        private String networkScopedSymbol;
-
-        private String minWithdrawalAmount;
-
-        private String maxWithdrawalAmount;
-
-        private String minDepositAmount;
-
-        public Builder network(Network network) {
-            this.network = network;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder maxDecimals(String maxDecimals) {
-            this.maxDecimals = maxDecimals;
-            return this;
-        }
-
-        public Builder _default(boolean _default) {
-            this._default = _default;
-            return this;
-        }
-
-        public Builder tradingSupported(boolean tradingSupported) {
-            this.tradingSupported = tradingSupported;
-            return this;
-        }
-
-        public Builder vaultSupported(boolean vaultSupported) {
-            this.vaultSupported = vaultSupported;
-            return this;
-        }
-
-        public Builder primeCustodySupported(boolean primeCustodySupported) {
-            this.primeCustodySupported = primeCustodySupported;
-            return this;
-        }
-
-        public Builder destinationTagRequired(boolean destinationTagRequired) {
-            this.destinationTagRequired = destinationTagRequired;
-            return this;
-        }
-
-        public Builder networkLink(String networkLink) {
-            this.networkLink = networkLink;
-            return this;
-        }
-
-        public Builder networkScopedSymbol(String networkScopedSymbol) {
-            this.networkScopedSymbol = networkScopedSymbol;
-            return this;
-        }
-
-        public Builder minWithdrawalAmount(String minWithdrawalAmount) {
-            this.minWithdrawalAmount = minWithdrawalAmount;
-            return this;
-        }
-
-        public Builder maxWithdrawalAmount(String maxWithdrawalAmount) {
-            this.maxWithdrawalAmount = maxWithdrawalAmount;
-            return this;
-        }
-
-        public Builder minDepositAmount(String minDepositAmount) {
-            this.minDepositAmount = minDepositAmount;
-            return this;
-        }
-
-        public NetworkDetails build() {
-            return new NetworkDetails(this);
-        }
-    }
+  }
 }
-

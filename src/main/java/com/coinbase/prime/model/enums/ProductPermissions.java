@@ -23,4 +23,3 @@ public enum ProductPermissions {
   PRODUCT_PERMISSION_TRADE,
   PRODUCT_PERMISSION_LENDING
 }
-

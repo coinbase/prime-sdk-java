@@ -17,81 +17,80 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** TierPairRateEntry represents a single (tier_a, tier_b) -> rate entry in an offset credit matrix. */
+/**
+ * TierPairRateEntry represents a single (tier_a, tier_b) -> rate entry in an offset credit matrix.
+ */
 public class TierPairRateEntry {
-    /**
-     * First tier in the pair.
-     */
-    @JsonProperty("tier_a")
+  /** First tier in the pair. */
+  @JsonProperty("tier_a")
+  private String tierA;
+
+  /** Second tier in the pair. */
+  @JsonProperty("tier_b")
+  private String tierB;
+
+  /** Credit rate for this tier pair. */
+  private String rate;
+
+  public TierPairRateEntry() {}
+
+  public TierPairRateEntry(Builder builder) {
+    this.tierA = builder.tierA;
+    this.tierB = builder.tierB;
+    this.rate = builder.rate;
+  }
+
+  public String getTierA() {
+    return tierA;
+  }
+
+  public void setTierA(String tierA) {
+    this.tierA = tierA;
+  }
+
+  public String getTierB() {
+    return tierB;
+  }
+
+  public void setTierB(String tierB) {
+    this.tierB = tierB;
+  }
+
+  public String getRate() {
+    return rate;
+  }
+
+  public void setRate(String rate) {
+    this.rate = rate;
+  }
+
+  public static class Builder {
     private String tierA;
 
-    /**
-     * Second tier in the pair.
-     */
-    @JsonProperty("tier_b")
     private String tierB;
 
-    /**
-     * Credit rate for this tier pair.
-     */
     private String rate;
 
-    public TierPairRateEntry() {
+    public Builder tierA(String tierA) {
+      this.tierA = tierA;
+      return this;
     }
 
-    public TierPairRateEntry(Builder builder) {
-        this.tierA = builder.tierA;
-        this.tierB = builder.tierB;
-        this.rate = builder.rate;
-    }
-    public String getTierA() {
-        return tierA;
+    public Builder tierB(String tierB) {
+      this.tierB = tierB;
+      return this;
     }
 
-    public void setTierA(String tierA) {
-        this.tierA = tierA;
-    }
-    public String getTierB() {
-        return tierB;
+    public Builder rate(String rate) {
+      this.rate = rate;
+      return this;
     }
 
-    public void setTierB(String tierB) {
-        this.tierB = tierB;
+    public TierPairRateEntry build() {
+      return new TierPairRateEntry(this);
     }
-    public String getRate() {
-        return rate;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
-    }
-    public static class Builder {
-        private String tierA;
-
-        private String tierB;
-
-        private String rate;
-
-        public Builder tierA(String tierA) {
-            this.tierA = tierA;
-            return this;
-        }
-
-        public Builder tierB(String tierB) {
-            this.tierB = tierB;
-            return this;
-        }
-
-        public Builder rate(String rate) {
-            this.rate = rate;
-            return this;
-        }
-
-        public TierPairRateEntry build() {
-            return new TierPairRateEntry(this);
-        }
-    }
+  }
 }
-

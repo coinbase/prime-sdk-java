@@ -362,7 +362,8 @@ public class FuturesServiceSerializationTest {
 
   @Test
   public void testGetDerivativePositionsResponseDeserialization() throws JsonProcessingException {
-    String json = "{\"positions\":[{\"product_id\":\"BTC-31JAN24-CDE\",\"number_of_contracts\":\"10\"}]}";
+    String json =
+        "{\"positions\":[{\"product_id\":\"BTC-31JAN24-CDE\",\"number_of_contracts\":\"10\"}]}";
     GetDerivativePositionsResponse response =
         objectMapper.readValue(json, GetDerivativePositionsResponse.class);
     assertEquals(1, response.getPositions().length);

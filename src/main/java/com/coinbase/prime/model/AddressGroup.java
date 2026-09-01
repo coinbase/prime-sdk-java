@@ -17,110 +17,114 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.AddressEntry;
+
 import com.coinbase.prime.model.enums.NetworkType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
 
 public class AddressGroup {
+  private String id;
+
+  private String name;
+
+  @JsonProperty("network_type")
+  private NetworkType networkType;
+
+  /** A list of addresses within the group */
+  private List<AddressEntry> addresses;
+
+  @JsonProperty("added_at")
+  private OffsetDateTime addedAt;
+
+  public AddressGroup() {}
+
+  public AddressGroup(Builder builder) {
+    this.id = builder.id;
+    this.name = builder.name;
+    this.networkType = builder.networkType;
+    this.addresses = builder.addresses;
+    this.addedAt = builder.addedAt;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public NetworkType getNetworkType() {
+    return networkType;
+  }
+
+  public void setNetworkType(NetworkType networkType) {
+    this.networkType = networkType;
+  }
+
+  public List<AddressEntry> getAddresses() {
+    return addresses;
+  }
+
+  public void setAddresses(List<AddressEntry> addresses) {
+    this.addresses = addresses;
+  }
+
+  public OffsetDateTime getAddedAt() {
+    return addedAt;
+  }
+
+  public void setAddedAt(OffsetDateTime addedAt) {
+    this.addedAt = addedAt;
+  }
+
+  public static class Builder {
     private String id;
 
     private String name;
 
-    @JsonProperty("network_type")
     private NetworkType networkType;
 
-    /** A list of addresses within the group */
     private List<AddressEntry> addresses;
 
-    @JsonProperty("added_at")
     private OffsetDateTime addedAt;
 
-    public AddressGroup() {
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
-    public AddressGroup(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.networkType = builder.networkType;
-        this.addresses = builder.addresses;
-        this.addedAt = builder.addedAt;
-    }
-    public String getId() {
-        return id;
+    public Builder name(String name) {
+      this.name = name;
+      return this;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
+    public Builder networkType(NetworkType networkType) {
+      this.networkType = networkType;
+      return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public NetworkType getNetworkType() {
-        return networkType;
+    public Builder addresses(List<AddressEntry> addresses) {
+      this.addresses = addresses;
+      return this;
     }
 
-    public void setNetworkType(NetworkType networkType) {
-        this.networkType = networkType;
-    }
-    public List<AddressEntry> getAddresses() {
-        return addresses;
+    public Builder addedAt(OffsetDateTime addedAt) {
+      this.addedAt = addedAt;
+      return this;
     }
 
-    public void setAddresses(List<AddressEntry> addresses) {
-        this.addresses = addresses;
+    public AddressGroup build() {
+      return new AddressGroup(this);
     }
-    public OffsetDateTime getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(OffsetDateTime addedAt) {
-        this.addedAt = addedAt;
-    }
-    public static class Builder {
-        private String id;
-
-        private String name;
-
-        private NetworkType networkType;
-
-        private List<AddressEntry> addresses;
-
-        private OffsetDateTime addedAt;
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder networkType(NetworkType networkType) {
-            this.networkType = networkType;
-            return this;
-        }
-
-        public Builder addresses(List<AddressEntry> addresses) {
-            this.addresses = addresses;
-            return this;
-        }
-
-        public Builder addedAt(OffsetDateTime addedAt) {
-            this.addedAt = addedAt;
-            return this;
-        }
-
-        public AddressGroup build() {
-            return new AddressGroup(this);
-        }
-    }
+  }
 }
-

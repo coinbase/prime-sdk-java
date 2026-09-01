@@ -17,164 +17,157 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RfqProductDetails {
-    /**
-     * Whether the product is tradable via RFQ
-     */
+  /** Whether the product is tradable via RFQ */
+  private boolean tradable;
+
+  /** Deprecated: Value will be an empty string */
+  @JsonProperty("min_notional_size")
+  private String minNotionalSize;
+
+  /** Deprecated: Value will be an empty string */
+  @JsonProperty("max_notional_size")
+  private String maxNotionalSize;
+
+  /** Minimum base size for RFQ */
+  @JsonProperty("min_base_size")
+  private String minBaseSize;
+
+  /** Maximum base size for RFQ */
+  @JsonProperty("max_base_size")
+  private String maxBaseSize;
+
+  /** Minimum quote size for RFQ */
+  @JsonProperty("min_quote_size")
+  private String minQuoteSize;
+
+  /** Maximum quote size for RFQ */
+  @JsonProperty("max_quote_size")
+  private String maxQuoteSize;
+
+  public RfqProductDetails() {}
+
+  public RfqProductDetails(Builder builder) {
+    this.tradable = builder.tradable;
+    this.minNotionalSize = builder.minNotionalSize;
+    this.maxNotionalSize = builder.maxNotionalSize;
+    this.minBaseSize = builder.minBaseSize;
+    this.maxBaseSize = builder.maxBaseSize;
+    this.minQuoteSize = builder.minQuoteSize;
+    this.maxQuoteSize = builder.maxQuoteSize;
+  }
+
+  public boolean getTradable() {
+    return tradable;
+  }
+
+  public void setTradable(boolean tradable) {
+    this.tradable = tradable;
+  }
+
+  public String getMinNotionalSize() {
+    return minNotionalSize;
+  }
+
+  public void setMinNotionalSize(String minNotionalSize) {
+    this.minNotionalSize = minNotionalSize;
+  }
+
+  public String getMaxNotionalSize() {
+    return maxNotionalSize;
+  }
+
+  public void setMaxNotionalSize(String maxNotionalSize) {
+    this.maxNotionalSize = maxNotionalSize;
+  }
+
+  public String getMinBaseSize() {
+    return minBaseSize;
+  }
+
+  public void setMinBaseSize(String minBaseSize) {
+    this.minBaseSize = minBaseSize;
+  }
+
+  public String getMaxBaseSize() {
+    return maxBaseSize;
+  }
+
+  public void setMaxBaseSize(String maxBaseSize) {
+    this.maxBaseSize = maxBaseSize;
+  }
+
+  public String getMinQuoteSize() {
+    return minQuoteSize;
+  }
+
+  public void setMinQuoteSize(String minQuoteSize) {
+    this.minQuoteSize = minQuoteSize;
+  }
+
+  public String getMaxQuoteSize() {
+    return maxQuoteSize;
+  }
+
+  public void setMaxQuoteSize(String maxQuoteSize) {
+    this.maxQuoteSize = maxQuoteSize;
+  }
+
+  public static class Builder {
     private boolean tradable;
 
-    /**
-     * Deprecated: Value will be an empty string
-     */
-    @JsonProperty("min_notional_size")
     private String minNotionalSize;
 
-    /**
-     * Deprecated: Value will be an empty string
-     */
-    @JsonProperty("max_notional_size")
     private String maxNotionalSize;
 
-    /**
-     * Minimum base size for RFQ
-     */
-    @JsonProperty("min_base_size")
     private String minBaseSize;
 
-    /**
-     * Maximum base size for RFQ
-     */
-    @JsonProperty("max_base_size")
     private String maxBaseSize;
 
-    /**
-     * Minimum quote size for RFQ
-     */
-    @JsonProperty("min_quote_size")
     private String minQuoteSize;
 
-    /**
-     * Maximum quote size for RFQ
-     */
-    @JsonProperty("max_quote_size")
     private String maxQuoteSize;
 
-    public RfqProductDetails() {
+    public Builder tradable(boolean tradable) {
+      this.tradable = tradable;
+      return this;
     }
 
-    public RfqProductDetails(Builder builder) {
-        this.tradable = builder.tradable;
-        this.minNotionalSize = builder.minNotionalSize;
-        this.maxNotionalSize = builder.maxNotionalSize;
-        this.minBaseSize = builder.minBaseSize;
-        this.maxBaseSize = builder.maxBaseSize;
-        this.minQuoteSize = builder.minQuoteSize;
-        this.maxQuoteSize = builder.maxQuoteSize;
-    }
-    public boolean getTradable() {
-        return tradable;
+    public Builder minNotionalSize(String minNotionalSize) {
+      this.minNotionalSize = minNotionalSize;
+      return this;
     }
 
-    public void setTradable(boolean tradable) {
-        this.tradable = tradable;
-    }
-    public String getMinNotionalSize() {
-        return minNotionalSize;
+    public Builder maxNotionalSize(String maxNotionalSize) {
+      this.maxNotionalSize = maxNotionalSize;
+      return this;
     }
 
-    public void setMinNotionalSize(String minNotionalSize) {
-        this.minNotionalSize = minNotionalSize;
-    }
-    public String getMaxNotionalSize() {
-        return maxNotionalSize;
+    public Builder minBaseSize(String minBaseSize) {
+      this.minBaseSize = minBaseSize;
+      return this;
     }
 
-    public void setMaxNotionalSize(String maxNotionalSize) {
-        this.maxNotionalSize = maxNotionalSize;
-    }
-    public String getMinBaseSize() {
-        return minBaseSize;
+    public Builder maxBaseSize(String maxBaseSize) {
+      this.maxBaseSize = maxBaseSize;
+      return this;
     }
 
-    public void setMinBaseSize(String minBaseSize) {
-        this.minBaseSize = minBaseSize;
-    }
-    public String getMaxBaseSize() {
-        return maxBaseSize;
+    public Builder minQuoteSize(String minQuoteSize) {
+      this.minQuoteSize = minQuoteSize;
+      return this;
     }
 
-    public void setMaxBaseSize(String maxBaseSize) {
-        this.maxBaseSize = maxBaseSize;
-    }
-    public String getMinQuoteSize() {
-        return minQuoteSize;
+    public Builder maxQuoteSize(String maxQuoteSize) {
+      this.maxQuoteSize = maxQuoteSize;
+      return this;
     }
 
-    public void setMinQuoteSize(String minQuoteSize) {
-        this.minQuoteSize = minQuoteSize;
+    public RfqProductDetails build() {
+      return new RfqProductDetails(this);
     }
-    public String getMaxQuoteSize() {
-        return maxQuoteSize;
-    }
-
-    public void setMaxQuoteSize(String maxQuoteSize) {
-        this.maxQuoteSize = maxQuoteSize;
-    }
-    public static class Builder {
-        private boolean tradable;
-
-        private String minNotionalSize;
-
-        private String maxNotionalSize;
-
-        private String minBaseSize;
-
-        private String maxBaseSize;
-
-        private String minQuoteSize;
-
-        private String maxQuoteSize;
-
-        public Builder tradable(boolean tradable) {
-            this.tradable = tradable;
-            return this;
-        }
-
-        public Builder minNotionalSize(String minNotionalSize) {
-            this.minNotionalSize = minNotionalSize;
-            return this;
-        }
-
-        public Builder maxNotionalSize(String maxNotionalSize) {
-            this.maxNotionalSize = maxNotionalSize;
-            return this;
-        }
-
-        public Builder minBaseSize(String minBaseSize) {
-            this.minBaseSize = minBaseSize;
-            return this;
-        }
-
-        public Builder maxBaseSize(String maxBaseSize) {
-            this.maxBaseSize = maxBaseSize;
-            return this;
-        }
-
-        public Builder minQuoteSize(String minQuoteSize) {
-            this.minQuoteSize = minQuoteSize;
-            return this;
-        }
-
-        public Builder maxQuoteSize(String maxQuoteSize) {
-            this.maxQuoteSize = maxQuoteSize;
-            return this;
-        }
-
-        public RfqProductDetails build() {
-            return new RfqProductDetails(this);
-        }
-    }
+  }
 }
-

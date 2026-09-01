@@ -19,28 +19,17 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - SETTLEMENT_PERIOD_UNSPECIFIED: Unspecified settlement period
- * - SETTLEMENT_PERIOD_PERPETUAL: Contract never expires
- * - SETTLEMENT_PERIOD_DAY: Contract expires daily
- * - SETTLEMENT_PERIOD_WEEK: Contract expires weekly
- * - SETTLEMENT_PERIOD_MONTH: Contract expires monthly
+ * - SETTLEMENT_PERIOD_UNSPECIFIED: Unspecified settlement period - SETTLEMENT_PERIOD_PERPETUAL:
+ * Contract never expires - SETTLEMENT_PERIOD_DAY: Contract expires daily - SETTLEMENT_PERIOD_WEEK:
+ * Contract expires weekly - SETTLEMENT_PERIOD_MONTH: Contract expires monthly
  */
 public enum SettlementPeriod {
-  /**
-   * Contract never expires
-   */
+  /** Contract never expires */
   SETTLEMENT_PERIOD_PERPETUAL,
-  /**
-   * Contract expires daily
-   */
+  /** Contract expires daily */
   SETTLEMENT_PERIOD_DAY,
-  /**
-   * Contract expires weekly
-   */
+  /** Contract expires weekly */
   SETTLEMENT_PERIOD_WEEK,
-  /**
-   * Contract expires monthly
-   */
+  /** Contract expires monthly */
   SETTLEMENT_PERIOD_MONTH
 }
-

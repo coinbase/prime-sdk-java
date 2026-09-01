@@ -17,7 +17,7 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.FcmScheduledMaintenance;
+
 import com.coinbase.prime.model.enums.FcmTradingSessionClosedReason;
 import com.coinbase.prime.model.enums.FcmTradingSessionState;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,209 +25,204 @@ import java.time.OffsetDateTime;
 
 /** FcmTradingSessionDetails contains trading session details for FCM products */
 public class FcmTradingSessionDetails {
-    /**
-     * Whether the trading session is currently open
-     */
-    @JsonProperty("session_open")
+  /** Whether the trading session is currently open */
+  @JsonProperty("session_open")
+  private boolean sessionOpen;
+
+  /** Trading session open time */
+  @JsonProperty("open_time")
+  private OffsetDateTime openTime;
+
+  /** Trading session close time */
+  @JsonProperty("close_time")
+  private OffsetDateTime closeTime;
+
+  /**
+   * - FCM_TRADING_SESSION_STATE_UNDEFINED: Undefined session state -
+   * FCM_TRADING_SESSION_STATE_PRE_OPEN: Pre-open state, orders can be placed and cancelled -
+   * FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL: Pre-open state, orders cannot be cancelled -
+   * FCM_TRADING_SESSION_STATE_OPEN: Trading session is open - FCM_TRADING_SESSION_STATE_CLOSE:
+   * Trading session is closed - FCM_TRADING_SESSION_STATE_HALTED: Trading session is halted
+   */
+  @JsonProperty("session_state")
+  private FcmTradingSessionState sessionState;
+
+  /** Whether after-hours order entry is disabled */
+  @JsonProperty("after_hours_order_entry_disabled")
+  private boolean afterHoursOrderEntryDisabled;
+
+  /**
+   * - FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED: Undefined closed reason -
+   * FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE: Regular market close -
+   * FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE: Exchange maintenance -
+   * FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE: Vendor maintenance
+   */
+  @JsonProperty("closed_reason")
+  private FcmTradingSessionClosedReason closedReason;
+
+  /** FcmScheduledMaintenance contains scheduled maintenance window information */
+  private FcmScheduledMaintenance maintenance;
+
+  /** Settlement timestamp from previous trading day */
+  @JsonProperty("settlement_timestamp")
+  private OffsetDateTime settlementTimestamp;
+
+  /** Settlement price from previous trading day */
+  @JsonProperty("settlement_price")
+  private String settlementPrice;
+
+  public FcmTradingSessionDetails() {}
+
+  public FcmTradingSessionDetails(Builder builder) {
+    this.sessionOpen = builder.sessionOpen;
+    this.openTime = builder.openTime;
+    this.closeTime = builder.closeTime;
+    this.sessionState = builder.sessionState;
+    this.afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
+    this.closedReason = builder.closedReason;
+    this.maintenance = builder.maintenance;
+    this.settlementTimestamp = builder.settlementTimestamp;
+    this.settlementPrice = builder.settlementPrice;
+  }
+
+  public boolean getSessionOpen() {
+    return sessionOpen;
+  }
+
+  public void setSessionOpen(boolean sessionOpen) {
+    this.sessionOpen = sessionOpen;
+  }
+
+  public OffsetDateTime getOpenTime() {
+    return openTime;
+  }
+
+  public void setOpenTime(OffsetDateTime openTime) {
+    this.openTime = openTime;
+  }
+
+  public OffsetDateTime getCloseTime() {
+    return closeTime;
+  }
+
+  public void setCloseTime(OffsetDateTime closeTime) {
+    this.closeTime = closeTime;
+  }
+
+  public FcmTradingSessionState getSessionState() {
+    return sessionState;
+  }
+
+  public void setSessionState(FcmTradingSessionState sessionState) {
+    this.sessionState = sessionState;
+  }
+
+  public boolean getAfterHoursOrderEntryDisabled() {
+    return afterHoursOrderEntryDisabled;
+  }
+
+  public void setAfterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
+    this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
+  }
+
+  public FcmTradingSessionClosedReason getClosedReason() {
+    return closedReason;
+  }
+
+  public void setClosedReason(FcmTradingSessionClosedReason closedReason) {
+    this.closedReason = closedReason;
+  }
+
+  public FcmScheduledMaintenance getMaintenance() {
+    return maintenance;
+  }
+
+  public void setMaintenance(FcmScheduledMaintenance maintenance) {
+    this.maintenance = maintenance;
+  }
+
+  public OffsetDateTime getSettlementTimestamp() {
+    return settlementTimestamp;
+  }
+
+  public void setSettlementTimestamp(OffsetDateTime settlementTimestamp) {
+    this.settlementTimestamp = settlementTimestamp;
+  }
+
+  public String getSettlementPrice() {
+    return settlementPrice;
+  }
+
+  public void setSettlementPrice(String settlementPrice) {
+    this.settlementPrice = settlementPrice;
+  }
+
+  public static class Builder {
     private boolean sessionOpen;
 
-    /**
-     * Trading session open time
-     */
-    @JsonProperty("open_time")
     private OffsetDateTime openTime;
 
-    /**
-     * Trading session close time
-     */
-    @JsonProperty("close_time")
     private OffsetDateTime closeTime;
 
-    /**
-     * - FCM_TRADING_SESSION_STATE_UNDEFINED: Undefined session state
-     * - FCM_TRADING_SESSION_STATE_PRE_OPEN: Pre-open state, orders can be placed and cancelled
-     * - FCM_TRADING_SESSION_STATE_PRE_OPEN_NO_CANCEL: Pre-open state, orders cannot be cancelled
-     * - FCM_TRADING_SESSION_STATE_OPEN: Trading session is open
-     * - FCM_TRADING_SESSION_STATE_CLOSE: Trading session is closed
-     * - FCM_TRADING_SESSION_STATE_HALTED: Trading session is halted
-     */
-    @JsonProperty("session_state")
     private FcmTradingSessionState sessionState;
 
-    /**
-     * Whether after-hours order entry is disabled
-     */
-    @JsonProperty("after_hours_order_entry_disabled")
     private boolean afterHoursOrderEntryDisabled;
 
-    /**
-     * - FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED: Undefined closed reason
-     * - FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE: Regular market close
-     * - FCM_TRADING_SESSION_CLOSED_REASON_EXCHANGE_MAINTENANCE: Exchange maintenance
-     * - FCM_TRADING_SESSION_CLOSED_REASON_VENDOR_MAINTENANCE: Vendor maintenance
-     */
-    @JsonProperty("closed_reason")
     private FcmTradingSessionClosedReason closedReason;
 
-    /** FcmScheduledMaintenance contains scheduled maintenance window information */
     private FcmScheduledMaintenance maintenance;
 
-    /**
-     * Settlement timestamp from previous trading day
-     */
-    @JsonProperty("settlement_timestamp")
     private OffsetDateTime settlementTimestamp;
 
-    /**
-     * Settlement price from previous trading day
-     */
-    @JsonProperty("settlement_price")
     private String settlementPrice;
 
-    public FcmTradingSessionDetails() {
+    public Builder sessionOpen(boolean sessionOpen) {
+      this.sessionOpen = sessionOpen;
+      return this;
     }
 
-    public FcmTradingSessionDetails(Builder builder) {
-        this.sessionOpen = builder.sessionOpen;
-        this.openTime = builder.openTime;
-        this.closeTime = builder.closeTime;
-        this.sessionState = builder.sessionState;
-        this.afterHoursOrderEntryDisabled = builder.afterHoursOrderEntryDisabled;
-        this.closedReason = builder.closedReason;
-        this.maintenance = builder.maintenance;
-        this.settlementTimestamp = builder.settlementTimestamp;
-        this.settlementPrice = builder.settlementPrice;
-    }
-    public boolean getSessionOpen() {
-        return sessionOpen;
+    public Builder openTime(OffsetDateTime openTime) {
+      this.openTime = openTime;
+      return this;
     }
 
-    public void setSessionOpen(boolean sessionOpen) {
-        this.sessionOpen = sessionOpen;
-    }
-    public OffsetDateTime getOpenTime() {
-        return openTime;
+    public Builder closeTime(OffsetDateTime closeTime) {
+      this.closeTime = closeTime;
+      return this;
     }
 
-    public void setOpenTime(OffsetDateTime openTime) {
-        this.openTime = openTime;
-    }
-    public OffsetDateTime getCloseTime() {
-        return closeTime;
+    public Builder sessionState(FcmTradingSessionState sessionState) {
+      this.sessionState = sessionState;
+      return this;
     }
 
-    public void setCloseTime(OffsetDateTime closeTime) {
-        this.closeTime = closeTime;
-    }
-    public FcmTradingSessionState getSessionState() {
-        return sessionState;
+    public Builder afterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
+      this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
+      return this;
     }
 
-    public void setSessionState(FcmTradingSessionState sessionState) {
-        this.sessionState = sessionState;
-    }
-    public boolean getAfterHoursOrderEntryDisabled() {
-        return afterHoursOrderEntryDisabled;
+    public Builder closedReason(FcmTradingSessionClosedReason closedReason) {
+      this.closedReason = closedReason;
+      return this;
     }
 
-    public void setAfterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
-        this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
-    }
-    public FcmTradingSessionClosedReason getClosedReason() {
-        return closedReason;
+    public Builder maintenance(FcmScheduledMaintenance maintenance) {
+      this.maintenance = maintenance;
+      return this;
     }
 
-    public void setClosedReason(FcmTradingSessionClosedReason closedReason) {
-        this.closedReason = closedReason;
-    }
-    public FcmScheduledMaintenance getMaintenance() {
-        return maintenance;
+    public Builder settlementTimestamp(OffsetDateTime settlementTimestamp) {
+      this.settlementTimestamp = settlementTimestamp;
+      return this;
     }
 
-    public void setMaintenance(FcmScheduledMaintenance maintenance) {
-        this.maintenance = maintenance;
-    }
-    public OffsetDateTime getSettlementTimestamp() {
-        return settlementTimestamp;
+    public Builder settlementPrice(String settlementPrice) {
+      this.settlementPrice = settlementPrice;
+      return this;
     }
 
-    public void setSettlementTimestamp(OffsetDateTime settlementTimestamp) {
-        this.settlementTimestamp = settlementTimestamp;
+    public FcmTradingSessionDetails build() {
+      return new FcmTradingSessionDetails(this);
     }
-    public String getSettlementPrice() {
-        return settlementPrice;
-    }
-
-    public void setSettlementPrice(String settlementPrice) {
-        this.settlementPrice = settlementPrice;
-    }
-    public static class Builder {
-        private boolean sessionOpen;
-
-        private OffsetDateTime openTime;
-
-        private OffsetDateTime closeTime;
-
-        private FcmTradingSessionState sessionState;
-
-        private boolean afterHoursOrderEntryDisabled;
-
-        private FcmTradingSessionClosedReason closedReason;
-
-        private FcmScheduledMaintenance maintenance;
-
-        private OffsetDateTime settlementTimestamp;
-
-        private String settlementPrice;
-
-        public Builder sessionOpen(boolean sessionOpen) {
-            this.sessionOpen = sessionOpen;
-            return this;
-        }
-
-        public Builder openTime(OffsetDateTime openTime) {
-            this.openTime = openTime;
-            return this;
-        }
-
-        public Builder closeTime(OffsetDateTime closeTime) {
-            this.closeTime = closeTime;
-            return this;
-        }
-
-        public Builder sessionState(FcmTradingSessionState sessionState) {
-            this.sessionState = sessionState;
-            return this;
-        }
-
-        public Builder afterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
-            this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
-            return this;
-        }
-
-        public Builder closedReason(FcmTradingSessionClosedReason closedReason) {
-            this.closedReason = closedReason;
-            return this;
-        }
-
-        public Builder maintenance(FcmScheduledMaintenance maintenance) {
-            this.maintenance = maintenance;
-            return this;
-        }
-
-        public Builder settlementTimestamp(OffsetDateTime settlementTimestamp) {
-            this.settlementTimestamp = settlementTimestamp;
-            return this;
-        }
-
-        public Builder settlementPrice(String settlementPrice) {
-            this.settlementPrice = settlementPrice;
-            return this;
-        }
-
-        public FcmTradingSessionDetails build() {
-            return new FcmTradingSessionDetails(this);
-        }
-    }
+  }
 }
-

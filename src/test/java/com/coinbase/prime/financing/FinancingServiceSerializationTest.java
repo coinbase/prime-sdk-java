@@ -508,10 +508,7 @@ public class FinancingServiceSerializationTest {
   @Test
   public void testGetXmLiquidationRequestOmitsEntityId() throws JsonProcessingException {
     GetXmLiquidationRequest request =
-        new GetXmLiquidationRequest.Builder()
-            .entityId("entity-123")
-            .liquidationId("liq-1")
-            .build();
+        new GetXmLiquidationRequest.Builder().entityId("entity-123").liquidationId("liq-1").build();
     String json = objectMapper.writeValueAsString(request);
     assertTrue(json.contains("\"liquidation_id\":\"liq-1\""));
     assertFalse(json.contains("entity_id"));
@@ -531,7 +528,8 @@ public class FinancingServiceSerializationTest {
     ListXmLiquidationsRequest request =
         new ListXmLiquidationsRequest.Builder()
             .entityId("entity-123")
-            .status(com.coinbase.prime.model.enums.XMLiquidationStatus.XM_LIQUIDATION_STATUS_LIQUIDATED)
+            .status(
+                com.coinbase.prime.model.enums.XMLiquidationStatus.XM_LIQUIDATION_STATUS_LIQUIDATED)
             .build();
     String json = objectMapper.writeValueAsString(request);
     assertTrue(json.contains("\"status\":\"XM_LIQUIDATION_STATUS_LIQUIDATED\""));

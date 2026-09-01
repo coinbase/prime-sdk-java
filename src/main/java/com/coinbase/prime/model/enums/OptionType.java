@@ -19,19 +19,12 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * The type of an option position.
- * - OPTION_TYPE_UNSPECIFIED: Unspecified option type.
- * - OPTION_TYPE_CALL: Call option.
- * - OPTION_TYPE_PUT: Put option.
+ * The type of an option position. - OPTION_TYPE_UNSPECIFIED: Unspecified option type. -
+ * OPTION_TYPE_CALL: Call option. - OPTION_TYPE_PUT: Put option.
  */
 public enum OptionType {
-  /**
-   * Call option.
-   */
+  /** Call option. */
   OPTION_TYPE_CALL,
-  /**
-   * Put option.
-   */
+  /** Put option. */
   OPTION_TYPE_PUT
 }
-

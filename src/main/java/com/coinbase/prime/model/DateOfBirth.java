@@ -19,75 +19,74 @@
 package com.coinbase.prime.model;
 
 public class DateOfBirth {
-    /**
-     * Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
-     */
+  /** Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year. */
+  private int year;
+
+  /** Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day. */
+  private int month;
+
+  /**
+   * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year
+   * by itself or a year and month where the day isn't significant.
+   */
+  private int day;
+
+  public DateOfBirth() {}
+
+  public DateOfBirth(Builder builder) {
+    this.year = builder.year;
+    this.month = builder.month;
+    this.day = builder.day;
+  }
+
+  public int getYear() {
+    return year;
+  }
+
+  public void setYear(int year) {
+    this.year = year;
+  }
+
+  public int getMonth() {
+    return month;
+  }
+
+  public void setMonth(int month) {
+    this.month = month;
+  }
+
+  public int getDay() {
+    return day;
+  }
+
+  public void setDay(int day) {
+    this.day = day;
+  }
+
+  public static class Builder {
     private int year;
 
-    /**
-     * Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
-     */
     private int month;
 
-    /**
-     * Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
-     */
     private int day;
 
-    public DateOfBirth() {
+    public Builder year(int year) {
+      this.year = year;
+      return this;
     }
 
-    public DateOfBirth(Builder builder) {
-        this.year = builder.year;
-        this.month = builder.month;
-        this.day = builder.day;
-    }
-    public int getYear() {
-        return year;
+    public Builder month(int month) {
+      this.month = month;
+      return this;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-    public int getMonth() {
-        return month;
+    public Builder day(int day) {
+      this.day = day;
+      return this;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public DateOfBirth build() {
+      return new DateOfBirth(this);
     }
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-    public static class Builder {
-        private int year;
-
-        private int month;
-
-        private int day;
-
-        public Builder year(int year) {
-            this.year = year;
-            return this;
-        }
-
-        public Builder month(int month) {
-            this.month = month;
-            return this;
-        }
-
-        public Builder day(int day) {
-            this.day = day;
-            return this;
-        }
-
-        public DateOfBirth build() {
-            return new DateOfBirth(this);
-        }
-    }
+  }
 }
-

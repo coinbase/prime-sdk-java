@@ -17,65 +17,66 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * PriceIncrementStep overrides the product's price_increment for prices above a
- * threshold. A price takes the increment of the highest step whose threshold it
- * strictly exceeds, and the product's price_increment when it exceeds none.
+ * PriceIncrementStep overrides the product's price_increment for prices above a threshold. A price
+ * takes the increment of the highest step whose threshold it strictly exceeds, and the product's
+ * price_increment when it exceeds none.
  */
 public class PriceIncrementStep {
-    /**
-     * Prices strictly greater than this threshold use this step's price increment; a price equal to it takes the next lower step
-     */
-    @JsonProperty("price_threshold")
+  /**
+   * Prices strictly greater than this threshold use this step's price increment; a price equal to
+   * it takes the next lower step
+   */
+  @JsonProperty("price_threshold")
+  private String priceThreshold;
+
+  /** Minimum price increment applied to prices above the threshold */
+  @JsonProperty("price_increment")
+  private String priceIncrement;
+
+  public PriceIncrementStep() {}
+
+  public PriceIncrementStep(Builder builder) {
+    this.priceThreshold = builder.priceThreshold;
+    this.priceIncrement = builder.priceIncrement;
+  }
+
+  public String getPriceThreshold() {
+    return priceThreshold;
+  }
+
+  public void setPriceThreshold(String priceThreshold) {
+    this.priceThreshold = priceThreshold;
+  }
+
+  public String getPriceIncrement() {
+    return priceIncrement;
+  }
+
+  public void setPriceIncrement(String priceIncrement) {
+    this.priceIncrement = priceIncrement;
+  }
+
+  public static class Builder {
     private String priceThreshold;
 
-    /**
-     * Minimum price increment applied to prices above the threshold
-     */
-    @JsonProperty("price_increment")
     private String priceIncrement;
 
-    public PriceIncrementStep() {
+    public Builder priceThreshold(String priceThreshold) {
+      this.priceThreshold = priceThreshold;
+      return this;
     }
 
-    public PriceIncrementStep(Builder builder) {
-        this.priceThreshold = builder.priceThreshold;
-        this.priceIncrement = builder.priceIncrement;
-    }
-    public String getPriceThreshold() {
-        return priceThreshold;
+    public Builder priceIncrement(String priceIncrement) {
+      this.priceIncrement = priceIncrement;
+      return this;
     }
 
-    public void setPriceThreshold(String priceThreshold) {
-        this.priceThreshold = priceThreshold;
+    public PriceIncrementStep build() {
+      return new PriceIncrementStep(this);
     }
-    public String getPriceIncrement() {
-        return priceIncrement;
-    }
-
-    public void setPriceIncrement(String priceIncrement) {
-        this.priceIncrement = priceIncrement;
-    }
-    public static class Builder {
-        private String priceThreshold;
-
-        private String priceIncrement;
-
-        public Builder priceThreshold(String priceThreshold) {
-            this.priceThreshold = priceThreshold;
-            return this;
-        }
-
-        public Builder priceIncrement(String priceIncrement) {
-            this.priceIncrement = priceIncrement;
-            return this;
-        }
-
-        public PriceIncrementStep build() {
-            return new PriceIncrementStep(this);
-        }
-    }
+  }
 }
-

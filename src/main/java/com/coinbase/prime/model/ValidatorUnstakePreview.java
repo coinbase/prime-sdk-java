@@ -17,103 +17,99 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** ValidatorUnstakePreview contains the per-validator breakdown for an unstake preview. */
 public class ValidatorUnstakePreview {
-    /**
-     * Public address of the validator being unstaked from
-     */
-    @JsonProperty("validator_address")
+  /** Public address of the validator being unstaked from */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  /** Estimated amount that would be unstaked from this validator (in ETH) */
+  @JsonProperty("estimated_unstaking_amount")
+  private String estimatedUnstakingAmount;
+
+  /** Estimated time until this validator's unstake completes, in hours */
+  @JsonProperty("unstake_time_estimate_in_hours")
+  private Double unstakeTimeEstimateInHours;
+
+  /** Estimated date when this validator's unstake will complete (ISO 8601) */
+  @JsonProperty("estimated_unstake_date")
+  private String estimatedUnstakeDate;
+
+  public ValidatorUnstakePreview() {}
+
+  public ValidatorUnstakePreview(Builder builder) {
+    this.validatorAddress = builder.validatorAddress;
+    this.estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
+    this.unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
+    this.estimatedUnstakeDate = builder.estimatedUnstakeDate;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public String getEstimatedUnstakingAmount() {
+    return estimatedUnstakingAmount;
+  }
+
+  public void setEstimatedUnstakingAmount(String estimatedUnstakingAmount) {
+    this.estimatedUnstakingAmount = estimatedUnstakingAmount;
+  }
+
+  public Double getUnstakeTimeEstimateInHours() {
+    return unstakeTimeEstimateInHours;
+  }
+
+  public void setUnstakeTimeEstimateInHours(Double unstakeTimeEstimateInHours) {
+    this.unstakeTimeEstimateInHours = unstakeTimeEstimateInHours;
+  }
+
+  public String getEstimatedUnstakeDate() {
+    return estimatedUnstakeDate;
+  }
+
+  public void setEstimatedUnstakeDate(String estimatedUnstakeDate) {
+    this.estimatedUnstakeDate = estimatedUnstakeDate;
+  }
+
+  public static class Builder {
     private String validatorAddress;
 
-    /**
-     * Estimated amount that would be unstaked from this validator (in ETH)
-     */
-    @JsonProperty("estimated_unstaking_amount")
     private String estimatedUnstakingAmount;
 
-    /**
-     * Estimated time until this validator's unstake completes, in hours
-     */
-    @JsonProperty("unstake_time_estimate_in_hours")
     private Double unstakeTimeEstimateInHours;
 
-    /**
-     * Estimated date when this validator's unstake will complete (ISO 8601)
-     */
-    @JsonProperty("estimated_unstake_date")
     private String estimatedUnstakeDate;
 
-    public ValidatorUnstakePreview() {
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public ValidatorUnstakePreview(Builder builder) {
-        this.validatorAddress = builder.validatorAddress;
-        this.estimatedUnstakingAmount = builder.estimatedUnstakingAmount;
-        this.unstakeTimeEstimateInHours = builder.unstakeTimeEstimateInHours;
-        this.estimatedUnstakeDate = builder.estimatedUnstakeDate;
-    }
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public Builder estimatedUnstakingAmount(String estimatedUnstakingAmount) {
+      this.estimatedUnstakingAmount = estimatedUnstakingAmount;
+      return this;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
-    }
-    public String getEstimatedUnstakingAmount() {
-        return estimatedUnstakingAmount;
+    public Builder unstakeTimeEstimateInHours(Double unstakeTimeEstimateInHours) {
+      this.unstakeTimeEstimateInHours = unstakeTimeEstimateInHours;
+      return this;
     }
 
-    public void setEstimatedUnstakingAmount(String estimatedUnstakingAmount) {
-        this.estimatedUnstakingAmount = estimatedUnstakingAmount;
-    }
-    public Double getUnstakeTimeEstimateInHours() {
-        return unstakeTimeEstimateInHours;
+    public Builder estimatedUnstakeDate(String estimatedUnstakeDate) {
+      this.estimatedUnstakeDate = estimatedUnstakeDate;
+      return this;
     }
 
-    public void setUnstakeTimeEstimateInHours(Double unstakeTimeEstimateInHours) {
-        this.unstakeTimeEstimateInHours = unstakeTimeEstimateInHours;
+    public ValidatorUnstakePreview build() {
+      return new ValidatorUnstakePreview(this);
     }
-    public String getEstimatedUnstakeDate() {
-        return estimatedUnstakeDate;
-    }
-
-    public void setEstimatedUnstakeDate(String estimatedUnstakeDate) {
-        this.estimatedUnstakeDate = estimatedUnstakeDate;
-    }
-    public static class Builder {
-        private String validatorAddress;
-
-        private String estimatedUnstakingAmount;
-
-        private Double unstakeTimeEstimateInHours;
-
-        private String estimatedUnstakeDate;
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public Builder estimatedUnstakingAmount(String estimatedUnstakingAmount) {
-            this.estimatedUnstakingAmount = estimatedUnstakingAmount;
-            return this;
-        }
-
-        public Builder unstakeTimeEstimateInHours(Double unstakeTimeEstimateInHours) {
-            this.unstakeTimeEstimateInHours = unstakeTimeEstimateInHours;
-            return this;
-        }
-
-        public Builder estimatedUnstakeDate(String estimatedUnstakeDate) {
-            this.estimatedUnstakeDate = estimatedUnstakeDate;
-            return this;
-        }
-
-        public ValidatorUnstakePreview build() {
-            return new ValidatorUnstakePreview(this);
-        }
-    }
+  }
 }
-

@@ -17,121 +17,118 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.StakeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class StakingStatus {
-    /**
-     * Amount being staked (whole amount, e.g., 16 ETH)
-     */
+  /** Amount being staked (whole amount, e.g., 16 ETH) */
+  private String amount;
+
+  @JsonProperty("stake_type")
+  private StakeType stakeType;
+
+  /** Estimated date when staking will complete (ISO 8601 format) */
+  @JsonProperty("estimated_stake_date")
+  private OffsetDateTime estimatedStakeDate;
+
+  /** Estimated hours until this staking request completes */
+  @JsonProperty("estimated_hours_to_stake")
+  private Long estimatedHoursToStake;
+
+  /** Timestamp when the stake request was originally created */
+  @JsonProperty("requested_at")
+  private OffsetDateTime requestedAt;
+
+  public StakingStatus() {}
+
+  public StakingStatus(Builder builder) {
+    this.amount = builder.amount;
+    this.stakeType = builder.stakeType;
+    this.estimatedStakeDate = builder.estimatedStakeDate;
+    this.estimatedHoursToStake = builder.estimatedHoursToStake;
+    this.requestedAt = builder.requestedAt;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public StakeType getStakeType() {
+    return stakeType;
+  }
+
+  public void setStakeType(StakeType stakeType) {
+    this.stakeType = stakeType;
+  }
+
+  public OffsetDateTime getEstimatedStakeDate() {
+    return estimatedStakeDate;
+  }
+
+  public void setEstimatedStakeDate(OffsetDateTime estimatedStakeDate) {
+    this.estimatedStakeDate = estimatedStakeDate;
+  }
+
+  public Long getEstimatedHoursToStake() {
+    return estimatedHoursToStake;
+  }
+
+  public void setEstimatedHoursToStake(Long estimatedHoursToStake) {
+    this.estimatedHoursToStake = estimatedHoursToStake;
+  }
+
+  public OffsetDateTime getRequestedAt() {
+    return requestedAt;
+  }
+
+  public void setRequestedAt(OffsetDateTime requestedAt) {
+    this.requestedAt = requestedAt;
+  }
+
+  public static class Builder {
     private String amount;
 
-    @JsonProperty("stake_type")
     private StakeType stakeType;
 
-    /**
-     * Estimated date when staking will complete (ISO 8601 format)
-     */
-    @JsonProperty("estimated_stake_date")
     private OffsetDateTime estimatedStakeDate;
 
-    /**
-     * Estimated hours until this staking request completes
-     */
-    @JsonProperty("estimated_hours_to_stake")
     private Long estimatedHoursToStake;
 
-    /**
-     * Timestamp when the stake request was originally created
-     */
-    @JsonProperty("requested_at")
     private OffsetDateTime requestedAt;
 
-    public StakingStatus() {
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public StakingStatus(Builder builder) {
-        this.amount = builder.amount;
-        this.stakeType = builder.stakeType;
-        this.estimatedStakeDate = builder.estimatedStakeDate;
-        this.estimatedHoursToStake = builder.estimatedHoursToStake;
-        this.requestedAt = builder.requestedAt;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder stakeType(StakeType stakeType) {
+      this.stakeType = stakeType;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public StakeType getStakeType() {
-        return stakeType;
+    public Builder estimatedStakeDate(OffsetDateTime estimatedStakeDate) {
+      this.estimatedStakeDate = estimatedStakeDate;
+      return this;
     }
 
-    public void setStakeType(StakeType stakeType) {
-        this.stakeType = stakeType;
-    }
-    public OffsetDateTime getEstimatedStakeDate() {
-        return estimatedStakeDate;
+    public Builder estimatedHoursToStake(Long estimatedHoursToStake) {
+      this.estimatedHoursToStake = estimatedHoursToStake;
+      return this;
     }
 
-    public void setEstimatedStakeDate(OffsetDateTime estimatedStakeDate) {
-        this.estimatedStakeDate = estimatedStakeDate;
-    }
-    public Long getEstimatedHoursToStake() {
-        return estimatedHoursToStake;
+    public Builder requestedAt(OffsetDateTime requestedAt) {
+      this.requestedAt = requestedAt;
+      return this;
     }
 
-    public void setEstimatedHoursToStake(Long estimatedHoursToStake) {
-        this.estimatedHoursToStake = estimatedHoursToStake;
+    public StakingStatus build() {
+      return new StakingStatus(this);
     }
-    public OffsetDateTime getRequestedAt() {
-        return requestedAt;
-    }
-
-    public void setRequestedAt(OffsetDateTime requestedAt) {
-        this.requestedAt = requestedAt;
-    }
-    public static class Builder {
-        private String amount;
-
-        private StakeType stakeType;
-
-        private OffsetDateTime estimatedStakeDate;
-
-        private Long estimatedHoursToStake;
-
-        private OffsetDateTime requestedAt;
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder stakeType(StakeType stakeType) {
-            this.stakeType = stakeType;
-            return this;
-        }
-
-        public Builder estimatedStakeDate(OffsetDateTime estimatedStakeDate) {
-            this.estimatedStakeDate = estimatedStakeDate;
-            return this;
-        }
-
-        public Builder estimatedHoursToStake(Long estimatedHoursToStake) {
-            this.estimatedHoursToStake = estimatedHoursToStake;
-            return this;
-        }
-
-        public Builder requestedAt(OffsetDateTime requestedAt) {
-            this.requestedAt = requestedAt;
-            return this;
-        }
-
-        public StakingStatus build() {
-            return new StakingStatus(this);
-        }
-    }
+  }
 }
-

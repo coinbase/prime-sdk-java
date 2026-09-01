@@ -17,80 +17,77 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 public class AmountDue {
-    /**
-     * The currency this loan is due in
-     */
+  /** The currency this loan is due in */
+  private String currency;
+
+  /** The amount due */
+  private String amount;
+
+  /** The date this settlement is due, expressed in UTC */
+  @JsonProperty("due_date")
+  private OffsetDateTime dueDate;
+
+  public AmountDue() {}
+
+  public AmountDue(Builder builder) {
+    this.currency = builder.currency;
+    this.amount = builder.amount;
+    this.dueDate = builder.dueDate;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public OffsetDateTime getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(OffsetDateTime dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  public static class Builder {
     private String currency;
 
-    /**
-     * The amount due
-     */
     private String amount;
 
-    /**
-     * The date this settlement is due, expressed in UTC
-     */
-    @JsonProperty("due_date")
     private OffsetDateTime dueDate;
 
-    public AmountDue() {
+    public Builder currency(String currency) {
+      this.currency = currency;
+      return this;
     }
 
-    public AmountDue(Builder builder) {
-        this.currency = builder.currency;
-        this.amount = builder.amount;
-        this.dueDate = builder.dueDate;
-    }
-    public String getCurrency() {
-        return currency;
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder dueDate(OffsetDateTime dueDate) {
+      this.dueDate = dueDate;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public AmountDue build() {
+      return new AmountDue(this);
     }
-    public OffsetDateTime getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(OffsetDateTime dueDate) {
-        this.dueDate = dueDate;
-    }
-    public static class Builder {
-        private String currency;
-
-        private String amount;
-
-        private OffsetDateTime dueDate;
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder dueDate(OffsetDateTime dueDate) {
-            this.dueDate = dueDate;
-            return this;
-        }
-
-        public AmountDue build() {
-            return new AmountDue(this);
-        }
-    }
+  }
 }
-

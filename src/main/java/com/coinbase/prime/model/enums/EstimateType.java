@@ -22,4 +22,3 @@ public enum EstimateType {
   LIVE,
   INTERIM
 }
-

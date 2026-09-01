@@ -17,79 +17,78 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.ValidatorStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TransactionValidator {
-    /**
-     * The ID of the transaction which staked to this validator
-     */
-    @JsonProperty("transaction_id")
+  /** The ID of the transaction which staked to this validator */
+  @JsonProperty("transaction_id")
+  private String transactionId;
+
+  /** The address (public key) of the validator */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  @JsonProperty("validator_status")
+  private ValidatorStatus validatorStatus;
+
+  public TransactionValidator() {}
+
+  public TransactionValidator(Builder builder) {
+    this.transactionId = builder.transactionId;
+    this.validatorAddress = builder.validatorAddress;
+    this.validatorStatus = builder.validatorStatus;
+  }
+
+  public String getTransactionId() {
+    return transactionId;
+  }
+
+  public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public ValidatorStatus getValidatorStatus() {
+    return validatorStatus;
+  }
+
+  public void setValidatorStatus(ValidatorStatus validatorStatus) {
+    this.validatorStatus = validatorStatus;
+  }
+
+  public static class Builder {
     private String transactionId;
 
-    /**
-     * The address (public key) of the validator
-     */
-    @JsonProperty("validator_address")
     private String validatorAddress;
 
-    @JsonProperty("validator_status")
     private ValidatorStatus validatorStatus;
 
-    public TransactionValidator() {
+    public Builder transactionId(String transactionId) {
+      this.transactionId = transactionId;
+      return this;
     }
 
-    public TransactionValidator(Builder builder) {
-        this.transactionId = builder.transactionId;
-        this.validatorAddress = builder.validatorAddress;
-        this.validatorStatus = builder.validatorStatus;
-    }
-    public String getTransactionId() {
-        return transactionId;
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public Builder validatorStatus(ValidatorStatus validatorStatus) {
+      this.validatorStatus = validatorStatus;
+      return this;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
+    public TransactionValidator build() {
+      return new TransactionValidator(this);
     }
-    public ValidatorStatus getValidatorStatus() {
-        return validatorStatus;
-    }
-
-    public void setValidatorStatus(ValidatorStatus validatorStatus) {
-        this.validatorStatus = validatorStatus;
-    }
-    public static class Builder {
-        private String transactionId;
-
-        private String validatorAddress;
-
-        private ValidatorStatus validatorStatus;
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public Builder validatorStatus(ValidatorStatus validatorStatus) {
-            this.validatorStatus = validatorStatus;
-            return this;
-        }
-
-        public TransactionValidator build() {
-            return new TransactionValidator(this);
-        }
-    }
+  }
 }
-

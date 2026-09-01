@@ -18,9 +18,7 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * ValidatorProvider enumerates the ETH validator service providers accepted for unstaking.
- */
+/** ValidatorProvider enumerates the ETH validator service providers accepted for unstaking. */
 public enum ValidatorProvider {
   VALIDATOR_PROVIDER_COINBASE_CLOUD,
   VALIDATOR_PROVIDER_MAVAN,
@@ -29,4 +27,3 @@ public enum ValidatorProvider {
   VALIDATOR_PROVIDER_ATTESTANT,
   VALIDATOR_PROVIDER_GALAXY
 }
-

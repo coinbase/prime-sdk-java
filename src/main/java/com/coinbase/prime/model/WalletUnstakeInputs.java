@@ -17,86 +17,89 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.ValidatorAllocation;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet.
- * Requirements and supported fields vary by asset type.
+ * WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet. Requirements
+ * and supported fields vary by asset type.
  */
 public class WalletUnstakeInputs {
-    /**
-     * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available
-     */
+  /**
+   * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount
+   * available
+   */
+  private String amount;
+
+  /**
+   * (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which
+   * validators to unstake from and how much. This feature is in alpha. Please reach out to your
+   * Coinbase Prime account manager for more information
+   */
+  @JsonProperty("validator_allocations")
+  private List<ValidatorAllocation> validatorAllocations;
+
+  /** Optional validator address to unstake from. Only supported for a subset of protocols. */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
+  public WalletUnstakeInputs() {}
+
+  public WalletUnstakeInputs(Builder builder) {
+    this.amount = builder.amount;
+    this.validatorAllocations = builder.validatorAllocations;
+    this.validatorAddress = builder.validatorAddress;
+  }
+
+  public String getAmount() {
+    return amount;
+  }
+
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public List<ValidatorAllocation> getValidatorAllocations() {
+    return validatorAllocations;
+  }
+
+  public void setValidatorAllocations(List<ValidatorAllocation> validatorAllocations) {
+    this.validatorAllocations = validatorAllocations;
+  }
+
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
+  public static class Builder {
     private String amount;
 
-    /**
-     * (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which validators to unstake from and how much. This feature is in alpha. Please reach out to your Coinbase Prime account manager for more information
-     */
-    @JsonProperty("validator_allocations")
     private List<ValidatorAllocation> validatorAllocations;
 
-    /**
-     * Optional validator address to unstake from. Only supported for a subset of protocols.
-     */
-    @JsonProperty("validator_address")
     private String validatorAddress;
 
-    public WalletUnstakeInputs() {
+    public Builder amount(String amount) {
+      this.amount = amount;
+      return this;
     }
 
-    public WalletUnstakeInputs(Builder builder) {
-        this.amount = builder.amount;
-        this.validatorAllocations = builder.validatorAllocations;
-        this.validatorAddress = builder.validatorAddress;
-    }
-    public String getAmount() {
-        return amount;
+    public Builder validatorAllocations(List<ValidatorAllocation> validatorAllocations) {
+      this.validatorAllocations = validatorAllocations;
+      return this;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-    public List<ValidatorAllocation> getValidatorAllocations() {
-        return validatorAllocations;
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
+      return this;
     }
 
-    public void setValidatorAllocations(List<ValidatorAllocation> validatorAllocations) {
-        this.validatorAllocations = validatorAllocations;
+    public WalletUnstakeInputs build() {
+      return new WalletUnstakeInputs(this);
     }
-    public String getValidatorAddress() {
-        return validatorAddress;
-    }
-
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
-    }
-    public static class Builder {
-        private String amount;
-
-        private List<ValidatorAllocation> validatorAllocations;
-
-        private String validatorAddress;
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder validatorAllocations(List<ValidatorAllocation> validatorAllocations) {
-            this.validatorAllocations = validatorAllocations;
-            return this;
-        }
-
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
-            return this;
-        }
-
-        public WalletUnstakeInputs build() {
-            return new WalletUnstakeInputs(this);
-        }
-    }
+  }
 }
-

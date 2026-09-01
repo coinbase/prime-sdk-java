@@ -17,61 +17,59 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** New message for risk assessment details */
 public class RiskAssessment {
-    /**
-     * Indicates if the transaction has been flagged for compliance concerns
-     */
-    @JsonProperty("compliance_risk_detected")
+  /** Indicates if the transaction has been flagged for compliance concerns */
+  @JsonProperty("compliance_risk_detected")
+  private boolean complianceRiskDetected;
+
+  /** Indicates if the transaction has been flagged for security concerns */
+  @JsonProperty("security_risk_detected")
+  private boolean securityRiskDetected;
+
+  public RiskAssessment() {}
+
+  public RiskAssessment(Builder builder) {
+    this.complianceRiskDetected = builder.complianceRiskDetected;
+    this.securityRiskDetected = builder.securityRiskDetected;
+  }
+
+  public boolean getComplianceRiskDetected() {
+    return complianceRiskDetected;
+  }
+
+  public void setComplianceRiskDetected(boolean complianceRiskDetected) {
+    this.complianceRiskDetected = complianceRiskDetected;
+  }
+
+  public boolean getSecurityRiskDetected() {
+    return securityRiskDetected;
+  }
+
+  public void setSecurityRiskDetected(boolean securityRiskDetected) {
+    this.securityRiskDetected = securityRiskDetected;
+  }
+
+  public static class Builder {
     private boolean complianceRiskDetected;
 
-    /**
-     * Indicates if the transaction has been flagged for security concerns
-     */
-    @JsonProperty("security_risk_detected")
     private boolean securityRiskDetected;
 
-    public RiskAssessment() {
+    public Builder complianceRiskDetected(boolean complianceRiskDetected) {
+      this.complianceRiskDetected = complianceRiskDetected;
+      return this;
     }
 
-    public RiskAssessment(Builder builder) {
-        this.complianceRiskDetected = builder.complianceRiskDetected;
-        this.securityRiskDetected = builder.securityRiskDetected;
-    }
-    public boolean getComplianceRiskDetected() {
-        return complianceRiskDetected;
+    public Builder securityRiskDetected(boolean securityRiskDetected) {
+      this.securityRiskDetected = securityRiskDetected;
+      return this;
     }
 
-    public void setComplianceRiskDetected(boolean complianceRiskDetected) {
-        this.complianceRiskDetected = complianceRiskDetected;
+    public RiskAssessment build() {
+      return new RiskAssessment(this);
     }
-    public boolean getSecurityRiskDetected() {
-        return securityRiskDetected;
-    }
-
-    public void setSecurityRiskDetected(boolean securityRiskDetected) {
-        this.securityRiskDetected = securityRiskDetected;
-    }
-    public static class Builder {
-        private boolean complianceRiskDetected;
-
-        private boolean securityRiskDetected;
-
-        public Builder complianceRiskDetected(boolean complianceRiskDetected) {
-            this.complianceRiskDetected = complianceRiskDetected;
-            return this;
-        }
-
-        public Builder securityRiskDetected(boolean securityRiskDetected) {
-            this.securityRiskDetected = securityRiskDetected;
-            return this;
-        }
-
-        public RiskAssessment build() {
-            return new RiskAssessment(this);
-        }
-    }
+  }
 }
-

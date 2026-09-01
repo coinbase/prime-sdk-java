@@ -17,60 +17,58 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.MarginCallRecord;
-import com.coinbase.prime.model.MarginSummary;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class MarginInformation {
-    /**
-     * The current margin call records
-     */
-    @JsonProperty("margin_call_records")
+  /** The current margin call records */
+  @JsonProperty("margin_call_records")
+  private List<MarginCallRecord> marginCallRecords;
+
+  @JsonProperty("margin_summary")
+  private MarginSummary marginSummary;
+
+  public MarginInformation() {}
+
+  public MarginInformation(Builder builder) {
+    this.marginCallRecords = builder.marginCallRecords;
+    this.marginSummary = builder.marginSummary;
+  }
+
+  public List<MarginCallRecord> getMarginCallRecords() {
+    return marginCallRecords;
+  }
+
+  public void setMarginCallRecords(List<MarginCallRecord> marginCallRecords) {
+    this.marginCallRecords = marginCallRecords;
+  }
+
+  public MarginSummary getMarginSummary() {
+    return marginSummary;
+  }
+
+  public void setMarginSummary(MarginSummary marginSummary) {
+    this.marginSummary = marginSummary;
+  }
+
+  public static class Builder {
     private List<MarginCallRecord> marginCallRecords;
 
-    @JsonProperty("margin_summary")
     private MarginSummary marginSummary;
 
-    public MarginInformation() {
+    public Builder marginCallRecords(List<MarginCallRecord> marginCallRecords) {
+      this.marginCallRecords = marginCallRecords;
+      return this;
     }
 
-    public MarginInformation(Builder builder) {
-        this.marginCallRecords = builder.marginCallRecords;
-        this.marginSummary = builder.marginSummary;
-    }
-    public List<MarginCallRecord> getMarginCallRecords() {
-        return marginCallRecords;
+    public Builder marginSummary(MarginSummary marginSummary) {
+      this.marginSummary = marginSummary;
+      return this;
     }
 
-    public void setMarginCallRecords(List<MarginCallRecord> marginCallRecords) {
-        this.marginCallRecords = marginCallRecords;
+    public MarginInformation build() {
+      return new MarginInformation(this);
     }
-    public MarginSummary getMarginSummary() {
-        return marginSummary;
-    }
-
-    public void setMarginSummary(MarginSummary marginSummary) {
-        this.marginSummary = marginSummary;
-    }
-    public static class Builder {
-        private List<MarginCallRecord> marginCallRecords;
-
-        private MarginSummary marginSummary;
-
-        public Builder marginCallRecords(List<MarginCallRecord> marginCallRecords) {
-            this.marginCallRecords = marginCallRecords;
-            return this;
-        }
-
-        public Builder marginSummary(MarginSummary marginSummary) {
-            this.marginSummary = marginSummary;
-            return this;
-        }
-
-        public MarginInformation build() {
-            return new MarginInformation(this);
-        }
-    }
+  }
 }
-

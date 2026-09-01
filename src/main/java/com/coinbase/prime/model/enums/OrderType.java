@@ -19,48 +19,45 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - UNKNOWN_ORDER_TYPE: nil value
- * - MARKET: A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order)
- * - LIMIT: A [limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order)
- * - TWAP: A [time-weighted average price order](https://en.wikipedia.org/wiki/Time-weighted_average_price)
- * - BLOCK: A [block trade](https://en.wikipedia.org/wiki/Block_trade)
- * - VWAP: A [volume-weighted average price order](https://en.wikipedia.org/wiki/Volume-weighted_average_price)
- * - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
- * - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote)
- * - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+ * - UNKNOWN_ORDER_TYPE: nil value - MARKET: A [market
+ * order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order) - LIMIT: A [limit
+ * order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order) - TWAP: A [time-weighted
+ * average price order](https://en.wikipedia.org/wiki/Time-weighted_average_price) - BLOCK: A [block
+ * trade](https://en.wikipedia.org/wiki/Block_trade) - VWAP: A [volume-weighted average price
+ * order](https://en.wikipedia.org/wiki/Volume-weighted_average_price) - STOP_LIMIT: A [conditional
+ * order combined of stop order and limit
+ * order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order) - RFQ: A [request for
+ * quote](https://en.wikipedia.org/wiki/Request_for_quote) - PEG: A pegged order that dynamically
+ * adjust based on market conditions while maintaining execution discretion and avoiding adverse
+ * selection
  */
 public enum OrderType {
-  /**
-   * A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order)
-   */
+  /** A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order) */
   MARKET,
-  /**
-   * A [limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order)
-   */
+  /** A [limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Limit_order) */
   LIMIT,
   /**
-   * A [time-weighted average price order](https://en.wikipedia.org/wiki/Time-weighted_average_price)
+   * A [time-weighted average price
+   * order](https://en.wikipedia.org/wiki/Time-weighted_average_price)
    */
   TWAP,
-  /**
-   * A [block trade](https://en.wikipedia.org/wiki/Block_trade)
-   */
+  /** A [block trade](https://en.wikipedia.org/wiki/Block_trade) */
   BLOCK,
   /**
-   * A [volume-weighted average price order](https://en.wikipedia.org/wiki/Volume-weighted_average_price)
+   * A [volume-weighted average price
+   * order](https://en.wikipedia.org/wiki/Volume-weighted_average_price)
    */
   VWAP,
   /**
-   * A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
+   * A [conditional order combined of stop order and limit
+   * order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
    */
   STOP_LIMIT,
-  /**
-   * A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote)
-   */
+  /** A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote) */
   RFQ,
   /**
-   * A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+   * A pegged order that dynamically adjust based on market conditions while maintaining execution
+   * discretion and avoiding adverse selection
    */
   PEG
 }
-

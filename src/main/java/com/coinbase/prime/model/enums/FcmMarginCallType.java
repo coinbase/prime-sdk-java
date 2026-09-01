@@ -22,4 +22,3 @@ public enum FcmMarginCallType {
   FCM_MARGIN_CALL_TYPE_URGENT,
   FCM_MARGIN_CALL_TYPE_REGULAR
 }
-

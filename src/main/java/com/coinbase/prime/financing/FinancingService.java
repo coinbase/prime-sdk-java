@@ -283,8 +283,8 @@ public interface FinancingService {
    * Get Conversion Fees.
    *
    * <p>Get your organization's stablecoin conversion fee tiers and month-to-date net conversion
-   * volume per currency. The organization is resolved from the authenticated API key, which must
-   * be organization-scoped.
+   * volume per currency. The organization is resolved from the authenticated API key, which must be
+   * organization-scoped.
    *
    * @return the response payload for this operation
    * @throws CoinbaseClientException if the request fails client-side validation

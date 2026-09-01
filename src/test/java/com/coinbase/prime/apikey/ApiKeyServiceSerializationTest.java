@@ -43,8 +43,7 @@ public class ApiKeyServiceSerializationTest {
 
   @Test
   public void testRotateApiKeyRequestSerialization() throws JsonProcessingException {
-    RotateApiKeyRequest request =
-        new RotateApiKeyRequest.Builder().durationSeconds(3600L).build();
+    RotateApiKeyRequest request = new RotateApiKeyRequest.Builder().durationSeconds(3600L).build();
     String json = objectMapper.writeValueAsString(request);
     assertTrue(json.contains("\"duration_seconds\":3600"));
   }

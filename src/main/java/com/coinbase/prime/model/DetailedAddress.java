@@ -17,150 +17,157 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Detailed address information */
 public class DetailedAddress {
-    /** Primary address line */
-    @JsonProperty("address_1")
+  /** Primary address line */
+  @JsonProperty("address_1")
+  private String address1;
+
+  /** Secondary address line (optional) */
+  @JsonProperty("address_2")
+  private String address2;
+
+  /** Tertiary address line (optional) */
+  @JsonProperty("address_3")
+  private String address3;
+
+  /** City name */
+  private String city;
+
+  /** State or province */
+  private String state;
+
+  /** ISO 3166-1 alpha-2 country code */
+  @JsonProperty("country_code")
+  private String countryCode;
+
+  /** Postal/ZIP code */
+  @JsonProperty("postal_code")
+  private String postalCode;
+
+  public DetailedAddress() {}
+
+  public DetailedAddress(Builder builder) {
+    this.address1 = builder.address1;
+    this.address2 = builder.address2;
+    this.address3 = builder.address3;
+    this.city = builder.city;
+    this.state = builder.state;
+    this.countryCode = builder.countryCode;
+    this.postalCode = builder.postalCode;
+  }
+
+  public String getAddress1() {
+    return address1;
+  }
+
+  public void setAddress1(String address1) {
+    this.address1 = address1;
+  }
+
+  public String getAddress2() {
+    return address2;
+  }
+
+  public void setAddress2(String address2) {
+    this.address2 = address2;
+  }
+
+  public String getAddress3() {
+    return address3;
+  }
+
+  public void setAddress3(String address3) {
+    this.address3 = address3;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
+  }
+
+  public String getCountryCode() {
+    return countryCode;
+  }
+
+  public void setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
+  }
+
+  public String getPostalCode() {
+    return postalCode;
+  }
+
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
+  }
+
+  public static class Builder {
     private String address1;
 
-    /** Secondary address line (optional) */
-    @JsonProperty("address_2")
     private String address2;
 
-    /** Tertiary address line (optional) */
-    @JsonProperty("address_3")
     private String address3;
 
-    /** City name */
     private String city;
 
-    /** State or province */
     private String state;
 
-    /** ISO 3166-1 alpha-2 country code */
-    @JsonProperty("country_code")
     private String countryCode;
 
-    /** Postal/ZIP code */
-    @JsonProperty("postal_code")
     private String postalCode;
 
-    public DetailedAddress() {
+    public Builder address1(String address1) {
+      this.address1 = address1;
+      return this;
     }
 
-    public DetailedAddress(Builder builder) {
-        this.address1 = builder.address1;
-        this.address2 = builder.address2;
-        this.address3 = builder.address3;
-        this.city = builder.city;
-        this.state = builder.state;
-        this.countryCode = builder.countryCode;
-        this.postalCode = builder.postalCode;
-    }
-    public String getAddress1() {
-        return address1;
+    public Builder address2(String address2) {
+      this.address2 = address2;
+      return this;
     }
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-    public String getAddress2() {
-        return address2;
+    public Builder address3(String address3) {
+      this.address3 = address3;
+      return this;
     }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
-    public String getAddress3() {
-        return address3;
+    public Builder city(String city) {
+      this.city = city;
+      return this;
     }
 
-    public void setAddress3(String address3) {
-        this.address3 = address3;
-    }
-    public String getCity() {
-        return city;
+    public Builder state(String state) {
+      this.state = state;
+      return this;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public String getState() {
-        return state;
+    public Builder countryCode(String countryCode) {
+      this.countryCode = countryCode;
+      return this;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-    public String getCountryCode() {
-        return countryCode;
+    public Builder postalCode(String postalCode) {
+      this.postalCode = postalCode;
+      return this;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public DetailedAddress build() {
+      return new DetailedAddress(this);
     }
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-    public static class Builder {
-        private String address1;
-
-        private String address2;
-
-        private String address3;
-
-        private String city;
-
-        private String state;
-
-        private String countryCode;
-
-        private String postalCode;
-
-        public Builder address1(String address1) {
-            this.address1 = address1;
-            return this;
-        }
-
-        public Builder address2(String address2) {
-            this.address2 = address2;
-            return this;
-        }
-
-        public Builder address3(String address3) {
-            this.address3 = address3;
-            return this;
-        }
-
-        public Builder city(String city) {
-            this.city = city;
-            return this;
-        }
-
-        public Builder state(String state) {
-            this.state = state;
-            return this;
-        }
-
-        public Builder countryCode(String countryCode) {
-            this.countryCode = countryCode;
-            return this;
-        }
-
-        public Builder postalCode(String postalCode) {
-            this.postalCode = postalCode;
-            return this;
-        }
-
-        public DetailedAddress build() {
-            return new DetailedAddress(this);
-        }
-    }
+  }
 }
-

@@ -22,4 +22,3 @@ public enum AddressBookType {
   ADDRESS_BOOK_TYPE_ADDRESS,
   ADDRESS_BOOK_TYPE_COUNTERPARTY_ID
 }
-

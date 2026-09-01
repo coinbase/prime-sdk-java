@@ -19,54 +19,32 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * The general type of a derivative product.
- * - DERIVATIVE_PRODUCT_TYPE_UNSPECIFIED: Unknown product type.
- * - DERIVATIVE_PRODUCT_TYPE_SPOT: Spot product.
- * - DERIVATIVE_PRODUCT_TYPE_FUTURE: Future product.
- * - DERIVATIVE_PRODUCT_TYPE_EQUITY: Equity product.
- * - DERIVATIVE_PRODUCT_TYPE_PREDICTION_MARKET: Prediction market product.
- * - DERIVATIVE_PRODUCT_TYPE_OPTION: Option product.
- * - DERIVATIVE_PRODUCT_TYPE_BASIS: Basis product.
- * - DERIVATIVE_PRODUCT_TYPE_EQUITY_OPTION: Equity option product.
- * - DERIVATIVE_PRODUCT_TYPE_FUTURE_COMBO: Future combo product.
- * - DERIVATIVE_PRODUCT_TYPE_OPTION_COMBO: Option combo product.
+ * The general type of a derivative product. - DERIVATIVE_PRODUCT_TYPE_UNSPECIFIED: Unknown product
+ * type. - DERIVATIVE_PRODUCT_TYPE_SPOT: Spot product. - DERIVATIVE_PRODUCT_TYPE_FUTURE: Future
+ * product. - DERIVATIVE_PRODUCT_TYPE_EQUITY: Equity product. -
+ * DERIVATIVE_PRODUCT_TYPE_PREDICTION_MARKET: Prediction market product. -
+ * DERIVATIVE_PRODUCT_TYPE_OPTION: Option product. - DERIVATIVE_PRODUCT_TYPE_BASIS: Basis product. -
+ * DERIVATIVE_PRODUCT_TYPE_EQUITY_OPTION: Equity option product. -
+ * DERIVATIVE_PRODUCT_TYPE_FUTURE_COMBO: Future combo product. -
+ * DERIVATIVE_PRODUCT_TYPE_OPTION_COMBO: Option combo product.
  */
 public enum DerivativeProductType {
-  /**
-   * Spot product.
-   */
+  /** Spot product. */
   DERIVATIVE_PRODUCT_TYPE_SPOT,
-  /**
-   * Future product.
-   */
+  /** Future product. */
   DERIVATIVE_PRODUCT_TYPE_FUTURE,
-  /**
-   * Equity product.
-   */
+  /** Equity product. */
   DERIVATIVE_PRODUCT_TYPE_EQUITY,
-  /**
-   * Prediction market product.
-   */
+  /** Prediction market product. */
   DERIVATIVE_PRODUCT_TYPE_PREDICTION_MARKET,
-  /**
-   * Option product.
-   */
+  /** Option product. */
   DERIVATIVE_PRODUCT_TYPE_OPTION,
-  /**
-   * Basis product.
-   */
+  /** Basis product. */
   DERIVATIVE_PRODUCT_TYPE_BASIS,
-  /**
-   * Equity option product.
-   */
+  /** Equity option product. */
   DERIVATIVE_PRODUCT_TYPE_EQUITY_OPTION,
-  /**
-   * Future combo product.
-   */
+  /** Future combo product. */
   DERIVATIVE_PRODUCT_TYPE_FUTURE_COMBO,
-  /**
-   * Option combo product.
-   */
+  /** Option combo product. */
   DERIVATIVE_PRODUCT_TYPE_OPTION_COMBO
 }
-

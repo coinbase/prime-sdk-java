@@ -17,18 +17,114 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.InvoiceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Invoice item */
 public class InvoiceItem {
+  private String description;
+
+  @JsonProperty("currency_symbol")
+  private String currencySymbol;
+
+  /** Types */
+  @JsonProperty("invoice_type")
+  private InvoiceType invoiceType;
+
+  private Double rate;
+
+  private Double quantity;
+
+  private Double price;
+
+  @JsonProperty("average_auc")
+  private Double averageAuc;
+
+  private Double total;
+
+  public InvoiceItem() {}
+
+  public InvoiceItem(Builder builder) {
+    this.description = builder.description;
+    this.currencySymbol = builder.currencySymbol;
+    this.invoiceType = builder.invoiceType;
+    this.rate = builder.rate;
+    this.quantity = builder.quantity;
+    this.price = builder.price;
+    this.averageAuc = builder.averageAuc;
+    this.total = builder.total;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getCurrencySymbol() {
+    return currencySymbol;
+  }
+
+  public void setCurrencySymbol(String currencySymbol) {
+    this.currencySymbol = currencySymbol;
+  }
+
+  public InvoiceType getInvoiceType() {
+    return invoiceType;
+  }
+
+  public void setInvoiceType(InvoiceType invoiceType) {
+    this.invoiceType = invoiceType;
+  }
+
+  public Double getRate() {
+    return rate;
+  }
+
+  public void setRate(Double rate) {
+    this.rate = rate;
+  }
+
+  public Double getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Double quantity) {
+    this.quantity = quantity;
+  }
+
+  public Double getPrice() {
+    return price;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+  public Double getAverageAuc() {
+    return averageAuc;
+  }
+
+  public void setAverageAuc(Double averageAuc) {
+    this.averageAuc = averageAuc;
+  }
+
+  public Double getTotal() {
+    return total;
+  }
+
+  public void setTotal(Double total) {
+    this.total = total;
+  }
+
+  public static class Builder {
     private String description;
 
-    @JsonProperty("currency_symbol")
     private String currencySymbol;
 
-    /** Types */
-    @JsonProperty("invoice_type")
     private InvoiceType invoiceType;
 
     private Double rate;
@@ -37,140 +133,52 @@ public class InvoiceItem {
 
     private Double price;
 
-    @JsonProperty("average_auc")
     private Double averageAuc;
 
     private Double total;
 
-    public InvoiceItem() {
+    public Builder description(String description) {
+      this.description = description;
+      return this;
     }
 
-    public InvoiceItem(Builder builder) {
-        this.description = builder.description;
-        this.currencySymbol = builder.currencySymbol;
-        this.invoiceType = builder.invoiceType;
-        this.rate = builder.rate;
-        this.quantity = builder.quantity;
-        this.price = builder.price;
-        this.averageAuc = builder.averageAuc;
-        this.total = builder.total;
-    }
-    public String getDescription() {
-        return description;
+    public Builder currencySymbol(String currencySymbol) {
+      this.currencySymbol = currencySymbol;
+      return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getCurrencySymbol() {
-        return currencySymbol;
+    public Builder invoiceType(InvoiceType invoiceType) {
+      this.invoiceType = invoiceType;
+      return this;
     }
 
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
-    }
-    public InvoiceType getInvoiceType() {
-        return invoiceType;
+    public Builder rate(Double rate) {
+      this.rate = rate;
+      return this;
     }
 
-    public void setInvoiceType(InvoiceType invoiceType) {
-        this.invoiceType = invoiceType;
-    }
-    public Double getRate() {
-        return rate;
+    public Builder quantity(Double quantity) {
+      this.quantity = quantity;
+      return this;
     }
 
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
-    public Double getQuantity() {
-        return quantity;
+    public Builder price(Double price) {
+      this.price = price;
+      return this;
     }
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-    public Double getPrice() {
-        return price;
+    public Builder averageAuc(Double averageAuc) {
+      this.averageAuc = averageAuc;
+      return this;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-    public Double getAverageAuc() {
-        return averageAuc;
+    public Builder total(Double total) {
+      this.total = total;
+      return this;
     }
 
-    public void setAverageAuc(Double averageAuc) {
-        this.averageAuc = averageAuc;
+    public InvoiceItem build() {
+      return new InvoiceItem(this);
     }
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-    public static class Builder {
-        private String description;
-
-        private String currencySymbol;
-
-        private InvoiceType invoiceType;
-
-        private Double rate;
-
-        private Double quantity;
-
-        private Double price;
-
-        private Double averageAuc;
-
-        private Double total;
-
-        public Builder description(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder currencySymbol(String currencySymbol) {
-            this.currencySymbol = currencySymbol;
-            return this;
-        }
-
-        public Builder invoiceType(InvoiceType invoiceType) {
-            this.invoiceType = invoiceType;
-            return this;
-        }
-
-        public Builder rate(Double rate) {
-            this.rate = rate;
-            return this;
-        }
-
-        public Builder quantity(Double quantity) {
-            this.quantity = quantity;
-            return this;
-        }
-
-        public Builder price(Double price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder averageAuc(Double averageAuc) {
-            this.averageAuc = averageAuc;
-            return this;
-        }
-
-        public Builder total(Double total) {
-            this.total = total;
-            return this;
-        }
-
-        public InvoiceItem build() {
-            return new InvoiceItem(this);
-        }
-    }
+  }
 }
-

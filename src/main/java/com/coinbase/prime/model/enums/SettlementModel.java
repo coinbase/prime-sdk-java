@@ -19,18 +19,12 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - SETTLEMENT_MODEL_UNSPECIFIED: Unspecified settlement model
- * - SETTLEMENT_MODEL_LINEAR: Settles in the quote currency
- * - SETTLEMENT_MODEL_INVERSE: Settles in the base currency
+ * - SETTLEMENT_MODEL_UNSPECIFIED: Unspecified settlement model - SETTLEMENT_MODEL_LINEAR: Settles
+ * in the quote currency - SETTLEMENT_MODEL_INVERSE: Settles in the base currency
  */
 public enum SettlementModel {
-  /**
-   * Settles in the quote currency
-   */
+  /** Settles in the quote currency */
   SETTLEMENT_MODEL_LINEAR,
-  /**
-   * Settles in the base currency
-   */
+  /** Settles in the base currency */
   SETTLEMENT_MODEL_INVERSE
 }
-

@@ -17,365 +17,354 @@
  */
 
 package com.coinbase.prime.model;
+
 import com.coinbase.prime.model.enums.Benchmark;
 import com.coinbase.prime.model.enums.LoanType;
 import com.coinbase.prime.model.enums.RateType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Accrual {
-    /**
-     * The accrual ID
-     */
-    @JsonProperty("accrual_id")
+  /** The accrual ID */
+  @JsonProperty("accrual_id")
+  private String accrualId;
+
+  /** The date of accrual in UTC */
+  private String date;
+
+  /** The unique ID of the portfolio */
+  @JsonProperty("portfolio_id")
+  private String portfolioId;
+
+  /** The currency symbol */
+  private String symbol;
+
+  @JsonProperty("loan_type")
+  private LoanType loanType;
+
+  /** The daily or annualized interest rate for the loan, see rate_type */
+  @JsonProperty("interest_rate")
+  private String interestRate;
+
+  /** Daily accrual amount in the principal currency */
+  @JsonProperty("nominal_accrual")
+  private String nominalAccrual;
+
+  /** Daily USD accrued interest */
+  @JsonProperty("notional_accrual")
+  private String notionalAccrual;
+
+  /** Accrual rate used to convert from principal to USD accrual */
+  @JsonProperty("conversion_rate")
+  private String conversionRate;
+
+  /** Outstanding principal of the loan */
+  @JsonProperty("loan_amount")
+  private String loanAmount;
+
+  private Benchmark benchmark;
+
+  /** Daily interest rate fetched from the benchmark source */
+  @JsonProperty("benchmark_rate")
+  private String benchmarkRate;
+
+  /** Daily spread offset from the benchmark rate */
+  private String spread;
+
+  @JsonProperty("rate_type")
+  private RateType rateType;
+
+  /** Outstanding principal of the loan in USD */
+  @JsonProperty("loan_amount_notional")
+  private String loanAmountNotional;
+
+  /** Settled open borrow as of start-of-day in the principal currency */
+  @JsonProperty("nominal_open_borrow_sod")
+  private String nominalOpenBorrowSod;
+
+  /** Settled open borrow as of start-of-day in USD */
+  @JsonProperty("notional_open_borrow_sod")
+  private String notionalOpenBorrowSod;
+
+  public Accrual() {}
+
+  public Accrual(Builder builder) {
+    this.accrualId = builder.accrualId;
+    this.date = builder.date;
+    this.portfolioId = builder.portfolioId;
+    this.symbol = builder.symbol;
+    this.loanType = builder.loanType;
+    this.interestRate = builder.interestRate;
+    this.nominalAccrual = builder.nominalAccrual;
+    this.notionalAccrual = builder.notionalAccrual;
+    this.conversionRate = builder.conversionRate;
+    this.loanAmount = builder.loanAmount;
+    this.benchmark = builder.benchmark;
+    this.benchmarkRate = builder.benchmarkRate;
+    this.spread = builder.spread;
+    this.rateType = builder.rateType;
+    this.loanAmountNotional = builder.loanAmountNotional;
+    this.nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
+    this.notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
+  }
+
+  public String getAccrualId() {
+    return accrualId;
+  }
+
+  public void setAccrualId(String accrualId) {
+    this.accrualId = accrualId;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
+  }
+
+  public String getPortfolioId() {
+    return portfolioId;
+  }
+
+  public void setPortfolioId(String portfolioId) {
+    this.portfolioId = portfolioId;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public LoanType getLoanType() {
+    return loanType;
+  }
+
+  public void setLoanType(LoanType loanType) {
+    this.loanType = loanType;
+  }
+
+  public String getInterestRate() {
+    return interestRate;
+  }
+
+  public void setInterestRate(String interestRate) {
+    this.interestRate = interestRate;
+  }
+
+  public String getNominalAccrual() {
+    return nominalAccrual;
+  }
+
+  public void setNominalAccrual(String nominalAccrual) {
+    this.nominalAccrual = nominalAccrual;
+  }
+
+  public String getNotionalAccrual() {
+    return notionalAccrual;
+  }
+
+  public void setNotionalAccrual(String notionalAccrual) {
+    this.notionalAccrual = notionalAccrual;
+  }
+
+  public String getConversionRate() {
+    return conversionRate;
+  }
+
+  public void setConversionRate(String conversionRate) {
+    this.conversionRate = conversionRate;
+  }
+
+  public String getLoanAmount() {
+    return loanAmount;
+  }
+
+  public void setLoanAmount(String loanAmount) {
+    this.loanAmount = loanAmount;
+  }
+
+  public Benchmark getBenchmark() {
+    return benchmark;
+  }
+
+  public void setBenchmark(Benchmark benchmark) {
+    this.benchmark = benchmark;
+  }
+
+  public String getBenchmarkRate() {
+    return benchmarkRate;
+  }
+
+  public void setBenchmarkRate(String benchmarkRate) {
+    this.benchmarkRate = benchmarkRate;
+  }
+
+  public String getSpread() {
+    return spread;
+  }
+
+  public void setSpread(String spread) {
+    this.spread = spread;
+  }
+
+  public RateType getRateType() {
+    return rateType;
+  }
+
+  public void setRateType(RateType rateType) {
+    this.rateType = rateType;
+  }
+
+  public String getLoanAmountNotional() {
+    return loanAmountNotional;
+  }
+
+  public void setLoanAmountNotional(String loanAmountNotional) {
+    this.loanAmountNotional = loanAmountNotional;
+  }
+
+  public String getNominalOpenBorrowSod() {
+    return nominalOpenBorrowSod;
+  }
+
+  public void setNominalOpenBorrowSod(String nominalOpenBorrowSod) {
+    this.nominalOpenBorrowSod = nominalOpenBorrowSod;
+  }
+
+  public String getNotionalOpenBorrowSod() {
+    return notionalOpenBorrowSod;
+  }
+
+  public void setNotionalOpenBorrowSod(String notionalOpenBorrowSod) {
+    this.notionalOpenBorrowSod = notionalOpenBorrowSod;
+  }
+
+  public static class Builder {
     private String accrualId;
 
-    /**
-     * The date of accrual in UTC
-     */
     private String date;
 
-    /**
-     * The unique ID of the portfolio
-     */
-    @JsonProperty("portfolio_id")
     private String portfolioId;
 
-    /**
-     * The currency symbol
-     */
     private String symbol;
 
-    @JsonProperty("loan_type")
     private LoanType loanType;
 
-    /**
-     * The daily or annualized interest rate for the loan, see rate_type
-     */
-    @JsonProperty("interest_rate")
     private String interestRate;
 
-    /**
-     * Daily accrual amount in the principal currency
-     */
-    @JsonProperty("nominal_accrual")
     private String nominalAccrual;
 
-    /**
-     * Daily USD accrued interest
-     */
-    @JsonProperty("notional_accrual")
     private String notionalAccrual;
 
-    /**
-     * Accrual rate used to convert from principal to USD accrual
-     */
-    @JsonProperty("conversion_rate")
     private String conversionRate;
 
-    /**
-     * Outstanding principal of the loan
-     */
-    @JsonProperty("loan_amount")
     private String loanAmount;
 
     private Benchmark benchmark;
 
-    /**
-     * Daily interest rate fetched from the benchmark source
-     */
-    @JsonProperty("benchmark_rate")
     private String benchmarkRate;
 
-    /**
-     * Daily spread offset from the benchmark rate
-     */
     private String spread;
 
-    @JsonProperty("rate_type")
     private RateType rateType;
 
-    /**
-     * Outstanding principal of the loan in USD
-     */
-    @JsonProperty("loan_amount_notional")
     private String loanAmountNotional;
 
-    /**
-     * Settled open borrow as of start-of-day in the principal currency
-     */
-    @JsonProperty("nominal_open_borrow_sod")
     private String nominalOpenBorrowSod;
 
-    /**
-     * Settled open borrow as of start-of-day in USD
-     */
-    @JsonProperty("notional_open_borrow_sod")
     private String notionalOpenBorrowSod;
 
-    public Accrual() {
+    public Builder accrualId(String accrualId) {
+      this.accrualId = accrualId;
+      return this;
     }
 
-    public Accrual(Builder builder) {
-        this.accrualId = builder.accrualId;
-        this.date = builder.date;
-        this.portfolioId = builder.portfolioId;
-        this.symbol = builder.symbol;
-        this.loanType = builder.loanType;
-        this.interestRate = builder.interestRate;
-        this.nominalAccrual = builder.nominalAccrual;
-        this.notionalAccrual = builder.notionalAccrual;
-        this.conversionRate = builder.conversionRate;
-        this.loanAmount = builder.loanAmount;
-        this.benchmark = builder.benchmark;
-        this.benchmarkRate = builder.benchmarkRate;
-        this.spread = builder.spread;
-        this.rateType = builder.rateType;
-        this.loanAmountNotional = builder.loanAmountNotional;
-        this.nominalOpenBorrowSod = builder.nominalOpenBorrowSod;
-        this.notionalOpenBorrowSod = builder.notionalOpenBorrowSod;
-    }
-    public String getAccrualId() {
-        return accrualId;
+    public Builder date(String date) {
+      this.date = date;
+      return this;
     }
 
-    public void setAccrualId(String accrualId) {
-        this.accrualId = accrualId;
-    }
-    public String getDate() {
-        return date;
+    public Builder portfolioId(String portfolioId) {
+      this.portfolioId = portfolioId;
+      return this;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public String getPortfolioId() {
-        return portfolioId;
+    public Builder symbol(String symbol) {
+      this.symbol = symbol;
+      return this;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-    public String getSymbol() {
-        return symbol;
+    public Builder loanType(LoanType loanType) {
+      this.loanType = loanType;
+      return this;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-    public LoanType getLoanType() {
-        return loanType;
+    public Builder interestRate(String interestRate) {
+      this.interestRate = interestRate;
+      return this;
     }
 
-    public void setLoanType(LoanType loanType) {
-        this.loanType = loanType;
-    }
-    public String getInterestRate() {
-        return interestRate;
+    public Builder nominalAccrual(String nominalAccrual) {
+      this.nominalAccrual = nominalAccrual;
+      return this;
     }
 
-    public void setInterestRate(String interestRate) {
-        this.interestRate = interestRate;
-    }
-    public String getNominalAccrual() {
-        return nominalAccrual;
+    public Builder notionalAccrual(String notionalAccrual) {
+      this.notionalAccrual = notionalAccrual;
+      return this;
     }
 
-    public void setNominalAccrual(String nominalAccrual) {
-        this.nominalAccrual = nominalAccrual;
-    }
-    public String getNotionalAccrual() {
-        return notionalAccrual;
+    public Builder conversionRate(String conversionRate) {
+      this.conversionRate = conversionRate;
+      return this;
     }
 
-    public void setNotionalAccrual(String notionalAccrual) {
-        this.notionalAccrual = notionalAccrual;
-    }
-    public String getConversionRate() {
-        return conversionRate;
+    public Builder loanAmount(String loanAmount) {
+      this.loanAmount = loanAmount;
+      return this;
     }
 
-    public void setConversionRate(String conversionRate) {
-        this.conversionRate = conversionRate;
-    }
-    public String getLoanAmount() {
-        return loanAmount;
+    public Builder benchmark(Benchmark benchmark) {
+      this.benchmark = benchmark;
+      return this;
     }
 
-    public void setLoanAmount(String loanAmount) {
-        this.loanAmount = loanAmount;
-    }
-    public Benchmark getBenchmark() {
-        return benchmark;
+    public Builder benchmarkRate(String benchmarkRate) {
+      this.benchmarkRate = benchmarkRate;
+      return this;
     }
 
-    public void setBenchmark(Benchmark benchmark) {
-        this.benchmark = benchmark;
-    }
-    public String getBenchmarkRate() {
-        return benchmarkRate;
+    public Builder spread(String spread) {
+      this.spread = spread;
+      return this;
     }
 
-    public void setBenchmarkRate(String benchmarkRate) {
-        this.benchmarkRate = benchmarkRate;
-    }
-    public String getSpread() {
-        return spread;
+    public Builder rateType(RateType rateType) {
+      this.rateType = rateType;
+      return this;
     }
 
-    public void setSpread(String spread) {
-        this.spread = spread;
-    }
-    public RateType getRateType() {
-        return rateType;
+    public Builder loanAmountNotional(String loanAmountNotional) {
+      this.loanAmountNotional = loanAmountNotional;
+      return this;
     }
 
-    public void setRateType(RateType rateType) {
-        this.rateType = rateType;
-    }
-    public String getLoanAmountNotional() {
-        return loanAmountNotional;
+    public Builder nominalOpenBorrowSod(String nominalOpenBorrowSod) {
+      this.nominalOpenBorrowSod = nominalOpenBorrowSod;
+      return this;
     }
 
-    public void setLoanAmountNotional(String loanAmountNotional) {
-        this.loanAmountNotional = loanAmountNotional;
-    }
-    public String getNominalOpenBorrowSod() {
-        return nominalOpenBorrowSod;
+    public Builder notionalOpenBorrowSod(String notionalOpenBorrowSod) {
+      this.notionalOpenBorrowSod = notionalOpenBorrowSod;
+      return this;
     }
 
-    public void setNominalOpenBorrowSod(String nominalOpenBorrowSod) {
-        this.nominalOpenBorrowSod = nominalOpenBorrowSod;
+    public Accrual build() {
+      return new Accrual(this);
     }
-    public String getNotionalOpenBorrowSod() {
-        return notionalOpenBorrowSod;
-    }
-
-    public void setNotionalOpenBorrowSod(String notionalOpenBorrowSod) {
-        this.notionalOpenBorrowSod = notionalOpenBorrowSod;
-    }
-    public static class Builder {
-        private String accrualId;
-
-        private String date;
-
-        private String portfolioId;
-
-        private String symbol;
-
-        private LoanType loanType;
-
-        private String interestRate;
-
-        private String nominalAccrual;
-
-        private String notionalAccrual;
-
-        private String conversionRate;
-
-        private String loanAmount;
-
-        private Benchmark benchmark;
-
-        private String benchmarkRate;
-
-        private String spread;
-
-        private RateType rateType;
-
-        private String loanAmountNotional;
-
-        private String nominalOpenBorrowSod;
-
-        private String notionalOpenBorrowSod;
-
-        public Builder accrualId(String accrualId) {
-            this.accrualId = accrualId;
-            return this;
-        }
-
-        public Builder date(String date) {
-            this.date = date;
-            return this;
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder loanType(LoanType loanType) {
-            this.loanType = loanType;
-            return this;
-        }
-
-        public Builder interestRate(String interestRate) {
-            this.interestRate = interestRate;
-            return this;
-        }
-
-        public Builder nominalAccrual(String nominalAccrual) {
-            this.nominalAccrual = nominalAccrual;
-            return this;
-        }
-
-        public Builder notionalAccrual(String notionalAccrual) {
-            this.notionalAccrual = notionalAccrual;
-            return this;
-        }
-
-        public Builder conversionRate(String conversionRate) {
-            this.conversionRate = conversionRate;
-            return this;
-        }
-
-        public Builder loanAmount(String loanAmount) {
-            this.loanAmount = loanAmount;
-            return this;
-        }
-
-        public Builder benchmark(Benchmark benchmark) {
-            this.benchmark = benchmark;
-            return this;
-        }
-
-        public Builder benchmarkRate(String benchmarkRate) {
-            this.benchmarkRate = benchmarkRate;
-            return this;
-        }
-
-        public Builder spread(String spread) {
-            this.spread = spread;
-            return this;
-        }
-
-        public Builder rateType(RateType rateType) {
-            this.rateType = rateType;
-            return this;
-        }
-
-        public Builder loanAmountNotional(String loanAmountNotional) {
-            this.loanAmountNotional = loanAmountNotional;
-            return this;
-        }
-
-        public Builder nominalOpenBorrowSod(String nominalOpenBorrowSod) {
-            this.nominalOpenBorrowSod = nominalOpenBorrowSod;
-            return this;
-        }
-
-        public Builder notionalOpenBorrowSod(String notionalOpenBorrowSod) {
-            this.notionalOpenBorrowSod = notionalOpenBorrowSod;
-            return this;
-        }
-
-        public Accrual build() {
-            return new Accrual(this);
-        }
-    }
+  }
 }
-

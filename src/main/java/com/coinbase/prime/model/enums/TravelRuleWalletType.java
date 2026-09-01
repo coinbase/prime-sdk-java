@@ -19,18 +19,13 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED: Default unspecified wallet type
- * - TRAVEL_RULE_WALLET_TYPE_VASP: Centralized exchange wallet
- * - TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED: Self-hosted/custodial wallet
+ * - TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED: Default unspecified wallet type -
+ * TRAVEL_RULE_WALLET_TYPE_VASP: Centralized exchange wallet -
+ * TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED: Self-hosted/custodial wallet
  */
 public enum TravelRuleWalletType {
-  /**
-   * Centralized exchange wallet
-   */
+  /** Centralized exchange wallet */
   TRAVEL_RULE_WALLET_TYPE_VASP,
-  /**
-   * Self-hosted/custodial wallet
-   */
+  /** Self-hosted/custodial wallet */
   TRAVEL_RULE_WALLET_TYPE_SELF_CUSTODIED
 }
-
