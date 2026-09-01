@@ -49,7 +49,8 @@ public class RotateApiKey {
           Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
 
       String signingKey =
-          Utils.getObjectMapper().readTree(System.getenv("COINBASE_PRIME_CREDENTIALS"))
+          Utils.getObjectMapper()
+              .readTree(System.getenv("COINBASE_PRIME_CREDENTIALS"))
               .get("signingKey")
               .asText();
       RotatedApiKeyCredentials rotated = ApiKeyRotation.decrypt(signingKey, response);

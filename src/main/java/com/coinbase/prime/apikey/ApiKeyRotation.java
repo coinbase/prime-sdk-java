@@ -33,8 +33,8 @@ import javax.crypto.spec.SecretKeySpec;
  * Decrypts {@code encrypted_credentials} from {@link RotateApiKeyResponse} using only the JDK:
  * HKDF-SHA256 (RFC 5869) and AES-256-GCM.
  *
- * <p>Wire format after Base64 decode: {@code version(1) | salt(32) | nonce(12) |
- * ciphertext+tag}. Version must be {@code 0x01}. HKDF info is {@code api-key-rotation}. See <a
+ * <p>Wire format after Base64 decode: {@code version(1) | salt(32) | nonce(12) | ciphertext+tag}.
+ * Version must be {@code 0x01}. HKDF info is {@code api-key-rotation}. See <a
  * href="https://docs.cdp.coinbase.com/prime/rest-api/api-key-rotation">API Key Rotation</a>.
  */
 public final class ApiKeyRotation {
@@ -116,9 +116,7 @@ public final class ApiKeyRotation {
     }
   }
 
-  /**
-   * HKDF-SHA256 (RFC 5869) extract-then-expand. Package-visible for RFC test vectors.
-   */
+  /** HKDF-SHA256 (RFC 5869) extract-then-expand. Package-visible for RFC test vectors. */
   static byte[] hkdfSha256(byte[] ikm, byte[] salt, byte[] info, int length)
       throws GeneralSecurityException {
     if (length <= 0 || length > 255 * HASH_LEN) {

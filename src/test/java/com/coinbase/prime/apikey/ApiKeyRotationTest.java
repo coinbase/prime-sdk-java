@@ -36,8 +36,7 @@ public class ApiKeyRotationTest {
     byte[] ikm = hex("0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b");
     byte[] salt = hex("000102030405060708090a0b0c");
     byte[] info = hex("f0f1f2f3f4f5f6f7f8f9");
-    byte[] okm =
-        ApiKeyRotation.hkdfSha256(ikm, salt, info, 42);
+    byte[] okm = ApiKeyRotation.hkdfSha256(ikm, salt, info, 42);
     assertArrayEquals(
         hex("3cb25f25faacd57a90434f64d0362f2a2d2d0a90cf1a5a4c5db02d56ecc4c5bf34007208d5b887185865"),
         okm);
@@ -73,8 +72,7 @@ public class ApiKeyRotationTest {
   @Test
   public void decryptAcceptsMissingBase64Padding() throws Exception {
     String secretKey = "current-signing-key";
-    String plaintext =
-        "{\"access_key\":\"a\",\"secret_key\":\"s\",\"passphrase\":\"p\"}";
+    String plaintext = "{\"access_key\":\"a\",\"secret_key\":\"s\",\"passphrase\":\"p\"}";
     String encrypted = encrypt(secretKey, plaintext);
     while (encrypted.endsWith("=")) {
       encrypted = encrypted.substring(0, encrypted.length() - 1);
@@ -101,8 +99,7 @@ public class ApiKeyRotationTest {
   public void decryptRejectsWrongSecret() throws Exception {
     String encrypted =
         encrypt(
-            "correct-secret",
-            "{\"access_key\":\"a\",\"secret_key\":\"s\",\"passphrase\":\"p\"}");
+            "correct-secret", "{\"access_key\":\"a\",\"secret_key\":\"s\",\"passphrase\":\"p\"}");
     assertThrows(
         CoinbaseClientException.class, () -> ApiKeyRotation.decrypt("wrong-secret", encrypted));
   }
