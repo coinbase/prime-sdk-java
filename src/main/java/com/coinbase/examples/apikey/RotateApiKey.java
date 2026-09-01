@@ -16,9 +16,11 @@
 
 package com.coinbase.examples.apikey;
 
+import com.coinbase.prime.apikey.ApiKeyRotation;
 import com.coinbase.prime.apikey.ApiKeyService;
 import com.coinbase.prime.apikey.RotateApiKeyRequest;
 import com.coinbase.prime.apikey.RotateApiKeyResponse;
+import com.coinbase.prime.apikey.RotatedApiKeyCredentials;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
@@ -45,6 +47,14 @@ public class RotateApiKey {
 
       System.out.println(
           Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+
+      String signingKey =
+          Utils.getObjectMapper().readTree(System.getenv("COINBASE_PRIME_CREDENTIALS"))
+              .get("signingKey")
+              .asText();
+      RotatedApiKeyCredentials rotated = ApiKeyRotation.decrypt(signingKey, response);
+      System.out.println("Decrypted new access_key: " + rotated.getAccessKey());
+      System.out.println("Store the new secret_key and passphrase securely; they are not printed.");
     } catch (Exception e) {
       e.printStackTrace();
     }

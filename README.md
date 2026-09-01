@@ -142,7 +142,7 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.transactions.ListPortfolio
 - `com.coinbase.examples.wallets.GetWalletDepositInstructions <wallet-id> [deposit-type]` - Get deposit instructions (deposit-type: CRYPTO, WIRE, SEN, SWIFT, SEPA)
 
 **API Key:**
-- `com.coinbase.examples.apikey.RotateApiKey` - Rotate the invoking API key (starts a real rotation)
+- `com.coinbase.examples.apikey.RotateApiKey` - Rotate the invoking API key (starts a real rotation). Decrypts `encrypted_credentials` via `ApiKeyRotation.decrypt` using the current `signingKey`.
 
 **Financing:**
 - `com.coinbase.examples.financing.GetConversionFees` - Get organization conversion fee tiers

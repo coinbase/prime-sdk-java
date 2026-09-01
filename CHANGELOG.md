@@ -8,6 +8,7 @@
 
 **ApiKey Service**
 - **`rotateApiKey()`**: Rotate the invoking API key (`POST /v1/api-keys/rotate`)
+- **`ApiKeyRotation.decrypt()`**: Decrypt `encrypted_credentials` with JDK HKDF-SHA256 + AES-256-GCM (no extra libraries)
 
 **Financing Service**
 - **`getConversionFees()`**: Get organization conversion fee tiers and month-to-date volume (`GET /v1/conversion/fees`)
