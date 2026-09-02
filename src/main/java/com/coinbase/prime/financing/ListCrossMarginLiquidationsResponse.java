@@ -21,14 +21,14 @@ import com.coinbase.prime.model.XMLiquidationSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** List Cross Margin Liquidations */
-public class ListXmLiquidationsResponse {
+public class ListCrossMarginLiquidationsResponse {
   @JsonProperty("liquidations")
   private XMLiquidationSummary[] liquidations;
 
   @JsonProperty("pagination")
   private Pagination pagination;
 
-  public ListXmLiquidationsResponse() {}
+  public ListCrossMarginLiquidationsResponse() {}
 
   public XMLiquidationSummary[] getLiquidations() {
     return liquidations;

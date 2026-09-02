@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Get Cross Margin Liquidation */
-public class GetXmLiquidationRequest {
+public class GetCrossMarginLiquidationRequest {
   /** XM customer Prime Entity ID */
   @JsonProperty(required = true, value = "entity_id")
   @JsonIgnore
@@ -33,9 +33,9 @@ public class GetXmLiquidationRequest {
   @JsonProperty("liquidation_id")
   private String liquidationId;
 
-  public GetXmLiquidationRequest() {}
+  public GetCrossMarginLiquidationRequest() {}
 
-  public GetXmLiquidationRequest(Builder builder) {
+  public GetCrossMarginLiquidationRequest(Builder builder) {
     this.entityId = builder.entityId;
     this.liquidationId = builder.liquidationId;
   }
@@ -72,9 +72,9 @@ public class GetXmLiquidationRequest {
       return this;
     }
 
-    public GetXmLiquidationRequest build() throws CoinbaseClientException {
+    public GetCrossMarginLiquidationRequest build() throws CoinbaseClientException {
       validate();
-      return new GetXmLiquidationRequest(this);
+      return new GetCrossMarginLiquidationRequest(this);
     }
 
     private void validate() throws CoinbaseClientException {

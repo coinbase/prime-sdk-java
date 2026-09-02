@@ -20,11 +20,11 @@ import com.coinbase.prime.model.XMLiquidationDetail;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Get Cross Margin Liquidation */
-public class GetXmLiquidationResponse {
+public class GetCrossMarginLiquidationResponse {
   @JsonProperty("liquidation")
   private XMLiquidationDetail liquidation;
 
-  public GetXmLiquidationResponse() {}
+  public GetCrossMarginLiquidationResponse() {}
 
   public XMLiquidationDetail getLiquidation() {
     return liquidation;

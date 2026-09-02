@@ -259,25 +259,25 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
-  public GetXmLiquidationResponse getXmLiquidation(GetXmLiquidationRequest request)
+  public GetCrossMarginLiquidationResponse getCrossMarginLiquidation(GetCrossMarginLiquidationRequest request)
       throws CoinbasePrimeException {
     return this.request(
         HttpMethod.GET,
         String.format("/entities/%s/cross_margin/liquidation", request.getEntityId()),
         request,
         List.of(200),
-        new TypeReference<GetXmLiquidationResponse>() {});
+        new TypeReference<GetCrossMarginLiquidationResponse>() {});
   }
 
   @Override
-  public ListXmLiquidationsResponse listXmLiquidations(ListXmLiquidationsRequest request)
+  public ListCrossMarginLiquidationsResponse listCrossMarginLiquidations(ListCrossMarginLiquidationsRequest request)
       throws CoinbasePrimeException {
     return this.request(
         HttpMethod.GET,
         String.format("/entities/%s/cross_margin/liquidations", request.getEntityId()),
         request,
         List.of(200),
-        new TypeReference<ListXmLiquidationsResponse>() {});
+        new TypeReference<ListCrossMarginLiquidationsResponse>() {});
   }
 
   @Override

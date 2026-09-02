@@ -12,8 +12,8 @@
 
 **Financing Service**
 - **`getConversionFees()`**: Get organization conversion fee tiers and month-to-date volume (`GET /v1/conversion/fees`)
-- **`getXmLiquidation()`**: Get detailed XM liquidation data (`GET /v1/entities/{entity_id}/cross_margin/liquidation`)
-- **`listXmLiquidations()`**: List XM liquidation history (`GET /v1/entities/{entity_id}/cross_margin/liquidations`)
+- **`getCrossMarginLiquidation()`**: Get detailed XM liquidation data (`GET /v1/entities/{entity_id}/cross_margin/liquidation`)
+- **`listCrossMarginLiquidations()`**: List XM liquidation history (`GET /v1/entities/{entity_id}/cross_margin/liquidations`)
 - **`getEntityRewardsRate()`**: Get entity rewards rate and tiers (beta) (`GET /v1/entities/{entity_id}/rewards/rate`)
 - **`getPortfolioRewardsRate()`**: Get portfolio rewards rate and tiers (beta) (`GET /v1/portfolios/{portfolio_id}/rewards/rate`)
 

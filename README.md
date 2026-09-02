@@ -146,8 +146,8 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.transactions.ListPortfolio
 
 **Financing:**
 - `com.coinbase.examples.financing.GetConversionFees` - Get organization conversion fee tiers
-- `com.coinbase.examples.financing.GetXmLiquidation` - Get XM liquidation details
-- `com.coinbase.examples.financing.ListXmLiquidations` - List XM liquidation history
+- `com.coinbase.examples.financing.GetCrossMarginLiquidation` - Get XM liquidation details
+- `com.coinbase.examples.financing.ListCrossMarginLiquidations` - List XM liquidation history
 - `com.coinbase.examples.financing.GetEntityRewardsRate` - Get entity rewards rate (beta)
 - `com.coinbase.examples.financing.GetPortfolioRewardsRate` - Get portfolio rewards rate (beta)
 

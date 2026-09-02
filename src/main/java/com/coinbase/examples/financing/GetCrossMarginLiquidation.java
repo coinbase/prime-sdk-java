@@ -20,11 +20,11 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.financing.FinancingService;
-import com.coinbase.prime.financing.GetXmLiquidationRequest;
-import com.coinbase.prime.financing.GetXmLiquidationResponse;
+import com.coinbase.prime.financing.GetCrossMarginLiquidationRequest;
+import com.coinbase.prime.financing.GetCrossMarginLiquidationResponse;
 import com.coinbase.prime.utils.Utils;
 
-public class GetXmLiquidation {
+public class GetCrossMarginLiquidation {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials =
@@ -33,9 +33,9 @@ public class GetXmLiquidation {
       String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
       FinancingService service = PrimeServiceFactory.createFinancingService(client);
-      GetXmLiquidationResponse response =
-          service.getXmLiquidation(
-              new GetXmLiquidationRequest.Builder().entityId(entityId).build());
+      GetCrossMarginLiquidationResponse response =
+          service.getCrossMarginLiquidation(
+              new GetCrossMarginLiquidationRequest.Builder().entityId(entityId).build());
 
       System.out.println(
           Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));

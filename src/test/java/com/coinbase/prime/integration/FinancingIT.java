@@ -363,23 +363,23 @@ public class FinancingIT extends BaseIntegrationTest {
   }
 
   @Test
-  public void testGetXmLiquidation() throws Exception {
+  public void testGetCrossMarginLiquidation() throws Exception {
     assumeTrue(
         entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
     FinancingService service = PrimeServiceFactory.createFinancingService(client);
-    GetXmLiquidationResponse response =
-        service.getXmLiquidation(new GetXmLiquidationRequest.Builder().entityId(entityId).build());
+    GetCrossMarginLiquidationResponse response =
+        service.getCrossMarginLiquidation(new GetCrossMarginLiquidationRequest.Builder().entityId(entityId).build());
     assertNotNull(response);
   }
 
   @Test
-  public void testListXmLiquidations() throws Exception {
+  public void testListCrossMarginLiquidations() throws Exception {
     assumeTrue(
         entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
     FinancingService service = PrimeServiceFactory.createFinancingService(client);
-    ListXmLiquidationsResponse response =
-        service.listXmLiquidations(
-            new ListXmLiquidationsRequest.Builder().entityId(entityId).build());
+    ListCrossMarginLiquidationsResponse response =
+        service.listCrossMarginLiquidations(
+            new ListCrossMarginLiquidationsRequest.Builder().entityId(entityId).build());
     assertNotNull(response);
   }
 

@@ -506,27 +506,27 @@ public class FinancingServiceSerializationTest {
   }
 
   @Test
-  public void testGetXmLiquidationRequestOmitsEntityId() throws JsonProcessingException {
-    GetXmLiquidationRequest request =
-        new GetXmLiquidationRequest.Builder().entityId("entity-123").liquidationId("liq-1").build();
+  public void testGetCrossMarginLiquidationRequestOmitsEntityId() throws JsonProcessingException {
+    GetCrossMarginLiquidationRequest request =
+        new GetCrossMarginLiquidationRequest.Builder().entityId("entity-123").liquidationId("liq-1").build();
     String json = objectMapper.writeValueAsString(request);
     assertTrue(json.contains("\"liquidation_id\":\"liq-1\""));
     assertFalse(json.contains("entity_id"));
   }
 
   @Test
-  public void testGetXmLiquidationResponseDeserialization() throws JsonProcessingException {
+  public void testGetCrossMarginLiquidationResponseDeserialization() throws JsonProcessingException {
     String json = "{\"liquidation\":{\"liquidation_id\":\"liq-1\"}}";
-    GetXmLiquidationResponse response =
-        objectMapper.readValue(json, GetXmLiquidationResponse.class);
+    GetCrossMarginLiquidationResponse response =
+        objectMapper.readValue(json, GetCrossMarginLiquidationResponse.class);
     assertNotNull(response.getLiquidation());
     assertEquals("liq-1", response.getLiquidation().getLiquidationId());
   }
 
   @Test
-  public void testListXmLiquidationsRequestSerialization() throws JsonProcessingException {
-    ListXmLiquidationsRequest request =
-        new ListXmLiquidationsRequest.Builder()
+  public void testListCrossMarginLiquidationsRequestSerialization() throws JsonProcessingException {
+    ListCrossMarginLiquidationsRequest request =
+        new ListCrossMarginLiquidationsRequest.Builder()
             .entityId("entity-123")
             .status(
                 com.coinbase.prime.model.enums.XMLiquidationStatus.XM_LIQUIDATION_STATUS_LIQUIDATED)
@@ -537,10 +537,10 @@ public class FinancingServiceSerializationTest {
   }
 
   @Test
-  public void testListXmLiquidationsResponseDeserialization() throws JsonProcessingException {
+  public void testListCrossMarginLiquidationsResponseDeserialization() throws JsonProcessingException {
     String json = "{\"liquidations\":[{\"liquidation_id\":\"liq-1\"}]}";
-    ListXmLiquidationsResponse response =
-        objectMapper.readValue(json, ListXmLiquidationsResponse.class);
+    ListCrossMarginLiquidationsResponse response =
+        objectMapper.readValue(json, ListCrossMarginLiquidationsResponse.class);
     assertEquals(1, response.getLiquidations().length);
     assertEquals("liq-1", response.getLiquidations()[0].getLiquidationId());
   }

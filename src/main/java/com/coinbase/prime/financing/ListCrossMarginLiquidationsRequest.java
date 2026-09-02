@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** List Cross Margin Liquidations */
-public class ListXmLiquidationsRequest extends PrimeListRequest {
+public class ListCrossMarginLiquidationsRequest extends PrimeListRequest {
   /** XM customer Prime Entity ID */
   @JsonProperty(required = true, value = "entity_id")
   @JsonIgnore
@@ -42,9 +42,9 @@ public class ListXmLiquidationsRequest extends PrimeListRequest {
   @JsonProperty("end_time")
   private String endTime;
 
-  public ListXmLiquidationsRequest() {}
+  public ListCrossMarginLiquidationsRequest() {}
 
-  public ListXmLiquidationsRequest(Builder builder) {
+  public ListCrossMarginLiquidationsRequest(Builder builder) {
     super(builder.cursor, builder.sortDirection, builder.limit);
     this.entityId = builder.entityId;
     this.status = builder.status;
@@ -126,9 +126,9 @@ public class ListXmLiquidationsRequest extends PrimeListRequest {
       return this;
     }
 
-    public ListXmLiquidationsRequest build() throws CoinbaseClientException {
+    public ListCrossMarginLiquidationsRequest build() throws CoinbaseClientException {
       validate();
-      return new ListXmLiquidationsRequest(this);
+      return new ListCrossMarginLiquidationsRequest(this);
     }
 
     private void validate() throws CoinbaseClientException {
