@@ -1,0 +1,8 @@
+{
+  "specUrl": "https://api.prime.coinbase.com/v1/openapi.yaml",
+  "committedSpecPath": "apiSpec/prime-public-spec.yaml",
+  "tagToFolderOverrides": {
+    "Travel Rule": "transactions"
+  },
+  "operationOverrides": {}
+}
