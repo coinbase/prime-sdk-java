@@ -368,7 +368,8 @@ public class FinancingIT extends BaseIntegrationTest {
         entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
     FinancingService service = PrimeServiceFactory.createFinancingService(client);
     GetCrossMarginLiquidationResponse response =
-        service.getCrossMarginLiquidation(new GetCrossMarginLiquidationRequest.Builder().entityId(entityId).build());
+        service.getCrossMarginLiquidation(
+            new GetCrossMarginLiquidationRequest.Builder().entityId(entityId).build());
     assertNotNull(response);
   }
 

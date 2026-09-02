@@ -259,8 +259,8 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
-  public GetCrossMarginLiquidationResponse getCrossMarginLiquidation(GetCrossMarginLiquidationRequest request)
-      throws CoinbasePrimeException {
+  public GetCrossMarginLiquidationResponse getCrossMarginLiquidation(
+      GetCrossMarginLiquidationRequest request) throws CoinbasePrimeException {
     return this.request(
         HttpMethod.GET,
         String.format("/entities/%s/cross_margin/liquidation", request.getEntityId()),
@@ -270,8 +270,8 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
-  public ListCrossMarginLiquidationsResponse listCrossMarginLiquidations(ListCrossMarginLiquidationsRequest request)
-      throws CoinbasePrimeException {
+  public ListCrossMarginLiquidationsResponse listCrossMarginLiquidations(
+      ListCrossMarginLiquidationsRequest request) throws CoinbasePrimeException {
     return this.request(
         HttpMethod.GET,
         String.format("/entities/%s/cross_margin/liquidations", request.getEntityId()),

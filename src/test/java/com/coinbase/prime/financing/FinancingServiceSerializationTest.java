@@ -508,14 +508,18 @@ public class FinancingServiceSerializationTest {
   @Test
   public void testGetCrossMarginLiquidationRequestOmitsEntityId() throws JsonProcessingException {
     GetCrossMarginLiquidationRequest request =
-        new GetCrossMarginLiquidationRequest.Builder().entityId("entity-123").liquidationId("liq-1").build();
+        new GetCrossMarginLiquidationRequest.Builder()
+            .entityId("entity-123")
+            .liquidationId("liq-1")
+            .build();
     String json = objectMapper.writeValueAsString(request);
     assertTrue(json.contains("\"liquidation_id\":\"liq-1\""));
     assertFalse(json.contains("entity_id"));
   }
 
   @Test
-  public void testGetCrossMarginLiquidationResponseDeserialization() throws JsonProcessingException {
+  public void testGetCrossMarginLiquidationResponseDeserialization()
+      throws JsonProcessingException {
     String json = "{\"liquidation\":{\"liquidation_id\":\"liq-1\"}}";
     GetCrossMarginLiquidationResponse response =
         objectMapper.readValue(json, GetCrossMarginLiquidationResponse.class);
@@ -537,7 +541,8 @@ public class FinancingServiceSerializationTest {
   }
 
   @Test
-  public void testListCrossMarginLiquidationsResponseDeserialization() throws JsonProcessingException {
+  public void testListCrossMarginLiquidationsResponseDeserialization()
+      throws JsonProcessingException {
     String json = "{\"liquidations\":[{\"liquidation_id\":\"liq-1\"}]}";
     ListCrossMarginLiquidationsResponse response =
         objectMapper.readValue(json, ListCrossMarginLiquidationsResponse.class);

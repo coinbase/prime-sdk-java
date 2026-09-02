@@ -304,7 +304,8 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
-  GetCrossMarginLiquidationResponse getCrossMarginLiquidation(GetCrossMarginLiquidationRequest request)
+  GetCrossMarginLiquidationResponse getCrossMarginLiquidation(
+      GetCrossMarginLiquidationRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
   /**
@@ -317,7 +318,8 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
-  ListCrossMarginLiquidationsResponse listCrossMarginLiquidations(ListCrossMarginLiquidationsRequest request)
+  ListCrossMarginLiquidationsResponse listCrossMarginLiquidations(
+      ListCrossMarginLiquidationsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
   /**
