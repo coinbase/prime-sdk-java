@@ -19,7 +19,6 @@
 package com.coinbase.prime.model.enums;
 
 public enum LoanType {
-  LOAN_TYPE_UNSET,
   BILATERAL_LENDING,
   TRADE_FINANCE,
   PORTFOLIO_MARGIN,

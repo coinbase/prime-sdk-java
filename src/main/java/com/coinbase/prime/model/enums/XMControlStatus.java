@@ -26,7 +26,6 @@ package com.coinbase.prime.model.enums;
  * Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
  */
 public enum XMControlStatus {
-  XM_CONTROL_STATUS_UNSPECIFIED,
   /**
    * Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading
    * and withdrawals are enabled or disabled.

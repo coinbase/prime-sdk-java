@@ -30,11 +30,15 @@ public class CustomStablecoinRewardDetails {
   @JsonProperty("end_date")
   private String endDate;
 
+  /** Currency metadata of the custom stablecoin asset for the reward program */
+  private CustomStablecoinAsset asset;
+
   public CustomStablecoinRewardDetails() {}
 
   public CustomStablecoinRewardDetails(Builder builder) {
     this.startDate = builder.startDate;
     this.endDate = builder.endDate;
+    this.asset = builder.asset;
   }
 
   public String getStartDate() {
@@ -53,10 +57,20 @@ public class CustomStablecoinRewardDetails {
     this.endDate = endDate;
   }
 
+  public CustomStablecoinAsset getAsset() {
+    return asset;
+  }
+
+  public void setAsset(CustomStablecoinAsset asset) {
+    this.asset = asset;
+  }
+
   public static class Builder {
     private String startDate;
 
     private String endDate;
+
+    private CustomStablecoinAsset asset;
 
     public Builder startDate(String startDate) {
       this.startDate = startDate;
@@ -65,6 +79,11 @@ public class CustomStablecoinRewardDetails {
 
     public Builder endDate(String endDate) {
       this.endDate = endDate;
+      return this;
+    }
+
+    public Builder asset(CustomStablecoinAsset asset) {
+      this.asset = asset;
       return this;
     }
 

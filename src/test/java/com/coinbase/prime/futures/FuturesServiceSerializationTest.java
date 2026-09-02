@@ -325,4 +325,48 @@ public class FuturesServiceSerializationTest {
     assertEquals("105000.00", response.getEodAccountEquity());
     assertEquals("500.00", response.getEodUnrealizedPnl());
   }
+
+  @Test
+  public void testGetDerivativesCurrencySummaryRequestConstruction() {
+    GetDerivativesCurrencySummaryRequest request =
+        new GetDerivativesCurrencySummaryRequest.Builder().portfolioId("portfolio-123").build();
+    assertNotNull(request);
+    assertEquals("portfolio-123", request.getPortfolioId());
+  }
+
+  @Test
+  public void testGetDerivativesCurrencySummaryResponseDeserialization()
+      throws JsonProcessingException {
+    String json =
+        "{"
+            + "\"portfolio_id\":\"portfolio-123\","
+            + "\"balances\":[{\"currency\":\"USD\",\"balance\":\"1000.00\"}]"
+            + "}";
+    GetDerivativesCurrencySummaryResponse response =
+        objectMapper.readValue(json, GetDerivativesCurrencySummaryResponse.class);
+    assertEquals("portfolio-123", response.getPortfolioId());
+    assertEquals("USD", response.getBalances()[0].getCurrency());
+  }
+
+  @Test
+  public void testGetDerivativePositionsRequestSerialization() throws JsonProcessingException {
+    GetDerivativePositionsRequest request =
+        new GetDerivativePositionsRequest.Builder()
+            .portfolioId("portfolio-123")
+            .productId("BTC-31JAN24-CDE")
+            .build();
+    String json = objectMapper.writeValueAsString(request);
+    assertTrue(json.contains("\"product_id\":\"BTC-31JAN24-CDE\""));
+    assertFalse(json.contains("portfolio_id"));
+  }
+
+  @Test
+  public void testGetDerivativePositionsResponseDeserialization() throws JsonProcessingException {
+    String json =
+        "{\"positions\":[{\"product_id\":\"BTC-31JAN24-CDE\",\"number_of_contracts\":\"10\"}]}";
+    GetDerivativePositionsResponse response =
+        objectMapper.readValue(json, GetDerivativePositionsResponse.class);
+    assertEquals(1, response.getPositions().length);
+    assertEquals("BTC-31JAN24-CDE", response.getPositions()[0].getProductId());
+  }
 }

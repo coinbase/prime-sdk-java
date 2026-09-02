@@ -148,4 +148,26 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
         List.of(200),
         new TypeReference<GetFcmEquityResponse>() {});
   }
+
+  @Override
+  public GetDerivativesCurrencySummaryResponse getDerivativesCurrencySummary(
+      GetDerivativesCurrencySummaryRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/derivatives/currency_summary", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetDerivativesCurrencySummaryResponse>() {});
+  }
+
+  @Override
+  public GetDerivativePositionsResponse getDerivativePositions(
+      GetDerivativePositionsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/derivatives/positions", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetDerivativePositionsResponse>() {});
+  }
 }

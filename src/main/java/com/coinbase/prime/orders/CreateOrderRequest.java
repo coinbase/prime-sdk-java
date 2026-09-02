@@ -115,6 +115,10 @@ public class CreateOrderRequest {
   @JsonProperty("is_raise_exact")
   private boolean isRaiseExact;
 
+  /** Buy Exact order flag */
+  @JsonProperty("is_buy_exact")
+  private boolean isBuyExact;
+
   /** Historical percentage of volume */
   @JsonProperty("historical_pov")
   private String historicalPov;
@@ -174,6 +178,7 @@ public class CreateOrderRequest {
     this.displayQuoteSize = builder.displayQuoteSize;
     this.displayBaseSize = builder.displayBaseSize;
     this.isRaiseExact = builder.isRaiseExact;
+    this.isBuyExact = builder.isBuyExact;
     this.historicalPov = builder.historicalPov;
     this.stopPrice = builder.stopPrice;
     this.settlCurrency = builder.settlCurrency;
@@ -303,6 +308,14 @@ public class CreateOrderRequest {
     this.isRaiseExact = isRaiseExact;
   }
 
+  public boolean isBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setBuyExact(boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
+  }
+
   public String getHistoricalPov() {
     return historicalPov;
   }
@@ -375,6 +388,7 @@ public class CreateOrderRequest {
     private String displayQuoteSize;
     private String displayBaseSize;
     private boolean isRaiseExact;
+    private boolean isBuyExact;
     private String historicalPov;
     private String stopPrice;
     private String settlCurrency;
@@ -457,6 +471,11 @@ public class CreateOrderRequest {
 
     public Builder isRaiseExact(boolean isRaiseExact) {
       this.isRaiseExact = isRaiseExact;
+      return this;
+    }
+
+    public Builder isBuyExact(boolean isBuyExact) {
+      this.isBuyExact = isBuyExact;
       return this;
     }
 

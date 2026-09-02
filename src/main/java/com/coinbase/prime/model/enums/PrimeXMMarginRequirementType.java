@@ -25,7 +25,6 @@ package com.coinbase.prime.model.enums;
  * (IFMR).
  */
 public enum PrimeXMMarginRequirementType {
-  MARGIN_REQUIREMENT_TYPE_UNSPECIFIED,
   /** Integrated (netted) cross-margin requirement for spot assets and all derivatives contracts. */
   MARGIN_REQUIREMENT_TYPE_DMR_PLUS_PMR,
   /**

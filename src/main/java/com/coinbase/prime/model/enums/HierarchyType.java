@@ -23,7 +23,6 @@ package com.coinbase.prime.model.enums;
  * Portfolio
  */
 public enum HierarchyType {
-  HIERARCHY_TYPE_UNSPECIFIED,
   HIERARCHY_TYPE_PORTFOLIO,
   HIERARCHY_TYPE_ENTITY
 }

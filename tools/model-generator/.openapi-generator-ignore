@@ -6,6 +6,13 @@
 src/main/java/com/coinbase/prime/model/*Request.java
 src/main/java/com/coinbase/prime/model/*Response.java
 
+# Per-operation typed error payloads and codes (not consumed by the SDK yet)
+src/main/java/com/coinbase/prime/model/*ErrorResponse.java
+src/main/java/com/coinbase/prime/model/*ErrorCode.java
+src/main/java/com/coinbase/prime/model/*Subcode.java
+src/main/java/com/coinbase/prime/model/enums/*ErrorCode.java
+src/main/java/com/coinbase/prime/model/enums/*Subcode.java
+
 # Google infrastructure types (google.type.Date is generated as GoogleTypeDate and renamed to DateOfBirth)
 src/main/java/com/coinbase/prime/model/GoogleProtobufAny.java
 src/main/java/com/coinbase/prime/model/GoogleRpcStatus.java

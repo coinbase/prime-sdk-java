@@ -354,4 +354,56 @@ public class FinancingIT extends BaseIntegrationTest {
                 .build());
     assertNotNull(response);
   }
+
+  @Test
+  public void testGetConversionFees() throws Exception {
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetConversionFeesResponse response = service.getConversionFees();
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetCrossMarginLiquidation() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetCrossMarginLiquidationResponse response =
+        service.getCrossMarginLiquidation(
+            new GetCrossMarginLiquidationRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testListCrossMarginLiquidations() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    ListCrossMarginLiquidationsResponse response =
+        service.listCrossMarginLiquidations(
+            new ListCrossMarginLiquidationsRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetEntityRewardsRate() throws Exception {
+    assumeTrue(
+        entityId != null && !entityId.isEmpty(), "Skipping: COINBASE_PRIME_ENTITY_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetEntityRewardsRateResponse response =
+        service.getEntityRewardsRate(
+            new GetEntityRewardsRateRequest.Builder().entityId(entityId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetPortfolioRewardsRate() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FinancingService service = PrimeServiceFactory.createFinancingService(client);
+    GetPortfolioRewardsRateResponse response =
+        service.getPortfolioRewardsRate(
+            new GetPortfolioRewardsRateRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 }

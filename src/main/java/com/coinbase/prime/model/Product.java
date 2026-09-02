@@ -61,7 +61,10 @@ public class Product {
   @JsonProperty("rfq_product_details")
   private RfqProductDetails rfqProductDetails;
 
-  /** - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product */
+  /**
+   * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
+   * OPTION: Option product
+   */
   @JsonProperty("product_type")
   private ProductType productType;
 
@@ -72,6 +75,10 @@ public class Product {
   /** FutureProductDetails contains details specific to futures products */
   @JsonProperty("future_product_details")
   private FutureProductDetails futureProductDetails;
+
+  /** OptionProductDetails contains details specific to option products */
+  @JsonProperty("option_product_details")
+  private OptionProductDetails optionProductDetails;
 
   public Product() {}
 
@@ -89,6 +96,7 @@ public class Product {
     this.productType = builder.productType;
     this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
     this.futureProductDetails = builder.futureProductDetails;
+    this.optionProductDetails = builder.optionProductDetails;
   }
 
   public String getId() {
@@ -195,6 +203,14 @@ public class Product {
     this.futureProductDetails = futureProductDetails;
   }
 
+  public OptionProductDetails getOptionProductDetails() {
+    return optionProductDetails;
+  }
+
+  public void setOptionProductDetails(OptionProductDetails optionProductDetails) {
+    this.optionProductDetails = optionProductDetails;
+  }
+
   public static class Builder {
     private String id;
 
@@ -221,6 +237,8 @@ public class Product {
     private FcmTradingSessionDetails fcmTradingSessionDetails;
 
     private FutureProductDetails futureProductDetails;
+
+    private OptionProductDetails optionProductDetails;
 
     public Builder id(String id) {
       this.id = id;
@@ -284,6 +302,11 @@ public class Product {
 
     public Builder futureProductDetails(FutureProductDetails futureProductDetails) {
       this.futureProductDetails = futureProductDetails;
+      return this;
+    }
+
+    public Builder optionProductDetails(OptionProductDetails optionProductDetails) {
+      this.optionProductDetails = optionProductDetails;
       return this;
     }
 

@@ -77,6 +77,10 @@ public class GetOrderPreviewResponse {
   @JsonProperty("is_raise_exact")
   private Boolean isRaiseExact;
 
+  /** Buy Exact order flag */
+  @JsonProperty("is_buy_exact")
+  private Boolean isBuyExact;
+
   @JsonProperty("stop_price")
   private String stopPrice;
 
@@ -233,6 +237,14 @@ public class GetOrderPreviewResponse {
 
   public void setIsRaiseExact(Boolean isRaiseExact) {
     this.isRaiseExact = isRaiseExact;
+  }
+
+  public Boolean getIsBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setIsBuyExact(Boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
   }
 
   public String getStopPrice() {

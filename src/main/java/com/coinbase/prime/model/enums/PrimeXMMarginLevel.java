@@ -32,7 +32,6 @@ package com.coinbase.prime.model.enums;
  * may commence.
  */
 public enum PrimeXMMarginLevel {
-  XM_MARGIN_LEVEL_UNSPECIFIED,
   /** Margin level is healthy */
   HEALTHY_THRESHOLD,
   /**

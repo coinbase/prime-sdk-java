@@ -69,6 +69,7 @@ The SDK is organized into service interfaces under `com.coinbase.prime.*`, each 
 | `AddressBookService` | `com.coinbase.prime.addressbook` |
 | `AdvancedTransferService` | `com.coinbase.prime.advancedtransfer` |
 | `AllocationsService` | `com.coinbase.prime.allocations` |
+| `ApiKeyService` | `com.coinbase.prime.apikey` |
 | `AssetsService` | `com.coinbase.prime.assets` |
 | `BalancesService` | `com.coinbase.prime.balances` |
 | `CommissionService` | `com.coinbase.prime.commission` |
@@ -140,6 +141,20 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.transactions.ListPortfolio
 - `com.coinbase.examples.wallets.ListWalletAddresses <wallet-id> <network-id>` - List addresses for a wallet
 - `com.coinbase.examples.wallets.GetWalletDepositInstructions <wallet-id> [deposit-type]` - Get deposit instructions (deposit-type: CRYPTO, WIRE, SEN, SWIFT, SEPA)
 
+**API Key:**
+- `com.coinbase.examples.apikey.RotateApiKey` - Rotate the invoking API key (starts a real rotation). Decrypts `encrypted_credentials` via `ApiKeyRotation.decrypt` using the current `signingKey`.
+
+**Financing:**
+- `com.coinbase.examples.financing.GetConversionFees` - Get organization conversion fee tiers
+- `com.coinbase.examples.financing.GetCrossMarginLiquidation` - Get XM liquidation details
+- `com.coinbase.examples.financing.ListCrossMarginLiquidations` - List XM liquidation history
+- `com.coinbase.examples.financing.GetEntityRewardsRate` - Get entity rewards rate (beta)
+- `com.coinbase.examples.financing.GetPortfolioRewardsRate` - Get portfolio rewards rate (beta)
+
+**Futures:**
+- `com.coinbase.examples.futures.GetDerivativesCurrencySummary` - Get portfolio derivatives currency summary
+- `com.coinbase.examples.futures.GetDerivativePositions` - List portfolio derivative positions
+
 **Other:**
 - `com.coinbase.examples.Main` - Comprehensive example with multiple API calls
 
@@ -170,7 +185,7 @@ The SDK tracks the published Prime OpenAPI definition in **apiSpec/prime-public-
 make fetch-spec
 ```
 
-Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` ship in the same module and compile with **`mvn compile`**—keep them in sync when the SDK API changes.
+Models and enums under `com.coinbase.prime.model` are regenerated from that spec via `tools/model-generator`. Per-operation request/response types, services, and `PrimeServiceFactory` are hand-maintained. Typed error-code / subcode schemas from the spec are skipped for now. Example programs under `com.coinbase.examples` ship in the same module and compile with **`mvn compile`**—keep them in sync when the SDK API changes.
 
 ## Changelog
 

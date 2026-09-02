@@ -17,10 +17,21 @@
 package com.coinbase.tools.modelgenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class PostProcessorJavadocTest {
+
+  @Test
+  void isSkippedErrorSchema_skipsTypedErrorEnumsAndResponses() {
+    assertTrue(PostProcessor.isSkippedErrorSchema("BadRequestErrorCode.java"));
+    assertTrue(PostProcessor.isSkippedErrorSchema("RotateAPIKeyForbiddenSubcode.java"));
+    assertTrue(PostProcessor.isSkippedErrorSchema("GetConversionFeesForbiddenErrorResponse.java"));
+    assertFalse(PostProcessor.isSkippedErrorSchema("TransactionType.java"));
+    assertFalse(PostProcessor.isSkippedErrorSchema("Order.java"));
+  }
 
   @Test
   void decodeHtmlEntities_decodesCommonEntities() {

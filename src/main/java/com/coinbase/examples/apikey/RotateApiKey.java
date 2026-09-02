@@ -1,0 +1,63 @@
+/*
+ * Copyright 2026-present Coinbase Global, Inc.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+package com.coinbase.examples.apikey;
+
+import com.coinbase.prime.apikey.ApiKeyRotation;
+import com.coinbase.prime.apikey.ApiKeyService;
+import com.coinbase.prime.apikey.RotateApiKeyRequest;
+import com.coinbase.prime.apikey.RotateApiKeyResponse;
+import com.coinbase.prime.apikey.RotatedApiKeyCredentials;
+import com.coinbase.prime.client.CoinbasePrimeClient;
+import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
+import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.utils.Utils;
+
+/**
+ * Rotates the invoking API key. This starts a real key-rotation activity and should only be run
+ * intentionally.
+ */
+public class RotateApiKey {
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials =
+          new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+
+      ApiKeyService service = PrimeServiceFactory.createApiKeyService(client);
+      RotateApiKeyRequest.Builder builder = new RotateApiKeyRequest.Builder();
+      String durationSeconds = System.getenv("DURATION_SECONDS");
+      if (durationSeconds != null && !durationSeconds.isEmpty()) {
+        builder.durationSeconds(Long.parseLong(durationSeconds));
+      }
+      RotateApiKeyResponse response = service.rotateApiKey(builder.build());
+
+      System.out.println(
+          Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+
+      String signingKey =
+          Utils.getObjectMapper()
+              .readTree(System.getenv("COINBASE_PRIME_CREDENTIALS"))
+              .get("signingKey")
+              .asText();
+      RotatedApiKeyCredentials rotated = ApiKeyRotation.decrypt(signingKey, response);
+      System.out.println("Decrypted new access_key: " + rotated.getAccessKey());
+      System.out.println("Store the new secret_key and passphrase securely; they are not printed.");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}

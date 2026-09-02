@@ -62,6 +62,10 @@ public class GetOrderPreviewRequest {
   @JsonProperty("is_raise_exact")
   private Boolean isRaiseExact;
 
+  /** Buy Exact order flag */
+  @JsonProperty("is_buy_exact")
+  private Boolean isBuyExact;
+
   @JsonProperty("historical_pov")
   private String historicalPov;
 
@@ -103,6 +107,7 @@ public class GetOrderPreviewRequest {
     this.expiryTime = builder.expiryTime;
     this.timeInForce = builder.timeInForce;
     this.isRaiseExact = builder.isRaiseExact;
+    this.isBuyExact = builder.isBuyExact;
     this.historicalPov = builder.historicalPov;
     this.stopPrice = builder.stopPrice;
     this.settlCurrency = builder.settlCurrency;
@@ -202,6 +207,14 @@ public class GetOrderPreviewRequest {
     this.isRaiseExact = isRaiseExact;
   }
 
+  public Boolean getIsBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setIsBuyExact(Boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
+  }
+
   public String getHistoricalPov() {
     return historicalPov;
   }
@@ -286,6 +299,7 @@ public class GetOrderPreviewRequest {
     private String expiryTime;
     private TimeInForceType timeInForce;
     private Boolean isRaiseExact;
+    private Boolean isBuyExact;
     private String historicalPov;
     private String stopPrice;
     private String settlCurrency;
@@ -350,6 +364,11 @@ public class GetOrderPreviewRequest {
 
     public Builder isRaiseExact(Boolean isRaiseExact) {
       this.isRaiseExact = isRaiseExact;
+      return this;
+    }
+
+    public Builder isBuyExact(Boolean isBuyExact) {
+      this.isBuyExact = isBuyExact;
       return this;
     }
 

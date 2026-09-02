@@ -40,11 +40,16 @@ public class WalletUnstakeInputs {
   @JsonProperty("validator_allocations")
   private List<ValidatorAllocation> validatorAllocations;
 
+  /** Optional validator address to unstake from. Only supported for a subset of protocols. */
+  @JsonProperty("validator_address")
+  private String validatorAddress;
+
   public WalletUnstakeInputs() {}
 
   public WalletUnstakeInputs(Builder builder) {
     this.amount = builder.amount;
     this.validatorAllocations = builder.validatorAllocations;
+    this.validatorAddress = builder.validatorAddress;
   }
 
   public String getAmount() {
@@ -63,10 +68,20 @@ public class WalletUnstakeInputs {
     this.validatorAllocations = validatorAllocations;
   }
 
+  public String getValidatorAddress() {
+    return validatorAddress;
+  }
+
+  public void setValidatorAddress(String validatorAddress) {
+    this.validatorAddress = validatorAddress;
+  }
+
   public static class Builder {
     private String amount;
 
     private List<ValidatorAllocation> validatorAllocations;
+
+    private String validatorAddress;
 
     public Builder amount(String amount) {
       this.amount = amount;
@@ -75,6 +90,11 @@ public class WalletUnstakeInputs {
 
     public Builder validatorAllocations(List<ValidatorAllocation> validatorAllocations) {
       this.validatorAllocations = validatorAllocations;
+      return this;
+    }
+
+    public Builder validatorAddress(String validatorAddress) {
+      this.validatorAddress = validatorAddress;
       return this;
     }
 
