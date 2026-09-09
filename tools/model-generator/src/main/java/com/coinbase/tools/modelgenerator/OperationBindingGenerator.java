@@ -22,6 +22,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
@@ -55,11 +57,71 @@ public final class OperationBindingGenerator {
   private OperationBindingGenerator() {}
 
   public static List<OperationBinding> deriveAll(SpecModels.Document document) {
+    return deriveAll(document, null);
+  }
+
+  public static List<OperationBinding> deriveAll(
+      SpecModels.Document document, GeneratorConfiguration configuration) {
     List<OperationBinding> bindings = new ArrayList<>();
-    for (SpecModels.Operation operation : document.operations()) bindings.add(derive(operation));
+    Set<String> knownOperations = new HashSet<>();
+    for (SpecModels.Operation operation : document.operations()) {
+      knownOperations.add(operation.operationId());
+      OperationBinding derived = derive(operation);
+      if (configuration != null && !operation.tags().isEmpty()) {
+        String configuredFolder = configuration.tagFolders().get(operation.tags().get(0));
+        if (configuredFolder != null && !configuredFolder.equals(derived.serviceFolder())) {
+          derived = new OperationBinding(derived.operationId(), configuredFolder, derived.serviceName(),
+              derived.sdkMethod(), derived.omitRequest(), derived.paginated(), derived.parameterTypeOverrides());
+        }
+      }
+      GeneratorConfiguration.Override override = configuration == null ? null
+          : configuration.overrides().get(operation.operationId());
+      if (override != null) {
+        for (String parameter : override.parameterTypes().keySet()) {
+          boolean declared = operation.parameters().stream().anyMatch(value -> value.name().equals(parameter));
+          Map<String, Object> body = SpecParser.map(operation.requestBodySchema().get("properties"));
+          if (!declared && !body.containsKey(parameter)) {
+            throw new IllegalArgumentException("Unknown parameter override " + parameter + " for " + operation.operationId());
+          }
+        }
+        derived = applyOverride(derived, override);
+      }
+      bindings.add(derived);
+    }
+    if (configuration != null) {
+      for (String operationId : configuration.overrides().keySet()) {
+        if (!knownOperations.contains(operationId)) {
+          throw new IllegalArgumentException("Unknown operation override: " + operationId);
+        }
+      }
+    }
     bindings.sort(Comparator.comparing(OperationBinding::operationId));
     OperationBindingValidator.validate(document, bindings);
     return Collections.unmodifiableList(bindings);
+  }
+
+  private static OperationBinding applyOverride(
+      OperationBinding binding, GeneratorConfiguration.Override override) {
+    String folder = override.serviceFolder() == null ? binding.serviceFolder() : override.serviceFolder();
+    String service = folderToService(folder);
+    String method = override.sdkMethod() == null ? binding.sdkMethod() : override.sdkMethod();
+    boolean omit = override.omitRequest() == null ? binding.omitRequest() : override.omitRequest();
+    boolean paginated = override.paginated() == null ? binding.paginated() : override.paginated();
+    if (folder.equals(binding.serviceFolder()) && method.equals(binding.sdkMethod())
+        && omit == binding.omitRequest() && paginated == binding.paginated()
+        && override.parameterTypes().isEmpty() && override.statuses().isEmpty()) {
+      System.err.println("WARN redundant operation override: " + binding.operationId());
+    }
+    return new OperationBinding(binding.operationId(), folder, service, method, omit, paginated,
+        override.parameterTypes().isEmpty() ? binding.parameterTypeOverrides() : override.parameterTypes());
+  }
+
+  private static String folderToService(String folder) {
+    StringBuilder name = new StringBuilder();
+    for (String part : folder.split("[^A-Za-z0-9]+")) {
+      if (!part.isEmpty()) name.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+    }
+    return name.append("Service").toString();
   }
 
   static OperationBinding derive(SpecModels.Operation operation) {

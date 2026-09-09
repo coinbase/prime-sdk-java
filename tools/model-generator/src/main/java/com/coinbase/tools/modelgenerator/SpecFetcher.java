@@ -45,6 +45,18 @@ public final class SpecFetcher {
 
     static Path fetch(Path projectRoot, String specUrl) throws IOException, InterruptedException {
         Path specPath = projectRoot.resolve(SPEC_RELATIVE_PATH);
+        return fetchTo(specPath, specUrl);
+    }
+
+    /** Downloads a live spec to a temporary file without changing committed input or generated output. */
+    public static Path fetchToTemporary(Path projectRoot, String specUrl) throws IOException, InterruptedException {
+        Path temporaryDirectory = projectRoot.resolve("generated");
+        Files.createDirectories(temporaryDirectory);
+        Path specPath = Files.createTempFile(temporaryDirectory, "prime-public-spec-", ".yaml");
+        return fetchTo(specPath, specUrl);
+    }
+
+    private static Path fetchTo(Path specPath, String specUrl) throws IOException, InterruptedException {
         Files.createDirectories(specPath.getParent());
 
         logger.info("Fetching OpenAPI spec from: {}", specUrl);

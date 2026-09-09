@@ -49,9 +49,15 @@ public final class SpecParser {
         Map<String, Object> operation = map(pathItem.get(method));
         String operationId = string(operation.get("operationId"));
         if (operationId.isEmpty()) continue;
-        List<Map<String, Object>> parameterMaps = new ArrayList<>(pathParameters);
-        parameterMaps.addAll(parameterMaps(operation.get("parameters")));
-        List<SpecModels.Parameter> parameters = parameterMaps.stream()
+        Map<String, Map<String, Object>> mergedParameters = new LinkedHashMap<>();
+        for (Map<String, Object> parameter : pathParameters) {
+          mergedParameters.put(parameterKey(parameter), parameter);
+        }
+        // Operation-level declarations override path-level declarations with the same in/name pair.
+        for (Map<String, Object> parameter : parameterMaps(operation.get("parameters"))) {
+          mergedParameters.put(parameterKey(parameter), parameter);
+        }
+        List<SpecModels.Parameter> parameters = mergedParameters.values().stream()
             .map(SpecParser::parameter).collect(Collectors.toList());
         Map<String, Object> response = firstSuccessResponse(operation);
         operations.add(new SpecModels.Operation(
@@ -62,6 +68,10 @@ public final class SpecParser {
     }
     operations.sort(Comparator.comparing(SpecModels.Operation::operationId));
     return new SpecModels.Document(root, operations);
+  }
+
+  private static String parameterKey(Map<String, Object> parameter) {
+    return string(parameter.get("in")) + "\u0000" + string(parameter.get("name"));
   }
 
   private static SpecModels.Parameter parameter(Map<String, Object> parameter) {
