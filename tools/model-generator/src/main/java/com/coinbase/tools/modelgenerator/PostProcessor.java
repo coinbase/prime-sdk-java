@@ -221,8 +221,7 @@ public class PostProcessor {
 
     /** Returns schemas that must not enter the shared model namespace. */
     static boolean isSkippedErrorSchema(String fileName) {
-        return fileName.endsWith("ErrorCode.java")
-            || fileName.endsWith("ErrorResponse.java");
+        return fileName.endsWith("ErrorResponse.java");
     }
 
     private boolean isEnumFile(Path file) throws IOException {
@@ -354,7 +353,7 @@ public class PostProcessor {
             logger.info("Transformed {} filename: {} -> {}", isEnum ? "enum" : "model", originalFileName, fileName);
         }
 
-        Path outputDirectory = isEnum && GeneratedEnumKind.isSubcode(className) ? errorsDir : targetDir;
+        Path outputDirectory = isEnum && GeneratedEnumKind.isErrorEnum(className) ? errorsDir : targetDir;
         Path outputPath = outputDirectory.resolve(fileName);
         // Read copyright year before deleting case-variant paths (TS getHeaderYear parity)
         String copyrightYear = GeneratedFileHeader.resolveStartYear(outputPath);
@@ -389,7 +388,7 @@ public class PostProcessor {
         if (!resolvedClassName.equals(className)) {
             className = resolvedClassName;
             fileName = className + ".java";
-            outputDirectory = isEnum && GeneratedEnumKind.isSubcode(className) ? errorsDir : targetDir;
+            outputDirectory = isEnum && GeneratedEnumKind.isErrorEnum(className) ? errorsDir : targetDir;
             outputPath = outputDirectory.resolve(fileName);
         }
 

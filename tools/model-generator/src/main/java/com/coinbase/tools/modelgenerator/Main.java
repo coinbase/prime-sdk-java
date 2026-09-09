@@ -71,7 +71,8 @@ public final class Main {
     }
 
     SpecModels.Document document = SpecParser.load(spec);
-    NamingResolver names = new NamingResolver(configuration.nameReplacements());
+    NamingResolver names =
+        new NamingResolver(configuration.nameReplacements(), configuration.modelTypeMappings());
     List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
     JavaTypeResolver types = new JavaTypeResolver(document, names, configuration.sharedModelMappings());
     Map<Path, String> sources = new LinkedHashMap<>();

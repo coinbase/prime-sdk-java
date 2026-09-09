@@ -26,10 +26,10 @@ class OperationBindingGeneratorTest {
   @Test
   void derivesStableBindingsForTheCommittedSpec() throws Exception {
     Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
-    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(
-        SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml")));
+    SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
 
-    assertEquals(111, bindings.size());
+    assertEquals(document.operations().size(), bindings.size());
     OperationBinding createOrder = bindings.stream()
         .filter(binding -> binding.operationId().equals("PrimeRESTAPI_CreateOrder"))
         .findFirst().orElseThrow();
@@ -46,15 +46,43 @@ class OperationBindingGeneratorTest {
   }
 
   @Test
-  void preservesConfiguredCompatibilityMethodNames() throws Exception {
+  void preservesConfiguredCompatibilityNamesAndRequestShapes() throws Exception {
     Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
     GeneratorPaths paths = GeneratorPaths.forRoot(root);
-    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(
-        SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml")), GeneratorConfiguration.load(paths));
+    SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
+    GeneratorConfiguration configuration = GeneratorConfiguration.load(paths);
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
 
-    OperationBinding fcmBalance = bindings.stream()
-        .filter(binding -> binding.operationId().equals("PrimeRESTAPI_GetFcmBalance"))
-        .findFirst().orElseThrow();
-    assertEquals("GetEntityFcmBalance", fcmBalance.sdkMethod());
+    assertEquals("GetEntityFcmBalance", binding(bindings, "PrimeRESTAPI_GetFcmBalance").sdkMethod());
+    assertEquals("ListPortfolioOrders", binding(bindings, "PrimeRESTAPI_GetOrders").sdkMethod());
+    assertEquals("GetOrderByOrderId", binding(bindings, "PrimeRESTAPI_GetOrder").sdkMethod());
+    assertEquals("ClaimRewards", binding(bindings, "PrimeRESTAPI_StakingClaimRewards").sdkMethod());
+    assertEquals("GetCrossMarginLiquidation", binding(bindings, "PrimeRESTAPI_GetXMLiquidation").sdkMethod());
+    assertEquals("GetDerivativePositions", binding(bindings, "PrimeRESTAPI_GetDerivativePositions").sdkMethod());
+    assertEquals("ListOnchainWalletBalances", binding(bindings, "PrimeRESTAPI_ListWeb3WalletBalances").sdkMethod());
+    assertEquals("apikey", binding(bindings, "PrimeRESTAPI_RotateAPIKey").serviceFolder());
+    assertEquals("ApiKeyService", binding(bindings, "PrimeRESTAPI_RotateAPIKey").serviceName());
+
+    NamingResolver names =
+        new NamingResolver(configuration.nameReplacements(), configuration.modelTypeMappings());
+    JavaTypeResolver types =
+        new JavaTypeResolver(document, names, configuration.sharedModelMappings());
+    String orders =
+        RequestPhase.render(document, bindings, types, names)
+            .get(Path.of("com/coinbase/prime/orders/ListPortfolioOrdersRequest.java"));
+    assertTrue(orders.contains("private OrderStatus[] orderStatuses;"), orders);
+    assertTrue(orders.contains("private String[] productIds;"), orders);
+    String wallet =
+        RequestPhase.render(document, bindings, types, names)
+            .get(Path.of("com/coinbase/prime/wallets/CreateWalletRequest.java"));
+    assertTrue(wallet.contains("private WalletType type;"), wallet);
+    assertTrue(wallet.contains("Builder type(WalletType type)"), wallet);
+  }
+
+  private static OperationBinding binding(List<OperationBinding> bindings, String operationId) {
+    return bindings.stream()
+        .filter(binding -> binding.operationId().equals(operationId))
+        .findFirst()
+        .orElseThrow();
   }
 }

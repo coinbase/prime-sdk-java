@@ -4,19 +4,21 @@
   "tagToFolderOverrides": {
     "Travel Rule": "transactions"
   },
-  "nameReplacements": {
-    "GoogleTypeDate": "DateOfBirth",
-    "Web3": "Onchain",
-    "Fcm": "FCM",
-    "Rfq": "RFQ",
-    "Evm": "EVM",
-    "Xm": "XM"
+  "modelTypeMappings": {
+    "CreateOnchainTransactionRequestEVMParams": "EvmParams",
+    "CreateOnchainTransactionRequestEvmParams": "EvmParams",
+    "FcmFuturesSweepRequestAmount": "SweepAmount",
+    "FcmFuturesSweep": "FuturesSweep",
+    "EvmParam": "EvmParams",
+    "RPC": "RpcConfig"
   },
   "sharedModelMappings": {
     "PaginatedResponse": "com.coinbase.prime.common.Pagination"
   },
   "protectedCompatibilityFiles": [
     "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdRequest.java",
-    "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdResponse.java"
+    "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdResponse.java",
+    "com/coinbase/prime/portfolios/PortfoliosService.java",
+    "com/coinbase/prime/portfolios/PortfoliosServiceImpl.java"
   ]
 }

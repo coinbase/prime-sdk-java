@@ -35,6 +35,7 @@ public final class GeneratorConfiguration {
   private final String committedSpecPath;
   private final Map<String, String> tagFolders;
   private final Map<String, String> nameReplacements;
+  private final Map<String, String> modelTypeMappings;
   private final Map<String, String> sharedModelMappings;
   private final Set<String> protectedFiles;
   private final Map<String, Override> overrides;
@@ -44,6 +45,7 @@ public final class GeneratorConfiguration {
       String committedSpecPath,
       Map<String, String> tagFolders,
       Map<String, String> nameReplacements,
+      Map<String, String> modelTypeMappings,
       Map<String, String> sharedModelMappings,
       Set<String> protectedFiles,
       Map<String, Override> overrides) {
@@ -51,6 +53,7 @@ public final class GeneratorConfiguration {
     this.committedSpecPath = committedSpecPath;
     this.tagFolders = Collections.unmodifiableMap(tagFolders);
     this.nameReplacements = Collections.unmodifiableMap(nameReplacements);
+    this.modelTypeMappings = Collections.unmodifiableMap(modelTypeMappings);
     this.sharedModelMappings = Collections.unmodifiableMap(sharedModelMappings);
     this.protectedFiles = Collections.unmodifiableSet(protectedFiles);
     this.overrides = Collections.unmodifiableMap(overrides);
@@ -78,6 +81,11 @@ public final class GeneratorConfiguration {
     Map<String, String> replacements = strings(config.path("nameReplacements"));
     for (Map.Entry<String, String> entry : replacements.entrySet()) {
       validateJavaIdentifier(entry.getValue(), "nameReplacements." + entry.getKey());
+    }
+    Map<String, String> modelTypeMappings = strings(config.path("modelTypeMappings"));
+    for (Map.Entry<String, String> entry : modelTypeMappings.entrySet()) {
+      validateJavaIdentifier(entry.getKey(), "modelTypeMappings key");
+      validateJavaIdentifier(entry.getValue(), "modelTypeMappings." + entry.getKey());
     }
     Map<String, String> sharedMappings = strings(config.path("sharedModelMappings"));
     for (Map.Entry<String, String> entry : sharedMappings.entrySet()) {
@@ -107,6 +115,7 @@ public final class GeneratorConfiguration {
         committedSpecPath,
         tagFolders,
         replacements,
+        modelTypeMappings,
         sharedMappings,
         protectedFiles,
         overrides);
@@ -139,6 +148,13 @@ public final class GeneratorConfiguration {
     }
   }
 
+  static void validatePascalCaseIdentifier(String value, String field) {
+    validateJavaIdentifier(value, field);
+    if (!Character.isUpperCase(value.charAt(0))) {
+      throw new IllegalArgumentException(field + " must be PascalCase: " + value);
+    }
+  }
+
   static void validatePackageFolder(String value, String field) {
     if (value == null || value.isEmpty()) {
       throw new IllegalArgumentException(field + " must be a Java package folder");
@@ -154,6 +170,12 @@ public final class GeneratorConfiguration {
     }
     for (String segment : value.split("\\.")) {
       validateJavaIdentifier(segment, field);
+    }
+  }
+
+  private static void validateJavaType(String value, String field) {
+    if (value == null || !value.matches("[A-Za-z_$][A-Za-z0-9_$.]*(?:\\[\\])?")) {
+      throw new IllegalArgumentException(field + " must be a Java type: " + value);
     }
   }
 
@@ -180,6 +202,10 @@ public final class GeneratorConfiguration {
     return nameReplacements;
   }
 
+  public Map<String, String> modelTypeMappings() {
+    return modelTypeMappings;
+  }
+
   public Map<String, String> sharedModelMappings() {
     return sharedModelMappings;
   }
@@ -195,39 +221,75 @@ public final class GeneratorConfiguration {
   public static final class Override {
     private final String sdkMethod;
     private final String serviceFolder;
+    private final String serviceName;
     private final Boolean omitRequest;
     private final Boolean paginated;
     private final Map<String, String> parameterTypes;
+    private final Map<String, String> propertyNames;
+    private final Map<String, String> responseTypes;
+    private final List<String> convenienceConstructorParameters;
     private final List<Integer> statuses;
 
     private Override(
         String sdkMethod,
         String serviceFolder,
+        String serviceName,
         Boolean omitRequest,
         Boolean paginated,
         Map<String, String> parameterTypes,
+        Map<String, String> propertyNames,
+        Map<String, String> responseTypes,
+        List<String> convenienceConstructorParameters,
         List<Integer> statuses) {
       this.sdkMethod = sdkMethod;
       this.serviceFolder = serviceFolder;
+      this.serviceName = serviceName;
       this.omitRequest = omitRequest;
       this.paginated = paginated;
       this.parameterTypes = parameterTypes;
+      this.propertyNames = propertyNames;
+      this.responseTypes = responseTypes;
+      this.convenienceConstructorParameters = convenienceConstructorParameters;
       this.statuses = statuses;
     }
 
     static Override from(JsonNode node) {
       String sdkMethod = node.path("sdkMethod").asText(null);
       if (sdkMethod != null) {
-        validateJavaIdentifier(sdkMethod, "sdkMethod");
+        validatePascalCaseIdentifier(sdkMethod, "sdkMethod");
       }
       String serviceFolder = node.path("serviceFolder").asText(null);
       if (serviceFolder != null) {
         validatePackageFolder(serviceFolder, "serviceFolder");
       }
+      String serviceName = node.path("serviceName").asText(null);
+      if (serviceName != null) {
+        validatePascalCaseIdentifier(serviceName, "serviceName");
+      }
       Map<String, String> parameterTypes = strings(node.path("parameterTypeOverrides"));
       for (Map.Entry<String, String> entry : parameterTypes.entrySet()) {
         validateJavaIdentifier(entry.getKey(), "parameterTypeOverrides key");
-        validateQualifiedType(entry.getValue(), "parameterTypeOverrides." + entry.getKey());
+        validateJavaType(entry.getValue(), "parameterTypeOverrides." + entry.getKey());
+      }
+      Map<String, String> propertyNames = strings(node.path("propertyNameOverrides"));
+      for (Map.Entry<String, String> entry : propertyNames.entrySet()) {
+        validateJavaIdentifier(entry.getKey(), "propertyNameOverrides key");
+        validateJavaIdentifier(entry.getValue(), "propertyNameOverrides." + entry.getKey());
+      }
+      Map<String, String> responseTypes = strings(node.path("responseTypeOverrides"));
+      for (Map.Entry<String, String> entry : responseTypes.entrySet()) {
+        validateJavaIdentifier(entry.getKey(), "responseTypeOverrides key");
+        validateJavaType(entry.getValue(), "responseTypeOverrides." + entry.getKey());
+      }
+      List<String> convenienceConstructorParameters = new ArrayList<>();
+      for (JsonNode parameter : node.path("convenienceConstructorParameters")) {
+        String parameterName = parameter.asText();
+        validateJavaIdentifier(parameterName, "convenienceConstructorParameters");
+        if (convenienceConstructorParameters.contains(parameterName)) {
+          throw new IllegalArgumentException(
+              "Duplicate convenience constructor parameter: " + parameterName);
+        }
+        convenienceConstructorParameters.add(parameterName);
       }
       TreeSet<Integer> normalizedStatuses = new TreeSet<>();
       for (JsonNode status : node.path("statusCodes")) {
@@ -240,9 +302,13 @@ public final class GeneratorConfiguration {
       return new Override(
           sdkMethod,
           serviceFolder,
+          serviceName,
           node.has("omitRequest") ? node.get("omitRequest").asBoolean() : null,
           node.has("paginated") ? node.get("paginated").asBoolean() : null,
           Collections.unmodifiableMap(new LinkedHashMap<>(parameterTypes)),
+          Collections.unmodifiableMap(new LinkedHashMap<>(propertyNames)),
+          Collections.unmodifiableMap(new LinkedHashMap<>(responseTypes)),
+          Collections.unmodifiableList(convenienceConstructorParameters),
           Collections.unmodifiableList(new ArrayList<>(normalizedStatuses)));
     }
 
@@ -252,6 +318,10 @@ public final class GeneratorConfiguration {
 
     public String serviceFolder() {
       return serviceFolder;
+    }
+
+    public String serviceName() {
+      return serviceName;
     }
 
     public Boolean omitRequest() {
@@ -264,6 +334,18 @@ public final class GeneratorConfiguration {
 
     public Map<String, String> parameterTypes() {
       return parameterTypes;
+    }
+
+    public Map<String, String> propertyNames() {
+      return propertyNames;
+    }
+
+    public Map<String, String> responseTypes() {
+      return responseTypes;
+    }
+
+    public List<String> convenienceConstructorParameters() {
+      return convenienceConstructorParameters;
     }
 
     public List<Integer> statuses() {

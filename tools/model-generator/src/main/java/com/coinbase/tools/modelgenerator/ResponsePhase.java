@@ -42,7 +42,8 @@ public final class ResponsePhase {
     Map<String, Object> properties = SpecParser.map(schema.get("properties"));
     Set<String> imports = new LinkedHashSet<>(); imports.add("com.fasterxml.jackson.annotation.JsonProperty");
     StringBuilder source = new StringBuilder(SourceTemplates.header()).append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
-    for (Object property : properties.values()) imports.addAll(types.resolve(SpecParser.map(property)).imports());
+    for (Map.Entry<String, Object> property : properties.entrySet())
+      imports.addAll(type(binding, property.getKey(), SpecParser.map(property.getValue()), types).imports());
     if (!properties.isEmpty()) SourceTemplates.imports(source, imports);
     SourceTemplates.javadoc(source, operation.summary());
     source.append("public class ").append(className).append(" {\n");
@@ -53,13 +54,31 @@ public final class ResponsePhase {
       source.insert(source.indexOf("/**"), SourceTemplates.importBlock(imports));
       appendField(source, "value", names.propertyName("value"), type);
     } else for (Map.Entry<String, Object> property : properties.entrySet()) {
-      appendField(source, property.getKey(), names.propertyName(property.getKey()), types.resolve(SpecParser.map(property.getValue())));
+      appendField(
+          source,
+          property.getKey(),
+          names.propertyName(property.getKey()),
+          type(binding, property.getKey(), SpecParser.map(property.getValue()), types));
     }
     source.append("  public ").append(className).append("() {}\n\n");
-    for (Map.Entry<String, Object> property : properties.entrySet()) appendAccessors(source, names.propertyName(property.getKey()), types.resolve(SpecParser.map(property.getValue())));
+    for (Map.Entry<String, Object> property : properties.entrySet())
+      appendAccessors(
+          source,
+          names.propertyName(property.getKey()),
+          type(binding, property.getKey(), SpecParser.map(property.getValue()), types));
     if (properties.isEmpty() && !schema.isEmpty()) appendAccessors(source, "value", types.resolve(operation.successResponseSchema()));
     return source.append("}\n").toString();
   }
+  private static JavaTypeResolver.Type type(
+      OperationBinding binding,
+      String wireName,
+      Map<String, Object> schema,
+      JavaTypeResolver types) {
+    return binding.responseTypeOverrides().containsKey(wireName)
+        ? types.configured(binding.responseTypeOverrides().get(wireName))
+        : types.resolve(schema);
+  }
+
   private static void appendField(StringBuilder source, String wire, String name, JavaTypeResolver.Type type) { source.append("  @JsonProperty(\"").append(wire).append("\")\n  private ").append(type.name()).append(" ").append(name).append(";\n\n"); }
   private static void appendAccessors(StringBuilder source, String name, JavaTypeResolver.Type type) { String cap=SourceTemplates.cap(name); source.append("  public ").append(type.name()).append(" get").append(cap).append("() {\n    return ").append(name).append(";\n  }\n\n  public void set").append(cap).append("(").append(type.name()).append(" ").append(name).append(") {\n    this.").append(name).append(" = ").append(name).append(";\n  }\n\n"); }
 }

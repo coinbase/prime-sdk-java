@@ -25,11 +25,16 @@ import org.junit.jupiter.api.Test;
 
 class ErrorSubcodeGenerationTest {
   @Test
-  void classifiesSubcodeEnumsSeparatelyFromDomainEnums() {
+  void classifiesErrorCodeAndSubcodeEnumsSeparatelyFromDomainEnums() {
     assertTrue(GeneratedEnumKind.isSubcode("CreateOrderBadRequestSubcode"));
-    assertFalse(GeneratedEnumKind.isSubcode("OrderSide"));
-    assertEquals(GeneratedEnumKind.ERRORS_PACKAGE,
+    assertTrue(GeneratedEnumKind.isErrorCode("BadRequestErrorCode"));
+    assertTrue(GeneratedEnumKind.isErrorEnum("CreateOrderBadRequestSubcode"));
+    assertTrue(GeneratedEnumKind.isErrorEnum("BadRequestErrorCode"));
+    assertFalse(GeneratedEnumKind.isErrorEnum("OrderSide"));
+    assertEquals(
+        GeneratedEnumKind.ERRORS_PACKAGE,
         GeneratedEnumKind.packageFor("CreateOrderBadRequestSubcode"));
+    assertEquals(GeneratedEnumKind.ERRORS_PACKAGE, GeneratedEnumKind.packageFor("BadRequestErrorCode"));
     assertEquals(GeneratedEnumKind.ENUMS_PACKAGE, GeneratedEnumKind.packageFor("OrderSide"));
   }
 
@@ -48,6 +53,10 @@ class ErrorSubcodeGenerationTest {
         "package com.coinbase.prime.model;\n"
             + "public enum PrimeRESTAPICreateThingBadRequestSubcode { INVALID }\n");
     Files.writeString(
+        generatedModels.resolve("BadRequestErrorCode.java"),
+        "package com.coinbase.prime.model;\n"
+            + "public enum BadRequestErrorCode { INVALID }\n");
+    Files.writeString(
         generatedModels.resolve("ErrorEnvelope.java"),
         "package com.coinbase.prime.model;\n"
             + "import com.coinbase.prime.model.PrimeRESTAPICreateThingBadRequestSubcode;\n"
@@ -61,6 +70,7 @@ class ErrorSubcodeGenerationTest {
     assertTrue(Files.exists(errorEnum));
     assertFalse(Files.exists(enumsRoot.resolve("CreateThingBadRequestSubcode.java")));
     assertTrue(Files.readString(errorEnum).contains("package com.coinbase.prime.model.errors;"));
+    assertTrue(Files.exists(errorsRoot.resolve("BadRequestErrorCode.java")));
     assertTrue(Files.readString(modelRoot.resolve("ErrorEnvelope.java"))
         .contains("import com.coinbase.prime.model.errors.CreateThingBadRequestSubcode;"));
   }

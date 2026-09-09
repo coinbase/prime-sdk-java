@@ -78,13 +78,15 @@ public final class OperationBindingGenerator {
       GeneratorConfiguration.Override override = configuration == null ? null
           : configuration.overrides().get(operation.operationId());
       if (override != null) {
-        for (String parameter : override.parameterTypes().keySet()) {
-          boolean declared = operation.parameters().stream().anyMatch(value -> value.name().equals(parameter));
-          Map<String, Object> body = SpecParser.map(operation.requestBodySchema().get("properties"));
-          if (!declared && !body.containsKey(parameter)) {
-            throw new IllegalArgumentException("Unknown parameter override " + parameter + " for " + operation.operationId());
-          }
-        }
+        Map<String, Object> body =
+            SpecParser.map(dereference(document, operation.requestBodySchema()).get("properties"));
+        validateCompatibilityFields(operation, body, override.parameterTypes().keySet(), "parameter override");
+        validateCompatibilityFields(operation, body, override.propertyNames().keySet(), "property name override");
+        validateCompatibilityFields(
+            operation,
+            body,
+            new HashSet<>(override.convenienceConstructorParameters()),
+            "convenience constructor parameter");
         derived = applyOverride(derived, override);
       }
       bindings.add(derived);
@@ -104,17 +106,65 @@ public final class OperationBindingGenerator {
   private static OperationBinding applyOverride(
       OperationBinding binding, GeneratorConfiguration.Override override) {
     String folder = override.serviceFolder() == null ? binding.serviceFolder() : override.serviceFolder();
-    String service = folderToService(folder);
+    String service =
+        override.serviceName() == null
+            ? (folder.equals(binding.serviceFolder()) ? binding.serviceName() : folderToService(folder))
+            : override.serviceName();
     String method = override.sdkMethod() == null ? binding.sdkMethod() : override.sdkMethod();
     boolean omit = override.omitRequest() == null ? binding.omitRequest() : override.omitRequest();
     boolean paginated = override.paginated() == null ? binding.paginated() : override.paginated();
-    if (folder.equals(binding.serviceFolder()) && method.equals(binding.sdkMethod())
-        && omit == binding.omitRequest() && paginated == binding.paginated()
-        && override.parameterTypes().isEmpty() && override.statuses().isEmpty()) {
+    if (folder.equals(binding.serviceFolder())
+        && service.equals(binding.serviceName())
+        && method.equals(binding.sdkMethod())
+        && omit == binding.omitRequest()
+        && paginated == binding.paginated()
+        && override.parameterTypes().isEmpty()
+        && override.propertyNames().isEmpty()
+        && override.responseTypes().isEmpty()
+        && override.convenienceConstructorParameters().isEmpty()
+        && override.statuses().isEmpty()) {
       System.err.println("WARN redundant operation override: " + binding.operationId());
     }
-    return new OperationBinding(binding.operationId(), folder, service, method, omit, paginated,
-        override.parameterTypes().isEmpty() ? binding.parameterTypeOverrides() : override.parameterTypes());
+    return new OperationBinding(
+        binding.operationId(),
+        folder,
+        service,
+        method,
+        omit,
+        paginated,
+        override.parameterTypes().isEmpty()
+            ? binding.parameterTypeOverrides()
+            : override.parameterTypes(),
+        override.propertyNames().isEmpty() ? binding.propertyNameOverrides() : override.propertyNames(),
+        override.responseTypes().isEmpty() ? binding.responseTypeOverrides() : override.responseTypes(),
+        override.convenienceConstructorParameters().isEmpty()
+            ? binding.convenienceConstructorParameters()
+            : override.convenienceConstructorParameters());
+  }
+
+  private static Map<String, Object> dereference(
+      SpecModels.Document document, Map<String, Object> schema) {
+    String ref = String.valueOf(schema.getOrDefault("$ref", ""));
+    if (ref.isEmpty()) {
+      return schema;
+    }
+    Map<String, Object> schemas =
+        SpecParser.map(SpecParser.map(document.root().get("components")).get("schemas"));
+    return SpecParser.map(schemas.get(ref.substring(ref.lastIndexOf('/') + 1)));
+  }
+
+  private static void validateCompatibilityFields(
+      SpecModels.Operation operation,
+      Map<String, Object> body,
+      Set<String> fields,
+      String label) {
+    for (String field : fields) {
+      boolean declared = operation.parameters().stream().anyMatch(value -> value.name().equals(field));
+      if (!declared && !body.containsKey(field)) {
+        throw new IllegalArgumentException(
+            "Unknown " + label + " " + field + " for " + operation.operationId());
+      }
+    }
   }
 
   private static String folderToService(String folder) {
@@ -129,12 +179,20 @@ public final class OperationBindingGenerator {
     String tag = operation.tags().isEmpty() ? "Misc" : operation.tags().get(0);
     String folder = "Travel Rule".equals(tag) ? "transactions" : tag.replaceAll("[^A-Za-z0-9]", "").replace(" ", "").toLowerCase(Locale.ROOT);
     String serviceName = "Travel Rule".equals(tag) ? folderToService(folder) : pascal(tag) + "Service";
-    String raw = operation.sdkMethodName().isEmpty() ? operation.operationId().replaceFirst("^" + OPERATION_ID_PREFIX, "") : operation.sdkMethodName();
+    String raw =
+        operation.sdkMethodName().isEmpty()
+            ? operation.operationId()
+            : operation.sdkMethodName();
+    raw = stripOperationPrefix(raw);
     String method = METHOD_RENAMES.getOrDefault(raw, raw);
     if (operation.httpMethod().equals("GET") && method.startsWith("Get") && operation.summary().startsWith("List ")) method = "List" + method.substring(3);
     boolean omitRequest = operation.parameters().isEmpty() && operation.requestBodySchema().isEmpty();
     boolean paginated = operation.parameters().stream().anyMatch(p -> p.name().equals("cursor") || p.name().equals("sort_direction"));
     return new OperationBinding(operation.operationId(), folder, serviceName, method, omitRequest, paginated, new LinkedHashMap<>());
+  }
+
+  private static String stripOperationPrefix(String operationName) {
+    return operationName.replaceFirst("^[A-Za-z][A-Za-z0-9]*_", "");
   }
 
   private static String canonicalServiceForFolder(SpecModels.Document document, String folder) {

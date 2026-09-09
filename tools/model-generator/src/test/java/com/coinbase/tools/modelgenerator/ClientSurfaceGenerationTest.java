@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,7 +51,7 @@ class ClientSurfaceGenerationTest {
     assertTrue(listRequest.contains("Builder pagination(Pagination pagination)"), listRequest);
     String request = sources.get(Path.of("com/coinbase/prime/orders/CreateThingRequest.java"));
     assertTrue(request.contains("@JsonIgnore"));
-    assertTrue(request.contains("private List<Thing> things"));
+    assertTrue(request.contains("private Thing[] things"));
     assertTrue(request.contains("PortfolioId is required"));
     String response = sources.get(Path.of("com/coinbase/prime/orders/CreateThingResponse.java"));
     assertTrue(response.contains("private OnchainThing thing"));
@@ -88,6 +89,48 @@ class ClientSurfaceGenerationTest {
         .contains("createTransactionsService"));
     assertFalse(factory.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java"))
         .contains("TravelRuleService"));
+  }
+
+  @Test
+  void resolvesPostProcessorModelNamesWithoutPreNormalizationReplacement() throws Exception {
+    NamingResolver names =
+        new NamingResolver(
+            Collections.singletonMap("Evm", "EVM"),
+            Map.of(
+                "CreateOnchainTransactionRequestEVMParams", "EvmParams",
+                "FcmFuturesSweep", "FuturesSweep"));
+    JavaTypeResolver types = new JavaTypeResolver(fixture(), names);
+
+    assertEquals(
+        "EvmParams",
+        types
+            .resolve(
+                Collections.singletonMap(
+                    "$ref",
+                    "#/components/schemas/CoinbasePublicRestApiCreateOnchainTransactionRequestEVMParams"))
+            .name());
+    assertEquals(
+        "FuturesSweep",
+        types
+            .resolve(
+                Collections.singletonMap(
+                    "$ref", "#/components/schemas/FcmFuturesSweep"))
+            .name());
+  }
+
+  @Test
+  void rejectsCaseInsensitiveGeneratedFilenameCollisions() throws Exception {
+    Path root = Files.createTempDirectory("generator-case-collision");
+    Files.writeString(root.resolve("RotateApiKeyRequest.java"), "existing", StandardCharsets.UTF_8);
+    Map<Path, String> generated =
+        Collections.singletonMap(Path.of("RotateAPIKeyRequest.java"), "public class RotateAPIKeyRequest {}\n");
+
+    IOException exception =
+        assertThrows(
+            IOException.class,
+            () -> GeneratedSourceReconciler.write(root, generated, Collections.emptySet(), null));
+
+    assertTrue(exception.getMessage().contains("case-insensitively"), exception.getMessage());
   }
 
   @Test

@@ -15,7 +15,7 @@
  */
 package com.coinbase.tools.modelgenerator;
 
-/** Distinguishes domain enums from OpenAPI error Subcode enums. */
+/** Distinguishes domain enums from OpenAPI error Subcode and ErrorCode enums. */
 public final class GeneratedEnumKind {
   public static final String ENUMS_PACKAGE = "com.coinbase.prime.model.enums";
   public static final String ERRORS_PACKAGE = "com.coinbase.prime.model.errors";
@@ -26,7 +26,15 @@ public final class GeneratedEnumKind {
     return typeName.endsWith("Subcode");
   }
 
+  public static boolean isErrorCode(String typeName) {
+    return typeName.endsWith("ErrorCode");
+  }
+
+  public static boolean isErrorEnum(String typeName) {
+    return isSubcode(typeName) || isErrorCode(typeName);
+  }
+
   public static String packageFor(String typeName) {
-    return isSubcode(typeName) ? ERRORS_PACKAGE : ENUMS_PACKAGE;
+    return isErrorEnum(typeName) ? ERRORS_PACKAGE : ENUMS_PACKAGE;
   }
 }

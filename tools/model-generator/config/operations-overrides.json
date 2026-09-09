@@ -1,5 +1,181 @@
 [
   {
+    "operationId": "PrimeRESTAPI_GetActivity",
+    "convenienceConstructorParameters": ["activity_id"]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityActivities",
+    "parameterTypeOverrides": {
+      "activity_level": "com.coinbase.prime.model.enums.ActivityLevel",
+      "symbols": "String[]",
+      "categories": "com.coinbase.prime.model.enums.ActivityCategory[]",
+      "statuses": "com.coinbase.prime.model.enums.ActivityStatus[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioActivities",
+    "parameterTypeOverrides": {
+      "symbols": "String[]",
+      "categories": "com.coinbase.prime.model.enums.ActivityCategory[]",
+      "statuses": "com.coinbase.prime.model.enums.ActivityStatus[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListEntityBalances",
+    "parameterTypeOverrides": {
+      "symbols": "String[]",
+      "aggregation_type": "com.coinbase.prime.model.enums.PortfolioBalanceType"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioBalances",
+    "paginated": true,
+    "parameterTypeOverrides": {
+      "symbols": "String[]",
+      "balance_type": "com.coinbase.prime.model.enums.PortfolioBalanceType"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetCandles",
+    "parameterTypeOverrides": {
+      "granularity": "com.coinbase.prime.model.enums.CandlesGranularity"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOpenOrders",
+    "parameterTypeOverrides": {
+      "product_ids": "String[]",
+      "order_type": "com.coinbase.prime.model.enums.OrderType",
+      "order_side": "com.coinbase.prime.model.enums.OrderSide"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrders",
+    "sdkMethod": "ListPortfolioOrders",
+    "responseTypeOverrides": {
+      "orders": "com.coinbase.prime.model.Order[]"
+    },
+    "parameterTypeOverrides": {
+      "order_type": "com.coinbase.prime.model.enums.OrderType",
+      "order_side": "com.coinbase.prime.model.enums.OrderSide",
+      "order_statuses": "com.coinbase.prime.model.enums.OrderStatus[]",
+      "product_ids": "String[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrder",
+    "sdkMethod": "GetOrderByOrderId"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethods",
+    "sdkMethod": "ListPaymentMethods"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolios",
+    "omitRequest": false
+  },
+  {
+    "operationId": "PrimeRESTAPI_RotateAPIKey",
+    "sdkMethod": "RotateApiKey",
+    "serviceFolder": "apikey",
+    "serviceName": "ApiKeyService",
+    "parameterTypeOverrides": {
+      "duration_seconds": "Long"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListAdvancedTransferTransactions",
+    "serviceFolder": "advancedtransfer",
+    "serviceName": "AdvancedTransferService"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioCounterpartyID",
+    "sdkMethod": "GetPortfolioCounterpartyId"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetBuyingPower",
+    "sdkMethod": "GetPortfolioBuyingPower"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetWithdrawalPower",
+    "sdkMethod": "GetPortfolioWithdrawalPower"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetXMLiquidation",
+    "sdkMethod": "GetCrossMarginLiquidation"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListXMLiquidations",
+    "sdkMethod": "ListCrossMarginLiquidations",
+    "parameterTypeOverrides": {
+      "status": "com.coinbase.prime.model.enums.XMLiquidationStatus"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetDerivativePositions",
+    "sdkMethod": "GetDerivativePositions"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingClaimRewards",
+    "sdkMethod": "ClaimRewards"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingInitiate",
+    "sdkMethod": "CreateStake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingUnstake",
+    "sdkMethod": "CreateUnstake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListTransactionValidators",
+    "parameterTypeOverrides": {
+      "transaction_ids": "String[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetInvoices",
+    "parameterTypeOverrides": {
+      "states": "com.coinbase.prime.model.enums.InvoiceState[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioTransactions",
+    "parameterTypeOverrides": {
+      "symbols": "String[]",
+      "types": "com.coinbase.prime.model.enums.TransactionType[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetWalletTransactions",
+    "parameterTypeOverrides": {
+      "types": "com.coinbase.prime.model.enums.TransactionType[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListWeb3WalletBalances",
+    "sdkMethod": "ListOnchainWalletBalances"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetWallets",
+    "parameterTypeOverrides": {
+      "type": "com.coinbase.prime.model.enums.WalletType",
+      "symbols": "String[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateWallet",
+    "propertyNameOverrides": {
+      "wallet_type": "type"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetWalletDepositInstructions",
+    "parameterTypeOverrides": {
+      "deposit_type": "com.coinbase.prime.model.enums.WalletDepositInstructionType"
+    }
+  },
+  {
     "operationId": "PrimeRESTAPI_GetFcmBalance",
     "sdkMethod": "GetEntityFcmBalance"
   }

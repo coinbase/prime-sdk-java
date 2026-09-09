@@ -28,6 +28,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Locale;
 import java.util.TreeMap;
 
 /** Reconciles only manifest-owned generated files; hand-authored SDK files are never glob-deleted. */
@@ -46,8 +47,13 @@ public final class GeneratedSourceReconciler {
       Set<String> protectedFiles,
       Path manifest)
       throws IOException {
+    validateCaseInsensitivePaths(outputRoot, generated.keySet());
     List<String> changes = new ArrayList<>();
     for (Map.Entry<Path, String> entry : new TreeMap<>(generated).entrySet()) {
+      String relative = entry.getKey().toString().replace('\\', '/');
+      if (protectedFiles.contains(relative)) {
+        continue;
+      }
       Path target = outputRoot.resolve(entry.getKey());
       String existing = Files.exists(target) ? Files.readString(target) : null;
       if (!entry.getValue().equals(existing)) {
@@ -74,7 +80,12 @@ public final class GeneratedSourceReconciler {
   public static void write(
       Path outputRoot, Map<Path, String> generated, Set<String> protectedFiles, Path manifest)
       throws IOException {
+    validateCaseInsensitivePaths(outputRoot, generated.keySet());
     for (Map.Entry<Path, String> entry : new TreeMap<>(generated).entrySet()) {
+      String relative = entry.getKey().toString().replace('\\', '/');
+      if (protectedFiles.contains(relative)) {
+        continue;
+      }
       Path target = outputRoot.resolve(entry.getKey());
       if (Files.exists(target) && entry.getValue().equals(Files.readString(target))) {
         continue;
@@ -89,6 +100,43 @@ public final class GeneratedSourceReconciler {
         }
       }
       writeManifest(manifest, generated.keySet());
+    }
+  }
+
+  private static void validateCaseInsensitivePaths(Path outputRoot, Set<Path> generated)
+      throws IOException {
+    Map<String, Path> generatedByFoldedPath = new LinkedHashMap<>();
+    for (Path relative : generated) {
+      String normalized = relative.toString().replace('\\', '/');
+      Path previous = generatedByFoldedPath.putIfAbsent(normalized.toLowerCase(Locale.ROOT), relative);
+      if (previous != null && !previous.equals(relative)) {
+        throw new IOException(
+            "Generated source paths differ only by case: " + previous + " and " + relative);
+      }
+      Path target = outputRoot.resolve(relative);
+      Path parent = target.getParent();
+      if (parent == null || !Files.isDirectory(parent)) {
+        continue;
+      }
+      try (java.util.stream.Stream<Path> children = Files.list(parent)) {
+        Path collision =
+            children
+                .filter(child -> !child.getFileName().equals(target.getFileName()))
+                .filter(
+                    child ->
+                        child.getFileName()
+                            .toString()
+                            .equalsIgnoreCase(target.getFileName().toString()))
+                .findFirst()
+                .orElse(null);
+        if (collision != null) {
+          throw new IOException(
+              "Generated source path collides case-insensitively with existing file: "
+                  + relative
+                  + " and "
+                  + outputRoot.relativize(collision));
+        }
+      }
     }
   }
 

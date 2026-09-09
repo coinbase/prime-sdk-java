@@ -72,6 +72,7 @@ public final class RequestPhase {
       source.append("  private ").append(field.type.name()).append(" ").append(field.name).append(";\n\n");
     }
     source.append("  public ").append(className).append("() {}\n\n");
+    appendConvenienceConstructor(source, className, fields, binding.convenienceConstructorParameters());
     source.append("  public ").append(className).append("(Builder builder) {\n");
     if (binding.paginated()) {
       source.append("    super(builder.cursor, builder.sortDirection, builder.limit);\n");
@@ -116,21 +117,73 @@ public final class RequestPhase {
     Map<String, Field> fields = new LinkedHashMap<>();
     for (SpecModels.Parameter parameter : operation.parameters()) {
       if (binding.paginated() && (parameter.name().equals("cursor") || parameter.name().equals("limit") || parameter.name().equals("sort_direction"))) continue;
-      JavaTypeResolver.Type type = binding.parameterTypeOverrides().containsKey(parameter.name())
-          ? new JavaTypeResolver.Type(binding.parameterTypeOverrides().get(parameter.name()), Collections.emptySet()) : types.resolve(parameter.schema());
-      fields.put(parameter.name(), new Field(parameter.name(), names.propertyName(parameter.name()), type,
-          parameter.required(), "path".equals(parameter.location()), ""));
+      JavaTypeResolver.Type type =
+          binding.parameterTypeOverrides().containsKey(parameter.name())
+              ? types.configured(binding.parameterTypeOverrides().get(parameter.name()))
+              : types.resolve(parameter.schema());
+      fields.put(
+          parameter.name(),
+          new Field(
+              parameter.name(),
+              propertyName(binding, parameter.name(), names),
+              type,
+              parameter.required(),
+              "path".equals(parameter.location()),
+              ""));
     }
     Map<String, Object> body = types.dereference(operation.requestBodySchema());
     Map<String, Object> required = new LinkedHashMap<>();
     Object requiredValue = body.get("required");
     if (requiredValue instanceof List) for (Object value : (List<?>) requiredValue) required.put(String.valueOf(value), Boolean.TRUE);
     for (Map.Entry<String, Object> property : SpecParser.map(body.get("properties")).entrySet()) {
-      if (!fields.containsKey(property.getKey())) fields.put(property.getKey(), new Field(property.getKey(),
-          names.propertyName(property.getKey()), types.resolve(SpecParser.map(property.getValue())), required.containsKey(property.getKey()), false, ""));
+      if (!fields.containsKey(property.getKey()))
+        fields.put(
+            property.getKey(),
+            new Field(
+                property.getKey(),
+                propertyName(binding, property.getKey(), names),
+                binding.parameterTypeOverrides().containsKey(property.getKey())
+                    ? types.configured(binding.parameterTypeOverrides().get(property.getKey()))
+                    : types.resolve(SpecParser.map(property.getValue())),
+                required.containsKey(property.getKey()),
+                false,
+                ""));
     }
     return new ArrayList<>(fields.values());
   }
+  private static void appendConvenienceConstructor(
+      StringBuilder source,
+      String className,
+      List<Field> fields,
+      List<String> parameterNames) {
+    if (parameterNames.isEmpty()) {
+      return;
+    }
+    Map<String, Field> fieldsByWireName = new LinkedHashMap<>();
+    for (Field field : fields) {
+      fieldsByWireName.put(field.wireName, field);
+    }
+    source.append("  public ").append(className).append("(");
+    for (int index = 0; index < parameterNames.size(); index++) {
+      if (index > 0) {
+        source.append(", ");
+      }
+      Field field = fieldsByWireName.get(parameterNames.get(index));
+      source.append(field.type.name()).append(" ").append(field.name);
+    }
+    source.append(") {\n");
+    for (String parameterName : parameterNames) {
+      Field field = fieldsByWireName.get(parameterName);
+      source.append("    this.").append(field.name).append(" = ").append(field.name).append(";\n");
+    }
+    source.append("  }\n\n");
+  }
+
+  private static String propertyName(
+      OperationBinding binding, String wireName, NamingResolver names) {
+    return binding.propertyNameOverrides().getOrDefault(wireName, names.propertyName(wireName));
+  }
+
   private static Path path(OperationBinding binding, String className) { return Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + className + ".java"); }
   private static Map<String, SpecModels.Operation> byId(SpecModels.Document document) { Map<String, SpecModels.Operation> result = new LinkedHashMap<>(); for (SpecModels.Operation operation : document.operations()) result.put(operation.operationId(), operation); return result; }
   static final class Field { final String wireName, name, description; final JavaTypeResolver.Type type; final boolean required, path; Field(String wireName, String name, JavaTypeResolver.Type type, boolean required, boolean path, String description) { this.wireName=wireName; this.name=name; this.type=type; this.required=required; this.path=path; this.description=description; } }

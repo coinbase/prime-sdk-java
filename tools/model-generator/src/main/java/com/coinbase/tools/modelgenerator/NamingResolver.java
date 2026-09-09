@@ -15,31 +15,41 @@
  */
 package com.coinbase.tools.modelgenerator;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Shared schema-to-Java naming policy used by models and client-surface emitters. */
 public final class NamingResolver {
   private final Map<String, String> replacements;
+  private final Map<String, String> modelTypeMappings;
 
   public NamingResolver(Map<String, String> replacements) {
+    this(replacements, Collections.emptyMap());
+  }
+
+  public NamingResolver(
+      Map<String, String> replacements, Map<String, String> modelTypeMappings) {
     this.replacements = new LinkedHashMap<>(replacements);
+    this.modelTypeMappings = new LinkedHashMap<>(modelTypeMappings);
   }
 
   public String typeName(String schemaName) {
-    String result = schemaName == null ? "Object" : schemaName;
-    for (Map.Entry<String, String> replacement : replacements.entrySet()) {
-      result = result.replace(replacement.getKey(), replacement.getValue());
-    }
-    // Model post-processing is the source of truth for generated type names.
-    return SharedTransforms.modelType(result);
+    // PostProcessor owns acronym and prefix normalization. Applying configurable replacements
+    // before that normalization diverges references from emitted model filenames (for example,
+    // EVMParams and FCMFuturesSweep), so type resolution starts from the raw schema name.
+    String result = SharedTransforms.modelType(schemaName == null ? "Object" : schemaName);
+    return modelTypeMappings.getOrDefault(result, result);
   }
 
   public String propertyName(String wireName) {
     StringBuilder result = new StringBuilder();
     boolean upper = false;
     for (char character : wireName.toCharArray()) {
-      if (!Character.isLetterOrDigit(character)) { upper = true; continue; }
+      if (!Character.isLetterOrDigit(character)) {
+        upper = true;
+        continue;
+      }
       if (result.length() == 0) result.append(Character.toLowerCase(character));
       else result.append(upper ? Character.toUpperCase(character) : character);
       upper = false;

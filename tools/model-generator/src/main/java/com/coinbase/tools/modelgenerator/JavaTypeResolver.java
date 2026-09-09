@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Resolves OpenAPI schemas to the post-processed Java model and enum type names. */
 public final class JavaTypeResolver {
@@ -61,7 +63,7 @@ public final class JavaTypeResolver {
       return external(packageName + typeName);
     }
     String type = string(schema.get("type"));
-    if ("array".equals(type)) return generic("List", resolve(SpecParser.map(schema.get("items"))), "java.util.List");
+    if ("array".equals(type)) return array(resolve(SpecParser.map(schema.get("items"))));
     if ("object".equals(type) && schema.containsKey("additionalProperties")) {
       return generic("Map", resolve(SpecParser.map(schema.get("additionalProperties"))), "java.util.Map");
     }
@@ -75,6 +77,20 @@ public final class JavaTypeResolver {
     }
   }
 
+  /** Resolves an explicit compatibility type while retaining imports for qualified model types. */
+  public Type configured(String javaType) {
+    Set<String> imports = new LinkedHashSet<>();
+    Matcher matcher = Pattern.compile("(?:[A-Za-z_$][A-Za-z0-9_$]*\\.)+([A-Za-z_$][A-Za-z0-9_$]*)").matcher(javaType);
+    StringBuffer source = new StringBuffer();
+    while (matcher.find()) {
+      String qualifiedName = matcher.group();
+      imports.add(qualifiedName);
+      matcher.appendReplacement(source, matcher.group(1));
+    }
+    matcher.appendTail(source);
+    return new Type(source.toString(), imports);
+  }
+
   public Map<String, Object> dereference(Map<String, Object> schema) {
     String ref = schema == null ? "" : string(schema.get("$ref"));
     return ref.isEmpty() ? (schema == null ? Collections.emptyMap() : schema)
@@ -84,8 +100,13 @@ public final class JavaTypeResolver {
     Set<String> imports = new LinkedHashSet<>(); imports.add(qualifiedName);
     return new Type(qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1), imports);
   }
+  private Type array(Type item) {
+    return new Type(item.name() + "[]", new LinkedHashSet<>(item.imports()));
+  }
+
   private Type generic(String raw, Type item, String rawImport) {
-    Set<String> imports = new LinkedHashSet<>(item.imports()); imports.add(rawImport);
+    Set<String> imports = new LinkedHashSet<>(item.imports());
+    imports.add(rawImport);
     return new Type(raw + "<" + item.name() + ">", imports);
   }
   private static String schemaTypeName(String schemaName) {
