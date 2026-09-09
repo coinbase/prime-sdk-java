@@ -42,6 +42,7 @@ public final class GeneratorPaths {
   public Path sourceRoot() { return root.resolve("src/main/java"); }
   public Path modelRoot() { return sourceRoot().resolve("com/coinbase/prime/model"); }
   public Path enumRoot() { return modelRoot().resolve("enums"); }
+  public Path errorRoot() { return modelRoot().resolve("errors"); }
   public Path rawRoot() { return root.resolve("generated"); }
   public Path manifest() { return root.resolve("tools/model-generator/generated-files.json"); }
 }

@@ -37,8 +37,11 @@ public final class JavaTypeResolver {
     if (!ref.isEmpty()) {
       String raw = ref.substring(ref.lastIndexOf('/') + 1);
       Map<String, Object> target = schemas.get(raw) instanceof Map ? SpecParser.map(schemas.get(raw)) : Collections.emptyMap();
-      String packageName = target.containsKey("enum") ? "com.coinbase.prime.model.enums." : "com.coinbase.prime.model.";
-      return external(packageName + names.typeName(raw));
+      String typeName = names.typeName(raw);
+      String packageName = target.containsKey("enum")
+          ? GeneratedEnumKind.packageFor(typeName) + "."
+          : "com.coinbase.prime.model.";
+      return external(packageName + typeName);
     }
     String type = string(schema.get("type"));
     if ("array".equals(type)) return generic("List", resolve(SpecParser.map(schema.get("items"))), "java.util.List");

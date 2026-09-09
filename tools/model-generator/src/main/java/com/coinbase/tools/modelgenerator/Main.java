@@ -33,7 +33,7 @@ public final class Main {
       boolean check=has(args,"--check"); boolean liveDiff=has(args,"--live-diff"); boolean skipModels=has(args,"--skip-models");
       Path spec=paths.root().resolve(configuration.committedSpecPath());
       if (liveDiff) { spec=SpecFetcher.fetchToTemporary(paths.root(), configuration.specUrl()); check=true; skipModels=true; }
-      if (!skipModels && !check) { new OpenApiGenerator(spec.toString(), paths.rawRoot()).generateModels(); new PostProcessor(paths.rawRoot(),paths.modelRoot(),paths.enumRoot(),spec).processModels(); }
+      if (!skipModels && !check) { new OpenApiGenerator(spec.toString(), paths.rawRoot()).generateModels(); new PostProcessor(paths.rawRoot(),paths.modelRoot(),paths.enumRoot(),paths.errorRoot(),spec).processModels(); }
       SpecModels.Document document=SpecParser.load(spec); NamingResolver names=new NamingResolver(configuration.nameReplacements());
       List<OperationBinding> bindings=OperationBindingGenerator.deriveAll(document,configuration); JavaTypeResolver types=new JavaTypeResolver(document,names);
       Map<Path,String> sources=new LinkedHashMap<>(); sources.putAll(RequestPhase.render(document,bindings,types,names)); sources.putAll(ResponsePhase.render(document,bindings,types,names)); sources.putAll(ServicePhase.render(document,bindings,configuration,names)); sources.putAll(FactoryPhase.render(bindings));

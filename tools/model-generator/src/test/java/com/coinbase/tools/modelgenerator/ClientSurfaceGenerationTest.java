@@ -60,6 +60,9 @@ class ClientSurfaceGenerationTest {
   void resolvesEnumsArraysMapsAndVersionedPaths() throws Exception {
     JavaTypeResolver types = new JavaTypeResolver(fixture(), new NamingResolver(Collections.emptyMap()));
     assertEquals("ThingState", types.resolve(Collections.singletonMap("$ref", "#/components/schemas/ThingState")).name());
+    JavaTypeResolver.Type subcode = types.resolve(Collections.singletonMap("$ref", "#/components/schemas/ThingProblemSubcode"));
+    assertEquals("ThingProblemSubcode", subcode.name());
+    assertEquals(Collections.singleton("com.coinbase.prime.model.errors.ThingProblemSubcode"), subcode.imports());
     assertEquals("Map<String>", types.resolve(map("type", "object", "additionalProperties", map("type", "string"))).name());
     assertEquals("v2", ServicePhase.version("/v2/things"));
     assertThrows(IllegalArgumentException.class, () -> ServicePhase.version("/v3/things"));
@@ -103,7 +106,8 @@ class ClientSurfaceGenerationTest {
         "              properties:", "                things:", "                  type: array", "                  items: { $ref: '#/components/schemas/Thing' }",
         "      responses:", "        '200':", "          content:", "            application/json:", "              schema:",
         "                type: object", "                properties:", "                  thing: { $ref: '#/components/schemas/Web3Thing' }",
-        "components:", "  schemas:", "    Thing: { type: object }", "    Web3Thing: { type: object }", "    ThingState: { type: string, enum: [OPEN] }", ""));
+        "components:", "  schemas:", "    Thing: { type: object }", "    Web3Thing: { type: object }", "    ThingState: { type: string, enum: [OPEN] }",
+        "    ThingProblemSubcode: { type: string, enum: [INVALID] }", ""));
     return SpecParser.load(spec);
   }
 
