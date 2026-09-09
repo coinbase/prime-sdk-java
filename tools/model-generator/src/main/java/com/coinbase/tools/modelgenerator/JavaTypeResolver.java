@@ -24,11 +24,20 @@ import java.util.Set;
 public final class JavaTypeResolver {
   private final Map<String, Object> schemas;
   private final NamingResolver names;
+  private final Map<String, String> sharedModelMappings;
+
+  public JavaTypeResolver(SpecModels.Document document, NamingResolver names) {
+    this(document, names, Collections.emptyMap());
+  }
 
   @SuppressWarnings("unchecked")
-  public JavaTypeResolver(SpecModels.Document document, NamingResolver names) {
-    this.schemas = SpecParser.map(SpecParser.map(SpecParser.map(document.root().get("components")).get("schemas")));
+  public JavaTypeResolver(
+      SpecModels.Document document, NamingResolver names, Map<String, String> sharedModelMappings) {
+    this.schemas =
+        SpecParser.map(
+            SpecParser.map(SpecParser.map(document.root().get("components")).get("schemas")));
     this.names = names;
+    this.sharedModelMappings = sharedModelMappings;
   }
 
   public Type resolve(Map<String, Object> schema) {
@@ -37,10 +46,18 @@ public final class JavaTypeResolver {
     if (!ref.isEmpty()) {
       String raw = ref.substring(ref.lastIndexOf('/') + 1);
       Map<String, Object> target = schemas.get(raw) instanceof Map ? SpecParser.map(schemas.get(raw)) : Collections.emptyMap();
-      String typeName = names.typeName(raw);
-      String packageName = target.containsKey("enum")
-          ? GeneratedEnumKind.packageFor(typeName) + "."
-          : "com.coinbase.prime.model.";
+      String typeName = names.typeName(schemaTypeName(raw));
+      String sharedType = sharedModelMappings.get(raw);
+      if (sharedType == null) {
+        sharedType = sharedModelMappings.get(typeName);
+      }
+      if (sharedType != null) {
+        return external(sharedType);
+      }
+      String packageName =
+          target.containsKey("enum")
+              ? GeneratedEnumKind.packageFor(typeName) + "."
+              : "com.coinbase.prime.model.";
       return external(packageName + typeName);
     }
     String type = string(schema.get("type"));
@@ -71,6 +88,16 @@ public final class JavaTypeResolver {
     Set<String> imports = new LinkedHashSet<>(item.imports()); imports.add(rawImport);
     return new Type(raw + "<" + item.name() + ">", imports);
   }
+  private static String schemaTypeName(String schemaName) {
+    StringBuilder result = new StringBuilder();
+    for (String part : schemaName.split("[._]")) {
+      if (!part.isEmpty()) {
+        result.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+      }
+    }
+    return result.toString();
+  }
+
   private static String string(Object value) { return value == null ? "" : String.valueOf(value); }
 
   public static final class Type {

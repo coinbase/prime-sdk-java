@@ -43,6 +43,11 @@ class ClientSurfaceGenerationTest {
     sources.putAll(FactoryPhase.render(bindings));
     String listRequest = sources.get(Path.of("com/coinbase/prime/orders/ListThingsRequest.java"));
     assertTrue(listRequest.contains("extends PrimeListRequest"), listRequest);
+    assertTrue(listRequest.contains("super(builder.cursor, builder.sortDirection, builder.limit);"), listRequest);
+    assertTrue(listRequest.contains("Builder cursor(String cursor)"), listRequest);
+    assertTrue(listRequest.contains("Builder sortDirection(SortDirection sortDirection)"), listRequest);
+    assertTrue(listRequest.contains("Builder limit(Integer limit)"), listRequest);
+    assertTrue(listRequest.contains("Builder pagination(Pagination pagination)"), listRequest);
     String request = sources.get(Path.of("com/coinbase/prime/orders/CreateThingRequest.java"));
     assertTrue(request.contains("@JsonIgnore"));
     assertTrue(request.contains("private List<Thing> things"));
@@ -54,6 +59,47 @@ class ClientSurfaceGenerationTest {
     assertTrue(implementation.contains("List.of(201, 200)"));
     assertTrue(implementation.indexOf("listThings") < implementation.indexOf("createThing"));
     assertTrue(sources.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java")).contains("createOrdersService"));
+  }
+
+  @Test
+  void rendersV2TransportWithSendRequestStatusBeforeBody() throws Exception {
+    SpecModels.Document document = fixture();
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
+    NamingResolver names = new NamingResolver(Collections.emptyMap());
+    String implementation = ServicePhase.render(document, bindings, configuration(), names)
+        .get(Path.of("com/coinbase/prime/financing/FinancingServiceImpl.java"));
+
+    assertTrue(implementation.contains(".sendRequest(HttpMethod.GET,"), implementation);
+    assertTrue(implementation.contains("String.format(\"/entities/%s/cross_margin/prime\", request.getEntityId())"), implementation);
+    assertTrue(implementation.indexOf("List.of(200),") < implementation.indexOf("request,"), implementation);
+  }
+
+  @Test
+  void routesTravelRuleToTheCanonicalTransactionsService() throws Exception {
+    SpecModels.Document document = fixture();
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, routingConfiguration());
+    NamingResolver names = new NamingResolver(Collections.emptyMap());
+    Map<Path, String> services = ServicePhase.render(document, bindings, routingConfiguration(), names);
+    Map<Path, String> factory = FactoryPhase.render(bindings);
+
+    assertTrue(services.containsKey(Path.of("com/coinbase/prime/transactions/TransactionsService.java")));
+    assertFalse(services.containsKey(Path.of("com/coinbase/prime/transactions/TravelRuleService.java")));
+    assertTrue(factory.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java"))
+        .contains("createTransactionsService"));
+    assertFalse(factory.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java"))
+        .contains("TravelRuleService"));
+  }
+
+  @Test
+  void resolvesConfiguredSharedModelsWithoutGeneratingModelCopies() throws Exception {
+    JavaTypeResolver types = new JavaTypeResolver(
+        fixture(), new NamingResolver(Collections.emptyMap()),
+        Collections.singletonMap("PaginatedResponse", "com.coinbase.prime.common.Pagination"));
+    JavaTypeResolver.Type pagination = types.resolve(
+        Collections.singletonMap("$ref", "#/components/schemas/coinbase.public_rest_api.PaginatedResponse"));
+
+    assertEquals("Pagination", pagination.name());
+    assertEquals(Collections.singleton("com.coinbase.prime.common.Pagination"), pagination.imports());
   }
 
   @Test
@@ -83,11 +129,22 @@ class ClientSurfaceGenerationTest {
   }
 
   private static GeneratorConfiguration configuration() throws Exception {
+    return configuration("{\"specUrl\":\"x\",\"committedSpecPath\":\"x\"}", "[]");
+  }
+
+  private static GeneratorConfiguration routingConfiguration() throws Exception {
+    return configuration(
+        "{\"specUrl\":\"x\",\"committedSpecPath\":\"x\",\"tagToFolderOverrides\":{\"Travel Rule\":\"transactions\"}}",
+        "[]");
+  }
+
+  private static GeneratorConfiguration configuration(String configContent, String overridesContent)
+      throws Exception {
     Path directory = Files.createTempDirectory("generator-config");
     Path config = directory.resolve("generator.json");
     Path overrides = directory.resolve("overrides.json");
-    Files.writeString(config, "{\"specUrl\":\"x\",\"committedSpecPath\":\"x\"}");
-    Files.writeString(overrides, "[]");
+    Files.writeString(config, configContent);
+    Files.writeString(overrides, overridesContent);
     return GeneratorConfiguration.loadForTests(config, overrides);
   }
 
@@ -106,7 +163,14 @@ class ClientSurfaceGenerationTest {
         "              properties:", "                things:", "                  type: array", "                  items: { $ref: '#/components/schemas/Thing' }",
         "      responses:", "        '200':", "          content:", "            application/json:", "              schema:",
         "                type: object", "                properties:", "                  thing: { $ref: '#/components/schemas/Web3Thing' }",
-        "components:", "  schemas:", "    Thing: { type: object }", "    Web3Thing: { type: object }", "    ThingState: { type: string, enum: [OPEN] }",
+        "  /v2/entities/{entity_id}/cross_margin/prime:", "    get:", "      operationId: PrimeRESTAPI_GetCrossMarginPrimeOverview", "      tags: [Financing]", "      summary: Get Cross Margin Prime Overview",
+        "      parameters:", "        - name: entity_id", "          in: path", "          required: true", "          schema: { type: string }",
+        "      responses:", "        '200':", "          content:", "            application/json:", "              schema: { type: object }",
+        "  /v1/portfolios/{portfolio_id}/transactions/{transaction_id}/travel_rule:", "    get:", "      operationId: PrimeRESTAPI_GetTransactionTravelRuleData", "      tags: [Travel Rule]", "      summary: Get Transaction Travel Rule Data",
+        "      parameters:", "        - name: portfolio_id", "          in: path", "          required: true", "          schema: { type: string }",
+        "        - name: transaction_id", "          in: path", "          required: true", "          schema: { type: string }",
+        "      responses:", "        '200':", "          content:", "            application/json:", "              schema: { type: object }",
+        "components:", "  schemas:", "    Thing: { type: object }", "    Web3Thing: { type: object }", "    PaginatedResponse: { type: object }", "    ThingState: { type: string, enum: [OPEN] }",
         "    ThingProblemSubcode: { type: string, enum: [INVALID] }", ""));
     return SpecParser.load(spec);
   }

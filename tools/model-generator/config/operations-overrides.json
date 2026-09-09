@@ -1,1 +1,6 @@
-[]
+[
+  {
+    "operationId": "PrimeRESTAPI_GetFcmBalance",
+    "sdkMethod": "GetEntityFcmBalance"
+  }
+]

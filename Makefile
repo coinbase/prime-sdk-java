@@ -13,7 +13,7 @@ generate:
 	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models
 
 check-generated:
-	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models -Dexec.args="--check --skip-models"
+	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models -Dexec.args="--check"
 
 generate-live-diff:
 	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models -Dexec.args="--live-diff"

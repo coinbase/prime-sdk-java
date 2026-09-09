@@ -78,9 +78,21 @@ public final class ServicePhase {
       source.append("\n  @Override\n  public ").append(binding.sdkMethod()).append("Response ").append(method).append("(");
       if (!binding.omitRequest()) source.append(binding.sdkMethod()).append("Request request");
       source.append(") throws CoinbasePrimeException {\n    return ");
-      if (version.equals("v2")) source.append("this.primeClient.withBaseUrl(Constants.versionedBaseUrl(this.primeClient.getBaseUrl(), \"v2\")).sendRequest(");
-      else source.append("this.request(");
-      source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ").append(pathExpression(operation.path(), binding, names)).append(",\n        ").append(binding.omitRequest() ? "null" : "request").append(",\n        ").append(statuses(operation, configuration)).append(",\n        new TypeReference<").append(binding.sdkMethod()).append("Response>() {});\n  }\n");
+      if (version.equals("v2")) {
+        source.append("this.primeClient.withBaseUrl(Constants.versionedBaseUrl(this.primeClient.getBaseUrl(), \"v2\")).sendRequest(");
+        source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
+            .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
+            .append(statuses(operation, configuration)).append(",\n        ")
+            .append(binding.omitRequest() ? "null" : "request").append(",\n        new TypeReference<")
+            .append(binding.sdkMethod()).append("Response>() {});\n  }\n");
+      } else {
+        source.append("this.request(");
+        source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
+            .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
+            .append(binding.omitRequest() ? "null" : "request").append(",\n        ")
+            .append(statuses(operation, configuration)).append(",\n        new TypeReference<")
+            .append(binding.sdkMethod()).append("Response>() {});\n  }\n");
+      }
     }
     return source.append("}\n").toString();
   }
@@ -95,11 +107,30 @@ public final class ServicePhase {
     return "String.format(\"" + format + "\", " + String.join(", ", args) + ")";
   }
   static List<Integer> statusCodes(SpecModels.Operation operation, GeneratorConfiguration configuration) {
+    List<Integer> defaults = defaultStatusCodes(operation);
     GeneratorConfiguration.Override override = configuration.overrides().get(operation.operationId());
-    if (override != null && !override.statuses().isEmpty()) return override.statuses();
+    if (override != null && !override.statuses().isEmpty()) {
+      if (override.statuses().equals(defaults)) {
+        System.err.println("WARN redundant status override: " + operation.operationId());
+      }
+      return override.statuses();
+    }
+    return defaults;
+  }
+
+  private static List<Integer> defaultStatusCodes(SpecModels.Operation operation) {
     List<Integer> values = new ArrayList<>(operation.successStatusCodes());
-    if (values.size() == 1 && values.get(0) == 200 && (operation.operationId().matches(".*_(Create|Claim|Submit).*") || operation.operationId().endsWith("PreviewUnstake"))) { values.clear(); values.add(201); values.add(200); }
-    values.sort((left, right) -> left == 201 ? -1 : right == 201 ? 1 : Integer.compare(left, right));
+    if (values.size() == 1
+        && values.get(0) == 200
+        && (operation.operationId().matches(".*_(Create|Claim|Submit).*")
+            || operation.operationId().endsWith("PreviewUnstake"))) {
+      values.clear();
+      values.add(201);
+      values.add(200);
+    }
+    values.sort(
+        (left, right) ->
+            left == 201 ? -1 : right == 201 ? 1 : Integer.compare(left, right));
     return values;
   }
   private static String statuses(SpecModels.Operation operation, GeneratorConfiguration config) { StringBuilder result=new StringBuilder("List.of("); for (Integer code:statusCodes(operation, config)) { if (result.length()>8) result.append(", "); result.append(code); } return result.append(")").toString(); }

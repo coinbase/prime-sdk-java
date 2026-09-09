@@ -50,7 +50,11 @@ public final class RequestPhase {
     if (hasPath) imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
     boolean validates = fields.stream().anyMatch(field -> field.path && field.required && field.type.name().equals("String"));
     if (validates) { imports.add("com.coinbase.core.errors.CoinbaseClientException"); imports.add("static com.coinbase.core.utils.Utils.isNullOrEmpty"); }
-    if (binding.paginated()) imports.add("com.coinbase.prime.common.PrimeListRequest");
+    if (binding.paginated()) {
+      imports.add("com.coinbase.prime.common.Pagination");
+      imports.add("com.coinbase.prime.common.PrimeListRequest");
+      imports.add("com.coinbase.prime.model.enums.SortDirection");
+    }
     for (Field field : fields) imports.addAll(field.type.imports());
     StringBuilder source = new StringBuilder(SourceTemplates.header())
         .append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
@@ -69,6 +73,9 @@ public final class RequestPhase {
     }
     source.append("  public ").append(className).append("() {}\n\n");
     source.append("  public ").append(className).append("(Builder builder) {\n");
+    if (binding.paginated()) {
+      source.append("    super(builder.cursor, builder.sortDirection, builder.limit);\n");
+    }
     for (Field field : fields) source.append("    this.").append(field.name).append(" = builder.").append(field.name).append(";\n");
     source.append("  }\n\n");
     for (Field field : fields) {
@@ -77,8 +84,19 @@ public final class RequestPhase {
           .append("  public void set").append(cap).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n    this.").append(field.name).append(" = ").append(field.name).append(";\n  }\n\n");
     }
     source.append("  public static class Builder {\n");
+    if (binding.paginated()) {
+      source.append("    private String cursor;\n")
+          .append("    private SortDirection sortDirection;\n")
+          .append("    private Integer limit;\n");
+    }
     for (Field field : fields) source.append("    private ").append(field.type.name()).append(" ").append(field.name).append(";\n");
     source.append("\n    public Builder() {}\n\n");
+    if (binding.paginated()) {
+      source.append("    public Builder cursor(String cursor) {\n      this.cursor = cursor;\n      return this;\n    }\n\n")
+          .append("    public Builder sortDirection(SortDirection sortDirection) {\n      this.sortDirection = sortDirection;\n      return this;\n    }\n\n")
+          .append("    public Builder limit(Integer limit) {\n      this.limit = limit;\n      return this;\n    }\n\n")
+          .append("    public Builder pagination(Pagination pagination) {\n      this.cursor = pagination.getNextCursor();\n      this.sortDirection = pagination.getSortDirection();\n      return this;\n    }\n\n");
+    }
     for (Field field : fields) source.append("    public Builder ").append(field.name).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n      this.").append(field.name).append(" = ").append(field.name).append(";\n      return this;\n    }\n\n");
     source.append("    public ").append(className).append(" build()");
     if (validates) source.append(" throws CoinbaseClientException");

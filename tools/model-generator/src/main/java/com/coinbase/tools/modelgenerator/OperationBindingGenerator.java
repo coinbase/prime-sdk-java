@@ -70,8 +70,9 @@ public final class OperationBindingGenerator {
       if (configuration != null && !operation.tags().isEmpty()) {
         String configuredFolder = configuration.tagFolders().get(operation.tags().get(0));
         if (configuredFolder != null && !configuredFolder.equals(derived.serviceFolder())) {
-          derived = new OperationBinding(derived.operationId(), configuredFolder, derived.serviceName(),
-              derived.sdkMethod(), derived.omitRequest(), derived.paginated(), derived.parameterTypeOverrides());
+          derived = new OperationBinding(derived.operationId(), configuredFolder,
+              canonicalServiceForFolder(document, configuredFolder), derived.sdkMethod(), derived.omitRequest(),
+              derived.paginated(), derived.parameterTypeOverrides());
         }
       }
       GeneratorConfiguration.Override override = configuration == null ? null
@@ -127,7 +128,7 @@ public final class OperationBindingGenerator {
   static OperationBinding derive(SpecModels.Operation operation) {
     String tag = operation.tags().isEmpty() ? "Misc" : operation.tags().get(0);
     String folder = "Travel Rule".equals(tag) ? "transactions" : tag.replaceAll("[^A-Za-z0-9]", "").replace(" ", "").toLowerCase(Locale.ROOT);
-    String serviceName = pascal(tag) + "Service";
+    String serviceName = "Travel Rule".equals(tag) ? folderToService(folder) : pascal(tag) + "Service";
     String raw = operation.sdkMethodName().isEmpty() ? operation.operationId().replaceFirst("^" + OPERATION_ID_PREFIX, "") : operation.sdkMethodName();
     String method = METHOD_RENAMES.getOrDefault(raw, raw);
     if (operation.httpMethod().equals("GET") && method.startsWith("Get") && operation.summary().startsWith("List ")) method = "List" + method.substring(3);
@@ -136,10 +137,26 @@ public final class OperationBindingGenerator {
     return new OperationBinding(operation.operationId(), folder, serviceName, method, omitRequest, paginated, new LinkedHashMap<>());
   }
 
+  private static String canonicalServiceForFolder(SpecModels.Document document, String folder) {
+    for (SpecModels.Operation candidate : document.operations()) {
+      OperationBinding binding = derive(candidate);
+      if (folder.equals(binding.serviceFolder()) && !"Travel Rule".equals(firstTag(candidate))) {
+        return binding.serviceName();
+      }
+    }
+    return folderToService(folder);
+  }
+
+  private static String firstTag(SpecModels.Operation operation) {
+    return operation.tags().isEmpty() ? "Misc" : operation.tags().get(0);
+  }
+
   private static String pascal(String value) {
     StringBuilder result = new StringBuilder();
     for (String part : Arrays.asList(value.replaceAll("[^A-Za-z0-9]+", " ").split(" +"))) {
-      if (!part.isEmpty()) result.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+      if (!part.isEmpty()) {
+        result.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+      }
     }
     return result.toString();
   }

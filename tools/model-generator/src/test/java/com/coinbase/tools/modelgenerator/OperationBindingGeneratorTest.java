@@ -42,5 +42,19 @@ class OperationBindingGeneratorTest {
         .filter(binding -> binding.operationId().equals("PrimeRESTAPI_SubmitDepositTravelRuleData"))
         .findFirst().orElseThrow();
     assertEquals("transactions", travelRule.serviceFolder());
+    assertEquals("TransactionsService", travelRule.serviceName());
+  }
+
+  @Test
+  void preservesConfiguredCompatibilityMethodNames() throws Exception {
+    Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
+    GeneratorPaths paths = GeneratorPaths.forRoot(root);
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(
+        SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml")), GeneratorConfiguration.load(paths));
+
+    OperationBinding fcmBalance = bindings.stream()
+        .filter(binding -> binding.operationId().equals("PrimeRESTAPI_GetFcmBalance"))
+        .findFirst().orElseThrow();
+    assertEquals("GetEntityFcmBalance", fcmBalance.sdkMethod());
   }
 }

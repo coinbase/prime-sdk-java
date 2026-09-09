@@ -26,7 +26,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
@@ -51,6 +50,8 @@ public class PostProcessor {
     private final Path outputDir;
     private final Path enumsDir;
     private final Path errorsDir;
+    private final Path sourceRoot;
+    private final Path manifest;
     private final EnumJavadocEnhancer enumJavadocEnhancer;
     private final ModelJavadocEnhancer modelJavadocEnhancer;
 
@@ -60,12 +61,22 @@ public class PostProcessor {
     private final Set<Path> writtenOutputFiles = new HashSet<>();
 
     public PostProcessor(Path tempDir, Path outputDir, Path enumsDir, Path errorsDir, Path specPath) throws IOException {
+        this(tempDir, null, outputDir, enumsDir, errorsDir, specPath, null);
+    }
+
+    public PostProcessor(Path tempDir, Path sourceRoot, Path outputDir, Path enumsDir, Path errorsDir,
+            Path specPath, Path manifest) throws IOException {
         this.tempDir = tempDir;
+        this.sourceRoot = sourceRoot == null ? null : sourceRoot.toAbsolutePath().normalize();
         this.outputDir = outputDir;
         this.enumsDir = enumsDir;
         this.errorsDir = errorsDir;
+        this.manifest = manifest;
         this.enumJavadocEnhancer = EnumJavadocEnhancer.load(specPath);
         this.modelJavadocEnhancer = ModelJavadocEnhancer.load(specPath);
+        if (manifest != null && this.sourceRoot == null) {
+            throw new IllegalArgumentException("Model generation manifest requires a source root");
+        }
     }
 
     /** Maps an OpenAPI schema name to the SDK Java enum type name (prefix strip + acronym rules). */
@@ -112,35 +123,24 @@ public class PostProcessor {
 
         logger.info("Found {} enum files and {} model files", enumFiles.size(), nonEnumFiles.size());
 
-        // Process enums FIRST so they're available for import fixing
+        // Process enums first so they are available for import fixing. Do not clean stale output
+        // unless every source was processed successfully.
         logger.info("Processing enums first...");
         for (Path file : enumFiles) {
-            String fileName = file.getFileName().toString();
-            logger.info("Processing enum: {}", fileName);
-
-            try {
-                processEnumFile(file);
-            } catch (Exception e) {
-                logger.error("Error processing enum file: " + fileName, e);
-            }
+            logger.info("Processing enum: {}", file.getFileName());
+            processEnumFile(file);
         }
 
         createEnumAliases();
 
-        // Then process models with fixed enum imports
         logger.info("Processing models...");
         for (Path file : nonEnumFiles) {
-            String fileName = file.getFileName().toString();
-            logger.info("Processing model: {}", fileName);
-
-            try {
-                processModelFile(file);
-            } catch (Exception e) {
-                logger.error("Error processing model file: " + fileName, e);
-            }
+            logger.info("Processing model: {}", file.getFileName());
+            processModelFile(file);
         }
 
         removeStaleOutputFiles();
+        writeModelManifest();
 
         // Clean up temporary directory
         logger.info("Cleaning up temporary files...");
@@ -156,58 +156,58 @@ public class PostProcessor {
         logger.info("==========================================");
     }
 
-    /**
-     * Deletes model and enum files under the output directories that were not produced in this run.
-     */
+    /** Deletes only files explicitly owned by the previous successful model generation. */
     private void removeStaleOutputFiles() throws IOException {
         removedStaleCount = 0;
-        if (Files.exists(outputDir)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(outputDir, "*.java")) {
-                for (Path file : stream) {
-                    removedStaleCount += deleteIfStale(file);
-                }
-            }
-        }
-        removeStaleFiles(enumsDir);
-        removeStaleFiles(errorsDir);
-        if (removedStaleCount > 0) {
-            logger.info("Removed {} stale model/enum file(s) not produced by this generation run", removedStaleCount);
-        }
-    }
-
-    private void removeStaleFiles(Path directory) throws IOException {
-        if (!Files.exists(directory)) {
+        if (manifest == null) {
             return;
         }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory, "*.java")) {
-            for (Path file : stream) {
-                removedStaleCount += deleteIfStale(file);
+        for (String entry : GeneratedSourceReconciler.manifestEntries(manifest)) {
+            Path file = sourceRoot.resolve(entry).normalize();
+            if (!file.startsWith(sourceRoot)) {
+                throw new IOException("Model manifest contains unsafe path: " + entry);
             }
+            if (!writtenOutputFiles.contains(file) && Files.deleteIfExists(file)) {
+                removedStaleCount++;
+                logger.info("Deleted stale generated model/enum file: {}", entry);
+            }
+        }
+        if (removedStaleCount > 0) {
+            logger.info("Removed {} stale model/enum file(s) owned by the generation manifest", removedStaleCount);
         }
     }
 
-    private int deleteIfStale(Path file) throws IOException {
-        Path normalized = file.toAbsolutePath().normalize();
-        if (writtenOutputFiles.contains(normalized)) {
-            return 0;
+    private void writeModelManifest() throws IOException {
+        if (manifest == null) {
+            return;
         }
-        Files.delete(file);
-        logger.info("Deleted stale file: {}", file.getFileName());
-        return 1;
+        Set<Path> generated = new HashSet<>();
+        for (Path file : writtenOutputFiles) {
+            if (!file.startsWith(sourceRoot)) {
+                throw new IOException("Generated model was written outside the configured source root: " + file);
+            }
+            generated.add(sourceRoot.relativize(file));
+        }
+        GeneratedSourceReconciler.writeManifest(manifest, generated);
     }
 
     private List<Path> findGeneratedModelFiles() throws IOException {
         List<Path> files = new ArrayList<>();
         Path modelPath = tempDir.resolve("raw");
 
-        if (Files.exists(modelPath)) {
+        if (!Files.isDirectory(modelPath)) {
+            throw new IOException("OpenAPI model output was not produced: " + modelPath);
+        }
+        {
             Files.walkFileTree(modelPath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     String fileName = file.getFileName().toString();
-                    if (file.toString().endsWith(".java") &&
-                        !fileName.contains("Test") &&
-                        !fileName.matches(".*Api\\.java$")) { // Only skip files ending with "Api.java", not containing "Api"
+                    if (file.toString().endsWith(".java")
+                        && !fileName.contains("Test")
+                        && !fileName.matches(".*Api\\.java$")
+                        && !fileName.endsWith("Request.java")
+                        && !fileName.endsWith("Response.java")) {
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
@@ -271,14 +271,6 @@ public class PostProcessor {
 
     private void processEnumFile(Path file) throws IOException {
         processFile(file, enumsDir, true);
-    }
-
-    private void deleteSiblingEnumCopy(Path outputDirectory, String fileName) throws IOException {
-        Path siblingDirectory = outputDirectory.equals(errorsDir) ? enumsDir : errorsDir;
-        Path stalePath = siblingDirectory.resolve(fileName);
-        if (Files.deleteIfExists(stalePath)) {
-            logger.info("Deleted stale enum file after folder move: {}", stalePath);
-        }
     }
 
     private void createEnumAliases() throws IOException {
@@ -361,11 +353,6 @@ public class PostProcessor {
         String copyrightYear = GeneratedFileHeader.resolveStartYear(outputPath);
         boolean existsBefore = Files.exists(outputPath);
 
-        deleteCaseVariantFiles(outputDirectory, fileName, isEnum);
-        if (isEnum) {
-            deleteSiblingEnumCopy(outputDirectory, fileName);
-        }
-
         // Apply final transformations based on file type
         if (isEnum) {
             String enumPackage = GeneratedEnumKind.packageFor(className);
@@ -397,10 +384,6 @@ public class PostProcessor {
             fileName = className + ".java";
             outputDirectory = isEnum && GeneratedEnumKind.isSubcode(className) ? errorsDir : targetDir;
             outputPath = outputDirectory.resolve(fileName);
-            deleteCaseVariantFiles(outputDirectory, fileName, isEnum);
-            if (isEnum) {
-                deleteSiblingEnumCopy(outputDirectory, fileName);
-            }
         }
 
         Files.writeString(outputPath, content);
@@ -683,24 +666,6 @@ public class PostProcessor {
      */
     private String applyXMAcronymCasing(String content) {
         return content.replaceAll("Xm([A-Z])", "XM$1");
-    }
-
-    private void deleteCaseVariantFiles(Path targetDir, String fileName, boolean isEnum) throws IOException {
-        try {
-            List<Path> toDelete = Files.list(targetDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(fileName))
-                .collect(Collectors.toList());
-
-            for (Path p : toDelete) {
-                Files.delete(p);
-                if (!p.getFileName().toString().equals(fileName)) {
-                    logger.info("Deleted old {} file with different casing: {} -> {}",
-                        isEnum ? "enum" : "model", p.getFileName(), fileName);
-                }
-            }
-        } catch (IOException e) {
-            logger.warn("Could not delete old {} file variants: {}", isEnum ? "enum" : "model", e.getMessage());
-        }
     }
 
     private String applyDateOfBirthPrimitiveConversion(String content) {

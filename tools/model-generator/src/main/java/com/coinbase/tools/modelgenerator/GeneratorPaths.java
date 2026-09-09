@@ -24,6 +24,8 @@ public final class GeneratorPaths {
 
   private GeneratorPaths(Path root) { this.root = root.toAbsolutePath().normalize(); }
 
+  static GeneratorPaths forRoot(Path root) { return new GeneratorPaths(root); }
+
   public static GeneratorPaths fromWorkingDirectory() {
     Path current = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
     while (current != null) {
@@ -45,4 +47,5 @@ public final class GeneratorPaths {
   public Path errorRoot() { return modelRoot().resolve("errors"); }
   public Path rawRoot() { return root.resolve("generated"); }
   public Path manifest() { return root.resolve("tools/model-generator/generated-files.json"); }
+  public Path modelManifest() { return root.resolve("tools/model-generator/generated-model-files.json"); }
 }

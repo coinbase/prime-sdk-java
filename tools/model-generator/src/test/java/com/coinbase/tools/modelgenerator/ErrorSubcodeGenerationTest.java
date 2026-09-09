@@ -64,4 +64,34 @@ class ErrorSubcodeGenerationTest {
     assertTrue(Files.readString(modelRoot.resolve("ErrorEnvelope.java"))
         .contains("import com.coinbase.prime.model.errors.CreateThingBadRequestSubcode;"));
   }
+
+  @Test
+  void cleansOnlyManifestOwnedModelsAndSkipsIgnoredResponseSchemas() throws Exception {
+    Path root = Files.createTempDirectory("model-manifest-generation");
+    Path rawModels = root.resolve("generated/raw/src/main/java/com/coinbase/prime/model");
+    Path sourceRoot = root.resolve("src/main/java");
+    Path modelRoot = sourceRoot.resolve("com/coinbase/prime/model");
+    Path manifest = root.resolve("generated-model-files.json");
+    Path spec = root.resolve("openapi.yaml");
+    Files.createDirectories(rawModels);
+    Files.createDirectories(modelRoot);
+    Files.writeString(spec, "openapi: 3.0.0\ncomponents:\n  schemas: {}\n");
+    Files.writeString(rawModels.resolve("Fresh.java"),
+        "package com.coinbase.prime.model;\npublic class Fresh {}\n");
+    Files.writeString(rawModels.resolve("IgnoredResponse.java"),
+        "package com.coinbase.prime.model;\npublic class IgnoredResponse {}\n");
+    Files.writeString(modelRoot.resolve("Stale.java"), "stale");
+    Files.writeString(modelRoot.resolve("HandWritten.java"), "keep");
+    Files.writeString(manifest, "[\n  \"com/coinbase/prime/model/Stale.java\"\n]\n");
+
+    new PostProcessor(
+        root.resolve("generated"), sourceRoot, modelRoot, modelRoot.resolve("enums"),
+        modelRoot.resolve("errors"), spec, manifest).processModels();
+
+    assertTrue(Files.exists(modelRoot.resolve("Fresh.java")));
+    assertFalse(Files.exists(modelRoot.resolve("IgnoredResponse.java")));
+    assertFalse(Files.exists(modelRoot.resolve("Stale.java")));
+    assertTrue(Files.exists(modelRoot.resolve("HandWritten.java")));
+    assertTrue(Files.readString(manifest).contains("Fresh.java"));
+  }
 }

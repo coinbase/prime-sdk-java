@@ -1,7 +1,9 @@
 {
   "specUrl": "https://api.prime.coinbase.com/v1/openapi.yaml",
   "committedSpecPath": "apiSpec/prime-public-spec.yaml",
-  "tagToFolderOverrides": { "Travel Rule": "transactions" },
+  "tagToFolderOverrides": {
+    "Travel Rule": "transactions"
+  },
   "nameReplacements": {
     "GoogleTypeDate": "DateOfBirth",
     "Web3": "Onchain",
@@ -10,7 +12,9 @@
     "Evm": "EVM",
     "Xm": "XM"
   },
-  "sharedModelMappings": {},
+  "sharedModelMappings": {
+    "PaginatedResponse": "com.coinbase.prime.common.Pagination"
+  },
   "protectedCompatibilityFiles": [
     "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdRequest.java",
     "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdResponse.java"
