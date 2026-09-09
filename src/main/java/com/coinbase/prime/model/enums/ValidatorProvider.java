@@ -18,14 +18,8 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * ValidatorProvider enumerates the ETH validator service providers that PPA accepts on
- * PortfolioStakingUnstakeRequest.validator_provider. The enum names map 1:1 to the display names
- * returned by ISS GetUsedValidators (service_provider field) and shown in the Prime UI. Keep in
- * sync with staking/internal/asset/ethereum.mapServiceProviderToDisplayName.
- */
+/** ValidatorProvider enumerates the ETH validator service providers accepted for unstaking. */
 public enum ValidatorProvider {
-  VALIDATOR_PROVIDER_UNSPECIFIED,
   VALIDATOR_PROVIDER_COINBASE_CLOUD,
   VALIDATOR_PROVIDER_MAVAN,
   VALIDATOR_PROVIDER_FIGMENT,

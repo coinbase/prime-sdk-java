@@ -74,6 +74,10 @@ public class TravelRuleParty {
   @JsonProperty("account_id")
   private String accountId;
 
+  /** Detailed address information */
+  @JsonProperty("vasp_address")
+  private DetailedAddress vaspAddress;
+
   public TravelRuleParty() {}
 
   public TravelRuleParty(Builder builder) {
@@ -87,6 +91,7 @@ public class TravelRuleParty {
     this.dateOfBirth = builder.dateOfBirth;
     this.telephoneNumber = builder.telephoneNumber;
     this.accountId = builder.accountId;
+    this.vaspAddress = builder.vaspAddress;
   }
 
   public String getName() {
@@ -169,6 +174,14 @@ public class TravelRuleParty {
     this.accountId = accountId;
   }
 
+  public DetailedAddress getVaspAddress() {
+    return vaspAddress;
+  }
+
+  public void setVaspAddress(DetailedAddress vaspAddress) {
+    this.vaspAddress = vaspAddress;
+  }
+
   public static class Builder {
     private String name;
 
@@ -189,6 +202,8 @@ public class TravelRuleParty {
     private String telephoneNumber;
 
     private String accountId;
+
+    private DetailedAddress vaspAddress;
 
     public Builder name(String name) {
       this.name = name;
@@ -237,6 +252,11 @@ public class TravelRuleParty {
 
     public Builder accountId(String accountId) {
       this.accountId = accountId;
+      return this;
+    }
+
+    public Builder vaspAddress(DetailedAddress vaspAddress) {
+      this.vaspAddress = vaspAddress;
       return this;
     }
 

@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.11.0] - 2026-SEP-01
+
+### Added
+
+#### New API Endpoints
+
+**ApiKey Service**
+- **`rotateApiKey()`**: Rotate the invoking API key (`POST /v1/api-keys/rotate`)
+- **`ApiKeyRotation.decrypt()`**: Decrypt `encrypted_credentials` with JDK HKDF-SHA256 + AES-256-GCM (no extra libraries)
+
+**Financing Service**
+- **`getConversionFees()`**: Get organization conversion fee tiers and month-to-date volume (`GET /v1/conversion/fees`)
+- **`getCrossMarginLiquidation()`**: Get detailed XM liquidation data (`GET /v1/entities/{entity_id}/cross_margin/liquidation`)
+- **`listCrossMarginLiquidations()`**: List XM liquidation history (`GET /v1/entities/{entity_id}/cross_margin/liquidations`)
+- **`getEntityRewardsRate()`**: Get entity rewards rate and tiers (beta) (`GET /v1/entities/{entity_id}/rewards/rate`)
+- **`getPortfolioRewardsRate()`**: Get portfolio rewards rate and tiers (beta) (`GET /v1/portfolios/{portfolio_id}/rewards/rate`)
+
+**Futures Service**
+- **`getDerivativesCurrencySummary()`**: Get per-currency international derivatives balances (`GET /v1/portfolios/{portfolio_id}/derivatives/currency_summary`)
+- **`getDerivativePositions()`**: List active derivative positions for a portfolio (`GET /v1/portfolios/{portfolio_id}/derivatives/positions`)
+
+#### New & Updated Models
+- **`ConversionFee`**, **`ConversionFeeTier`**: Stablecoin conversion fee schedule types
+- **`XMLiquidationDetail`**, **`XMLiquidationSummary`**, **`XMLiquidatedAsset`**: Cross-margin liquidation types
+- **`BetaRewardsRateTier`**: Rewards rate tier (beta)
+- **`DerivativePosition`**, **`DerivativesCurrencyBalance`**, **`OptionsDetails`**, **`OptionProductDetails`**: Derivatives product and position types
+- **`CustomStablecoinAsset`**, **`ComboLeg`**, **`PriceIncrementStep`**: Supporting product/reward types
+- **`Order`**: Added `isBuyExact`
+- **`CreateOrderRequest`**, **`GetOrderPreviewRequest`**, **`GetOrderPreviewResponse`**: Added `isBuyExact`
+- **`Product`**: Added `optionProductDetails`
+- **`TravelRuleParty`**: Added `vaspAddress`
+- **`WalletStakeInputs`**: Added `endDate`
+- **`WalletUnstakeInputs`**: Added `validatorAddress`
+- **`CustomStablecoinRewardDetails`**: Added `asset`
+
+#### New Enums
+- **`XMLiquidationStatus`**, **`BetaRewardsRateTierType`**, **`DerivativeProductType`**, **`OptionType`**, **`SettlementModel`**, **`SettlementPeriod`**
+- **`ProductType`**: Added `OPTION`
+- **`TransactionType`**: Added `MERGE_STAKE`
+
+### Notes
+
+- Minor release: new endpoints including API key rotation, plus regenerated models from the latest OpenAPI spec via **OpenAPI Generator 7.25.0**.
+- Model generation skips per-operation typed error-code and subcode enums until the SDK consumes them.
+- Rewards rate endpoints are marked beta in the spec.
+
 ## [1.10.3] - 2026-JUL-28
 
 ### Added

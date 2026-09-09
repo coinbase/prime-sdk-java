@@ -24,6 +24,8 @@ import com.coinbase.prime.advancedtransfer.AdvancedTransferService;
 import com.coinbase.prime.advancedtransfer.AdvancedTransferServiceImpl;
 import com.coinbase.prime.allocations.AllocationsService;
 import com.coinbase.prime.allocations.AllocationsServiceImpl;
+import com.coinbase.prime.apikey.ApiKeyService;
+import com.coinbase.prime.apikey.ApiKeyServiceImpl;
 import com.coinbase.prime.assets.AssetsService;
 import com.coinbase.prime.assets.AssetsServiceImpl;
 import com.coinbase.prime.balances.BalancesService;
@@ -73,6 +75,10 @@ public class PrimeServiceFactory {
 
   public static AllocationsService createAllocationsService(CoinbasePrimeClient client) {
     return new AllocationsServiceImpl(client);
+  }
+
+  public static ApiKeyService createApiKeyService(CoinbasePrimeClient client) {
+    return new ApiKeyServiceImpl(client);
   }
 
   public static AssetsService createAssetsService(CoinbasePrimeClient client) {

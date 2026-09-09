@@ -207,7 +207,8 @@ public class PostProcessor {
                         && !fileName.contains("Test")
                         && !fileName.matches(".*Api\\.java$")
                         && !fileName.endsWith("Request.java")
-                        && !fileName.endsWith("Response.java")) {
+                        && !fileName.endsWith("Response.java")
+                        && !isSkippedErrorSchema(fileName)) {
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
@@ -216,6 +217,12 @@ public class PostProcessor {
         }
 
         return files;
+    }
+
+    /** Returns schemas that must not enter the shared model namespace. */
+    static boolean isSkippedErrorSchema(String fileName) {
+        return fileName.endsWith("ErrorCode.java")
+            || fileName.endsWith("ErrorResponse.java");
     }
 
     private boolean isEnumFile(Path file) throws IOException {

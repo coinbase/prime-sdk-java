@@ -70,7 +70,10 @@ public class Fill {
   @JsonProperty("ces_commission")
   private String cesCommission;
 
-  /** - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product */
+  /**
+   * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
+   * OPTION: Option product
+   */
   @JsonProperty("product_type")
   private ProductType productType;
 

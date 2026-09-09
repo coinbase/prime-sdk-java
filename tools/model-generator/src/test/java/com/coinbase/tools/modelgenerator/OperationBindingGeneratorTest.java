@@ -29,7 +29,7 @@ class OperationBindingGeneratorTest {
     List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(
         SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml")));
 
-    assertEquals(103, bindings.size());
+    assertEquals(111, bindings.size());
     OperationBinding createOrder = bindings.stream()
         .filter(binding -> binding.operationId().equals("PrimeRESTAPI_CreateOrder"))
         .findFirst().orElseThrow();

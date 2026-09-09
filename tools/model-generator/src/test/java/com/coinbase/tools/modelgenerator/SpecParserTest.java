@@ -28,7 +28,7 @@ class SpecParserTest {
     Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
     SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
 
-    assertEquals(103, document.operations().size());
+    assertEquals(111, document.operations().size());
     SpecModels.Operation createOrder = document.operations().stream()
         .filter(operation -> operation.operationId().equals("PrimeRESTAPI_CreateOrder"))
         .findFirst().orElseThrow();

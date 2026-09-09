@@ -24,7 +24,6 @@ package com.coinbase.prime.model.enums;
  * Margin call was canceled by Credit Risk
  */
 public enum XMCallStatus {
-  XM_CALL_STATUS_UNSPECIFIED,
   /** Margin call is open and not expired */
   CALL_STATUS_OPEN,
   /** Margin call is open and it is expired */

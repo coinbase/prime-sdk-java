@@ -26,8 +26,6 @@ package com.coinbase.prime.model.enums;
  * FCM_MARGIN_HEALTH_STATE_LIQUIDATION: Account is in liquidation.
  */
 public enum FcmMarginHealthState {
-  /** Unspecified margin health state. */
-  FCM_MARGIN_HEALTH_STATE_UNSPECIFIED,
   /** Account margin is healthy. */
   FCM_MARGIN_HEALTH_STATE_HEALTHY,
   /** Account margin is restricted. */

@@ -116,4 +116,28 @@ public class FuturesIT extends BaseIntegrationTest {
         service.getFcmEquity(new GetFcmEquityRequest.Builder().entityId(entityId).build());
     assertNotNull(response);
   }
+
+  @Test
+  public void testGetDerivativesCurrencySummary() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FuturesService service = PrimeServiceFactory.createFuturesService(client);
+    GetDerivativesCurrencySummaryResponse response =
+        service.getDerivativesCurrencySummary(
+            new GetDerivativesCurrencySummaryRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
+
+  @Test
+  public void testGetDerivativePositions() throws Exception {
+    assumeTrue(
+        portfolioId != null && !portfolioId.isEmpty(),
+        "Skipping: COINBASE_PRIME_PORTFOLIO_ID not set");
+    FuturesService service = PrimeServiceFactory.createFuturesService(client);
+    GetDerivativePositionsResponse response =
+        service.getDerivativePositions(
+            new GetDerivativePositionsRequest.Builder().portfolioId(portfolioId).build());
+    assertNotNull(response);
+  }
 }

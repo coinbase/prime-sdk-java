@@ -24,7 +24,6 @@ package com.coinbase.prime.model.enums;
  * / XMML; triggers when (MR - EQ) / XMML > threshold_value.
  */
 public enum PrimeXMMarginThresholdType {
-  MARGIN_THRESHOLD_TYPE_UNSPECIFIED,
   /** Threshold based on equity ratio EQ / MR; triggers when EQ / MR >= threshold_value. */
   MARGIN_THRESHOLD_EQUITY_RATIO,
   /**

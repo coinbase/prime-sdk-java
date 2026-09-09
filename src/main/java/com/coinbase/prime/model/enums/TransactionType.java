@@ -45,7 +45,9 @@ package com.coinbase.prime.model.enums;
  * transfer the reward claiming permission to other pubkey - WEB3_TRANSACTION: On-chain transaction
  * initiated with Prime Onchain Wallet Deprecated: Use ONCHAIN_TRANSACTION instead -
  * ONCHAIN_TRANSACTION: On-chain transaction initiated with Prime Onchain Wallet - PORTFOLIO_STAKE:
- * Portfolio-level staking operation - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation
+ * Portfolio-level staking operation - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation -
+ * MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the
+ * same wallet.
  */
 public enum TransactionType {
   /** A fiat or crypto deposit */
@@ -119,5 +121,9 @@ public enum TransactionType {
   /** Portfolio-level staking operation */
   PORTFOLIO_STAKE,
   /** Portfolio-level unstaking operation */
-  PORTFOLIO_UNSTAKE
+  PORTFOLIO_UNSTAKE,
+  /**
+   * On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+   */
+  MERGE_STAKE
 }

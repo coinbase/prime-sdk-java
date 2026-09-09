@@ -38,11 +38,19 @@ public class WalletStakeInputs {
   @JsonProperty("validator_address")
   private String validatorAddress;
 
+  /**
+   * Optional delegation end date in ISO date format (e.g. 2026-07-15). Required for AVAX; minimum
+   * 14-day delegation period applies.
+   */
+  @JsonProperty("end_date")
+  private String endDate;
+
   public WalletStakeInputs() {}
 
   public WalletStakeInputs(Builder builder) {
     this.amount = builder.amount;
     this.validatorAddress = builder.validatorAddress;
+    this.endDate = builder.endDate;
   }
 
   public String getAmount() {
@@ -61,10 +69,20 @@ public class WalletStakeInputs {
     this.validatorAddress = validatorAddress;
   }
 
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
   public static class Builder {
     private String amount;
 
     private String validatorAddress;
+
+    private String endDate;
 
     public Builder amount(String amount) {
       this.amount = amount;
@@ -73,6 +91,11 @@ public class WalletStakeInputs {
 
     public Builder validatorAddress(String validatorAddress) {
       this.validatorAddress = validatorAddress;
+      return this;
+    }
+
+    public Builder endDate(String endDate) {
+      this.endDate = endDate;
       return this;
     }
 

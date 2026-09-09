@@ -30,7 +30,6 @@ package com.coinbase.prime.model.enums;
  * debit call. There are no standard margin calls, urgent margin calls, or expired calls.
  */
 public enum XMEntityCallStatus {
-  XM_ENTITY_CALL_STATUS_UNSPECIFIED,
   /** There are no margin calls or debit calls. */
   ENTITY_NO_CALL,
   /**

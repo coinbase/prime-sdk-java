@@ -166,4 +166,33 @@ public interface FuturesService {
    */
   GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Portfolio Derivatives Currency Summary.
+   *
+   * <p>Retrieve per-currency international derivatives balances for a given portfolio. US Futures
+   * balances roll up to a single clearing account per entity rather than per portfolio, and are
+   * available from the entity futures balance summary and risk limits endpoints instead.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetDerivativesCurrencySummaryResponse getDerivativesCurrencySummary(
+      GetDerivativesCurrencySummaryRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Portfolio Derivative Positions.
+   *
+   * <p>Retrieve all active derivative positions for a given portfolio.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   */
+  GetDerivativePositionsResponse getDerivativePositions(GetDerivativePositionsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -26,7 +26,6 @@ package com.coinbase.prime.model.enums;
  * Liquidation failed
  */
 public enum XMLiquidationStatus {
-  XM_LIQUIDATION_STATUS_UNSET,
   /** Liquidation is in the pre-liquidation phase */
   XM_LIQUIDATION_STATUS_PRE_LIQUIDATION,
   /** Liquidation is actively in progress */

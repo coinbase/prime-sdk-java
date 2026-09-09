@@ -23,7 +23,6 @@ package com.coinbase.prime.model.enums;
  * Commission Merchant, trading venue that can receive the XM loan
  */
 public enum XMParty {
-  XM_PARTY_UNSPECIFIED,
   /** Coinbase Exchange, trading venue that can receive the XM loan */
   CBE,
   /** Coinbase’s Futures Commission Merchant, trading venue that can receive the XM loan */

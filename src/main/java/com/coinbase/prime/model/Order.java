@@ -205,12 +205,22 @@ public class Order {
   @JsonProperty("wig_level")
   private String wigLevel;
 
-  /** - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product */
+  /**
+   * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
+   * OPTION: Option product
+   */
   @JsonProperty("product_type")
   private ProductType productType;
 
   @JsonProperty("commission_detail_total")
   private CommissionDetailTotal commissionDetailTotal;
+
+  /**
+   * Indicates if this was a buy exact order (fees charged on top of quote size for BUY orders sized
+   * in quote)
+   */
+  @JsonProperty("is_buy_exact")
+  private boolean isBuyExact;
 
   public Order() {}
 
@@ -252,6 +262,7 @@ public class Order {
     this.wigLevel = builder.wigLevel;
     this.productType = builder.productType;
     this.commissionDetailTotal = builder.commissionDetailTotal;
+    this.isBuyExact = builder.isBuyExact;
   }
 
   public String getId() {
@@ -550,6 +561,14 @@ public class Order {
     this.commissionDetailTotal = commissionDetailTotal;
   }
 
+  public boolean getIsBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setIsBuyExact(boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
+  }
+
   public static class Builder {
     private String id;
 
@@ -624,6 +643,8 @@ public class Order {
     private ProductType productType;
 
     private CommissionDetailTotal commissionDetailTotal;
+
+    private boolean isBuyExact;
 
     public Builder id(String id) {
       this.id = id;
@@ -807,6 +828,11 @@ public class Order {
 
     public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
       this.commissionDetailTotal = commissionDetailTotal;
+      return this;
+    }
+
+    public Builder isBuyExact(boolean isBuyExact) {
+      this.isBuyExact = isBuyExact;
       return this;
     }
 
