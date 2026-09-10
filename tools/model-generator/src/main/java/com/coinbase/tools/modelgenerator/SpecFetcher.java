@@ -64,7 +64,17 @@ public final class SpecFetcher {
     Path temporaryDirectory = projectRoot.resolve("generated");
     Files.createDirectories(temporaryDirectory);
     Path specPath = Files.createTempFile(temporaryDirectory, "prime-public-spec-", ".yaml");
-    return fetchTo(specPath, specUrl);
+    try {
+      return fetchTo(specPath, specUrl);
+    } catch (IOException | InterruptedException exception) {
+      Files.deleteIfExists(specPath);
+      try {
+        Files.deleteIfExists(temporaryDirectory);
+      } catch (java.nio.file.DirectoryNotEmptyException ignored) {
+        // The directory existed before this fetch or contains unrelated generator output.
+      }
+      throw exception;
+    }
   }
 
   private static Path fetchTo(Path specPath, String specUrl) throws IOException, InterruptedException {

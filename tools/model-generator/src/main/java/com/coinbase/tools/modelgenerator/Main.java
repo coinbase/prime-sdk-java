@@ -50,42 +50,47 @@ public final class Main {
     boolean liveDiff = has(args, "--live-diff");
     boolean skipModels = has(args, "--skip-models");
     Path spec = paths.root().resolve(configuration.committedSpecPath());
-    if (liveDiff) {
-      spec = SpecFetcher.fetchToTemporary(paths.root(), configuration.specUrl());
-      check = true;
-      skipModels = true;
-    }
+    Path temporaryLiveSpec = null;
+    try {
+      if (liveDiff) {
+        temporaryLiveSpec = SpecFetcher.fetchToTemporary(paths.root(), configuration.specUrl());
+        spec = temporaryLiveSpec;
+        check = true;
+      }
 
-    if (check && !liveDiff) {
-      List<String> changes = checkGeneratedInIsolation(paths, spec, configuration);
-      reportChanges(changes);
-      return;
-    }
+      if (check) {
+        // Live diffs use the identical isolated rendering and Spotless normalization as --check.
+        List<String> changes = checkGeneratedInIsolation(paths, spec, configuration);
+        reportChanges(changes);
+        return;
+      }
 
-    if (!skipModels && !check) {
-      new OpenApiGenerator(spec.toString(), paths.rawRoot()).generateModels();
-      new PostProcessor(
-              paths.rawRoot(),
-              paths.sourceRoot(),
-              paths.modelRoot(),
-              paths.enumRoot(),
-              paths.errorRoot(),
-              spec,
-              paths.modelManifest())
-          .processModels();
-    }
+      if (!skipModels) {
+        new OpenApiGenerator(spec.toString(), paths.rawRoot()).generateModels();
+        new PostProcessor(
+                paths.rawRoot(),
+                paths.sourceRoot(),
+                paths.modelRoot(),
+                paths.enumRoot(),
+                paths.errorRoot(),
+                spec,
+                paths.modelManifest())
+            .processModels();
+      }
 
-    Map<Path, String> sources = renderClientSources(spec, configuration);
-    List<String> changes =
-        GeneratedSourceReconciler.diff(
-            paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest());
-
-    if (check) {
-      reportChanges(changes);
-    } else {
+      Map<Path, String> sources = renderClientSources(spec, configuration, paths.sourceRoot());
       GeneratedSourceReconciler.write(
           paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest());
       System.out.println("Generated " + sources.size() + " client-surface files");
+    } finally {
+      if (temporaryLiveSpec != null) {
+        Files.deleteIfExists(temporaryLiveSpec);
+        try {
+          Files.deleteIfExists(temporaryLiveSpec.getParent());
+        } catch (java.nio.file.DirectoryNotEmptyException ignored) {
+          // The generator output directory pre-existed or has unrelated content.
+        }
+      }
     }
   }
 
@@ -119,7 +124,7 @@ public final class Main {
           .processModels();
       GeneratedSourceReconciler.write(
           stagedSourceRoot,
-          renderClientSources(spec, configuration),
+          renderClientSources(spec, configuration, stagedSourceRoot),
           configuration.protectedFiles(),
           stagedClientManifest);
       formatStagedSources(stagingRoot);
@@ -166,7 +171,7 @@ public final class Main {
     }
   }
 
-  private static void formatStagedSources(Path stagingRoot) throws IOException, InterruptedException {
+  static void formatStagedSources(Path stagingRoot) throws IOException, InterruptedException {
     Process process =
         new ProcessBuilder(
                 "mvn", "-B", "-f", stagingRoot.resolve("pom.xml").toString(), "spotless:apply")
@@ -187,7 +192,7 @@ public final class Main {
   }
 
   private static Map<Path, String> renderClientSources(
-      Path spec, GeneratorConfiguration configuration) throws IOException {
+      Path spec, GeneratorConfiguration configuration, Path sourceRoot) throws IOException {
     SpecModels.Document document = SpecParser.load(spec);
     NamingResolver names =
         new NamingResolver(configuration.nameReplacements(), configuration.modelTypeMappings());
@@ -198,7 +203,19 @@ public final class Main {
     sources.putAll(ResponsePhase.render(document, bindings, types, names));
     sources.putAll(ServicePhase.render(document, bindings, configuration, names));
     sources.putAll(FactoryPhase.render(bindings));
-    return sources;
+    return preserveClientSourceHeaders(sources, sourceRoot);
+  }
+
+  static Map<Path, String> preserveClientSourceHeaders(Map<Path, String> sources, Path sourceRoot)
+      throws IOException {
+    Map<Path, String> headedSources = new LinkedHashMap<>();
+    for (Map.Entry<Path, String> source : sources.entrySet()) {
+      headedSources.put(
+          source.getKey(),
+          GeneratedFileHeader.applyStartYear(
+              source.getValue(), GeneratedFileHeader.resolveStartYear(sourceRoot.resolve(source.getKey()))));
+    }
+    return headedSources;
   }
 
   private static void reportChanges(List<String> changes) {

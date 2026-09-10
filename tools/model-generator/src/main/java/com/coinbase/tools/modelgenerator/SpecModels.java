@@ -46,12 +46,13 @@ public final class SpecModels {
     private final Map<String, Object> successResponseSchema;
     private final List<Integer> successStatusCodes;
     private final String summary;
+    private final String description;
     private final String sdkMethodName;
 
     Operation(String operationId, String httpMethod, String path, List<String> tags,
         List<Parameter> parameters, Map<String, Object> requestBodySchema,
         Map<String, Object> successResponseSchema, List<Integer> successStatusCodes,
-        String summary, String sdkMethodName) {
+        String summary, String description, String sdkMethodName) {
       this.operationId = operationId;
       this.httpMethod = httpMethod;
       this.path = path;
@@ -61,6 +62,7 @@ public final class SpecModels {
       this.successResponseSchema = successResponseSchema;
       this.successStatusCodes = Collections.unmodifiableList(successStatusCodes);
       this.summary = summary;
+      this.description = description;
       this.sdkMethodName = sdkMethodName;
     }
 
@@ -73,6 +75,7 @@ public final class SpecModels {
     public Map<String, Object> successResponseSchema() { return successResponseSchema; }
     public List<Integer> successStatusCodes() { return successStatusCodes; }
     public String summary() { return summary; }
+    public String description() { return description; }
     public String sdkMethodName() { return sdkMethodName; }
   }
 
@@ -81,17 +84,21 @@ public final class SpecModels {
     private final String location;
     private final boolean required;
     private final Map<String, Object> schema;
+    private final String description;
 
-    Parameter(String name, String location, boolean required, Map<String, Object> schema) {
+    Parameter(String name, String location, boolean required, Map<String, Object> schema,
+        String description) {
       this.name = name;
       this.location = location;
       this.required = required;
       this.schema = schema;
+      this.description = description;
     }
 
     public String name() { return name; }
     public String location() { return location; }
     public boolean required() { return required; }
     public Map<String, Object> schema() { return schema; }
+    public String description() { return description; }
   }
 }

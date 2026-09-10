@@ -54,7 +54,7 @@ public final class ServicePhase {
         .append("import com.coinbase.core.errors.CoinbaseClientException;\nimport com.coinbase.prime.errors.CoinbasePrimeException;\n\npublic interface ").append(service).append(" {\n");
     for (OperationBinding binding : bindings) {
       SpecModels.Operation operation = operations.get(binding.operationId());
-      SourceTemplates.javadoc(source, operation.summary());
+      appendMethodJavadoc(source, operation, binding, true);
       source.append("  ").append(binding.sdkMethod()).append("Response ").append(names.methodName(binding.sdkMethod())).append("(");
       if (!binding.omitRequest()) source.append(binding.sdkMethod()).append("Request request");
       source.append(") throws CoinbaseClientException, CoinbasePrimeException;\n\n");
@@ -75,7 +75,9 @@ public final class ServicePhase {
     for (OperationBinding binding : bindings) {
       SpecModels.Operation operation = operations.get(binding.operationId());
       String method = names.methodName(binding.sdkMethod()); String version = version(operation.path());
-      source.append("\n  @Override\n  public ").append(binding.sdkMethod()).append("Response ").append(method).append("(");
+      source.append("\n");
+      appendMethodJavadoc(source, operation, binding, false);
+      source.append("  @Override\n  public ").append(binding.sdkMethod()).append("Response ").append(method).append("(");
       if (!binding.omitRequest()) source.append(binding.sdkMethod()).append("Request request");
       source.append(") throws CoinbasePrimeException {\n    return ");
       if (version.equals("v2")) {
@@ -96,6 +98,27 @@ public final class ServicePhase {
     }
     return source.append("}\n").toString();
   }
+  private static void appendMethodJavadoc(
+      StringBuilder source,
+      SpecModels.Operation operation,
+      OperationBinding binding,
+      boolean interfaceMethod) {
+    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
+    source.append("  /**\n");
+    if (!documentation.isEmpty()) {
+      source.append("   * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
+    }
+    if (!binding.omitRequest()) {
+      source.append("   * @param request request parameters and body for this operation\n");
+    }
+    source.append("   * @return the decoded ").append(binding.sdkMethod()).append(" response\n");
+    if (interfaceMethod) {
+      source.append("   * @throws CoinbaseClientException if the request cannot be sent\n");
+    }
+    source.append("   * @throws CoinbasePrimeException if the Prime API rejects the request\n");
+    source.append("   */\n");
+  }
+
   private static String pathExpression(String rawPath, OperationBinding binding, NamingResolver names) {
     String path = rawPath.replaceFirst("^/v[12]", "");
     if (!path.matches(".*\\{[^}]+}.*")) return "\"" + path + "\"";

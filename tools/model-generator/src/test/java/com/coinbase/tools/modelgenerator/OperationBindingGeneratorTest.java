@@ -16,10 +16,12 @@
 package com.coinbase.tools.modelgenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class OperationBindingGeneratorTest {
@@ -27,7 +29,8 @@ class OperationBindingGeneratorTest {
   void derivesStableBindingsForTheCommittedSpec() throws Exception {
     Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
     SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
-    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
+    GeneratorConfiguration configuration = GeneratorConfiguration.load(GeneratorPaths.forRoot(root));
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
 
     assertEquals(document.operations().size(), bindings.size());
     OperationBinding createOrder = bindings.stream()
@@ -77,6 +80,41 @@ class OperationBindingGeneratorTest {
             .get(Path.of("com/coinbase/prime/wallets/CreateWalletRequest.java"));
     assertTrue(wallet.contains("private WalletType type;"), wallet);
     assertTrue(wallet.contains("Builder type(WalletType type)"), wallet);
+    assertEquals(
+        "PrimeXMControlStatus",
+        names.typeName("CoinbasePublicRestApiXMControlStatus"));
+    assertEquals(
+        "PrimeXMMarginLevel", names.typeName("CoinbasePublicRestApiXMMarginLevel"));
+  }
+
+  @Test
+  void resolvesEveryCommittedInlineRequestEnumToAPublicNamedEnum() throws Exception {
+    Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
+    GeneratorConfiguration configuration = GeneratorConfiguration.load(GeneratorPaths.forRoot(root));
+    SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
+    JavaTypeResolver types =
+        new JavaTypeResolver(
+            document,
+            new NamingResolver(configuration.nameReplacements(), configuration.modelTypeMappings()),
+            configuration.sharedModelMappings());
+    int inlineEnumCount = 0;
+    for (SpecModels.Operation operation : document.operations()) {
+      for (SpecModels.Parameter parameter : operation.parameters()) {
+        if (parameter.schema().containsKey("enum")) {
+          assertFalse(types.resolve(parameter.schema()).name().equals("String"));
+          inlineEnumCount++;
+        }
+      }
+      Map<String, Object> body = types.dereference(operation.requestBodySchema());
+      for (Object property : SpecParser.map(body.get("properties")).values()) {
+        Map<String, Object> propertySchema = SpecParser.map(property);
+        if (propertySchema.containsKey("enum")) {
+          assertFalse(types.resolve(propertySchema).name().equals("String"));
+          inlineEnumCount++;
+        }
+      }
+    }
+    assertTrue(inlineEnumCount > 0);
   }
 
   private static OperationBinding binding(List<OperationBinding> bindings, String operationId) {

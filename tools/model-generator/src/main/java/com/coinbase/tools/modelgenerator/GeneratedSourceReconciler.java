@@ -51,11 +51,14 @@ public final class GeneratedSourceReconciler {
     List<String> changes = new ArrayList<>();
     for (Map.Entry<Path, String> entry : new TreeMap<>(generated).entrySet()) {
       String relative = entry.getKey().toString().replace('\\', '/');
-      if (protectedFiles.contains(relative)) {
-        continue;
-      }
       Path target = outputRoot.resolve(entry.getKey());
       String existing = Files.exists(target) ? Files.readString(target) : null;
+      if (protectedFiles.contains(relative)) {
+        if (!entry.getValue().equals(existing)) {
+          changes.add("SKIP " + entry.getKey());
+        }
+        continue;
+      }
       if (!entry.getValue().equals(existing)) {
         changes.add((existing == null ? "ADD " : "CHANGE ") + entry.getKey());
       }

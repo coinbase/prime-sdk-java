@@ -65,13 +65,13 @@ public final class JavaTypeResolver {
     String type = string(schema.get("type"));
     if ("array".equals(type)) return array(resolve(SpecParser.map(schema.get("items"))));
     if ("object".equals(type) && schema.containsKey("additionalProperties")) {
-      return generic("Map", resolve(SpecParser.map(schema.get("additionalProperties"))), "java.util.Map");
+      return map(resolve(SpecParser.map(schema.get("additionalProperties"))));
     }
-    if (schema.containsKey("enum")) return new Type("String", Collections.emptySet());
+    if (schema.containsKey("enum")) return resolveInlineEnum(schema);
     switch (type) {
       case "integer": return new Type("Integer", Collections.emptySet());
       case "number": return new Type("Double", Collections.emptySet());
-      case "boolean": return new Type("Boolean", Collections.emptySet());
+      case "boolean": return new Type("boolean", Collections.emptySet());
       case "string": return new Type("String", Collections.emptySet());
       default: return new Type("Object", Collections.emptySet());
     }
@@ -104,10 +104,24 @@ public final class JavaTypeResolver {
     return new Type(item.name() + "[]", new LinkedHashSet<>(item.imports()));
   }
 
-  private Type generic(String raw, Type item, String rawImport) {
-    Set<String> imports = new LinkedHashSet<>(item.imports());
-    imports.add(rawImport);
-    return new Type(raw + "<" + item.name() + ">", imports);
+  /** Resolves an inline enum only when it exactly matches one named schema enum. */
+  private Type resolveInlineEnum(Map<String, Object> schema) {
+    Object values = schema.get("enum");
+    for (Map.Entry<String, Object> entry : schemas.entrySet()) {
+      Map<String, Object> candidate = SpecParser.map(entry.getValue());
+      if (values.equals(candidate.get("enum"))) {
+        String typeName = names.typeName(schemaTypeName(entry.getKey()));
+        return external(GeneratedEnumKind.packageFor(typeName) + "." + typeName);
+      }
+    }
+    throw new IllegalArgumentException(
+        "Inline enum cannot be safely resolved to a named SDK enum: " + values);
+  }
+
+  private Type map(Type value) {
+    Set<String> imports = new LinkedHashSet<>(value.imports());
+    imports.add("java.util.Map");
+    return new Type("Map<String, " + value.name() + ">", imports);
   }
   private static String schemaTypeName(String schemaName) {
     StringBuilder result = new StringBuilder();

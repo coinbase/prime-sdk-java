@@ -59,7 +59,7 @@ public final class RequestPhase {
     StringBuilder source = new StringBuilder(SourceTemplates.header())
         .append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
     SourceTemplates.imports(source, imports);
-    SourceTemplates.javadoc(source, operation.summary());
+    SourceTemplates.javadoc(source, SourceTemplates.documentation(operation.summary(), operation.description()));
     source.append("public class ").append(className);
     if (binding.paginated()) source.append(" extends PrimeListRequest");
     source.append(" {\n");
@@ -80,9 +80,7 @@ public final class RequestPhase {
     for (Field field : fields) source.append("    this.").append(field.name).append(" = builder.").append(field.name).append(";\n");
     source.append("  }\n\n");
     for (Field field : fields) {
-      String cap = SourceTemplates.cap(field.name);
-      source.append("  public ").append(field.type.name()).append(" get").append(cap).append("() {\n    return ").append(field.name).append(";\n  }\n\n")
-          .append("  public void set").append(cap).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n    this.").append(field.name).append(" = ").append(field.name).append(";\n  }\n\n");
+      appendAccessors(source, field);
     }
     source.append("  public static class Builder {\n");
     if (binding.paginated()) {
@@ -116,7 +114,13 @@ public final class RequestPhase {
   static List<Field> fields(SpecModels.Operation operation, OperationBinding binding, JavaTypeResolver types, NamingResolver names) {
     Map<String, Field> fields = new LinkedHashMap<>();
     for (SpecModels.Parameter parameter : operation.parameters()) {
-      if (binding.paginated() && (parameter.name().equals("cursor") || parameter.name().equals("limit") || parameter.name().equals("sort_direction"))) continue;
+      if ("header".equals(parameter.location()) || "cookie".equals(parameter.location())) {
+        continue;
+      }
+      if (binding.paginated()
+          && (parameter.name().equals("cursor")
+              || parameter.name().equals("limit")
+              || parameter.name().equals("sort_direction"))) continue;
       JavaTypeResolver.Type type =
           binding.parameterTypeOverrides().containsKey(parameter.name())
               ? types.configured(binding.parameterTypeOverrides().get(parameter.name()))
@@ -129,7 +133,7 @@ public final class RequestPhase {
               type,
               parameter.required(),
               "path".equals(parameter.location()),
-              ""));
+              parameter.description()));
     }
     Map<String, Object> body = types.dereference(operation.requestBodySchema());
     Map<String, Object> required = new LinkedHashMap<>();
@@ -147,10 +151,28 @@ public final class RequestPhase {
                     : types.resolve(SpecParser.map(property.getValue())),
                 required.containsKey(property.getKey()),
                 false,
-                ""));
+                description(SpecParser.map(property.getValue()))));
     }
     return new ArrayList<>(fields.values());
   }
+  private static void appendAccessors(StringBuilder source, Field field) {
+    String cap = SourceTemplates.cap(field.name);
+    boolean booleanIsPrefix = field.type.name().equals("boolean") && field.name.startsWith("is")
+        && field.name.length() > 2 && Character.isUpperCase(field.name.charAt(2));
+    String getter = booleanIsPrefix ? field.name : "get" + cap;
+    String setter = booleanIsPrefix ? "set" + field.name.substring(2) : "set" + cap;
+    source.append("  public ").append(field.type.name()).append(" ").append(getter).append("() {\n    return ")
+        .append(field.name).append(";\n  }\n\n")
+        .append("  public void ").append(setter).append("(").append(field.type.name()).append(" ")
+        .append(field.name).append(") {\n    this.").append(field.name).append(" = ")
+        .append(field.name).append(";\n  }\n\n");
+  }
+
+  private static String description(Map<String, Object> schema) {
+    Object value = schema.containsKey("description") ? schema.get("description") : schema.get("title");
+    return value == null ? "" : String.valueOf(value);
+  }
+
   private static void appendConvenienceConstructor(
       StringBuilder source,
       String className,

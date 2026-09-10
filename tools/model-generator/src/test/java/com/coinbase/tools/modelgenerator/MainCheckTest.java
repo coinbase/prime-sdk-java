@@ -20,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.sun.net.httpserver.HttpServer;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -53,6 +56,61 @@ class MainCheckTest {
       assertFalse(Files.exists(root.resolve("tools/model-generator/generated-model-files.json")));
       assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/things/ListThingsResponse.java")));
       assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/model/Thing.java")));
+    } finally {
+      FileUtils.deleteDirectory(root.toFile());
+    }
+  }
+
+  @Test
+  void liveDiffUsesFormattedIsolatedOutputAndDeletesDownloadedSpec() throws Exception {
+    Path root = Files.createTempDirectory("live-generator-diff");
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    try {
+      writeFixture(root);
+      byte[] spec = Files.readAllBytes(root.resolve("apiSpec/openapi.yaml"));
+      server.createContext(
+          "/openapi.yaml",
+          exchange -> {
+            exchange.sendResponseHeaders(200, spec.length);
+            exchange.getResponseBody().write(spec);
+            exchange.close();
+          });
+      server.start();
+      Files.writeString(
+          root.resolve("tools/model-generator/config/generator-config.json"),
+          "{\"specUrl\":\"http://127.0.0.1:"
+              + server.getAddress().getPort()
+              + "/openapi.yaml\",\"committedSpecPath\":\"apiSpec/openapi.yaml\"}\n");
+
+      Main.run(new String[0], GeneratorPaths.forRoot(root));
+      Main.formatStagedSources(root);
+      Map<String, String> beforeLiveDiff = snapshot(root);
+      Main.run(new String[] {"--live-diff"}, GeneratorPaths.forRoot(root));
+
+      assertEquals(beforeLiveDiff, snapshot(root));
+      assertFalse(Files.exists(root.resolve("generated")));
+    } finally {
+      server.stop(0);
+      FileUtils.deleteDirectory(root.toFile());
+    }
+  }
+
+  @Test
+  void failedLiveFetchDeletesPartialTemporarySpec() throws Exception {
+    Path root = Files.createTempDirectory("failed-live-generator-diff");
+    try {
+      writeFixture(root);
+      Files.writeString(
+          root.resolve("tools/model-generator/config/generator-config.json"),
+          "{\"specUrl\":\"http://127.0.0.1:1/unavailable\",\"committedSpecPath\":\"apiSpec/openapi.yaml\"}\n");
+      assertThrows(Exception.class, () -> Main.run(new String[] {"--live-diff"}, GeneratorPaths.forRoot(root)));
+      Path generated = root.resolve("generated");
+      assertFalse(Files.exists(generated.resolve("prime-public-spec-.yaml")));
+      if (Files.exists(generated)) {
+        try (Stream<Path> paths = Files.list(generated)) {
+          assertFalse(paths.anyMatch(path -> path.getFileName().toString().endsWith(".yaml")));
+        }
+      }
     } finally {
       FileUtils.deleteDirectory(root.toFile());
     }

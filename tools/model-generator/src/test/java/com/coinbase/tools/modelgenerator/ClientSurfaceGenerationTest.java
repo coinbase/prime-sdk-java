@@ -49,16 +49,30 @@ class ClientSurfaceGenerationTest {
     assertTrue(listRequest.contains("Builder sortDirection(SortDirection sortDirection)"), listRequest);
     assertTrue(listRequest.contains("Builder limit(Integer limit)"), listRequest);
     assertTrue(listRequest.contains("Builder pagination(Pagination pagination)"), listRequest);
+    assertTrue(listRequest.contains("private ThingState state;"), listRequest);
+    assertTrue(listRequest.contains("List state"), listRequest);
+    assertFalse(listRequest.contains("request_id"), listRequest);
+    assertFalse(listRequest.contains("session_id"), listRequest);
     String request = sources.get(Path.of("com/coinbase/prime/orders/CreateThingRequest.java"));
     assertTrue(request.contains("@JsonIgnore"));
     assertTrue(request.contains("private Thing[] things"));
     assertTrue(request.contains("PortfolioId is required"));
+    assertTrue(request.contains("private boolean isBuyExact;"), request);
+    assertTrue(request.contains("public boolean isBuyExact()"), request);
+    assertTrue(request.contains("public void setBuyExact(boolean isBuyExact)"), request);
+    assertTrue(request.contains("Buy exact flag"), request);
     String response = sources.get(Path.of("com/coinbase/prime/orders/CreateThingResponse.java"));
     assertTrue(response.contains("private OnchainThing thing"));
+    assertTrue(response.contains("Created thing"), response);
     String implementation = sources.get(Path.of("com/coinbase/prime/orders/OrdersServiceImpl.java"));
     assertTrue(implementation.contains("String.format(\"/portfolios/%s/things\", request.getPortfolioId())"));
     assertTrue(implementation.contains("List.of(201, 200)"));
     assertTrue(implementation.indexOf("listThings") < implementation.indexOf("createThing"));
+    String service = sources.get(Path.of("com/coinbase/prime/orders/OrdersService.java"));
+    assertTrue(service.contains("List Things. Includes query filtering."), service);
+    assertTrue(service.contains("@param request request parameters and body for this operation"), service);
+    assertTrue(service.contains("@return the decoded ListThings response"), service);
+    assertTrue(service.contains("@throws CoinbaseClientException"), service);
     assertTrue(sources.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java")).contains("createOrdersService"));
   }
 
@@ -152,9 +166,62 @@ class ClientSurfaceGenerationTest {
     JavaTypeResolver.Type subcode = types.resolve(Collections.singletonMap("$ref", "#/components/schemas/ThingProblemSubcode"));
     assertEquals("ThingProblemSubcode", subcode.name());
     assertEquals(Collections.singleton("com.coinbase.prime.model.errors.ThingProblemSubcode"), subcode.imports());
-    assertEquals("Map<String>", types.resolve(map("type", "object", "additionalProperties", map("type", "string"))).name());
+    assertEquals("Map<String, String>", types.resolve(map("type", "object", "additionalProperties", map("type", "string"))).name());
     assertEquals("v2", ServicePhase.version("/v2/things"));
     assertThrows(IllegalArgumentException.class, () -> ServicePhase.version("/v3/things"));
+  }
+
+  @Test
+  void failsFastForInlineEnumWithoutANamedPublicType() throws Exception {
+    JavaTypeResolver types = new JavaTypeResolver(fixture(), new NamingResolver(Collections.emptyMap()));
+    IllegalArgumentException exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> types.resolve(map("type", "string", "enum", List.of("NOT_A_PUBLIC_ENUM"))));
+    assertTrue(exception.getMessage().contains("Inline enum cannot be safely resolved"));
+  }
+
+  @Test
+  void emitsNonObjectResponsesWithoutSummaryAndWithImports() throws Exception {
+    Path spec = Files.createTempFile("non-object-response", ".yaml");
+    Files.writeString(
+        spec,
+        "openapi: 3.0.0\n"
+            + "paths:\n"
+            + "  /v1/value:\n"
+            + "    get:\n"
+            + "      operationId: PrimeRESTAPI_GetValue\n"
+            + "      tags: [Values]\n"
+            + "      responses:\n"
+            + "        '200':\n"
+            + "          content:\n"
+            + "            application/json:\n"
+            + "              schema: { type: array, items: { type: string } }\n");
+    SpecModels.Document document = SpecParser.load(spec);
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
+    String response =
+        ResponsePhase.render(document, bindings, new JavaTypeResolver(document, new NamingResolver(Collections.emptyMap())), new NamingResolver(Collections.emptyMap()))
+            .get(Path.of("com/coinbase/prime/values/GetValueResponse.java"));
+    assertTrue(response.contains("import com.fasterxml.jackson.annotation.JsonProperty;"), response);
+    assertTrue(response.contains("private String[] value;"), response);
+  }
+
+  @Test
+  void preservesExistingClientSourceHeaderAndSignalsProtectedDrift() throws Exception {
+    Path root = Files.createTempDirectory("client-source-header");
+    Path relative = Path.of("com/coinbase/prime/orders/Thing.java");
+    Path existing = root.resolve(relative);
+    Files.createDirectories(existing.getParent());
+    Files.writeString(
+        existing,
+        "/*\n * Copyright 2021-present Coinbase Global, Inc.\n */\nclass Thing {}\n",
+        StandardCharsets.UTF_8);
+    Map<Path, String> sources = Collections.singletonMap(relative, SourceTemplates.header() + "class Thing {}\n");
+    Map<Path, String> headed = Main.preserveClientSourceHeaders(sources, root);
+    assertTrue(headed.get(relative).contains("Copyright 2021-present"));
+    assertTrue(
+        GeneratedSourceReconciler.diff(root, headed, Collections.singleton(relative.toString()), null)
+            .contains("SKIP " + relative));
   }
 
   @Test
@@ -196,16 +263,20 @@ class ClientSurfaceGenerationTest {
     Files.writeString(spec, String.join("\n",
         "openapi: 3.0.0", "paths:", "  /v1/portfolios/{portfolio_id}/things:", "    parameters:",
         "      - name: portfolio_id", "        in: path", "        required: true", "        schema: { type: string }",
-        "    get:", "      operationId: PrimeRESTAPI_GetThings", "      tags: [Orders]", "      summary: List Things",
+        "    get:", "      operationId: PrimeRESTAPI_GetThings", "      tags: [Orders]", "      summary: List Things", "      description: Includes query filtering.",
         "      parameters:", "        - name: cursor", "          in: query", "          schema: { type: string }",
+        "        - name: state", "          in: query", "          description: List state", "          schema: { type: string, enum: [OPEN] }",
+        "        - name: request_id", "          in: header", "          schema: { type: string }",
+        "        - name: session_id", "          in: cookie", "          schema: { type: string }",
         "      responses:", "        '200':", "          content:", "            application/json:", "              schema:",
         "                type: object", "                properties:", "                  items:", "                    type: array",
         "                    items: { $ref: '#/components/schemas/Web3Thing' }",
         "    post:", "      operationId: PrimeRESTAPI_CreateThing", "      tags: [Orders]", "      summary: Create Thing",
         "      requestBody:", "        content:", "          application/json:", "            schema:", "              type: object",
         "              properties:", "                things:", "                  type: array", "                  items: { $ref: '#/components/schemas/Thing' }",
+        "                is_buy_exact: { type: boolean, description: Buy exact flag }",
         "      responses:", "        '200':", "          content:", "            application/json:", "              schema:",
-        "                type: object", "                properties:", "                  thing: { $ref: '#/components/schemas/Web3Thing' }",
+        "                type: object", "                properties:", "                  thing: { $ref: '#/components/schemas/Web3Thing', description: Created thing }",
         "  /v2/entities/{entity_id}/cross_margin/prime:", "    get:", "      operationId: PrimeRESTAPI_GetCrossMarginPrimeOverview", "      tags: [Financing]", "      summary: Get Cross Margin Prime Overview",
         "      parameters:", "        - name: entity_id", "          in: path", "          required: true", "          schema: { type: string }",
         "      responses:", "        '200':", "          content:", "            application/json:", "              schema: { type: object }",

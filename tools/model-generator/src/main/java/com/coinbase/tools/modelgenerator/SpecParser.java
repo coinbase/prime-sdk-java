@@ -63,7 +63,7 @@ public final class SpecParser {
         operations.add(new SpecModels.Operation(
             operationId, method.toUpperCase(), pathEntry.getKey(), strings(operation.get("tags")), parameters,
             requestSchema(operation), schema(response), successCodes(operation), string(operation.get("summary")),
-            string(operation.get("x-sdk-method-name"))));
+            string(operation.get("description")), string(operation.get("x-sdk-method-name"))));
       }
     }
     operations.sort(Comparator.comparing(SpecModels.Operation::operationId));
@@ -76,7 +76,8 @@ public final class SpecParser {
 
   private static SpecModels.Parameter parameter(Map<String, Object> parameter) {
     return new SpecModels.Parameter(string(parameter.get("name")), string(parameter.get("in")),
-        Boolean.TRUE.equals(parameter.get("required")), map(parameter.get("schema")));
+        Boolean.TRUE.equals(parameter.get("required")), map(parameter.get("schema")),
+        string(parameter.get("description")));
   }
 
   private static Map<String, Object> requestSchema(Map<String, Object> operation) {

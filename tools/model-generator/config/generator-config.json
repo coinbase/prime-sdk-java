@@ -10,7 +10,9 @@
     "FcmFuturesSweepRequestAmount": "SweepAmount",
     "FcmFuturesSweep": "FuturesSweep",
     "EvmParam": "EvmParams",
-    "RPC": "RpcConfig"
+    "RPC": "RpcConfig",
+    "XMControlStatus": "PrimeXMControlStatus",
+    "XMMarginLevel": "PrimeXMMarginLevel"
   },
   "sharedModelMappings": {
     "PaginatedResponse": "com.coinbase.prime.common.Pagination"

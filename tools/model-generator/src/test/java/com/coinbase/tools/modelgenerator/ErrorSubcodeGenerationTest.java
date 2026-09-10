@@ -76,6 +76,39 @@ class ErrorSubcodeGenerationTest {
   }
 
   @Test
+  void actualOpenApiGenerationDoesNotIgnoreErrorEnumsBeforeErrorsRouting() throws Exception {
+    Path root = Files.createTempDirectory("raw-error-enum-generation");
+    Path spec = root.resolve("openapi.yaml");
+    Files.writeString(
+        spec,
+        "openapi: 3.0.0\n"
+            + "info: { title: test, version: 1.0.0 }\n"
+            + "paths: {}\n"
+            + "components:\n"
+            + "  schemas:\n"
+            + "    PrimeRESTAPI_CreateThingBadRequestSubcode:\n"
+            + "      type: string\n"
+            + "      enum: [INVALID]\n");
+    Path projectRoot = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
+    Path generated = root.resolve("generated");
+    Path sourceRoot = root.resolve("src/main/java");
+    Path modelRoot = sourceRoot.resolve("com/coinbase/prime/model");
+
+    new OpenApiGenerator(spec.toString(), generated, projectRoot).generateModels();
+    new PostProcessor(
+            generated,
+            sourceRoot,
+            modelRoot,
+            modelRoot.resolve("enums"),
+            modelRoot.resolve("errors"),
+            spec,
+            root.resolve("generated-model-files.json"))
+        .processModels();
+
+    assertTrue(Files.exists(modelRoot.resolve("errors/CreateThingBadRequestSubcode.java")));
+  }
+
+  @Test
   void cleansOnlyManifestOwnedModelsAndSkipsIgnoredResponseSchemas() throws Exception {
     Path root = Files.createTempDirectory("model-manifest-generation");
     Path rawModels = root.resolve("generated/raw/src/main/java/com/coinbase/prime/model");

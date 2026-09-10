@@ -177,8 +177,8 @@ public final class OperationBindingGenerator {
 
   static OperationBinding derive(SpecModels.Operation operation) {
     String tag = operation.tags().isEmpty() ? "Misc" : operation.tags().get(0);
-    String folder = "Travel Rule".equals(tag) ? "transactions" : tag.replaceAll("[^A-Za-z0-9]", "").replace(" ", "").toLowerCase(Locale.ROOT);
-    String serviceName = "Travel Rule".equals(tag) ? folderToService(folder) : pascal(tag) + "Service";
+    String folder = tag.replaceAll("[^A-Za-z0-9]", "").replace(" ", "").toLowerCase(Locale.ROOT);
+    String serviceName = pascal(tag) + "Service";
     String raw =
         operation.sdkMethodName().isEmpty()
             ? operation.operationId()
