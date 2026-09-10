@@ -16,9 +16,11 @@
 package com.coinbase.tools.modelgenerator;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,10 +56,13 @@ public final class Main {
       skipModels = true;
     }
 
-    List<String> changes = new ArrayList<>();
     if (check && !liveDiff) {
-      changes.addAll(checkModelsInIsolation(paths, spec));
-    } else if (!skipModels && !check) {
+      List<String> changes = checkGeneratedInIsolation(paths, spec, configuration);
+      reportChanges(changes);
+      return;
+    }
+
+    if (!skipModels && !check) {
       new OpenApiGenerator(spec.toString(), paths.rawRoot()).generateModels();
       new PostProcessor(
               paths.rawRoot(),
@@ -70,6 +75,119 @@ public final class Main {
           .processModels();
     }
 
+    Map<Path, String> sources = renderClientSources(spec, configuration);
+    List<String> changes =
+        GeneratedSourceReconciler.diff(
+            paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest());
+
+    if (check) {
+      reportChanges(changes);
+    } else {
+      GeneratedSourceReconciler.write(
+          paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest());
+      System.out.println("Generated " + sources.size() + " client-surface files");
+    }
+  }
+
+  /**
+   * Runs the complete write-mode pipeline against a disposable copy of the source tree.
+   *
+   * <p>The staged project receives the same Spotless normalization as {@code make generate}; only its
+   * rendered, manifest-owned files are compared with the repository. The repository itself is never
+   * used as an output directory in check mode.
+   */
+  static List<String> checkGeneratedInIsolation(
+      GeneratorPaths paths, Path spec, GeneratorConfiguration configuration) throws Exception {
+    Path stagingRoot = Files.createTempDirectory("prime-sdk-java-generator-check-");
+    try {
+      Path stagedSourceRoot = stagingRoot.resolve("src/main/java");
+      Path stagedModelRoot = stagedSourceRoot.resolve("com/coinbase/prime/model");
+      Path stagedModelManifest = stagingRoot.resolve("tools/model-generator/generated-model-files.json");
+      Path stagedClientManifest = stagingRoot.resolve("tools/model-generator/generated-files.json");
+
+      copyProjectInputs(paths, stagingRoot, stagedSourceRoot, stagedModelManifest, stagedClientManifest);
+      Path stagedRawRoot = stagingRoot.resolve("generated");
+      new OpenApiGenerator(spec.toString(), stagedRawRoot, paths.root()).generateModels();
+      new PostProcessor(
+              stagedRawRoot,
+              stagedSourceRoot,
+              stagedModelRoot,
+              stagedModelRoot.resolve("enums"),
+              stagedModelRoot.resolve("errors"),
+              spec,
+              stagedModelManifest)
+          .processModels();
+      GeneratedSourceReconciler.write(
+          stagedSourceRoot,
+          renderClientSources(spec, configuration),
+          configuration.protectedFiles(),
+          stagedClientManifest);
+      formatStagedSources(stagingRoot);
+
+      List<String> changes = new ArrayList<>();
+      changes.addAll(
+          GeneratedSourceReconciler.diff(
+              paths.sourceRoot(),
+              GeneratedSourceReconciler.readOwnedSources(stagedSourceRoot, stagedModelManifest),
+              Collections.emptySet(),
+              paths.modelManifest()));
+      changes.addAll(
+          GeneratedSourceReconciler.diff(
+              paths.sourceRoot(),
+              GeneratedSourceReconciler.readOwnedSources(stagedSourceRoot, stagedClientManifest),
+              configuration.protectedFiles(),
+              paths.manifest()));
+      addManifestChangeIfPresent(changes, paths.modelManifest(), stagedModelManifest);
+      addManifestChangeIfPresent(changes, paths.manifest(), stagedClientManifest);
+      Collections.sort(changes);
+      return Collections.unmodifiableList(changes);
+    } finally {
+      FileUtils.deleteDirectory(stagingRoot.toFile());
+    }
+  }
+
+  private static void copyProjectInputs(
+      GeneratorPaths paths,
+      Path stagingRoot,
+      Path stagedSourceRoot,
+      Path stagedModelManifest,
+      Path stagedClientManifest)
+      throws IOException {
+    Files.copy(paths.root().resolve("pom.xml"), stagingRoot.resolve("pom.xml"));
+    FileUtils.copyDirectory(paths.sourceRoot().toFile(), stagedSourceRoot.toFile());
+    copyIfPresent(paths.modelManifest(), stagedModelManifest);
+    copyIfPresent(paths.manifest(), stagedClientManifest);
+  }
+
+  private static void copyIfPresent(Path source, Path target) throws IOException {
+    if (Files.exists(source)) {
+      Files.createDirectories(target.getParent());
+      Files.copy(source, target);
+    }
+  }
+
+  private static void formatStagedSources(Path stagingRoot) throws IOException, InterruptedException {
+    Process process =
+        new ProcessBuilder(
+                "mvn", "-B", "-f", stagingRoot.resolve("pom.xml").toString(), "spotless:apply")
+            .redirectErrorStream(true)
+            .start();
+    String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+    if (process.waitFor() != 0) {
+      throw new IOException("Could not format staged generated sources:\n" + output);
+    }
+  }
+
+  private static void addManifestChangeIfPresent(
+      List<String> changes, Path committedManifest, Path stagedManifest) throws IOException {
+    if (Files.exists(committedManifest)
+        && !Files.readString(committedManifest).equals(Files.readString(stagedManifest))) {
+      changes.add("CHANGE " + committedManifest.getFileName());
+    }
+  }
+
+  private static Map<Path, String> renderClientSources(
+      Path spec, GeneratorConfiguration configuration) throws IOException {
     SpecModels.Document document = SpecParser.load(spec);
     NamingResolver names =
         new NamingResolver(configuration.nameReplacements(), configuration.modelTypeMappings());
@@ -80,50 +198,15 @@ public final class Main {
     sources.putAll(ResponsePhase.render(document, bindings, types, names));
     sources.putAll(ServicePhase.render(document, bindings, configuration, names));
     sources.putAll(FactoryPhase.render(bindings));
-    changes.addAll(
-        GeneratedSourceReconciler.diff(
-            paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest()));
-
-    if (check) {
-      for (String change : changes) {
-        System.out.println(change);
-      }
-      if (!changes.isEmpty()) {
-        throw new IllegalStateException("Generated source is out of date (" + changes.size() + " changes)");
-      }
-    } else {
-      GeneratedSourceReconciler.write(
-          paths.sourceRoot(), sources, configuration.protectedFiles(), paths.manifest());
-      System.out.println("Generated " + sources.size() + " client-surface files");
-    }
+    return sources;
   }
 
-  /** Renders models into a temporary source tree so checks never touch committed SDK files. */
-  static List<String> checkModelsInIsolation(GeneratorPaths paths, Path spec) throws Exception {
-    Files.createDirectories(paths.rawRoot());
-    Path stagingRoot = Files.createTempDirectory(paths.rawRoot(), "check-models-");
-    try {
-      Path rawGenerationRoot = stagingRoot.resolve("raw-generation");
-      Path stagedSourceRoot = stagingRoot.resolve("src/main/java");
-      Path stagedModelRoot = stagedSourceRoot.resolve("com/coinbase/prime/model");
-      Path stagedManifest = stagingRoot.resolve("generated-model-files.json");
-      new OpenApiGenerator(spec.toString(), rawGenerationRoot).generateModels();
-      new PostProcessor(
-              rawGenerationRoot,
-              stagedSourceRoot,
-              stagedModelRoot,
-              stagedModelRoot.resolve("enums"),
-              stagedModelRoot.resolve("errors"),
-              spec,
-              stagedManifest)
-          .processModels();
-      return GeneratedSourceReconciler.diff(
-          paths.sourceRoot(),
-          GeneratedSourceReconciler.readOwnedSources(stagedSourceRoot, stagedManifest),
-          java.util.Collections.emptySet(),
-          paths.modelManifest());
-    } finally {
-      FileUtils.deleteDirectory(stagingRoot.toFile());
+  private static void reportChanges(List<String> changes) {
+    for (String change : changes) {
+      System.out.println(change);
+    }
+    if (!changes.isEmpty()) {
+      throw new IllegalStateException("Generated source is out of date (" + changes.size() + " changes)");
     }
   }
 

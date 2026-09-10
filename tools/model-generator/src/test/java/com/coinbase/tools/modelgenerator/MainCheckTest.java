@@ -15,38 +15,126 @@
  */
 package com.coinbase.tools.modelgenerator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 class MainCheckTest {
   @Test
-  void checkRendersModelsInIsolationAndReportsDriftWithoutWritingTheSdkTree() throws Exception {
-    Path root = Files.createTempDirectory("isolated-model-check");
-    Path sourceRoot = root.resolve("src/main/java");
-    Path spec = root.resolve("apiSpec/openapi.yaml");
-    Files.createDirectories(sourceRoot.resolve("com/coinbase/prime"));
-    Files.createDirectories(spec.getParent());
-    Files.writeString(root.resolve("pom.xml"), "<project/>\n");
-    Files.writeString(spec, String.join("\n",
-        "openapi: 3.0.0",
-        "info: { title: test, version: 1.0.0 }",
-        "paths: {}",
-        "components:",
-        "  schemas:",
-        "    Thing:",
-        "      type: object",
-        "      properties:",
-        "        id: { type: string }",
-        ""));
+  void checkCliLeavesFixtureSourcesAndManifestStateByteForByteUnchanged() throws Exception {
+    Path root = Files.createTempDirectory("isolated-generator-check");
+    try {
+      writeFixture(root);
+      Map<String, String> before = snapshot(root);
 
-    List<String> changes = Main.checkModelsInIsolation(GeneratorPaths.forRoot(root), spec);
+      IllegalStateException exception =
+          assertThrows(
+              IllegalStateException.class,
+              () -> {
+                Main.run(new String[] {"--check"}, GeneratorPaths.forRoot(root));
+              });
 
-    assertTrue(changes.stream().anyMatch(change -> change.endsWith("com/coinbase/prime/model/Thing.java")));
-    assertFalse(Files.exists(sourceRoot.resolve("com/coinbase/prime/model/Thing.java")));
+      assertTrue(exception.getMessage().contains("out of date"), exception.getMessage());
+      assertEquals(before, snapshot(root));
+      assertFalse(Files.exists(root.resolve("generated")));
+      assertFalse(Files.exists(root.resolve("tools/model-generator/generated-files.json")));
+      assertFalse(Files.exists(root.resolve("tools/model-generator/generated-model-files.json")));
+      assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/things/ListThingsResponse.java")));
+      assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/model/Thing.java")));
+    } finally {
+      FileUtils.deleteDirectory(root.toFile());
+    }
+  }
+
+  private static void writeFixture(Path root) throws Exception {
+    Path sourceRoot = root.resolve("src/main/java/com/coinbase/prime");
+    Files.createDirectories(sourceRoot);
+    Files.createDirectories(root.resolve("apiSpec"));
+    Files.createDirectories(root.resolve("tools/model-generator/config"));
+    Files.writeString(root.resolve("pom.xml"), fixturePom());
+    Files.writeString(sourceRoot.resolve("Existing.java"), "package com.coinbase.prime;\nclass Existing {}\n");
+    Files.writeString(
+        root.resolve("tools/model-generator/config/generator-config.json"),
+        "{\"specUrl\":\"unused\",\"committedSpecPath\":\"apiSpec/openapi.yaml\"}\n");
+    Files.writeString(root.resolve("tools/model-generator/config/operations-overrides.json"), "[]\n");
+    Files.writeString(
+        root.resolve("apiSpec/openapi.yaml"),
+        String.join(
+            "\n",
+            "openapi: 3.0.0",
+            "info: { title: test, version: 1.0.0 }",
+            "paths:",
+            "  /v1/things:",
+            "    get:",
+            "      operationId: PrimeRESTAPI_ListThings",
+            "      tags: [Things]",
+            "      responses:",
+            "        '200':",
+            "          description: Success",
+            "          content:",
+            "            application/json:",
+            "              schema:",
+            "                type: object",
+            "                properties:",
+            "                  thing: { $ref: '#/components/schemas/Thing' }",
+            "components:",
+            "  schemas:",
+            "    Thing:",
+            "      type: object",
+            "      properties:",
+            "        id: { type: string }",
+            ""));
+  }
+
+  private static String fixturePom() {
+    return String.join(
+        "\n",
+        "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">",
+        "  <modelVersion>4.0.0</modelVersion>",
+        "  <groupId>test</groupId>",
+        "  <artifactId>fixture</artifactId>",
+        "  <version>1.0.0</version>",
+        "  <build><plugins><plugin>",
+        "    <groupId>com.diffplug.spotless</groupId>",
+        "    <artifactId>spotless-maven-plugin</artifactId>",
+        "    <version>2.43.0</version>",
+        "    <configuration><java><googleJavaFormat>",
+        "      <version>1.24.0</version><style>GOOGLE</style>",
+        "    </googleJavaFormat></java></configuration>",
+        "  </plugin></plugins></build>",
+        "</project>",
+        "");
+  }
+
+  private static Map<String, String> snapshot(Path root) throws Exception {
+    Map<String, String> files = new LinkedHashMap<>();
+    try (Stream<Path> paths = Files.walk(root)) {
+      List<Path> regularFiles = paths.filter(Files::isRegularFile).sorted().collect(Collectors.toList());
+      for (Path file : regularFiles) {
+        files.put(root.relativize(file).toString(), sha256(Files.readAllBytes(file)));
+      }
+    }
+    return files;
+  }
+
+  private static String sha256(byte[] content) throws Exception {
+    byte[] digest = MessageDigest.getInstance("SHA-256").digest(content);
+    StringBuilder hex = new StringBuilder();
+    for (byte value : digest) {
+      hex.append(String.format("%02x", value));
+    }
+    return hex.toString();
   }
 }
