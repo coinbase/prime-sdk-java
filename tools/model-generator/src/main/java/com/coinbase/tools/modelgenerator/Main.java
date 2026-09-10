@@ -122,10 +122,12 @@ public final class Main {
               spec,
               stagedModelManifest)
           .processModels();
+      // Stage protected proposals too so Spotless can normalize and compare them without touching the
+      // repository's compatibility files.
       GeneratedSourceReconciler.write(
           stagedSourceRoot,
           renderClientSources(spec, configuration, stagedSourceRoot),
-          configuration.protectedFiles(),
+          Collections.emptySet(),
           stagedClientManifest);
       formatStagedSources(stagingRoot);
 

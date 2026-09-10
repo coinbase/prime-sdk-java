@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.sun.net.httpserver.HttpServer;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -56,6 +58,54 @@ class MainCheckTest {
       assertFalse(Files.exists(root.resolve("tools/model-generator/generated-model-files.json")));
       assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/things/ListThingsResponse.java")));
       assertFalse(Files.exists(root.resolve("src/main/java/com/coinbase/prime/model/Thing.java")));
+    } finally {
+      FileUtils.deleteDirectory(root.toFile());
+    }
+  }
+
+  @Test
+  void checkReportsProtectedCompatibilityDriftWithoutChangingProjectFiles() throws Exception {
+    Path root = Files.createTempDirectory("protected-generator-check");
+    Path protectedRelative = Path.of("com/coinbase/prime/things/ListThingsResponse.java");
+    Path protectedFile = root.resolve("src/main/java").resolve(protectedRelative);
+    try {
+      writeFixture(root);
+      Files.writeString(
+          root.resolve("tools/model-generator/config/generator-config.json"),
+          "{\"specUrl\":\"unused\",\"committedSpecPath\":\"apiSpec/openapi.yaml\","
+              + "\"protectedCompatibilityFiles\":[\""
+              + protectedRelative
+              + "\"]}\n");
+      Files.createDirectories(protectedFile.getParent());
+      Files.writeString(
+          protectedFile,
+          "package com.coinbase.prime.things;\npublic class ListThingsResponse {}\n");
+      Main.run(new String[0], GeneratorPaths.forRoot(root));
+      Main.formatStagedSources(root);
+      Files.writeString(
+          protectedFile,
+          "package com.coinbase.prime.things;\n// Compatibility implementation.\n"
+              + "public class ListThingsResponse {}\n");
+      Map<String, String> before = snapshot(root);
+
+      ByteArrayOutputStream output = new ByteArrayOutputStream();
+      PrintStream originalOut = System.out;
+      try {
+        System.setOut(new PrintStream(output, true, StandardCharsets.UTF_8));
+        IllegalStateException exception =
+            assertThrows(
+                IllegalStateException.class,
+                () -> Main.run(new String[] {"--check"}, GeneratorPaths.forRoot(root)));
+        assertTrue(exception.getMessage().contains("out of date"), exception.getMessage());
+      } finally {
+        System.setOut(originalOut);
+      }
+
+      assertTrue(
+          output.toString(StandardCharsets.UTF_8).contains("SKIP " + protectedRelative),
+          output.toString(StandardCharsets.UTF_8));
+      assertEquals(before, snapshot(root));
+      assertFalse(Files.exists(root.resolve("generated")));
     } finally {
       FileUtils.deleteDirectory(root.toFile());
     }
