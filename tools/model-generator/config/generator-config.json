@@ -1,0 +1,26 @@
+{
+  "specUrl": "https://api.prime.coinbase.com/v1/openapi.yaml",
+  "committedSpecPath": "apiSpec/prime-public-spec.yaml",
+  "tagToFolderOverrides": {
+    "Travel Rule": "transactions"
+  },
+  "modelTypeMappings": {
+    "CreateOnchainTransactionRequestEVMParams": "EvmParams",
+    "CreateOnchainTransactionRequestEvmParams": "EvmParams",
+    "FcmFuturesSweepRequestAmount": "SweepAmount",
+    "FcmFuturesSweep": "FuturesSweep",
+    "EvmParam": "EvmParams",
+    "RPC": "RpcConfig",
+    "XMControlStatus": "PrimeXMControlStatus",
+    "XMMarginLevel": "PrimeXMMarginLevel"
+  },
+  "sharedModelMappings": {
+    "PaginatedResponse": "com.coinbase.prime.common.Pagination"
+  },
+  "protectedCompatibilityFiles": [
+    "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdRequest.java",
+    "com/coinbase/prime/portfolios/GetPortfolioCounterpartyIdResponse.java",
+    "com/coinbase/prime/portfolios/PortfoliosService.java",
+    "com/coinbase/prime/portfolios/PortfoliosServiceImpl.java"
+  ]
+}
