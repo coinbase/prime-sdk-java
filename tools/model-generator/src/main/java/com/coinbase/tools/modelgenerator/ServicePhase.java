@@ -54,13 +54,28 @@ public final class ServicePhase {
         .append("import com.coinbase.core.errors.CoinbaseClientException;\nimport com.coinbase.prime.errors.CoinbasePrimeException;\n\npublic interface ").append(service).append(" {\n");
     for (OperationBinding binding : bindings) {
       SpecModels.Operation operation = operations.get(binding.operationId());
-      appendMethodJavadoc(source, operation, binding, true);
-      source.append("  ").append(binding.sdkMethod()).append("Response ").append(names.methodName(binding.sdkMethod())).append("(");
-      if (!binding.omitRequest()) source.append(binding.sdkMethod()).append("Request request");
-      source.append(") throws CoinbaseClientException, CoinbasePrimeException;\n\n");
+      appendInterfaceMethod(source, operation, binding, names, binding.sdkMethod(), null);
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        appendInterfaceMethod(source, operation, binding, names, alias.sdkMethod(), alias.message());
+      }
     }
     return source.append("}\n").toString();
   }
+
+  private static void appendInterfaceMethod(
+      StringBuilder source,
+      SpecModels.Operation operation,
+      OperationBinding binding,
+      NamingResolver names,
+      String methodSdkName,
+      String deprecationMessage) {
+    appendMethodJavadoc(source, operation, binding, true, methodSdkName, deprecationMessage);
+    if (deprecationMessage != null) source.append("  @Deprecated\n");
+    source.append("  ").append(methodSdkName).append("Response ").append(names.methodName(methodSdkName)).append("(");
+    if (!binding.omitRequest()) source.append(methodSdkName).append("Request request");
+    source.append(") throws CoinbaseClientException, CoinbasePrimeException;\n\n");
+  }
+
   private static String implementationSource(String service, String folder, List<OperationBinding> bindings,
       Map<String, SpecModels.Operation> operations, GeneratorConfiguration configuration, NamingResolver names) {
     boolean v2 = bindings.stream().anyMatch(binding -> version(operations.get(binding.operationId()).path()).equals("v2"));
@@ -74,35 +89,54 @@ public final class ServicePhase {
     source.append("  }\n");
     for (OperationBinding binding : bindings) {
       SpecModels.Operation operation = operations.get(binding.operationId());
-      String method = names.methodName(binding.sdkMethod()); String version = version(operation.path());
-      source.append("\n");
-      appendMethodJavadoc(source, operation, binding, false);
-      source.append("  @Override\n  public ").append(binding.sdkMethod()).append("Response ").append(method).append("(");
-      if (!binding.omitRequest()) source.append(binding.sdkMethod()).append("Request request");
-      source.append(") throws CoinbasePrimeException {\n    return ");
-      if (version.equals("v2")) {
-        source.append("this.primeClient.withBaseUrl(Constants.versionedBaseUrl(this.primeClient.getBaseUrl(), \"v2\")).sendRequest(");
-        source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
-            .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
-            .append(statuses(operation, configuration)).append(",\n        ")
-            .append(binding.omitRequest() ? "null" : "request").append(",\n        new TypeReference<")
-            .append(binding.sdkMethod()).append("Response>() {});\n  }\n");
-      } else {
-        source.append("this.request(");
-        source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
-            .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
-            .append(binding.omitRequest() ? "null" : "request").append(",\n        ")
-            .append(statuses(operation, configuration)).append(",\n        new TypeReference<")
-            .append(binding.sdkMethod()).append("Response>() {});\n  }\n");
+      appendImplMethod(source, operation, binding, configuration, names, binding.sdkMethod(), null);
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        appendImplMethod(source, operation, binding, configuration, names, alias.sdkMethod(), alias.message());
       }
     }
     return source.append("}\n").toString();
   }
+
+  private static void appendImplMethod(
+      StringBuilder source,
+      SpecModels.Operation operation,
+      OperationBinding binding,
+      GeneratorConfiguration configuration,
+      NamingResolver names,
+      String methodSdkName,
+      String deprecationMessage) {
+    String method = names.methodName(methodSdkName);
+    String version = version(operation.path());
+    source.append("\n");
+    appendMethodJavadoc(source, operation, binding, false, methodSdkName, deprecationMessage);
+    if (deprecationMessage != null) source.append("  @Deprecated\n");
+    source.append("  @Override\n  public ").append(methodSdkName).append("Response ").append(method).append("(");
+    if (!binding.omitRequest()) source.append(methodSdkName).append("Request request");
+    source.append(") throws CoinbasePrimeException {\n    return ");
+    if (version.equals("v2")) {
+      source.append("this.primeClient.withBaseUrl(Constants.versionedBaseUrl(this.primeClient.getBaseUrl(), \"v2\")).sendRequest(");
+      source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
+          .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
+          .append(statuses(operation, configuration)).append(",\n        ")
+          .append(binding.omitRequest() ? "null" : "request").append(",\n        new TypeReference<")
+          .append(methodSdkName).append("Response>() {});\n  }\n");
+    } else {
+      source.append("this.request(");
+      source.append("HttpMethod.").append(operation.httpMethod()).append(",\n        ")
+          .append(pathExpression(operation.path(), binding, names)).append(",\n        ")
+          .append(binding.omitRequest() ? "null" : "request").append(",\n        ")
+          .append(statuses(operation, configuration)).append(",\n        new TypeReference<")
+          .append(methodSdkName).append("Response>() {});\n  }\n");
+    }
+  }
+
   private static void appendMethodJavadoc(
       StringBuilder source,
       SpecModels.Operation operation,
       OperationBinding binding,
-      boolean interfaceMethod) {
+      boolean interfaceMethod,
+      String responseSdkName,
+      String deprecationMessage) {
     String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
     source.append("  /**\n");
     if (!documentation.isEmpty()) {
@@ -111,11 +145,14 @@ public final class ServicePhase {
     if (!binding.omitRequest()) {
       source.append("   * @param request request parameters and body for this operation\n");
     }
-    source.append("   * @return the decoded ").append(binding.sdkMethod()).append(" response\n");
+    source.append("   * @return the decoded ").append(responseSdkName).append(" response\n");
     if (interfaceMethod) {
       source.append("   * @throws CoinbaseClientException if the request cannot be sent\n");
     }
     source.append("   * @throws CoinbasePrimeException if the Prime API rejects the request\n");
+    if (deprecationMessage != null) {
+      source.append("   * @deprecated ").append(deprecationMessage).append("\n");
+    }
     source.append("   */\n");
   }
 

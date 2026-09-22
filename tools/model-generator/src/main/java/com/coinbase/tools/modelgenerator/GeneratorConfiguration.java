@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -229,6 +231,7 @@ public final class GeneratorConfiguration {
     private final Map<String, String> responseTypes;
     private final List<String> convenienceConstructorParameters;
     private final List<Integer> statuses;
+    private final List<DeprecatedAlias> deprecatedAliases;
 
     private Override(
         String sdkMethod,
@@ -240,7 +243,8 @@ public final class GeneratorConfiguration {
         Map<String, String> propertyNames,
         Map<String, String> responseTypes,
         List<String> convenienceConstructorParameters,
-        List<Integer> statuses) {
+        List<Integer> statuses,
+        List<DeprecatedAlias> deprecatedAliases) {
       this.sdkMethod = sdkMethod;
       this.serviceFolder = serviceFolder;
       this.serviceName = serviceName;
@@ -251,6 +255,7 @@ public final class GeneratorConfiguration {
       this.responseTypes = responseTypes;
       this.convenienceConstructorParameters = convenienceConstructorParameters;
       this.statuses = statuses;
+      this.deprecatedAliases = deprecatedAliases;
     }
 
     static Override from(JsonNode node) {
@@ -299,6 +304,23 @@ public final class GeneratorConfiguration {
         }
         normalizedStatuses.add(code);
       }
+      List<DeprecatedAlias> deprecatedAliases = new ArrayList<>();
+      Set<String> aliasNames = new HashSet<>();
+      for (JsonNode aliasNode : node.path("deprecatedAliases")) {
+        String aliasSdkMethod = required(aliasNode, "sdkMethod");
+        validatePascalCaseIdentifier(aliasSdkMethod, "deprecatedAliases.sdkMethod");
+        String message = required(aliasNode, "message");
+        if (sdkMethod != null && sdkMethod.equals(aliasSdkMethod)) {
+          throw new IllegalArgumentException(
+              "deprecatedAliases.sdkMethod must differ from sdkMethod: " + aliasSdkMethod);
+        }
+        if (!aliasNames.add(aliasSdkMethod)) {
+          throw new IllegalArgumentException(
+              "Duplicate deprecatedAliases.sdkMethod: " + aliasSdkMethod);
+        }
+        deprecatedAliases.add(new DeprecatedAlias(aliasSdkMethod, message));
+      }
+
       return new Override(
           sdkMethod,
           serviceFolder,
@@ -309,7 +331,8 @@ public final class GeneratorConfiguration {
           Collections.unmodifiableMap(new LinkedHashMap<>(propertyNames)),
           Collections.unmodifiableMap(new LinkedHashMap<>(responseTypes)),
           Collections.unmodifiableList(convenienceConstructorParameters),
-          Collections.unmodifiableList(new ArrayList<>(normalizedStatuses)));
+          Collections.unmodifiableList(new ArrayList<>(normalizedStatuses)),
+          Collections.unmodifiableList(deprecatedAliases));
     }
 
     public String sdkMethod() {
@@ -350,6 +373,10 @@ public final class GeneratorConfiguration {
 
     public List<Integer> statuses() {
       return statuses;
+    }
+
+    public List<DeprecatedAlias> deprecatedAliases() {
+      return deprecatedAliases;
     }
   }
 }

@@ -58,8 +58,14 @@ class OperationBindingGeneratorTest {
 
     assertEquals("GetEntityFcmBalance", binding(bindings, "PrimeRESTAPI_GetFcmBalance").sdkMethod());
     assertEquals("ListPortfolioOrders", binding(bindings, "PrimeRESTAPI_GetOrders").sdkMethod());
-    assertEquals("GetOrderByOrderId", binding(bindings, "PrimeRESTAPI_GetOrder").sdkMethod());
-    assertEquals("ClaimRewards", binding(bindings, "PrimeRESTAPI_StakingClaimRewards").sdkMethod());
+    assertEquals("GetOrder", binding(bindings, "PrimeRESTAPI_GetOrder").sdkMethod());
+    assertEquals(
+        "GetOrderByOrderId",
+        binding(bindings, "PrimeRESTAPI_GetOrder").deprecatedAliases().get(0).sdkMethod());
+    assertEquals("ClaimStakingRewards", binding(bindings, "PrimeRESTAPI_StakingClaimRewards").sdkMethod());
+    assertEquals(
+        "ClaimRewards",
+        binding(bindings, "PrimeRESTAPI_StakingClaimRewards").deprecatedAliases().get(0).sdkMethod());
     assertEquals("GetCrossMarginLiquidation", binding(bindings, "PrimeRESTAPI_GetXMLiquidation").sdkMethod());
     assertEquals("GetDerivativePositions", binding(bindings, "PrimeRESTAPI_GetDerivativePositions").sdkMethod());
     assertEquals("ListOnchainWalletBalances", binding(bindings, "PrimeRESTAPI_ListWeb3WalletBalances").sdkMethod());

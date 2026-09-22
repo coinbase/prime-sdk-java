@@ -1,0 +1,100 @@
+[
+  {
+    "operationId": "PrimeRESTAPI_CreateWalletTransfer",
+    "canonicalJavaMethod": "createTransfer",
+    "legacyJavaAliases": ["createWalletTransfer"],
+    "serviceFolder": "transactions",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateWalletWithdrawal",
+    "canonicalJavaMethod": "createWithdrawal",
+    "legacyJavaAliases": ["createWalletWithdrawal"],
+    "serviceFolder": "transactions",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrder",
+    "canonicalJavaMethod": "getOrder",
+    "legacyJavaAliases": ["getOrderByOrderId"],
+    "serviceFolder": "orders",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingClaimRewards",
+    "canonicalJavaMethod": "claimStakingRewards",
+    "legacyJavaAliases": ["claimRewards"],
+    "serviceFolder": "staking",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingInitiate",
+    "canonicalJavaMethod": "createPortfolioStake",
+    "legacyJavaAliases": ["portfolioStakingInitiate"],
+    "serviceFolder": "staking",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingUnstake",
+    "canonicalJavaMethod": "createPortfolioUnstake",
+    "legacyJavaAliases": ["portfolioStakingUnstake"],
+    "serviceFolder": "staking",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethods",
+    "canonicalJavaMethod": "listEntityPaymentMethods",
+    "legacyJavaAliases": ["listPaymentMethods"],
+    "serviceFolder": "paymentmethods",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethodDetails",
+    "canonicalJavaMethod": "getEntityPaymentMethod",
+    "legacyJavaAliases": ["getPaymentMethodDetails"],
+    "serviceFolder": "paymentmethods",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioActivities",
+    "canonicalJavaMethod": "listActivities",
+    "legacyJavaAliases": ["listPortfolioActivities"],
+    "serviceFolder": "activities",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioAddressBook",
+    "canonicalJavaMethod": "getAddressBook",
+    "legacyJavaAliases": ["listAddressBook"],
+    "serviceFolder": "addressbook",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetAllocationsByClientNettingId",
+    "canonicalJavaMethod": "getAllocationsByClientNettingId",
+    "legacyJavaAliases": ["listAllocationsByNettingId"],
+    "serviceFolder": "allocations",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityUsers",
+    "canonicalJavaMethod": "listEntityUsers",
+    "legacyJavaAliases": [],
+    "serviceFolder": "users",
+    "aliasBehavior": "none"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetFcmBalance",
+    "canonicalJavaMethod": "getEntityFcmBalance",
+    "legacyJavaAliases": [],
+    "serviceFolder": "futures",
+    "aliasBehavior": "none"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioCounterpartyID",
+    "canonicalJavaMethod": "getPortfolioCounterpartyId",
+    "legacyJavaAliases": [],
+    "serviceFolder": "advancedtransfer",
+    "aliasBehavior": "none"
+  }
+]

@@ -15,6 +15,7 @@
  */
 package com.coinbase.tools.modelgenerator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +33,7 @@ public final class OperationBinding {
   private final Map<String, String> propertyNameOverrides;
   private final Map<String, String> responseTypeOverrides;
   private final List<String> convenienceConstructorParameters;
+  private final List<DeprecatedAlias> deprecatedAliases;
 
   OperationBinding(
       String operationId,
@@ -51,6 +53,7 @@ public final class OperationBinding {
         parameterTypeOverrides,
         Collections.emptyMap(),
         Collections.emptyMap(),
+        Collections.emptyList(),
         Collections.emptyList());
   }
 
@@ -64,7 +67,8 @@ public final class OperationBinding {
       Map<String, String> parameterTypeOverrides,
       Map<String, String> propertyNameOverrides,
       Map<String, String> responseTypeOverrides,
-      List<String> convenienceConstructorParameters) {
+      List<String> convenienceConstructorParameters,
+      List<DeprecatedAlias> deprecatedAliases) {
     this.operationId = operationId;
     this.serviceFolder = serviceFolder;
     this.serviceName = serviceName;
@@ -79,6 +83,7 @@ public final class OperationBinding {
         Collections.unmodifiableMap(new LinkedHashMap<>(responseTypeOverrides));
     this.convenienceConstructorParameters =
         Collections.unmodifiableList(convenienceConstructorParameters);
+    this.deprecatedAliases = Collections.unmodifiableList(new ArrayList<>(deprecatedAliases));
   }
 
   public String operationId() {
@@ -119,5 +124,9 @@ public final class OperationBinding {
 
   public List<String> convenienceConstructorParameters() {
     return convenienceConstructorParameters;
+  }
+
+  public List<DeprecatedAlias> deprecatedAliases() {
+    return deprecatedAliases;
   }
 }

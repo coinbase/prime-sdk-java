@@ -37,6 +37,12 @@ public final class RequestPhase {
       SpecModels.Operation operation = operations.get(binding.operationId());
       String className = binding.sdkMethod() + "Request";
       sources.put(path(binding, className), renderOne(operation, binding, className, types, names));
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        String aliasClassName = alias.sdkMethod() + "Request";
+        sources.put(
+            path(binding, aliasClassName),
+            renderAliasOne(operation, binding, className, aliasClassName, alias, types, names));
+      }
     }
     return sources;
   }
@@ -103,12 +109,93 @@ public final class RequestPhase {
     if (validates) source.append("      validate();\n");
     source.append("      return new ").append(className).append("(this);\n    }\n");
     if (validates) {
-      source.append("\n    private void validate() throws CoinbaseClientException {\n");
+      source.append("\n    protected void validate() throws CoinbaseClientException {\n");
       for (Field field : fields) if (field.path && field.required && field.type.name().equals("String"))
         source.append("      if (isNullOrEmpty(this.").append(field.name).append(")) {\n        throw new CoinbaseClientException(\"").append(SourceTemplates.cap(field.name)).append(" is required\");\n      }\n");
       source.append("    }\n");
     }
     return source.append("  }\n}\n").toString();
+  }
+
+  private static String renderAliasOne(
+      SpecModels.Operation operation,
+      OperationBinding binding,
+      String canonicalClassName,
+      String aliasClassName,
+      DeprecatedAlias alias,
+      JavaTypeResolver types,
+      NamingResolver names) {
+    List<Field> fields = fields(operation, binding, types, names);
+    boolean validates =
+        fields.stream()
+            .anyMatch(field -> field.path && field.required && field.type.name().equals("String"));
+    Set<String> imports = new LinkedHashSet<>();
+    if (validates) imports.add("com.coinbase.core.errors.CoinbaseClientException");
+    if (binding.paginated()) {
+      imports.add("com.coinbase.prime.common.Pagination");
+      imports.add("com.coinbase.prime.model.enums.SortDirection");
+    }
+    for (Field field : fields) imports.addAll(field.type.imports());
+    StringBuilder source =
+        new StringBuilder(SourceTemplates.header())
+            .append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
+    SourceTemplates.imports(source, imports);
+    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
+    source.append("/**\n");
+    if (!documentation.isEmpty()) {
+      source.append(" * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
+    }
+    source.append(" *\n * @deprecated ").append(alias.message()).append("\n */\n");
+    source.append("@Deprecated\n");
+    source.append("public class ").append(aliasClassName).append(" extends ").append(canonicalClassName).append(" {\n");
+    source.append("  public ").append(aliasClassName).append("() {}\n\n");
+    appendAliasConvenienceConstructor(source, aliasClassName, fields, binding.convenienceConstructorParameters());
+    source.append("  public ").append(aliasClassName).append("(").append(canonicalClassName).append(".Builder builder) {\n    super(builder);\n  }\n\n");
+    source.append("  /** @deprecated ").append(alias.message()).append(" */\n");
+    source.append("  @Deprecated\n");
+    source.append("  public static class Builder extends ").append(canonicalClassName).append(".Builder {\n");
+    if (binding.paginated()) {
+      source
+          .append("    @Override\n    public Builder cursor(String cursor) {\n      super.cursor(cursor);\n      return this;\n    }\n\n")
+          .append("    @Override\n    public Builder sortDirection(SortDirection sortDirection) {\n      super.sortDirection(sortDirection);\n      return this;\n    }\n\n")
+          .append("    @Override\n    public Builder limit(Integer limit) {\n      super.limit(limit);\n      return this;\n    }\n\n")
+          .append("    @Override\n    public Builder pagination(Pagination pagination) {\n      super.pagination(pagination);\n      return this;\n    }\n\n");
+    }
+    for (Field field : fields) {
+      source
+          .append("    @Override\n    public Builder ").append(field.name).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n      super.").append(field.name).append("(").append(field.name).append(");\n      return this;\n    }\n\n");
+    }
+    source.append("    @Override\n    public ").append(aliasClassName).append(" build()");
+    if (validates) source.append(" throws CoinbaseClientException");
+    source.append(" {\n");
+    if (validates) source.append("      super.validate();\n");
+    source.append("      return new ").append(aliasClassName).append("(this);\n    }\n");
+    return source.append("  }\n}\n").toString();
+  }
+
+  private static void appendAliasConvenienceConstructor(
+      StringBuilder source, String aliasClassName, List<Field> fields, List<String> parameterNames) {
+    if (parameterNames.isEmpty()) {
+      return;
+    }
+    Map<String, Field> fieldsByWireName = new LinkedHashMap<>();
+    for (Field field : fields) {
+      fieldsByWireName.put(field.wireName, field);
+    }
+    source.append("  public ").append(aliasClassName).append("(");
+    for (int index = 0; index < parameterNames.size(); index++) {
+      if (index > 0) {
+        source.append(", ");
+      }
+      Field field = fieldsByWireName.get(parameterNames.get(index));
+      source.append(field.type.name()).append(" ").append(field.name);
+    }
+    source.append(") {\n    super();\n");
+    for (String parameterName : parameterNames) {
+      Field field = fieldsByWireName.get(parameterName);
+      source.append("    this.set").append(SourceTemplates.cap(field.name)).append("(").append(field.name).append(");\n");
+    }
+    source.append("  }\n\n");
   }
 
   static List<Field> fields(SpecModels.Operation operation, OperationBinding binding, JavaTypeResolver types, NamingResolver names) {

@@ -14,11 +14,18 @@
   },
   {
     "operationId": "PrimeRESTAPI_GetPortfolioActivities",
+    "sdkMethod": "ListActivities",
     "parameterTypeOverrides": {
       "symbols": "String[]",
       "categories": "com.coinbase.prime.model.enums.ActivityCategory[]",
       "statuses": "com.coinbase.prime.model.enums.ActivityStatus[]"
-    }
+    },
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListPortfolioActivities",
+        "message": "Use listActivities instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_ListEntityBalances",
@@ -64,11 +71,32 @@
   },
   {
     "operationId": "PrimeRESTAPI_GetOrder",
-    "sdkMethod": "GetOrderByOrderId"
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetOrderByOrderId",
+        "message": "Use getOrder instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetEntityPaymentMethods",
-    "sdkMethod": "ListPaymentMethods"
+    "sdkMethod": "ListEntityPaymentMethods",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListPaymentMethods",
+        "message": "Use listEntityPaymentMethods instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethodDetails",
+    "sdkMethod": "GetEntityPaymentMethod",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetPaymentMethodDetails",
+        "message": "Use getEntityPaymentMethod instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetPortfolios",
@@ -117,7 +145,13 @@
   },
   {
     "operationId": "PrimeRESTAPI_StakingClaimRewards",
-    "sdkMethod": "ClaimRewards"
+    "sdkMethod": "ClaimStakingRewards",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ClaimRewards",
+        "message": "Use claimStakingRewards instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_StakingInitiate",
@@ -126,6 +160,26 @@
   {
     "operationId": "PrimeRESTAPI_StakingUnstake",
     "sdkMethod": "CreateUnstake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingInitiate",
+    "sdkMethod": "CreatePortfolioStake",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "PortfolioStakingInitiate",
+        "message": "Use createPortfolioStake instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingUnstake",
+    "sdkMethod": "CreatePortfolioUnstake",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "PortfolioStakingUnstake",
+        "message": "Use createPortfolioUnstake instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_ListTransactionValidators",
@@ -153,6 +207,26 @@
     }
   },
   {
+    "operationId": "PrimeRESTAPI_CreateWalletTransfer",
+    "sdkMethod": "CreateTransfer",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "CreateWalletTransfer",
+        "message": "Use createTransfer instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateWalletWithdrawal",
+    "sdkMethod": "CreateWithdrawal",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "CreateWalletWithdrawal",
+        "message": "Use createWithdrawal instead."
+      }
+    ]
+  },
+  {
     "operationId": "PrimeRESTAPI_ListWeb3WalletBalances",
     "sdkMethod": "ListOnchainWalletBalances"
   },
@@ -174,6 +248,26 @@
     "parameterTypeOverrides": {
       "deposit_type": "com.coinbase.prime.model.enums.WalletDepositInstructionType"
     }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioAddressBook",
+    "sdkMethod": "GetAddressBook",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListAddressBook",
+        "message": "Use getAddressBook instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetAllocationsByClientNettingId",
+    "sdkMethod": "GetAllocationsByClientNettingId",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListAllocationsByNettingId",
+        "message": "Use getAllocationsByClientNettingId instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetFcmBalance",

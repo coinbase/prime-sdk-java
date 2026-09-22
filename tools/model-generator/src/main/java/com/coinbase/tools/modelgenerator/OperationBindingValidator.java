@@ -49,6 +49,16 @@ public final class OperationBindingValidator {
           throw new IllegalArgumentException(operation.operationId() + " is missing path parameter " + matcher.group(1));
         }
       }
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        if (alias.sdkMethod().equals(binding.sdkMethod())) {
+          throw new IllegalArgumentException(
+              "Deprecated alias must differ from the canonical Java method: " + binding.operationId());
+        }
+        if (!serviceMethods.add(binding.serviceFolder() + ":" + alias.sdkMethod())) {
+          throw new IllegalArgumentException(
+              "Duplicate Java service method: " + binding.serviceFolder() + ":" + alias.sdkMethod());
+        }
+      }
     }
   }
 }
