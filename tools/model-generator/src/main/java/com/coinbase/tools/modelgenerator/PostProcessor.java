@@ -26,7 +26,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
@@ -50,6 +49,9 @@ public class PostProcessor {
     private final Path tempDir;
     private final Path outputDir;
     private final Path enumsDir;
+    private final Path errorsDir;
+    private final Path sourceRoot;
+    private final Path manifest;
     private final EnumJavadocEnhancer enumJavadocEnhancer;
     private final ModelJavadocEnhancer modelJavadocEnhancer;
 
@@ -58,12 +60,23 @@ public class PostProcessor {
     private int removedStaleCount = 0;
     private final Set<Path> writtenOutputFiles = new HashSet<>();
 
-    public PostProcessor(Path tempDir, Path outputDir, Path enumsDir, Path specPath) throws IOException {
+    public PostProcessor(Path tempDir, Path outputDir, Path enumsDir, Path errorsDir, Path specPath) throws IOException {
+        this(tempDir, null, outputDir, enumsDir, errorsDir, specPath, null);
+    }
+
+    public PostProcessor(Path tempDir, Path sourceRoot, Path outputDir, Path enumsDir, Path errorsDir,
+            Path specPath, Path manifest) throws IOException {
         this.tempDir = tempDir;
+        this.sourceRoot = sourceRoot == null ? null : sourceRoot.toAbsolutePath().normalize();
         this.outputDir = outputDir;
         this.enumsDir = enumsDir;
+        this.errorsDir = errorsDir;
+        this.manifest = manifest;
         this.enumJavadocEnhancer = EnumJavadocEnhancer.load(specPath);
         this.modelJavadocEnhancer = ModelJavadocEnhancer.load(specPath);
+        if (manifest != null && this.sourceRoot == null) {
+            throw new IllegalArgumentException("Model generation manifest requires a source root");
+        }
     }
 
     /** Maps an OpenAPI schema name to the SDK Java enum type name (prefix strip + acronym rules). */
@@ -94,6 +107,7 @@ public class PostProcessor {
         // Create output directories
         Files.createDirectories(outputDir);
         Files.createDirectories(enumsDir);
+        Files.createDirectories(errorsDir);
 
         // Separate enum files from model files
         List<Path> enumFiles = new ArrayList<>();
@@ -109,35 +123,24 @@ public class PostProcessor {
 
         logger.info("Found {} enum files and {} model files", enumFiles.size(), nonEnumFiles.size());
 
-        // Process enums FIRST so they're available for import fixing
+        // Process enums first so they are available for import fixing. Do not clean stale output
+        // unless every source was processed successfully.
         logger.info("Processing enums first...");
         for (Path file : enumFiles) {
-            String fileName = file.getFileName().toString();
-            logger.info("Processing enum: {}", fileName);
-
-            try {
-                processEnumFile(file);
-            } catch (Exception e) {
-                logger.error("Error processing enum file: " + fileName, e);
-            }
+            logger.info("Processing enum: {}", file.getFileName());
+            processEnumFile(file);
         }
 
         createEnumAliases();
 
-        // Then process models with fixed enum imports
         logger.info("Processing models...");
         for (Path file : nonEnumFiles) {
-            String fileName = file.getFileName().toString();
-            logger.info("Processing model: {}", fileName);
-
-            try {
-                processModelFile(file);
-            } catch (Exception e) {
-                logger.error("Error processing model file: " + fileName, e);
-            }
+            logger.info("Processing model: {}", file.getFileName());
+            processModelFile(file);
         }
 
         removeStaleOutputFiles();
+        writeModelManifest();
 
         // Clean up temporary directory
         logger.info("Cleaning up temporary files...");
@@ -153,53 +156,59 @@ public class PostProcessor {
         logger.info("==========================================");
     }
 
-    /**
-     * Deletes model and enum files under the output directories that were not produced in this run.
-     */
+    /** Deletes only files explicitly owned by the previous successful model generation. */
     private void removeStaleOutputFiles() throws IOException {
         removedStaleCount = 0;
-        if (Files.exists(outputDir)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(outputDir, "*.java")) {
-                for (Path file : stream) {
-                    removedStaleCount += deleteIfStale(file);
-                }
-            }
+        if (manifest == null) {
+            return;
         }
-        if (Files.exists(enumsDir)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(enumsDir, "*.java")) {
-                for (Path file : stream) {
-                    removedStaleCount += deleteIfStale(file);
-                }
+        for (String entry : GeneratedSourceReconciler.manifestEntries(manifest)) {
+            Path file = sourceRoot.resolve(entry).normalize();
+            if (!file.startsWith(sourceRoot)) {
+                throw new IOException("Model manifest contains unsafe path: " + entry);
+            }
+            if (!writtenOutputFiles.contains(file) && Files.deleteIfExists(file)) {
+                removedStaleCount++;
+                logger.info("Deleted stale generated model/enum file: {}", entry);
             }
         }
         if (removedStaleCount > 0) {
-            logger.info("Removed {} stale model/enum file(s) not produced by this generation run", removedStaleCount);
+            logger.info("Removed {} stale model/enum file(s) owned by the generation manifest", removedStaleCount);
         }
     }
 
-    private int deleteIfStale(Path file) throws IOException {
-        Path normalized = file.toAbsolutePath().normalize();
-        if (writtenOutputFiles.contains(normalized)) {
-            return 0;
+    private void writeModelManifest() throws IOException {
+        if (manifest == null) {
+            return;
         }
-        Files.delete(file);
-        logger.info("Deleted stale file: {}", file.getFileName());
-        return 1;
+        Set<Path> generated = new HashSet<>();
+        for (Path file : writtenOutputFiles) {
+            if (!file.startsWith(sourceRoot)) {
+                throw new IOException("Generated model was written outside the configured source root: " + file);
+            }
+            generated.add(sourceRoot.relativize(file));
+        }
+        GeneratedSourceReconciler.writeManifest(manifest, generated);
     }
 
     private List<Path> findGeneratedModelFiles() throws IOException {
         List<Path> files = new ArrayList<>();
         Path modelPath = tempDir.resolve("raw");
 
-        if (Files.exists(modelPath)) {
+        if (!Files.isDirectory(modelPath)) {
+            throw new IOException("OpenAPI model output was not produced: " + modelPath);
+        }
+        {
             Files.walkFileTree(modelPath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     String fileName = file.getFileName().toString();
-                    if (file.toString().endsWith(".java") &&
-                        !fileName.contains("Test") &&
-                        !fileName.matches(".*Api\\.java$") && // Only skip files ending with "Api.java", not containing "Api"
-                        !isSkippedErrorSchema(fileName)) {
+                    if (file.toString().endsWith(".java")
+                        && !fileName.contains("Test")
+                        && !fileName.matches(".*Api\\.java$")
+                        && !fileName.endsWith("Request.java")
+                        && !fileName.endsWith("Response.java")
+                        && !isSkippedErrorSchema(fileName)) {
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
@@ -210,15 +219,9 @@ public class PostProcessor {
         return files;
     }
 
-    /**
-     * Typed error-code / subcode schemas from the spec are omitted until the SDK
-     * maps HTTP errors onto them. Matching files are also ignored by
-     * {@code .openapi-generator-ignore} so they are not copied into {@code model/enums}.
-     */
+    /** Returns schemas that must not enter the shared model namespace. */
     static boolean isSkippedErrorSchema(String fileName) {
-        return fileName.endsWith("ErrorCode.java")
-            || fileName.endsWith("Subcode.java")
-            || fileName.endsWith("ErrorResponse.java");
+        return fileName.endsWith("ErrorResponse.java");
     }
 
     private boolean isEnumFile(Path file) throws IOException {
@@ -227,50 +230,49 @@ public class PostProcessor {
     }
 
     /**
-     * Fixes enum imports to use the enums package and applies special case enum name mappings.
-     * Handles both import statements and type references throughout the content.
+     * Fixes enum imports to use their generated package and applies special case enum name mappings.
+     * Handles both domain enums and OpenAPI error Subcode enums.
      */
     private String fixEnumImports(String content) {
-        // Get list of all actual enum names from enums directory
-        Set<String> actualEnumNames = new HashSet<>();
-        try {
-            Files.walk(enumsDir, 1)
-                .filter(p -> p.toString().endsWith(".java"))
-                .forEach(p -> {
-                    String fileName = p.getFileName().toString();
-                    actualEnumNames.add(fileName.replace(".java", ""));
-                });
-        } catch (Exception e) {
-            logger.warn("Could not read enums directory: {}", e.getMessage());
-        }
+        Map<String, String> enumPackages = collectEnumPackages();
 
-        // First, apply special case enum name mappings (e.g., ActivityType -> PrimeActivityType)
-        // This must happen BEFORE fixing import paths
+        // First, apply special case enum name mappings (e.g., ActivityType -> PrimeActivityType).
+        // This must happen before fixing import paths.
         for (Map.Entry<String, String> mapping : ENUM_NAME_MAPPINGS.entrySet()) {
             String strippedName = mapping.getKey();
             String actualEnumName = mapping.getValue();
-
-            // Only apply mapping if the actual enum exists
-            if (actualEnumNames.contains(actualEnumName)) {
-                // Replace type references (but not in @JsonProperty annotations)
-                // Pattern: word boundary + strippedName + word boundary (not followed by quotes)
+            if (enumPackages.containsKey(actualEnumName)) {
                 content = content.replaceAll(
-                    "\\b" + strippedName + "\\b(?![^@]*@JsonProperty)",
-                    actualEnumName
-                );
+                    "\\b" + strippedName + "\\b(?![^@]*@JsonProperty)", actualEnumName);
                 logger.debug("Applied enum mapping: {} -> {}", strippedName, actualEnumName);
             }
         }
 
-        // Then, fix import paths for all enums (move from model to model.enums package)
-        for (String enumName : actualEnumNames) {
-            content = content.replace(
-                "import com.coinbase.prime.model." + enumName + ";",
-                "import com.coinbase.prime.model.enums." + enumName + ";"
-            );
+        for (Map.Entry<String, String> enumPackage : enumPackages.entrySet()) {
+            String enumName = enumPackage.getKey();
+            String targetImport = "import " + enumPackage.getValue() + "." + enumName + ";";
+            content = content.replace("import com.coinbase.prime.model." + enumName + ";", targetImport);
+            content = content.replace("import com.coinbase.prime.model.enums." + enumName + ";", targetImport);
         }
 
         return content;
+    }
+
+    private Map<String, String> collectEnumPackages() {
+        Map<String, String> enumPackages = new HashMap<>();
+        collectEnumPackages(enumsDir, GeneratedEnumKind.ENUMS_PACKAGE, enumPackages);
+        collectEnumPackages(errorsDir, GeneratedEnumKind.ERRORS_PACKAGE, enumPackages);
+        return enumPackages;
+    }
+
+    private void collectEnumPackages(Path directory, String packageName, Map<String, String> enumPackages) {
+        try {
+            Files.walk(directory, 1)
+                .filter(path -> path.toString().endsWith(".java"))
+                .forEach(path -> enumPackages.put(path.getFileName().toString().replace(".java", ""), packageName));
+        } catch (Exception e) {
+            logger.warn("Could not read enum directory {}: {}", directory, e.getMessage());
+        }
     }
 
     private void processEnumFile(Path file) throws IOException {
@@ -306,7 +308,7 @@ public class PostProcessor {
     /**
      * Unified file processing logic for both enums and models.
      * @param file Source file to process
-     * @param targetDir Target directory (enumsDir for enums, outputDir for models)
+     * @param targetDir Target directory for models; enum output is selected from the final type name
      * @param isEnum Whether this is an enum file (affects package name and preserves SCREAMING_SNAKE_CASE)
      */
     private void processFile(Path file, Path targetDir, boolean isEnum) throws IOException {
@@ -351,17 +353,17 @@ public class PostProcessor {
             logger.info("Transformed {} filename: {} -> {}", isEnum ? "enum" : "model", originalFileName, fileName);
         }
 
-        Path outputPath = targetDir.resolve(fileName);
+        Path outputDirectory = isEnum && GeneratedEnumKind.isErrorEnum(className) ? errorsDir : targetDir;
+        Path outputPath = outputDirectory.resolve(fileName);
         // Read copyright year before deleting case-variant paths (TS getHeaderYear parity)
         String copyrightYear = GeneratedFileHeader.resolveStartYear(outputPath);
         boolean existsBefore = Files.exists(outputPath);
 
-        deleteCaseVariantFiles(targetDir, fileName, isEnum);
-
         // Apply final transformations based on file type
         if (isEnum) {
-            // Fix package for enums
-            content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
+            String enumPackage = GeneratedEnumKind.packageFor(className);
+            content = content.replace("package com.coinbase.prime.model;", "package " + enumPackage + ";");
+            content = content.replace("package com.coinbase.prime.model.enums;", "package " + enumPackage + ";");
             content = enumJavadocEnhancer.apply(content, className);
         } else {
             // Fix enum imports for models
@@ -386,8 +388,8 @@ public class PostProcessor {
         if (!resolvedClassName.equals(className)) {
             className = resolvedClassName;
             fileName = className + ".java";
-            outputPath = targetDir.resolve(fileName);
-            deleteCaseVariantFiles(targetDir, fileName, isEnum);
+            outputDirectory = isEnum && GeneratedEnumKind.isErrorEnum(className) ? errorsDir : targetDir;
+            outputPath = outputDirectory.resolve(fileName);
         }
 
         Files.writeString(outputPath, content);
@@ -670,24 +672,6 @@ public class PostProcessor {
      */
     private String applyXMAcronymCasing(String content) {
         return content.replaceAll("Xm([A-Z])", "XM$1");
-    }
-
-    private void deleteCaseVariantFiles(Path targetDir, String fileName, boolean isEnum) throws IOException {
-        try {
-            List<Path> toDelete = Files.list(targetDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(fileName))
-                .collect(Collectors.toList());
-
-            for (Path p : toDelete) {
-                Files.delete(p);
-                if (!p.getFileName().toString().equals(fileName)) {
-                    logger.info("Deleted old {} file with different casing: {} -> {}",
-                        isEnum ? "enum" : "model", p.getFileName(), fileName);
-                }
-            }
-        } catch (IOException e) {
-            logger.warn("Could not delete old {} file variants: {}", isEnum ? "enum" : "model", e.getMessage());
-        }
     }
 
     private String applyDateOfBirthPrimitiveConversion(String content) {

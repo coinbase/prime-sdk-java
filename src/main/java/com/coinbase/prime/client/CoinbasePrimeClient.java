@@ -29,21 +29,31 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
+  private final String baseUrl;
+
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, String baseUrl) {
     super(credentials, baseUrl);
+    this.baseUrl = baseUrl;
   }
 
   public CoinbasePrimeClient(
       CoinbasePrimeCredentials credentials, String baseUrl, HttpClient client) {
     super(credentials, baseUrl, client);
+    this.baseUrl = baseUrl;
   }
 
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials) {
     super(credentials, Constants.CB_PRIME_BASE_URL);
+    this.baseUrl = Constants.CB_PRIME_BASE_URL;
   }
 
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, HttpClient client) {
     super(credentials, Constants.CB_PRIME_BASE_URL, client);
+    this.baseUrl = Constants.CB_PRIME_BASE_URL;
+  }
+
+  public String getBaseUrl() {
+    return baseUrl;
   }
 
   /**
