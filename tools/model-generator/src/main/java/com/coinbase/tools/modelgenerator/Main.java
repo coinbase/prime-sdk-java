@@ -36,6 +36,7 @@ public class Main {
             Path projectRoot = findProjectRoot();
             Path outputDir = projectRoot.resolve("src/main/java/com/coinbase/prime/model");
             Path enumsDir = outputDir.resolve("enums");
+            Path errorsDir = outputDir.resolve("errors");
             Path tempDir = projectRoot.resolve("generated");
 
             logger.info("Project Root: {}", projectRoot);
@@ -54,7 +55,7 @@ public class Main {
 
             // Phase 2: Post-process models to match existing patterns
             logger.info("\nPhase 2: Post-processing models...");
-            PostProcessor postProcessor = new PostProcessor(tempDir, outputDir, enumsDir, specPath);
+            PostProcessor postProcessor = new PostProcessor(tempDir, outputDir, enumsDir, errorsDir, specPath);
             postProcessor.processModels();
 
             logger.info("\nModel generation completed successfully!");
