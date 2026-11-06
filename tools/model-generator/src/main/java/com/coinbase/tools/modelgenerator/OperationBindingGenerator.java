@@ -36,14 +36,11 @@ public final class OperationBindingGenerator {
     METHOD_RENAMES.put("CreateOnchainAddressGroup", "CreateOnchainAddressBookEntry");
     METHOD_RENAMES.put("CreatePortfolioAddressBookEntry", "CreateAddressBookEntry");
     METHOD_RENAMES.put("CreateQuoteRequest", "CreateQuote");
-    METHOD_RENAMES.put("GetAllocationsByClientNettingId", "ListAllocationsByNettingId");
     METHOD_RENAMES.put("GetEntityAssets", "ListAssets");
-    METHOD_RENAMES.put("GetEntityPaymentMethodDetails", "GetPaymentMethodDetails");
     METHOD_RENAMES.put("GetEntityUsers", "ListEntityUsers");
     METHOD_RENAMES.put("GetFuturesSweeps", "ListEntityFuturesSweeps");
     METHOD_RENAMES.put("GetLocateAvailabilities", "GetEntityLocateAvailabilities");
     METHOD_RENAMES.put("GetMarginSummaries", "ListMarginCallSummaries");
-    METHOD_RENAMES.put("GetPortfolioAddressBook", "ListAddressBook");
     METHOD_RENAMES.put("GetPortfolioInterestAccruals", "ListInterestAccrualsForPortfolio");
     METHOD_RENAMES.put("GetPostTradeCredit", "GetPortfolioCreditInformation");
     METHOD_RENAMES.put("GetTFTieredPricingFees", "GetTradeFinanceTieredPricingFees");
@@ -121,7 +118,8 @@ public final class OperationBindingGenerator {
         && override.propertyNames().isEmpty()
         && override.responseTypes().isEmpty()
         && override.convenienceConstructorParameters().isEmpty()
-        && override.statuses().isEmpty()) {
+        && override.statuses().isEmpty()
+        && override.deprecatedAliases().isEmpty()) {
       System.err.println("WARN redundant operation override: " + binding.operationId());
     }
     return new OperationBinding(
@@ -138,7 +136,10 @@ public final class OperationBindingGenerator {
         override.responseTypes().isEmpty() ? binding.responseTypeOverrides() : override.responseTypes(),
         override.convenienceConstructorParameters().isEmpty()
             ? binding.convenienceConstructorParameters()
-            : override.convenienceConstructorParameters());
+            : override.convenienceConstructorParameters(),
+        override.deprecatedAliases().isEmpty()
+            ? binding.deprecatedAliases()
+            : override.deprecatedAliases());
   }
 
   private static Map<String, Object> dereference(

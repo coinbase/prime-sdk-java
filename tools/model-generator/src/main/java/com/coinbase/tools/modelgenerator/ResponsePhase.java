@@ -41,6 +41,12 @@ public final class ResponsePhase {
       sources.put(
           Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + name + ".java"),
           renderOne(operations.get(binding.operationId()), name, binding, types, names));
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        String aliasName = alias.sdkMethod() + "Response";
+        sources.put(
+            Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + aliasName + ".java"),
+            renderAliasOne(operations.get(binding.operationId()), binding, name, aliasName, alias));
+      }
     }
     return sources;
   }
@@ -92,6 +98,34 @@ public final class ResponsePhase {
     for (Field field : fields.values()) {
       appendAccessors(source, field);
     }
+    return source.append("}\n").toString();
+  }
+
+  private static String renderAliasOne(
+      SpecModels.Operation operation,
+      OperationBinding binding,
+      String canonicalClassName,
+      String aliasClassName,
+      DeprecatedAlias alias) {
+    StringBuilder source =
+        new StringBuilder(SourceTemplates.header())
+            .append("package com.coinbase.prime.")
+            .append(binding.serviceFolder())
+            .append(";\n\n");
+    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
+    source.append("/**\n");
+    if (!documentation.isEmpty()) {
+      source.append(" * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
+    }
+    source.append(" *\n * @deprecated ").append(alias.message()).append("\n */\n");
+    source.append("@Deprecated\n");
+    source
+        .append("public class ")
+        .append(aliasClassName)
+        .append(" extends ")
+        .append(canonicalClassName)
+        .append(" {\n");
+    source.append("  public ").append(aliasClassName).append("() {}\n");
     return source.append("}\n").toString();
   }
 
