@@ -68,6 +68,18 @@ class OperationBindingGeneratorTest {
 
     NamingResolver names =
         new NamingResolver(configuration.modelTypeMappings());
+    JavaTypeResolver types =
+        new JavaTypeResolver(document, names, configuration.sharedModelMappings());
+    String orders =
+        RequestPhase.render(document, bindings, types, names)
+            .get(Path.of("com/coinbase/prime/orders/ListPortfolioOrdersRequest.java"));
+    assertTrue(orders.contains("private OrderStatus[] orderStatuses;"), orders);
+    assertTrue(orders.contains("private String[] productIds;"), orders);
+    String wallet =
+        RequestPhase.render(document, bindings, types, names)
+            .get(Path.of("com/coinbase/prime/wallets/CreateWalletRequest.java"));
+    assertTrue(wallet.contains("private WalletType type;"), wallet);
+    assertTrue(wallet.contains("Builder type(WalletType type)"), wallet);
     assertEquals(
         "PrimeXMControlStatus",
         names.typeName("CoinbasePublicRestApiXMControlStatus"));
