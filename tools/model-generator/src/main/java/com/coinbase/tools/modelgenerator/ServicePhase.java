@@ -29,19 +29,38 @@ public final class ServicePhase {
   private ServicePhase() {}
   public static Map<Path, String> render(SpecModels.Document document, List<OperationBinding> bindings,
       GeneratorConfiguration configuration, NamingResolver names) {
+    return render(document, bindings, configuration, names, SourceLayout.NONE);
+  }
+
+  public static Map<Path, String> render(SpecModels.Document document, List<OperationBinding> bindings,
+      GeneratorConfiguration configuration, NamingResolver names, SourceLayout layout) {
     Map<String, SpecModels.Operation> operations = new LinkedHashMap<>();
     for (SpecModels.Operation operation : document.operations()) operations.put(operation.operationId(), operation);
     Map<String, List<OperationBinding>> groups = new LinkedHashMap<>();
     for (OperationBinding binding : bindings) groups.computeIfAbsent(binding.serviceFolder(), ignored -> new ArrayList<>()).add(binding);
     Map<Path, String> sources = new LinkedHashMap<>();
     for (List<OperationBinding> group : groups.values()) {
-      group.sort(order(operations));
       String service = group.get(0).serviceName();
       String folder = group.get(0).serviceFolder();
-      sources.put(Path.of("com/coinbase/prime/" + folder + "/" + service + ".java"), interfaceSource(service, folder, group, operations, names));
+      // Methods the vended interface already declares keep its order; new operations follow in spec order.
+      List<String> declared = layout.serviceMethods(Path.of("com/coinbase/prime/" + folder + "/" + service + ".java"));
+      group.sort(Comparator.comparingInt((OperationBinding binding) -> declaredIndex(declared, binding, names)).thenComparing(order(operations)));
+      Path interfaceFile = Path.of("com/coinbase/prime/" + folder + "/" + service + ".java");
+      sources.put(interfaceFile, interfaceSource(service, folder, group, operations, names, layout.serviceMethodDocs(interfaceFile), layout.declares(interfaceFile, "interface " + service + " {\n\n", false)));
       sources.put(Path.of("com/coinbase/prime/" + folder + "/" + service + "Impl.java"), implementationSource(service, folder, group, operations, configuration, names));
     }
     return sources;
+  }
+  private static int declaredIndex(List<String> declared, OperationBinding binding, NamingResolver names) {
+    int best = Integer.MAX_VALUE;
+    List<String> candidates = new ArrayList<>();
+    candidates.add(names.methodName(binding.sdkMethod()));
+    for (DeprecatedAlias alias : binding.deprecatedAliases()) candidates.add(names.methodName(alias.sdkMethod()));
+    for (String candidate : candidates) {
+      int index = declared.indexOf(candidate);
+      if (index >= 0) best = Math.min(best, index);
+    }
+    return best;
   }
   static Comparator<OperationBinding> order(Map<String, SpecModels.Operation> operations) {
     return Comparator.comparingInt((OperationBinding binding) -> verbOrder(operations.get(binding.operationId()).httpMethod()))
@@ -49,14 +68,15 @@ public final class ServicePhase {
         .thenComparing(binding -> operations.get(binding.operationId()).path()).thenComparing(OperationBinding::sdkMethod);
   }
   private static String interfaceSource(String service, String folder, List<OperationBinding> bindings,
-      Map<String, SpecModels.Operation> operations, NamingResolver names) {
+      Map<String, SpecModels.Operation> operations, NamingResolver names, Map<String, String> docs, boolean blankFirst) {
     StringBuilder source = new StringBuilder(SourceTemplates.header()).append("package com.coinbase.prime.").append(folder).append(";\n\n")
         .append("import com.coinbase.core.errors.CoinbaseClientException;\nimport com.coinbase.prime.errors.CoinbasePrimeException;\n\npublic interface ").append(service).append(" {\n");
+    if (blankFirst) source.append("\n");
     for (OperationBinding binding : bindings) {
       SpecModels.Operation operation = operations.get(binding.operationId());
-      appendInterfaceMethod(source, operation, binding, names, binding.sdkMethod(), null);
+      appendInterfaceMethod(source, operation, binding, names, binding.sdkMethod(), null, docs);
       for (DeprecatedAlias alias : binding.deprecatedAliases()) {
-        appendInterfaceMethod(source, operation, binding, names, alias.sdkMethod(), alias.message());
+        appendInterfaceMethod(source, operation, binding, names, alias.sdkMethod(), alias.message(), docs);
       }
     }
     return source.append("}\n").toString();
@@ -68,8 +88,9 @@ public final class ServicePhase {
       OperationBinding binding,
       NamingResolver names,
       String methodSdkName,
-      String deprecationMessage) {
-    appendMethodJavadoc(source, operation, binding, true, methodSdkName, deprecationMessage);
+      String deprecationMessage,
+      Map<String, String> docs) {
+    appendMethodJavadoc(source, operation, binding, methodSdkName, deprecationMessage, docs, names);
     if (deprecationMessage != null) source.append("  @Deprecated\n");
     source.append("  ").append(methodSdkName).append("Response ").append(names.methodName(methodSdkName)).append("(");
     if (!binding.omitRequest()) source.append(methodSdkName).append("Request request");
@@ -108,7 +129,6 @@ public final class ServicePhase {
     String method = names.methodName(methodSdkName);
     String version = version(operation.path());
     source.append("\n");
-    appendMethodJavadoc(source, operation, binding, false, methodSdkName, deprecationMessage);
     if (deprecationMessage != null) source.append("  @Deprecated\n");
     source.append("  @Override\n  public ").append(methodSdkName).append("Response ").append(method).append("(");
     if (!binding.omitRequest()) source.append(methodSdkName).append("Request request");
@@ -134,26 +154,34 @@ public final class ServicePhase {
       StringBuilder source,
       SpecModels.Operation operation,
       OperationBinding binding,
-      boolean interfaceMethod,
-      String responseSdkName,
-      String deprecationMessage) {
-    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
-    source.append("  /**\n");
-    if (!documentation.isEmpty()) {
-      source.append("   * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
+      String methodSdkName,
+      String deprecationMessage,
+      Map<String, String> docs,
+      NamingResolver names) {
+    // A method the vended interface already documents keeps that Javadoc; a renamed canonical method
+    // inherits the documentation of the legacy name it replaces.
+    List<String> candidates = new ArrayList<>();
+    candidates.add(names.methodName(methodSdkName));
+    candidates.add(names.methodName(binding.sdkMethod()));
+    for (DeprecatedAlias alias : binding.deprecatedAliases()) candidates.add(names.methodName(alias.sdkMethod()));
+    for (String candidate : candidates) {
+      String existing = docs.get(candidate);
+      if (existing == null) continue;
+      String block = existing;
+      if (deprecationMessage != null && !block.contains("@deprecated")) {
+        int end = block.lastIndexOf("\n   */");
+        block = block.substring(0, end) + "\n   *\n   * @deprecated " + deprecationMessage + block.substring(end);
+      }
+      source.append(block).append("\n");
+      return;
     }
-    if (!binding.omitRequest()) {
-      source.append("   * @param request request parameters and body for this operation\n");
-    }
-    source.append("   * @return the decoded ").append(responseSdkName).append(" response\n");
-    if (interfaceMethod) {
-      source.append("   * @throws CoinbaseClientException if the request cannot be sent\n");
-    }
-    source.append("   * @throws CoinbasePrimeException if the Prime API rejects the request\n");
-    if (deprecationMessage != null) {
-      source.append("   * @deprecated ").append(deprecationMessage).append("\n");
-    }
-    source.append("   */\n");
+    List<String> tags = new ArrayList<>();
+    if (!binding.omitRequest()) tags.add("@param request the request parameters for this operation");
+    tags.add("@return the response payload for this operation");
+    tags.add("@throws CoinbaseClientException if the request fails client-side validation");
+    tags.add("@throws CoinbasePrimeException if the Prime API returns an error response");
+    if (deprecationMessage != null) tags.add("@deprecated " + deprecationMessage);
+    SourceTemplates.methodJavadoc(source, operation.summary(), operation.description(), tags);
   }
 
   private static String pathExpression(String rawPath, OperationBinding binding, NamingResolver names) {

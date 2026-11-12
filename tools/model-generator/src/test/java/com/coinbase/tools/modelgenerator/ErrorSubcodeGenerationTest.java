@@ -64,7 +64,9 @@ class ErrorSubcodeGenerationTest {
             + "  private PrimeRESTAPICreateThingBadRequestSubcode subcode;\n"
             + "}\n");
 
-    new PostProcessor(root.resolve("generated"), modelRoot, enumsRoot, errorsRoot, spec).processModels();
+    new PostProcessor(root.resolve("generated"), modelRoot, enumsRoot, errorsRoot, spec)
+        .includeErrorEnums(true)
+        .processModels();
 
     Path errorEnum = errorsRoot.resolve("CreateThingBadRequestSubcode.java");
     assertTrue(Files.exists(errorEnum));
@@ -103,9 +105,38 @@ class ErrorSubcodeGenerationTest {
             modelRoot.resolve("errors"),
             spec,
             root.resolve("generated-model-files.json"))
+        .includeErrorEnums(true)
         .processModels();
 
     assertTrue(Files.exists(modelRoot.resolve("errors/CreateThingBadRequestSubcode.java")));
+  }
+
+  @Test
+  void errorEnumsAreSkippedUnlessEnabled() throws Exception {
+    Path root = Files.createTempDirectory("error-enums-default-off");
+    Path generatedModels = root.resolve("generated/raw/src/main/java/com/coinbase/prime/model");
+    Path modelRoot = root.resolve("src/main/java/com/coinbase/prime/model");
+    Path spec = root.resolve("openapi.yaml");
+    Files.createDirectories(generatedModels);
+    Files.writeString(spec, "openapi: 3.0.0\ncomponents:\n  schemas: {}\n");
+    Files.writeString(
+        generatedModels.resolve("BadRequestErrorCode.java"),
+        "package com.coinbase.prime.model;\npublic enum BadRequestErrorCode { INVALID }\n");
+    Files.writeString(
+        generatedModels.resolve("Thing.java"),
+        "package com.coinbase.prime.model;\npublic class Thing {}\n");
+
+    new PostProcessor(
+            root.resolve("generated"),
+            modelRoot,
+            modelRoot.resolve("enums"),
+            modelRoot.resolve("errors"),
+            spec)
+        .processModels();
+
+    assertTrue(Files.exists(modelRoot.resolve("Thing.java")));
+    assertFalse(Files.exists(modelRoot.resolve("errors")));
+    assertFalse(Files.exists(modelRoot.resolve("enums/BadRequestErrorCode.java")));
   }
 
   @Test

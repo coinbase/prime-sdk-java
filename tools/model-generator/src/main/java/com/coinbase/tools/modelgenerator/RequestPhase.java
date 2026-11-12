@@ -30,32 +30,64 @@ public final class RequestPhase {
 
   public static Map<Path, String> render(SpecModels.Document document, List<OperationBinding> bindings,
       JavaTypeResolver types, NamingResolver names) {
+    return render(document, bindings, types, names, SourceLayout.NONE);
+  }
+
+  public static Map<Path, String> render(SpecModels.Document document, List<OperationBinding> bindings,
+      JavaTypeResolver types, NamingResolver names, SourceLayout layout) {
     Map<String, SpecModels.Operation> operations = byId(document);
     Map<Path, String> sources = new LinkedHashMap<>();
     for (OperationBinding binding : bindings) {
       if (binding.omitRequest()) continue;
       SpecModels.Operation operation = operations.get(binding.operationId());
       String className = binding.sdkMethod() + "Request";
-      sources.put(path(binding, className), renderOne(operation, binding, className, types, names));
+      List<Path> aliasFiles = new ArrayList<>();
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        aliasFiles.add(path(binding, alias.sdkMethod() + "Request"));
+      }
+      Path reference = layout.reference(path(binding, className), aliasFiles);
+      sources.put(
+          path(binding, className),
+          renderOne(operation, binding, className, types, names, layout, reference));
       for (DeprecatedAlias alias : binding.deprecatedAliases()) {
         String aliasClassName = alias.sdkMethod() + "Request";
         sources.put(
             path(binding, aliasClassName),
-            renderAliasOne(operation, binding, className, aliasClassName, alias, types, names));
+            renderAliasOne(
+                operation, binding, className, aliasClassName, alias, types, names, layout, reference));
       }
     }
     return sources;
   }
 
+  /** Applies the reference file's field order and documentation to spec-derived fields. */
+  private static List<Field> arrange(List<Field> fields, SourceLayout layout, Path reference) {
+    Map<String, SourceLayout.Member> existing = layout.fields(reference);
+    List<Field> ordered = SourceLayout.order(existing, fields, field -> field.name);
+    List<Field> result = new ArrayList<>();
+    for (Field field : ordered) {
+      SourceLayout.Member member = existing.get(field.name);
+      result.add(member == null ? field : field.withDescription(member.documentation()));
+    }
+    return result;
+  }
+
+  private static boolean pathChecked(Field field) {
+    return field.path && field.required && field.type.name().equals("String");
+  }
+
   private static String renderOne(SpecModels.Operation operation, OperationBinding binding, String className,
-      JavaTypeResolver types, NamingResolver names) {
-    List<Field> fields = fields(operation, binding, types, names);
+      JavaTypeResolver types, NamingResolver names, SourceLayout layout, Path reference) {
+    List<Field> fields = arrange(fields(operation, binding, types, names), layout, reference);
+    boolean empty = fields.isEmpty() && !binding.paginated();
     Set<String> imports = new LinkedHashSet<>();
-    imports.add("com.fasterxml.jackson.annotation.JsonProperty");
+    if (!fields.isEmpty()) imports.add("com.fasterxml.jackson.annotation.JsonProperty");
     boolean hasPath = fields.stream().anyMatch(field -> field.path);
     if (hasPath) imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
-    boolean validates = fields.stream().anyMatch(field -> field.path && field.required && field.type.name().equals("String"));
-    if (validates) { imports.add("com.coinbase.core.errors.CoinbaseClientException"); imports.add("static com.coinbase.core.utils.Utils.isNullOrEmpty"); }
+    boolean throwsChecked = !fields.isEmpty();
+    boolean validates = throwsChecked && layout.declares(reference, "void validate()", true);
+    if (throwsChecked) imports.add("com.coinbase.core.errors.CoinbaseClientException");
+    if (fields.stream().anyMatch(RequestPhase::pathChecked)) imports.add("static com.coinbase.core.utils.Utils.isNullOrEmpty");
     if (binding.paginated()) {
       imports.add("com.coinbase.prime.common.Pagination");
       imports.add("com.coinbase.prime.common.PrimeListRequest");
@@ -65,15 +97,27 @@ public final class RequestPhase {
     StringBuilder source = new StringBuilder(SourceTemplates.header())
         .append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
     SourceTemplates.imports(source, imports);
-    SourceTemplates.javadoc(source, SourceTemplates.documentation(operation.summary(), operation.description()));
+    SourceTemplates.javadoc(
+        source,
+        layout.classDocumentation(
+            reference,
+            SourceTemplates.classDocumentation(operation.summary(), operation.description())));
     source.append("public class ").append(className);
     if (binding.paginated()) source.append(" extends PrimeListRequest");
     source.append(" {\n");
+    if (empty) {
+      // Parameterless operations carry no state: a bare constructor and a trivial builder.
+      source.append("\n  public ").append(className).append("() {}\n\n")
+          .append("  public static class Builder {\n\n    public Builder() {}\n\n    public ")
+          .append(className).append(" build() {\n      return new ").append(className)
+          .append("();\n    }\n  }\n}\n");
+      return source.toString();
+    }
     for (Field field : fields) {
       SourceTemplates.javadoc(source, field.description);
       source.append("  @JsonProperty(");
-      if (field.required) source.append("required = true, ");
-      source.append("value = \"").append(field.wireName).append("\")\n");
+      if (field.path) source.append("required = true, value = ");
+      source.append("\"").append(field.wireName).append("\")\n");
       if (field.path) source.append("  @JsonIgnore\n");
       source.append("  private ").append(field.type.name()).append(" ").append(field.name).append(";\n\n");
     }
@@ -89,32 +133,45 @@ public final class RequestPhase {
       appendAccessors(source, field);
     }
     source.append("  public static class Builder {\n");
+    for (Field field : fields) source.append("    private ").append(field.type.name()).append(" ").append(field.name).append(";\n");
     if (binding.paginated()) {
       source.append("    private String cursor;\n")
           .append("    private SortDirection sortDirection;\n")
           .append("    private Integer limit;\n");
     }
-    for (Field field : fields) source.append("    private ").append(field.type.name()).append(" ").append(field.name).append(";\n");
     source.append("\n    public Builder() {}\n\n");
-    if (binding.paginated()) {
-      source.append("    public Builder cursor(String cursor) {\n      this.cursor = cursor;\n      return this;\n    }\n\n")
-          .append("    public Builder sortDirection(SortDirection sortDirection) {\n      this.sortDirection = sortDirection;\n      return this;\n    }\n\n")
-          .append("    public Builder limit(Integer limit) {\n      this.limit = limit;\n      return this;\n    }\n\n")
-          .append("    public Builder pagination(Pagination pagination) {\n      this.cursor = pagination.getNextCursor();\n      this.sortDirection = pagination.getSortDirection();\n      return this;\n    }\n\n");
-    }
     for (Field field : fields) source.append("    public Builder ").append(field.name).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n      this.").append(field.name).append(" = ").append(field.name).append(";\n      return this;\n    }\n\n");
-    source.append("    public ").append(className).append(" build()");
-    if (validates) source.append(" throws CoinbaseClientException");
-    source.append(" {\n");
+    if (binding.paginated()) {
+      if (cursorBuilder(layout, reference)) {
+        source.append("    public Builder cursor(String cursor) {\n      this.cursor = cursor;\n      return this;\n    }\n\n")
+            .append("    public Builder sortDirection(SortDirection sortDirection) {\n      this.sortDirection = sortDirection;\n      return this;\n    }\n\n");
+      }
+      source.append("    public Builder limit(Integer limit) {\n      this.limit = limit;\n      return this;\n    }\n\n");
+      if (paginationBuilder(layout, reference)) {
+        source.append("    public Builder pagination(Pagination pagination) {\n      this.cursor = pagination.getNextCursor();\n      this.sortDirection = pagination.getSortDirection();\n      return this;\n    }\n\n");
+      }
+    }
+    source.append("    public ").append(className).append(" build() throws CoinbaseClientException {\n");
     if (validates) source.append("      validate();\n");
     source.append("      return new ").append(className).append("(this);\n    }\n");
     if (validates) {
-      source.append("\n    protected void validate() throws CoinbaseClientException {\n");
-      for (Field field : fields) if (field.path && field.required && field.type.name().equals("String"))
+      // Only classes that have deprecated aliases expose validate(): the alias builder reuses it.
+      String visibility = binding.deprecatedAliases().isEmpty() ? "private" : "protected";
+      source.append("\n    ").append(visibility).append(" void validate() throws CoinbaseClientException {\n");
+      for (Field field : fields) if (pathChecked(field))
         source.append("      if (isNullOrEmpty(this.").append(field.name).append(")) {\n        throw new CoinbaseClientException(\"").append(SourceTemplates.cap(field.name)).append(" is required\");\n      }\n");
       source.append("    }\n");
     }
     return source.append("  }\n}\n").toString();
+  }
+
+  /** Vended list requests expose cursor()/sortDirection() builders only in a few classes. */
+  private static boolean cursorBuilder(SourceLayout layout, Path reference) {
+    return layout.declares(reference, "Builder cursor(", false);
+  }
+
+  private static boolean paginationBuilder(SourceLayout layout, Path reference) {
+    return layout.declares(reference, "Builder pagination(", true);
   }
 
   private static String renderAliasOne(
@@ -124,13 +181,14 @@ public final class RequestPhase {
       String aliasClassName,
       DeprecatedAlias alias,
       JavaTypeResolver types,
-      NamingResolver names) {
-    List<Field> fields = fields(operation, binding, types, names);
-    boolean validates =
-        fields.stream()
-            .anyMatch(field -> field.path && field.required && field.type.name().equals("String"));
+      NamingResolver names,
+      SourceLayout layout,
+      Path reference) {
+    List<Field> fields = arrange(fields(operation, binding, types, names), layout, reference);
+    boolean throwsChecked = !fields.isEmpty();
+    boolean validates = throwsChecked && layout.declares(reference, "void validate()", true);
     Set<String> imports = new LinkedHashSet<>();
-    if (validates) imports.add("com.coinbase.core.errors.CoinbaseClientException");
+    if (throwsChecked) imports.add("com.coinbase.core.errors.CoinbaseClientException");
     if (binding.paginated()) {
       imports.add("com.coinbase.prime.common.Pagination");
       imports.add("com.coinbase.prime.model.enums.SortDirection");
@@ -140,7 +198,7 @@ public final class RequestPhase {
         new StringBuilder(SourceTemplates.header())
             .append("package com.coinbase.prime.").append(binding.serviceFolder()).append(";\n\n");
     SourceTemplates.imports(source, imports);
-    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
+    String documentation = SourceTemplates.classDocumentation(operation.summary(), operation.description());
     source.append("/**\n");
     if (!documentation.isEmpty()) {
       source.append(" * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
@@ -154,19 +212,23 @@ public final class RequestPhase {
     source.append("  /** @deprecated ").append(alias.message()).append(" */\n");
     source.append("  @Deprecated\n");
     source.append("  public static class Builder extends ").append(canonicalClassName).append(".Builder {\n");
-    if (binding.paginated()) {
-      source
-          .append("    @Override\n    public Builder cursor(String cursor) {\n      super.cursor(cursor);\n      return this;\n    }\n\n")
-          .append("    @Override\n    public Builder sortDirection(SortDirection sortDirection) {\n      super.sortDirection(sortDirection);\n      return this;\n    }\n\n")
-          .append("    @Override\n    public Builder limit(Integer limit) {\n      super.limit(limit);\n      return this;\n    }\n\n")
-          .append("    @Override\n    public Builder pagination(Pagination pagination) {\n      super.pagination(pagination);\n      return this;\n    }\n\n");
-    }
     for (Field field : fields) {
       source
           .append("    @Override\n    public Builder ").append(field.name).append("(").append(field.type.name()).append(" ").append(field.name).append(") {\n      super.").append(field.name).append("(").append(field.name).append(");\n      return this;\n    }\n\n");
     }
+    if (binding.paginated()) {
+      if (cursorBuilder(layout, reference)) {
+        source
+            .append("    @Override\n    public Builder cursor(String cursor) {\n      super.cursor(cursor);\n      return this;\n    }\n\n")
+            .append("    @Override\n    public Builder sortDirection(SortDirection sortDirection) {\n      super.sortDirection(sortDirection);\n      return this;\n    }\n\n");
+      }
+      source.append("    @Override\n    public Builder limit(Integer limit) {\n      super.limit(limit);\n      return this;\n    }\n\n");
+      if (paginationBuilder(layout, reference)) {
+        source.append("    @Override\n    public Builder pagination(Pagination pagination) {\n      super.pagination(pagination);\n      return this;\n    }\n\n");
+      }
+    }
     source.append("    @Override\n    public ").append(aliasClassName).append(" build()");
-    if (validates) source.append(" throws CoinbaseClientException");
+    if (throwsChecked) source.append(" throws CoinbaseClientException");
     source.append(" {\n");
     if (validates) source.append("      super.validate();\n");
     source.append("      return new ").append(aliasClassName).append("(this);\n    }\n");
@@ -295,5 +357,5 @@ public final class RequestPhase {
 
   private static Path path(OperationBinding binding, String className) { return Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + className + ".java"); }
   private static Map<String, SpecModels.Operation> byId(SpecModels.Document document) { Map<String, SpecModels.Operation> result = new LinkedHashMap<>(); for (SpecModels.Operation operation : document.operations()) result.put(operation.operationId(), operation); return result; }
-  static final class Field { final String wireName, name, description; final JavaTypeResolver.Type type; final boolean required, path; Field(String wireName, String name, JavaTypeResolver.Type type, boolean required, boolean path, String description) { this.wireName=wireName; this.name=name; this.type=type; this.required=required; this.path=path; this.description=description; } }
+  static final class Field { final String wireName, name, description; final JavaTypeResolver.Type type; final boolean required, path; Field withDescription(String text) { return new Field(wireName, name, type, required, path, text); } Field(String wireName, String name, JavaTypeResolver.Type type, boolean required, boolean path, String description) { this.wireName=wireName; this.name=name; this.type=type; this.required=required; this.path=path; this.description=description; } }
 }

@@ -31,6 +31,15 @@ public final class ResponsePhase {
       List<OperationBinding> bindings,
       JavaTypeResolver types,
       NamingResolver names) {
+    return render(document, bindings, types, names, SourceLayout.NONE);
+  }
+
+  public static Map<Path, String> render(
+      SpecModels.Document document,
+      List<OperationBinding> bindings,
+      JavaTypeResolver types,
+      NamingResolver names,
+      SourceLayout layout) {
     Map<String, SpecModels.Operation> operations = new LinkedHashMap<>();
     for (SpecModels.Operation operation : document.operations()) {
       operations.put(operation.operationId(), operation);
@@ -38,9 +47,27 @@ public final class ResponsePhase {
     Map<Path, String> sources = new LinkedHashMap<>();
     for (OperationBinding binding : bindings) {
       String name = binding.sdkMethod() + "Response";
+      Path file = Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + name + ".java");
+      List<Path> aliasFiles = new java.util.ArrayList<>();
+      for (DeprecatedAlias alias : binding.deprecatedAliases()) {
+        aliasFiles.add(
+            Path.of(
+                "com/coinbase/prime/"
+                    + binding.serviceFolder()
+                    + "/"
+                    + alias.sdkMethod()
+                    + "Response.java"));
+      }
       sources.put(
-          Path.of("com/coinbase/prime/" + binding.serviceFolder() + "/" + name + ".java"),
-          renderOne(operations.get(binding.operationId()), name, binding, types, names));
+          file,
+          renderOne(
+              operations.get(binding.operationId()),
+              name,
+              binding,
+              types,
+              names,
+              layout,
+              layout.reference(file, aliasFiles)));
       for (DeprecatedAlias alias : binding.deprecatedAliases()) {
         String aliasName = alias.sdkMethod() + "Response";
         sources.put(
@@ -56,7 +83,9 @@ public final class ResponsePhase {
       String className,
       OperationBinding binding,
       JavaTypeResolver types,
-      NamingResolver names) {
+      NamingResolver names,
+      SourceLayout layout,
+      Path reference) {
     Map<String, Object> schema = types.dereference(operation.successResponseSchema());
     Map<String, Object> properties = SpecParser.map(schema.get("properties"));
     Map<String, Field> fields = new LinkedHashMap<>();
@@ -74,11 +103,17 @@ public final class ResponsePhase {
       fields.put("value", new Field("value", "value", types.resolve(operation.successResponseSchema()), ""));
     }
 
+    Map<String, SourceLayout.Member> existing = layout.fields(reference);
+    List<Field> ordered = new java.util.ArrayList<>();
+    for (Field field : SourceLayout.order(existing, new java.util.ArrayList<>(fields.values()), f -> f.name)) {
+      SourceLayout.Member member = existing.get(field.name);
+      ordered.add(member == null ? field : field.withLayout(member.documentation(), member.annotated()));
+    }
     Set<String> imports = new LinkedHashSet<>();
-    if (!fields.isEmpty()) {
+    if (ordered.stream().anyMatch(field -> field.annotated)) {
       imports.add("com.fasterxml.jackson.annotation.JsonProperty");
     }
-    for (Field field : fields.values()) {
+    for (Field field : ordered) {
       imports.addAll(field.type.imports());
     }
     StringBuilder source =
@@ -88,14 +123,17 @@ public final class ResponsePhase {
             .append(";\n\n");
     SourceTemplates.imports(source, imports);
     SourceTemplates.javadoc(
-        source, SourceTemplates.documentation(operation.summary(), operation.description()));
+        source,
+        layout.classDocumentation(
+            reference,
+            SourceTemplates.classDocumentation(operation.summary(), operation.description())));
     source.append("public class ").append(className).append(" {\n");
-    for (Field field : fields.values()) {
+    for (Field field : ordered) {
       SourceTemplates.javadoc(source, field.description);
       appendField(source, field);
     }
     source.append("  public ").append(className).append("() {}\n\n");
-    for (Field field : fields.values()) {
+    for (Field field : ordered) {
       appendAccessors(source, field);
     }
     return source.append("}\n").toString();
@@ -112,7 +150,7 @@ public final class ResponsePhase {
             .append("package com.coinbase.prime.")
             .append(binding.serviceFolder())
             .append(";\n\n");
-    String documentation = SourceTemplates.documentation(operation.summary(), operation.description());
+    String documentation = SourceTemplates.classDocumentation(operation.summary(), operation.description());
     source.append("/**\n");
     if (!documentation.isEmpty()) {
       source.append(" * ").append(documentation.replace("*/", "* /").replace("\n", " ")).append("\n");
@@ -145,10 +183,11 @@ public final class ResponsePhase {
   }
 
   private static void appendField(StringBuilder source, Field field) {
+    if (field.annotated) {
+      source.append("  @JsonProperty(\"").append(field.wireName).append("\")\n");
+    }
     source
-        .append("  @JsonProperty(\"")
-        .append(field.wireName)
-        .append("\")\n  private ")
+        .append("  private ")
         .append(field.type.name())
         .append(" ")
         .append(field.name)
@@ -182,12 +221,27 @@ public final class ResponsePhase {
     private final String name;
     private final JavaTypeResolver.Type type;
     private final String description;
+    private final boolean annotated;
 
     Field(String wireName, String name, JavaTypeResolver.Type type, String description) {
+      this(wireName, name, type, description, true);
+    }
+
+    private Field(
+        String wireName,
+        String name,
+        JavaTypeResolver.Type type,
+        String description,
+        boolean annotated) {
       this.wireName = wireName;
       this.name = name;
       this.type = type;
       this.description = description;
+      this.annotated = annotated;
+    }
+
+    Field withLayout(String description, boolean annotated) {
+      return new Field(wireName, name, type, description, annotated);
     }
   }
 }

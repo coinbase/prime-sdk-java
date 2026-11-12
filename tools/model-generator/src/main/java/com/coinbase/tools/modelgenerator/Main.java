@@ -61,7 +61,12 @@ public final class Main {
       if (check) {
         // Live diffs use the identical isolated rendering and Spotless normalization as --check.
         List<String> changes = checkGeneratedInIsolation(paths, spec, configuration);
-        reportChanges(changes);
+        String expected = option(args, "--expect-changes=");
+        if (expected == null) {
+          reportChanges(changes);
+        } else {
+          verifyExpectedChanges(changes, readExpectedChanges(paths.root().resolve(expected)));
+        }
         return;
       }
 
@@ -78,6 +83,7 @@ public final class Main {
                 paths.errorRoot(),
                 spec,
                 paths.modelManifest())
+            .includeErrorEnums(configuration.generateErrorEnums())
             .processModels();
       }
       GeneratedSourceReconciler.write(
@@ -122,6 +128,7 @@ public final class Main {
               stagedModelRoot.resolve("errors"),
               spec,
               stagedModelManifest)
+          .includeErrorEnums(configuration.generateErrorEnums())
           .processModels();
       // Stage protected proposals too so Spotless can normalize and compare them without touching the
       // repository's compatibility files.
@@ -200,10 +207,11 @@ public final class Main {
     NamingResolver names = new NamingResolver(configuration.modelTypeMappings());
     List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
     JavaTypeResolver types = new JavaTypeResolver(document, names, configuration.sharedModelMappings());
+    SourceLayout layout = SourceLayout.of(sourceRoot);
     Map<Path, String> sources = new LinkedHashMap<>();
-    sources.putAll(RequestPhase.render(document, bindings, types, names));
-    sources.putAll(ResponsePhase.render(document, bindings, types, names));
-    sources.putAll(ServicePhase.render(document, bindings, configuration, names));
+    sources.putAll(RequestPhase.render(document, bindings, types, names, layout));
+    sources.putAll(ResponsePhase.render(document, bindings, types, names, layout));
+    sources.putAll(ServicePhase.render(document, bindings, configuration, names, layout));
     sources.putAll(FactoryPhase.render(bindings));
     return preserveClientSourceHeaders(sources, sourceRoot);
   }
@@ -218,6 +226,40 @@ public final class Main {
               source.getValue(), GeneratedFileHeader.resolveStartYear(sourceRoot.resolve(source.getKey()))));
     }
     return headedSources;
+  }
+
+  /** Reads an allowlist of {@code CHANGE|ADD <path>} lines; blank lines and {@code #} comments are skipped. */
+  static List<String> readExpectedChanges(Path file) throws IOException {
+    List<String> expected = new ArrayList<>();
+    for (String line : Files.readAllLines(file)) {
+      String trimmed = line.trim();
+      if (!trimmed.isEmpty() && !trimmed.startsWith("#")) expected.add(trimmed);
+    }
+    return expected;
+  }
+
+  /**
+   * Fails unless regeneration produces exactly the expected changes. Generating from the committed
+   * spec must not touch any other vended file, so anything unlisted is drift, and anything listed
+   * but absent means the allowlist is stale.
+   */
+  static void verifyExpectedChanges(List<String> changes, List<String> expected) {
+    java.util.Set<String> unexpected = new java.util.TreeSet<>(changes);
+    unexpected.removeAll(expected);
+    java.util.Set<String> missing = new java.util.TreeSet<>(expected);
+    missing.removeAll(changes);
+    if (unexpected.isEmpty() && missing.isEmpty()) return;
+    StringBuilder message = new StringBuilder("Generation drift against the vended SDK:\n");
+    for (String change : unexpected) message.append("  unexpected ").append(change).append('\n');
+    for (String change : missing) message.append("  no longer changes ").append(change).append('\n');
+    throw new IllegalStateException(message.toString());
+  }
+
+  private static String option(String[] args, String prefix) {
+    for (String arg : args) {
+      if (arg.startsWith(prefix)) return arg.substring(prefix.length());
+    }
+    return null;
   }
 
   private static void reportChanges(List<String> changes) {
