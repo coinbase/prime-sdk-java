@@ -1,7 +1,9 @@
 [
   {
     "operationId": "PrimeRESTAPI_GetActivity",
-    "convenienceConstructorParameters": ["activity_id"]
+    "convenienceConstructorParameters": [
+      "activity_id"
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_CreateOrder",
@@ -279,5 +281,20 @@
   {
     "operationId": "PrimeRESTAPI_GetFcmBalance",
     "sdkMethod": "GetEntityFcmBalance"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetCrossMarginRiskParameters",
+    "responseTypeOverrides": {
+      "risk_parameters": "java.util.List<com.coinbase.prime.model.CrossMarginRiskParameters>",
+      "offset_credit_matrix_long_short": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>",
+      "offset_credit_matrix_long_long": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>",
+      "offset_credit_matrix_short_short": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetMarketData",
+    "responseTypeOverrides": {
+      "market_data": "java.util.List<com.coinbase.prime.model.MarketData>"
+    }
   }
 ]
