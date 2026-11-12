@@ -55,6 +55,11 @@ jobs:
           java-version: "11"
           cache: maven
 
+      - name: Check generation drift against the vended SDK
+        # Regenerating from the committed spec may only change the files listed in
+        # tools/model-generator/config/expected-generation-changes.txt.
+        run: make check-surface
+
       - name: Generate SDK from committed spec
         run: make generate
 
