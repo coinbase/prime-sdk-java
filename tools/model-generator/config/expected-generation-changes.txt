@@ -1,0 +1,86 @@
+# Every change that regenerating the SDK from the committed spec is allowed to make to the vended
+# sources. `make check-surface` fails on any other change, and on any entry here that stops
+# applying, so this list can only shrink as the generated baseline is adopted.
+#
+# Anything not listed must regenerate byte-for-byte: existing request/response/service classes keep
+# their vended shape, member order and documentation.
+
+# New canonical classes for operations whose Java names were aligned across SDKs (see
+# operations-overrides.json). The legacy names below remain as @Deprecated subclasses.
+ADD com/coinbase/prime/activities/ListActivitiesRequest.java
+ADD com/coinbase/prime/activities/ListActivitiesResponse.java
+ADD com/coinbase/prime/addressbook/GetAddressBookRequest.java
+ADD com/coinbase/prime/addressbook/GetAddressBookResponse.java
+ADD com/coinbase/prime/allocations/GetAllocationsByClientNettingIdRequest.java
+ADD com/coinbase/prime/allocations/GetAllocationsByClientNettingIdResponse.java
+ADD com/coinbase/prime/orders/GetOrderRequest.java
+ADD com/coinbase/prime/orders/GetOrderResponse.java
+ADD com/coinbase/prime/paymentmethods/GetEntityPaymentMethodRequest.java
+ADD com/coinbase/prime/paymentmethods/GetEntityPaymentMethodResponse.java
+ADD com/coinbase/prime/paymentmethods/ListEntityPaymentMethodsRequest.java
+ADD com/coinbase/prime/paymentmethods/ListEntityPaymentMethodsResponse.java
+ADD com/coinbase/prime/staking/ClaimStakingRewardsRequest.java
+ADD com/coinbase/prime/staking/ClaimStakingRewardsResponse.java
+ADD com/coinbase/prime/staking/CreatePortfolioStakeRequest.java
+ADD com/coinbase/prime/staking/CreatePortfolioStakeResponse.java
+ADD com/coinbase/prime/staking/CreatePortfolioUnstakeRequest.java
+ADD com/coinbase/prime/staking/CreatePortfolioUnstakeResponse.java
+ADD com/coinbase/prime/transactions/CreateTransferRequest.java
+ADD com/coinbase/prime/transactions/CreateTransferResponse.java
+ADD com/coinbase/prime/transactions/CreateWithdrawalRequest.java
+ADD com/coinbase/prime/transactions/CreateWithdrawalResponse.java
+
+# Legacy request/response classes rewritten as @Deprecated aliases of the canonical classes.
+CHANGE com/coinbase/prime/activities/ListPortfolioActivitiesRequest.java
+CHANGE com/coinbase/prime/activities/ListPortfolioActivitiesResponse.java
+CHANGE com/coinbase/prime/addressbook/ListAddressBookRequest.java
+CHANGE com/coinbase/prime/addressbook/ListAddressBookResponse.java
+CHANGE com/coinbase/prime/allocations/ListAllocationsByNettingIdRequest.java
+CHANGE com/coinbase/prime/allocations/ListAllocationsByNettingIdResponse.java
+CHANGE com/coinbase/prime/orders/GetOrderByOrderIdRequest.java
+CHANGE com/coinbase/prime/orders/GetOrderByOrderIdResponse.java
+CHANGE com/coinbase/prime/paymentmethods/GetPaymentMethodDetailsRequest.java
+CHANGE com/coinbase/prime/paymentmethods/GetPaymentMethodDetailsResponse.java
+CHANGE com/coinbase/prime/paymentmethods/ListPaymentMethodsRequest.java
+CHANGE com/coinbase/prime/paymentmethods/ListPaymentMethodsResponse.java
+CHANGE com/coinbase/prime/staking/ClaimRewardsRequest.java
+CHANGE com/coinbase/prime/staking/ClaimRewardsResponse.java
+CHANGE com/coinbase/prime/staking/PortfolioStakingInitiateRequest.java
+CHANGE com/coinbase/prime/staking/PortfolioStakingInitiateResponse.java
+CHANGE com/coinbase/prime/staking/PortfolioStakingUnstakeRequest.java
+CHANGE com/coinbase/prime/staking/PortfolioStakingUnstakeResponse.java
+CHANGE com/coinbase/prime/transactions/CreateWalletTransferRequest.java
+CHANGE com/coinbase/prime/transactions/CreateWalletTransferResponse.java
+CHANGE com/coinbase/prime/transactions/CreateWalletWithdrawalRequest.java
+CHANGE com/coinbase/prime/transactions/CreateWalletWithdrawalResponse.java
+
+# Service interfaces/implementations that gain the canonical methods plus @Deprecated forwarding
+# aliases for the legacy method names.
+CHANGE com/coinbase/prime/activities/ActivitiesService.java
+CHANGE com/coinbase/prime/activities/ActivitiesServiceImpl.java
+CHANGE com/coinbase/prime/addressbook/AddressBookService.java
+CHANGE com/coinbase/prime/addressbook/AddressBookServiceImpl.java
+CHANGE com/coinbase/prime/allocations/AllocationsService.java
+CHANGE com/coinbase/prime/allocations/AllocationsServiceImpl.java
+CHANGE com/coinbase/prime/orders/OrdersService.java
+CHANGE com/coinbase/prime/orders/OrdersServiceImpl.java
+CHANGE com/coinbase/prime/paymentmethods/PaymentMethodsService.java
+CHANGE com/coinbase/prime/paymentmethods/PaymentMethodsServiceImpl.java
+CHANGE com/coinbase/prime/staking/StakingService.java
+CHANGE com/coinbase/prime/staking/StakingServiceImpl.java
+CHANGE com/coinbase/prime/transactions/TransactionsService.java
+CHANGE com/coinbase/prime/transactions/TransactionsServiceImpl.java
+
+# Fields the committed spec has that the vended classes lack (real spec updates).
+CHANGE com/coinbase/prime/orders/CreateQuoteRequest.java
+CHANGE com/coinbase/prime/orders/CreateQuoteResponse.java
+CHANGE com/coinbase/prime/orders/EditOrderRequest.java
+
+# /v2 endpoints now derive their base URL from the configured client instead of the production
+# constant, so a custom base URL is honored.
+CHANGE com/coinbase/prime/financing/FinancingServiceImpl.java
+
+# Hand-maintained compatibility files (protectedCompatibilityFiles). The generator only proposes
+# changes for them and never writes them.
+SKIP com/coinbase/prime/portfolios/PortfoliosService.java
+SKIP com/coinbase/prime/portfolios/PortfoliosServiceImpl.java
