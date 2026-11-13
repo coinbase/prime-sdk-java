@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 class GeneratorConfigurationTest {
   @Test
-  void usesCommittedSpecPathForFetchDestinationAndNormalizesStatusOverrides() throws Exception {
+  void usesCommittedSpecPathForFetchDestinationAndDeduplicatesStatusOverridesInConfiguredOrder() throws Exception {
     GeneratorConfiguration configuration = configuration(
         "{\"specUrl\":\"https://example.test/openapi.yaml\",\"committedSpecPath\":\"apiSpec/custom.yaml\"}",
         "[{\"operationId\":\"PrimeRESTAPI_Test\",\"statusCodes\":[204,200,204,201]}]");
@@ -33,7 +33,8 @@ class GeneratorConfigurationTest {
     assertEquals(
         Path.of("/tmp/prime-sdk/apiSpec/custom.yaml"),
         SpecFetcher.destination(Path.of("/tmp/prime-sdk"), configuration.committedSpecPath()));
-    assertEquals(List.of(200, 201, 204),
+    // Order is preserved: the vended calls list 201 before 200.
+    assertEquals(List.of(204, 200, 201),
         configuration.overrides().get("PrimeRESTAPI_Test").statuses());
   }
 
