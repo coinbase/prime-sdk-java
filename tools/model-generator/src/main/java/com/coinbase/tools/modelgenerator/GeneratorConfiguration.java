@@ -28,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 /** Loads deterministic generation configuration and validates sparse operation overrides. */
 public final class GeneratorConfiguration {
@@ -298,7 +297,8 @@ public final class GeneratorConfiguration {
         }
         convenienceConstructorParameters.add(parameterName);
       }
-      TreeSet<Integer> normalizedStatuses = new TreeSet<>();
+      // Order is part of the vended call (201 before 200), so keep it as configured.
+      Set<Integer> normalizedStatuses = new LinkedHashSet<>();
       for (JsonNode status : node.path("statusCodes")) {
         int code = status.asInt();
         if (code < 200 || code >= 300) {

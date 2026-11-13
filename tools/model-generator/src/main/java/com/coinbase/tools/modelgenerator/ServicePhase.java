@@ -166,7 +166,7 @@ public final class ServicePhase {
     for (DeprecatedAlias alias : binding.deprecatedAliases()) candidates.add(names.methodName(alias.sdkMethod()));
     for (String candidate : candidates) {
       String existing = docs.get(candidate);
-      if (existing == null) continue;
+      if (existing == null || existing.isEmpty()) continue;
       String block = existing;
       if (deprecationMessage != null && !block.contains("@deprecated")) {
         int end = block.lastIndexOf("\n   */");

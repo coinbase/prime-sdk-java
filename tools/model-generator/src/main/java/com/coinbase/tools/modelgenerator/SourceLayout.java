@@ -40,21 +40,6 @@ import java.util.regex.Pattern;
 final class SourceLayout {
   static final SourceLayout NONE = new SourceLayout(null);
 
-  private static final Pattern CLASS_DOC =
-      Pattern.compile(
-          "/\\*\\*((?:(?!\\*/).)*)\\*/\\s*(?:@\\w+(?:\\([^)]*\\))?\\s*)*public\\s+(?:final\\s+)?(?:class|interface)\\s+\\w+",
-          Pattern.DOTALL);
-  private static final Pattern FIELD =
-      Pattern.compile(
-          "((?:/\\*\\*(?:(?!\\*/).)*\\*/\\s*)*)((?:@\\w+(?:\\([^)]*\\))?\\s*)*)private\\s+[\\w.<>\\[\\], ?]+?\\s+(\\w+)\\s*;",
-          Pattern.DOTALL);
-  private static final Pattern SERVICE_METHOD =
-      Pattern.compile("(?m)^  \\w+Response (\\w+)\\(");
-
-  private static final Pattern SERVICE_DOC =
-      Pattern.compile(
-          "(?m)^(  /\\*\\*(?:(?!\\*/).)*?\\*/)\\s*(?:@\\w+\\s*)*\\w+Response (\\w+)\\(",
-          Pattern.DOTALL);
 
   /** A field that is already declared by an existing class. */
   static final class Member {
@@ -109,15 +94,30 @@ final class SourceLayout {
     return read(file).map(source -> source.contains(text)).orElse(false);
   }
 
+  private static final Pattern CLASS_DECLARATION =
+      Pattern.compile("(?m)^public\\s+(?:final\\s+)?(?:class|interface)\\s");
+  private static final Pattern SERVICE_METHOD = Pattern.compile("^  \\w+Response (\\w+)\\(.*");
+
   /** The existing class Javadoc, an empty string if documented as none, or {@code fallback} if new. */
   String classDocumentation(Path file, String fallback) {
     java.util.Optional<String> source = read(file);
     if (!source.isPresent()) return fallback;
-    Matcher matcher = CLASS_DOC.matcher(source.get());
-    return matcher.find() ? clean(matcher.group(1)) : "";
+    Matcher declaration = CLASS_DECLARATION.matcher(source.get());
+    if (!declaration.find()) return "";
+    String head = source.get().substring(0, declaration.start());
+    int end = head.lastIndexOf("*/");
+    int start = end < 0 ? -1 : head.lastIndexOf("/**", end);
+    // Only annotations may sit between the Javadoc and the class declaration.
+    if (start < 0 || !head.substring(end + 2).replaceAll("@\\w+(?:\\([^)]*\\))?", "").trim().isEmpty()) {
+      return "";
+    }
+    return clean(head.substring(start + 3, end));
   }
 
-  /** Fields declared before the nested builder, in declaration order. */
+  /**
+   * Fields declared before the nested builder, in declaration order. Scanned linearly: Javadoc
+   * blocks and annotations accumulate until the next {@code private} declaration claims them.
+   */
   Map<String, Member> fields(Path file) {
     java.util.Optional<String> source = read(file);
     if (!source.isPresent()) return Collections.emptyMap();
@@ -125,32 +125,99 @@ final class SourceLayout {
     int builder = text.indexOf("public static class Builder");
     if (builder >= 0) text = text.substring(0, builder);
     Map<String, Member> fields = new LinkedHashMap<>();
-    Matcher matcher = FIELD.matcher(text);
-    while (matcher.find()) {
-      fields.put(
-          matcher.group(3),
-          new Member(documentation(matcher.group(1)), matcher.group(2).contains("@JsonProperty")));
+    List<String> docs = new ArrayList<>();
+    boolean annotated = false;
+    int index = 0;
+    while (index < text.length()) {
+      char current = text.charAt(index);
+      if (Character.isWhitespace(current)) {
+        index++;
+      } else if (text.startsWith("/**", index)) {
+        int end = text.indexOf("*/", index + 3);
+        if (end < 0) break;
+        docs.add(clean(text.substring(index + 3, end)));
+        index = end + 2;
+      } else if (text.startsWith("/*", index)) {
+        int end = text.indexOf("*/", index + 2);
+        if (end < 0) break;
+        index = end + 2;
+      } else if (text.startsWith("//", index)) {
+        int end = text.indexOf('\n', index);
+        index = end < 0 ? text.length() : end + 1;
+      } else if (current == '@') {
+        int name = index + 1;
+        while (name < text.length() && Character.isJavaIdentifierPart(text.charAt(name))) name++;
+        if (text.substring(index + 1, name).equals("JsonProperty")) annotated = true;
+        index = name;
+        int open = name;
+        while (open < text.length() && text.charAt(open) == ' ') open++;
+        if (open < text.length() && text.charAt(open) == '(') {
+          int depth = 0;
+          for (; open < text.length(); open++) {
+            if (text.charAt(open) == '(') depth++;
+            else if (text.charAt(open) == ')' && --depth == 0) break;
+          }
+          index = open + 1;
+        }
+      } else if (text.startsWith("private ", index)) {
+        int end = text.indexOf(';', index);
+        if (end < 0) break;
+        String declaration = text.substring(index, end).trim();
+        int space = declaration.lastIndexOf(' ');
+        fields.put(
+            declaration.substring(space + 1),
+            new Member(String.join(SourceTemplates.DOC_SEPARATOR, docs), annotated));
+        docs = new ArrayList<>();
+        annotated = false;
+        index = end + 1;
+      } else {
+        // Any other member or clause ends the pending Javadoc and annotations.
+        docs = new ArrayList<>();
+        annotated = false;
+        int end = index;
+        while (end < text.length() && ";{}".indexOf(text.charAt(end)) < 0) end++;
+        index = end + 1;
+      }
     }
     return fields;
   }
 
   /** Service interface method names in declaration order. */
   List<String> serviceMethods(Path file) {
-    List<String> names = new ArrayList<>();
-    java.util.Optional<String> source = read(file);
-    if (!source.isPresent()) return names;
-    Matcher matcher = SERVICE_METHOD.matcher(source.get());
-    while (matcher.find()) names.add(matcher.group(1));
-    return names;
+    return new ArrayList<>(serviceMethodDocs(file).keySet());
   }
 
-  /** Existing service-interface Javadoc blocks (verbatim, with indentation) keyed by method name. */
+  /**
+   * Existing service-interface methods in declaration order, each with its verbatim Javadoc block
+   * (with indentation) or an empty string when the method was undocumented.
+   */
   Map<String, String> serviceMethodDocs(Path file) {
     Map<String, String> docs = new LinkedHashMap<>();
     java.util.Optional<String> source = read(file);
     if (!source.isPresent()) return docs;
-    Matcher matcher = SERVICE_DOC.matcher(source.get());
-    while (matcher.find()) docs.put(matcher.group(2), matcher.group(1));
+    StringBuilder block = null;
+    String pending = "";
+    for (String line : source.get().split("\\R")) {
+      if (block == null && line.startsWith("  /**")) {
+        block = new StringBuilder();
+      }
+      if (block != null) {
+        if (block.length() > 0) block.append('\n');
+        block.append(line);
+        if (line.contains("*/")) {
+          pending = block.toString();
+          block = null;
+        }
+        continue;
+      }
+      Matcher method = SERVICE_METHOD.matcher(line);
+      if (method.matches()) {
+        docs.put(method.group(1), pending);
+        pending = "";
+      } else if (!line.startsWith("  @")) {
+        pending = "";
+      }
+    }
     return docs;
   }
 
@@ -175,13 +242,6 @@ final class SourceLayout {
     } catch (IOException e) {
       throw new UncheckedIOException("Cannot read existing source " + file, e);
     }
-  }
-
-  private static String documentation(String blocks) {
-    List<String> parts = new ArrayList<>();
-    Matcher matcher = Pattern.compile("/\\*\\*((?:(?!\\*/).)*)\\*/", Pattern.DOTALL).matcher(blocks);
-    while (matcher.find()) parts.add(clean(matcher.group(1)));
-    return String.join(SourceTemplates.DOC_SEPARATOR, parts);
   }
 
   /**
