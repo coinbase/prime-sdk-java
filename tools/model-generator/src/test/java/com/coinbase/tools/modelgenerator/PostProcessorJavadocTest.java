@@ -25,9 +25,9 @@ import org.junit.jupiter.api.Test;
 class PostProcessorJavadocTest {
 
   @Test
-  void isSkippedErrorSchema_skipsTypedErrorEnumsAndResponses() {
-    assertTrue(PostProcessor.isSkippedErrorSchema("BadRequestErrorCode.java"));
-    assertTrue(PostProcessor.isSkippedErrorSchema("RotateAPIKeyForbiddenSubcode.java"));
+  void isSkippedErrorSchema_preservesErrorEnumsAndSkipsOnlyErrorResponses() {
+    assertFalse(PostProcessor.isSkippedErrorSchema("BadRequestErrorCode.java"));
+    assertFalse(PostProcessor.isSkippedErrorSchema("RotateAPIKeyForbiddenSubcode.java"));
     assertTrue(PostProcessor.isSkippedErrorSchema("GetConversionFeesForbiddenErrorResponse.java"));
     assertFalse(PostProcessor.isSkippedErrorSchema("TransactionType.java"));
     assertFalse(PostProcessor.isSkippedErrorSchema("Order.java"));

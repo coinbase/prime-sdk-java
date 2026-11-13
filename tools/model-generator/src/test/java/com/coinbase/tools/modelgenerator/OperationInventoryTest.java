@@ -1,0 +1,91 @@
+/*
+ * Copyright 2026-present Coinbase Global, Inc.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+package com.coinbase.tools.modelgenerator;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Locks the vended Java surface for every known operation.
+ *
+ * <p>This covers the service, method name, deprecated aliases, and accepted success status codes.
+ * Spec updates may add operations freely, but a spec or derivation change that renames, moves, or
+ * drops an existing SDK method fails here. Add an override to {@code operations-overrides.json} to
+ * keep the vended name, or update {@code operation-inventory.json} deliberately.
+ */
+class OperationInventoryTest {
+  private static final ObjectMapper JSON = new ObjectMapper();
+
+  @Test
+  void existingOperationsKeepTheirVendedJavaSurface() throws Exception {
+    Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
+    SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
+    GeneratorConfiguration configuration = GeneratorConfiguration.load(GeneratorPaths.forRoot(root));
+    Map<String, String> actual = inventory(document, OperationBindingGenerator.deriveAll(document, configuration), configuration);
+    @SuppressWarnings("unchecked")
+    Map<String, String> expected =
+        JSON.readValue(
+            root.resolve("tools/model-generator/src/test/resources/operation-inventory.json").toFile(),
+            TreeMap.class);
+
+    List<String> failures = new ArrayList<>();
+    for (Map.Entry<String, String> entry : expected.entrySet()) {
+      String surface = actual.get(entry.getKey());
+      if (!entry.getValue().equals(surface)) {
+        failures.add(entry.getKey() + ": expected " + entry.getValue() + " but was " + surface);
+      }
+    }
+    assertTrue(failures.isEmpty(), "Vended Java surface changed:\n" + String.join("\n", failures));
+  }
+
+  private static Map<String, String> inventory(
+      SpecModels.Document document,
+      List<OperationBinding> bindings,
+      GeneratorConfiguration configuration) {
+    Map<String, SpecModels.Operation> operations = new TreeMap<>();
+    for (SpecModels.Operation operation : document.operations()) {
+      operations.put(operation.operationId(), operation);
+    }
+    Map<String, String> inventory = new TreeMap<>();
+    for (OperationBinding binding : bindings) {
+      StringBuilder surface =
+          new StringBuilder(binding.serviceFolder())
+              .append('/').append(binding.serviceName()).append('#').append(binding.sdkMethod());
+      if (!binding.deprecatedAliases().isEmpty()) {
+        surface.append(" deprecated:").append(
+            binding.deprecatedAliases().stream()
+                .map(DeprecatedAlias::sdkMethod)
+                .collect(Collectors.joining(",")));
+      }
+      // Accepted success codes are part of the vended behavior, not just the method name.
+      surface.append(" status:").append(
+          ServicePhase.statusCodes(operations.get(binding.operationId()), configuration).stream()
+              .map(String::valueOf)
+              .collect(Collectors.joining(",")));
+      inventory.put(binding.operationId(), surface.toString());
+    }
+    return inventory;
+  }
+}

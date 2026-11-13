@@ -16,7 +16,6 @@
 
 package com.coinbase.tools.modelgenerator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.config.CodegenConfigurator;
@@ -34,11 +33,17 @@ public class OpenApiGenerator {
     
     private final String specLocation;
     private final Path outputDir;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Path projectRoot;
     
     public OpenApiGenerator(String specLocation, Path outputDir) {
+        this(specLocation, outputDir, null);
+    }
+
+    /** Allows isolated checks to write outside the repository while still using repository templates. */
+    public OpenApiGenerator(String specLocation, Path outputDir, Path projectRoot) {
         this.specLocation = specLocation;
         this.outputDir = outputDir;
+        this.projectRoot = projectRoot;
     }
     
     public void generateModels() throws IOException {
@@ -141,6 +146,9 @@ public class OpenApiGenerator {
     }
     
     private Path findProjectRoot() {
+        if (projectRoot != null) {
+            return projectRoot;
+        }
         Path current = outputDir.getParent();
         while (current != null) {
             if (current.resolve("pom.xml").toFile().exists() &&
