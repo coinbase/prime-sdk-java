@@ -45,8 +45,9 @@ class ClientSurfaceGenerationTest {
     String listRequest = sources.get(Path.of("com/coinbase/prime/orders/ListThingsRequest.java"));
     assertTrue(listRequest.contains("extends PrimeListRequest"), listRequest);
     assertTrue(listRequest.contains("super(builder.cursor, builder.sortDirection, builder.limit);"), listRequest);
-    assertTrue(listRequest.contains("Builder cursor(String cursor)"), listRequest);
-    assertTrue(listRequest.contains("Builder sortDirection(SortDirection sortDirection)"), listRequest);
+    // New list requests expose limit() and pagination() like the vended ones, not cursor()/sortDirection().
+    assertFalse(listRequest.contains("Builder cursor(String cursor)"), listRequest);
+    assertFalse(listRequest.contains("Builder sortDirection(SortDirection sortDirection)"), listRequest);
     assertTrue(listRequest.contains("Builder limit(Integer limit)"), listRequest);
     assertTrue(listRequest.contains("Builder pagination(Pagination pagination)"), listRequest);
     assertTrue(listRequest.contains("private ThingState state;"), listRequest);
@@ -70,11 +71,82 @@ class ClientSurfaceGenerationTest {
     assertTrue(implementation.contains("List.of(201, 200)"));
     assertOrdered(implementation, "listThings", "createThing");
     String service = sources.get(Path.of("com/coinbase/prime/orders/OrdersService.java"));
-    assertTrue(service.contains("List Things. Includes query filtering."), service);
-    assertTrue(service.contains("@param request request parameters and body for this operation"), service);
-    assertTrue(service.contains("@return the decoded ListThings response"), service);
-    assertTrue(service.contains("@throws CoinbaseClientException"), service);
+    assertTrue(service.contains("   * List Things.\n   *\n   * <p>Includes query filtering\n"), service);
+    assertTrue(service.contains("@param request the request parameters for this operation"), service);
+    assertTrue(service.contains("@return the response payload for this operation"), service);
+    assertTrue(service.contains("@throws CoinbaseClientException if the request fails client-side validation"), service);
     assertTrue(sources.get(Path.of("com/coinbase/prime/factory/PrimeServiceFactory.java")).contains("createOrdersService"));
+  }
+
+  @Test
+  void rendersVendedClassConventions() throws Exception {
+    SpecModels.Document document = fixture();
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
+    NamingResolver names = new NamingResolver();
+    JavaTypeResolver types = new JavaTypeResolver(document, names);
+    String request =
+        RequestPhase.render(document, bindings, types, names)
+            .get(Path.of("com/coinbase/prime/orders/CreateThingRequest.java"));
+
+    assertTrue(request.startsWith("/*\n * Copyright 2026-present Coinbase Global, Inc.\n *\n *  Licensed"), request);
+    assertTrue(request.contains(" */\n\npackage com.coinbase.prime.orders;"), request);
+    // Only path parameters are marked required; body and query fields use the short form.
+    assertTrue(request.contains("@JsonProperty(required = true, value = \"portfolio_id\")"), request);
+    assertTrue(request.contains("@JsonProperty(\"things\")"), request);
+    assertFalse(request.contains("value = \"things\""), request);
+    assertTrue(request.contains("public CreateThingRequest build() throws CoinbaseClientException {"), request);
+    assertTrue(request.contains("private void validate() throws CoinbaseClientException {"), request);
+  }
+
+  @Test
+  void keepsMemberOrderAndDocumentationOfExistingSources() throws Exception {
+    SpecModels.Document document = fixture();
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document);
+    NamingResolver names = new NamingResolver();
+    JavaTypeResolver types = new JavaTypeResolver(document, names);
+    Path sourceRoot = Files.createTempDirectory("vended-layout");
+    Path orders = Files.createDirectories(sourceRoot.resolve("com/coinbase/prime/orders"));
+    Files.writeString(
+        orders.resolve("CreateThingRequest.java"),
+        "/** Vended request doc */\npublic class CreateThingRequest {\n"
+            + "  @JsonProperty(\"is_buy_exact\")\n  private Boolean isBuyExact;\n\n"
+            + "  /** Vended things doc */\n  @JsonProperty(\"things\")\n  private Thing[] things;\n\n"
+            + "  @JsonProperty(required = true, value = \"portfolio_id\")\n  @JsonIgnore\n  private String portfolioId;\n\n"
+            + "  public static class Builder {}\n}\n");
+    Files.writeString(
+        orders.resolve("OrdersService.java"),
+        "public interface OrdersService {\n"
+            + "  /** Vended create doc */\n  CreateThingResponse createThing(CreateThingRequest request)\n      throws X;\n\n"
+            + "  ListThingsResponse listThings(ListThingsRequest request) throws X;\n}\n");
+    SourceLayout layout = SourceLayout.of(sourceRoot);
+
+    String request =
+        RequestPhase.render(document, bindings, types, names, layout)
+            .get(Path.of("com/coinbase/prime/orders/CreateThingRequest.java"));
+    assertTrue(request.contains("/** Vended request doc */\npublic class"), request);
+    assertOrdered(request, "private Boolean isBuyExact;", "private Thing[] things;");
+    assertOrdered(request, "private Thing[] things;", "private String portfolioId;");
+    assertTrue(request.contains("/** Vended things doc */\n  @JsonProperty(\"things\")"), request);
+    // A field the vended class documented as none stays undocumented rather than taking the spec text.
+    assertFalse(request.contains("Buy exact flag"), request);
+
+    String service =
+        ServicePhase.render(document, bindings, configuration(), names, layout)
+            .get(Path.of("com/coinbase/prime/orders/OrdersService.java"));
+    assertOrdered(service, "createThing(", "listThings(");
+    assertTrue(service.contains("/** Vended create doc */"), service);
+  }
+
+  @Test
+  void expectedChangesMustMatchExactly() {
+    Main.verifyExpectedChanges(
+        List.of("ADD a/B.java", "CHANGE a/C.java"), List.of("CHANGE a/C.java", "ADD a/B.java"));
+    IllegalStateException drift =
+        org.junit.jupiter.api.Assertions.assertThrows(
+            IllegalStateException.class,
+            () -> Main.verifyExpectedChanges(List.of("CHANGE a/C.java", "CHANGE a/D.java"), List.of("CHANGE a/C.java", "ADD a/B.java")));
+    assertTrue(drift.getMessage().contains("unexpected CHANGE a/D.java"), drift.getMessage());
+    assertTrue(drift.getMessage().contains("no longer changes ADD a/B.java"), drift.getMessage());
   }
 
   @Test

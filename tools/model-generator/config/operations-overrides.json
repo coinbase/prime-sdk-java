@@ -1,7 +1,9 @@
 [
   {
     "operationId": "PrimeRESTAPI_GetActivity",
-    "convenienceConstructorParameters": ["activity_id"]
+    "convenienceConstructorParameters": [
+      "activity_id"
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_CreateOrder",
@@ -158,15 +160,27 @@
         "sdkMethod": "ClaimRewards",
         "message": "Use claimStakingRewards instead."
       }
+    ],
+    "statusCodes": [
+      201,
+      200
     ]
   },
   {
     "operationId": "PrimeRESTAPI_StakingInitiate",
-    "sdkMethod": "CreateStake"
+    "sdkMethod": "CreateStake",
+    "statusCodes": [
+      201,
+      200
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_StakingUnstake",
-    "sdkMethod": "CreateUnstake"
+    "sdkMethod": "CreateUnstake",
+    "statusCodes": [
+      201,
+      200
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_PortfolioStakingInitiate",
@@ -176,6 +190,10 @@
         "sdkMethod": "PortfolioStakingInitiate",
         "message": "Use createPortfolioStake instead."
       }
+    ],
+    "statusCodes": [
+      201,
+      200
     ]
   },
   {
@@ -186,6 +204,10 @@
         "sdkMethod": "PortfolioStakingUnstake",
         "message": "Use createPortfolioUnstake instead."
       }
+    ],
+    "statusCodes": [
+      201,
+      200
     ]
   },
   {
@@ -221,6 +243,9 @@
         "sdkMethod": "CreateWalletTransfer",
         "message": "Use createTransfer instead."
       }
+    ],
+    "statusCodes": [
+      200
     ]
   },
   {
@@ -231,6 +256,9 @@
         "sdkMethod": "CreateWalletWithdrawal",
         "message": "Use createWithdrawal instead."
       }
+    ],
+    "statusCodes": [
+      200
     ]
   },
   {
@@ -279,5 +307,20 @@
   {
     "operationId": "PrimeRESTAPI_GetFcmBalance",
     "sdkMethod": "GetEntityFcmBalance"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetCrossMarginRiskParameters",
+    "responseTypeOverrides": {
+      "risk_parameters": "java.util.List<com.coinbase.prime.model.CrossMarginRiskParameters>",
+      "offset_credit_matrix_long_short": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>",
+      "offset_credit_matrix_long_long": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>",
+      "offset_credit_matrix_short_short": "java.util.List<com.coinbase.prime.model.TierPairRateEntry>"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetMarketData",
+    "responseTypeOverrides": {
+      "market_data": "java.util.List<com.coinbase.prime.model.MarketData>"
+    }
   }
 ]
