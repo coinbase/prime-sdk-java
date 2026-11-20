@@ -91,10 +91,101 @@
     "aliasBehavior": "none"
   },
   {
+    "operationId": "PrimeRESTAPI_GetCandles",
+    "canonicalJavaMethod": "getProductCandles",
+    "legacyJavaAliases": ["getCandles"],
+    "serviceFolder": "products",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrderEditHistory",
+    "canonicalJavaMethod": "getOrderEditHistory",
+    "legacyJavaAliases": ["listOrderEditHistory"],
+    "serviceFolder": "orders",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
     "operationId": "PrimeRESTAPI_GetPortfolioCounterpartyID",
-    "canonicalJavaMethod": "getPortfolioCounterpartyId",
-    "legacyJavaAliases": [],
+    "canonicalJavaMethod": "getCounterpartyId",
+    "legacyJavaAliases": ["getPortfolioCounterpartyId"],
     "serviceFolder": "advancedtransfer",
-    "aliasBehavior": "none"
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioProducts",
+    "canonicalJavaMethod": "listProducts",
+    "legacyJavaAliases": ["listPortfolioProducts"],
+    "serviceFolder": "products",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPositions",
+    "canonicalJavaMethod": "getEntityPositions",
+    "legacyJavaAliases": ["getPositions"],
+    "serviceFolder": "futures",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListTransactionValidators",
+    "canonicalJavaMethod": "queryTransactionValidators",
+    "legacyJavaAliases": ["listTransactionValidators"],
+    "serviceFolder": "staking",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_OrderPreview",
+    "canonicalJavaMethod": "createOrderPreview",
+    "legacyJavaAliases": ["getOrderPreview"],
+    "serviceFolder": "orders",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_UpdateFundingSettings",
+    "canonicalJavaMethod": "setFundingSettings",
+    "legacyJavaAliases": ["updateFundingSettings"],
+    "serviceFolder": "financing",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateAllocation",
+    "canonicalJavaMethod": "createPortfolioAllocations",
+    "legacyJavaAliases": ["createAllocation"],
+    "serviceFolder": "allocations",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateNetAllocation",
+    "canonicalJavaMethod": "createPortfolioNetAllocations",
+    "legacyJavaAliases": ["createNetAllocation"],
+    "serviceFolder": "allocations",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrders",
+    "canonicalJavaMethod": "listOrders",
+    "legacyJavaAliases": ["listPortfolioOrders"],
+    "serviceFolder": "orders",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioInterestAccruals",
+    "canonicalJavaMethod": "listPortfolioInterestAccruals",
+    "legacyJavaAliases": ["listInterestAccrualsForPortfolio"],
+    "serviceFolder": "financing",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPostTradeCredit",
+    "canonicalJavaMethod": "getPortfolioCredit",
+    "legacyJavaAliases": ["getPortfolioCreditInformation"],
+    "serviceFolder": "financing",
+    "aliasBehavior": "requestResponseSubclass"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetTFTieredPricingFees",
+    "canonicalJavaMethod": "getTieredPricingFees",
+    "legacyJavaAliases": ["getTradeFinanceTieredPricingFees"],
+    "serviceFolder": "financing",
+    "aliasBehavior": "requestResponseSubclass"
   }
 ]
