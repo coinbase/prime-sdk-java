@@ -53,9 +53,16 @@
   },
   {
     "operationId": "PrimeRESTAPI_GetCandles",
+    "sdkMethod": "GetProductCandles",
     "parameterTypeOverrides": {
       "granularity": "com.coinbase.prime.model.enums.CandlesGranularity"
-    }
+    },
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetCandles",
+        "message": "Use getProductCandles instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetOpenOrders",
@@ -67,7 +74,7 @@
   },
   {
     "operationId": "PrimeRESTAPI_GetOrders",
-    "sdkMethod": "ListPortfolioOrders",
+    "sdkMethod": "ListOrders",
     "responseTypeOverrides": {
       "orders": "com.coinbase.prime.model.Order[]"
     },
@@ -76,7 +83,13 @@
       "order_side": "com.coinbase.prime.model.enums.OrderSide",
       "order_statuses": "com.coinbase.prime.model.enums.OrderStatus[]",
       "product_ids": "String[]"
-    }
+    },
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListPortfolioOrders",
+        "message": "Use listOrders instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetOrder",
@@ -127,7 +140,13 @@
   },
   {
     "operationId": "PrimeRESTAPI_GetPortfolioCounterpartyID",
-    "sdkMethod": "GetPortfolioCounterpartyId"
+    "sdkMethod": "GetCounterpartyId",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetPortfolioCounterpartyId",
+        "message": "Use getCounterpartyId instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetBuyingPower",
@@ -212,9 +231,16 @@
   },
   {
     "operationId": "PrimeRESTAPI_ListTransactionValidators",
+    "sdkMethod": "QueryTransactionValidators",
     "parameterTypeOverrides": {
       "transaction_ids": "String[]"
-    }
+    },
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListTransactionValidators",
+        "message": "Use queryTransactionValidators instead."
+      }
+    ]
   },
   {
     "operationId": "PrimeRESTAPI_GetInvoices",
@@ -322,5 +348,105 @@
     "responseTypeOverrides": {
       "market_data": "java.util.List<com.coinbase.prime.model.MarketData>"
     }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrderEditHistory",
+    "sdkMethod": "GetOrderEditHistory",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListOrderEditHistory",
+        "message": "Use getOrderEditHistory instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioProducts",
+    "sdkMethod": "ListProducts",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListPortfolioProducts",
+        "message": "Use listProducts instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPositions",
+    "sdkMethod": "GetEntityPositions",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetPositions",
+        "message": "Use getEntityPositions instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_OrderPreview",
+    "sdkMethod": "CreateOrderPreview",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetOrderPreview",
+        "message": "Use createOrderPreview instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_UpdateFundingSettings",
+    "sdkMethod": "SetFundingSettings",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "UpdateFundingSettings",
+        "message": "Use setFundingSettings instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateAllocation",
+    "sdkMethod": "CreatePortfolioAllocations",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "CreateAllocation",
+        "message": "Use createPortfolioAllocations instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateNetAllocation",
+    "sdkMethod": "CreatePortfolioNetAllocations",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "CreateNetAllocation",
+        "message": "Use createPortfolioNetAllocations instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioInterestAccruals",
+    "sdkMethod": "ListPortfolioInterestAccruals",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "ListInterestAccrualsForPortfolio",
+        "message": "Use listPortfolioInterestAccruals instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPostTradeCredit",
+    "sdkMethod": "GetPortfolioCredit",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetPortfolioCreditInformation",
+        "message": "Use getPortfolioCredit instead."
+      }
+    ]
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetTFTieredPricingFees",
+    "sdkMethod": "GetTieredPricingFees",
+    "deprecatedAliases": [
+      {
+        "sdkMethod": "GetTradeFinanceTieredPricingFees",
+        "message": "Use getTieredPricingFees instead."
+      }
+    ]
   }
 ]
