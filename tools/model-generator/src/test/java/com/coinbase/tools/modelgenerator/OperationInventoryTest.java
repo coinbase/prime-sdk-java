@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -58,12 +59,19 @@ class OperationInventoryTest {
     assertTrue(failures.isEmpty(), "Vended Java surface changed:\n" + String.join("\n", failures));
   }
 
-  static Map<String, String> inventory(List<OperationBinding> bindings) {
+  private static Map<String, String> inventory(List<OperationBinding> bindings) {
     Map<String, String> inventory = new TreeMap<>();
     for (OperationBinding binding : bindings) {
-      inventory.put(
-          binding.operationId(),
-          binding.serviceFolder() + "/" + binding.serviceName() + "#" + binding.sdkMethod());
+      StringBuilder surface =
+          new StringBuilder(binding.serviceFolder())
+              .append('/').append(binding.serviceName()).append('#').append(binding.sdkMethod());
+      if (!binding.deprecatedAliases().isEmpty()) {
+        surface.append(" deprecated:").append(
+            binding.deprecatedAliases().stream()
+                .map(DeprecatedAlias::sdkMethod)
+                .collect(Collectors.joining(",")));
+      }
+      inventory.put(binding.operationId(), surface.toString());
     }
     return inventory;
   }
