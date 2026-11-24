@@ -25,16 +25,14 @@ import org.junit.jupiter.api.Test;
 
 class GeneratorConfigurationTest {
   @Test
-  void usesCommittedSpecPathForFetchDestinationAndNormalizesStatusOverrides() throws Exception {
+  void usesCommittedSpecPathForFetchDestination() throws Exception {
     GeneratorConfiguration configuration = configuration(
         "{\"specUrl\":\"https://example.test/openapi.yaml\",\"committedSpecPath\":\"apiSpec/custom.yaml\"}",
-        "[{\"operationId\":\"PrimeRESTAPI_Test\",\"statusCodes\":[204,200,204,201]}]");
+        "[]");
 
     assertEquals(
         Path.of("/tmp/prime-sdk/apiSpec/custom.yaml"),
         SpecFetcher.destination(Path.of("/tmp/prime-sdk"), configuration.committedSpecPath()));
-    assertEquals(List.of(200, 201, 204),
-        configuration.overrides().get("PrimeRESTAPI_Test").statuses());
   }
 
   @Test

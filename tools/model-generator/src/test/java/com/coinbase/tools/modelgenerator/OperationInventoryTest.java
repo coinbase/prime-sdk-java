@@ -24,12 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 /**
  * Locks the vended Java surface for every known operation.
  *
- * <p>Spec updates may add operations freely, but a spec or derivation change that renames, moves, or
+ * <p>This covers the service, method name, deprecated aliases, and accepted success status codes.
+ * Spec updates may add operations freely, but a spec or derivation change that renames, moves, or
  * drops an existing SDK method fails here. Add an override to {@code operations-overrides.json} to
  * keep the vended name, or update {@code operation-inventory.json} deliberately.
  */
@@ -41,7 +43,7 @@ class OperationInventoryTest {
     Path root = Path.of(System.getProperty("user.dir")).toAbsolutePath().getParent().getParent();
     SpecModels.Document document = SpecParser.load(root.resolve("apiSpec/prime-public-spec.yaml"));
     GeneratorConfiguration configuration = GeneratorConfiguration.load(GeneratorPaths.forRoot(root));
-    Map<String, String> actual = inventory(OperationBindingGenerator.deriveAll(document, configuration));
+    Map<String, String> actual = inventory(document, OperationBindingGenerator.deriveAll(document, configuration));
     @SuppressWarnings("unchecked")
     Map<String, String> expected =
         JSON.readValue(
@@ -58,12 +60,28 @@ class OperationInventoryTest {
     assertTrue(failures.isEmpty(), "Vended Java surface changed:\n" + String.join("\n", failures));
   }
 
-  static Map<String, String> inventory(List<OperationBinding> bindings) {
+  private static Map<String, String> inventory(SpecModels.Document document, List<OperationBinding> bindings) {
+    Map<String, SpecModels.Operation> operations = new TreeMap<>();
+    for (SpecModels.Operation operation : document.operations()) {
+      operations.put(operation.operationId(), operation);
+    }
     Map<String, String> inventory = new TreeMap<>();
     for (OperationBinding binding : bindings) {
-      inventory.put(
-          binding.operationId(),
-          binding.serviceFolder() + "/" + binding.serviceName() + "#" + binding.sdkMethod());
+      StringBuilder surface =
+          new StringBuilder(binding.serviceFolder())
+              .append('/').append(binding.serviceName()).append('#').append(binding.sdkMethod());
+      if (!binding.deprecatedAliases().isEmpty()) {
+        surface.append(" deprecated:").append(
+            binding.deprecatedAliases().stream()
+                .map(DeprecatedAlias::sdkMethod)
+                .collect(Collectors.joining(",")));
+      }
+      // Accepted success codes are part of the vended behavior, not just the method name.
+      surface.append(" status:").append(
+          ServicePhase.statusCodes(operations.get(binding.operationId())).stream()
+              .map(String::valueOf)
+              .collect(Collectors.joining(",")));
+      inventory.put(binding.operationId(), surface.toString());
     }
     return inventory;
   }

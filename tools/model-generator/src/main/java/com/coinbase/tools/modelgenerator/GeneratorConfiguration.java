@@ -21,12 +21,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 /** Loads deterministic generation configuration and validates sparse operation overrides. */
 public final class GeneratorConfiguration {
@@ -37,6 +38,7 @@ public final class GeneratorConfiguration {
   private final Map<String, String> modelTypeMappings;
   private final Map<String, String> sharedModelMappings;
   private final Set<String> protectedFiles;
+  private final boolean generateErrorEnums;
   private final Map<String, Override> overrides;
 
   private GeneratorConfiguration(
@@ -46,6 +48,7 @@ public final class GeneratorConfiguration {
       Map<String, String> modelTypeMappings,
       Map<String, String> sharedModelMappings,
       Set<String> protectedFiles,
+      boolean generateErrorEnums,
       Map<String, Override> overrides) {
     this.specUrl = specUrl;
     this.committedSpecPath = committedSpecPath;
@@ -53,6 +56,7 @@ public final class GeneratorConfiguration {
     this.modelTypeMappings = Collections.unmodifiableMap(modelTypeMappings);
     this.sharedModelMappings = Collections.unmodifiableMap(sharedModelMappings);
     this.protectedFiles = Collections.unmodifiableSet(protectedFiles);
+    this.generateErrorEnums = generateErrorEnums;
     this.overrides = Collections.unmodifiableMap(overrides);
   }
 
@@ -110,6 +114,7 @@ public final class GeneratorConfiguration {
         modelTypeMappings,
         sharedMappings,
         protectedFiles,
+        config.path("generateErrorEnums").asBoolean(false),
         overrides);
   }
 
@@ -165,8 +170,10 @@ public final class GeneratorConfiguration {
     }
   }
 
+  private static final String JAVA_TYPE = "[A-Za-z_$][A-Za-z0-9_$.]*";
+
   private static void validateJavaType(String value, String field) {
-    if (value == null || !value.matches("[A-Za-z_$][A-Za-z0-9_$.]*(?:\\[\\])?")) {
+    if (value == null || !value.matches(JAVA_TYPE + "(?:<" + JAVA_TYPE + "(?:,\\s*" + JAVA_TYPE + ")*>)?(?:\\[\\])?")) {
       throw new IllegalArgumentException(field + " must be a Java type: " + value);
     }
   }
@@ -198,6 +205,14 @@ public final class GeneratorConfiguration {
     return sharedModelMappings;
   }
 
+  /**
+   * Whether ErrorCode and Subcode enums are emitted under {@code model/errors}. Off by default: the
+   * SDK does not map HTTP errors onto them yet, and the vended SDK has never contained them.
+   */
+  public boolean generateErrorEnums() {
+    return generateErrorEnums;
+  }
+
   public Set<String> protectedFiles() {
     return protectedFiles;
   }
@@ -216,7 +231,7 @@ public final class GeneratorConfiguration {
     private final Map<String, String> propertyNames;
     private final Map<String, String> responseTypes;
     private final List<String> convenienceConstructorParameters;
-    private final List<Integer> statuses;
+    private final List<DeprecatedAlias> deprecatedAliases;
 
     private Override(
         String sdkMethod,
@@ -228,7 +243,7 @@ public final class GeneratorConfiguration {
         Map<String, String> propertyNames,
         Map<String, String> responseTypes,
         List<String> convenienceConstructorParameters,
-        List<Integer> statuses) {
+        List<DeprecatedAlias> deprecatedAliases) {
       this.sdkMethod = sdkMethod;
       this.serviceFolder = serviceFolder;
       this.serviceName = serviceName;
@@ -238,7 +253,7 @@ public final class GeneratorConfiguration {
       this.propertyNames = propertyNames;
       this.responseTypes = responseTypes;
       this.convenienceConstructorParameters = convenienceConstructorParameters;
-      this.statuses = statuses;
+      this.deprecatedAliases = deprecatedAliases;
     }
 
     static Override from(JsonNode node) {
@@ -279,14 +294,23 @@ public final class GeneratorConfiguration {
         }
         convenienceConstructorParameters.add(parameterName);
       }
-      TreeSet<Integer> normalizedStatuses = new TreeSet<>();
-      for (JsonNode status : node.path("statusCodes")) {
-        int code = status.asInt();
-        if (code < 200 || code >= 300) {
-          throw new IllegalArgumentException("Override status must be a 2xx code");
+      List<DeprecatedAlias> deprecatedAliases = new ArrayList<>();
+      Set<String> aliasNames = new HashSet<>();
+      for (JsonNode aliasNode : node.path("deprecatedAliases")) {
+        String aliasSdkMethod = required(aliasNode, "sdkMethod");
+        validatePascalCaseIdentifier(aliasSdkMethod, "deprecatedAliases.sdkMethod");
+        String message = required(aliasNode, "message");
+        if (sdkMethod != null && sdkMethod.equals(aliasSdkMethod)) {
+          throw new IllegalArgumentException(
+              "deprecatedAliases.sdkMethod must differ from sdkMethod: " + aliasSdkMethod);
         }
-        normalizedStatuses.add(code);
+        if (!aliasNames.add(aliasSdkMethod)) {
+          throw new IllegalArgumentException(
+              "Duplicate deprecatedAliases.sdkMethod: " + aliasSdkMethod);
+        }
+        deprecatedAliases.add(new DeprecatedAlias(aliasSdkMethod, message));
       }
+
       return new Override(
           sdkMethod,
           serviceFolder,
@@ -297,7 +321,7 @@ public final class GeneratorConfiguration {
           Collections.unmodifiableMap(new LinkedHashMap<>(propertyNames)),
           Collections.unmodifiableMap(new LinkedHashMap<>(responseTypes)),
           Collections.unmodifiableList(convenienceConstructorParameters),
-          Collections.unmodifiableList(new ArrayList<>(normalizedStatuses)));
+          Collections.unmodifiableList(deprecatedAliases));
     }
 
     public String sdkMethod() {
@@ -336,8 +360,8 @@ public final class GeneratorConfiguration {
       return convenienceConstructorParameters;
     }
 
-    public List<Integer> statuses() {
-      return statuses;
+    public List<DeprecatedAlias> deprecatedAliases() {
+      return deprecatedAliases;
     }
   }
 }
