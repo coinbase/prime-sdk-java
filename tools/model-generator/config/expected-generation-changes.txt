@@ -29,6 +29,34 @@ ADD com/coinbase/prime/transactions/CreateTransferRequest.java
 ADD com/coinbase/prime/transactions/CreateTransferResponse.java
 ADD com/coinbase/prime/transactions/CreateWithdrawalRequest.java
 ADD com/coinbase/prime/transactions/CreateWithdrawalResponse.java
+ADD com/coinbase/prime/advancedtransfer/GetCounterpartyIdRequest.java
+ADD com/coinbase/prime/advancedtransfer/GetCounterpartyIdResponse.java
+ADD com/coinbase/prime/allocations/CreatePortfolioAllocationsRequest.java
+ADD com/coinbase/prime/allocations/CreatePortfolioAllocationsResponse.java
+ADD com/coinbase/prime/allocations/CreatePortfolioNetAllocationsRequest.java
+ADD com/coinbase/prime/allocations/CreatePortfolioNetAllocationsResponse.java
+ADD com/coinbase/prime/financing/GetPortfolioCreditRequest.java
+ADD com/coinbase/prime/financing/GetPortfolioCreditResponse.java
+ADD com/coinbase/prime/financing/GetTieredPricingFeesRequest.java
+ADD com/coinbase/prime/financing/GetTieredPricingFeesResponse.java
+ADD com/coinbase/prime/financing/ListPortfolioInterestAccrualsRequest.java
+ADD com/coinbase/prime/financing/ListPortfolioInterestAccrualsResponse.java
+ADD com/coinbase/prime/financing/SetFundingSettingsRequest.java
+ADD com/coinbase/prime/financing/SetFundingSettingsResponse.java
+ADD com/coinbase/prime/futures/GetEntityPositionsRequest.java
+ADD com/coinbase/prime/futures/GetEntityPositionsResponse.java
+ADD com/coinbase/prime/orders/CreateOrderPreviewRequest.java
+ADD com/coinbase/prime/orders/CreateOrderPreviewResponse.java
+ADD com/coinbase/prime/orders/GetOrderEditHistoryRequest.java
+ADD com/coinbase/prime/orders/GetOrderEditHistoryResponse.java
+ADD com/coinbase/prime/orders/ListOrdersRequest.java
+ADD com/coinbase/prime/orders/ListOrdersResponse.java
+ADD com/coinbase/prime/products/GetProductCandlesRequest.java
+ADD com/coinbase/prime/products/GetProductCandlesResponse.java
+ADD com/coinbase/prime/products/ListProductsRequest.java
+ADD com/coinbase/prime/products/ListProductsResponse.java
+ADD com/coinbase/prime/staking/QueryTransactionValidatorsRequest.java
+ADD com/coinbase/prime/staking/QueryTransactionValidatorsResponse.java
 
 # Legacy request/response classes rewritten as @Deprecated aliases of the canonical classes.
 CHANGE com/coinbase/prime/activities/ListPortfolioActivitiesRequest.java
@@ -53,6 +81,34 @@ CHANGE com/coinbase/prime/transactions/CreateWalletTransferRequest.java
 CHANGE com/coinbase/prime/transactions/CreateWalletTransferResponse.java
 CHANGE com/coinbase/prime/transactions/CreateWalletWithdrawalRequest.java
 CHANGE com/coinbase/prime/transactions/CreateWalletWithdrawalResponse.java
+CHANGE com/coinbase/prime/advancedtransfer/GetPortfolioCounterpartyIdRequest.java
+CHANGE com/coinbase/prime/advancedtransfer/GetPortfolioCounterpartyIdResponse.java
+CHANGE com/coinbase/prime/allocations/CreateAllocationRequest.java
+CHANGE com/coinbase/prime/allocations/CreateAllocationResponse.java
+CHANGE com/coinbase/prime/allocations/CreateNetAllocationRequest.java
+CHANGE com/coinbase/prime/allocations/CreateNetAllocationResponse.java
+CHANGE com/coinbase/prime/financing/GetPortfolioCreditInformationRequest.java
+CHANGE com/coinbase/prime/financing/GetPortfolioCreditInformationResponse.java
+CHANGE com/coinbase/prime/financing/GetTradeFinanceTieredPricingFeesRequest.java
+CHANGE com/coinbase/prime/financing/GetTradeFinanceTieredPricingFeesResponse.java
+CHANGE com/coinbase/prime/financing/ListInterestAccrualsForPortfolioRequest.java
+CHANGE com/coinbase/prime/financing/ListInterestAccrualsForPortfolioResponse.java
+CHANGE com/coinbase/prime/financing/UpdateFundingSettingsRequest.java
+CHANGE com/coinbase/prime/financing/UpdateFundingSettingsResponse.java
+CHANGE com/coinbase/prime/futures/GetPositionsRequest.java
+CHANGE com/coinbase/prime/futures/GetPositionsResponse.java
+CHANGE com/coinbase/prime/orders/GetOrderPreviewRequest.java
+CHANGE com/coinbase/prime/orders/GetOrderPreviewResponse.java
+CHANGE com/coinbase/prime/orders/ListOrderEditHistoryRequest.java
+CHANGE com/coinbase/prime/orders/ListOrderEditHistoryResponse.java
+CHANGE com/coinbase/prime/orders/ListPortfolioOrdersRequest.java
+CHANGE com/coinbase/prime/orders/ListPortfolioOrdersResponse.java
+CHANGE com/coinbase/prime/products/GetCandlesRequest.java
+CHANGE com/coinbase/prime/products/GetCandlesResponse.java
+CHANGE com/coinbase/prime/products/ListPortfolioProductsRequest.java
+CHANGE com/coinbase/prime/products/ListPortfolioProductsResponse.java
+CHANGE com/coinbase/prime/staking/ListTransactionValidatorsRequest.java
+CHANGE com/coinbase/prime/staking/ListTransactionValidatorsResponse.java
 
 # Service interfaces/implementations that gain the canonical methods plus @Deprecated forwarding
 # aliases for the legacy method names.
@@ -70,6 +126,13 @@ CHANGE com/coinbase/prime/staking/StakingService.java
 CHANGE com/coinbase/prime/staking/StakingServiceImpl.java
 CHANGE com/coinbase/prime/transactions/TransactionsService.java
 CHANGE com/coinbase/prime/transactions/TransactionsServiceImpl.java
+CHANGE com/coinbase/prime/advancedtransfer/AdvancedTransferService.java
+CHANGE com/coinbase/prime/advancedtransfer/AdvancedTransferServiceImpl.java
+CHANGE com/coinbase/prime/financing/FinancingService.java
+CHANGE com/coinbase/prime/futures/FuturesService.java
+CHANGE com/coinbase/prime/futures/FuturesServiceImpl.java
+CHANGE com/coinbase/prime/products/ProductsService.java
+CHANGE com/coinbase/prime/products/ProductsServiceImpl.java
 
 # Fields the committed spec has that the vended classes lack (real spec updates).
 CHANGE com/coinbase/prime/orders/CreateQuoteRequest.java

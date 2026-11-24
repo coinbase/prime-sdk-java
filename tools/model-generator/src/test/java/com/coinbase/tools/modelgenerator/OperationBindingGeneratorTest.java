@@ -57,7 +57,10 @@ class OperationBindingGeneratorTest {
     List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
 
     assertEquals("GetEntityFcmBalance", binding(bindings, "PrimeRESTAPI_GetFcmBalance").sdkMethod());
-    assertEquals("ListPortfolioOrders", binding(bindings, "PrimeRESTAPI_GetOrders").sdkMethod());
+    assertEquals("ListOrders", binding(bindings, "PrimeRESTAPI_GetOrders").sdkMethod());
+    assertEquals(
+        "ListPortfolioOrders",
+        binding(bindings, "PrimeRESTAPI_GetOrders").deprecatedAliases().get(0).sdkMethod());
     assertEquals("GetOrder", binding(bindings, "PrimeRESTAPI_GetOrder").sdkMethod());
     assertEquals(
         "GetOrderByOrderId",
@@ -78,7 +81,7 @@ class OperationBindingGeneratorTest {
         new JavaTypeResolver(document, names, configuration.sharedModelMappings());
     String orders =
         RequestPhase.render(document, bindings, types, names)
-            .get(Path.of("com/coinbase/prime/orders/ListPortfolioOrdersRequest.java"));
+            .get(Path.of("com/coinbase/prime/orders/ListOrdersRequest.java"));
     assertTrue(orders.contains("private OrderStatus[] orderStatuses;"), orders);
     assertTrue(orders.contains("private String[] productIds;"), orders);
     String wallet =
