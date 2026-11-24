@@ -142,7 +142,7 @@ class DeprecatedAliasGenerationTest {
     assertTrue(alias != null, alias);
     assertTrue(alias.contains("extends ListWidgetsRequest"), alias);
     assertTrue(
-        alias.contains("@Override\n    public Builder cursor(String cursor) {\n      super.cursor(cursor);\n      return this;\n    }"),
+        alias.contains("@Override\n    public Builder limit(Integer limit) {\n      super.limit(limit);\n      return this;\n    }"),
         alias);
     assertTrue(
         alias.contains(

@@ -28,7 +28,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 /** Loads deterministic generation configuration and validates sparse operation overrides. */
 public final class GeneratorConfiguration {
@@ -39,6 +38,7 @@ public final class GeneratorConfiguration {
   private final Map<String, String> modelTypeMappings;
   private final Map<String, String> sharedModelMappings;
   private final Set<String> protectedFiles;
+  private final boolean generateErrorEnums;
   private final Map<String, Override> overrides;
 
   private GeneratorConfiguration(
@@ -48,6 +48,7 @@ public final class GeneratorConfiguration {
       Map<String, String> modelTypeMappings,
       Map<String, String> sharedModelMappings,
       Set<String> protectedFiles,
+      boolean generateErrorEnums,
       Map<String, Override> overrides) {
     this.specUrl = specUrl;
     this.committedSpecPath = committedSpecPath;
@@ -55,6 +56,7 @@ public final class GeneratorConfiguration {
     this.modelTypeMappings = Collections.unmodifiableMap(modelTypeMappings);
     this.sharedModelMappings = Collections.unmodifiableMap(sharedModelMappings);
     this.protectedFiles = Collections.unmodifiableSet(protectedFiles);
+    this.generateErrorEnums = generateErrorEnums;
     this.overrides = Collections.unmodifiableMap(overrides);
   }
 
@@ -112,6 +114,7 @@ public final class GeneratorConfiguration {
         modelTypeMappings,
         sharedMappings,
         protectedFiles,
+        config.path("generateErrorEnums").asBoolean(false),
         overrides);
   }
 
@@ -167,8 +170,10 @@ public final class GeneratorConfiguration {
     }
   }
 
+  private static final String JAVA_TYPE = "[A-Za-z_$][A-Za-z0-9_$.]*";
+
   private static void validateJavaType(String value, String field) {
-    if (value == null || !value.matches("[A-Za-z_$][A-Za-z0-9_$.]*(?:\\[\\])?")) {
+    if (value == null || !value.matches(JAVA_TYPE + "(?:<" + JAVA_TYPE + "(?:,\\s*" + JAVA_TYPE + ")*>)?(?:\\[\\])?")) {
       throw new IllegalArgumentException(field + " must be a Java type: " + value);
     }
   }
@@ -198,6 +203,14 @@ public final class GeneratorConfiguration {
 
   public Map<String, String> sharedModelMappings() {
     return sharedModelMappings;
+  }
+
+  /**
+   * Whether ErrorCode and Subcode enums are emitted under {@code model/errors}. Off by default: the
+   * SDK does not map HTTP errors onto them yet, and the vended SDK has never contained them.
+   */
+  public boolean generateErrorEnums() {
+    return generateErrorEnums;
   }
 
   public Set<String> protectedFiles() {
@@ -284,7 +297,8 @@ public final class GeneratorConfiguration {
         }
         convenienceConstructorParameters.add(parameterName);
       }
-      TreeSet<Integer> normalizedStatuses = new TreeSet<>();
+      // Order is part of the vended call (201 before 200), so keep it as configured.
+      Set<Integer> normalizedStatuses = new LinkedHashSet<>();
       for (JsonNode status : node.path("statusCodes")) {
         int code = status.asInt();
         if (code < 200 || code >= 300) {

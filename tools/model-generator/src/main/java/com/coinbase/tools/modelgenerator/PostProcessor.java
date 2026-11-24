@@ -55,6 +55,7 @@ public class PostProcessor {
     private final EnumJavadocEnhancer enumJavadocEnhancer;
     private final ModelJavadocEnhancer modelJavadocEnhancer;
 
+    private boolean includeErrorEnums = false;
     private int newModelsCount = 0;
     private int updatedModelsCount = 0;
     private int removedStaleCount = 0;
@@ -99,6 +100,17 @@ public class PostProcessor {
         return result;
     }
 
+    /** Emits ErrorCode and Subcode enums under the errors package; skipped unless enabled. */
+    public PostProcessor includeErrorEnums(boolean include) {
+        this.includeErrorEnums = include;
+        return this;
+    }
+
+    private boolean skipsErrorEnum(String fileName) {
+        return !includeErrorEnums
+            && (fileName.endsWith("ErrorCode.java") || fileName.endsWith("Subcode.java"));
+    }
+
     public void processModels() throws IOException {
         logger.info("Finding generated model files...");
         List<Path> modelFiles = findGeneratedModelFiles();
@@ -107,7 +119,9 @@ public class PostProcessor {
         // Create output directories
         Files.createDirectories(outputDir);
         Files.createDirectories(enumsDir);
-        Files.createDirectories(errorsDir);
+        if (includeErrorEnums) {
+            Files.createDirectories(errorsDir);
+        }
 
         // Separate enum files from model files
         List<Path> enumFiles = new ArrayList<>();
@@ -208,7 +222,8 @@ public class PostProcessor {
                         && !fileName.matches(".*Api\\.java$")
                         && !fileName.endsWith("Request.java")
                         && !fileName.endsWith("Response.java")
-                        && !isSkippedErrorSchema(fileName)) {
+                        && !isSkippedErrorSchema(fileName)
+                        && !skipsErrorEnum(fileName)) {
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
