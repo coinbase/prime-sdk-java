@@ -45,7 +45,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         HttpMethod.POST,
         String.format("/portfolios/%s/wallets", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateWalletResponse>() {});
   }
 
@@ -79,7 +79,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         String.format(
             "/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateWalletDepositAddressResponse>() {});
   }
 

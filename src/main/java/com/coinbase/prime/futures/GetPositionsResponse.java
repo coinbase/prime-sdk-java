@@ -16,33 +16,12 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.FcmPosition;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Get Entity Positions */
-public class GetPositionsResponse {
-  @JsonProperty("positions")
-  private FcmPosition[] positions;
-
-  /** Clearing account ID */
-  @JsonProperty("clearing_account_id")
-  private String clearingAccountId;
-
+/**
+ * Get Entity Positions
+ *
+ * @deprecated Use getEntityPositions instead.
+ */
+@Deprecated
+public class GetPositionsResponse extends GetEntityPositionsResponse {
   public GetPositionsResponse() {}
-
-  public FcmPosition[] getPositions() {
-    return positions;
-  }
-
-  public void setPositions(FcmPosition[] positions) {
-    this.positions = positions;
-  }
-
-  public String getClearingAccountId() {
-    return clearingAccountId;
-  }
-
-  public void setClearingAccountId(String clearingAccountId) {
-    this.clearingAccountId = clearingAccountId;
-  }
 }

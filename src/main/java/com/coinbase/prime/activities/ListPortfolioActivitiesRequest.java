@@ -16,179 +16,87 @@
 
 package com.coinbase.prime.activities;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.ActivityCategory;
 import com.coinbase.prime.model.enums.ActivityStatus;
-import com.coinbase.prime.model.enums.SortDirection;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Activities */
-public class ListPortfolioActivitiesRequest extends PrimeListRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty("symbols")
-  private String[] symbols;
-
-  @JsonProperty("categories")
-  private ActivityCategory[] categories;
-
-  @JsonProperty("statuses")
-  private ActivityStatus[] statuses;
-
-  @JsonProperty("start_time")
-  private String startTime;
-
-  @JsonProperty("end_time")
-  private String endTime;
-
-  @JsonProperty("get_network_unified_activities")
-  private Boolean getNetworkUnifiedActivities;
-
+/**
+ * List Activities
+ *
+ * @deprecated Use listActivities instead.
+ */
+@Deprecated
+public class ListPortfolioActivitiesRequest extends ListActivitiesRequest {
   public ListPortfolioActivitiesRequest() {}
 
-  public ListPortfolioActivitiesRequest(Builder builder) {
-    super(builder.cursor, builder.sortDirection, builder.limit);
-    this.portfolioId = builder.portfolioId;
-    this.symbols = builder.symbols;
-    this.categories = builder.categories;
-    this.statuses = builder.statuses;
-    this.startTime = builder.startTime;
-    this.endTime = builder.endTime;
-    this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
+  public ListPortfolioActivitiesRequest(ListActivitiesRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String[] getSymbols() {
-    return symbols;
-  }
-
-  public void setSymbols(String[] symbols) {
-    this.symbols = symbols;
-  }
-
-  public ActivityCategory[] getCategories() {
-    return categories;
-  }
-
-  public void setCategories(ActivityCategory[] categories) {
-    this.categories = categories;
-  }
-
-  public ActivityStatus[] getStatuses() {
-    return statuses;
-  }
-
-  public void setStatuses(ActivityStatus[] statuses) {
-    this.statuses = statuses;
-  }
-
-  public String getStartTime() {
-    return startTime;
-  }
-
-  public void setStartTime(String startTime) {
-    this.startTime = startTime;
-  }
-
-  public String getEndTime() {
-    return endTime;
-  }
-
-  public void setEndTime(String endTime) {
-    this.endTime = endTime;
-  }
-
-  public Boolean getGetNetworkUnifiedActivities() {
-    return getNetworkUnifiedActivities;
-  }
-
-  public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
-    this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String[] symbols;
-    private ActivityCategory[] categories;
-    private ActivityStatus[] statuses;
-    private String startTime;
-    private String endTime;
-    private Boolean getNetworkUnifiedActivities;
-    private String cursor;
-    private SortDirection sortDirection;
-    private Integer limit;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use listActivities instead.
+   */
+  @Deprecated
+  public static class Builder extends ListActivitiesRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder symbols(String[] symbols) {
-      this.symbols = symbols;
+      super.symbols(symbols);
       return this;
     }
 
+    @Override
     public Builder categories(ActivityCategory[] categories) {
-      this.categories = categories;
+      super.categories(categories);
       return this;
     }
 
+    @Override
     public Builder statuses(ActivityStatus[] statuses) {
-      this.statuses = statuses;
+      super.statuses(statuses);
       return this;
     }
 
+    @Override
     public Builder startTime(String startTime) {
-      this.startTime = startTime;
+      super.startTime(startTime);
       return this;
     }
 
+    @Override
     public Builder endTime(String endTime) {
-      this.endTime = endTime;
+      super.endTime(endTime);
       return this;
     }
 
+    @Override
     public Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
-      this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+      super.getNetworkUnifiedActivities(getNetworkUnifiedActivities);
       return this;
     }
 
+    @Override
     public Builder limit(Integer limit) {
-      this.limit = limit;
+      super.limit(limit);
       return this;
     }
 
+    @Override
     public Builder pagination(Pagination pagination) {
-      this.cursor = pagination.getNextCursor();
-      this.sortDirection = pagination.getSortDirection();
+      super.pagination(pagination);
       return this;
     }
 
+    @Override
     public ListPortfolioActivitiesRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListPortfolioActivitiesRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

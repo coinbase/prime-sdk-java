@@ -96,6 +96,21 @@ public interface TransactionsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreateTransferResponse createTransfer(CreateTransferRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Create Transfer.
+   *
+   * <p>Create a wallet transfer
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createTransfer instead.
+   */
+  @Deprecated
   CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -109,6 +124,21 @@ public interface TransactionsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Create Withdrawal.
+   *
+   * <p>Create a withdrawal
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createWithdrawal instead.
+   */
+  @Deprecated
   CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

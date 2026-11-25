@@ -16,150 +16,68 @@
 
 package com.coinbase.prime.staking;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.PortfolioStakingMetadata;
 import com.coinbase.prime.model.enums.ValidatorProvider;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Request to unstake currency across a portfolio */
-public class PortfolioStakingUnstakeRequest {
-  /** The portfolio ID */
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  /**
-   * The client generated idempotency key (uuid required) for requested execution. Subsequent
-   * requests using the same key will not create new transactions.
-   */
-  @JsonProperty("idempotency_key")
-  private String idempotencyKey;
-
-  /** The currency symbol to unstake */
-  @JsonProperty("currency_symbol")
-  private String currencySymbol;
-
-  /** The quantity of the chosen currency to unstake */
-  @JsonProperty("amount")
-  private String amount;
-
-  @JsonProperty("metadata")
-  private PortfolioStakingMetadata metadata;
-
-  @JsonProperty("validator_provider")
-  private ValidatorProvider validatorProvider;
-
+/**
+ * Request to unstake currency across a portfolio
+ *
+ * @deprecated Use createPortfolioUnstake instead.
+ */
+@Deprecated
+public class PortfolioStakingUnstakeRequest extends CreatePortfolioUnstakeRequest {
   public PortfolioStakingUnstakeRequest() {}
 
-  public PortfolioStakingUnstakeRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.idempotencyKey = builder.idempotencyKey;
-    this.currencySymbol = builder.currencySymbol;
-    this.amount = builder.amount;
-    this.metadata = builder.metadata;
-    this.validatorProvider = builder.validatorProvider;
+  public PortfolioStakingUnstakeRequest(CreatePortfolioUnstakeRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getIdempotencyKey() {
-    return idempotencyKey;
-  }
-
-  public void setIdempotencyKey(String idempotencyKey) {
-    this.idempotencyKey = idempotencyKey;
-  }
-
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  public void setCurrencySymbol(String currencySymbol) {
-    this.currencySymbol = currencySymbol;
-  }
-
-  public String getAmount() {
-    return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
-
-  public PortfolioStakingMetadata getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(PortfolioStakingMetadata metadata) {
-    this.metadata = metadata;
-  }
-
-  public ValidatorProvider getValidatorProvider() {
-    return validatorProvider;
-  }
-
-  public void setValidatorProvider(ValidatorProvider validatorProvider) {
-    this.validatorProvider = validatorProvider;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String idempotencyKey;
-    private String currencySymbol;
-    private String amount;
-    private PortfolioStakingMetadata metadata;
-    private ValidatorProvider validatorProvider;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use createPortfolioUnstake instead.
+   */
+  @Deprecated
+  public static class Builder extends CreatePortfolioUnstakeRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder idempotencyKey(String idempotencyKey) {
-      this.idempotencyKey = idempotencyKey;
+      super.idempotencyKey(idempotencyKey);
       return this;
     }
 
+    @Override
     public Builder currencySymbol(String currencySymbol) {
-      this.currencySymbol = currencySymbol;
+      super.currencySymbol(currencySymbol);
       return this;
     }
 
+    @Override
     public Builder amount(String amount) {
-      this.amount = amount;
+      super.amount(amount);
       return this;
     }
 
+    @Override
     public Builder metadata(PortfolioStakingMetadata metadata) {
-      this.metadata = metadata;
+      super.metadata(metadata);
       return this;
     }
 
+    @Override
     public Builder validatorProvider(ValidatorProvider validatorProvider) {
-      this.validatorProvider = validatorProvider;
+      super.validatorProvider(validatorProvider);
       return this;
     }
 
+    @Override
     public PortfolioStakingUnstakeRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new PortfolioStakingUnstakeRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

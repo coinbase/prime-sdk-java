@@ -16,105 +16,61 @@
 
 package com.coinbase.prime.addressbook;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.enums.SortDirection;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Address Book */
-public class ListAddressBookRequest extends PrimeListRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty("currency_symbol")
-  private String currencySymbol;
-
-  @JsonProperty("search")
-  private String search;
-
+/**
+ * Get Address Book
+ *
+ * @deprecated Use getAddressBook instead.
+ */
+@Deprecated
+public class ListAddressBookRequest extends GetAddressBookRequest {
   public ListAddressBookRequest() {}
 
-  public ListAddressBookRequest(Builder builder) {
-    super(builder.cursor, builder.sortDirection, builder.limit);
-    this.portfolioId = builder.portfolioId;
-    this.currencySymbol = builder.currencySymbol;
-    this.search = builder.search;
+  public ListAddressBookRequest(GetAddressBookRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  public void setCurrencySymbol(String currencySymbol) {
-    this.currencySymbol = currencySymbol;
-  }
-
-  public String getSearch() {
-    return search;
-  }
-
-  public void setSearch(String search) {
-    this.search = search;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String currencySymbol;
-    private String search;
-    private String cursor;
-    private SortDirection sortDirection;
-    private Integer limit;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getAddressBook instead.
+   */
+  @Deprecated
+  public static class Builder extends GetAddressBookRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder currencySymbol(String currencySymbol) {
-      this.currencySymbol = currencySymbol;
+      super.currencySymbol(currencySymbol);
       return this;
     }
 
+    @Override
     public Builder search(String search) {
-      this.search = search;
+      super.search(search);
       return this;
     }
 
+    @Override
     public Builder limit(Integer limit) {
-      this.limit = limit;
+      super.limit(limit);
       return this;
     }
 
+    @Override
     public Builder pagination(Pagination pagination) {
-      this.cursor = pagination.getNextCursor();
-      this.sortDirection = pagination.getSortDirection();
+      super.pagination(pagination);
       return this;
     }
 
+    @Override
     public ListAddressBookRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListAddressBookRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

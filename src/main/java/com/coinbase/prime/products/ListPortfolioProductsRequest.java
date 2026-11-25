@@ -16,126 +16,70 @@
 
 package com.coinbase.prime.products;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.ContractExpiryType;
 import com.coinbase.prime.model.enums.ExpiringContractStatus;
 import com.coinbase.prime.model.enums.ProductType;
-import com.coinbase.prime.model.enums.SortDirection;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Portfolio Products */
-public class ListPortfolioProductsRequest extends PrimeListRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty("product_type")
-  private ProductType productType;
-
-  @JsonProperty("contract_expiry_type")
-  private ContractExpiryType contractExpiryType;
-
-  @JsonProperty("expiring_contract_status")
-  private ExpiringContractStatus expiringContractStatus;
-
+/**
+ * List Portfolio Products
+ *
+ * @deprecated Use listProducts instead.
+ */
+@Deprecated
+public class ListPortfolioProductsRequest extends ListProductsRequest {
   public ListPortfolioProductsRequest() {}
 
-  public ListPortfolioProductsRequest(Builder builder) {
-    super(builder.cursor, builder.sortDirection, builder.limit);
-    this.portfolioId = builder.portfolioId;
-    this.productType = builder.productType;
-    this.contractExpiryType = builder.contractExpiryType;
-    this.expiringContractStatus = builder.expiringContractStatus;
+  public ListPortfolioProductsRequest(ListProductsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public ProductType getProductType() {
-    return productType;
-  }
-
-  public void setProductType(ProductType productType) {
-    this.productType = productType;
-  }
-
-  public ContractExpiryType getContractExpiryType() {
-    return contractExpiryType;
-  }
-
-  public void setContractExpiryType(ContractExpiryType contractExpiryType) {
-    this.contractExpiryType = contractExpiryType;
-  }
-
-  public ExpiringContractStatus getExpiringContractStatus() {
-    return expiringContractStatus;
-  }
-
-  public void setExpiringContractStatus(ExpiringContractStatus expiringContractStatus) {
-    this.expiringContractStatus = expiringContractStatus;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private ProductType productType;
-    private ContractExpiryType contractExpiryType;
-    private ExpiringContractStatus expiringContractStatus;
-    private String cursor;
-    private SortDirection sortDirection;
-    private Integer limit;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use listProducts instead.
+   */
+  @Deprecated
+  public static class Builder extends ListProductsRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder productType(ProductType productType) {
-      this.productType = productType;
+      super.productType(productType);
       return this;
     }
 
+    @Override
     public Builder contractExpiryType(ContractExpiryType contractExpiryType) {
-      this.contractExpiryType = contractExpiryType;
+      super.contractExpiryType(contractExpiryType);
       return this;
     }
 
+    @Override
     public Builder expiringContractStatus(ExpiringContractStatus expiringContractStatus) {
-      this.expiringContractStatus = expiringContractStatus;
+      super.expiringContractStatus(expiringContractStatus);
       return this;
     }
 
+    @Override
     public Builder limit(Integer limit) {
-      this.limit = limit;
+      super.limit(limit);
       return this;
     }
 
+    @Override
     public Builder pagination(Pagination pagination) {
-      this.cursor = pagination.getNextCursor();
-      this.sortDirection = pagination.getSortDirection();
+      super.pagination(pagination);
       return this;
     }
 
+    @Override
     public ListPortfolioProductsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListPortfolioProductsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

@@ -111,6 +111,22 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetTieredPricingFeesResponse getTieredPricingFees(GetTieredPricingFeesRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Trade Finance Tiered Pricing Fees.
+   *
+   * <p>Get trade finance tiered pricing fees for a given entity at a specific time, default to
+   * current time
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getTieredPricingFees instead.
+   */
+  @Deprecated
   GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(
       GetTradeFinanceTieredPricingFeesRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
@@ -137,6 +153,22 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ListPortfolioInterestAccrualsResponse listPortfolioInterestAccruals(
+      ListPortfolioInterestAccrualsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Interest Accruals For Portfolio.
+   *
+   * <p>Lists interest accruals between the specified date range for a specific portfolio ID
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use listPortfolioInterestAccruals instead.
+   */
+  @Deprecated
   ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(
       ListInterestAccrualsForPortfolioRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
@@ -167,6 +199,21 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetPortfolioCreditResponse getPortfolioCredit(GetPortfolioCreditRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Portfolio Credit Information.
+   *
+   * <p>Retrieve a portfolio's post-trade credit information
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getPortfolioCredit instead.
+   */
+  @Deprecated
   GetPortfolioCreditInformationResponse getPortfolioCreditInformation(
       GetPortfolioCreditInformationRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
@@ -235,6 +282,19 @@ public interface FinancingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  SetFundingSettingsResponse setFundingSettings(SetFundingSettingsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Update Funding Settings.
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use setFundingSettings instead.
+   */
+  @Deprecated
   UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

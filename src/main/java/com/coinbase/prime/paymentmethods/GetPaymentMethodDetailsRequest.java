@@ -16,73 +16,42 @@
 
 package com.coinbase.prime.paymentmethods;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Entity Payment Method */
-public class GetPaymentMethodDetailsRequest {
-  @JsonProperty(required = true, value = "entity_id")
-  @JsonIgnore
-  private String entityId;
-
-  @JsonProperty(required = true, value = "payment_method_id")
-  @JsonIgnore
-  private String paymentMethodId;
-
+/**
+ * Get Entity Payment Method
+ *
+ * @deprecated Use getEntityPaymentMethod instead.
+ */
+@Deprecated
+public class GetPaymentMethodDetailsRequest extends GetEntityPaymentMethodRequest {
   public GetPaymentMethodDetailsRequest() {}
 
-  public GetPaymentMethodDetailsRequest(Builder builder) {
-    this.entityId = builder.entityId;
-    this.paymentMethodId = builder.paymentMethodId;
+  public GetPaymentMethodDetailsRequest(GetEntityPaymentMethodRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getEntityId() {
-    return entityId;
-  }
-
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
-  }
-
-  public String getPaymentMethodId() {
-    return paymentMethodId;
-  }
-
-  public void setPaymentMethodId(String paymentMethodId) {
-    this.paymentMethodId = paymentMethodId;
-  }
-
-  public static class Builder {
-    private String entityId;
-    private String paymentMethodId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getEntityPaymentMethod instead.
+   */
+  @Deprecated
+  public static class Builder extends GetEntityPaymentMethodRequest.Builder {
+    @Override
     public Builder entityId(String entityId) {
-      this.entityId = entityId;
+      super.entityId(entityId);
       return this;
     }
 
+    @Override
     public Builder paymentMethodId(String paymentMethodId) {
-      this.paymentMethodId = paymentMethodId;
+      super.paymentMethodId(paymentMethodId);
       return this;
     }
 
+    @Override
     public GetPaymentMethodDetailsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetPaymentMethodDetailsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.entityId)) {
-        throw new CoinbaseClientException("EntityId is required");
-      }
-      if (isNullOrEmpty(this.paymentMethodId)) {
-        throw new CoinbaseClientException("PaymentMethodId is required");
-      }
     }
   }
 }

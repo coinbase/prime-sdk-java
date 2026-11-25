@@ -66,6 +66,9 @@ public class Transaction {
    * On-chain transaction initiated with Prime Onchain Wallet - PORTFOLIO_STAKE: Portfolio-level
    * staking operation - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation - MERGE_STAKE:
    * On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+   * - ONCHAIN_DEPOSIT: On-chain deposit detected into a Prime Onchain Wallet - ONCHAIN_REWARD:
+   * Automated on-chain reward payout to a blockchain address - ONCHAIN_MESSAGE: Message signing
+   * initiated with Prime Onchain Wallet; no funds move on-chain.
    */
   private TransactionType type;
 
@@ -113,7 +116,11 @@ public class Transaction {
   @JsonProperty("completed_at")
   private OffsetDateTime completedAt;
 
-  /** The transaction amount in whole units */
+  /**
+   * The transaction amount (in whole units). For example, \"1.50\" represents 1.5 of the associated
+   * symbol. Examples: - \"100\" - \"1.123456\" (precision varies by asset; USDC, for example,
+   * supports up to 6 decimal places) - \"0.50\"
+   */
   private String amount;
 
   @JsonProperty("transfer_from")
@@ -122,14 +129,25 @@ public class Transaction {
   @JsonProperty("transfer_to")
   private TransferLocation transferTo;
 
-  /** The blockchain network fees (in whole units) required in order to broadcast the transaction */
+  /**
+   * The blockchain network fees (in whole units) required in order to broadcast the transaction.
+   * Does not carry the Advanced Transfer Coinbase fee.
+   */
   @JsonProperty("network_fees")
   private String networkFees;
 
-  /** The fees that the customer paid for the transaction (in whole units) */
+  /**
+   * The charged fee (in whole units). On the transfer, coinbase_fees is set and fees is 0. On the
+   * send, the same charge is on fees and fee_symbol, and coinbase_fees is omitted. Crypto and fiat
+   * sends that belong to the transfer use those transfer and send fields. A bank withdrawal that is
+   * not part of the transfer is unchanged.
+   */
   private String fees;
 
-  /** The asset in which fees will be paid */
+  /**
+   * The asset in which fees is denominated. On the send, the same charge is on fees and fee_symbol,
+   * and coinbase_fees is omitted. On the transfer, fee_symbol is empty.
+   */
   @JsonProperty("fee_symbol")
   private String feeSymbol;
 
@@ -151,7 +169,7 @@ public class Transaction {
   /** The network name specific to onchain/onchain wallet transactions */
   private String network;
 
-  /** The estimated asset changes (onchain) */
+  /** The estimated asset changes (onchain/onchain) */
   @JsonProperty("estimated_asset_changes")
   private List<AssetChange> estimatedAssetChanges;
 
@@ -170,6 +188,17 @@ public class Transaction {
   /** Represents the status of various process requirements for a transaction */
   @JsonProperty("process_requirements")
   private ProcessRequirements processRequirements;
+
+  /**
+   * Coinbase fees on the transfer (amount, symbol, wallet_id), where fees is 0. On the send, the
+   * same charge is on fees and fee_symbol, and coinbase_fees is omitted. When you total fees, do
+   * not add coinbase_fees from the transfer to the send's fees, or you will count the charge twice.
+   * A wallet transaction list includes the fees paid by that wallet. Get Transaction and the
+   * portfolio transaction list include every fee paid in the requesting portfolio. Fees paid in the
+   * counterparty's portfolio are omitted.
+   */
+  @JsonProperty("coinbase_fees")
+  private List<CoinbaseFee> coinbaseFees;
 
   public Transaction() {}
 
@@ -199,6 +228,7 @@ public class Transaction {
     this.onchainDetails = builder.onchainDetails;
     this.networkInfo = builder.networkInfo;
     this.processRequirements = builder.processRequirements;
+    this.coinbaseFees = builder.coinbaseFees;
   }
 
   public String getId() {
@@ -401,6 +431,14 @@ public class Transaction {
     this.processRequirements = processRequirements;
   }
 
+  public List<CoinbaseFee> getCoinbaseFees() {
+    return coinbaseFees;
+  }
+
+  public void setCoinbaseFees(List<CoinbaseFee> coinbaseFees) {
+    this.coinbaseFees = coinbaseFees;
+  }
+
   public static class Builder {
     private String id;
 
@@ -451,6 +489,8 @@ public class Transaction {
     private Network networkInfo;
 
     private ProcessRequirements processRequirements;
+
+    private List<CoinbaseFee> coinbaseFees;
 
     public Builder id(String id) {
       this.id = id;
@@ -574,6 +614,11 @@ public class Transaction {
 
     public Builder processRequirements(ProcessRequirements processRequirements) {
       this.processRequirements = processRequirements;
+      return this;
+    }
+
+    public Builder coinbaseFees(List<CoinbaseFee> coinbaseFees) {
+      this.coinbaseFees = coinbaseFees;
       return this;
     }
 

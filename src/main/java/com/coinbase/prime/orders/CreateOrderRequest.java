@@ -19,6 +19,8 @@ package com.coinbase.prime.orders;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.SpreadConfig;
+import com.coinbase.prime.model.enums.LimitPriceType;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.PegOffsetType;
@@ -160,6 +162,12 @@ public class CreateOrderRequest {
   @JsonProperty("wig_level")
   private String wigLevel;
 
+  @JsonProperty("limit_price_type")
+  private LimitPriceType limitPriceType;
+
+  @JsonProperty("spread_config")
+  private SpreadConfig spreadConfig;
+
   public CreateOrderRequest() {}
 
   public CreateOrderRequest(Builder builder) {
@@ -186,6 +194,8 @@ public class CreateOrderRequest {
     this.pegOffsetType = builder.pegOffsetType;
     this.offset = builder.offset;
     this.wigLevel = builder.wigLevel;
+    this.limitPriceType = builder.limitPriceType;
+    this.spreadConfig = builder.spreadConfig;
   }
 
   public String getPortfolioId() {
@@ -372,6 +382,22 @@ public class CreateOrderRequest {
     this.wigLevel = wigLevel;
   }
 
+  public LimitPriceType getLimitPriceType() {
+    return limitPriceType;
+  }
+
+  public void setLimitPriceType(LimitPriceType limitPriceType) {
+    this.limitPriceType = limitPriceType;
+  }
+
+  public SpreadConfig getSpreadConfig() {
+    return spreadConfig;
+  }
+
+  public void setSpreadConfig(SpreadConfig spreadConfig) {
+    this.spreadConfig = spreadConfig;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String productId;
@@ -396,6 +422,8 @@ public class CreateOrderRequest {
     private PegOffsetType pegOffsetType;
     private String offset;
     private String wigLevel;
+    private LimitPriceType limitPriceType;
+    private SpreadConfig spreadConfig;
 
     public Builder() {}
 
@@ -511,6 +539,16 @@ public class CreateOrderRequest {
 
     public Builder wigLevel(String wigLevel) {
       this.wigLevel = wigLevel;
+      return this;
+    }
+
+    public Builder limitPriceType(LimitPriceType limitPriceType) {
+      this.limitPriceType = limitPriceType;
+      return this;
+    }
+
+    public Builder spreadConfig(SpreadConfig spreadConfig) {
+      this.spreadConfig = spreadConfig;
       return this;
     }
 

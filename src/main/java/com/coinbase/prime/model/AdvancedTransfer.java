@@ -30,7 +30,11 @@ public class AdvancedTransfer {
   /** AdvancedTransferType specifies the type of advanced transfer. */
   private AdvancedTransferType type;
 
-  /** AdvancedTransferState represents the lifecycle state of an advanced transfer. */
+  /**
+   * AdvancedTransferState represents the lifecycle state of an advanced transfer. -
+   * ADVANCED_TRANSFER_STATE_MATCHED: The counterparties have matched. Settlement has not started.
+   * Happy path is CREATED, MATCHED, PROCESSING, DONE.
+   */
   private AdvancedTransferState state;
 
   @JsonProperty("fund_movements")
@@ -40,6 +44,13 @@ public class AdvancedTransfer {
   @JsonProperty("blind_match_metadata")
   private BlindMatchMetadata blindMatchMetadata;
 
+  /**
+   * Coinbase fees charged to this portfolio's wallets on this Advanced Transfer. Empty on create
+   * and when no fee applies.
+   */
+  @JsonProperty("coinbase_fees")
+  private List<CoinbaseFee> coinbaseFees;
+
   public AdvancedTransfer() {}
 
   public AdvancedTransfer(Builder builder) {
@@ -48,6 +59,7 @@ public class AdvancedTransfer {
     this.state = builder.state;
     this.fundMovements = builder.fundMovements;
     this.blindMatchMetadata = builder.blindMatchMetadata;
+    this.coinbaseFees = builder.coinbaseFees;
   }
 
   public String getId() {
@@ -90,6 +102,14 @@ public class AdvancedTransfer {
     this.blindMatchMetadata = blindMatchMetadata;
   }
 
+  public List<CoinbaseFee> getCoinbaseFees() {
+    return coinbaseFees;
+  }
+
+  public void setCoinbaseFees(List<CoinbaseFee> coinbaseFees) {
+    this.coinbaseFees = coinbaseFees;
+  }
+
   public static class Builder {
     private String id;
 
@@ -100,6 +120,8 @@ public class AdvancedTransfer {
     private List<FundMovement> fundMovements;
 
     private BlindMatchMetadata blindMatchMetadata;
+
+    private List<CoinbaseFee> coinbaseFees;
 
     public Builder id(String id) {
       this.id = id;
@@ -123,6 +145,11 @@ public class AdvancedTransfer {
 
     public Builder blindMatchMetadata(BlindMatchMetadata blindMatchMetadata) {
       this.blindMatchMetadata = blindMatchMetadata;
+      return this;
+    }
+
+    public Builder coinbaseFees(List<CoinbaseFee> coinbaseFees) {
+      this.coinbaseFees = coinbaseFees;
       return this;
     }
 

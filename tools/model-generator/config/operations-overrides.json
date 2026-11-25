@@ -422,5 +422,21 @@
         "message": "Use getTieredPricingFees instead."
       }
     ]
+  },
+  {
+    "operationId": "PrimeBeta_RotateWebhookHMACSecret",
+    "sdkMethod": "RotateWebhookHmacSecret"
+  },
+  {
+    "operationId": "PrimeBeta_GetWebhookSubscriptionStats",
+    "parameterTypeOverrides": {
+      "period": "String"
+    }
+  },
+  {
+    "operationId": "PrimeBeta_GetWebhookOwnerStats",
+    "parameterTypeOverrides": {
+      "period": "String"
+    }
   }
 ]

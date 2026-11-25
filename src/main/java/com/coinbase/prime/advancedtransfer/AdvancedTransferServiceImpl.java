@@ -47,7 +47,7 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl
         HttpMethod.POST,
         String.format("/portfolios/%s/advanced_transfers", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateAdvancedTransferResponse>() {});
   }
 
@@ -77,6 +77,18 @@ public class AdvancedTransferServiceImpl extends CoinbaseServiceImpl
         new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
   }
 
+  @Override
+  public GetCounterpartyIdResponse getCounterpartyId(GetCounterpartyIdRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetCounterpartyIdResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(
       GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {

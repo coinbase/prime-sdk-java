@@ -79,6 +79,10 @@ public class DerivativePosition {
   @JsonProperty("venue_id")
   private String venueId;
 
+  /** Funding PNL, populated only for perpetual futures positions */
+  @JsonProperty("funding_pnl")
+  private String fundingPnl;
+
   public DerivativePosition() {}
 
   public DerivativePosition(Builder builder) {
@@ -94,6 +98,7 @@ public class DerivativePosition {
     this.currency = builder.currency;
     this.optionsDetails = builder.optionsDetails;
     this.venueId = builder.venueId;
+    this.fundingPnl = builder.fundingPnl;
   }
 
   public String getProductId() {
@@ -192,6 +197,14 @@ public class DerivativePosition {
     this.venueId = venueId;
   }
 
+  public String getFundingPnl() {
+    return fundingPnl;
+  }
+
+  public void setFundingPnl(String fundingPnl) {
+    this.fundingPnl = fundingPnl;
+  }
+
   public static class Builder {
     private String productId;
 
@@ -216,6 +229,8 @@ public class DerivativePosition {
     private OptionsDetails optionsDetails;
 
     private String venueId;
+
+    private String fundingPnl;
 
     public Builder productId(String productId) {
       this.productId = productId;
@@ -274,6 +289,11 @@ public class DerivativePosition {
 
     public Builder venueId(String venueId) {
       this.venueId = venueId;
+      return this;
+    }
+
+    public Builder fundingPnl(String fundingPnl) {
+      this.fundingPnl = fundingPnl;
       return this;
     }
 

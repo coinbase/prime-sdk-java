@@ -16,71 +16,42 @@
 
 package com.coinbase.prime.futures;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Entity Positions */
-public class GetPositionsRequest {
-  /** Entity ID */
-  @JsonProperty(required = true, value = "entity_id")
-  @JsonIgnore
-  private String entityId;
-
-  /** Product ID. Optional */
-  @JsonProperty("product_id")
-  private String productId;
-
+/**
+ * Get Entity Positions
+ *
+ * @deprecated Use getEntityPositions instead.
+ */
+@Deprecated
+public class GetPositionsRequest extends GetEntityPositionsRequest {
   public GetPositionsRequest() {}
 
-  public GetPositionsRequest(Builder builder) {
-    this.entityId = builder.entityId;
-    this.productId = builder.productId;
+  public GetPositionsRequest(GetEntityPositionsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getEntityId() {
-    return entityId;
-  }
-
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
-  }
-
-  public String getProductId() {
-    return productId;
-  }
-
-  public void setProductId(String productId) {
-    this.productId = productId;
-  }
-
-  public static class Builder {
-    private String entityId;
-    private String productId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getEntityPositions instead.
+   */
+  @Deprecated
+  public static class Builder extends GetEntityPositionsRequest.Builder {
+    @Override
     public Builder entityId(String entityId) {
-      this.entityId = entityId;
+      super.entityId(entityId);
       return this;
     }
 
+    @Override
     public Builder productId(String productId) {
-      this.productId = productId;
+      super.productId(productId);
       return this;
     }
 
+    @Override
     public GetPositionsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetPositionsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.entityId)) {
-        throw new CoinbaseClientException("EntityId is required");
-      }
     }
   }
 }

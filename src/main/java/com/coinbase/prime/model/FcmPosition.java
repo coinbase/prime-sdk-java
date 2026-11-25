@@ -53,6 +53,10 @@ public class FcmPosition {
   @JsonProperty("expiration_time")
   private OffsetDateTime expirationTime;
 
+  /** Funding PNL, populated only for perpetual futures positions */
+  @JsonProperty("funding_pnl")
+  private String fundingPnl;
+
   public FcmPosition() {}
 
   public FcmPosition(Builder builder) {
@@ -64,6 +68,7 @@ public class FcmPosition {
     this.currentPrice = builder.currentPrice;
     this.avgEntryPrice = builder.avgEntryPrice;
     this.expirationTime = builder.expirationTime;
+    this.fundingPnl = builder.fundingPnl;
   }
 
   public String getProductId() {
@@ -130,6 +135,14 @@ public class FcmPosition {
     this.expirationTime = expirationTime;
   }
 
+  public String getFundingPnl() {
+    return fundingPnl;
+  }
+
+  public void setFundingPnl(String fundingPnl) {
+    this.fundingPnl = fundingPnl;
+  }
+
   public static class Builder {
     private String productId;
 
@@ -146,6 +159,8 @@ public class FcmPosition {
     private String avgEntryPrice;
 
     private OffsetDateTime expirationTime;
+
+    private String fundingPnl;
 
     public Builder productId(String productId) {
       this.productId = productId;
@@ -184,6 +199,11 @@ public class FcmPosition {
 
     public Builder expirationTime(OffsetDateTime expirationTime) {
       this.expirationTime = expirationTime;
+      return this;
+    }
+
+    public Builder fundingPnl(String fundingPnl) {
+      this.fundingPnl = fundingPnl;
       return this;
     }
 

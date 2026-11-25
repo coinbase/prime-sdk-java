@@ -30,6 +30,18 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl
   }
 
   @Override
+  public ListEntityPaymentMethodsResponse listEntityPaymentMethods(
+      ListEntityPaymentMethodsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/payment-methods", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<ListEntityPaymentMethodsResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request)
       throws CoinbasePrimeException {
     return this.request(
@@ -40,6 +52,19 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl
         new TypeReference<ListPaymentMethodsResponse>() {});
   }
 
+  @Override
+  public GetEntityPaymentMethodResponse getEntityPaymentMethod(
+      GetEntityPaymentMethodRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
+        request,
+        List.of(200),
+        new TypeReference<GetEntityPaymentMethodResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public GetPaymentMethodDetailsResponse getPaymentMethodDetails(
       GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException {

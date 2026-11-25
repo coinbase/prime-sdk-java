@@ -16,110 +16,55 @@
 
 package com.coinbase.prime.staking;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.WalletClaimRewardsInputs;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Claim Wallet Staking Rewards (Alpha) */
-public class ClaimRewardsRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty(required = true, value = "wallet_id")
-  @JsonIgnore
-  private String walletId;
-
-  @JsonProperty("idempotency_key")
-  private String idempotencyKey;
-
-  @JsonProperty("inputs")
-  private WalletClaimRewardsInputs inputs;
-
+/**
+ * Claim Wallet Staking Rewards (Alpha)
+ *
+ * @deprecated Use claimStakingRewards instead.
+ */
+@Deprecated
+public class ClaimRewardsRequest extends ClaimStakingRewardsRequest {
   public ClaimRewardsRequest() {}
 
-  public ClaimRewardsRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.walletId = builder.walletId;
-    this.idempotencyKey = builder.idempotencyKey;
-    this.inputs = builder.inputs;
+  public ClaimRewardsRequest(ClaimStakingRewardsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getWalletId() {
-    return walletId;
-  }
-
-  public void setWalletId(String walletId) {
-    this.walletId = walletId;
-  }
-
-  public String getIdempotencyKey() {
-    return idempotencyKey;
-  }
-
-  public void setIdempotencyKey(String idempotencyKey) {
-    this.idempotencyKey = idempotencyKey;
-  }
-
-  public WalletClaimRewardsInputs getInputs() {
-    return inputs;
-  }
-
-  public void setInputs(WalletClaimRewardsInputs inputs) {
-    this.inputs = inputs;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String walletId;
-    private String idempotencyKey;
-    private WalletClaimRewardsInputs inputs;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use claimStakingRewards instead.
+   */
+  @Deprecated
+  public static class Builder extends ClaimStakingRewardsRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder walletId(String walletId) {
-      this.walletId = walletId;
+      super.walletId(walletId);
       return this;
     }
 
+    @Override
     public Builder idempotencyKey(String idempotencyKey) {
-      this.idempotencyKey = idempotencyKey;
+      super.idempotencyKey(idempotencyKey);
       return this;
     }
 
+    @Override
     public Builder inputs(WalletClaimRewardsInputs inputs) {
-      this.inputs = inputs;
+      super.inputs(inputs);
       return this;
     }
 
+    @Override
     public ClaimRewardsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ClaimRewardsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.walletId)) {
-        throw new CoinbaseClientException("WalletId is required");
-      }
     }
   }
 }

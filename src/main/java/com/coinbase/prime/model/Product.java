@@ -63,7 +63,9 @@ public class Product {
 
   /**
    * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
-   * OPTION: Option product
+   * OPTION: Option product - BASIS: Basis product: a futures contract traded against its spot
+   * underlying, or against another futures contract of the same underlying (calendar spread); the
+   * product of SPREAD orders
    */
   @JsonProperty("product_type")
   private ProductType productType;

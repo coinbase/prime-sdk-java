@@ -31,7 +31,7 @@ public class WalletCryptoDepositInstructions {
   /**
    * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire
    * deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit -
-   * SEPA: A SEPA deposit (Single Euro Payments Area)
+   * SEPA: A SEPA deposit (Single Euro Payments Area) - KINEXYS: A JPM Kinexys deposit
    */
   private WalletDepositInstructionType type;
 

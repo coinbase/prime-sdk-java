@@ -35,6 +35,17 @@ public class CreateQuoteResponse {
   @JsonProperty("price_inclusive_of_fees")
   private String priceInclusiveOfFees;
 
+  /**
+   * Echo of the quote_duration_ms supplied in the request. 0 if the client did not supply a value,
+   * in which case the server applies the default of 3000 ms (3 seconds).
+   */
+  @JsonProperty("quote_duration_ms")
+  private String quoteDurationMs;
+
+  /** Buy Exact order flag */
+  @JsonProperty("is_buy_exact")
+  private Boolean isBuyExact;
+
   public CreateQuoteResponse() {}
 
   public String getQuoteId() {
@@ -75,5 +86,21 @@ public class CreateQuoteResponse {
 
   public void setPriceInclusiveOfFees(String priceInclusiveOfFees) {
     this.priceInclusiveOfFees = priceInclusiveOfFees;
+  }
+
+  public String getQuoteDurationMs() {
+    return quoteDurationMs;
+  }
+
+  public void setQuoteDurationMs(String quoteDurationMs) {
+    this.quoteDurationMs = quoteDurationMs;
+  }
+
+  public Boolean getIsBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setIsBuyExact(Boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
   }
 }

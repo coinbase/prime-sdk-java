@@ -16,33 +16,12 @@
 
 package com.coinbase.prime.addressbook;
 
-import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.AddressBookEntry;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Get Address Book */
-public class ListAddressBookResponse {
-  @JsonProperty("addresses")
-  private AddressBookEntry[] addresses;
-
-  @JsonProperty("pagination")
-  private Pagination pagination;
-
+/**
+ * Get Address Book
+ *
+ * @deprecated Use getAddressBook instead.
+ */
+@Deprecated
+public class ListAddressBookResponse extends GetAddressBookResponse {
   public ListAddressBookResponse() {}
-
-  public AddressBookEntry[] getAddresses() {
-    return addresses;
-  }
-
-  public void setAddresses(AddressBookEntry[] addresses) {
-    this.addresses = addresses;
-  }
-
-  public Pagination getPagination() {
-    return pagination;
-  }
-
-  public void setPagination(Pagination pagination) {
-    this.pagination = pagination;
-  }
 }

@@ -30,6 +30,21 @@ public interface ProductsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ListProductsResponse listProducts(ListProductsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Portfolio Products.
+   *
+   * <p>List tradable products for a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use listProducts instead.
+   */
+  @Deprecated
   ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -44,6 +59,22 @@ public interface ProductsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetProductCandlesResponse getProductCandles(GetProductCandlesRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Public Product Candles (Beta).
+   *
+   * <p>Get rates for a single product by product ID, grouped in buckets. This feature is in beta
+   * please reach out to your Coinbase Prime account manager for more information
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getProductCandles instead.
+   */
+  @Deprecated
   GetCandlesResponse getCandles(GetCandlesRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 }

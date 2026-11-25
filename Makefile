@@ -1,4 +1,4 @@
-.PHONY: fetch-spec compile format generate check-generated generate-live-diff
+.PHONY: fetch-spec compile format generate update check-generated generate-live-diff
 
 fetch-spec:
 	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models -Dexec.args="--fetch-spec"
@@ -12,6 +12,8 @@ format:
 generate:
 	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models
 	mvn -B spotless:apply
+
+update: fetch-spec generate
 
 check-generated:
 	mvn -B -f tools/model-generator/pom.xml compile exec:java@generate-models -Dexec.args="--check"

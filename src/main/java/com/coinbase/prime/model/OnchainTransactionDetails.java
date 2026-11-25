@@ -22,7 +22,11 @@ import com.coinbase.prime.model.enums.SigningStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnchainTransactionDetails {
-  /** The signed transaction data */
+  /**
+   * The hex-encoded signed transaction. Only returned for transactions created with skip_broadcast
+   * set to true; empty for all other transactions, including broadcast transactions that have been
+   * signed.
+   */
   @JsonProperty("signed_transaction")
   private String signedTransaction;
 
@@ -64,6 +68,18 @@ public class OnchainTransactionDetails {
   @JsonProperty("signing_status")
   private SigningStatus signingStatus;
 
+  /**
+   * The hex-encoded unsigned transaction exactly as submitted when the transaction was created.
+   * This value is never updated. Before signing, Prime may set the nonce, network fees, or gas
+   * limit on EVM transactions, or refresh the recent blockhash on Solana transactions, so the
+   * transaction that is signed and broadcast can differ from this payload. The transfer amount is
+   * only changed for EVM transactions initiated as a maximum transfer of the network's native
+   * asset, where Prime lowers it so that the amount plus network fees does not exceed the wallet's
+   * current balance.
+   */
+  @JsonProperty("original_unsigned_transaction")
+  private String originalUnsignedTransaction;
+
   public OnchainTransactionDetails() {}
 
   public OnchainTransactionDetails(Builder builder) {
@@ -76,6 +92,7 @@ public class OnchainTransactionDetails {
     this.skipBroadcast = builder.skipBroadcast;
     this.failureReason = builder.failureReason;
     this.signingStatus = builder.signingStatus;
+    this.originalUnsignedTransaction = builder.originalUnsignedTransaction;
   }
 
   public String getSignedTransaction() {
@@ -150,6 +167,14 @@ public class OnchainTransactionDetails {
     this.signingStatus = signingStatus;
   }
 
+  public String getOriginalUnsignedTransaction() {
+    return originalUnsignedTransaction;
+  }
+
+  public void setOriginalUnsignedTransaction(String originalUnsignedTransaction) {
+    this.originalUnsignedTransaction = originalUnsignedTransaction;
+  }
+
   public static class Builder {
     private String signedTransaction;
 
@@ -168,6 +193,8 @@ public class OnchainTransactionDetails {
     private String failureReason;
 
     private SigningStatus signingStatus;
+
+    private String originalUnsignedTransaction;
 
     public Builder signedTransaction(String signedTransaction) {
       this.signedTransaction = signedTransaction;
@@ -211,6 +238,11 @@ public class OnchainTransactionDetails {
 
     public Builder signingStatus(SigningStatus signingStatus) {
       this.signingStatus = signingStatus;
+      return this;
+    }
+
+    public Builder originalUnsignedTransaction(String originalUnsignedTransaction) {
+      this.originalUnsignedTransaction = originalUnsignedTransaction;
       return this;
     }
 

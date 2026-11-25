@@ -30,6 +30,21 @@ public interface PaymentMethodsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Entity Payment Methods.
+   *
+   * <p>Retrieve all payment methods for a given entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use listEntityPaymentMethods instead.
+   */
+  @Deprecated
   ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -43,6 +58,21 @@ public interface PaymentMethodsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Entity Payment Method.
+   *
+   * <p>Get payment method details by id for a given entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getEntityPaymentMethod instead.
+   */
+  @Deprecated
   GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 }

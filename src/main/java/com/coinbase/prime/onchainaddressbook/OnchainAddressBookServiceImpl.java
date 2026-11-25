@@ -47,7 +47,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl
         HttpMethod.POST,
         String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateOnchainAddressBookEntryResponse>() {});
   }
 

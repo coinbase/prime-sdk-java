@@ -18,8 +18,10 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum BetaRewardsRateTierType {
-  REWARDS_RATE_TIER_TYPE_BALANCE,
-  REWARDS_RATE_TIER_TYPE_OPEN_INTEREST,
-  REWARDS_RATE_TIER_TYPE_PERCENT_VOLUME
+/** WebhookDeliveryStatus describes the delivery state of a webhook event. */
+public enum WebhookDeliveryStatus {
+  WEBHOOK_DELIVERY_STATUS_DELIVERED,
+  WEBHOOK_DELIVERY_STATUS_RETRYING,
+  WEBHOOK_DELIVERY_STATUS_FAILED,
+  WEBHOOK_DELIVERY_STATUS_PENDING
 }

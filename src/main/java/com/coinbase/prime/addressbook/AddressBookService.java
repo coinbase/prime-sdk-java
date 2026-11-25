@@ -30,6 +30,21 @@ public interface AddressBookService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetAddressBookResponse getAddressBook(GetAddressBookRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Address Book.
+   *
+   * <p>Gets a list of address book addresses
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getAddressBook instead.
+   */
+  @Deprecated
   ListAddressBookResponse listAddressBook(ListAddressBookRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

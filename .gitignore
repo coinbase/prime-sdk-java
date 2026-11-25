@@ -28,3 +28,6 @@ docs/
 generated/
 
 .java-version
+# Generator ownership manifests
+tools/model-generator/generated-files.json
+tools/model-generator/generated-model-files.json

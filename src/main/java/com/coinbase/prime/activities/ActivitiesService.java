@@ -30,6 +30,21 @@ public interface ActivitiesService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ListActivitiesResponse listActivities(ListActivitiesRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Activities.
+   *
+   * <p>List all activities associated with a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use listActivities instead.
+   */
+  @Deprecated
   ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

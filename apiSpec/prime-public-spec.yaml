@@ -827,6 +827,52 @@ tags:
     httpStatus: 400
     description: The counterparty_id field is required when destination_type is a
       counterparty destination.
+  - name: WEBHOOK_SUBSCRIPTION_NOT_FOUND
+    errorCode: RESOURCE_NOT_FOUND
+    httpStatus: 404
+    description: No webhook subscription matching the given subscription_id exists
+      for the specified portfolio.
+  - name: WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+    errorCode: REQUIRED_FIELD_MISSING
+    httpStatus: 400
+    description: The subscription_id field is required but was not provided.
+  - name: WEBHOOK_SUBSCRIPTION_ID_INVALID
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: The subscription_id provided is not a valid UUID.
+  - name: WEBHOOK_TARGET_URL_INVALID
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: "The target_url provided is not an acceptable webhook destination,\
+      \ for example because its scheme or host is disallowed."
+  - name: WEBHOOK_EVENT_TYPE_INVALID
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: One or more values in event_types are not recognized or are not available
+      for this portfolio.
+  - name: WEBHOOK_VERSION_CONFLICT
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: The subscription was modified by another request since it was last
+      read. Reload the subscription to get its current state and retry the update
+      with the latest expected_version.
+  - name: WEBHOOK_IDEMPOTENCY_CONFLICT
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: The same idempotency key was already used to create a subscription
+      with different parameters.
+  - name: WEBHOOK_EVENT_NOT_FOUND
+    errorCode: RESOURCE_NOT_FOUND
+    httpStatus: 404
+    description: No webhook event matching the given event_id exists for this subscription.
+  - name: WEBHOOK_INVALID_ARGUMENT
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: One or more fields in the request failed validation.
+  - name: WEBHOOK_FEATURE_DISABLED
+    errorCode: PERMISSION_DENIED
+    httpStatus: 403
+    description: The webhooks API is not enabled for this portfolio.
   - name: ORDER_ID_REQUIRED
     errorCode: REQUIRED_FIELD_MISSING
     httpStatus: 400
@@ -1031,6 +1077,10 @@ tags:
     errorCode: PERMISSION_DENIED
     httpStatus: 403
     description: Size-in-quote RFQ requests are not enabled for this portfolio.
+  - name: ORDER_SPREAD_NOT_ENABLED
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: SPREAD orders are not enabled for this portfolio.
   - name: CONVERSION_FEE_FEATURE_DISABLED
     errorCode: PERMISSION_DENIED
     httpStatus: 403
@@ -1311,6 +1361,10 @@ tags:
     errorCode: REQUIRED_FIELD_MISSING
     httpStatus: 400
     description: One or more fund movements is missing its counterparty identifier.
+  - name: ADVANCED_TRANSFER_IDEMPOTENCY_KEY_INVALID
+    errorCode: VALIDATION_ERROR
+    httpStatus: 400
+    description: The idempotency_key field is present but is not a valid UUID.
   - name: ONCHAIN_TRANSACTION_REQUEST_INVALID
     errorCode: VALIDATION_ERROR
     httpStatus: 400
@@ -2434,7 +2488,10 @@ paths:
       tags:
       - Futures
       summary: Set Auto Sweep
-      description: Set auto sweep for a given entity.
+      description: "Set auto sweep for a given entity. Note: Exchange clients accessing\
+        \ this endpoint as a Cross-Margin customer, must pass their designated Exchange\
+        \ UUID as the *entity_id* path parameter. If you do not have this value, please\
+        \ reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_SetAutoSweep
       parameters:
       - name: entity_id
@@ -2500,7 +2557,10 @@ paths:
       tags:
       - Futures
       summary: Get Entity FCM Balance
-      description: Retrieve fcm balance for a given entity.
+      description: "Retrieve fcm balance for a given entity. Note: Exchange clients\
+        \ accessing this endpoint as a Cross-Margin customer, must pass their designated\
+        \ Exchange UUID as the *entity_id* path parameter. If you do not have this\
+        \ value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetFcmBalance
       parameters:
       - name: entity_id
@@ -2552,7 +2612,10 @@ paths:
       tags:
       - Futures
       summary: Get FCM Equity
-      description: Retrieve the equity data for a given entity.
+      description: "Retrieve the equity data for a given entity. Note: Exchange clients\
+        \ accessing this endpoint as a Cross-Margin customer, must pass their designated\
+        \ Exchange UUID as the *entity_id* path parameter. If you do not have this\
+        \ value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetFcmEquity
       parameters:
       - name: entity_id
@@ -2604,7 +2667,10 @@ paths:
       tags:
       - Futures
       summary: Get FCM Margin Call Details
-      description: Retrieve the margin call details for a given entity.
+      description: "Retrieve the margin call details for a given entity. Note: Exchange\
+        \ clients accessing this endpoint as a Cross-Margin customer, must pass their\
+        \ designated Exchange UUID as the *entity_id* path parameter. If you do not\
+        \ have this value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetFcmMarginCallDetails
       parameters:
       - name: entity_id
@@ -2656,7 +2722,10 @@ paths:
       tags:
       - Futures
       summary: Get Entity Positions
-      description: Retrieve all active fcm positions for a given entity.
+      description: "Retrieve all active fcm positions for a given entity. Note: Exchange\
+        \ clients accessing this endpoint as a Cross-Margin customer, must pass their\
+        \ designated Exchange UUID as the *entity_id* path parameter. If you do not\
+        \ have this value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetPositions
       parameters:
       - name: entity_id
@@ -2720,7 +2789,10 @@ paths:
       tags:
       - Futures
       summary: Get FCM Risk Limits
-      description: Retrieve the risk limits for a given entity.
+      description: "Retrieve the risk limits for a given entity. Note: Exchange clients\
+        \ accessing this endpoint as a Cross-Margin customer, must pass their designated\
+        \ Exchange UUID as the *entity_id* path parameter. If you do not have this\
+        \ value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetFcmRiskLimits
       parameters:
       - name: entity_id
@@ -2772,7 +2844,10 @@ paths:
       tags:
       - Futures
       summary: Get FCM Settings
-      description: Get settings related to FCM.
+      description: "Get settings related to FCM. Note: Exchange clients accessing\
+        \ this endpoint as a Cross-Margin customer, must pass their designated Exchange\
+        \ UUID as the *entity_id* path parameter. If you do not have this value, please\
+        \ reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_GetFcmSettings
       parameters:
       - name: entity_id
@@ -2823,7 +2898,10 @@ paths:
       tags:
       - Futures
       summary: Set FCM Settings
-      description: Update settings related to FCM.
+      description: "Update settings related to FCM. Note: Exchange clients accessing\
+        \ this endpoint as a Cross-Margin customer, must pass their designated Exchange\
+        \ UUID as the *entity_id* path parameter. If you do not have this value, please\
+        \ reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_SetFcmSettings
       parameters:
       - name: entity_id
@@ -2889,7 +2967,10 @@ paths:
       - Futures
       summary: List Entity Futures Sweeps
       description: "Retrieve fcm sweeps in open status, including pending and processing\
-        \ sweeps."
+        \ sweeps. Note: Exchange clients accessing this endpoint as a Cross-Margin\
+        \ customer, must pass their designated Exchange UUID as the *entity_id* path\
+        \ parameter. If you do not have this value, please reach out to your dedicated\
+        \ Technical Account Manager."
       operationId: PrimeRESTAPI_GetFuturesSweeps
       parameters:
       - name: entity_id
@@ -2940,8 +3021,11 @@ paths:
       tags:
       - Futures
       summary: Schedule Entity Futures Sweep
-      description: Schedule a sweep for a given entity from FCM wallet to USD Spot
-        wallet. Only one pending sweep is allowed at a time per entity.
+      description: "Schedule a sweep for a given entity from FCM wallet to USD Spot\
+        \ wallet. Only one pending sweep is allowed at a time per entity. Note: Exchange\
+        \ clients accessing this endpoint as a Cross-Margin customer, must pass their\
+        \ designated Exchange UUID as the *entity_id* path parameter. If you do not\
+        \ have this value, please reach out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_ScheduleFuturesSweep
       parameters:
       - name: entity_id
@@ -3012,7 +3096,10 @@ paths:
       summary: Cancel Entity Futures Sweep
       description: "Cancel the pending sweep for a given entity. A user will only\
         \ be able to have one pending sweep at a time. If the sweep is not found,\
-        \ a 404 will be returned."
+        \ a 404 will be returned. Note: Exchange clients accessing this endpoint as\
+        \ a Cross-Margin customer, must pass their designated Exchange UUID as the\
+        \ *entity_id* path parameter. If you do not have this value, please reach\
+        \ out to your dedicated Technical Account Manager."
       operationId: PrimeRESTAPI_CancelFuturesSweep
       parameters:
       - name: entity_id
@@ -4426,7 +4513,10 @@ paths:
           type: string
       - name: state
         in: query
-        description: The state of the Advanced Transfer to filter by
+        description: |-
+          The state of the Advanced Transfer to filter by
+
+           - ADVANCED_TRANSFER_STATE_MATCHED: The counterparties have matched. Settlement has not started. Happy path is CREATED, MATCHED, PROCESSING, DONE.
         schema:
           type: string
           enum:
@@ -4436,6 +4526,8 @@ paths:
           - ADVANCED_TRANSFER_STATE_CANCELLED
           - ADVANCED_TRANSFER_STATE_FAILED
           - ADVANCED_TRANSFER_STATE_EXPIRED
+          - ADVANCED_TRANSFER_STATE_REJECTED
+          - ADVANCED_TRANSFER_STATE_MATCHED
       - name: type
         in: query
         description: The type of the Advanced Transfer to filter by
@@ -4552,6 +4644,12 @@ paths:
               properties:
                 advanced_transfer:
                   $ref: '#/components/schemas/coinbase.public_rest_api.AdvancedTransfer'
+                idempotency_key:
+                  type: string
+                  description: "Optional client-generated idempotency key. When set,\
+                    \ it must be a UUID. A request with the same key returns the stored\
+                    \ transfer (id, legs, and state); the request body is not compared.\
+                    \ Omit the field to create a new transfer."
               description: CreateAdvancedTransferRequest is the request to create
                 an advanced transfer.
         required: true
@@ -4706,6 +4804,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.ListAdvancedTransferTransactionsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ListAdvancedTransferTransactionsBadRequestErrorResponse'
         "401":
           description: "Authentication failed. The request signature, key, or timestamp\
             \ is invalid."
@@ -4769,11 +4873,13 @@ paths:
            - UNKNOWN_ORDER_SIDE: nil value
            - BUY: Buy order
            - SELL: Sell order
+           - MULTIPLE: Response only: a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in requests
         schema:
           type: string
           enum:
           - BUY
           - SELL
+          - MULTIPLE
       - name: start_date
         in: query
         description: A start date for the allocations to be queried from.
@@ -6080,6 +6186,7 @@ paths:
            - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
            - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote)
            - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+           - SPREAD: A spread order that trades a futures contract against its spot underlying, or against another futures contract of the same underlying (calendar spread), to capture a target spread (futures price - spot price, or back month - front month)
         schema:
           type: string
           enum:
@@ -6091,6 +6198,7 @@ paths:
           - STOP_LIMIT
           - RFQ
           - PEG
+          - SPREAD
       - name: cursor
         in: query
         description: "**Deprecated** - this endpoint always returns one page with\
@@ -6128,11 +6236,13 @@ paths:
            - UNKNOWN_ORDER_SIDE: nil value
            - BUY: Buy order
            - SELL: Sell order
+           - MULTIPLE: Response only: a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in requests
         schema:
           type: string
           enum:
           - BUY
           - SELL
+          - MULTIPLE
       - name: end_date
         in: query
         description: An end date for the orders to be queried from
@@ -6198,7 +6308,6 @@ paths:
               required:
               - client_order_id
               - product_id
-              - side
               - type
               type: object
               properties:
@@ -6213,15 +6322,17 @@ paths:
                 type:
                   $ref: '#/components/schemas/coinbase.public_rest_api.OrderType'
                 base_quantity:
-                  title: Order size in base asset units (either `base_quantity` or
-                    `quote_value` is required)
+                  title: "Order size in base asset units (either `base_quantity` or\
+                    \ `quote_value` is required). For SPREAD orders, required and\
+                    \ in the primary leg's units: a whole number of contracts when\
+                    \ it is a futures product"
                   type: string
                 quote_value:
                   title: "Order size in quote asset units, i.e. the amount the user\
                     \ wants to spend (when buying) or receive (when selling); the\
                     \ quantity in base units will be determined based on the market\
                     \ liquidity and indicated `quote_value` (either `base_quantity`\
-                    \ or `quote_value` is required)"
+                    \ or `quote_value` is required). Not supported for SPREAD orders"
                   type: string
                 limit_price:
                   title: "The limit price (required for TWAP, VWAP, LIMIT, and STOP_LIMIT\
@@ -6287,6 +6398,14 @@ paths:
                     \ sized in quote_value are charged on top of the requested quote_value\
                     \ instead of being carved out of it. Only valid for BUY orders\
                     \ sized in quote_value on SPOT products."
+                limit_price_type:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.LimitPriceType'
+                spread_config:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.SpreadConfig'
+              description: "`side` is required for every order type except SPREAD,\
+                \ which must leave it unset: each leg carries its own side in `spread_config`.\
+                \ `spread_config` is required when `type` is SPREAD and must be unset\
+                \ for every other order type."
         required: true
       responses:
         "200":
@@ -6353,7 +6472,6 @@ paths:
             schema:
               required:
               - product_id
-              - side
               - type
               type: object
               properties:
@@ -6365,15 +6483,17 @@ paths:
                 type:
                   $ref: '#/components/schemas/coinbase.public_rest_api.OrderType'
                 base_quantity:
-                  title: Order size in base asset units (either `base_quantity` or
-                    `quote_value` is required)
+                  title: "Order size in base asset units (either `base_quantity` or\
+                    \ `quote_value` is required). For SPREAD orders, required and\
+                    \ in the primary leg's units: a whole number of contracts when\
+                    \ it is a futures product"
                   type: string
                 quote_value:
                   title: "Order size in quote asset units, i.e. the amount the user\
                     \ wants to spend (when buying) or receive (when selling); the\
                     \ quantity in base units will be determined based on the market\
                     \ liquidity and indicated `quote_value` (either `base_quantity`\
-                    \ or `quote_value` is required)"
+                    \ or `quote_value` is required). Not supported for SPREAD orders"
                   type: string
                 limit_price:
                   title: "The limit price (required for TWAP, VWAP, LIMIT and STOP_LIMIT\
@@ -6435,6 +6555,14 @@ paths:
                     \ sized in quote_value are charged on top of the requested quote_value\
                     \ instead of being carved out of it. Only valid for BUY orders\
                     \ sized in quote_value on SPOT products."
+                limit_price_type:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.LimitPriceType'
+                spread_config:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.SpreadConfig'
+              description: "`side` is required for every order type except SPREAD,\
+                \ which must leave it unset: each leg carries its own side in `spread_config`.\
+                \ `spread_config` is required when `type` is SPREAD and must be unset\
+                \ for every other order type."
         required: true
       responses:
         "200":
@@ -6548,6 +6676,7 @@ paths:
            - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
            - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote)
            - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+           - SPREAD: A spread order that trades a futures contract against its spot underlying, or against another futures contract of the same underlying (calendar spread), to capture a target spread (futures price - spot price, or back month - front month)
         schema:
           type: string
           enum:
@@ -6559,6 +6688,7 @@ paths:
           - STOP_LIMIT
           - RFQ
           - PEG
+          - SPREAD
       - name: cursor
         in: query
         description: Cursor used for pagination (last consumed record)
@@ -6587,11 +6717,13 @@ paths:
            - UNKNOWN_ORDER_SIDE: nil value
            - BUY: Buy order
            - SELL: Sell order
+           - MULTIPLE: Response only: a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in requests
         schema:
           type: string
           enum:
           - BUY
           - SELL
+          - MULTIPLE
       - name: start_date
         in: query
         description: A start date for the orders to be queried from
@@ -7044,7 +7176,7 @@ paths:
       - name: limit
         in: query
         description: Number of items to retrieve. Must be between 0 (defaulted to
-          10) and 1000.
+          10) and 3000.
         schema:
           type: integer
           format: int32
@@ -7066,12 +7198,14 @@ paths:
            - SPOT: Spot product
            - FUTURE: Future product
            - OPTION: Option product
+           - BASIS: Basis product: a futures contract traded against its spot underlying, or against another futures contract of the same underlying (calendar spread); the product of SPREAD orders
         schema:
           type: string
           enum:
           - SPOT
           - FUTURE
           - OPTION
+          - BASIS
       - name: contract_expiry_type
         in: query
         description: |-
@@ -7204,6 +7338,12 @@ paths:
                     Mirrors FIX tag 8090 (QuoteRequestGoodForMs).
                   format: int64
                   example: "5000"
+                is_buy_exact:
+                  type: boolean
+                  description: "Buy Exact order flag. When true, fees for a BUY RFQ\
+                    \ sized in quote_value are charged on top of the requested quote_value\
+                    \ instead of being carved out of it. Only valid for BUY RFQs sized\
+                    \ in quote_value on SPOT products."
               description: based off PostOrderPreviewRequest
         required: true
       responses:
@@ -7556,6 +7696,9 @@ paths:
            - PORTFOLIO_STAKE: Portfolio-level staking operation
            - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation
            - MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+           - ONCHAIN_DEPOSIT: On-chain deposit detected into a Prime Onchain Wallet
+           - ONCHAIN_REWARD: Automated on-chain reward payout to a blockchain address
+           - ONCHAIN_MESSAGE: Message signing initiated with Prime Onchain Wallet; no funds move on-chain.
         style: form
         explode: true
         schema:
@@ -7599,17 +7742,22 @@ paths:
             - PORTFOLIO_STAKE
             - PORTFOLIO_UNSTAKE
             - MERGE_STAKE
+            - ONCHAIN_DEPOSIT
+            - ONCHAIN_REWARD
+            - ONCHAIN_MESSAGE
       - name: start_time
         in: query
         description: "UTC timestamp from which to filter the response (inclusive,\
-          \ ISO-8601 format)"
+          \ ISO-8601 format). This filter is only sensitive to the second; fractional\
+          \ seconds are truncated."
         schema:
           type: string
           format: date-time
       - name: end_time
         in: query
         description: "UTC timestamp until which to filter the response (exclusive,\
-          \ ISO-8601 format)"
+          \ ISO-8601 format). This filter is only sensitive to the second; fractional\
+          \ seconds are truncated."
         schema:
           type: string
           format: date-time
@@ -8016,6 +8164,7 @@ paths:
           - WALLET_TYPE_OTHER
           - QC
           - ONCHAIN
+          - INTERNATIONAL_DERIVATIVES
       - name: cursor
         in: query
         description: Cursor used for pagination (last consumed record)
@@ -8502,7 +8651,13 @@ paths:
               properties:
                 amount:
                   type: string
-                  description: The amount in whole units to convert
+                  description: |-
+                    The amount in whole units to convert. For example, "1.50" represents 1.5 of the source symbol.
+
+                    Examples:
+                     - "100"
+                     - "1.123456" (precision varies by asset; USDC, for example, supports up to 6 decimal places)
+                     - "0.50"
                   example: "50.50"
                 destination:
                   type: string
@@ -8591,6 +8746,7 @@ paths:
            - SEN: DEPRECATED. A Silvergate Exchange Network deposit
            - SWIFT: A SWIFT deposit
            - SEPA: A SEPA deposit (Single Euro Payments Area)
+           - KINEXYS: A JPM Kinexys deposit
         required: true
         schema:
           type: string
@@ -8600,6 +8756,7 @@ paths:
           - SEN
           - SWIFT
           - SEPA
+          - KINEXYS
       - name: network.id
         in: query
         description: |-
@@ -9247,6 +9404,9 @@ paths:
            - PORTFOLIO_STAKE: Portfolio-level staking operation
            - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation
            - MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+           - ONCHAIN_DEPOSIT: On-chain deposit detected into a Prime Onchain Wallet
+           - ONCHAIN_REWARD: Automated on-chain reward payout to a blockchain address
+           - ONCHAIN_MESSAGE: Message signing initiated with Prime Onchain Wallet; no funds move on-chain.
         style: form
         explode: true
         schema:
@@ -9290,17 +9450,22 @@ paths:
             - PORTFOLIO_STAKE
             - PORTFOLIO_UNSTAKE
             - MERGE_STAKE
+            - ONCHAIN_DEPOSIT
+            - ONCHAIN_REWARD
+            - ONCHAIN_MESSAGE
       - name: start_time
         in: query
         description: "UTC timestamp from which to filter the response (inclusive,\
-          \ ISO-8601 format)"
+          \ ISO-8601 format). This filter is only sensitive to the second; fractional\
+          \ seconds are truncated."
         schema:
           type: string
           format: date-time
       - name: end_time
         in: query
         description: "UTC timestamp until which to filter the response (exclusive,\
-          \ ISO-8601 format)"
+          \ ISO-8601 format). This filter is only sensitive to the second; fractional\
+          \ seconds are truncated."
         schema:
           type: string
           format: date-time
@@ -9403,7 +9568,14 @@ paths:
               properties:
                 amount:
                   type: string
-                  description: The amount in whole units to send
+                  description: |-
+                    The amount in whole units to transfer. For example, "1.50" represents 1.5 of the wallet's asset.
+
+                    Examples:
+                     - "100"
+                     - "1.123456" (precision varies by asset; USDC, for example, supports up to 6 decimal places)
+                     - "0.50"
+                  example: "1.0001"
                 destination:
                   type: string
                   description: The UUID of the destination wallet
@@ -9589,7 +9761,14 @@ paths:
               properties:
                 amount:
                   type: string
-                  description: The amount in whole units of the withdrawal
+                  description: |-
+                    The amount in whole units to withdraw. For example, "1.50" represents 1.5 of the wallet's asset.
+
+                    Examples:
+                     - "100"
+                     - "1.123456" (precision varies by asset; USDC, for example, supports up to 6 decimal places)
+                     - "0.50"
+                  example: "1.0001"
                 destination_type:
                   $ref: '#/components/schemas/coinbase.public_rest_api.DestinationType'
                 idempotency_key:
@@ -9777,6 +9956,928 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions:
+    get:
+      tags:
+      - Webhooks
+      summary: List Webhook Subscriptions
+      description: Returns cursor-paginated webhook subscriptions for the portfolio
+        in the URL path.
+      operationId: PrimeBeta_ListWebhookSubscriptions
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: include_disabled
+        in: query
+        schema:
+          type: boolean
+      - name: event_type_filter
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.ListWebhookSubscriptionsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsForbiddenErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+    post:
+      tags:
+      - Webhooks
+      summary: Create Webhook Subscription
+      description: Creates a new webhook subscription for the portfolio in the URL
+        path. Returns the HMAC signing secret exactly once; store it securely.
+      operationId: PrimeBeta_CreateWebhookSubscription
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: Populated from the URL path.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_types:
+                  type: array
+                  items:
+                    type: string
+                target_url:
+                  type: string
+                auth_type:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookAuthType'
+                oauth_config:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookOAuthConfigInput'
+                custom_headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                description:
+                  type: string
+                idempotency_key:
+                  type: string
+              description: "CreateWebhookSubscriptionRequest specifies the events,\
+                \ destination, and authentication for a new subscription."
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.CreateWebhookSubscriptionResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionForbiddenErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+      x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Subscription
+      description: Returns a single webhook subscription by ID. Auth secrets are never
+        returned.
+      operationId: PrimeBeta_GetWebhookSubscription
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookSubscriptionResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+    delete:
+      tags:
+      - Webhooks
+      summary: Delete Webhook Subscription
+      description: Soft-deletes a webhook subscription. The subscription stops matching
+        events immediately but audit history is retained.
+      operationId: PrimeBeta_DeleteWebhookSubscription
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.DeleteWebhookSubscriptionResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+    patch:
+      tags:
+      - Webhooks
+      summary: Update Webhook Subscription
+      description: Applies a partial patch to a webhook subscription using FieldMask
+        semantics.
+      operationId: PrimeBeta_UpdateWebhookSubscription
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_types:
+                  type: array
+                  items:
+                    type: string
+                target_url:
+                  type: string
+                auth_type:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookAuthType'
+                oauth_config:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookOAuthConfigInput'
+                custom_headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                description:
+                  type: string
+                is_enabled:
+                  type: boolean
+                update_mask:
+                  type: string
+                expected_version:
+                  type: string
+                  format: int64
+              description: UpdateWebhookSubscriptionRequest specifies a partial subscription
+                update using a field mask.
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.UpdateWebhookSubscriptionResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+      x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/rotate-hmac-secret:
+    post:
+      tags:
+      - Webhooks
+      summary: Rotate Webhook HMAC Secret
+      description: Issues a new HMAC signing secret for the subscription and returns
+        the plaintext exactly once. By default the previous secret remains valid for
+        a server-configured grace window; set revoke_previous_immediately to invalidate
+        it at once.
+      operationId: PrimeBeta_RotateWebhookHMACSecret
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                revoke_previous_immediately:
+                  type: boolean
+                  description: |-
+                    revoke_previous_immediately invalidates the old secret immediately instead of
+                    keeping it valid for the server grace window. Use when the secret may be compromised.
+              description: |-
+                RotateWebhookHMACSecretRequest is the request message for rotating a webhook
+                HMAC signing secret.
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.RotateWebhookHMACSecretResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+      x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/simulate:
+    post:
+      tags:
+      - Webhooks
+      summary: Send Webhook Simulation
+      description: Fires a synthetic simulation event to the subscription's endpoint
+        for integration testing.
+      operationId: PrimeBeta_SendWebhookSimulation
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_type:
+                  type: string
+              description: SendWebhookSimulationRequest selects a subscription and
+                event type for a synthetic test delivery.
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.SendWebhookSimulationResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+      x-codegen-request-body-name: body
+  /v1/webhooks/event-types:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Event Types
+      description: Returns the registered webhook event types available to subscribe
+        to.
+      operationId: PrimeBeta_GetWebhookEventTypes
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookEventTypesResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookEventTypesForbiddenErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/deliveries:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Delivery Logs
+      description: Returns cursor-paginated delivery logs for a single subscription.
+        Delivery history is retained for up to 30 days from each attempt's `attempted_at`
+        timestamp; older entries may be unavailable.
+      operationId: PrimeBeta_GetWebhookDeliveryLogs
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status_filter
+        in: query
+        schema:
+          type: string
+          enum:
+          - WEBHOOK_DELIVERY_STATUS_DELIVERED
+          - WEBHOOK_DELIVERY_STATUS_RETRYING
+          - WEBHOOK_DELIVERY_STATUS_FAILED
+          - WEBHOOK_DELIVERY_STATUS_PENDING
+      - name: event_type_filter
+        in: query
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookDeliveryLogsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/deliveries/{event_id}/attempts:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Delivery Attempts
+      description: "Returns all HTTP POST attempts for a specific (event_id, subscription_id)\
+        \ pair. Attempt history is retained for up to 30 days from each attempt's\
+        \ `attempted_at` timestamp; older records may be unavailable."
+      operationId: PrimeBeta_GetWebhookDeliveryAttempts
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookDeliveryAttemptsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/stats:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Subscription Stats
+      description: Returns pre-aggregated delivery statistics for a single subscription
+        over a fixed time window.
+      operationId: PrimeBeta_GetWebhookSubscriptionStats
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: period
+        in: query
+        schema:
+          type: string
+          enum:
+          - WEBHOOK_STATS_PERIOD_24H
+          - WEBHOOK_STATS_PERIOD_7D
+          - WEBHOOK_STATS_PERIOD_30D
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookSubscriptionStatsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/stats:
+    get:
+      tags:
+      - Webhooks
+      summary: Get Webhook Owner Stats
+      description: Returns a dashboard-level rollup of delivery statistics across
+        all subscriptions for the portfolio in the URL path.
+      operationId: PrimeBeta_GetWebhookOwnerStats
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: period
+        in: query
+        schema:
+          type: string
+          enum:
+          - WEBHOOK_STATS_PERIOD_24H
+          - WEBHOOK_STATS_PERIOD_7D
+          - WEBHOOK_STATS_PERIOD_30D
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.GetWebhookOwnerStatsResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsForbiddenErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+  /v1/portfolios/{portfolio_id}/webhooks/events/{event_id}/replay:
+    post:
+      tags:
+      - Webhooks
+      summary: Replay Webhook Event
+      description: Replays a previously published event for the portfolio in the URL
+        path. When subscription_id is set the event is re-delivered to that single
+        subscription; otherwise it is re-delivered to every matching subscription
+        owned by the path owner.
+      operationId: PrimeBeta_ReplayWebhookEvent
+      parameters:
+      - name: portfolio_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_id:
+                  type: string
+              description: |-
+                ReplayWebhookEventRequest replays a previously published event.
+                portfolio_id is set from the URL path. When subscription_id is non-empty,
+                the event is re-delivered to that single subscription. When subscription_id
+                is empty, the event is re-delivered to every matching subscription owned
+                by the portfolio in the URL path.
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.beta.ReplayWebhookEventResponse'
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventBadRequestErrorResponse'
+        "403":
+          description: Permission denied. The API key lacks the required scope for
+            this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventForbiddenErrorResponse'
+        "404":
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventNotFoundErrorResponse'
+        "429":
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.TooManyRequestsErrorResponse'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.InternalServerErrorResponse'
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ServiceUnavailableErrorResponse'
+      x-codegen-request-body-name: body
   /v1/entities/{entity_id}/rewards/rate:
     get:
       tags:
@@ -10333,12 +11434,20 @@ components:
             $ref: '#/components/schemas/coinbase.public_rest_api.FundMovement'
         blind_match_metadata:
           $ref: '#/components/schemas/coinbase.public_rest_api.BlindMatchMetadata'
+        coinbase_fees:
+          type: array
+          description: Coinbase fees charged to this portfolio's wallets on this Advanced
+            Transfer. Empty on create and when no fee applies.
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.CoinbaseFee'
       description: AdvancedTransfer represents a complex transfer operation such as
         a blind match settlement.
     coinbase.public_rest_api.AdvancedTransferState:
       type: string
-      description: AdvancedTransferState represents the lifecycle state of an advanced
-        transfer.
+      description: |-
+        AdvancedTransferState represents the lifecycle state of an advanced transfer.
+
+         - ADVANCED_TRANSFER_STATE_MATCHED: The counterparties have matched. Settlement has not started. Happy path is CREATED, MATCHED, PROCESSING, DONE.
       enum:
       - ADVANCED_TRANSFER_STATE_CREATED
       - ADVANCED_TRANSFER_STATE_PROCESSING
@@ -10346,6 +11455,8 @@ components:
       - ADVANCED_TRANSFER_STATE_CANCELLED
       - ADVANCED_TRANSFER_STATE_FAILED
       - ADVANCED_TRANSFER_STATE_EXPIRED
+      - ADVANCED_TRANSFER_STATE_REJECTED
+      - ADVANCED_TRANSFER_STATE_MATCHED
     coinbase.public_rest_api.AdvancedTransferType:
       type: string
       description: AdvancedTransferType specifies the type of advanced transfer.
@@ -10746,6 +11857,22 @@ components:
       - THIRTY_MINUTES
       - TWO_HOURS
       - FOUR_HOURS
+    coinbase.public_rest_api.CoinbaseFee:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The fee amount in whole units of the fee symbol
+          example: "0.05"
+        symbol:
+          type: string
+          description: The asset symbol in which the fee was charged
+          example: USDC
+        wallet_id:
+          type: string
+          description: The wallet that paid the fee
+          example: cde8dd34-b6cf-4c2c-82bc-5f86adacc868
+      description: A Coinbase fee charged on an Advanced Transfer.
     coinbase.public_rest_api.ComboLeg:
       type: object
       properties:
@@ -10995,7 +12122,13 @@ components:
           example: USDC
         amount:
           type: string
-          description: The amount in whole units to convert
+          description: |-
+            The amount in whole units to convert. For example, "1.50" represents 1.5 of the source symbol.
+
+            Examples:
+             - "100"
+             - "1.123456" (precision varies by asset; USDC, for example, supports up to 6 decimal places)
+             - "0.50"
           example: "50.50"
         destination:
           type: string
@@ -11220,6 +12353,22 @@ components:
             $ref: '#/components/schemas/coinbase.public_rest_api.XMLoan'
         active_liquidation:
           $ref: '#/components/schemas/coinbase.public_rest_api.ActiveLiquidationSummary'
+    coinbase.public_rest_api.CrossMarginPositionBreakdown:
+      type: object
+      properties:
+        position_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMPositionType'
+        balance:
+          type: string
+          description: "Signed balance of this leg in the position currency, after\
+            \ pending withdrawals and before collateral caps and haircuts."
+          example: "-0.19652944"
+        notional_balance:
+          type: string
+          description: "Signed USD notional of this leg, after pending withdrawals\
+            \ and before collateral caps and haircuts."
+          example: "-22508.85"
+      description: A single typed position leg of a per-asset XM row.
     coinbase.public_rest_api.CrossMarginPrimeDerivativesEquityBreakdown:
       type: object
       properties:
@@ -11320,6 +12469,16 @@ components:
           type: string
           description: FCM excess available to return.
           example: "5000.00"
+        raw_account_equity:
+          type: string
+          description: "Total account equity in USD after pending withdrawals, before\
+            \ collateral caps and cash-equivalent haircuts."
+          example: "-21542.63"
+        pre_haircut_account_equity:
+          type: string
+          description: "Total account equity in USD after pending withdrawals and\
+            \ collateral caps, before cash-equivalent haircuts."
+          example: "-21542.63"
       description: Cross-margin account summary and nested breakdowns.
     coinbase.public_rest_api.CrossMarginPrimeRiskNettingInfo:
       type: object
@@ -11384,7 +12543,40 @@ components:
           type: string
           description: Pending transfers affecting spot equity.
           example: "15303.77"
+        fx_balance:
+          type: string
+          description: Equity contribution from FX positions.
+          example: "0.00"
+        stablecoin_balance:
+          type: string
+          description: Equity contribution from non-USDC stablecoins. USDC is included
+            in cash_balance.
+          example: "-1000000.00"
       description: Breakdown of the components of spot equity.
+    coinbase.public_rest_api.CrossMarginPrimeSpotMarginContribution:
+      type: object
+      properties:
+        raw_notional:
+          type: string
+          description: "Signed spot value in USD after pending withdrawals, before\
+            \ collateral caps and cash-equivalent haircuts."
+          example: "1000000.00"
+        ineligible_notional:
+          type: string
+          description: Long notional excluded above the collateral cap.
+          example: "0"
+        haircut_notional:
+          type: string
+          description: Amount removed by the cash-equivalent long haircut.
+          example: "20000.00"
+        equity_contribution:
+          type: string
+          description: Final spot equity contribution. Positive values are eligible
+            collateral; negative values are liabilities.
+          example: "980000.00"
+      description: "Breakdown of a position row's spot equity contribution. All values\
+        \ are zero when no contribution data is available. If the asset class is unknown,\
+        \ the contribution amounts are still returned."
     coinbase.public_rest_api.CrossMarginPrimeXMPosition:
       type: object
       properties:
@@ -11448,6 +12640,16 @@ components:
           type: string
           description: Liquidity margin add-on for this asset.
           example: "0.49"
+        asset_class:
+          $ref: '#/components/schemas/coinbase.public_rest_api.PrimeXMAssetClass'
+        spot_margin_contribution:
+          $ref: '#/components/schemas/coinbase.public_rest_api.CrossMarginPrimeSpotMarginContribution'
+        spot_position_breakdown:
+          type: array
+          description: "Spot balance of this asset by position type. Contains SPOT_TRADING\
+            \ and SPOT_VAULT legs, which sum to spot_balance and spot_balance_notional."
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.CrossMarginPositionBreakdown'
       description: CrossMarginPrimeXMPosition is a single per-asset XM row (proto-backed
         fields from XMPositionDetails).
     coinbase.public_rest_api.CrossMarginRiskParameters:
@@ -11580,6 +12782,10 @@ components:
           type: string
           description: Venue ID of the position
           example: CDE
+        funding_pnl:
+          type: string
+          description: "Funding PNL, populated only for perpetual futures positions"
+          example: "10.12"
       description: A single derivative position across all derivative product types.
     coinbase.public_rest_api.DerivativeProductType:
       type: string
@@ -11974,6 +13180,10 @@ components:
           description: Expiration time of position
           format: date-time
           example: 2021-01-01T00:00:00Z
+        funding_pnl:
+          type: string
+          description: "Funding PNL, populated only for perpetual futures positions"
+          example: "10.12"
     coinbase.public_rest_api.FcmPositionSide:
       type: string
       enum:
@@ -12951,6 +14161,65 @@ components:
       - INVOICE_TYPE_WITHDRAWAL_FEE
       - INVOICE_TYPE_NEW_WALLET_FEE
       - INVOICE_TYPE_STAKING_FEE
+    coinbase.public_rest_api.Leg:
+      title: One leg of a SPREAD order
+      type: object
+      properties:
+        product_id:
+          title: "Product ID of the leg, e.g. BTC-USD for spot or BIP-20DEC30-CDE\
+            \ for futures"
+          type: string
+        side:
+          $ref: '#/components/schemas/coinbase.public_rest_api.OrderSide'
+        support_passive_order:
+          type: boolean
+          description: Whether this leg may rest passively on the book. At least one
+            leg must be true.
+    coinbase.public_rest_api.LegPreview:
+      title: Preview values for one leg of a SPREAD order
+      type: object
+      properties:
+        product_id:
+          type: string
+        side:
+          $ref: '#/components/schemas/coinbase.public_rest_api.OrderSide'
+        support_passive_order:
+          type: boolean
+        leg_commission:
+          title: Estimated commission for this leg
+          type: string
+        quote_value:
+          title: Estimated notional of this leg in quote currency
+          type: string
+        best_bid:
+          title: Current best bid for this leg's order book
+          type: string
+        best_ask:
+          title: Current best ask for this leg's order book
+          type: string
+        average_filled_price:
+          title: Estimated average fill price for this leg
+          type: string
+        slippage:
+          title: Expected slippage for this leg
+          type: string
+    coinbase.public_rest_api.LimitPriceType:
+      type: string
+      description: |-
+        LimitPriceType indicates the unit `limit_price` is denominated in. Only meaningful for
+        Deribit options - leave unspecified for every other order type and product, which are
+        always priced in the quote currency.
+
+         - UNKNOWN_LIMIT_PRICE_TYPE: nil value - `limit_price` is interpreted in the product's default/native unit
+         - LIMIT_PRICE_TYPE_BASE_ASSET: `limit_price` is denominated in the underlying base asset (e.g. BTC for a BTC option).
+        Only valid for Deribit options settled in the base asset.
+         - LIMIT_PRICE_TYPE_QUOTE_ASSET: `limit_price` is denominated in the quote asset (e.g. USD/USDC).
+         - LIMIT_PRICE_TYPE_IMPLIED_VOLATILITY: `limit_price` is an implied volatility percentage rather than a monetary amount
+        (e.g. "65.5" means 65.5% implied volatility).
+      enum:
+      - LIMIT_PRICE_TYPE_BASE_ASSET
+      - LIMIT_PRICE_TYPE_QUOTE_ASSET
+      - LIMIT_PRICE_TYPE_IMPLIED_VOLATILITY
     coinbase.public_rest_api.ListAdvancedTransferTransactionsResponse:
       required:
       - transactions
@@ -13180,6 +14449,80 @@ components:
           type: string
           description: The time the margin call is due in RFC3339 format
           example: 2023-01-01T00:00:00Z
+    coinbase.public_rest_api.MarginCallThresholds:
+      type: object
+      properties:
+        margin_thresholds:
+          type: array
+          description: Ordered thresholds used to select a margin level.
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.MarginThreshold'
+      description: |-
+        Configured thresholds used to determine `margin_level`. Each entry identifies a margin level, the ratio used to evaluate it, and its threshold value.
+        Historical responses contain the thresholds recorded with the historical health evaluation.
+
+        Equity at or above the margin requirement produces a healthy margin level. Otherwise, the evaluator selects the first matching rule in the configured order.
+        A threshold comparison identifies a matching level; it doesn't by itself issue a margin call or change account permissions.
+    coinbase.public_rest_api.MarginControlStatus:
+      type: string
+      description: |-
+        Trading and withdrawal permissions derived from the account's recorded health state, outstanding margin calls, and account restrictions.
+        These permissions can remain restricted even when the calculated `margin_level` improves.
+        Returns `MARGIN_CONTROL_STATUS_UNSPECIFIED` when the margin service doesn't provide a control status.
+
+         - MARGIN_CONTROL_STATUS_UNSPECIFIED: No control status is provided. Don't infer permission to trade or withdraw from this value.
+         - MARGIN_CONTROL_STATUS_TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw under the applicable margin methodology.
+         - MARGIN_CONTROL_STATUS_TRADES_ONLY: Allowed to trade but not withdraw under the applicable margin methodology.
+         - MARGIN_CONTROL_STATUS_SESSION_LOCKED: Not allowed to trade or withdraw.
+      enum:
+      - MARGIN_CONTROL_STATUS_TRADES_AND_WITHDRAWALS
+      - MARGIN_CONTROL_STATUS_TRADES_ONLY
+      - MARGIN_CONTROL_STATUS_SESSION_LOCKED
+    coinbase.public_rest_api.MarginEntityCallStatus:
+      type: string
+      description: |-
+        MarginEntityCallStatus summarizes the entity's open margin calls. When several calls are open, it reflects the highest-priority one: aged, then urgent, then standard, then debit.
+        `call_status` describes outstanding calls. Use `margin_level` for calculated margin condition and `control_status` for trading and withdrawal permissions.
+
+         - MARGIN_ENTITY_CALL_STATUS_UNSPECIFIED: No call status is provided. Don't infer that the entity has no margin calls from this value.
+         - MARGIN_ENTITY_CALL_STATUS_NO_CALL: The entity has no open margin calls.
+         - MARGIN_ENTITY_CALL_STATUS_OPEN_STANDARD_CALL: The entity has an open standard margin call and no urgent or aged calls.
+         - MARGIN_ENTITY_CALL_STATUS_OPEN_URGENT_CALL: The entity has an open urgent margin call and no aged calls.
+         - MARGIN_ENTITY_CALL_STATUS_AGED_CALL: At least one open margin call is past its due time. This status alone does not indicate a contractual Event of Default or that liquidation has begun.
+         - MARGIN_ENTITY_CALL_STATUS_OPEN_DEBIT_CALL: The entity has an open debit call and no standard, urgent, or aged calls.
+      enum:
+      - MARGIN_ENTITY_CALL_STATUS_NO_CALL
+      - MARGIN_ENTITY_CALL_STATUS_OPEN_STANDARD_CALL
+      - MARGIN_ENTITY_CALL_STATUS_OPEN_URGENT_CALL
+      - MARGIN_ENTITY_CALL_STATUS_AGED_CALL
+      - MARGIN_ENTITY_CALL_STATUS_OPEN_DEBIT_CALL
+    coinbase.public_rest_api.MarginHealthStatus:
+      type: string
+      description: |-
+        Recorded account health state maintained by the margin-management process.
+        Persistence rules filter out short-lived threshold changes. Margin-call and liquidation events also affect this state.
+        A change in the calculated `margin_level` may not immediately change this status.
+        Use `control_status` for trading and withdrawal permissions in live responses.
+        Historical responses contain the recorded health state at the historical evaluation.
+
+         - MARGIN_HEALTH_STATUS_UNSPECIFIED: No account health state is provided. Don't interpret this value as healthy or as permission to trade or withdraw.
+         - MARGIN_HEALTH_STATUS_HEALTHY: The account's recorded health state is healthy.
+         - MARGIN_HEALTH_STATUS_WARNING: The account's recorded health state is warning. Margin-call issuance follows the applicable margin methodology.
+         - MARGIN_HEALTH_STATUS_CRITICAL: The account's recorded health state is critical, corresponding to an urgent margin-call condition under the applicable margin methodology.
+         - MARGIN_HEALTH_STATUS_SUSPENDED: The account is recorded as suspended under the applicable margin methodology.
+         - MARGIN_HEALTH_STATUS_RESTRICTED: The account is recorded as restricted under the applicable margin methodology.
+         - MARGIN_HEALTH_STATUS_PRE_LIQUIDATION: The account is in a pre-liquidation state. Liquidation may commence under the applicable margin methodology.
+         - MARGIN_HEALTH_STATUS_LIQUIDATING: Liquidation has commenced.
+         - MARGIN_HEALTH_STATUS_IN_DEFICIT: The account's recorded health state is in deficit. Margin-call issuance follows the applicable margin methodology.
+      enum:
+      - MARGIN_HEALTH_STATUS_HEALTHY
+      - MARGIN_HEALTH_STATUS_WARNING
+      - MARGIN_HEALTH_STATUS_CRITICAL
+      - MARGIN_HEALTH_STATUS_SUSPENDED
+      - MARGIN_HEALTH_STATUS_RESTRICTED
+      - MARGIN_HEALTH_STATUS_PRE_LIQUIDATION
+      - MARGIN_HEALTH_STATUS_LIQUIDATING
+      - MARGIN_HEALTH_STATUS_IN_DEFICIT
     coinbase.public_rest_api.MarginInformation:
       type: object
       properties:
@@ -13190,6 +14533,26 @@ components:
             $ref: '#/components/schemas/coinbase.public_rest_api.MarginCallRecord'
         margin_summary:
           $ref: '#/components/schemas/coinbase.public_rest_api.MarginSummary'
+    coinbase.public_rest_api.MarginLevel:
+      type: string
+      description: |-
+        Calculated margin level based on the account's equity, margin requirement, margin limit, and configured thresholds.
+        This reflects the current calculation for live responses or the recorded calculation for historical responses.
+        It can differ from `health_status`, which is maintained by the margin-management process.
+        The level alone doesn't determine whether a margin call is open or whether trading and withdrawals are allowed.
+
+         - MARGIN_LEVEL_UNSPECIFIED: No calculated margin level is provided.
+         - MARGIN_LEVEL_HEALTHY: Account equity is at or above the margin requirement.
+         - MARGIN_LEVEL_DEFICIT: The calculation places the account in the deficit band. Margin-call issuance follows the applicable margin methodology.
+         - MARGIN_LEVEL_WARNING: The calculation places the account in the warning band, approaching the critical threshold.
+         - MARGIN_LEVEL_CRITICAL: The calculation places the account in the critical band.
+         - MARGIN_LEVEL_LIQUIDATION: The calculation places the account in the liquidation band. This value alone doesn't indicate that liquidation has commenced.
+      enum:
+      - MARGIN_LEVEL_HEALTHY
+      - MARGIN_LEVEL_DEFICIT
+      - MARGIN_LEVEL_WARNING
+      - MARGIN_LEVEL_CRITICAL
+      - MARGIN_LEVEL_LIQUIDATION
     coinbase.public_rest_api.MarginSummary:
       type: object
       properties:
@@ -13332,6 +14695,37 @@ components:
           description: The amount of the margin limit that is consumed by the excess
             deficit
           example: "5000"
+        short_collateral_transfer:
+          type: string
+          description: |-
+            Signed cash adjustment associated with the short collateral balance in a historical margin summary. Negative amounts move cash into short collateral; positive amounts return cash from short collateral. Add this signed amount to the snapshot's cash balance to calculate cash after the transfer. Live margin responses return an empty string for this field.
+
+            For example, a cash balance of 60000000 and a short collateral transfer of -20000000 produce a cash balance of 40000000 after the transfer. This calculation doesn't determine the amount available to withdraw.
+          example: "10000"
+        health_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginHealthStatus'
+        margin_level:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginLevel'
+        margin_thresholds:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginCallThresholds'
+        control_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginControlStatus'
+        equity_ratio:
+          type: string
+          description: "Account equity divided by margin requirement, expressed as\
+            \ a decimal ratio. For example, \"1.2\" represents equity equal to 120%\
+            \ of the margin requirement. Returns an empty string when either input\
+            \ is unavailable or the margin requirement is zero."
+          example: "3.633"
+        deficit_ratio:
+          type: string
+          description: "Margin deficit divided by the account's margin limit, calculated\
+            \ as `max(0, (margin requirement - account equity) / pm_margin_limit)`.\
+            \ Expressed as a decimal ratio, not a percentage. Returns an empty string\
+            \ when an input is unavailable or the margin limit is zero."
+          example: "0"
+        call_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginEntityCallStatus'
     coinbase.public_rest_api.MarginSummaryHistorical:
       type: object
       properties:
@@ -13345,6 +14739,35 @@ components:
           example: 2023-05-01
         margin_summary:
           $ref: '#/components/schemas/coinbase.public_rest_api.MarginSummary'
+    coinbase.public_rest_api.MarginThreshold:
+      type: object
+      properties:
+        margin_level:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginLevel'
+        threshold_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginThreshold.MarginThresholdType'
+        threshold_value:
+          type: string
+          description: "Threshold expressed as a decimal ratio, not a percentage.\
+            \ For example, \"0.8\" represents 80%. Interpret this value together with\
+            \ threshold_type."
+          example: "0.8"
+      description: "A single margin level, the ratio used to evaluate its threshold,\
+        \ and the threshold value."
+    coinbase.public_rest_api.MarginThreshold.MarginThresholdType:
+      type: string
+      description: |-
+        Ratio used to evaluate a threshold. Rules are evaluated in configured order; the first matching rule determines the margin level when equity is below the margin requirement.
+        A zero threshold imposes no constraint for that ratio. If the denominator is zero, the evaluator skips the division and checks the numerator condition: nonnegative equity for an equity-ratio rule, or a positive deficit for a deficit-ratio rule.
+
+         - MARGIN_THRESHOLD_TYPE_UNSPECIFIED: No threshold type is provided.
+         - MARGIN_THRESHOLD_TYPE_EQUITY_RATIO: For a nonzero threshold and positive margin requirement, the rule matches when equity is nonnegative and equity / margin requirement is greater than or equal to threshold_value.
+         - MARGIN_THRESHOLD_TYPE_DEFICIT_RATIO: For a nonzero threshold and positive margin limit, the rule matches when the deficit is positive and (margin requirement - equity) / margin limit is greater than threshold_value.
+         - MARGIN_THRESHOLD_TYPE_NONE: Fallback rule with no numeric ratio threshold.
+      enum:
+      - MARGIN_THRESHOLD_TYPE_EQUITY_RATIO
+      - MARGIN_THRESHOLD_TYPE_DEFICIT_RATIO
+      - MARGIN_THRESHOLD_TYPE_NONE
     coinbase.public_rest_api.MarketData:
       type: object
       properties:
@@ -13396,6 +14819,18 @@ components:
         settlement_date:
           type: string
           description: The settlement date of the match
+    coinbase.public_rest_api.MaxDeltaType:
+      title: Unit of a SPREAD order's max delta size
+      type: string
+      description: |-
+        - UNKNOWN_MAX_DELTA_TYPE: nil value
+         - MAX_DELTA_TYPE_SPOT: Absolute size in spot base units. Not accepted for a calendar spread (two futures).
+         - MAX_DELTA_TYPE_PERCENT: Percentage of the order size
+         - MAX_DELTA_TYPE_CONTRACT: Absolute number of futures contracts
+      enum:
+      - MAX_DELTA_TYPE_SPOT
+      - MAX_DELTA_TYPE_PERCENT
+      - MAX_DELTA_TYPE_CONTRACT
     coinbase.public_rest_api.NFTCollection:
       type: object
       properties:
@@ -13507,7 +14942,9 @@ components:
       properties:
         signed_transaction:
           type: string
-          description: The signed transaction data
+          description: "The hex-encoded signed transaction. Only returned for transactions\
+            \ created with skip_broadcast set to true; empty for all other transactions,\
+            \ including broadcast transactions that have been signed."
           example: 01ac1872bb2967df00124a7fd15e470a10aab04852e19fc6f...
         risk_assessment:
           $ref: '#/components/schemas/coinbase.public_rest_api.RiskAssessment'
@@ -13540,6 +14977,39 @@ components:
           example: insufficient_funds
         signing_status:
           $ref: '#/components/schemas/coinbase.public_rest_api.SigningStatus'
+        original_unsigned_transaction:
+          type: string
+          description: "The hex-encoded unsigned transaction exactly as submitted\
+            \ when the transaction was created. This value is never updated. Before\
+            \ signing, Prime may set the nonce, network fees, or gas limit on EVM\
+            \ transactions, or refresh the recent blockhash on Solana transactions,\
+            \ so the transaction that is signed and broadcast can differ from this\
+            \ payload. The transfer amount is only changed for EVM transactions initiated\
+            \ as a maximum transfer of the network's native asset, where Prime lowers\
+            \ it so that the amount plus network fees does not exceed the wallet's\
+            \ current balance."
+          example: 02f872818980850db7504633854f33d9a27882c1a4947ceb23fd6bc0add59e62ac25578270cff1b9f61980b844a9059cbb...
+    coinbase.public_rest_api.OptionGreeks:
+      type: object
+      properties:
+        delta:
+          type: string
+          description: "Delta greek, in units of the underlying"
+          example: "0.36833"
+        gamma:
+          type: string
+          description: Gamma greek
+          example: "0.00046"
+        theta:
+          type: string
+          description: "Theta greek, in USD per day"
+          example: "-155.79411"
+        vega:
+          type: string
+          description: "Vega greek, in USD per 1% change in implied volatility"
+          example: "7.86142"
+      description: "Greeks of one option contract as quoted by the venue, not scaled\
+        \ by order size or side."
     coinbase.public_rest_api.OptionProductDetails:
       title: OptionProductDetails contains details specific to option products
       type: object
@@ -13670,20 +15140,23 @@ components:
           $ref: '#/components/schemas/coinbase.public_rest_api.OrderType'
         base_quantity:
           type: string
-          description: Order size in base asset units (either `base_quantity` or `quote_value`
-            is required)
+          description: "Order size in base asset units (either `base_quantity` or\
+            \ `quote_value` is required). For SPREAD orders, in the primary leg's\
+            \ units: a whole number of contracts when it is a futures product"
           example: "50"
         quote_value:
           type: string
           description: "Order size in quote asset units, i.e. the amount the user\
             \ wants to spend (when buying) or receive (when selling); the quantity\
             \ in base units will be determined based on the market liquidity and indicated\
-            \ `quote_value`. Either `base_quantity` or `quote_value` is required"
+            \ `quote_value`. Either `base_quantity` or `quote_value` is required.\
+            \ Not supported for SPREAD orders"
           example: "100"
         limit_price:
           type: string
           description: "The limit price (required for TWAP, VWAP, LIMIT and STOP_LIMIT\
-            \ orders)"
+            \ orders). Empty for SPREAD orders, which carry a spread limit in `spread_details`\
+            \ instead"
           example: "50.12"
         start_time:
           type: string
@@ -13708,25 +15181,33 @@ components:
           example: 2021-05-31T10:59:59Z
         filled_quantity:
           type: string
-          description: Size filled (in base asset units)
+          description: "Size filled (in base asset units). Empty for SPREAD orders,\
+            \ whose legs fill in different units; see `spread_details` for each leg's\
+            \ value"
           example: "100"
         filled_value:
           type: string
-          description: Market value filled (in quote asset units)
+          description: "Market value filled (in quote asset units). For SPREAD orders,\
+            \ the sum of both legs' filled values"
           example: "100"
         average_filled_price:
           type: string
-          description: Indicates the average `filled_price`
+          description: Indicates the average `filled_price`. Empty for SPREAD orders;
+            see `spread_details` for each leg's value
           example: "50.19"
         commission:
           type: string
-          description: Total commission paid on this order (in quote asset units)
-            -- only applicable for partially- or fully-filled orders
+          description: "Total commission paid on this order (in quote asset units)\
+            \ -- only applicable for partially- or fully-filled orders. For SPREAD\
+            \ orders, the sum of both legs' commissions; `commission_detail_total`\
+            \ is empty and each leg's breakdown is in `spread_details`"
           example: "4.99"
         exchange_fee:
           type: string
-          description: Fee charged by the exchange for Cost Plus commission configurations.
-            Exchange fee will be 0 for All In commission configurations.
+          description: "Fee charged by the exchange for Cost Plus commission configurations.\
+            \ Exchange fee will be 0 for All In commission configurations. For SPREAD\
+            \ orders, the sum of both legs' exchange fees (`spread_details.primary_leg.exchange_fee`\
+            \ and `spread_details.secondary_leg.exchange_fee`)."
           example: "2.50"
         historical_pov:
           type: string
@@ -13741,7 +15222,7 @@ components:
         net_average_filled_price:
           type: string
           description: Indicates the average `filled_price` net of commissions and
-            fees
+            fees. Empty for SPREAD orders; see `spread_details` for each leg's value
           example: "57.68"
         user_context:
           type: string
@@ -13824,6 +15305,10 @@ components:
           description: Indicates if this was a buy exact order (fees charged on top
             of quote size for BUY orders sized in quote)
           example: false
+        limit_price_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.LimitPriceType'
+        spread_details:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadDetails'
     coinbase.public_rest_api.OrderEdit:
       type: object
       properties:
@@ -13868,9 +15353,11 @@ components:
         - UNKNOWN_ORDER_SIDE: nil value
          - BUY: Buy order
          - SELL: Sell order
+         - MULTIPLE: Response only: a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in requests
       enum:
       - BUY
       - SELL
+      - MULTIPLE
     coinbase.public_rest_api.OrderStatus:
       title: Indicates the order status
       type: string
@@ -13902,6 +15389,7 @@ components:
          - STOP_LIMIT: A [conditional order combined of stop order and limit order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order)
          - RFQ: A [request for quote](https://en.wikipedia.org/wiki/Request_for_quote)
          - PEG: A pegged order that dynamically adjust based on market conditions while maintaining execution discretion and avoiding adverse selection
+         - SPREAD: A spread order that trades a futures contract against its spot underlying, or against another futures contract of the same underlying (calendar spread), to capture a target spread (futures price - spot price, or back month - front month)
       enum:
       - MARKET
       - LIMIT
@@ -13911,6 +15399,7 @@ components:
       - STOP_LIMIT
       - RFQ
       - PEG
+      - SPREAD
     coinbase.public_rest_api.PMAssetInfo:
       type: object
       properties:
@@ -14023,12 +15512,20 @@ components:
       description: |-
         - UNKNOWN_PAYMENT_METHOD_TYPE: nil value
          - METHOD_WIRE: Wire transfer
-         - METHOD_SEN: Silvergate exchange network
+         - METHOD_SEN: DEPRECATED. Silvergate exchange network
          - METHOD_SWIFT: Swift
+         - METHOD_SEPA: Single Euro Payments Area
+         - METHOD_CBIT: Customers Bank Instant Token
+         - METHOD_PIX: Brazilian instant payment system
+         - METHOD_JPM_KINEXYS: JPMorgan Kinexys
       enum:
       - METHOD_WIRE
       - METHOD_SEN
       - METHOD_SWIFT
+      - METHOD_SEPA
+      - METHOD_CBIT
+      - METHOD_PIX
+      - METHOD_JPM_KINEXYS
     coinbase.public_rest_api.PegOffsetType:
       title: Peg offset type for PEG orders
       type: string
@@ -14123,8 +15620,8 @@ components:
       properties:
         external_id:
           type: string
-          description: An optional custom identifier (up to 255 characters) to attach
-            to the transaction.  This is not a searchable transaction field.
+          description: An optional custom identifier (up to 255 bytes) to attach to
+            the transaction. This is not a searchable transaction field.
     coinbase.public_rest_api.PortfolioStakingUnstakeResponse:
       type: object
       properties:
@@ -14301,6 +15798,38 @@ components:
           type: boolean
           description: Buy Exact order flag
           example: false
+        option_greeks:
+          $ref: '#/components/schemas/coinbase.public_rest_api.OptionGreeks'
+        spread_preview:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadPreview'
+        current_margin_utilization:
+          type: string
+          description: "Futures and SPREAD orders only: amount of the portfolio's\
+            \ derivatives margin limit used before this order. For cross-margin portfolios,\
+            \ the cross-margin limit consumed."
+          example: "12000.00"
+        current_margin_utilization_ratio:
+          type: string
+          description: "Futures and SPREAD orders only: `current_margin_utilization`\
+            \ as a percentage of the margin limit (0-100, e.g. \"1.2\" means 1.2%,\
+            \ not a 0-1 decimal)"
+          example: "1.2"
+        projected_margin_utilization:
+          type: string
+          description: "Futures and SPREAD orders only: amount of the portfolio's\
+            \ derivatives margin limit used if this order fills. For cross-margin\
+            \ portfolios, the cross-margin limit consumed."
+          example: "36480.00"
+        projected_margin_utilization_ratio:
+          type: string
+          description: "Futures and SPREAD orders only: `projected_margin_utilization`\
+            \ as a percentage of the margin limit (0-100, e.g. \"3.6\" means 3.6%,\
+            \ not a 0-1 decimal)"
+          example: "3.6"
+        settl_currency:
+          type: string
+          description: "The requested `settl_currency`, echoed"
+          example: USDC
     coinbase.public_rest_api.PostTradeCreditInformation:
       type: object
       properties:
@@ -14392,6 +15921,22 @@ components:
         PriceIncrementStep overrides the product's price_increment for prices above a
         threshold. A price takes the increment of the highest step whose threshold it
         strictly exceeds, and the product's price_increment when it exceeds none.
+    coinbase.public_rest_api.PrimeXMAssetClass:
+      type: string
+      description: |-
+        Asset class of the XM position underlier.
+
+         - PRIME_XM_ASSET_CLASS_UNSPECIFIED: The asset class is unavailable for this position, or is not recognized by this API version.
+         - PRIME_XM_ASSET_CLASS_CASH: USD and USDC.
+         - PRIME_XM_ASSET_CLASS_FX: Non-USD fiat currencies recognized as FX in the margin model, such as EUR, GBP, and CHF.
+         - PRIME_XM_ASSET_CLASS_STABLECOIN: Non-USDC stablecoins recognized as cash equivalents in the margin model, such as EURC and USDT.
+         - PRIME_XM_ASSET_CLASS_CRYPTO: Crypto assets (e.g. BTC, ETH).
+      enum:
+      - PRIME_XM_ASSET_CLASS_UNSPECIFIED
+      - PRIME_XM_ASSET_CLASS_CASH
+      - PRIME_XM_ASSET_CLASS_FX
+      - PRIME_XM_ASSET_CLASS_STABLECOIN
+      - PRIME_XM_ASSET_CLASS_CRYPTO
     coinbase.public_rest_api.PrimeXMHealthStatus:
       type: string
       description: |2-
@@ -14592,10 +16137,12 @@ components:
          - SPOT: Spot product
          - FUTURE: Future product
          - OPTION: Option product
+         - BASIS: Basis product: a futures contract traded against its spot underlying, or against another futures contract of the same underlying (calendar spread); the product of SPREAD orders
       enum:
       - SPOT
       - FUTURE
       - OPTION
+      - BASIS
     coinbase.public_rest_api.QuoteResponse:
       title: Copied from https://github.cbhq.net/institutional/trading/blob/3e6da61aceb64c7cbe6f0c0f8fbdb98fd3e868dc/proxy/trading/protos/coinbase/brokerage/proxy/trading/api/orderentry.proto#L366-L370
       type: object
@@ -14619,6 +16166,10 @@ components:
             \ the default of 3000 ms (3 seconds)."
           format: int64
           example: "5000"
+        is_buy_exact:
+          type: boolean
+          description: Buy Exact order flag
+          example: false
     coinbase.public_rest_api.RFQProductDetails:
       type: object
       properties:
@@ -14678,6 +16229,8 @@ components:
         i.e. dividends from BUIDL fund holdings
          - CUSTOM_STABLECOIN_REWARD: A custom stablecoin reward
         i.e. USDC reward payouts
+         - TRADING_FEE_REBATE_REWARD: A trading fee rebate reward
+        i.e. USDC trading-fee rebates paid by Coinbase
       enum:
       - MEV_REWARD
       - INFLATION_REWARD
@@ -14687,6 +16240,7 @@ components:
       - STAKING_FEE_REBATE_REWARD
       - BUIDL_DIVIDEND
       - CUSTOM_STABLECOIN_REWARD
+      - TRADING_FEE_REBATE_REWARD
     coinbase.public_rest_api.RiskAssessment:
       title: New message for risk assessment details
       type: object
@@ -14763,7 +16317,7 @@ components:
         - SECONDARY_PERMISSION_UNKNOWN: nil value
          - VIDEO_APPROVER: A video approver
          - TEAM_APPROVER: A team approver
-         - WEB3_SIGNER: A web3 signer
+         - WEB3_SIGNER: A web3/onchain signer
       enum:
       - VIDEO_APPROVER
       - TEAM_APPROVER
@@ -14842,6 +16396,124 @@ components:
       enum:
       - DESC
       - ASC
+    coinbase.public_rest_api.SpreadConfig:
+      title: Configuration of a SPREAD order
+      type: object
+      properties:
+        limit:
+          type: string
+          description: |-
+            Worst acceptable spread (futures - spot), signed decimal. A buy-futures spread executes
+            when the spread is at or below the limit, a sell-futures spread when it is at or above.
+        limit_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadLimitType'
+        max_delta_size:
+          title: "Maximum allowed difference between the filled sizes of the two legs,\
+            \ in the unit given by `max_delta_type`"
+          type: string
+        max_delta_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MaxDeltaType'
+        primary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.Leg'
+        secondary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.Leg'
+      description: "`primary_leg`: its product_id must equal the order's `product_id`,\
+        \ and `base_quantity` is in its units. For a calendar spread (two futures)\
+        \ it must be the back month."
+    coinbase.public_rest_api.SpreadDetails:
+      title: "A SPREAD order as placed and executed: the spread configuration, the\
+        \ spread product and each leg's fills"
+      type: object
+      properties:
+        limit:
+          title: "The spread limit the order was placed with, see `SpreadConfig.limit`"
+          type: string
+        limit_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadLimitType'
+        max_delta_size:
+          title: "The max delta size the order was placed with, see `SpreadConfig.max_delta_size`"
+          type: string
+        max_delta_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MaxDeltaType'
+        group_product_id:
+          title: "Product ID of the spread product the order is placed on, in the\
+            \ form <futures product_id>:<spot product_id> (back month:front month\
+            \ for a futures-futures spread), e.g. BIP-20DEC30-CDE:BTC-USD"
+          type: string
+        realized_spread:
+          title: "Realized spread of the fills so far, in the unit of `limit_type`:\
+            \ for SPREAD_LIMIT_TYPE_USD the futures leg's average filled price minus\
+            \ the spot leg's, in the quote currency; for SPREAD_LIMIT_TYPE_BPS that\
+            \ difference in basis points of the spot leg's average filled price ((futures\
+            \ / spot - 1) x 10000). For a futures-futures spread, back month in place\
+            \ of futures and front month in place of spot. Empty until both legs have\
+            \ fills"
+          type: string
+        primary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadLegDetails'
+        secondary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadLegDetails'
+    coinbase.public_rest_api.SpreadLegDetails:
+      title: One leg of a SPREAD order as placed and executed
+      type: object
+      properties:
+        product_id:
+          title: "Product ID of the leg, e.g. BTC-USD or BIP-20DEC30-CDE"
+          type: string
+        side:
+          $ref: '#/components/schemas/coinbase.public_rest_api.OrderSide'
+        support_passive_order:
+          title: Whether this leg may rest passively on the book
+          type: boolean
+        filled_quantity:
+          title: "Quantity filled on this leg, in its units: contracts for a futures\
+            \ product, base units for spot"
+          type: string
+        average_filled_price:
+          title: "Average price of this leg's fills, per unit of the underlying"
+          type: string
+        commission:
+          title: Commission charged on this leg so far
+          type: string
+        commission_detail_total:
+          $ref: '#/components/schemas/coinbase.public_rest_api.CommissionDetailTotal'
+        exchange_fee:
+          title: Fee charged by the exchange on this leg for Cost Plus commission
+            configurations; 0 for All In
+          type: string
+        filled_value:
+          title: "Notional value of this leg's fills so far, in the quote currency"
+          type: string
+    coinbase.public_rest_api.SpreadLimitType:
+      title: Unit of a SPREAD order's spread limit
+      type: string
+      description: |-
+        - UNKNOWN_SPREAD_LIMIT_TYPE: nil value
+         - SPREAD_LIMIT_TYPE_BPS: Limit in basis points of the spot price
+         - SPREAD_LIMIT_TYPE_USD: Limit in USD
+      enum:
+      - SPREAD_LIMIT_TYPE_BPS
+      - SPREAD_LIMIT_TYPE_USD
+    coinbase.public_rest_api.SpreadPreview:
+      title: "SPREAD order preview: the submitted configuration plus per-leg values"
+      type: object
+      properties:
+        limit:
+          type: string
+        limit_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SpreadLimitType'
+        max_delta_size:
+          type: string
+        max_delta_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MaxDeltaType'
+        group_product_id:
+          title: "Product ID of the spread product, in the form <futures product_id>:<spot\
+            \ product_id>"
+          type: string
+        primary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.LegPreview'
+        secondary_leg:
+          $ref: '#/components/schemas/coinbase.public_rest_api.LegPreview'
     coinbase.public_rest_api.StakeType:
       type: string
       enum:
@@ -15058,8 +16730,14 @@ components:
           example: 2021-05-31T12:09:31Z
         amount:
           type: string
-          description: The transaction amount in whole units
-          example: "100"
+          description: |-
+            The transaction amount (in whole units). For example, "1.50" represents 1.5 of the associated symbol.
+
+            Examples:
+             - "100"
+             - "1.123456" (precision varies by asset; USDC, for example, supports up to 6 decimal places)
+             - "0.50"
+          example: "1.0001"
         transfer_from:
           $ref: '#/components/schemas/coinbase.public_rest_api.TransferLocation'
         transfer_to:
@@ -15067,16 +16745,22 @@ components:
         network_fees:
           type: string
           description: The blockchain network fees (in whole units) required in order
-            to broadcast the transaction
+            to broadcast the transaction. Does not carry the Advanced Transfer Coinbase
+            fee.
           example: "1.99"
         fees:
           type: string
-          description: The fees that the customer paid for the transaction (in whole
-            units)
+          description: "The charged fee (in whole units). On the transfer, coinbase_fees\
+            \ is set and fees is 0. On the send, the same charge is on fees and fee_symbol,\
+            \ and coinbase_fees is omitted. Crypto and fiat sends that belong to the\
+            \ transfer use those transfer and send fields. A bank withdrawal that\
+            \ is not part of the transfer is unchanged."
           example: "4.53"
         fee_symbol:
           type: string
-          description: The asset in which fees will be paid
+          description: "The asset in which fees is denominated. On the send, the same\
+            \ charge is on fees and fee_symbol, and coinbase_fees is omitted. On the\
+            \ transfer, fee_symbol is empty."
           example: USD
         blockchain_ids:
           type: array
@@ -15102,7 +16786,7 @@ components:
           example: ethereum-mainnet
         estimated_asset_changes:
           type: array
-          description: The estimated asset changes (web3)
+          description: The estimated asset changes (web3/onchain)
           items:
             $ref: '#/components/schemas/coinbase.public_rest_api.AssetChange'
         metadata:
@@ -15117,6 +16801,18 @@ components:
           $ref: '#/components/schemas/coinbase.public_rest_api.Network'
         process_requirements:
           $ref: '#/components/schemas/coinbase.public_rest_api.ProcessRequirements'
+        coinbase_fees:
+          type: array
+          description: "Coinbase fees on the transfer (amount, symbol, wallet_id),\
+            \ where fees is 0. On the send, the same charge is on fees and fee_symbol,\
+            \ and coinbase_fees is omitted. When you total fees, do not add coinbase_fees\
+            \ from the transfer to the send's fees, or you will count the charge twice.\
+            \ A wallet transaction list includes the fees paid by that wallet. Get\
+            \ Transaction and the portfolio transaction list include every fee paid\
+            \ in the requesting portfolio. Fees paid in the counterparty's portfolio\
+            \ are omitted."
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.CoinbaseFee'
     coinbase.public_rest_api.TransactionMetadata:
       type: object
       properties:
@@ -15237,6 +16933,9 @@ components:
          - PORTFOLIO_STAKE: Portfolio-level staking operation
          - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation
          - MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+         - ONCHAIN_DEPOSIT: On-chain deposit detected into a Prime Onchain Wallet
+         - ONCHAIN_REWARD: Automated on-chain reward payout to a blockchain address
+         - ONCHAIN_MESSAGE: Message signing initiated with Prime Onchain Wallet; no funds move on-chain.
       enum:
       - DEPOSIT
       - WITHDRAWAL
@@ -15274,6 +16973,9 @@ components:
       - PORTFOLIO_STAKE
       - PORTFOLIO_UNSTAKE
       - MERGE_STAKE
+      - ONCHAIN_DEPOSIT
+      - ONCHAIN_REWARD
+      - ONCHAIN_MESSAGE
     coinbase.public_rest_api.TransactionValidator:
       required:
       - transaction_id
@@ -15315,7 +17017,7 @@ components:
          - WALLET: The ID of a wallet
          - ADDRESS: A cryptocurrency address
          - OTHER: Another type of transfer location: Blockchain Network, Coinbase
-         - MULTIPLE_ADDRESSES: Multiple cryptocurrency addresses
+         - MULTIPLE_ADDRESSES: More than one cryptocurrency address. value and address are empty; the addresses are not listed. A single address uses ADDRESS.
          - COUNTERPARTY_ID: Counterparty ID
       type: string
       enum:
@@ -15662,12 +17364,14 @@ components:
          - SEN: DEPRECATED. A Silvergate Exchange Network deposit
          - SWIFT: A SWIFT deposit
          - SEPA: A SEPA deposit (Single Euro Payments Area)
+         - KINEXYS: A JPM Kinexys deposit
       enum:
       - CRYPTO
       - WIRE
       - SEN
       - SWIFT
       - SEPA
+      - KINEXYS
     coinbase.public_rest_api.WalletFiatDepositInstructions:
       type: object
       properties:
@@ -15717,8 +17421,7 @@ components:
             on retry will be silently ignored.
       description: |-
         WalletStakingMetadata contains optional metadata for wallet staking requests.
-        external_id tags the discrete TWS transaction stake/unstake create; automatic reward crediting (e.g. SOL inflation) does not produce one.
-        StakingClaimRewardsRequest intentionally omits this field; add metadata to claim rewards only if a supported network's claim flow creates a discrete TWS transaction clients need to tag.
+        Optional metadata to attach to this staking or delegation request. Automatic reward crediting (such as SOL inflation) does not produce a taggable transaction and therefore does not support metadata; see the field descriptions below for details.
     coinbase.public_rest_api.WalletType:
       title: Indicates the wallet type
       type: string
@@ -15734,6 +17437,7 @@ components:
       - WALLET_TYPE_OTHER
       - QC
       - ONCHAIN
+      - INTERNATIONAL_DERIVATIVES
     coinbase.public_rest_api.WalletUnstakeInputs:
       type: object
       properties:
@@ -16168,6 +17872,17 @@ components:
         total_position_margin:
           type: string
           description: Total margin required
+    coinbase.public_rest_api.XMPositionType:
+      type: string
+      description: |-
+        Type of a position leg within a per-asset XM row. New values may be added as more legs are broken out.
+
+         - XM_POSITION_TYPE_UNSPECIFIED: The position type is unavailable, or is not recognized by this API version.
+         - XM_POSITION_TYPE_SPOT_TRADING: Spot balance held outside Prime Vault (trading balance, including Prime Loans).
+         - XM_POSITION_TYPE_SPOT_VAULT: Spot balance held in Prime Vault.
+      enum:
+      - XM_POSITION_TYPE_SPOT_TRADING
+      - XM_POSITION_TYPE_SPOT_VAULT
     coinbase.public_rest_api.XMRiskNettingInfo:
       type: object
       properties:
@@ -16312,6 +18027,237 @@ components:
         * [google.type.TimeOfDay][google.type.TimeOfDay]
         * [google.type.DateTime][google.type.DateTime]
         * [google.protobuf.Timestamp][google.protobuf.Timestamp]
+    coinbase.public_rest_api.beta.CreateWebhookSubscriptionResponse:
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscription'
+        hmac_secret:
+          type: string
+          description: |-
+            hmac_secret is the plaintext HMAC signing secret. Returned exactly once
+            on creation; store it securely — it is never surfaced again.
+      description: CreateWebhookSubscriptionResponse returns the created subscription
+        and its one-time HMAC secret.
+    coinbase.public_rest_api.beta.WebhookAuthType:
+      type: string
+      description: |-
+        WebhookAuthType is how Prime authenticates to your endpoint, on top of the
+        signatures. Every delivery is signed twice, whatever the auth type: with
+        HMAC-SHA256 in X-Coinbase-Signature, keyed by the subscription's
+        hmac_secret, and with Ed25519 in X-Coinbase-Signature-Ed25519, verifiable
+        with the public key named by X-Coinbase-Signature-Key-Id at
+        /.well-known/jwks.json. Verify either one.
+
+         - WEBHOOK_AUTH_TYPE_SIGNATURE_ONLY: Signatures only. Used when a subscription is created without auth_type.
+         - WEBHOOK_AUTH_TYPE_OAUTH: Signatures plus an OAuth 2.0 bearer token, fetched with oauth_config, in
+        the Authorization header.
+         - WEBHOOK_AUTH_TYPE_MTLS: Signatures plus a Coinbase client certificate (mutual TLS).
+         - WEBHOOK_AUTH_TYPE_OAUTH_MTLS: Signatures plus both an OAuth 2.0 bearer token and a client certificate.
+      enum:
+      - WEBHOOK_AUTH_TYPE_SIGNATURE_ONLY
+      - WEBHOOK_AUTH_TYPE_OAUTH
+      - WEBHOOK_AUTH_TYPE_MTLS
+      - WEBHOOK_AUTH_TYPE_OAUTH_MTLS
+    coinbase.public_rest_api.beta.WebhookOAuthConfigInput:
+      type: object
+      properties:
+        token_url:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+      description: WebhookOAuthConfigInput supplies OAuth credentials and scopes for
+        a subscription.
+    coinbase.public_rest_api.beta.ListWebhookSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscription'
+        next_cursor:
+          type: string
+        has_next:
+          type: boolean
+      description: ListWebhookSubscriptionsResponse returns a page of subscriptions
+        and pagination metadata.
+    coinbase.public_rest_api.beta.GetWebhookSubscriptionResponse:
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscription'
+      description: GetWebhookSubscriptionResponse returns the requested subscription
+        without authentication secrets.
+    coinbase.public_rest_api.beta.UpdateWebhookSubscriptionResponse:
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscription'
+      description: UpdateWebhookSubscriptionResponse returns the updated subscription
+        without authentication secrets.
+    coinbase.public_rest_api.beta.DeleteWebhookSubscriptionResponse:
+      type: object
+      description: DeleteWebhookSubscriptionResponse confirms that the subscription
+        was soft-deleted.
+    coinbase.public_rest_api.beta.RotateWebhookHMACSecretResponse:
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscription'
+        hmac_secret:
+          type: string
+          description: |-
+            hmac_secret is the new plaintext HMAC signing secret. Returned exactly once;
+            store it securely — it is never surfaced again.
+        previous_secret_expires_at:
+          type: string
+          description: |-
+            previous_secret_expires_at is when the prior secret stops being accepted.
+            Unset when revoke_previous_immediately was true.
+          format: date-time
+      description: |-
+        RotateWebhookHMACSecretResponse is the response message for rotating a webhook
+        HMAC signing secret.
+    coinbase.public_rest_api.beta.SendWebhookSimulationResponse:
+      type: object
+      properties:
+        event_id:
+          type: string
+      description: SendWebhookSimulationResponse identifies the synthetic event created
+        for the test delivery.
+    coinbase.public_rest_api.beta.GetWebhookEventTypesResponse:
+      type: object
+      properties:
+        event_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookEventType'
+      description: GetWebhookEventTypesResponse lists the webhook event types available
+        for subscriptions.
+    coinbase.public_rest_api.beta.GetWebhookDeliveryLogsResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookDeliveryLogEntry'
+        next_cursor:
+          type: string
+        has_next:
+          type: boolean
+      description: GetWebhookDeliveryLogsResponse returns a page of delivery logs
+        and pagination metadata.
+    coinbase.public_rest_api.beta.GetWebhookDeliveryAttemptsResponse:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event_type:
+          type: string
+        subscription_id:
+          type: string
+        delivery_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookDeliveryStatus'
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookDeliveryAttempt'
+        event_payload:
+          pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+          type: string
+          description: event_payload is the raw JSON bytes delivered to the subscriber.
+          format: byte
+      description: "GetWebhookDeliveryAttemptsResponse returns an event's payload,\
+        \ delivery state, and attempts for a subscription."
+    coinbase.public_rest_api.beta.GetWebhookSubscriptionStatsResponse:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+        health_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookHealthStatus'
+        total_events:
+          type: string
+          format: int64
+        successful:
+          type: string
+          format: int64
+        failed:
+          type: string
+          format: int64
+        success_rate:
+          type: number
+          format: double
+        avg_latency_ms:
+          type: string
+          format: int64
+        p95_latency_ms:
+          type: string
+          format: int64
+        p99_latency_ms:
+          type: string
+          format: int64
+        event_type_breakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookEventTypeStats'
+        recent_failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookRecentFailure'
+        in_progress:
+          type: string
+          format: int64
+      description: "GetWebhookSubscriptionStatsResponse returns subscription health,\
+        \ delivery statistics, and recent failures."
+    coinbase.public_rest_api.beta.GetWebhookOwnerStatsResponse:
+      type: object
+      properties:
+        total_subscriptions:
+          type: string
+          format: int64
+        active_subscriptions:
+          type: string
+          format: int64
+        total_events:
+          type: string
+          format: int64
+        overall_success_rate:
+          type: number
+          format: double
+        avg_latency_ms:
+          type: string
+          format: int64
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookSubscriptionSummary'
+        recent_failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookRecentFailure'
+      description: GetWebhookOwnerStatsResponse summarizes delivery statistics across
+        a portfolio's subscriptions.
+    coinbase.public_rest_api.beta.ReplayWebhookEventResponse:
+      type: object
+      properties:
+        deliveries_queued:
+          type: integer
+          format: int32
+        delivery_ids:
+          type: array
+          items:
+            type: string
+        delivery_ids_truncated:
+          type: boolean
+      description: ReplayWebhookEventResponse reports the number and identifiers of
+        queued replay deliveries.
     coinbase.public_rest_api.beta.GetRewardsRateResponse:
       type: object
       properties:
@@ -16327,6 +18273,203 @@ components:
             $ref: '#/components/schemas/coinbase.public_rest_api.beta.RewardsRateTier'
       description: GetRewardsRateResponse returns the current rewards rate and the
         available rates.
+    coinbase.public_rest_api.beta.WebhookSubscription:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+        event_types:
+          type: array
+          items:
+            type: string
+        target_url:
+          type: string
+        auth_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookAuthType'
+        oauth_config:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookOAuthConfig'
+        custom_headers:
+          type: object
+          additionalProperties:
+            type: string
+        is_enabled:
+          type: boolean
+        description:
+          type: string
+        created_by:
+          type: string
+        updated_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        health_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookHealthStatus'
+        version:
+          type: string
+          format: int64
+      description: |-
+        WebhookSubscription is the customer-facing representation of a webhook
+        subscription. auth secrets (hmac_secret, oauth client_secret) are never
+        included; hmac_secret is returned exactly once in CreateWebhookSubscriptionResponse.
+    coinbase.public_rest_api.beta.WebhookEventType:
+      type: object
+      properties:
+        name:
+          type: string
+        domain_object:
+          type: string
+        description:
+          type: string
+      description: WebhookEventType describes a registered webhook event customers
+        can subscribe to.
+    coinbase.public_rest_api.beta.WebhookDeliveryLogEntry:
+      type: object
+      properties:
+        delivery_id:
+          type: string
+        event_id:
+          type: string
+        event_type:
+          type: string
+        delivery_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookDeliveryStatus'
+        status_code:
+          type: integer
+          format: int32
+        latency_ms:
+          type: integer
+          format: int32
+        attempt_number:
+          type: integer
+          format: int32
+        max_retries:
+          type: integer
+          format: int32
+        error_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookErrorType'
+        error_message:
+          type: string
+        is_test:
+          type: boolean
+        is_replay:
+          type: boolean
+        occurred_at:
+          type: string
+          format: date-time
+        attempted_at:
+          type: string
+          format: date-time
+      description: WebhookDeliveryLogEntry summarizes a webhook event delivery and
+        its latest attempt.
+    coinbase.public_rest_api.beta.WebhookDeliveryStatus:
+      type: string
+      description: WebhookDeliveryStatus describes the delivery state of a webhook
+        event.
+      enum:
+      - WEBHOOK_DELIVERY_STATUS_DELIVERED
+      - WEBHOOK_DELIVERY_STATUS_RETRYING
+      - WEBHOOK_DELIVERY_STATUS_FAILED
+      - WEBHOOK_DELIVERY_STATUS_PENDING
+    coinbase.public_rest_api.beta.WebhookDeliveryAttempt:
+      type: object
+      properties:
+        delivery_attempt_id:
+          type: string
+        delivery_id:
+          type: string
+        attempt_number:
+          type: integer
+          format: int32
+        status_code:
+          type: integer
+          format: int32
+        latency_ms:
+          type: integer
+          format: int32
+        error_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookErrorType'
+        error_message:
+          type: string
+        attempted_at:
+          type: string
+          format: date-time
+      description: WebhookDeliveryAttempt records the outcome and timing of an individual
+        delivery attempt.
+    coinbase.public_rest_api.beta.WebhookHealthStatus:
+      type: string
+      description: WebhookHealthStatus describes the current delivery health of a
+        subscription.
+      enum:
+      - WEBHOOK_HEALTH_STATUS_HEALTHY
+      - WEBHOOK_HEALTH_STATUS_DEGRADED
+      - WEBHOOK_HEALTH_STATUS_FAILING
+      - WEBHOOK_HEALTH_STATUS_DISABLED
+    coinbase.public_rest_api.beta.WebhookEventTypeStats:
+      type: object
+      properties:
+        event_type:
+          type: string
+        total:
+          type: string
+          format: int64
+        successful:
+          type: string
+          format: int64
+        success_rate:
+          type: number
+          format: double
+        avg_latency_ms:
+          type: string
+          format: int64
+        failed:
+          type: string
+          format: int64
+        in_progress:
+          type: string
+          format: int64
+      description: WebhookEventTypeStats contains aggregated delivery statistics for
+        one event type.
+    coinbase.public_rest_api.beta.WebhookRecentFailure:
+      type: object
+      properties:
+        delivery_id:
+          type: string
+        subscription_id:
+          type: string
+        event_id:
+          type: string
+        event_type:
+          type: string
+        error_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookErrorType'
+        attempt_number:
+          type: integer
+          format: int32
+        attempted_at:
+          type: string
+          format: date-time
+      description: WebhookRecentFailure identifies a recent failed delivery attempt.
+    coinbase.public_rest_api.beta.WebhookSubscriptionSummary:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+        description:
+          type: string
+        health_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.beta.WebhookHealthStatus'
+        events_in_period:
+          type: string
+          format: int64
+        success_rate:
+          type: number
+          format: double
+      description: WebhookSubscriptionSummary summarizes a subscription's health and
+        delivery statistics.
     coinbase.public_rest_api.beta.RewardsRateTier:
       type: object
       properties:
@@ -16346,6 +18489,31 @@ components:
         criteria_type:
           $ref: '#/components/schemas/coinbase.public_rest_api.beta.RewardsRateTierType'
       description: RewardsRateTier is a single tier in the rewards rate card.
+    coinbase.public_rest_api.beta.WebhookOAuthConfig:
+      type: object
+      properties:
+        token_url:
+          type: string
+        client_id:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+      description: WebhookOAuthConfig describes a subscription's OAuth configuration
+        without its client secret.
+    coinbase.public_rest_api.beta.WebhookErrorType:
+      type: string
+      description: WebhookErrorType classifies the outcome of a webhook delivery attempt.
+      enum:
+      - WEBHOOK_ERROR_TYPE_SUCCESS
+      - WEBHOOK_ERROR_TYPE_HTTP_4XX
+      - WEBHOOK_ERROR_TYPE_HTTP_5XX
+      - WEBHOOK_ERROR_TYPE_TIMEOUT
+      - WEBHOOK_ERROR_TYPE_CONNECTION_ERROR
+      - WEBHOOK_ERROR_TYPE_HTTP_3XX
+      - WEBHOOK_ERROR_TYPE_INVALID_EVENT
+      - WEBHOOK_ERROR_TYPE_CANCELED
     coinbase.public_rest_api.beta.RewardsRateTierType:
       type: string
       description: RewardsRateTierType describes what a rewards rate tier is scoped
@@ -16631,6 +18799,7 @@ components:
       - ADVANCED_TRANSFER_COUNTERPARTY_INVALID
       - ADVANCED_TRANSFER_AMOUNT_INVALID
       - ADVANCED_TRANSFER_COUNTERPARTY_REQUIRED
+      - ADVANCED_TRANSFER_IDEMPOTENCY_KEY_INVALID
     coinbase.public_rest_api.CreateAdvancedTransferForbiddenErrorResponse:
       type: object
       properties:
@@ -16945,6 +19114,8 @@ components:
     coinbase.public_rest_api.CreateOnchainAddressGroupBadRequestSubcode:
       type: string
       enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
       - ONCHAIN_ADDRESS_GROUP_REQUEST_INVALID
     coinbase.public_rest_api.CreateOnchainAddressGroupForbiddenErrorResponse:
       type: object
@@ -17092,6 +19263,7 @@ components:
       - ORDER_TIME_IN_FORCE_INVALID
       - ORDER_TIME_RANGE_INVALID
       - ORDER_PEG_OFFSET_TYPE_INVALID
+      - ORDER_SPREAD_NOT_ENABLED
     coinbase.public_rest_api.CreateOrderForbiddenErrorResponse:
       type: object
       properties:
@@ -17536,6 +19708,49 @@ components:
       - AUTH_RESOURCE_NOT_FOUND
       - ASSET_NOT_FOUND
       - WALLET_NOT_FOUND
+    coinbase.public_rest_api.CreateWebhookSubscriptionBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionBadRequestSubcode'
+        trace_id:
+          type: string
+      description: CreateWebhookSubscriptionBadRequestErrorResponse documents the
+        HTTP 400 error body.
+    coinbase.public_rest_api.CreateWebhookSubscriptionBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_TARGET_URL_INVALID
+      - WEBHOOK_EVENT_TYPE_INVALID
+      - WEBHOOK_IDEMPOTENCY_CONFLICT
+      - WEBHOOK_INVALID_ARGUMENT
+    coinbase.public_rest_api.CreateWebhookSubscriptionForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionForbiddenSubcode'
+        trace_id:
+          type: string
+      description: CreateWebhookSubscriptionForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.CreateWebhookSubscriptionForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
     coinbase.public_rest_api.DeleteOnchainAddressGroupBadRequestErrorResponse:
       type: object
       properties:
@@ -17552,6 +19767,8 @@ components:
     coinbase.public_rest_api.DeleteOnchainAddressGroupBadRequestSubcode:
       type: string
       enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
       - ONCHAIN_ADDRESS_GROUP_REQUEST_INVALID
     coinbase.public_rest_api.DeleteOnchainAddressGroupForbiddenErrorResponse:
       type: object
@@ -17590,6 +19807,64 @@ components:
       type: string
       enum:
       - AUTH_RESOURCE_NOT_FOUND
+    coinbase.public_rest_api.DeleteWebhookSubscriptionBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionBadRequestSubcode'
+        trace_id:
+          type: string
+      description: DeleteWebhookSubscriptionBadRequestErrorResponse documents the
+        HTTP 400 error body.
+    coinbase.public_rest_api.DeleteWebhookSubscriptionBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+    coinbase.public_rest_api.DeleteWebhookSubscriptionForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionForbiddenSubcode'
+        trace_id:
+          type: string
+      description: DeleteWebhookSubscriptionForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.DeleteWebhookSubscriptionForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.DeleteWebhookSubscriptionNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionNotFoundSubcode'
+        trace_id:
+          type: string
+      description: DeleteWebhookSubscriptionNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.DeleteWebhookSubscriptionNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
     coinbase.public_rest_api.EditOrderBadRequestErrorResponse:
       type: object
       properties:
@@ -21132,6 +23407,7 @@ components:
       - PORTFOLIO_ID_REQUIRED
       - PORTFOLIO_ID_INVALID
       - TRANSACTION_CURSOR_INVALID
+      - TRANSACTION_FILTER_INVALID
       - TRANSACTION_PARAMS_INVALID
       - WALLET_ID_REQUIRED
       - WALLET_ID_INVALID
@@ -21229,6 +23505,298 @@ components:
       enum:
       - ASSET_NOT_FOUND
       - WALLET_NOT_FOUND
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryAttemptsBadRequestErrorResponse documents the
+        HTTP 400 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryAttemptsForbiddenErrorResponse documents the
+        HTTP 403 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsNotFoundSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryAttemptsNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryAttemptsNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
+      - WEBHOOK_EVENT_NOT_FOUND
+    coinbase.public_rest_api.GetWebhookDeliveryLogsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryLogsBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryLogsBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+    coinbase.public_rest_api.GetWebhookDeliveryLogsForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryLogsForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryLogsForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.GetWebhookDeliveryLogsNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsNotFoundSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookDeliveryLogsNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.GetWebhookDeliveryLogsNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
+    coinbase.public_rest_api.GetWebhookEventTypesForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookEventTypesForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookEventTypesForbiddenErrorResponse documents the HTTP 403
+        error body.
+    coinbase.public_rest_api.GetWebhookEventTypesForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+    coinbase.public_rest_api.GetWebhookOwnerStatsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookOwnerStatsBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.GetWebhookOwnerStatsBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+    coinbase.public_rest_api.GetWebhookOwnerStatsForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookOwnerStatsForbiddenErrorResponse documents the HTTP 403
+        error body.
+    coinbase.public_rest_api.GetWebhookOwnerStatsForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.GetWebhookSubscriptionBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionBadRequestSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+    coinbase.public_rest_api.GetWebhookSubscriptionForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.GetWebhookSubscriptionNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionNotFoundSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionStatsBadRequestErrorResponse documents the
+        HTTP 400 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsForbiddenSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionStatsForbiddenErrorResponse documents the
+        HTTP 403 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsNotFoundSubcode'
+        trace_id:
+          type: string
+      description: GetWebhookSubscriptionStatsNotFoundErrorResponse documents the
+        HTTP 404 error body.
+    coinbase.public_rest_api.GetWebhookSubscriptionStatsNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
     coinbase.public_rest_api.GetWithdrawalPowerBadRequestErrorResponse:
       type: object
       properties:
@@ -21365,6 +23933,23 @@ components:
       type: string
       enum:
       - AUTH_AUTHORIZATION_FAILED
+    coinbase.public_rest_api.ListAdvancedTransferTransactionsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ListAdvancedTransferTransactionsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: ListAdvancedTransferTransactionsBadRequestErrorResponse documents
+        the HTTP 400 error body.
+    coinbase.public_rest_api.ListAdvancedTransferTransactionsBadRequestSubcode:
+      type: string
+      enum:
+      - ADVANCED_TRANSFER_REQUEST_INVALID
     coinbase.public_rest_api.ListAdvancedTransferTransactionsForbiddenErrorResponse:
       type: object
       properties:
@@ -21650,6 +24235,7 @@ components:
       type: string
       enum:
       - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
     coinbase.public_rest_api.ListOnchainAddressGroupsForbiddenErrorResponse:
       type: object
       properties:
@@ -21923,6 +24509,45 @@ components:
       enum:
       - AUTH_RESOURCE_NOT_FOUND
       - WALLET_NOT_FOUND
+    coinbase.public_rest_api.ListWebhookSubscriptionsBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsBadRequestSubcode'
+        trace_id:
+          type: string
+      description: ListWebhookSubscriptionsBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.ListWebhookSubscriptionsBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+    coinbase.public_rest_api.ListWebhookSubscriptionsForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsForbiddenSubcode'
+        trace_id:
+          type: string
+      description: ListWebhookSubscriptionsForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.ListWebhookSubscriptionsForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
     coinbase.public_rest_api.ListXMLiquidationsBadRequestErrorResponse:
       type: object
       properties:
@@ -22046,6 +24671,7 @@ components:
       - ORDER_TIME_IN_FORCE_INVALID
       - ORDER_TIME_RANGE_INVALID
       - ORDER_PEG_OFFSET_TYPE_INVALID
+      - ORDER_SPREAD_NOT_ENABLED
     coinbase.public_rest_api.OrderPreviewForbiddenErrorResponse:
       type: object
       properties:
@@ -22267,6 +24893,66 @@ components:
       - MTLS_CERTIFICATE_REQUIRED
       - MTLS_CERTIFICATE_REVOKED
       - MTLS_CERTIFICATE_INVALID
+    coinbase.public_rest_api.ReplayWebhookEventBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventBadRequestSubcode'
+        trace_id:
+          type: string
+      description: ReplayWebhookEventBadRequestErrorResponse documents the HTTP 400
+        error body.
+    coinbase.public_rest_api.ReplayWebhookEventBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+      - WEBHOOK_IDEMPOTENCY_CONFLICT
+      - WEBHOOK_INVALID_ARGUMENT
+    coinbase.public_rest_api.ReplayWebhookEventForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventForbiddenSubcode'
+        trace_id:
+          type: string
+      description: ReplayWebhookEventForbiddenErrorResponse documents the HTTP 403
+        error body.
+    coinbase.public_rest_api.ReplayWebhookEventForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.ReplayWebhookEventNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventNotFoundSubcode'
+        trace_id:
+          type: string
+      description: ReplayWebhookEventNotFoundErrorResponse documents the HTTP 404
+        error body.
+    coinbase.public_rest_api.ReplayWebhookEventNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
+      - WEBHOOK_EVENT_NOT_FOUND
     coinbase.public_rest_api.RotateAPIKeyBadRequestErrorResponse:
       type: object
       properties:
@@ -22305,6 +24991,66 @@ components:
       - MTLS_CERTIFICATE_REQUIRED
       - MTLS_CERTIFICATE_REVOKED
       - MTLS_CERTIFICATE_INVALID
+    coinbase.public_rest_api.RotateWebhookHMACSecretBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretBadRequestSubcode'
+        trace_id:
+          type: string
+      description: RotateWebhookHMACSecretBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.RotateWebhookHMACSecretBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+      - WEBHOOK_VERSION_CONFLICT
+      - WEBHOOK_INVALID_ARGUMENT
+    coinbase.public_rest_api.RotateWebhookHMACSecretForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretForbiddenSubcode'
+        trace_id:
+          type: string
+      description: RotateWebhookHMACSecretForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.RotateWebhookHMACSecretForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.RotateWebhookHMACSecretNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretNotFoundSubcode'
+        trace_id:
+          type: string
+      description: RotateWebhookHMACSecretNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.RotateWebhookHMACSecretNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
     coinbase.public_rest_api.ScheduleFuturesSweepBadRequestErrorResponse:
       type: object
       properties:
@@ -22361,6 +25107,65 @@ components:
       type: string
       enum:
       - AUTH_RESOURCE_NOT_FOUND
+    coinbase.public_rest_api.SendWebhookSimulationBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationBadRequestSubcode'
+        trace_id:
+          type: string
+      description: SendWebhookSimulationBadRequestErrorResponse documents the HTTP
+        400 error body.
+    coinbase.public_rest_api.SendWebhookSimulationBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+      - WEBHOOK_EVENT_TYPE_INVALID
+    coinbase.public_rest_api.SendWebhookSimulationForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationForbiddenSubcode'
+        trace_id:
+          type: string
+      description: SendWebhookSimulationForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.SendWebhookSimulationForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.SendWebhookSimulationNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationNotFoundSubcode'
+        trace_id:
+          type: string
+      description: SendWebhookSimulationNotFoundErrorResponse documents the HTTP 404
+        error body.
+    coinbase.public_rest_api.SendWebhookSimulationNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
     coinbase.public_rest_api.ServiceUnavailableErrorCode:
       type: string
       enum:
@@ -22918,6 +25723,8 @@ components:
     coinbase.public_rest_api.UpdateOnchainAddressGroupBadRequestSubcode:
       type: string
       enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
       - ONCHAIN_ADDRESS_GROUP_REQUEST_INVALID
     coinbase.public_rest_api.UpdateOnchainAddressGroupForbiddenErrorResponse:
       type: object
@@ -22956,6 +25763,68 @@ components:
       type: string
       enum:
       - AUTH_RESOURCE_NOT_FOUND
+    coinbase.public_rest_api.UpdateWebhookSubscriptionBadRequestErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.BadRequestErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionBadRequestSubcode'
+        trace_id:
+          type: string
+      description: UpdateWebhookSubscriptionBadRequestErrorResponse documents the
+        HTTP 400 error body.
+    coinbase.public_rest_api.UpdateWebhookSubscriptionBadRequestSubcode:
+      type: string
+      enum:
+      - PORTFOLIO_ID_REQUIRED
+      - PORTFOLIO_ID_INVALID
+      - WEBHOOK_SUBSCRIPTION_ID_REQUIRED
+      - WEBHOOK_SUBSCRIPTION_ID_INVALID
+      - WEBHOOK_TARGET_URL_INVALID
+      - WEBHOOK_EVENT_TYPE_INVALID
+      - WEBHOOK_VERSION_CONFLICT
+      - WEBHOOK_INVALID_ARGUMENT
+    coinbase.public_rest_api.UpdateWebhookSubscriptionForbiddenErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ForbiddenErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionForbiddenSubcode'
+        trace_id:
+          type: string
+      description: UpdateWebhookSubscriptionForbiddenErrorResponse documents the HTTP
+        403 error body.
+    coinbase.public_rest_api.UpdateWebhookSubscriptionForbiddenSubcode:
+      type: string
+      enum:
+      - AUTH_RESOURCE_ACCESS_DENIED
+      - MTLS_CERTIFICATE_REQUIRED
+      - MTLS_CERTIFICATE_REVOKED
+      - MTLS_CERTIFICATE_INVALID
+      - WEBHOOK_FEATURE_DISABLED
+    coinbase.public_rest_api.UpdateWebhookSubscriptionNotFoundErrorResponse:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/coinbase.public_rest_api.NotFoundErrorCode'
+        message:
+          type: string
+        subcode:
+          $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionNotFoundSubcode'
+        trace_id:
+          type: string
+      description: UpdateWebhookSubscriptionNotFoundErrorResponse documents the HTTP
+        404 error body.
+    coinbase.public_rest_api.UpdateWebhookSubscriptionNotFoundSubcode:
+      type: string
+      enum:
+      - WEBHOOK_SUBSCRIPTION_NOT_FOUND
     public_rest_apiCreateAllocationRequest:
       type: object
       properties:
@@ -23918,6 +26787,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/coinbase.public_rest_api.CancelAdvancedTransferNotFoundErrorResponse'
+    ListAdvancedTransferTransactionsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ListAdvancedTransferTransactionsBadRequestErrorResponse'
     ListAdvancedTransferTransactionsForbidden:
       description: Permission denied. The API key lacks the required scope for this
         resource.
@@ -25047,6 +27922,223 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/coinbase.public_rest_api.GetCrossMarginPrimeOverviewNotFoundErrorResponse'
+    ListWebhookSubscriptionsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsBadRequestErrorResponse'
+    ListWebhookSubscriptionsForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ListWebhookSubscriptionsForbiddenErrorResponse'
+    CreateWebhookSubscriptionBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionBadRequestErrorResponse'
+    CreateWebhookSubscriptionForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.CreateWebhookSubscriptionForbiddenErrorResponse'
+    GetWebhookSubscriptionBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionBadRequestErrorResponse'
+    GetWebhookSubscriptionForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionForbiddenErrorResponse'
+    GetWebhookSubscriptionNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionNotFoundErrorResponse'
+    DeleteWebhookSubscriptionBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionBadRequestErrorResponse'
+    DeleteWebhookSubscriptionForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionForbiddenErrorResponse'
+    DeleteWebhookSubscriptionNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.DeleteWebhookSubscriptionNotFoundErrorResponse'
+    UpdateWebhookSubscriptionBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionBadRequestErrorResponse'
+    UpdateWebhookSubscriptionForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionForbiddenErrorResponse'
+    UpdateWebhookSubscriptionNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.UpdateWebhookSubscriptionNotFoundErrorResponse'
+    RotateWebhookHMACSecretBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretBadRequestErrorResponse'
+    RotateWebhookHMACSecretForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretForbiddenErrorResponse'
+    RotateWebhookHMACSecretNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.RotateWebhookHMACSecretNotFoundErrorResponse'
+    SendWebhookSimulationBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationBadRequestErrorResponse'
+    SendWebhookSimulationForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationForbiddenErrorResponse'
+    SendWebhookSimulationNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.SendWebhookSimulationNotFoundErrorResponse'
+    GetWebhookEventTypesForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookEventTypesForbiddenErrorResponse'
+    GetWebhookDeliveryLogsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsBadRequestErrorResponse'
+    GetWebhookDeliveryLogsForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsForbiddenErrorResponse'
+    GetWebhookDeliveryLogsNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryLogsNotFoundErrorResponse'
+    GetWebhookDeliveryAttemptsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsBadRequestErrorResponse'
+    GetWebhookDeliveryAttemptsForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsForbiddenErrorResponse'
+    GetWebhookDeliveryAttemptsNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookDeliveryAttemptsNotFoundErrorResponse'
+    GetWebhookSubscriptionStatsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsBadRequestErrorResponse'
+    GetWebhookSubscriptionStatsForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsForbiddenErrorResponse'
+    GetWebhookSubscriptionStatsNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookSubscriptionStatsNotFoundErrorResponse'
+    GetWebhookOwnerStatsBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsBadRequestErrorResponse'
+    GetWebhookOwnerStatsForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.GetWebhookOwnerStatsForbiddenErrorResponse'
+    ReplayWebhookEventBadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventBadRequestErrorResponse'
+    ReplayWebhookEventForbidden:
+      description: Permission denied. The API key lacks the required scope for this
+        resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventForbiddenErrorResponse'
+    ReplayWebhookEventNotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/coinbase.public_rest_api.ReplayWebhookEventNotFoundErrorResponse'
     GetEntityRewardsRateBadRequest:
       description: Bad request.
       content:

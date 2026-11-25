@@ -16,134 +16,61 @@
 
 package com.coinbase.prime.staking;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.SortDirection;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Transaction Validators */
-public class ListTransactionValidatorsRequest {
-  /** The portfolio ID */
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  /**
-   * List of transaction IDs to filter validators by. Maximum of 100 transaction IDs allowed per
-   * request.
-   */
-  @JsonProperty("transaction_ids")
-  private String[] transactionIds;
-
-  /** Cursor for pagination */
-  @JsonProperty("cursor")
-  private String cursor;
-
-  /**
-   * Maximum number of transaction-validator associations to return per page. Default is 100,
-   * maximum is 1000.
-   */
-  @JsonProperty("limit")
-  private Integer limit;
-
-  @JsonProperty("sort_direction")
-  private SortDirection sortDirection;
-
+/**
+ * List Transaction Validators
+ *
+ * @deprecated Use queryTransactionValidators instead.
+ */
+@Deprecated
+public class ListTransactionValidatorsRequest extends QueryTransactionValidatorsRequest {
   public ListTransactionValidatorsRequest() {}
 
-  public ListTransactionValidatorsRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.transactionIds = builder.transactionIds;
-    this.cursor = builder.cursor;
-    this.limit = builder.limit;
-    this.sortDirection = builder.sortDirection;
+  public ListTransactionValidatorsRequest(QueryTransactionValidatorsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String[] getTransactionIds() {
-    return transactionIds;
-  }
-
-  public void setTransactionIds(String[] transactionIds) {
-    this.transactionIds = transactionIds;
-  }
-
-  public String getCursor() {
-    return cursor;
-  }
-
-  public void setCursor(String cursor) {
-    this.cursor = cursor;
-  }
-
-  public Integer getLimit() {
-    return limit;
-  }
-
-  public void setLimit(Integer limit) {
-    this.limit = limit;
-  }
-
-  public SortDirection getSortDirection() {
-    return sortDirection;
-  }
-
-  public void setSortDirection(SortDirection sortDirection) {
-    this.sortDirection = sortDirection;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String[] transactionIds;
-    private String cursor;
-    private Integer limit;
-    private SortDirection sortDirection;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use queryTransactionValidators instead.
+   */
+  @Deprecated
+  public static class Builder extends QueryTransactionValidatorsRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder transactionIds(String[] transactionIds) {
-      this.transactionIds = transactionIds;
+      super.transactionIds(transactionIds);
       return this;
     }
 
+    @Override
     public Builder cursor(String cursor) {
-      this.cursor = cursor;
+      super.cursor(cursor);
       return this;
     }
 
+    @Override
     public Builder limit(Integer limit) {
-      this.limit = limit;
+      super.limit(limit);
       return this;
     }
 
+    @Override
     public Builder sortDirection(SortDirection sortDirection) {
-      this.sortDirection = sortDirection;
+      super.sortDirection(sortDirection);
       return this;
     }
 
+    @Override
     public ListTransactionValidatorsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListTransactionValidatorsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

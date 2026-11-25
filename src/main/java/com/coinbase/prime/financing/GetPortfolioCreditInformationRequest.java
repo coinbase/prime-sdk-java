@@ -16,51 +16,36 @@
 
 package com.coinbase.prime.financing;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Portfolio Credit Information */
-public class GetPortfolioCreditInformationRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
+/**
+ * Get Portfolio Credit Information
+ *
+ * @deprecated Use getPortfolioCredit instead.
+ */
+@Deprecated
+public class GetPortfolioCreditInformationRequest extends GetPortfolioCreditRequest {
   public GetPortfolioCreditInformationRequest() {}
 
-  public GetPortfolioCreditInformationRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
+  public GetPortfolioCreditInformationRequest(GetPortfolioCreditRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getPortfolioCredit instead.
+   */
+  @Deprecated
+  public static class Builder extends GetPortfolioCreditRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public GetPortfolioCreditInformationRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetPortfolioCreditInformationRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

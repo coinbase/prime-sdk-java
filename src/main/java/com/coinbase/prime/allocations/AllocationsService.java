@@ -31,6 +31,22 @@ public interface AllocationsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreatePortfolioAllocationsResponse createPortfolioAllocations(
+      CreatePortfolioAllocationsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Create Portfolio Allocations.
+   *
+   * <p>Create allocation for a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createPortfolioAllocations instead.
+   */
+  @Deprecated
   CreateAllocationResponse createAllocation(CreateAllocationRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -44,6 +60,22 @@ public interface AllocationsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(
+      CreatePortfolioNetAllocationsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Create Portfolio Net Allocations.
+   *
+   * <p>Create net allocation for a given portfolio
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createPortfolioNetAllocations instead.
+   */
+  @Deprecated
   CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -70,6 +102,22 @@ public interface AllocationsService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetAllocationsByClientNettingIdResponse getAllocationsByClientNettingId(
+      GetAllocationsByClientNettingIdRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Net Allocations by Netting ID.
+   *
+   * <p>Retrieve an allocation by netting ID
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getAllocationsByClientNettingId instead.
+   */
+  @Deprecated
   ListAllocationsByNettingIdResponse listAllocationsByNettingId(
       ListAllocationsByNettingIdRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;

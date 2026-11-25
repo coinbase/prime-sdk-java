@@ -16,73 +16,42 @@
 
 package com.coinbase.prime.allocations;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Net Allocations by Netting ID */
-public class ListAllocationsByNettingIdRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty(required = true, value = "netting_id")
-  @JsonIgnore
-  private String nettingId;
-
+/**
+ * Get Net Allocations by Netting ID
+ *
+ * @deprecated Use getAllocationsByClientNettingId instead.
+ */
+@Deprecated
+public class ListAllocationsByNettingIdRequest extends GetAllocationsByClientNettingIdRequest {
   public ListAllocationsByNettingIdRequest() {}
 
-  public ListAllocationsByNettingIdRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.nettingId = builder.nettingId;
+  public ListAllocationsByNettingIdRequest(GetAllocationsByClientNettingIdRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getNettingId() {
-    return nettingId;
-  }
-
-  public void setNettingId(String nettingId) {
-    this.nettingId = nettingId;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String nettingId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getAllocationsByClientNettingId instead.
+   */
+  @Deprecated
+  public static class Builder extends GetAllocationsByClientNettingIdRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder nettingId(String nettingId) {
-      this.nettingId = nettingId;
+      super.nettingId(nettingId);
       return this;
     }
 
+    @Override
     public ListAllocationsByNettingIdRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListAllocationsByNettingIdRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.nettingId)) {
-        throw new CoinbaseClientException("NettingId is required");
-      }
     }
   }
 }

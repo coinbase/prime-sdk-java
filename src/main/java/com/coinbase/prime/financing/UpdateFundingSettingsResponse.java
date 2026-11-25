@@ -16,45 +16,12 @@
 
 package com.coinbase.prime.financing;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Update Funding Settings */
-public class UpdateFundingSettingsResponse {
-  /** Identifier for the created activity / proposal */
-  @JsonProperty("activity_id")
-  private String activityId;
-
-  /** Type of the activity (e.g. PCS proposal type) */
-  @JsonProperty("activity_type")
-  private String activityType;
-
-  /** Number of approvals still required before the change applies */
-  @JsonProperty("num_approvals_remaining")
-  private Integer numApprovalsRemaining;
-
+/**
+ * Update Funding Settings
+ *
+ * @deprecated Use setFundingSettings instead.
+ */
+@Deprecated
+public class UpdateFundingSettingsResponse extends SetFundingSettingsResponse {
   public UpdateFundingSettingsResponse() {}
-
-  public String getActivityId() {
-    return activityId;
-  }
-
-  public void setActivityId(String activityId) {
-    this.activityId = activityId;
-  }
-
-  public String getActivityType() {
-    return activityType;
-  }
-
-  public void setActivityType(String activityType) {
-    this.activityType = activityType;
-  }
-
-  public Integer getNumApprovalsRemaining() {
-    return numApprovalsRemaining;
-  }
-
-  public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
-    this.numApprovalsRemaining = numApprovalsRemaining;
-  }
 }

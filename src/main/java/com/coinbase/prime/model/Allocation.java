@@ -48,7 +48,11 @@ public class Allocation {
   @JsonProperty("product_id")
   private String productId;
 
-  /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+  /**
+   * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order - MULTIPLE: Response only:
+   * a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in
+   * requests
+   */
   private OrderSide side;
 
   /** Price the allocation was done at. */

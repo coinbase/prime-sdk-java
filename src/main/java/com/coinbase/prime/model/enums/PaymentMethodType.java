@@ -19,14 +19,24 @@
 package com.coinbase.prime.model.enums;
 
 /**
- * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: Silvergate
- * exchange network - METHOD_SWIFT: Swift
+ * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: DEPRECATED.
+ * Silvergate exchange network - METHOD_SWIFT: Swift - METHOD_SEPA: Single Euro Payments Area -
+ * METHOD_CBIT: Customers Bank Instant Token - METHOD_PIX: Brazilian instant payment system -
+ * METHOD_JPM_KINEXYS: JPMorgan Kinexys
  */
 public enum PaymentMethodType {
   /** Wire transfer */
   METHOD_WIRE,
-  /** Silvergate exchange network */
+  /** DEPRECATED. Silvergate exchange network */
   METHOD_SEN,
   /** Swift */
-  METHOD_SWIFT
+  METHOD_SWIFT,
+  /** Single Euro Payments Area */
+  METHOD_SEPA,
+  /** Customers Bank Instant Token */
+  METHOD_CBIT,
+  /** Brazilian instant payment system */
+  METHOD_PIX,
+  /** JPMorgan Kinexys */
+  METHOD_JPM_KINEXYS
 }

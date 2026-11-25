@@ -25,8 +25,9 @@ public class TransferLocation {
   /**
    * - TRANSFER_LOCATION_TYPE_UNKNOWN: The nil value - PAYMENT_METHOD: The ID of a fiat payment
    * method - WALLET: The ID of a wallet - ADDRESS: A cryptocurrency address - OTHER: Another type
-   * of transfer location: Blockchain Network, Coinbase - MULTIPLE_ADDRESSES: Multiple
-   * cryptocurrency addresses - COUNTERPARTY_ID: Counterparty ID
+   * of transfer location: Blockchain Network, Coinbase - MULTIPLE_ADDRESSES: More than one
+   * cryptocurrency address. value and address are empty; the addresses are not listed. A single
+   * address uses ADDRESS. - COUNTERPARTY_ID: Counterparty ID
    */
   private TransferLocationType type;
 

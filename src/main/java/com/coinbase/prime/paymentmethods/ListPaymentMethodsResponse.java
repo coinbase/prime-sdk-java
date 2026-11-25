@@ -16,21 +16,12 @@
 
 package com.coinbase.prime.paymentmethods;
 
-import com.coinbase.prime.model.PaymentMethodSummary;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** List Entity Payment Methods */
-public class ListPaymentMethodsResponse {
-  @JsonProperty("payment_methods")
-  private PaymentMethodSummary[] paymentMethods;
-
+/**
+ * List Entity Payment Methods
+ *
+ * @deprecated Use listEntityPaymentMethods instead.
+ */
+@Deprecated
+public class ListPaymentMethodsResponse extends ListEntityPaymentMethodsResponse {
   public ListPaymentMethodsResponse() {}
-
-  public PaymentMethodSummary[] getPaymentMethods() {
-    return paymentMethods;
-  }
-
-  public void setPaymentMethods(PaymentMethodSummary[] paymentMethods) {
-    this.paymentMethods = paymentMethods;
-  }
 }

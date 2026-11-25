@@ -31,6 +31,22 @@ public interface StakingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ClaimStakingRewardsResponse claimStakingRewards(ClaimStakingRewardsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Claim Wallet Staking Rewards (Alpha).
+   *
+   * <p>Request to claim staking rewards. This feature is in alpha. Please reach out to your
+   * Coinbase Prime account manager for more information
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use claimStakingRewards instead.
+   */
+  @Deprecated
   ClaimRewardsResponse claimRewards(ClaimRewardsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -72,6 +88,24 @@ public interface StakingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  QueryTransactionValidatorsResponse queryTransactionValidators(
+      QueryTransactionValidatorsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Transaction Validators.
+   *
+   * <p>List ETH 0x02 validators associated with wallet-level stake transactions for a given
+   * portfolio. It will not return data for unstake transactions, portfolio stake transactions,
+   * transactions which staked different currencies, or which staked to Ethereum 0x01 validators
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use queryTransactionValidators instead.
+   */
+  @Deprecated
   ListTransactionValidatorsResponse listTransactionValidators(
       ListTransactionValidatorsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
@@ -88,6 +122,23 @@ public interface StakingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreatePortfolioStakeResponse createPortfolioStake(CreatePortfolioStakeRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Request to stake currency in a portfolio.
+   *
+   * <p>Creates an execution request to stake funds across a portfolio. This will stake funds in one
+   * or more wallets in the portfolio, with a total bondable balance up to the requested stake
+   * amount
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createPortfolioStake instead.
+   */
+  @Deprecated
   PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -103,6 +154,23 @@ public interface StakingService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreatePortfolioUnstakeResponse createPortfolioUnstake(CreatePortfolioUnstakeRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Request to unstake currency across a portfolio.
+   *
+   * <p>Creates an execution request to unstake funds across a portfolio. This will unstake funds in
+   * one or more wallets in the portfolio, with a total bonded balance up to the requested unstake
+   * amount
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createPortfolioUnstake instead.
+   */
+  @Deprecated
   PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

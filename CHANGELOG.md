@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.12.0] - 2026-NOV-24
+
+### Added
+
+#### New API Endpoints
+
+**Webhooks Service**
+- **`listWebhookSubscriptions()`**: List webhook subscriptions for a portfolio (`GET /v1/portfolios/{portfolio_id}/webhooks/subscriptions`)
+- **`createWebhookSubscription()`**: Create a webhook subscription (`POST /v1/portfolios/{portfolio_id}/webhooks/subscriptions`)
+- **`getWebhookSubscription()`**: Get a webhook subscription (`GET /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}`)
+- **`updateWebhookSubscription()`**: Update a webhook subscription (`PATCH /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}`)
+- **`deleteWebhookSubscription()`**: Soft-delete a webhook subscription (`DELETE /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}`)
+- **`rotateWebhookHmacSecret()`**: Rotate a webhook subscription HMAC secret (`POST /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/rotate-hmac-secret`)
+- **`sendWebhookSimulation()`**: Send a simulated webhook event (`POST /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/simulate`)
+- **`getWebhookEventTypes()`**: List available webhook event types (`GET /v1/webhooks/event-types`)
+- **`getWebhookDeliveryLogs()`**: List webhook delivery logs (`GET /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/deliveries`)
+- **`getWebhookDeliveryAttempts()`**: List delivery attempts for a webhook event (`GET /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/deliveries/{event_id}/attempts`)
+- **`getWebhookSubscriptionStats()`**: Get delivery stats for a webhook subscription (`GET /v1/portfolios/{portfolio_id}/webhooks/subscriptions/{subscription_id}/stats`)
+- **`getWebhookOwnerStats()`**: Get aggregate webhook delivery stats (`GET /v1/portfolios/{portfolio_id}/webhooks/stats`)
+- **`replayWebhookEvent()`**: Replay a webhook event (`POST /v1/portfolios/{portfolio_id}/webhooks/events/{event_id}/replay`)
+
+#### Canonical Service Methods & Tooling
+- **Cross-SDK canonical naming**: Added 25 canonical service methods and request/response DTOs aligned with the Go, Python, and TypeScript SDKs (`listOrders`, `getOrder`, `getOrderEditHistory`, `createOrderPreview`, `listActivities`, `getAddressBook`, `createPortfolioAllocations`, `createPortfolioNetAllocations`, `getAllocationsByClientNettingId`, `getCounterpartyId`, `listEntityPaymentMethods`, `getEntityPaymentMethod`, `listProducts`, `getProductCandles`, `getEntityPositions`, `listPortfolioInterestAccruals`, `getPortfolioCredit`, `getTieredPricingFees`, `setFundingSettings`, `createStake`, `createUnstake`, `claimStakingRewards`, `createPortfolioStake`, `createPortfolioUnstake`, `queryTransactionValidators`, `createTransfer`, `createWithdrawal`)
+- **`CoinbasePrimeClient.withBaseUrl()`**: Added helper to reuse the underlying `HttpClient` across API versions
+- **`make update`**: Added Makefile target to fetch the latest OpenAPI spec and regenerate the SDK in one step
+
+#### New & Updated Models
+- **`WebhookSubscription`**, **`WebhookSubscriptionSummary`**, **`WebhookEventType`**, **`WebhookDeliveryLogEntry`**, **`WebhookDeliveryAttempt`**, **`WebhookEventTypeStats`**, **`WebhookRecentFailure`**, **`WebhookOAuthConfig`**, **`WebhookOAuthConfigInput`**: Webhook management and delivery models
+- **`SpreadConfig`**, **`SpreadDetails`**, **`SpreadLegDetails`**, **`SpreadPreview`**, **`Leg`**, **`LegPreview`**, **`OptionGreeks`**, **`CoinbaseFee`**: Spread order and options pricing models
+- **`CrossMarginPositionBreakdown`**, **`CrossMarginPrimeSpotMarginContribution`**, **`MarginCallThresholds`**, **`MarginThreshold`**: Cross-margin breakdown and threshold models
+- **`CreateQuoteRequest`** / **`CreateQuoteResponse`**: Added `quoteDurationMs`
+- **`EditOrderRequest`**: Added `offset` and `wigLevel`
+- **Updated existing models**: Synced fields across `AdvancedTransfer`, `Allocation`, `ComboLeg`, `DerivativePosition`, `FcmPosition`, `Fill`, `MarginSummary`, `OnchainTransactionDetails`, `Order`, `PaymentMethodDetails`, `PaymentMethodSummary`, `PortfolioStakingMetadata`, `Product`, `RewardMetadata`, `Transaction`, `TransferLocation`, `WalletCryptoDepositInstructions`, `WalletFiatDepositInstructions`, `WalletStakingMetadata`, and cross-margin summary models
+
+#### New & Updated Enums
+- **`WebhookAuthType`**, **`WebhookDeliveryStatus`**, **`WebhookErrorType`**, **`WebhookHealthStatus`**: Webhook enums
+- **`LimitPriceType`**, **`SpreadLimitType`**, **`MaxDeltaType`**: Spread and limit order enums
+- **`MarginControlStatus`**, **`MarginEntityCallStatus`**, **`MarginHealthStatus`**, **`MarginLevel`**, **`MarginThresholdMarginThresholdType`**, **`PrimeXMAssetClass`**, **`XMPositionType`**: Cross-margin enums
+- **Updated existing enums**: Synced values across `AdvancedTransferState`, `OrderSide`, `OrderType`, `PaymentMethodType`, `ProductType`, `RewardSubtype`, `SecondaryPermission`, `TransactionType`, `TransferLocationType`, `WalletDepositInstructionType`, and `WalletType`
+
+### Changed
+- Synced `apiSpec/prime-public-spec.yaml` to the latest OpenAPI spec and regenerated models, enums, DTOs, services, and `PrimeServiceFactory`
+- **Breaking**: Renamed `BetaRewardsRateTier` → **`RewardsRateTier`** and `BetaRewardsRateTierType` → **`RewardsRateTierType`** to align with TypeScript (update imports and `GetEntityRewardsRateResponse` / `GetPortfolioRewardsRateResponse` references)
+- Deprecated legacy method and DTO names as `@Deprecated` subclass/method aliases so existing callers continue compiling
+- Service implementations now accept HTTP `200` directly from the OpenAPI spec instead of synthetic `201` entries
+
+### Fixed
+- **`FinancingServiceImpl`**: `/v2` endpoints (`getEntityRewardsRate()`, `getPortfolioRewardsRate()`, `getCrossMarginPrimeOverview()`) now derive from `primeClient.getBaseUrl()` instead of hardcoding the production host
+
 ## [1.11.0] - 2026-SEP-01
 
 ### Added

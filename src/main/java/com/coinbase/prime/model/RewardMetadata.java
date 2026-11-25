@@ -31,7 +31,8 @@ public class RewardMetadata {
    * transaction (execution layer) rewards - STAKING_FEE_REBATE_REWARD: A staking fee rebate reward
    * i.e. coinbase pays rebates for staking fees to eligible delegators - BUIDL_DIVIDEND: A BUIDL
    * dividend reward i.e. dividends from BUIDL fund holdings - CUSTOM_STABLECOIN_REWARD: A custom
-   * stablecoin reward i.e. USDC reward payouts
+   * stablecoin reward i.e. USDC reward payouts - TRADING_FEE_REBATE_REWARD: A trading fee rebate
+   * reward i.e. USDC trading-fee rebates paid by Coinbase
    */
   private RewardSubtype subtype;
 

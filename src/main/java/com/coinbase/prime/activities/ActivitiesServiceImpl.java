@@ -29,6 +29,18 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
   }
 
   @Override
+  public ListActivitiesResponse listActivities(ListActivitiesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/activities", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListActivitiesResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public ListPortfolioActivitiesResponse listPortfolioActivities(
       ListPortfolioActivitiesRequest request) throws CoinbasePrimeException {
     return this.request(

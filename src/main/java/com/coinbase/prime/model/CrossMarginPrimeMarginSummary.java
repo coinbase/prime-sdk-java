@@ -131,6 +131,20 @@ public class CrossMarginPrimeMarginSummary {
   @JsonProperty("fcm_excess_available_to_return")
   private String fcmExcessAvailableToReturn;
 
+  /**
+   * Total account equity in USD after pending withdrawals, before collateral caps and
+   * cash-equivalent haircuts.
+   */
+  @JsonProperty("raw_account_equity")
+  private String rawAccountEquity;
+
+  /**
+   * Total account equity in USD after pending withdrawals and collateral caps, before
+   * cash-equivalent haircuts.
+   */
+  @JsonProperty("pre_haircut_account_equity")
+  private String preHaircutAccountEquity;
+
   public CrossMarginPrimeMarginSummary() {}
 
   public CrossMarginPrimeMarginSummary(Builder builder) {
@@ -156,6 +170,8 @@ public class CrossMarginPrimeMarginSummary {
     this.deficitRatio = builder.deficitRatio;
     this.marginThresholds = builder.marginThresholds;
     this.fcmExcessAvailableToReturn = builder.fcmExcessAvailableToReturn;
+    this.rawAccountEquity = builder.rawAccountEquity;
+    this.preHaircutAccountEquity = builder.preHaircutAccountEquity;
   }
 
   public String getMarginRequirement() {
@@ -335,6 +351,22 @@ public class CrossMarginPrimeMarginSummary {
     this.fcmExcessAvailableToReturn = fcmExcessAvailableToReturn;
   }
 
+  public String getRawAccountEquity() {
+    return rawAccountEquity;
+  }
+
+  public void setRawAccountEquity(String rawAccountEquity) {
+    this.rawAccountEquity = rawAccountEquity;
+  }
+
+  public String getPreHaircutAccountEquity() {
+    return preHaircutAccountEquity;
+  }
+
+  public void setPreHaircutAccountEquity(String preHaircutAccountEquity) {
+    this.preHaircutAccountEquity = preHaircutAccountEquity;
+  }
+
   public static class Builder {
     private String marginRequirement;
 
@@ -379,6 +411,10 @@ public class CrossMarginPrimeMarginSummary {
     private PrimeXMMarginCallThresholds marginThresholds;
 
     private String fcmExcessAvailableToReturn;
+
+    private String rawAccountEquity;
+
+    private String preHaircutAccountEquity;
 
     public Builder marginRequirement(String marginRequirement) {
       this.marginRequirement = marginRequirement;
@@ -488,6 +524,16 @@ public class CrossMarginPrimeMarginSummary {
 
     public Builder fcmExcessAvailableToReturn(String fcmExcessAvailableToReturn) {
       this.fcmExcessAvailableToReturn = fcmExcessAvailableToReturn;
+      return this;
+    }
+
+    public Builder rawAccountEquity(String rawAccountEquity) {
+      this.rawAccountEquity = rawAccountEquity;
+      return this;
+    }
+
+    public Builder preHaircutAccountEquity(String preHaircutAccountEquity) {
+      this.preHaircutAccountEquity = preHaircutAccountEquity;
       return this;
     }
 

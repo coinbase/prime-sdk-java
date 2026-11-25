@@ -107,9 +107,13 @@ class OperationBindingGeneratorTest {
             new NamingResolver(configuration.modelTypeMappings()),
             configuration.sharedModelMappings());
     int inlineEnumCount = 0;
+    List<OperationBinding> bindings = OperationBindingGenerator.deriveAll(document, configuration);
+    Map<String, OperationBinding> byOperation = new java.util.LinkedHashMap<>();
+    for (OperationBinding binding : bindings) byOperation.put(binding.operationId(), binding);
     for (SpecModels.Operation operation : document.operations()) {
+      OperationBinding binding = byOperation.get(operation.operationId());
       for (SpecModels.Parameter parameter : operation.parameters()) {
-        if (parameter.schema().containsKey("enum")) {
+        if (parameter.schema().containsKey("enum") && (binding == null || !binding.parameterTypeOverrides().containsKey(parameter.name()))) {
           assertFalse(types.resolve(parameter.schema()).name().equals("String"));
           inlineEnumCount++;
         }

@@ -16,51 +16,36 @@
 
 package com.coinbase.prime.paymentmethods;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Entity Payment Methods */
-public class ListPaymentMethodsRequest {
-  @JsonProperty(required = true, value = "entity_id")
-  @JsonIgnore
-  private String entityId;
-
+/**
+ * List Entity Payment Methods
+ *
+ * @deprecated Use listEntityPaymentMethods instead.
+ */
+@Deprecated
+public class ListPaymentMethodsRequest extends ListEntityPaymentMethodsRequest {
   public ListPaymentMethodsRequest() {}
 
-  public ListPaymentMethodsRequest(Builder builder) {
-    this.entityId = builder.entityId;
+  public ListPaymentMethodsRequest(ListEntityPaymentMethodsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getEntityId() {
-    return entityId;
-  }
-
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
-  }
-
-  public static class Builder {
-    private String entityId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use listEntityPaymentMethods instead.
+   */
+  @Deprecated
+  public static class Builder extends ListEntityPaymentMethodsRequest.Builder {
+    @Override
     public Builder entityId(String entityId) {
-      this.entityId = entityId;
+      super.entityId(entityId);
       return this;
     }
 
+    @Override
     public ListPaymentMethodsRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListPaymentMethodsRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.entityId)) {
-        throw new CoinbaseClientException("EntityId is required");
-      }
     }
   }
 }
