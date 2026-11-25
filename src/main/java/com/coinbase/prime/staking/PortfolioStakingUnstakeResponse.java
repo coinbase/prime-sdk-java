@@ -16,33 +16,12 @@
 
 package com.coinbase.prime.staking;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Request to unstake currency across a portfolio */
-public class PortfolioStakingUnstakeResponse {
-  /** The ID for the created activity */
-  @JsonProperty("activity_id")
-  private String activityId;
-
-  /** The ID for the created transaction */
-  @JsonProperty("transaction_id")
-  private String transactionId;
-
+/**
+ * Request to unstake currency across a portfolio
+ *
+ * @deprecated Use createPortfolioUnstake instead.
+ */
+@Deprecated
+public class PortfolioStakingUnstakeResponse extends CreatePortfolioUnstakeResponse {
   public PortfolioStakingUnstakeResponse() {}
-
-  public String getActivityId() {
-    return activityId;
-  }
-
-  public void setActivityId(String activityId) {
-    this.activityId = activityId;
-  }
-
-  public String getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(String transactionId) {
-    this.transactionId = transactionId;
-  }
 }

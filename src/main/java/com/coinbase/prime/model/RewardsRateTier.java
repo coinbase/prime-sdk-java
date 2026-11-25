@@ -18,10 +18,11 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.BetaRewardsRateTierType;
+import com.coinbase.prime.model.enums.RewardsRateTierType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BetaRewardsRateTier {
+/** RewardsRateTier is a single tier in the rewards rate card. */
+public class RewardsRateTier {
   /** Rate for this tier. */
   private String rate;
 
@@ -33,12 +34,13 @@ public class BetaRewardsRateTier {
   @JsonProperty("upper_limit")
   private String upperLimit;
 
+  /** RewardsRateTierType describes what a rewards rate tier is scoped by. */
   @JsonProperty("criteria_type")
-  private BetaRewardsRateTierType criteriaType;
+  private RewardsRateTierType criteriaType;
 
-  public BetaRewardsRateTier() {}
+  public RewardsRateTier() {}
 
-  public BetaRewardsRateTier(Builder builder) {
+  public RewardsRateTier(Builder builder) {
     this.rate = builder.rate;
     this.lowerLimit = builder.lowerLimit;
     this.upperLimit = builder.upperLimit;
@@ -69,11 +71,11 @@ public class BetaRewardsRateTier {
     this.upperLimit = upperLimit;
   }
 
-  public BetaRewardsRateTierType getCriteriaType() {
+  public RewardsRateTierType getCriteriaType() {
     return criteriaType;
   }
 
-  public void setCriteriaType(BetaRewardsRateTierType criteriaType) {
+  public void setCriteriaType(RewardsRateTierType criteriaType) {
     this.criteriaType = criteriaType;
   }
 
@@ -84,7 +86,7 @@ public class BetaRewardsRateTier {
 
     private String upperLimit;
 
-    private BetaRewardsRateTierType criteriaType;
+    private RewardsRateTierType criteriaType;
 
     public Builder rate(String rate) {
       this.rate = rate;
@@ -101,13 +103,13 @@ public class BetaRewardsRateTier {
       return this;
     }
 
-    public Builder criteriaType(BetaRewardsRateTierType criteriaType) {
+    public Builder criteriaType(RewardsRateTierType criteriaType) {
       this.criteriaType = criteriaType;
       return this;
     }
 
-    public BetaRewardsRateTier build() {
-      return new BetaRewardsRateTier(this);
+    public RewardsRateTier build() {
+      return new RewardsRateTier(this);
     }
   }
 }

@@ -29,16 +29,40 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
   }
 
   @Override
+  public CreatePortfolioAllocationsResponse createPortfolioAllocations(
+      CreatePortfolioAllocationsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        "/allocations",
+        request,
+        List.of(200),
+        new TypeReference<CreatePortfolioAllocationsResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public CreateAllocationResponse createAllocation(CreateAllocationRequest request)
       throws CoinbasePrimeException {
     return this.request(
         HttpMethod.POST,
         "/allocations",
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateAllocationResponse>() {});
   }
 
+  @Override
+  public CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(
+      CreatePortfolioNetAllocationsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        "/allocations/net",
+        request,
+        List.of(200),
+        new TypeReference<CreatePortfolioNetAllocationsResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request)
       throws CoinbasePrimeException {
@@ -46,7 +70,7 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
         HttpMethod.POST,
         "/allocations/net",
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateNetAllocationResponse>() {});
   }
 
@@ -61,6 +85,19 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
         new TypeReference<ListPortfolioAllocationsResponse>() {});
   }
 
+  @Override
+  public GetAllocationsByClientNettingIdResponse getAllocationsByClientNettingId(
+      GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format(
+            "/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),
+        request,
+        List.of(200),
+        new TypeReference<GetAllocationsByClientNettingIdResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public ListAllocationsByNettingIdResponse listAllocationsByNettingId(
       ListAllocationsByNettingIdRequest request) throws CoinbasePrimeException {

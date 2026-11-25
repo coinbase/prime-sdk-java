@@ -18,7 +18,9 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.PrimeXMAssetClass;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
  * CrossMarginPrimeXMPosition is a single per-asset XM row (proto-backed fields from
@@ -84,6 +86,33 @@ public class CrossMarginPrimeXMPosition {
   @JsonProperty("liquidity_addon")
   private String liquidityAddon;
 
+  /**
+   * Asset class of the XM position underlier. - PRIME_XM_ASSET_CLASS_UNSPECIFIED: The asset class
+   * is unavailable for this position, or is not recognized by this API version. -
+   * PRIME_XM_ASSET_CLASS_CASH: USD and USDC. - PRIME_XM_ASSET_CLASS_FX: Non-USD fiat currencies
+   * recognized as FX in the margin model, such as EUR, GBP, and CHF. -
+   * PRIME_XM_ASSET_CLASS_STABLECOIN: Non-USDC stablecoins recognized as cash equivalents in the
+   * margin model, such as EURC and USDT. - PRIME_XM_ASSET_CLASS_CRYPTO: Crypto assets (e.g. BTC,
+   * ETH).
+   */
+  @JsonProperty("asset_class")
+  private PrimeXMAssetClass assetClass;
+
+  /**
+   * Breakdown of a position row's spot equity contribution. All values are zero when no
+   * contribution data is available. If the asset class is unknown, the contribution amounts are
+   * still returned.
+   */
+  @JsonProperty("spot_margin_contribution")
+  private CrossMarginPrimeSpotMarginContribution spotMarginContribution;
+
+  /**
+   * Spot balance of this asset by position type. Contains SPOT_TRADING and SPOT_VAULT legs, which
+   * sum to spot_balance and spot_balance_notional.
+   */
+  @JsonProperty("spot_position_breakdown")
+  private List<CrossMarginPositionBreakdown> spotPositionBreakdown;
+
   public CrossMarginPrimeXMPosition() {}
 
   public CrossMarginPrimeXMPosition(Builder builder) {
@@ -102,6 +131,9 @@ public class CrossMarginPrimeXMPosition {
     this.shortAmount = builder.shortAmount;
     this.volatilityAddon = builder.volatilityAddon;
     this.liquidityAddon = builder.liquidityAddon;
+    this.assetClass = builder.assetClass;
+    this.spotMarginContribution = builder.spotMarginContribution;
+    this.spotPositionBreakdown = builder.spotPositionBreakdown;
   }
 
   public String getCurrency() {
@@ -224,6 +256,31 @@ public class CrossMarginPrimeXMPosition {
     this.liquidityAddon = liquidityAddon;
   }
 
+  public PrimeXMAssetClass getAssetClass() {
+    return assetClass;
+  }
+
+  public void setAssetClass(PrimeXMAssetClass assetClass) {
+    this.assetClass = assetClass;
+  }
+
+  public CrossMarginPrimeSpotMarginContribution getSpotMarginContribution() {
+    return spotMarginContribution;
+  }
+
+  public void setSpotMarginContribution(
+      CrossMarginPrimeSpotMarginContribution spotMarginContribution) {
+    this.spotMarginContribution = spotMarginContribution;
+  }
+
+  public List<CrossMarginPositionBreakdown> getSpotPositionBreakdown() {
+    return spotPositionBreakdown;
+  }
+
+  public void setSpotPositionBreakdown(List<CrossMarginPositionBreakdown> spotPositionBreakdown) {
+    this.spotPositionBreakdown = spotPositionBreakdown;
+  }
+
   public static class Builder {
     private String currency;
 
@@ -254,6 +311,12 @@ public class CrossMarginPrimeXMPosition {
     private String volatilityAddon;
 
     private String liquidityAddon;
+
+    private PrimeXMAssetClass assetClass;
+
+    private CrossMarginPrimeSpotMarginContribution spotMarginContribution;
+
+    private List<CrossMarginPositionBreakdown> spotPositionBreakdown;
 
     public Builder currency(String currency) {
       this.currency = currency;
@@ -327,6 +390,22 @@ public class CrossMarginPrimeXMPosition {
 
     public Builder liquidityAddon(String liquidityAddon) {
       this.liquidityAddon = liquidityAddon;
+      return this;
+    }
+
+    public Builder assetClass(PrimeXMAssetClass assetClass) {
+      this.assetClass = assetClass;
+      return this;
+    }
+
+    public Builder spotMarginContribution(
+        CrossMarginPrimeSpotMarginContribution spotMarginContribution) {
+      this.spotMarginContribution = spotMarginContribution;
+      return this;
+    }
+
+    public Builder spotPositionBreakdown(List<CrossMarginPositionBreakdown> spotPositionBreakdown) {
+      this.spotPositionBreakdown = spotPositionBreakdown;
       return this;
     }
 

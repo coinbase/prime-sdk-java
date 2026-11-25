@@ -27,8 +27,10 @@ public class PaymentMethodDetails {
   private String symbol;
 
   /**
-   * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: Silvergate
-   * exchange network - METHOD_SWIFT: Swift
+   * - UNKNOWN_PAYMENT_METHOD_TYPE: nil value - METHOD_WIRE: Wire transfer - METHOD_SEN: DEPRECATED.
+   * Silvergate exchange network - METHOD_SWIFT: Swift - METHOD_SEPA: Single Euro Payments Area -
+   * METHOD_CBIT: Customers Bank Instant Token - METHOD_PIX: Brazilian instant payment system -
+   * METHOD_JPM_KINEXYS: JPMorgan Kinexys
    */
   @JsonProperty("payment_method_type")
   private PaymentMethodType paymentMethodType;

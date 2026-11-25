@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.financing;
 
-import com.coinbase.prime.model.BetaRewardsRateTier;
+import com.coinbase.prime.model.RewardsRateTier;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Get Portfolio Rewards Rate (Beta) */
@@ -25,7 +25,7 @@ public class GetPortfolioRewardsRateResponse {
   private String currentRate;
 
   @JsonProperty("available_rates")
-  private BetaRewardsRateTier[] availableRates;
+  private RewardsRateTier[] availableRates;
 
   public GetPortfolioRewardsRateResponse() {}
 
@@ -37,11 +37,11 @@ public class GetPortfolioRewardsRateResponse {
     this.currentRate = currentRate;
   }
 
-  public BetaRewardsRateTier[] getAvailableRates() {
+  public RewardsRateTier[] getAvailableRates() {
     return availableRates;
   }
 
-  public void setAvailableRates(BetaRewardsRateTier[] availableRates) {
+  public void setAvailableRates(RewardsRateTier[] availableRates) {
     this.availableRates = availableRates;
   }
 }

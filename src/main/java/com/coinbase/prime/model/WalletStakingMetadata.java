@@ -21,11 +21,10 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * WalletStakingMetadata contains optional metadata for wallet staking requests. external_id tags
- * the discrete TWS transaction stake/unstake create; automatic reward crediting (e.g. SOL
- * inflation) does not produce one. StakingClaimRewardsRequest intentionally omits this field; add
- * metadata to claim rewards only if a supported network's claim flow creates a discrete TWS
- * transaction clients need to tag.
+ * WalletStakingMetadata contains optional metadata for wallet staking requests. Optional metadata
+ * to attach to this staking or delegation request. Automatic reward crediting (such as SOL
+ * inflation) does not produce a taggable transaction and therefore does not support metadata; see
+ * the field descriptions below for details.
  */
 public class WalletStakingMetadata {
   /**

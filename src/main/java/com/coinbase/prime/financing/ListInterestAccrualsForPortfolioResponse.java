@@ -16,32 +16,13 @@
 
 package com.coinbase.prime.financing;
 
-import com.coinbase.prime.model.Accrual;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** List Interest Accruals For Portfolio */
-public class ListInterestAccrualsForPortfolioResponse {
-  @JsonProperty("total_notional_accrual")
-  private String totalNotionalAccrual;
-
-  @JsonProperty("accruals")
-  private Accrual[] accruals;
-
+/**
+ * List Interest Accruals For Portfolio
+ *
+ * @deprecated Use listPortfolioInterestAccruals instead.
+ */
+@Deprecated
+public class ListInterestAccrualsForPortfolioResponse
+    extends ListPortfolioInterestAccrualsResponse {
   public ListInterestAccrualsForPortfolioResponse() {}
-
-  public String getTotalNotionalAccrual() {
-    return totalNotionalAccrual;
-  }
-
-  public void setTotalNotionalAccrual(String totalNotionalAccrual) {
-    this.totalNotionalAccrual = totalNotionalAccrual;
-  }
-
-  public Accrual[] getAccruals() {
-    return accruals;
-  }
-
-  public void setAccruals(Accrual[] accruals) {
-    this.accruals = accruals;
-  }
 }

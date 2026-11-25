@@ -18,12 +18,22 @@
 
 package com.coinbase.prime.model.enums;
 
-/** AdvancedTransferState represents the lifecycle state of an advanced transfer. */
+/**
+ * AdvancedTransferState represents the lifecycle state of an advanced transfer. -
+ * ADVANCED_TRANSFER_STATE_MATCHED: The counterparties have matched. Settlement has not started.
+ * Happy path is CREATED, MATCHED, PROCESSING, DONE.
+ */
 public enum AdvancedTransferState {
   ADVANCED_TRANSFER_STATE_CREATED,
   ADVANCED_TRANSFER_STATE_PROCESSING,
   ADVANCED_TRANSFER_STATE_DONE,
   ADVANCED_TRANSFER_STATE_CANCELLED,
   ADVANCED_TRANSFER_STATE_FAILED,
-  ADVANCED_TRANSFER_STATE_EXPIRED
+  ADVANCED_TRANSFER_STATE_EXPIRED,
+  ADVANCED_TRANSFER_STATE_REJECTED,
+  /**
+   * The counterparties have matched. Settlement has not started. Happy path is CREATED, MATCHED,
+   * PROCESSING, DONE.
+   */
+  ADVANCED_TRANSFER_STATE_MATCHED
 }

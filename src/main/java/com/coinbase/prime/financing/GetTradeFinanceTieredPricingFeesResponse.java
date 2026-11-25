@@ -16,21 +16,12 @@
 
 package com.coinbase.prime.financing;
 
-import com.coinbase.prime.model.TieredPricingFee;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Get Trade Finance Tiered Pricing Fees */
-public class GetTradeFinanceTieredPricingFeesResponse {
-  @JsonProperty("fees")
-  private TieredPricingFee[] fees;
-
+/**
+ * Get Trade Finance Tiered Pricing Fees
+ *
+ * @deprecated Use getTieredPricingFees instead.
+ */
+@Deprecated
+public class GetTradeFinanceTieredPricingFeesResponse extends GetTieredPricingFeesResponse {
   public GetTradeFinanceTieredPricingFeesResponse() {}
-
-  public TieredPricingFee[] getFees() {
-    return fees;
-  }
-
-  public void setFees(TieredPricingFee[] fees) {
-    this.fees = fees;
-  }
 }

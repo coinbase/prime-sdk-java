@@ -16,37 +16,12 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.TransactionValidator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** List Transaction Validators */
-public class ListTransactionValidatorsResponse {
-  /**
-   * List of transaction-to-validator associations. Each entry represents one transaction staking to
-   * one validator.
-   */
-  @JsonProperty("transaction_validators")
-  private TransactionValidator[] transactionValidators;
-
-  @JsonProperty("pagination")
-  private Pagination pagination;
-
+/**
+ * List Transaction Validators
+ *
+ * @deprecated Use queryTransactionValidators instead.
+ */
+@Deprecated
+public class ListTransactionValidatorsResponse extends QueryTransactionValidatorsResponse {
   public ListTransactionValidatorsResponse() {}
-
-  public TransactionValidator[] getTransactionValidators() {
-    return transactionValidators;
-  }
-
-  public void setTransactionValidators(TransactionValidator[] transactionValidators) {
-    this.transactionValidators = transactionValidators;
-  }
-
-  public Pagination getPagination() {
-    return pagination;
-  }
-
-  public void setPagination(Pagination pagination) {
-    this.pagination = pagination;
-  }
 }

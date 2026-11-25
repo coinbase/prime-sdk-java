@@ -29,7 +29,9 @@ package com.coinbase.prime.model.enums;
  * order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order) - RFQ: A [request for
  * quote](https://en.wikipedia.org/wiki/Request_for_quote) - PEG: A pegged order that dynamically
  * adjust based on market conditions while maintaining execution discretion and avoiding adverse
- * selection
+ * selection - SPREAD: A spread order that trades a futures contract against its spot underlying, or
+ * against another futures contract of the same underlying (calendar spread), to capture a target
+ * spread (futures price - spot price, or back month - front month)
  */
 public enum OrderType {
   /** A [market order](https://en.wikipedia.org/wiki/Order_(exchange)#Market_order) */
@@ -59,5 +61,11 @@ public enum OrderType {
    * A pegged order that dynamically adjust based on market conditions while maintaining execution
    * discretion and avoiding adverse selection
    */
-  PEG
+  PEG,
+  /**
+   * A spread order that trades a futures contract against its spot underlying, or against another
+   * futures contract of the same underlying (calendar spread), to capture a target spread (futures
+   * price - spot price, or back month - front month)
+   */
+  SPREAD
 }

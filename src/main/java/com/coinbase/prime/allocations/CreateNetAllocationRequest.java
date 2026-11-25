@@ -19,150 +19,71 @@ package com.coinbase.prime.allocations;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AllocationLeg;
 import com.coinbase.prime.model.enums.AllocationSizeType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Create Portfolio Net Allocations */
-public class CreateNetAllocationRequest {
-  @JsonProperty("source_portfolio_id")
-  private String sourcePortfolioId;
-
-  @JsonProperty("product_id")
-  private String productId;
-
-  @JsonProperty("order_ids")
-  private String[] orderIds;
-
-  @JsonProperty("allocation_legs")
-  private AllocationLeg[] allocationLegs;
-
-  @JsonProperty("size_type")
-  private AllocationSizeType sizeType;
-
-  @JsonProperty("remainder_destination_portfolio")
-  private String remainderDestinationPortfolio;
-
-  @JsonProperty("netting_id")
-  private String nettingId;
-
+/**
+ * Create Portfolio Net Allocations
+ *
+ * @deprecated Use createPortfolioNetAllocations instead.
+ */
+@Deprecated
+public class CreateNetAllocationRequest extends CreatePortfolioNetAllocationsRequest {
   public CreateNetAllocationRequest() {}
 
-  public CreateNetAllocationRequest(Builder builder) {
-    this.sourcePortfolioId = builder.sourcePortfolioId;
-    this.productId = builder.productId;
-    this.orderIds = builder.orderIds;
-    this.allocationLegs = builder.allocationLegs;
-    this.sizeType = builder.sizeType;
-    this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
-    this.nettingId = builder.nettingId;
+  public CreateNetAllocationRequest(CreatePortfolioNetAllocationsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getSourcePortfolioId() {
-    return sourcePortfolioId;
-  }
-
-  public void setSourcePortfolioId(String sourcePortfolioId) {
-    this.sourcePortfolioId = sourcePortfolioId;
-  }
-
-  public String getProductId() {
-    return productId;
-  }
-
-  public void setProductId(String productId) {
-    this.productId = productId;
-  }
-
-  public String[] getOrderIds() {
-    return orderIds;
-  }
-
-  public void setOrderIds(String[] orderIds) {
-    this.orderIds = orderIds;
-  }
-
-  public AllocationLeg[] getAllocationLegs() {
-    return allocationLegs;
-  }
-
-  public void setAllocationLegs(AllocationLeg[] allocationLegs) {
-    this.allocationLegs = allocationLegs;
-  }
-
-  public AllocationSizeType getSizeType() {
-    return sizeType;
-  }
-
-  public void setSizeType(AllocationSizeType sizeType) {
-    this.sizeType = sizeType;
-  }
-
-  public String getRemainderDestinationPortfolio() {
-    return remainderDestinationPortfolio;
-  }
-
-  public void setRemainderDestinationPortfolio(String remainderDestinationPortfolio) {
-    this.remainderDestinationPortfolio = remainderDestinationPortfolio;
-  }
-
-  public String getNettingId() {
-    return nettingId;
-  }
-
-  public void setNettingId(String nettingId) {
-    this.nettingId = nettingId;
-  }
-
-  public static class Builder {
-    private String sourcePortfolioId;
-    private String productId;
-    private String[] orderIds;
-    private AllocationLeg[] allocationLegs;
-    private AllocationSizeType sizeType;
-    private String remainderDestinationPortfolio;
-    private String nettingId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use createPortfolioNetAllocations instead.
+   */
+  @Deprecated
+  public static class Builder extends CreatePortfolioNetAllocationsRequest.Builder {
+    @Override
     public Builder sourcePortfolioId(String sourcePortfolioId) {
-      this.sourcePortfolioId = sourcePortfolioId;
+      super.sourcePortfolioId(sourcePortfolioId);
       return this;
     }
 
+    @Override
     public Builder productId(String productId) {
-      this.productId = productId;
+      super.productId(productId);
       return this;
     }
 
+    @Override
     public Builder orderIds(String[] orderIds) {
-      this.orderIds = orderIds;
+      super.orderIds(orderIds);
       return this;
     }
 
+    @Override
     public Builder allocationLegs(AllocationLeg[] allocationLegs) {
-      this.allocationLegs = allocationLegs;
+      super.allocationLegs(allocationLegs);
       return this;
     }
 
+    @Override
     public Builder sizeType(AllocationSizeType sizeType) {
-      this.sizeType = sizeType;
+      super.sizeType(sizeType);
       return this;
     }
 
+    @Override
     public Builder remainderDestinationPortfolio(String remainderDestinationPortfolio) {
-      this.remainderDestinationPortfolio = remainderDestinationPortfolio;
+      super.remainderDestinationPortfolio(remainderDestinationPortfolio);
       return this;
     }
 
+    @Override
     public Builder nettingId(String nettingId) {
-      this.nettingId = nettingId;
+      super.nettingId(nettingId);
       return this;
     }
 
+    @Override
     public CreateNetAllocationRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new CreateNetAllocationRequest(this);
     }
-
-    private void validate() throws CoinbaseClientException {}
   }
 }

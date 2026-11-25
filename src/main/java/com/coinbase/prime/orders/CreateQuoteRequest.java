@@ -50,6 +50,22 @@ public class CreateQuoteRequest {
   @JsonProperty("settl_currency")
   private String settlCurrency;
 
+  /**
+   * Optional quote timeout in milliseconds. Defaults to 3000 ms (3 seconds) if not specified.
+   * Maximum allowed value is 30000 ms (30 seconds); requests with a larger value are rejected.
+   * Mirrors FIX tag 8090 (QuoteRequestGoodForMs).
+   */
+  @JsonProperty("quote_duration_ms")
+  private String quoteDurationMs;
+
+  /**
+   * Buy Exact order flag. When true, fees for a BUY RFQ sized in quote_value are charged on top of
+   * the requested quote_value instead of being carved out of it. Only valid for BUY RFQs sized in
+   * quote_value on SPOT products.
+   */
+  @JsonProperty("is_buy_exact")
+  private Boolean isBuyExact;
+
   public CreateQuoteRequest() {}
 
   public CreateQuoteRequest(Builder builder) {
@@ -61,6 +77,8 @@ public class CreateQuoteRequest {
     this.quoteValue = builder.quoteValue;
     this.limitPrice = builder.limitPrice;
     this.settlCurrency = builder.settlCurrency;
+    this.quoteDurationMs = builder.quoteDurationMs;
+    this.isBuyExact = builder.isBuyExact;
   }
 
   public String getPortfolioId() {
@@ -127,6 +145,22 @@ public class CreateQuoteRequest {
     this.settlCurrency = settlCurrency;
   }
 
+  public String getQuoteDurationMs() {
+    return quoteDurationMs;
+  }
+
+  public void setQuoteDurationMs(String quoteDurationMs) {
+    this.quoteDurationMs = quoteDurationMs;
+  }
+
+  public Boolean getIsBuyExact() {
+    return isBuyExact;
+  }
+
+  public void setIsBuyExact(Boolean isBuyExact) {
+    this.isBuyExact = isBuyExact;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String productId;
@@ -136,6 +170,8 @@ public class CreateQuoteRequest {
     private String quoteValue;
     private String limitPrice;
     private String settlCurrency;
+    private String quoteDurationMs;
+    private Boolean isBuyExact;
 
     public Builder() {}
 
@@ -176,6 +212,16 @@ public class CreateQuoteRequest {
 
     public Builder settlCurrency(String settlCurrency) {
       this.settlCurrency = settlCurrency;
+      return this;
+    }
+
+    public Builder quoteDurationMs(String quoteDurationMs) {
+      this.quoteDurationMs = quoteDurationMs;
+      return this;
+    }
+
+    public Builder isBuyExact(Boolean isBuyExact) {
+      this.isBuyExact = isBuyExact;
       return this;
     }
 

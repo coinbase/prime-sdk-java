@@ -60,7 +60,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             "/portfolios/%s/wallets/%s/conversion",
             request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateConversionResponse>() {});
   }
 
@@ -73,7 +73,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             "/portfolios/%s/wallets/%s/onchain_transaction",
             request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateOnchainTransactionResponse>() {});
   }
 
@@ -91,6 +91,19 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
   }
 
   @Override
+  public CreateTransferResponse createTransfer(CreateTransferRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<CreateTransferResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request)
       throws CoinbasePrimeException {
     return this.request(
@@ -102,6 +115,20 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         new TypeReference<CreateWalletTransferResponse>() {});
   }
 
+  @Override
+  public CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/wallets/%s/withdrawals",
+            request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<CreateWithdrawalResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public CreateWalletWithdrawalResponse createWalletWithdrawal(
       CreateWalletWithdrawalRequest request) throws CoinbasePrimeException {
@@ -137,7 +164,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             "/portfolios/%s/transactions/%s/travel_rule/deposit",
             request.getPortfolioId(), request.getTransactionId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<SubmitDepositTravelRuleDataResponse>() {});
   }
 }

@@ -16,69 +16,42 @@
 
 package com.coinbase.prime.financing;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Trade Finance Tiered Pricing Fees */
-public class GetTradeFinanceTieredPricingFeesRequest {
-  @JsonProperty(required = true, value = "entity_id")
-  @JsonIgnore
-  private String entityId;
-
-  @JsonProperty("effective_at")
-  private String effectiveAt;
-
+/**
+ * Get Trade Finance Tiered Pricing Fees
+ *
+ * @deprecated Use getTieredPricingFees instead.
+ */
+@Deprecated
+public class GetTradeFinanceTieredPricingFeesRequest extends GetTieredPricingFeesRequest {
   public GetTradeFinanceTieredPricingFeesRequest() {}
 
-  public GetTradeFinanceTieredPricingFeesRequest(Builder builder) {
-    this.entityId = builder.entityId;
-    this.effectiveAt = builder.effectiveAt;
+  public GetTradeFinanceTieredPricingFeesRequest(GetTieredPricingFeesRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getEntityId() {
-    return entityId;
-  }
-
-  public void setEntityId(String entityId) {
-    this.entityId = entityId;
-  }
-
-  public String getEffectiveAt() {
-    return effectiveAt;
-  }
-
-  public void setEffectiveAt(String effectiveAt) {
-    this.effectiveAt = effectiveAt;
-  }
-
-  public static class Builder {
-    private String entityId;
-    private String effectiveAt;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getTieredPricingFees instead.
+   */
+  @Deprecated
+  public static class Builder extends GetTieredPricingFeesRequest.Builder {
+    @Override
     public Builder entityId(String entityId) {
-      this.entityId = entityId;
+      super.entityId(entityId);
       return this;
     }
 
+    @Override
     public Builder effectiveAt(String effectiveAt) {
-      this.effectiveAt = effectiveAt;
+      super.effectiveAt(effectiveAt);
       return this;
     }
 
+    @Override
     public GetTradeFinanceTieredPricingFeesRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetTradeFinanceTieredPricingFeesRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.entityId)) {
-        throw new CoinbaseClientException("EntityId is required");
-      }
     }
   }
 }

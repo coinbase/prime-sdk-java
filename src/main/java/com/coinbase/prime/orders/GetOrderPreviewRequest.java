@@ -16,416 +16,174 @@
 
 package com.coinbase.prime.orders;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.SpreadConfig;
+import com.coinbase.prime.model.enums.LimitPriceType;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.PegOffsetType;
 import com.coinbase.prime.model.enums.TimeInForceType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Order Preview */
-public class GetOrderPreviewRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty("product_id")
-  private String productId;
-
-  @JsonProperty("side")
-  private OrderSide side;
-
-  @JsonProperty("type")
-  private OrderType type;
-
-  @JsonProperty("base_quantity")
-  private String baseQuantity;
-
-  @JsonProperty("quote_value")
-  private String quoteValue;
-
-  @JsonProperty("limit_price")
-  private String limitPrice;
-
-  @JsonProperty("start_time")
-  private String startTime;
-
-  @JsonProperty("expiry_time")
-  private String expiryTime;
-
-  @JsonProperty("time_in_force")
-  private TimeInForceType timeInForce;
-
-  @JsonProperty("is_raise_exact")
-  private Boolean isRaiseExact;
-
-  /** Buy Exact order flag */
-  @JsonProperty("is_buy_exact")
-  private Boolean isBuyExact;
-
-  @JsonProperty("historical_pov")
-  private String historicalPov;
-
-  @JsonProperty("stop_price")
-  private String stopPrice;
-
-  @JsonProperty("settl_currency")
-  private String settlCurrency;
-
-  @JsonProperty("postOnly")
-  private Boolean postOnly;
-
-  @JsonProperty("display_quote_size")
-  private String displayQuoteSize;
-
-  @JsonProperty("display_base_size")
-  private String displayBaseSize;
-
-  @JsonProperty("peg_offset_type")
-  private PegOffsetType pegOffsetType;
-
-  @JsonProperty("offset")
-  private String offset;
-
-  @JsonProperty("wig_level")
-  private String wigLevel;
-
+/**
+ * Get Order Preview
+ *
+ * @deprecated Use createOrderPreview instead.
+ */
+@Deprecated
+public class GetOrderPreviewRequest extends CreateOrderPreviewRequest {
   public GetOrderPreviewRequest() {}
 
-  public GetOrderPreviewRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.productId = builder.productId;
-    this.side = builder.side;
-    this.type = builder.type;
-    this.baseQuantity = builder.baseQuantity;
-    this.quoteValue = builder.quoteValue;
-    this.limitPrice = builder.limitPrice;
-    this.startTime = builder.startTime;
-    this.expiryTime = builder.expiryTime;
-    this.timeInForce = builder.timeInForce;
-    this.isRaiseExact = builder.isRaiseExact;
-    this.isBuyExact = builder.isBuyExact;
-    this.historicalPov = builder.historicalPov;
-    this.stopPrice = builder.stopPrice;
-    this.settlCurrency = builder.settlCurrency;
-    this.postOnly = builder.postOnly;
-    this.displayQuoteSize = builder.displayQuoteSize;
-    this.displayBaseSize = builder.displayBaseSize;
-    this.pegOffsetType = builder.pegOffsetType;
-    this.offset = builder.offset;
-    this.wigLevel = builder.wigLevel;
+  public GetOrderPreviewRequest(CreateOrderPreviewRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getProductId() {
-    return productId;
-  }
-
-  public void setProductId(String productId) {
-    this.productId = productId;
-  }
-
-  public OrderSide getSide() {
-    return side;
-  }
-
-  public void setSide(OrderSide side) {
-    this.side = side;
-  }
-
-  public OrderType getType() {
-    return type;
-  }
-
-  public void setType(OrderType type) {
-    this.type = type;
-  }
-
-  public String getBaseQuantity() {
-    return baseQuantity;
-  }
-
-  public void setBaseQuantity(String baseQuantity) {
-    this.baseQuantity = baseQuantity;
-  }
-
-  public String getQuoteValue() {
-    return quoteValue;
-  }
-
-  public void setQuoteValue(String quoteValue) {
-    this.quoteValue = quoteValue;
-  }
-
-  public String getLimitPrice() {
-    return limitPrice;
-  }
-
-  public void setLimitPrice(String limitPrice) {
-    this.limitPrice = limitPrice;
-  }
-
-  public String getStartTime() {
-    return startTime;
-  }
-
-  public void setStartTime(String startTime) {
-    this.startTime = startTime;
-  }
-
-  public String getExpiryTime() {
-    return expiryTime;
-  }
-
-  public void setExpiryTime(String expiryTime) {
-    this.expiryTime = expiryTime;
-  }
-
-  public TimeInForceType getTimeInForce() {
-    return timeInForce;
-  }
-
-  public void setTimeInForce(TimeInForceType timeInForce) {
-    this.timeInForce = timeInForce;
-  }
-
-  public Boolean getIsRaiseExact() {
-    return isRaiseExact;
-  }
-
-  public void setIsRaiseExact(Boolean isRaiseExact) {
-    this.isRaiseExact = isRaiseExact;
-  }
-
-  public Boolean getIsBuyExact() {
-    return isBuyExact;
-  }
-
-  public void setIsBuyExact(Boolean isBuyExact) {
-    this.isBuyExact = isBuyExact;
-  }
-
-  public String getHistoricalPov() {
-    return historicalPov;
-  }
-
-  public void setHistoricalPov(String historicalPov) {
-    this.historicalPov = historicalPov;
-  }
-
-  public String getStopPrice() {
-    return stopPrice;
-  }
-
-  public void setStopPrice(String stopPrice) {
-    this.stopPrice = stopPrice;
-  }
-
-  public String getSettlCurrency() {
-    return settlCurrency;
-  }
-
-  public void setSettlCurrency(String settlCurrency) {
-    this.settlCurrency = settlCurrency;
-  }
-
-  public Boolean getPostOnly() {
-    return postOnly;
-  }
-
-  public void setPostOnly(Boolean postOnly) {
-    this.postOnly = postOnly;
-  }
-
-  public String getDisplayQuoteSize() {
-    return displayQuoteSize;
-  }
-
-  public void setDisplayQuoteSize(String displayQuoteSize) {
-    this.displayQuoteSize = displayQuoteSize;
-  }
-
-  public String getDisplayBaseSize() {
-    return displayBaseSize;
-  }
-
-  public void setDisplayBaseSize(String displayBaseSize) {
-    this.displayBaseSize = displayBaseSize;
-  }
-
-  public PegOffsetType getPegOffsetType() {
-    return pegOffsetType;
-  }
-
-  public void setPegOffsetType(PegOffsetType pegOffsetType) {
-    this.pegOffsetType = pegOffsetType;
-  }
-
-  public String getOffset() {
-    return offset;
-  }
-
-  public void setOffset(String offset) {
-    this.offset = offset;
-  }
-
-  public String getWigLevel() {
-    return wigLevel;
-  }
-
-  public void setWigLevel(String wigLevel) {
-    this.wigLevel = wigLevel;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String productId;
-    private OrderSide side;
-    private OrderType type;
-    private String baseQuantity;
-    private String quoteValue;
-    private String limitPrice;
-    private String startTime;
-    private String expiryTime;
-    private TimeInForceType timeInForce;
-    private Boolean isRaiseExact;
-    private Boolean isBuyExact;
-    private String historicalPov;
-    private String stopPrice;
-    private String settlCurrency;
-    private Boolean postOnly;
-    private String displayQuoteSize;
-    private String displayBaseSize;
-    private PegOffsetType pegOffsetType;
-    private String offset;
-    private String wigLevel;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use createOrderPreview instead.
+   */
+  @Deprecated
+  public static class Builder extends CreateOrderPreviewRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder productId(String productId) {
-      this.productId = productId;
+      super.productId(productId);
       return this;
     }
 
+    @Override
     public Builder side(OrderSide side) {
-      this.side = side;
+      super.side(side);
       return this;
     }
 
+    @Override
     public Builder type(OrderType type) {
-      this.type = type;
+      super.type(type);
       return this;
     }
 
+    @Override
     public Builder baseQuantity(String baseQuantity) {
-      this.baseQuantity = baseQuantity;
+      super.baseQuantity(baseQuantity);
       return this;
     }
 
+    @Override
     public Builder quoteValue(String quoteValue) {
-      this.quoteValue = quoteValue;
+      super.quoteValue(quoteValue);
       return this;
     }
 
+    @Override
     public Builder limitPrice(String limitPrice) {
-      this.limitPrice = limitPrice;
+      super.limitPrice(limitPrice);
       return this;
     }
 
+    @Override
     public Builder startTime(String startTime) {
-      this.startTime = startTime;
+      super.startTime(startTime);
       return this;
     }
 
+    @Override
     public Builder expiryTime(String expiryTime) {
-      this.expiryTime = expiryTime;
+      super.expiryTime(expiryTime);
       return this;
     }
 
+    @Override
     public Builder timeInForce(TimeInForceType timeInForce) {
-      this.timeInForce = timeInForce;
+      super.timeInForce(timeInForce);
       return this;
     }
 
+    @Override
     public Builder isRaiseExact(Boolean isRaiseExact) {
-      this.isRaiseExact = isRaiseExact;
+      super.isRaiseExact(isRaiseExact);
       return this;
     }
 
+    @Override
     public Builder isBuyExact(Boolean isBuyExact) {
-      this.isBuyExact = isBuyExact;
+      super.isBuyExact(isBuyExact);
       return this;
     }
 
+    @Override
     public Builder historicalPov(String historicalPov) {
-      this.historicalPov = historicalPov;
+      super.historicalPov(historicalPov);
       return this;
     }
 
+    @Override
     public Builder stopPrice(String stopPrice) {
-      this.stopPrice = stopPrice;
+      super.stopPrice(stopPrice);
       return this;
     }
 
+    @Override
     public Builder settlCurrency(String settlCurrency) {
-      this.settlCurrency = settlCurrency;
+      super.settlCurrency(settlCurrency);
       return this;
     }
 
+    @Override
     public Builder postOnly(Boolean postOnly) {
-      this.postOnly = postOnly;
+      super.postOnly(postOnly);
       return this;
     }
 
+    @Override
     public Builder displayQuoteSize(String displayQuoteSize) {
-      this.displayQuoteSize = displayQuoteSize;
+      super.displayQuoteSize(displayQuoteSize);
       return this;
     }
 
+    @Override
     public Builder displayBaseSize(String displayBaseSize) {
-      this.displayBaseSize = displayBaseSize;
+      super.displayBaseSize(displayBaseSize);
       return this;
     }
 
+    @Override
     public Builder pegOffsetType(PegOffsetType pegOffsetType) {
-      this.pegOffsetType = pegOffsetType;
+      super.pegOffsetType(pegOffsetType);
       return this;
     }
 
+    @Override
     public Builder offset(String offset) {
-      this.offset = offset;
+      super.offset(offset);
       return this;
     }
 
+    @Override
     public Builder wigLevel(String wigLevel) {
-      this.wigLevel = wigLevel;
+      super.wigLevel(wigLevel);
       return this;
     }
 
-    public GetOrderPreviewRequest build() throws CoinbaseClientException {
-      validate();
-      return new GetOrderPreviewRequest(this);
+    @Override
+    public Builder limitPriceType(LimitPriceType limitPriceType) {
+      super.limitPriceType(limitPriceType);
+      return this;
     }
 
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
+    @Override
+    public Builder spreadConfig(SpreadConfig spreadConfig) {
+      super.spreadConfig(spreadConfig);
+      return this;
+    }
+
+    @Override
+    public GetOrderPreviewRequest build() throws CoinbaseClientException {
+      super.validate();
+      return new GetOrderPreviewRequest(this);
     }
   }
 }

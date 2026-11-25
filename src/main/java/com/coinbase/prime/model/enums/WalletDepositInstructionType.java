@@ -21,7 +21,7 @@ package com.coinbase.prime.model.enums;
 /**
  * - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value - CRYPTO: A cryptocurrency deposit - WIRE: A wire
  * deposit - SEN: DEPRECATED. A Silvergate Exchange Network deposit - SWIFT: A SWIFT deposit - SEPA:
- * A SEPA deposit (Single Euro Payments Area)
+ * A SEPA deposit (Single Euro Payments Area) - KINEXYS: A JPM Kinexys deposit
  */
 public enum WalletDepositInstructionType {
   /** A cryptocurrency deposit */
@@ -33,5 +33,7 @@ public enum WalletDepositInstructionType {
   /** A SWIFT deposit */
   SWIFT,
   /** A SEPA deposit (Single Euro Payments Area) */
-  SEPA
+  SEPA,
+  /** A JPM Kinexys deposit */
+  KINEXYS
 }

@@ -16,73 +16,42 @@
 
 package com.coinbase.prime.orders;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Order by Order ID */
-public class GetOrderByOrderIdRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty(required = true, value = "order_id")
-  @JsonIgnore
-  private String orderId;
-
+/**
+ * Get Order by Order ID
+ *
+ * @deprecated Use getOrder instead.
+ */
+@Deprecated
+public class GetOrderByOrderIdRequest extends GetOrderRequest {
   public GetOrderByOrderIdRequest() {}
 
-  public GetOrderByOrderIdRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.orderId = builder.orderId;
+  public GetOrderByOrderIdRequest(GetOrderRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getOrderId() {
-    return orderId;
-  }
-
-  public void setOrderId(String orderId) {
-    this.orderId = orderId;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String orderId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getOrder instead.
+   */
+  @Deprecated
+  public static class Builder extends GetOrderRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder orderId(String orderId) {
-      this.orderId = orderId;
+      super.orderId(orderId);
       return this;
     }
 
+    @Override
     public GetOrderByOrderIdRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetOrderByOrderIdRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.orderId)) {
-        throw new CoinbaseClientException("OrderId is required");
-      }
     }
   }
 }

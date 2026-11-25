@@ -29,6 +29,33 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
   }
 
   @Override
+  public ClaimStakingRewardsResponse claimStakingRewards(ClaimStakingRewardsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/wallets/%s/staking/claim_rewards",
+            request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<ClaimStakingRewardsResponse>() {});
+  }
+
+  @Deprecated
+  @Override
+  public ClaimRewardsResponse claimRewards(ClaimRewardsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/wallets/%s/staking/claim_rewards",
+            request.getPortfolioId(), request.getWalletId()),
+        request,
+        List.of(200),
+        new TypeReference<ClaimRewardsResponse>() {});
+  }
+
+  @Override
   public CreateStakeResponse createStake(CreateStakeRequest request) throws CoinbasePrimeException {
     return this.request(
         HttpMethod.POST,
@@ -36,7 +63,7 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
             "/portfolios/%s/wallets/%s/staking/initiate",
             request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateStakeResponse>() {});
   }
 
@@ -49,10 +76,23 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
             "/portfolios/%s/wallets/%s/staking/unstake",
             request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateUnstakeResponse>() {});
   }
 
+  @Override
+  public QueryTransactionValidatorsResponse queryTransactionValidators(
+      QueryTransactionValidatorsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format(
+            "/portfolios/%s/staking/transaction-validators/query", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<QueryTransactionValidatorsResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public ListTransactionValidatorsResponse listTransactionValidators(
       ListTransactionValidatorsRequest request) throws CoinbasePrimeException {
@@ -66,16 +106,40 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
   }
 
   @Override
+  public CreatePortfolioStakeResponse createPortfolioStake(CreatePortfolioStakeRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<CreatePortfolioStakeResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public PortfolioStakingInitiateResponse portfolioStakingInitiate(
       PortfolioStakingInitiateRequest request) throws CoinbasePrimeException {
     return this.request(
         HttpMethod.POST,
         String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<PortfolioStakingInitiateResponse>() {});
   }
 
+  @Override
+  public CreatePortfolioUnstakeResponse createPortfolioUnstake(
+      CreatePortfolioUnstakeRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<CreatePortfolioUnstakeResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public PortfolioStakingUnstakeResponse portfolioStakingUnstake(
       PortfolioStakingUnstakeRequest request) throws CoinbasePrimeException {
@@ -83,34 +147,21 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
         HttpMethod.POST,
         String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<PortfolioStakingUnstakeResponse>() {});
   }
 
   @Override
-  public ClaimRewardsResponse claimRewards(ClaimRewardsRequest request)
+  public GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request)
       throws CoinbasePrimeException {
     return this.request(
-        HttpMethod.POST,
+        HttpMethod.GET,
         String.format(
-            "/portfolios/%s/wallets/%s/staking/claim_rewards",
+            "/portfolios/%s/wallets/%s/staking/status",
             request.getPortfolioId(), request.getWalletId()),
         request,
-        List.of(201, 200),
-        new TypeReference<ClaimRewardsResponse>() {});
-  }
-
-  @Override
-  public PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request)
-      throws CoinbasePrimeException {
-    return this.request(
-        HttpMethod.POST,
-        String.format(
-            "/portfolios/%s/wallets/%s/staking/unstake/preview",
-            request.getPortfolioId(), request.getWalletId()),
-        request,
-        List.of(201, 200),
-        new TypeReference<PreviewUnstakeResponse>() {});
+        List.of(200),
+        new TypeReference<GetStakingStatusResponse>() {});
   }
 
   @Override
@@ -127,15 +178,15 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
   }
 
   @Override
-  public GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request)
+  public PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request)
       throws CoinbasePrimeException {
     return this.request(
-        HttpMethod.GET,
+        HttpMethod.POST,
         String.format(
-            "/portfolios/%s/wallets/%s/staking/status",
+            "/portfolios/%s/wallets/%s/staking/unstake/preview",
             request.getPortfolioId(), request.getWalletId()),
         request,
         List.of(200),
-        new TypeReference<GetStakingStatusResponse>() {});
+        new TypeReference<PreviewUnstakeResponse>() {});
   }
 }

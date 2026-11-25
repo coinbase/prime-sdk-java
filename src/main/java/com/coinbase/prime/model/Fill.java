@@ -39,7 +39,11 @@ public class Fill {
   @JsonProperty("client_product_id")
   private String clientProductId;
 
-  /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+  /**
+   * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order - MULTIPLE: Response only:
+   * a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in
+   * requests
+   */
   private OrderSide side;
 
   /** Filled size (in base asset units) */
@@ -72,7 +76,9 @@ public class Fill {
 
   /**
    * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
-   * OPTION: Option product
+   * OPTION: Option product - BASIS: Basis product: a futures contract traded against its spot
+   * underlying, or against another futures contract of the same underlying (calendar spread); the
+   * product of SPREAD orders
    */
   @JsonProperty("product_type")
   private ProductType productType;

@@ -42,6 +42,14 @@ public class CrossMarginPrimeSpotEquityBreakdown {
   @JsonProperty("pending_transfers")
   private String pendingTransfers;
 
+  /** Equity contribution from FX positions. */
+  @JsonProperty("fx_balance")
+  private String fxBalance;
+
+  /** Equity contribution from non-USDC stablecoins. USDC is included in cash_balance. */
+  @JsonProperty("stablecoin_balance")
+  private String stablecoinBalance;
+
   public CrossMarginPrimeSpotEquityBreakdown() {}
 
   public CrossMarginPrimeSpotEquityBreakdown(Builder builder) {
@@ -50,6 +58,8 @@ public class CrossMarginPrimeSpotEquityBreakdown {
     this.shortMarketValue = builder.shortMarketValue;
     this.shortCollateral = builder.shortCollateral;
     this.pendingTransfers = builder.pendingTransfers;
+    this.fxBalance = builder.fxBalance;
+    this.stablecoinBalance = builder.stablecoinBalance;
   }
 
   public String getCashBalance() {
@@ -92,6 +102,22 @@ public class CrossMarginPrimeSpotEquityBreakdown {
     this.pendingTransfers = pendingTransfers;
   }
 
+  public String getFxBalance() {
+    return fxBalance;
+  }
+
+  public void setFxBalance(String fxBalance) {
+    this.fxBalance = fxBalance;
+  }
+
+  public String getStablecoinBalance() {
+    return stablecoinBalance;
+  }
+
+  public void setStablecoinBalance(String stablecoinBalance) {
+    this.stablecoinBalance = stablecoinBalance;
+  }
+
   public static class Builder {
     private String cashBalance;
 
@@ -102,6 +128,10 @@ public class CrossMarginPrimeSpotEquityBreakdown {
     private String shortCollateral;
 
     private String pendingTransfers;
+
+    private String fxBalance;
+
+    private String stablecoinBalance;
 
     public Builder cashBalance(String cashBalance) {
       this.cashBalance = cashBalance;
@@ -125,6 +155,16 @@ public class CrossMarginPrimeSpotEquityBreakdown {
 
     public Builder pendingTransfers(String pendingTransfers) {
       this.pendingTransfers = pendingTransfers;
+      return this;
+    }
+
+    public Builder fxBalance(String fxBalance) {
+      this.fxBalance = fxBalance;
+      return this;
+    }
+
+    public Builder stablecoinBalance(String stablecoinBalance) {
+      this.stablecoinBalance = stablecoinBalance;
       return this;
     }
 

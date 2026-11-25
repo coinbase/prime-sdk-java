@@ -16,73 +16,42 @@
 
 package com.coinbase.prime.orders;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Order Edit History */
-public class ListOrderEditHistoryRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty(required = true, value = "order_id")
-  @JsonIgnore
-  private String orderId;
-
+/**
+ * List Order Edit History
+ *
+ * @deprecated Use getOrderEditHistory instead.
+ */
+@Deprecated
+public class ListOrderEditHistoryRequest extends GetOrderEditHistoryRequest {
   public ListOrderEditHistoryRequest() {}
 
-  public ListOrderEditHistoryRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.orderId = builder.orderId;
+  public ListOrderEditHistoryRequest(GetOrderEditHistoryRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getOrderId() {
-    return orderId;
-  }
-
-  public void setOrderId(String orderId) {
-    this.orderId = orderId;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String orderId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getOrderEditHistory instead.
+   */
+  @Deprecated
+  public static class Builder extends GetOrderEditHistoryRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder orderId(String orderId) {
-      this.orderId = orderId;
+      super.orderId(orderId);
       return this;
     }
 
+    @Override
     public ListOrderEditHistoryRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListOrderEditHistoryRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.orderId)) {
-        throw new CoinbaseClientException("OrderId is required");
-      }
     }
   }
 }

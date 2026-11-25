@@ -16,21 +16,12 @@
 
 package com.coinbase.prime.allocations;
 
-import com.coinbase.prime.model.CreateNetAllocationResponseBody;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Create Portfolio Net Allocations */
-public class CreateNetAllocationResponse {
-  @JsonProperty("body")
-  private CreateNetAllocationResponseBody body;
-
+/**
+ * Create Portfolio Net Allocations
+ *
+ * @deprecated Use createPortfolioNetAllocations instead.
+ */
+@Deprecated
+public class CreateNetAllocationResponse extends CreatePortfolioNetAllocationsResponse {
   public CreateNetAllocationResponse() {}
-
-  public CreateNetAllocationResponseBody getBody() {
-    return body;
-  }
-
-  public void setBody(CreateNetAllocationResponseBody body) {
-    this.body = body;
-  }
 }

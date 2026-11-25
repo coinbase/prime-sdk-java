@@ -70,6 +70,21 @@ public interface FuturesService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetEntityPositionsResponse getEntityPositions(GetEntityPositionsRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Entity Positions.
+   *
+   * <p>Retrieve all active fcm positions for a given entity
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getEntityPositions instead.
+   */
+  @Deprecated
   GetPositionsResponse getPositions(GetPositionsRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

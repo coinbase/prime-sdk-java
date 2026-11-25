@@ -59,6 +59,8 @@ import com.coinbase.prime.users.UsersService;
 import com.coinbase.prime.users.UsersServiceImpl;
 import com.coinbase.prime.wallets.WalletsService;
 import com.coinbase.prime.wallets.WalletsServiceImpl;
+import com.coinbase.prime.webhooks.WebhooksService;
+import com.coinbase.prime.webhooks.WebhooksServiceImpl;
 
 public class PrimeServiceFactory {
   public static ActivitiesService createActivitiesService(CoinbasePrimeClient client) {
@@ -144,5 +146,9 @@ public class PrimeServiceFactory {
 
   public static WalletsService createWalletsService(CoinbasePrimeClient client) {
     return new WalletsServiceImpl(client);
+  }
+
+  public static WebhooksService createWebhooksService(CoinbasePrimeClient client) {
+    return new WebhooksServiceImpl(client);
   }
 }

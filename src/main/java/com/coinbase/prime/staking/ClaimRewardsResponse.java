@@ -16,42 +16,12 @@
 
 package com.coinbase.prime.staking;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/** Claim Wallet Staking Rewards (Alpha) */
-public class ClaimRewardsResponse {
-  @JsonProperty("wallet_id")
-  private String walletId;
-
-  @JsonProperty("transaction_id")
-  private String transactionId;
-
-  @JsonProperty("activity_id")
-  private String activityId;
-
+/**
+ * Claim Wallet Staking Rewards (Alpha)
+ *
+ * @deprecated Use claimStakingRewards instead.
+ */
+@Deprecated
+public class ClaimRewardsResponse extends ClaimStakingRewardsResponse {
   public ClaimRewardsResponse() {}
-
-  public String getWalletId() {
-    return walletId;
-  }
-
-  public void setWalletId(String walletId) {
-    this.walletId = walletId;
-  }
-
-  public String getTransactionId() {
-    return transactionId;
-  }
-
-  public void setTransactionId(String transactionId) {
-    this.transactionId = transactionId;
-  }
-
-  public String getActivityId() {
-    return activityId;
-  }
-
-  public void setActivityId(String activityId) {
-    this.activityId = activityId;
-  }
 }

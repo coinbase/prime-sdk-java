@@ -90,6 +90,21 @@ public interface OrdersService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  CreateOrderPreviewResponse createOrderPreview(CreateOrderPreviewRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Order Preview.
+   *
+   * <p>Retrieve an order preview
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use createOrderPreview instead.
+   */
+  @Deprecated
   GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -108,6 +123,26 @@ public interface OrdersService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  ListOrdersResponse listOrders(ListOrdersRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Portfolio Orders.
+   *
+   * <p>List historical orders for a given portfolio. This endpoint returns a payload with a default
+   * limit of 100 if not specified by the user. The maximum allowed limit is 3000. <br>
+   * <br>
+   * **Caution:** Currently, you cannot query open orders with this endpoint: use List Open Orders
+   * if you have less than 1000 open orders, otherwise use Websocket API, or FIX API to stream open
+   * orders
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use listOrders instead.
+   */
+  @Deprecated
   ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -121,6 +156,21 @@ public interface OrdersService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetOrderResponse getOrder(GetOrderRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * Get Order by Order ID.
+   *
+   * <p>Retrieve an order by order ID
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getOrder instead.
+   */
+  @Deprecated
   GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 
@@ -161,6 +211,21 @@ public interface OrdersService {
    * @throws CoinbaseClientException if the request fails client-side validation
    * @throws CoinbasePrimeException if the Prime API returns an error response
    */
+  GetOrderEditHistoryResponse getOrderEditHistory(GetOrderEditHistoryRequest request)
+      throws CoinbaseClientException, CoinbasePrimeException;
+
+  /**
+   * List Order Edit History.
+   *
+   * <p>List edit history for a specific order
+   *
+   * @param request the request parameters for this operation
+   * @return the response payload for this operation
+   * @throws CoinbaseClientException if the request fails client-side validation
+   * @throws CoinbasePrimeException if the Prime API returns an error response
+   * @deprecated Use getOrderEditHistory instead.
+   */
+  @Deprecated
   ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request)
       throws CoinbaseClientException, CoinbasePrimeException;
 

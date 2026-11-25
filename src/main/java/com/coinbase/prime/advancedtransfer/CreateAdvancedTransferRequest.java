@@ -34,11 +34,20 @@ public class CreateAdvancedTransferRequest {
   @JsonProperty("advanced_transfer")
   private AdvancedTransfer advancedTransfer;
 
+  /**
+   * Optional client-generated idempotency key. When set, it must be a UUID. A request with the same
+   * key returns the stored transfer (id, legs, and state); the request body is not compared. Omit
+   * the field to create a new transfer.
+   */
+  @JsonProperty("idempotency_key")
+  private String idempotencyKey;
+
   public CreateAdvancedTransferRequest() {}
 
   public CreateAdvancedTransferRequest(Builder builder) {
     this.portfolioId = builder.portfolioId;
     this.advancedTransfer = builder.advancedTransfer;
+    this.idempotencyKey = builder.idempotencyKey;
   }
 
   public String getPortfolioId() {
@@ -57,9 +66,18 @@ public class CreateAdvancedTransferRequest {
     this.advancedTransfer = advancedTransfer;
   }
 
+  public String getIdempotencyKey() {
+    return idempotencyKey;
+  }
+
+  public void setIdempotencyKey(String idempotencyKey) {
+    this.idempotencyKey = idempotencyKey;
+  }
+
   public static class Builder {
     private String portfolioId;
     private AdvancedTransfer advancedTransfer;
+    private String idempotencyKey;
 
     public Builder() {}
 
@@ -70,6 +88,11 @@ public class CreateAdvancedTransferRequest {
 
     public Builder advancedTransfer(AdvancedTransfer advancedTransfer) {
       this.advancedTransfer = advancedTransfer;
+      return this;
+    }
+
+    public Builder idempotencyKey(String idempotencyKey) {
+      this.idempotencyKey = idempotencyKey;
       return this;
     }
 

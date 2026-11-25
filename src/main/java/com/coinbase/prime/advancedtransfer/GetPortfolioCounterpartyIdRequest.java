@@ -16,51 +16,36 @@
 
 package com.coinbase.prime.advancedtransfer;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Get Portfolio Counterparty ID */
-public class GetPortfolioCounterpartyIdRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
+/**
+ * Get Portfolio Counterparty ID
+ *
+ * @deprecated Use getCounterpartyId instead.
+ */
+@Deprecated
+public class GetPortfolioCounterpartyIdRequest extends GetCounterpartyIdRequest {
   public GetPortfolioCounterpartyIdRequest() {}
 
-  public GetPortfolioCounterpartyIdRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
+  public GetPortfolioCounterpartyIdRequest(GetCounterpartyIdRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use getCounterpartyId instead.
+   */
+  @Deprecated
+  public static class Builder extends GetCounterpartyIdRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public GetPortfolioCounterpartyIdRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new GetPortfolioCounterpartyIdRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

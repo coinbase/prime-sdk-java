@@ -18,10 +18,18 @@
 
 package com.coinbase.prime.model.enums;
 
-/** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+/**
+ * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order - MULTIPLE: Response only: a
+ * SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in requests
+ */
 public enum OrderSide {
   /** Buy order */
   BUY,
   /** Sell order */
-  SELL
+  SELL,
+  /**
+   * Response only: a SPREAD order, whose legs carry their own sides (see `spread_details`); not
+   * accepted in requests
+   */
+  MULTIPLE
 }

@@ -16,235 +16,95 @@
 
 package com.coinbase.prime.transactions;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.CounterpartyDestination;
 import com.coinbase.prime.model.PaymentMethodDestination;
 import com.coinbase.prime.model.TravelRuleData;
 import com.coinbase.prime.model.enums.DestinationType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Create Withdrawal */
-public class CreateWalletWithdrawalRequest {
-  /** The portfolio ID */
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  /** The wallet ID */
-  @JsonProperty(required = true, value = "wallet_id")
-  @JsonIgnore
-  private String walletId;
-
-  /** The amount in whole units of the withdrawal */
-  @JsonProperty("amount")
-  private String amount;
-
-  /**
-   * - UNKNOWN_DESTINATION: nil value - DESTINATION_PAYMENT_METHOD: A fiat bank account linked to a
-   * payment method id via Payment Method Service - DESTINATION_BLOCKCHAIN: A blockchain network
-   * address - DESTINATION_WALLET: An on platform wallet UUID NOTE: this is not usable in the
-   * withdrawals endpoint only transfers - DESTINATION_COUNTERPARTY: Counterparty ID
-   */
-  @JsonProperty("destination_type")
-  private DestinationType destinationType;
-
-  /** The idempotency key associated with the withdrawal */
-  @JsonProperty("idempotency_key")
-  private String idempotencyKey;
-
-  /** The currency symbol for the withdrawal */
-  @JsonProperty("currency_symbol")
-  private String currencySymbol;
-
-  @JsonProperty("payment_method")
-  private PaymentMethodDestination paymentMethod;
-
-  @JsonProperty("blockchain_address")
-  private BlockchainAddress blockchainAddress;
-
-  /** Represents a destination for a counterparty payment */
-  @JsonProperty("counterparty")
-  private CounterpartyDestination counterparty;
-
-  /** Data object used for withdrawals. */
-  @JsonProperty("travel_rule_data")
-  private TravelRuleData travelRuleData;
-
+/**
+ * Create Withdrawal
+ *
+ * @deprecated Use createWithdrawal instead.
+ */
+@Deprecated
+public class CreateWalletWithdrawalRequest extends CreateWithdrawalRequest {
   public CreateWalletWithdrawalRequest() {}
 
-  public CreateWalletWithdrawalRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.walletId = builder.walletId;
-    this.amount = builder.amount;
-    this.destinationType = builder.destinationType;
-    this.idempotencyKey = builder.idempotencyKey;
-    this.currencySymbol = builder.currencySymbol;
-    this.paymentMethod = builder.paymentMethod;
-    this.blockchainAddress = builder.blockchainAddress;
-    this.counterparty = builder.counterparty;
-    this.travelRuleData = builder.travelRuleData;
+  public CreateWalletWithdrawalRequest(CreateWithdrawalRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getWalletId() {
-    return walletId;
-  }
-
-  public void setWalletId(String walletId) {
-    this.walletId = walletId;
-  }
-
-  public String getAmount() {
-    return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
-
-  public DestinationType getDestinationType() {
-    return destinationType;
-  }
-
-  public void setDestinationType(DestinationType destinationType) {
-    this.destinationType = destinationType;
-  }
-
-  public String getIdempotencyKey() {
-    return idempotencyKey;
-  }
-
-  public void setIdempotencyKey(String idempotencyKey) {
-    this.idempotencyKey = idempotencyKey;
-  }
-
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  public void setCurrencySymbol(String currencySymbol) {
-    this.currencySymbol = currencySymbol;
-  }
-
-  public PaymentMethodDestination getPaymentMethod() {
-    return paymentMethod;
-  }
-
-  public void setPaymentMethod(PaymentMethodDestination paymentMethod) {
-    this.paymentMethod = paymentMethod;
-  }
-
-  public BlockchainAddress getBlockchainAddress() {
-    return blockchainAddress;
-  }
-
-  public void setBlockchainAddress(BlockchainAddress blockchainAddress) {
-    this.blockchainAddress = blockchainAddress;
-  }
-
-  public CounterpartyDestination getCounterparty() {
-    return counterparty;
-  }
-
-  public void setCounterparty(CounterpartyDestination counterparty) {
-    this.counterparty = counterparty;
-  }
-
-  public TravelRuleData getTravelRuleData() {
-    return travelRuleData;
-  }
-
-  public void setTravelRuleData(TravelRuleData travelRuleData) {
-    this.travelRuleData = travelRuleData;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String walletId;
-    private String amount;
-    private DestinationType destinationType;
-    private String idempotencyKey;
-    private String currencySymbol;
-    private PaymentMethodDestination paymentMethod;
-    private BlockchainAddress blockchainAddress;
-    private CounterpartyDestination counterparty;
-    private TravelRuleData travelRuleData;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use createWithdrawal instead.
+   */
+  @Deprecated
+  public static class Builder extends CreateWithdrawalRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder walletId(String walletId) {
-      this.walletId = walletId;
+      super.walletId(walletId);
       return this;
     }
 
+    @Override
     public Builder amount(String amount) {
-      this.amount = amount;
+      super.amount(amount);
       return this;
     }
 
+    @Override
     public Builder destinationType(DestinationType destinationType) {
-      this.destinationType = destinationType;
+      super.destinationType(destinationType);
       return this;
     }
 
+    @Override
     public Builder idempotencyKey(String idempotencyKey) {
-      this.idempotencyKey = idempotencyKey;
+      super.idempotencyKey(idempotencyKey);
       return this;
     }
 
+    @Override
     public Builder currencySymbol(String currencySymbol) {
-      this.currencySymbol = currencySymbol;
+      super.currencySymbol(currencySymbol);
       return this;
     }
 
+    @Override
     public Builder paymentMethod(PaymentMethodDestination paymentMethod) {
-      this.paymentMethod = paymentMethod;
+      super.paymentMethod(paymentMethod);
       return this;
     }
 
+    @Override
     public Builder blockchainAddress(BlockchainAddress blockchainAddress) {
-      this.blockchainAddress = blockchainAddress;
+      super.blockchainAddress(blockchainAddress);
       return this;
     }
 
+    @Override
     public Builder counterparty(CounterpartyDestination counterparty) {
-      this.counterparty = counterparty;
+      super.counterparty(counterparty);
       return this;
     }
 
+    @Override
     public Builder travelRuleData(TravelRuleData travelRuleData) {
-      this.travelRuleData = travelRuleData;
+      super.travelRuleData(travelRuleData);
       return this;
     }
 
+    @Override
     public CreateWalletWithdrawalRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new CreateWalletWithdrawalRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.walletId)) {
-        throw new CoinbaseClientException("WalletId is required");
-      }
     }
   }
 }

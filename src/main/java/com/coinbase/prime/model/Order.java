@@ -18,6 +18,7 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.LimitPriceType;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
@@ -43,7 +44,11 @@ public class Order {
   @JsonProperty("product_id")
   private String productId;
 
-  /** - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order */
+  /**
+   * - UNKNOWN_ORDER_SIDE: nil value - BUY: Buy order - SELL: Sell order - MULTIPLE: Response only:
+   * a SPREAD order, whose legs carry their own sides (see `spread_details`); not accepted in
+   * requests
+   */
   private OrderSide side;
 
   /**
@@ -64,23 +69,33 @@ public class Order {
    * order](https://en.wikipedia.org/wiki/Order_(exchange)#Stop-limit_order) - RFQ: A [request for
    * quote](https://en.wikipedia.org/wiki/Request_for_quote) - PEG: A pegged order that dynamically
    * adjust based on market conditions while maintaining execution discretion and avoiding adverse
-   * selection
+   * selection - SPREAD: A spread order that trades a futures contract against its spot underlying,
+   * or against another futures contract of the same underlying (calendar spread), to capture a
+   * target spread (futures price - spot price, or back month - front month)
    */
   private OrderType type;
 
-  /** Order size in base asset units (either `base_quantity` or `quote_value` is required) */
+  /**
+   * Order size in base asset units (either `base_quantity` or `quote_value` is required). For
+   * SPREAD orders, in the primary leg's units: a whole number of contracts when it is a futures
+   * product
+   */
   @JsonProperty("base_quantity")
   private String baseQuantity;
 
   /**
    * Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or
    * receive (when selling); the quantity in base units will be determined based on the market
-   * liquidity and indicated `quote_value`. Either `base_quantity` or `quote_value` is required
+   * liquidity and indicated `quote_value`. Either `base_quantity` or `quote_value` is required. Not
+   * supported for SPREAD orders
    */
   @JsonProperty("quote_value")
   private String quoteValue;
 
-  /** The limit price (required for TWAP, VWAP, LIMIT and STOP_LIMIT orders) */
+  /**
+   * The limit price (required for TWAP, VWAP, LIMIT and STOP_LIMIT orders). Empty for SPREAD
+   * orders, which carry a spread limit in `spread_details` instead
+   */
   @JsonProperty("limit_price")
   private String limitPrice;
 
@@ -115,27 +130,38 @@ public class Order {
   @JsonProperty("created_at")
   private OffsetDateTime createdAt;
 
-  /** Size filled (in base asset units) */
+  /**
+   * Size filled (in base asset units). Empty for SPREAD orders, whose legs fill in different units;
+   * see `spread_details` for each leg's value
+   */
   @JsonProperty("filled_quantity")
   private String filledQuantity;
 
-  /** Market value filled (in quote asset units) */
+  /**
+   * Market value filled (in quote asset units). For SPREAD orders, the sum of both legs' filled
+   * values
+   */
   @JsonProperty("filled_value")
   private String filledValue;
 
-  /** Indicates the average `filled_price` */
+  /**
+   * Indicates the average `filled_price`. Empty for SPREAD orders; see `spread_details` for each
+   * leg's value
+   */
   @JsonProperty("average_filled_price")
   private String averageFilledPrice;
 
   /**
    * Total commission paid on this order (in quote asset units) -- only applicable for partially- or
-   * fully-filled orders
+   * fully-filled orders. For SPREAD orders, the sum of both legs' commissions;
+   * `commission_detail_total` is empty and each leg's breakdown is in `spread_details`
    */
   private String commission;
 
   /**
    * Fee charged by the exchange for Cost Plus commission configurations. Exchange fee will be 0 for
-   * All In commission configurations.
+   * All In commission configurations. For SPREAD orders, the sum of both legs' exchange fees
+   * (`spread_details.primary_leg.exchange_fee` and `spread_details.secondary_leg.exchange_fee`).
    */
   @JsonProperty("exchange_fee")
   private String exchangeFee;
@@ -151,7 +177,10 @@ public class Order {
   @JsonProperty("stop_price")
   private String stopPrice;
 
-  /** Indicates the average `filled_price` net of commissions and fees */
+  /**
+   * Indicates the average `filled_price` net of commissions and fees. Empty for SPREAD orders; see
+   * `spread_details` for each leg's value
+   */
   @JsonProperty("net_average_filled_price")
   private String netAverageFilledPrice;
 
@@ -207,7 +236,9 @@ public class Order {
 
   /**
    * - UNKNOWN_PRODUCT_TYPE: Unknown product type - SPOT: Spot product - FUTURE: Future product -
-   * OPTION: Option product
+   * OPTION: Option product - BASIS: Basis product: a futures contract traded against its spot
+   * underlying, or against another futures contract of the same underlying (calendar spread); the
+   * product of SPREAD orders
    */
   @JsonProperty("product_type")
   private ProductType productType;
@@ -221,6 +252,27 @@ public class Order {
    */
   @JsonProperty("is_buy_exact")
   private boolean isBuyExact;
+
+  /**
+   * LimitPriceType indicates the unit `limit_price` is denominated in. Only meaningful for Deribit
+   * options - leave unspecified for every other order type and product, which are always priced in
+   * the quote currency. - UNKNOWN_LIMIT_PRICE_TYPE: nil value - `limit_price` is interpreted in the
+   * product's default/native unit - LIMIT_PRICE_TYPE_BASE_ASSET: `limit_price` is denominated in
+   * the underlying base asset (e.g. BTC for a BTC option). Only valid for Deribit options settled
+   * in the base asset. - LIMIT_PRICE_TYPE_QUOTE_ASSET: `limit_price` is denominated in the quote
+   * asset (e.g. USD/USDC). - LIMIT_PRICE_TYPE_IMPLIED_VOLATILITY: `limit_price` is an implied
+   * volatility percentage rather than a monetary amount (e.g. "65.5" means 65.5% implied
+   * volatility).
+   */
+  @JsonProperty("limit_price_type")
+  private LimitPriceType limitPriceType;
+
+  /**
+   * A SPREAD order as placed and executed: the spread configuration, the spread product and each
+   * leg's fills
+   */
+  @JsonProperty("spread_details")
+  private SpreadDetails spreadDetails;
 
   public Order() {}
 
@@ -263,6 +315,8 @@ public class Order {
     this.productType = builder.productType;
     this.commissionDetailTotal = builder.commissionDetailTotal;
     this.isBuyExact = builder.isBuyExact;
+    this.limitPriceType = builder.limitPriceType;
+    this.spreadDetails = builder.spreadDetails;
   }
 
   public String getId() {
@@ -569,6 +623,22 @@ public class Order {
     this.isBuyExact = isBuyExact;
   }
 
+  public LimitPriceType getLimitPriceType() {
+    return limitPriceType;
+  }
+
+  public void setLimitPriceType(LimitPriceType limitPriceType) {
+    this.limitPriceType = limitPriceType;
+  }
+
+  public SpreadDetails getSpreadDetails() {
+    return spreadDetails;
+  }
+
+  public void setSpreadDetails(SpreadDetails spreadDetails) {
+    this.spreadDetails = spreadDetails;
+  }
+
   public static class Builder {
     private String id;
 
@@ -645,6 +715,10 @@ public class Order {
     private CommissionDetailTotal commissionDetailTotal;
 
     private boolean isBuyExact;
+
+    private LimitPriceType limitPriceType;
+
+    private SpreadDetails spreadDetails;
 
     public Builder id(String id) {
       this.id = id;
@@ -833,6 +907,16 @@ public class Order {
 
     public Builder isBuyExact(boolean isBuyExact) {
       this.isBuyExact = isBuyExact;
+      return this;
+    }
+
+    public Builder limitPriceType(LimitPriceType limitPriceType) {
+      this.limitPriceType = limitPriceType;
+      return this;
+    }
+
+    public Builder spreadDetails(SpreadDetails spreadDetails) {
+      this.spreadDetails = spreadDetails;
       return this;
     }
 

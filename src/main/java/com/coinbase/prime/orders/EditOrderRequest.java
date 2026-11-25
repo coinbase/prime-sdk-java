@@ -87,6 +87,21 @@ public class EditOrderRequest {
   @JsonProperty("stop_price")
   private String stopPrice;
 
+  /**
+   * New peg offset value for PEG orders. 0 means peg to BBO. Only non-negative values are allowed.
+   * The order's peg_offset_type is immutable and is reused server-side to interpret this value (PEG
+   * orders only)
+   */
+  @JsonProperty("offset")
+  private String offset;
+
+  /**
+   * New WIG (Would if Good) level for PEG orders - the best price a pegged order would be placed on
+   * venues, opposite to limit_price. Cannot be added or removed post-placement (PEG orders only)
+   */
+  @JsonProperty("wig_level")
+  private String wigLevel;
+
   public EditOrderRequest() {}
 
   public EditOrderRequest(Builder builder) {
@@ -102,6 +117,8 @@ public class EditOrderRequest {
     this.displayQuoteSize = builder.displayQuoteSize;
     this.displayBaseSize = builder.displayBaseSize;
     this.stopPrice = builder.stopPrice;
+    this.offset = builder.offset;
+    this.wigLevel = builder.wigLevel;
   }
 
   public String getPortfolioId() {
@@ -200,6 +217,22 @@ public class EditOrderRequest {
     this.stopPrice = stopPrice;
   }
 
+  public String getOffset() {
+    return offset;
+  }
+
+  public void setOffset(String offset) {
+    this.offset = offset;
+  }
+
+  public String getWigLevel() {
+    return wigLevel;
+  }
+
+  public void setWigLevel(String wigLevel) {
+    this.wigLevel = wigLevel;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String orderId;
@@ -213,6 +246,8 @@ public class EditOrderRequest {
     private String displayQuoteSize;
     private String displayBaseSize;
     private String stopPrice;
+    private String offset;
+    private String wigLevel;
 
     public Builder() {}
 
@@ -273,6 +308,16 @@ public class EditOrderRequest {
 
     public Builder stopPrice(String stopPrice) {
       this.stopPrice = stopPrice;
+      return this;
+    }
+
+    public Builder offset(String offset) {
+      this.offset = offset;
+      return this;
+    }
+
+    public Builder wigLevel(String wigLevel) {
+      this.wigLevel = wigLevel;
       return this;
     }
 

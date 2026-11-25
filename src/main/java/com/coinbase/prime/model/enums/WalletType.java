@@ -32,5 +32,6 @@ public enum WalletType {
   /** A QC Wallet */
   QC,
   /** An Onchain wallet */
-  ONCHAIN
+  ONCHAIN,
+  INTERNATIONAL_DERIVATIVES
 }

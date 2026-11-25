@@ -16,87 +16,49 @@
 
 package com.coinbase.prime.financing;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** List Interest Accruals For Portfolio */
-public class ListInterestAccrualsForPortfolioRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-
-  @JsonProperty("start_date")
-  private String startDate;
-
-  @JsonProperty("end_date")
-  private String endDate;
-
+/**
+ * List Interest Accruals For Portfolio
+ *
+ * @deprecated Use listPortfolioInterestAccruals instead.
+ */
+@Deprecated
+public class ListInterestAccrualsForPortfolioRequest extends ListPortfolioInterestAccrualsRequest {
   public ListInterestAccrualsForPortfolioRequest() {}
 
-  public ListInterestAccrualsForPortfolioRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.startDate = builder.startDate;
-    this.endDate = builder.endDate;
+  public ListInterestAccrualsForPortfolioRequest(
+      ListPortfolioInterestAccrualsRequest.Builder builder) {
+    super(builder);
   }
 
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
-  }
-
-  public String getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
-  }
-
-  public static class Builder {
-    private String portfolioId;
-    private String startDate;
-    private String endDate;
-
-    public Builder() {}
-
+  /**
+   * @deprecated Use listPortfolioInterestAccruals instead.
+   */
+  @Deprecated
+  public static class Builder extends ListPortfolioInterestAccrualsRequest.Builder {
+    @Override
     public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
+      super.portfolioId(portfolioId);
       return this;
     }
 
+    @Override
     public Builder startDate(String startDate) {
-      this.startDate = startDate;
+      super.startDate(startDate);
       return this;
     }
 
+    @Override
     public Builder endDate(String endDate) {
-      this.endDate = endDate;
+      super.endDate(endDate);
       return this;
     }
 
+    @Override
     public ListInterestAccrualsForPortfolioRequest build() throws CoinbaseClientException {
-      validate();
+      super.validate();
       return new ListInterestAccrualsForPortfolioRequest(this);
-    }
-
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
     }
   }
 }

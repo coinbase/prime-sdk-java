@@ -99,6 +99,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
+  public GetTieredPricingFeesResponse getTieredPricingFees(GetTieredPricingFeesRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/entities/%s/tf_tiered_fees", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<GetTieredPricingFeesResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(
       GetTradeFinanceTieredPricingFeesRequest request) throws CoinbasePrimeException {
     return this.request(
@@ -121,6 +133,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
+  public ListPortfolioInterestAccrualsResponse listPortfolioInterestAccruals(
+      ListPortfolioInterestAccrualsRequest request) throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/accruals", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<ListPortfolioInterestAccrualsResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(
       ListInterestAccrualsForPortfolioRequest request) throws CoinbasePrimeException {
     return this.request(
@@ -142,6 +166,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         new TypeReference<GetPortfolioBuyingPowerResponse>() {});
   }
 
+  @Override
+  public GetPortfolioCreditResponse getPortfolioCredit(GetPortfolioCreditRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.GET,
+        String.format("/portfolios/%s/credit", request.getPortfolioId()),
+        request,
+        List.of(200),
+        new TypeReference<GetPortfolioCreditResponse>() {});
+  }
+
+  @Deprecated
   @Override
   public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(
       GetPortfolioCreditInformationRequest request) throws CoinbasePrimeException {
@@ -171,7 +207,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         HttpMethod.POST,
         String.format("/portfolios/%s/locates", request.getPortfolioId()),
         request,
-        List.of(201, 200),
+        List.of(200),
         new TypeReference<CreateNewLocatesResponse>() {});
   }
 
@@ -198,6 +234,18 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
   }
 
   @Override
+  public SetFundingSettingsResponse setFundingSettings(SetFundingSettingsRequest request)
+      throws CoinbasePrimeException {
+    return this.request(
+        HttpMethod.POST,
+        String.format("/entities/%s/funding_settings", request.getEntityId()),
+        request,
+        List.of(200),
+        new TypeReference<SetFundingSettingsResponse>() {});
+  }
+
+  @Deprecated
+  @Override
   public UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request)
       throws CoinbasePrimeException {
     return this.request(
@@ -219,22 +267,17 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         new TypeReference<GetCrossMarginRiskParametersResponse>() {});
   }
 
-  /**
-   * This endpoint is served from {@code /v2}; we swap the version on the base URL for this call
-   * only without mutating the shared client (same pattern as prime-sdk-go {@code
-   * WithBaseUrl}/{@code VersionedBaseUrl}).
-   */
   @Override
   public GetCrossMarginPrimeOverviewResponse getCrossMarginPrimeOverview(
       GetCrossMarginPrimeOverviewRequest request) throws CoinbasePrimeException {
-    CoinbasePrimeClient v2Client =
-        primeClient.withBaseUrl(Constants.versionedBaseUrl(Constants.CB_PRIME_BASE_URL, "v2"));
-    return new CoinbaseServiceImpl(v2Client) {}.request(
-        HttpMethod.GET,
-        String.format("/entities/%s/cross_margin/prime", request.getEntityId()),
-        request,
-        List.of(200),
-        new TypeReference<GetCrossMarginPrimeOverviewResponse>() {});
+    return this.primeClient
+        .withBaseUrl(Constants.versionedBaseUrl(this.primeClient.getBaseUrl(), "v2"))
+        .sendRequest(
+            HttpMethod.GET,
+            String.format("/entities/%s/cross_margin/prime", request.getEntityId()),
+            List.of(200),
+            request,
+            new TypeReference<GetCrossMarginPrimeOverviewResponse>() {});
   }
 
   @Override
