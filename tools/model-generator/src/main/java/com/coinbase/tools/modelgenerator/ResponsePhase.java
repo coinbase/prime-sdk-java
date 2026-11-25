@@ -99,7 +99,7 @@ public final class ResponsePhase {
               type(binding, property.getKey(), propertySchema, types),
               description(propertySchema)));
     }
-    if (fields.isEmpty() && !schema.isEmpty()) {
+    if (fields.isEmpty() && !schema.isEmpty() && (!"object".equals(schema.get("type")) || schema.containsKey("additionalProperties"))) {
       fields.put("value", new Field("value", "value", types.resolve(operation.successResponseSchema()), ""));
     }
 

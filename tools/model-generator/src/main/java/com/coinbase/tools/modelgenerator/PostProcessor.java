@@ -455,6 +455,7 @@ public class PostProcessor {
         put("CoinbaseCustodyApiActivityType", "CustodyActivityType");
         put("CoinbasePublicRestApiActivityType", "PrimeActivityType");
         put("CoinbaseBrokerageProxyEventsMaterializedApi", "");
+        put("CoinbasePublicRestApiBeta", "");
         put("CoinbasePublicRestApi", "");
         put("CoinbaseCustodyApi", "");
         put("PrimeRESTAPI", "");
@@ -471,6 +472,8 @@ public class PostProcessor {
         put("coinbasePublicRestApiActivityType", "PrimeActivityType");
         put("CoinbaseCustodyApiActivityType", "CustodyActivityType");
         put("CoinbasePublicRestApiActivityType", "PrimeActivityType");
+        put("CoinbasePublicRestApiBeta", "");
+        put("coinbasePublicRestApiBeta", "");
         put("CoinbasePublicRestApi", "");
         put("coinbasePublicRestApi", "");
         put("PrimeRESTAPI", "");
