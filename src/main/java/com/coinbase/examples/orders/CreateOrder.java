@@ -21,6 +21,7 @@ import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.TimeInForceType;
 import com.coinbase.prime.orders.CreateOrderRequest;
 import com.coinbase.prime.orders.CreateOrderResponse;
 import com.coinbase.prime.orders.OrdersService;
@@ -32,9 +33,11 @@ public class CreateOrder {
     try {
       if (args.length < 5) {
         System.err.println(
-            "Usage: CreateOrder <product_id> <side> <type> <basequantity|quotevalue> <amount>");
+            "Usage: CreateOrder <product_id> <side> <type> <basequantity|quotevalue> <amount> [limit_price] [stop_price] [time_in_force]");
         System.err.println("Example: CreateOrder BTC-USD BUY MARKET basequantity 0.001");
-        System.err.println("Example: CreateOrder ETH-USD SELL LIMIT quotevalue 1000.00");
+        System.err.println("Example: CreateOrder BTC-USD BUY LIMIT basequantity 0.001 50000.00");
+        System.err.println(
+            "Example: CreateOrder BTC-USD BUY STOP_LIMIT basequantity 0.001 50000.00 49500.00");
         System.exit(1);
       }
 
@@ -48,6 +51,10 @@ public class CreateOrder {
       OrderType type = OrderType.valueOf(args[2].toUpperCase());
       String quantityType = args[3].toLowerCase();
       String amount = args[4];
+      String limitPrice = args.length > 5 ? args[5] : null;
+      String stopPrice = args.length > 6 ? args[6] : null;
+      TimeInForceType timeInForce =
+          args.length > 7 ? TimeInForceType.valueOf(args[7].toUpperCase()) : null;
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
       System.out.println(
@@ -69,6 +76,18 @@ public class CreateOrder {
               .side(side)
               .type(type)
               .clientOrderId(UUID.randomUUID().toString());
+      if (limitPrice != null && !limitPrice.isEmpty()) {
+        builder.limitPrice(limitPrice);
+        if (timeInForce == null && (type == OrderType.LIMIT || type == OrderType.STOP_LIMIT)) {
+          timeInForce = TimeInForceType.GOOD_UNTIL_CANCELLED;
+        }
+      }
+      if (stopPrice != null && !stopPrice.isEmpty()) {
+        builder.stopPrice(stopPrice);
+      }
+      if (timeInForce != null) {
+        builder.timeInForce(timeInForce);
+      }
 
       if (quantityType.equals("basequantity")) {
         builder.baseQuantity(amount);

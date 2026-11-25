@@ -29,34 +29,52 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 public class CoinbasePrimeClient extends CoinbaseNetHttpClient {
+  private final String baseUrl;
+  private final HttpClient httpClient;
+
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, String baseUrl) {
     super(credentials, baseUrl);
+    this.baseUrl = baseUrl;
+    this.httpClient = null;
   }
 
   public CoinbasePrimeClient(
       CoinbasePrimeCredentials credentials, String baseUrl, HttpClient client) {
     super(credentials, baseUrl, client);
+    this.baseUrl = baseUrl;
+    this.httpClient = client;
   }
 
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials) {
     super(credentials, Constants.CB_PRIME_BASE_URL);
+    this.baseUrl = Constants.CB_PRIME_BASE_URL;
+    this.httpClient = null;
   }
 
   public CoinbasePrimeClient(CoinbasePrimeCredentials credentials, HttpClient client) {
     super(credentials, Constants.CB_PRIME_BASE_URL, client);
+    this.baseUrl = Constants.CB_PRIME_BASE_URL;
+    this.httpClient = client;
+  }
+
+  public String getBaseUrl() {
+    return baseUrl;
   }
 
   /**
-   * Returns a new client with the given base URL; credentials and behavior are otherwise unchanged.
-   * Prefer this for single-call version overrides (e.g. {@code v2}) without mutating the shared
-   * client.
+   * Returns a new client with the given base URL; credentials and the injected HttpClient are
+   * reused. Prefer this for single-call version overrides (e.g. {@code v2}) without mutating the
+   * shared client.
    */
   public CoinbasePrimeClient withBaseUrl(String baseUrl) {
     CoinbaseCredentials credentials = getCredentials();
     if (!(credentials instanceof CoinbasePrimeCredentials)) {
       throw new IllegalStateException("Credentials must be CoinbasePrimeCredentials");
     }
-    return new CoinbasePrimeClient((CoinbasePrimeCredentials) credentials, baseUrl);
+    CoinbasePrimeCredentials primeCredentials = (CoinbasePrimeCredentials) credentials;
+    return httpClient == null
+        ? new CoinbasePrimeClient(primeCredentials, baseUrl)
+        : new CoinbasePrimeClient(primeCredentials, baseUrl, httpClient);
   }
 
   @Override
